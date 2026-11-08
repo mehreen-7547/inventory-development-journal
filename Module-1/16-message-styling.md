@@ -205,3 +205,65 @@ Next, we'll style these messages in the existing external CSS file.
 *Previous: Step 167 (Message Styling)  |  Next: Step 169 (Message Styling CSS)*
 
 ---
+
+## Step 169: Message Styling CSS
+
+#### Next: Style success and error messages
+
+We've added the messages section to `employee_list.html`. Now we'll style it using our external CSS file.
+
+Open **`accounts/static/accounts/style.css`**.
+
+Add this code at the bottom, keeping your existing CSS unchanged:
+
+```css
+.message {
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.message.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+```
+
+#### Expected appearance
+
+    Employee updated successfully.
+
+    Cannot send setup email to an inactive employee.
+
+  **NEW vs CLASS — `.message.success`**
+
+  This CSS selector targets an element that has **both** the `message` and `success` classes.
+
+  Django supplies the `success` class through `{{ message.tags }}`.
+
+#### Test
+
+1. Save `style.css`.
+2. Open Manage Employees and edit an employee.
+3. Click **Save Changes**.
+4. Verify that the success message appears with green styling.
+
+Next, we'll verify the Resend Setup Email workflow.
+
+*Previous: Step 168 (Change employee_list.html)  |  Next: Step 170 (Real Email Configuration)*
+
+---
