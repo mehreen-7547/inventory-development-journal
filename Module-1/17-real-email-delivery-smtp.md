@@ -298,3 +298,76 @@ If it still shows `console`, an existing PowerShell environment variable may be 
 *Previous: Step 172 (Install python-dotenv)  |  Next: Step 174 (Fix the email configuration)*
 
 ---
+
+## Step 174: Fix the email configuration
+
+**Found the issue.** Your `settings.py` is correctly loading `.env`, but the last two lines are forcing Django to use the Console Email Backend.
+
+#### Step 289 — Fix the email configuration
+
+In `config/settings.py`, find these lines at the bottom:
+
+```python
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+**Replace those three lines** with:
+
+```python
+# Email configuration
+EMAIL_MODE = os.getenv("EMAIL_MODE", "console").strip().lower()
+
+if EMAIL_MODE == "smtp":
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "no-reply@example.com"
+
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+Your `.env` file should contain these entries alongside its existing settings:
+
+```dotenv
+EMAIL_MODE=smtp
+EMAIL_HOST_USER=mehreen7547@gmail.com
+EMAIL_HOST_PASSWORD=YOUR_GMAIL_APP_PASSWORD
+```
+
+Replace the password placeholder with your actual App Password. Do not share it or commit `.env` to GitHub.
+
+#### Verify
+
+Restart Django Shell and run:
+
+```python
+from django.conf import settings
+
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+Expected output:
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+mehreen7547@gmail.com
+```
+
+No other changes to your `settings.py` are required for this fix.
+
+*Previous: Step 173 (Fix Email Backend)  |  Next: Step 175 (Change manage.py)*
+
+---
