@@ -353,3 +353,81 @@ Replace the entire contents with:
 *Previous: Step 182 (Update Forgot Password Page)  |  Next: Step 184 (Update Set New Password Page)*
 
 ---
+
+## Step 184: Update Set New Password Page
+
+#### Step 1 — Replace `password_reset_confirm.html`
+
+**File:** `templates/accounts/password_reset_confirm.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Set New Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+
+        {% if validlink %}
+
+            <h2 class="mb-4">Set New Password</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Reset Password
+                </button>
+            </form>
+
+        {% else %}
+
+            <h2 class="mb-4">Invalid Reset Link</h2>
+
+            <div class="alert alert-warning">
+                This password reset link is invalid or has
+                expired. Please request a new one.
+            </div>
+
+            <a href="{% url 'password_reset' %}"
+               class="btn btn-outline-primary">
+                Request New Link
+            </a>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Added Bootstrap layout and buttons.
+- Preserved the `validlink` condition.
+- Preserved Django's password validation and CSRF protection.
+- Added a warning alert for invalid or expired links.
+
+#### Step 3 — Test
+
+Use a test employee account:
+
+1. Request a password-reset email.
+2. Open the reset link and verify that the **Set New Password** form appears.
+3. Set a valid new password and submit.
+4. Open the same reset link again. It should now show **Invalid Reset Link**.
+5. Click **Request New Link** and verify that the Forgot Password page opens.
+
+*Previous: Step 183 (Update Reset Confirmation)  |  Next: Step 185 (Update Reset Complete Page)*
+
+---
