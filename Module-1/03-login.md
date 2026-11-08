@@ -227,3 +227,41 @@ Later, we can redirect users to different dashboards based on their roles.
 *Previous: Step 77 (Connect Login URL)  |  Next: Step 79 (Project vs App)*
 
 ---
+
+## Step 79: Project vs App
+
+**Yes, exactly.** That's the structure Django creates by default.
+
+For example, when you run:
+
+```bash
+django-admin startproject myproject
+```
+
+Django creates:
+
+```text
+myproject/
+├── manage.py
+└── myproject/
+    ├── settings.py
+    └── urls.py
+```
+
+The inner `myproject` folder has the **same name as the project**.
+
+Your instructor called it the *main app*, but technically it's the **project configuration package**, not a Django app.
+
+In our project, we named that folder `config` instead.
+
+So:
+
+- `config/urls.py` — connects URLs from other apps.
+- `core/urls.py` — defines homepage URLs.
+- `accounts/urls.py` — defines account-related URLs.
+
+**The structure is the same as what you learned. Only the name of the main configuration folder is different.**
+
+*Previous: Step 78 (Login Redirect)  |  Next: Step 80 (Logout Function)*
+
+---
