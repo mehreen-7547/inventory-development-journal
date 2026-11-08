@@ -540,3 +540,53 @@ In our current step, we're staging only `inventory-development-journal.md` in yo
 *Previous: Step 16 (Stage the journal for Git)  |  Next: Step 18 (Stage the private journal)*
 
 ---
+
+## Step 18: Stage the private journal
+
+#### Step 23 — Stage the private journal
+
+Run this in your VS Code terminal:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+This selects the journal file for the next Git commit. It does not upload anything.
+
+Send me the terminal output, and we'll verify the staged file before committing.
+
+#### How we checked it
+
+**Step 23 completed.** Your journal file has been staged successfully.
+
+The warning is harmless:
+
+- **LF** — Unix-style line endings.
+- **CRLF** — Windows-style line endings.
+- Git is informing you that it may convert the line endings when working with the file.
+
+This does not mean your journal content is damaged.
+
+#### Step 24 — Verify the staged file
+
+Run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal diff --cached --name-only
+```
+
+**What this does:** Lists the files selected for the next commit.
+
+**Expected output:**
+
+```text
+inventory-development-journal.md
+```
+
+This command makes no changes.
+
+Send me the output. Then we'll create the first commit in your private repository.
+
+*Previous: Step 17 (Change views.py)  |  Next: Step 19 (Commit the private development journal)*
+
+---
