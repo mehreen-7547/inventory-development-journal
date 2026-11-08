@@ -549,3 +549,47 @@ Paste:
 *Previous: Step 122 (Reset Link URL)  |  Next: Step 124 (Password Reset Complete URL)*
 
 ---
+
+## Step 124: Password Reset Complete URL
+
+#### Next: Connect the Password Reset Success page
+
+We've created `password_reset_complete.html`. Now we need Django to display it after an employee successfully resets their password.
+
+Open **`accounts/urls.py`**.
+
+Add this inside your existing `urlpatterns`:
+
+```python
+path(
+    'password-reset/complete/',
+    auth_views.PasswordResetCompleteView.as_view(
+        template_name='accounts/password_reset_complete.html'
+    ),
+    name='password_reset_complete'
+),
+```
+
+#### How does this work?
+
+- **`PasswordResetCompleteView`** — Django's built-in view for displaying the successful password-reset message.
+- **`template_name`** — specifies the HTML file to display.
+- **`name='password_reset_complete'`** — the URL name Django's `PasswordResetConfirmView` uses after saving the new password.
+
+We don't need to write our own redirect logic.
+
+#### Test
+
+Save the file and visit:
+
+`http://127.0.0.1:8000/password-reset/complete/`
+
+You should see **Password Reset Successful** with a link to the login page.
+
+This verifies that the page works, but **not yet that a password has actually been reset**.
+
+Next, we'll test the complete password-reset workflow.
+
+*Previous: Step 123 (Password Reset Success Page)  |  Next: Step 125 (Fix Django Error)*
+
+---
