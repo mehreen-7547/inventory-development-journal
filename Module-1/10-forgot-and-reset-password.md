@@ -329,3 +329,47 @@ The two templates serve different purposes:
 *Previous: Step 118 (Password Reset Email)  |  Next: Step 120 (Connect Email Subject)*
 
 ---
+
+## Step 120: Connect Email Subject
+
+#### Next: Connect the email subject template
+
+Open **`accounts/urls.py`**.
+
+Find your existing `PasswordResetView` and update it to:
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt',
+        subject_template_name='accounts/password_reset_subject.txt'
+    ),
+    name='password_reset'
+),
+```
+
+#### What changed?
+
+We added:
+
+```python
+subject_template_name='accounts/password_reset_subject.txt'
+```
+
+`subject_template_name` is another **built-in Django attribute**, just like `email_template_name`.
+
+Django now knows where to find all three templates:
+
+| Attribute | File |
+|---|---|
+| `template_name` | Password-reset request page |
+| `email_template_name` | Email body |
+| `subject_template_name` | Email subject |
+
+**Save the file.** Next, we'll create the page employees reach after clicking their password-reset link.
+
+*Previous: Step 119 (Connect Email Template)  |  Next: Step 121 (Set New Password Page)*
+
+---
