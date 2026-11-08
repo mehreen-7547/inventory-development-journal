@@ -117,3 +117,66 @@ Next, we'll add the **Deactivate/Reactivate** button to `edit_employee.html`.
 *Previous: Step 157 (Employee Deactivation)  |  Next: Step 159 (Deactivate/Reactivate Button)*
 
 ---
+
+## Step 159: Deactivate/Reactivate Button
+
+#### Next: Add the Deactivate/Reactivate button
+
+We've created the view and URL. Now we'll connect them to the Edit Employee page.
+
+Open **`templates/accounts/edit_employee.html`**.
+
+Find the existing **Save Changes** form's closing tag:
+
+```html
+</form>
+```
+
+Immediately **below it**, add:
+
+```html
+<form method="POST"
+      action="{% url 'toggle_employee_status' employee.id %}">
+
+    {% csrf_token %}
+
+    {% if employee.is_active %}
+
+        <button type="submit">
+            Deactivate Employee
+        </button>
+
+    {% else %}
+
+        <button type="submit">
+            Reactivate Employee
+        </button>
+
+    {% endif %}
+
+</form>
+```
+
+#### Expected result
+
+  {@body const [active,setActive] = DIL.useState(true)}
+  Edit Employee
+  Username: sales1
+
+  Save Changes
+  setActive(!active)}>{active?"Deactivate Employee":"Reactivate Employee"}
+  Interactive illustration only. Click to preview both states.
+
+  **NEW vs CLASS — `action` attribute**
+
+  The HTML form's `action` specifies which URL receives the submitted data.
+
+  Here, the button sends a POST request to our `toggle_employee_status()` view.
+
+**Important:** Keep this as a separate form, outside the existing Save Changes form.
+
+Save the file. Next, we'll test deactivation, login restrictions and reactivation.
+
+*Previous: Step 158 (Employee Status URL)  |  Next: Step 160 (Resend Setup Email)*
+
+---
