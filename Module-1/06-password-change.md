@@ -242,3 +242,52 @@ Don't open the URL yet. We haven't created its HTML template.
 *Previous: Step 87 (Code Walkthrough)  |  Next: Step 89 (Password Change Form)*
 
 ---
+
+## Step 89: Password Change Form
+
+#### Next: Create the password-change page
+
+Inside the same folder as `login.html`, create:
+
+**`templates/accounts/change_password.html`**
+
+Add this code:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Password</title>
+</head>
+<body>
+    <h2>Change Password</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Change Password</button>
+    </form>
+</body>
+</html>
+```
+
+#### Understand the important lines
+
+- `method="POST"` — submits the entered passwords to Django.
+- `{% csrf_token %}` — adds Django's form security token.
+- `{{ form.as_p }}` — displays the password fields provided by `PasswordChangeForm`, each in a paragraph.
+- `<button type="submit">` — submits the form when clicked.
+
+#### Test it
+
+1. Log in as `manager1`.
+2. Open `http://127.0.0.1:8000/change-password/`.
+3. Enter the current password and a valid new password twice.
+4. Click **Change Password**.
+
+**Expected result:** You return to the homepage and remain logged in. The new password should work the next time you log in.
+
+*Previous: Step 88 (Password Change URL)  |  Next: Step 90 (Change Password Link)*
+
+---
