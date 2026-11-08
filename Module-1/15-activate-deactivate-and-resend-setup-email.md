@@ -180,3 +180,69 @@ Save the file. Next, we'll test deactivation, login restrictions and reactivatio
 *Previous: Step 158 (Employee Status URL)  |  Next: Step 160 (Resend Setup Email)*
 
 ---
+
+## Step 160: Resend Setup Email
+
+#### Next: Create the Resend Password Setup Email view
+
+Employee deactivation and reactivation tests passed.
+
+Now we'll allow administrators to resend the welcome email when a new employee hasn't completed their password setup.
+
+#### Step 1: Add the view
+
+Open **`accounts/views.py`**.
+
+Add this function at the bottom:
+
+```python
+@role_required('admin')
+@require_POST
+def resend_setup_email(request, employee_id):
+
+    employee = get_object_or_404(
+        CustomUser,
+        id=employee_id,
+        role__in=['manager', 'sales']
+    )
+
+    if not employee.is_active:
+        messages.error(
+            request,
+            'Cannot send setup email to an inactive employee.'
+        )
+
+    elif employee.has_usable_password():
+        messages.error(
+            request,
+            'Employee has already set a password.'
+        )
+
+    else:
+        send_welcome_email(request, employee)
+
+        messages.success(
+            request,
+            'Password setup email generated successfully.'
+        )
+
+    return redirect('employee_list')
+```
+
+#### How does it work?
+
+| Employee condition | Result |
+|---|---|
+| Active, password not set | Resend setup email |
+| Active, password already set | Reject; use password reset instead |
+| Inactive | Reject |
+
+We're reusing the existing `send_welcome_email()` function. Since our email backend is currently configured for console output, the email will appear in the VS Code terminal.
+
+**Save `views.py`.** No browser testing yet.
+
+Next, we'll connect the URL and then add a Resend Setup Email button to the employee interface.
+
+*Previous: Step 159 (Deactivate/Reactivate Button)  |  Next: Step 161 (Resend Setup Email URL)*
+
+---
