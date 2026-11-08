@@ -710,3 +710,37 @@ Next: **Edit Employee**, including the activation/deactivation and resend setup 
 *Previous: Step 186 (Update Employee List)  |  Next: Step 188 (Fix Form Styling)*
 
 ---
+
+## Step 188: Fix Form Styling
+
+Your screenshot shows that the page layout is working, but the **form fields are still using Django's default appearance**. The labels, inputs, and help text are not aligned consistently.
+
+This happens because `{{ form.as_p }}` doesn't automatically apply Bootstrap styling to the input fields.
+
+#### Step 1 — Update `accounts/forms.py`
+
+Find `EmployeeCreationForm` and its existing `__init__()` method.
+
+**Add this code at the end of that method**, after the role choices:
+
+```python
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+Keep the existing code unchanged.
+
+This applies Bootstrap styling to the five employee fields without adding a new library or changing the form's behaviour. Your instructor's `backend/secondproject/testapp/forms.py` also uses widget attributes to style form fields.
+
+#### Step 2 — Check the result
+
+Save `forms.py` and refresh the Create Employee page.
+
+You should now see full-width input boxes, vertically arranged labels, and a styled role dropdown. This is still the functional UI, not the final design.
+
+*Previous: Step 187 (Update Create Employee)  |  Next: Step 189 (Change accounts/forms.py)*
+
+---
