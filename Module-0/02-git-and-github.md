@@ -359,3 +359,31 @@ This separation prevents your private learning notes from accidentally entering 
 *Previous: Step 12 (Push your first commit to GitHub)  |  Next: Step 14 (Initialize Git for the private journal)*
 
 ---
+
+## Step 14: Initialize Git for the private journal
+
+**Step 17 completed.** Your private journal folder has been created successfully.
+
+#### Step 18 — Initialize Git for the private journal
+
+Run this in your existing VS Code terminal:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal init -b main
+```
+
+**Understanding the command:**
+
+- `git init` — Creates a new local Git repository.
+- `-C` — Specifies the journal folder.
+- `-b main` — Names its initial branch `main`.
+
+**Why?** Your public Django project already has its own Git repository. We need a second, independent repository to track your private learning journal.
+
+This command does not upload anything or change your public project.
+
+Send me the output. Next, we'll connect this new local repository to your private GitHub repository.
+
+*Previous: Step 13 (Create a separate local journal folder)  |  Next: Step 15 (Connect it to GitHub)*
+
+---
