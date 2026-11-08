@@ -77,3 +77,127 @@ http://127.0.0.1:8000/admin/
 *Previous: Step 28 (Understanding the Migration Workflow)  |  Next: Step 30 (Understanding the Project Homepage)*
 
 ---
+
+## Step 30: Understanding the Project Homepage
+
+The page displaying your **project title and a link** is the project's homepage.
+
+The command:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+doesn't create that page. It simply starts the server so Django can display pages defined in your project.
+
+Django treats these as two different addresses:
+
+- `http://127.0.0.1:8000/` — Your project's homepage.
+- `http://127.0.0.1:8000/admin/` — Django's built-in administration interface.
+
+#### How was that page created?
+
+I checked your actual project code on GitHub. The homepage was already included in the initial project setup.
+
+Three files work together:
+
+    **1. `config/urls.py`**
+
+    ```python
+    path("", include("core.urls"))
+    
+```
+
+    Sends homepage requests to the `core` application.
+
+    **2. `core/views.py`**
+
+    ```python
+    def home(request):
+        return render(request, "core/home.html")
+    
+```
+
+    Tells Django which HTML page to display.
+
+    **3. `core/templates/core/home.html`**
+
+    ```html
+    <h1>Inventory &amp; Demand Intelligence</h1>
+    <p>Module 0 setup is running.</p>
+    <p><a href="/admin/">Open Django admin</a></p>
+    
+```
+
+    Defines the title, message, and clickable admin link.
+
+**In short:** The URL configuration finds the view, the view loads the HTML template, and your browser displays it.
+
+This is a temporary setup homepage, not the final inventory dashboard.
+
+#### How we checked it
+
+`manage.py` is located in the **Django project root**, outside both `config` and `core`.
+
+Your folder structure:
+
+```text
+Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│
+├── .venv/
+│
+└── techmindz_inventory_module0_sqlite_atomic/
+    │
+    ├── manage.py           ← HERE
+    │
+    ├── config/
+    │   ├── settings.py
+    │   ├── urls.py
+    │   ├── asgi.py
+    │   └── wsgi.py
+    │
+    └── core/
+        ├── views.py
+        ├── urls.py
+        └── models.py
+```
+
+**Why is it outside both folders?**
+
+Because `manage.py` manages the entire Django project, not just one app.
+
+For example, it lets you run the server, apply migrations, and create superusers.
+
+That's why we've been running:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+We're pointing Python to `manage.py` inside the Django project folder.
+
+#### How we checked it
+
+#### Step 39 — Verify Django Admin Login
+
+We previously created your superuser account. Now we'll verify that it works.
+
+**1.** If the Django server isn't running, execute:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+**2.** Open this address in your browser:
+
+http://127.0.0.1:8000/admin/
+
+**3.** Log in using the superuser credentials you created.
+
+**Expected result:** The Django Administration dashboard should appear, showing **Users** and **Groups**.
+
+Tell me whether you successfully logged in.
+
+*Previous: Step 29 (Confirming Terminal Environment)  |  Next: Step 31 (Documenting Superuser Setup)*
+
+---
