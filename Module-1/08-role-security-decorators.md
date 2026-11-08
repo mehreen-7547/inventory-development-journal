@@ -487,3 +487,41 @@ Our custom decorator already checks login status, so both decorators aren't nece
 *Previous: Step 105 (Change accounts/decorators.py)  |  Next: Step 107 (Test Role Security)*
 
 ---
+
+## Step 107: Test Role Security
+
+#### Next: Verify that role restrictions work
+
+**1.** In `core/views.py`, temporarily change:
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+to:
+
+```python
+@role_required('admin', 'manager')
+```
+
+**2.** Log in as `sales1` and visit:
+
+`http://127.0.0.1:8000/`
+
+**Expected result:** `403 Forbidden`
+
+Why? The user is logged in, but `'sales'` is not among the permitted roles.
+
+**3.** Restore the original decorator:
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+Save and refresh the homepage. `sales1` should now have access.
+
+This confirms that our custom decorator actually blocks unauthorized roles.
+
+*Previous: Step 106 (Apply Role Security)  |  Next: Step 108 (REQUIRED_FIELDS)*
+
+---
