@@ -230,3 +230,121 @@ Next, we'll make the homepage display this message.
 *Previous: Step 95 (Login Error Messages)  |  Next: Step 97 (Success Message)*
 
 ---
+
+## Step 97: Success Message
+
+#### Next: Display the password-change success message
+
+Open **`core/templates/core/home.html`**.
+
+Immediately below the `<body>` tag, add:
+
+```html
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+```
+
+#### What happens now?
+
+1. The user changes their password.
+2. `messages.success()` creates a confirmation message.
+3. Django redirects the user to the homepage.
+4. The code above displays the message.
+
+**Test:** Change your password successfully.
+
+You should return to the homepage and see:
+
+    Password changed successfully.
+
+We'll style these messages properly during the UI design phase.
+
+#### How we checked it
+
+#### Next: Check Module 1 for Django configuration errors
+
+We've implemented and tested login, logout, password changes, and role display.
+
+Now open your **VS Code terminal** in the folder containing `manage.py`.
+
+Run:
+
+```bash
+python manage.py check
+```
+
+**What does this do?**
+
+Django examines your project configuration, models, URLs, and other registered components for common errors.
+
+**Expected output:**
+
+```text
+System check identified no issues (0 silenced).
+```
+
+This doesn't test every feature, but it helps confirm that the project configuration is valid.
+
+We're nearing the end of Module 1. We'll enforce role-specific permissions on inventory operations when we create those operations in subsequent modules.
+
+#### How we checked it
+
+#### Next: Check which files have changed
+
+Before saving Module 1 to GitHub, let's review the files Git has detected.
+
+Open your VS Code terminal in the folder containing `manage.py`.
+
+Run:
+
+```bash
+git status --short
+```
+
+**What does this command do?**
+
+It lists files that have been added, modified, or deleted since your last commit.
+
+For example:
+
+```text
+ M config/settings.py
+ M config/urls.py
+ M core/views.py
+?? accounts/
+```
+
+- `M` means an existing file was modified.
+- `??` means Git hasn't started tracking that file or folder yet.
+
+**Important:** We should not commit `db.sqlite3`, `.venv`, or password-containing files.
+
+**Expected result:** A list of changed files. Send me the terminal output so we can review it before committing.
+
+#### How we checked it
+
+Your Git status looks as expected.
+
+| Status | Files | Meaning |
+|---|---|---|
+| Modified | `config/settings.py`, `config/urls.py` | Project configuration changed |
+| Modified | `core/views.py`, `core/templates/core/home.html` | Homepage updated |
+| New | `accounts/` | Accounts app created |
+| New | `templates/` | Login and password-change templates |
+
+**Before committing**, let's check exactly which files are inside those new folders.
+
+Run:
+
+```bash
+git status --short --untracked-files=all
+```
+
+This lists individual files instead of showing only `accounts/` and `templates/`.
+
+**Send me the output.** We'll check that no unnecessary files are included before committing Module 1.
+
+*Previous: Step 96 (Password Change Confirmation)  |  Next: Step 98 (Stage Files)*
+
+---
