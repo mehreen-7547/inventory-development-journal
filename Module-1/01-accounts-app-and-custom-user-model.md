@@ -469,3 +469,40 @@ You don't normally write the SQL table definition yourself in Django. You define
 *Previous: Step 63 (Understanding AbstractUser)  |  Next: Step 65 (AUTH_USER_MODEL)*
 
 ---
+
+## Step 65: AUTH_USER_MODEL
+
+```python
+AUTH_USER_MODEL = "accounts.CustomUser"
+```
+
+This line tells Django:
+
+**"Whenever you need a user model, use the `CustomUser` class defined in our `accounts` app."**
+
+#### Breaking it down
+
+| Part | Meaning |
+|---|---|
+| `AUTH_USER_MODEL` | Django setting that specifies which user model to use |
+| `accounts` | Name of our Django app |
+| `CustomUser` | Name of the model class inside `accounts/models.py` |
+| `"accounts.CustomUser"` | Django's reference to that model, written as `app_label.ModelName` |
+
+#### What happens because of this setting?
+
+    **Django needs to create or authenticate a user**
+
+    Checks `AUTH_USER_MODEL`
+    `"accounts.CustomUser"`
+
+    **Uses our `CustomUser` model**
+    Username, email, password, role, etc.
+
+Without this setting, Django would use its default `auth.User` model, which doesn't have our `role` field.
+
+**Important:** This setting does not create a table immediately. It tells Django which model to use. The actual `accounts_customuser` table will be created when we run migrations.
+
+*Previous: Step 64 (User Table Definition)  |  Next: Step 66 (Django Authentication)*
+
+---
