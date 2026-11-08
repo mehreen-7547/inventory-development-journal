@@ -794,3 +794,76 @@ Send me the output. We'll then record this completed setup in your private devel
 *Previous: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)  |  Next: Step 23 (Update your private development journal)*
 
 ---
+
+## Step 23: Update your private development journal
+
+**Step 30 completed successfully.**
+
+All 18 migrations now show `[X]`, confirming that Django has successfully initialized its built-in database tables.
+
+#### Step 31 — Update your private development journal
+
+Run this PowerShell command:
+
+```powershell
+Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Django Database Initialization — Initial Migrations
+
+### Objective
+Initialize Django's built-in database tables using SQLite.
+
+### Commands executed
+1. python manage.py showmigrations
+2. python manage.py migrate
+3. python manage.py showmigrations
+
+### Results
+- Initially, all 18 migrations were unapplied [ ].
+- The migrate command completed successfully.
+- Verification confirmed all 18 migrations applied [X].
+- Applications: admin, auth, contenttypes, sessions.
+
+### What I learned
+- A migration defines a database structure change.
+- migrate applies pending migrations to the database.
+- showmigrations displays which migrations have been applied.
+- [X] means applied; [ ] means pending.
+
+### Errors
+None.
+
+### Revision question
+What is the difference between makemigrations and migrate?
+'@
+```
+
+**What this does:** `Add-Content` appends this entry to your existing journal without replacing previous notes.
+
+No changes are being made to the Django project code.
+
+Once you've run it, tell me **done**. We'll verify the journal update before committing it to your private Git repository.
+
+#### How we checked it
+
+#### Step 32 — Verify the journal entry
+
+Run:
+
+```powershell
+Get-Content "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Tail 25
+```
+
+**What this does:**
+- `Get-Content` — Reads the journal file.
+- `-Tail 25` — Displays its last 25 lines.
+
+**Expected result:** The new section titled **Django Database Initialization — Initial Migrations** should appear, including the commands, results, and revision question.
+
+This command only reads the file. It makes no changes.
+
+Send me the output. Next, we'll commit the updated journal to your private Git repository.
+
+*Previous: Step 22 (Apply database migrations)  |  Next: Step 24 (Stage the updated journal)*
+
+---
