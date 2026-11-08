@@ -75,3 +75,59 @@ This command will:
 *Previous: Step 69 (Database File Locked)  |  Next: Step 71 (Create Administrator)*
 
 ---
+
+## Step 71: Create Administrator
+
+#### Next: Create our project's administrator account
+
+Run:
+
+```powershell
+python manage.py createsuperuser
+```
+
+When prompted, enter:
+
+- **Username:** `admin`
+- **Email:** Your email address
+- **Role:** `admin`
+- **Password:** A secure password of your choice
+- **Password confirmation:** Enter the same password again
+
+The exact prompt wording may vary. Your password will not be visible while typing.
+
+**Expected output:**
+
+```text
+Superuser created successfully.
+```
+
+This creates a record in `accounts_customuser` with:
+
+- `role = 'admin'` — our project's administrator role.
+- `is_superuser = True` — Django's unrestricted superuser permission.
+- `is_staff = True` — permission to access Django Admin.
+
+We now have an administrator using our **CustomUser model**, rather than Django's original `User` model.
+
+#### How we checked it
+
+#### Next: Test the new administrator account
+
+Start Django's development server:
+
+```powershell
+python manage.py runserver
+```
+
+Open Django Admin (http://127.0.0.1:8000/admin/) in your browser.
+
+Log in using the **username and password you just created**.
+
+**Expected result:** Django's administration dashboard opens successfully.
+
+You may not see `CustomUser` listed yet. That's normal—we haven't registered our model in `accounts/admin.py`.
+
+*Previous: Step 70 (Create Database Tables)  |  Next: Step 72 (Register CustomUser)*
+
+---
