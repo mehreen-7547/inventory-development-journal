@@ -639,3 +639,28 @@ Send me the output. Then we'll push your journal to GitHub.
 *Previous: Step 18 (Stage the private journal)  |  Next: Step 20 (Push your journal to private GitHub)*
 
 ---
+
+## Step 20: Push your journal to private GitHub
+
+#### Step 27 — Push your journal to private GitHub
+
+Assuming the remote URL from Step 26 was correct, run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal push -u origin main
+```
+
+**Understanding the command:**
+
+- `git push` — Uploads your local commits to GitHub.
+- `-u` — Links your local `main` branch to GitHub's `main` branch.
+- `origin` — Your private GitHub repository.
+- `main` — The branch being uploaded.
+
+**Result:** Your development journal will be backed up in your private repository, accessible only to you and anyone you explicitly authorize.
+
+Send me the terminal output. We'll verify the upload before returning to Django development.
+
+*Previous: Step 19 (Commit the private development journal)  |  Next: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)*
+
+---
