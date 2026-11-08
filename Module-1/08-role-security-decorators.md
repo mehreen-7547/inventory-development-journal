@@ -374,3 +374,43 @@ We're allowing all three roles because the homepage is shared. Later, individual
 *Previous: Step 102 (Complete Execution Flow)  |  Next: Step 104 (Test Role Restrictions)*
 
 ---
+
+## Step 104: Test Role Restrictions
+
+#### Next: Verify that unauthorized users receive HTTP 403
+
+Our homepage currently allows all three roles. To test whether the decorator actually blocks someone, we'll **temporarily restrict it**.
+
+**1.** In `core/views.py`, change:
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+to:
+
+```python
+@role_required('admin', 'manager')
+```
+
+**2.** Log in as `sales1` and open:
+
+`http://127.0.0.1:8000/`
+
+  **Expected result: 403 Forbidden**
+
+  The Sales user is authenticated but does not have permission to access this view.
+
+**3. Important — restore the original code:**
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+Save the file and refresh. The homepage should work again for `sales1`.
+
+This confirms that our decorator can enforce role restrictions, not merely display role-specific content.
+
+*Previous: Step 103 (Apply Role Security)  |  Next: Step 105 (Change accounts/decorators.py)*
+
+---
