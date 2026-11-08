@@ -139,3 +139,35 @@ Don't run `migrate` yet. We'll do that next.
 *Previous: Step 109 (Enforce Email Validation)  |  Next: Step 111 (Apply Migration)*
 
 ---
+
+## Step 111: Apply Migration
+
+#### Next: Apply the email-field migration
+
+We've created the migration file. Now we need to apply its changes to the actual database.
+
+Before proceeding, ensure `admin`, `manager1`, and `sales1` have different, non-empty email addresses.
+
+Run:
+
+```bash
+python manage.py migrate
+```
+
+**What does this do?**
+
+Django executes any pending migrations, including our new email-field migration.
+
+**Expected output (approximately):**
+
+```text
+Applying accounts.0002_alter_customuser_email... OK
+```
+
+After this, the database will enforce unique email addresses.
+
+**Important:** If you receive an error, don't modify or delete anything. Send me the terminal output so we can identify the cause.
+
+*Previous: Step 110 (Create Migration)  |  Next: Step 112 (Email Configuration)*
+
+---
