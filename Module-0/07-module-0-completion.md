@@ -339,3 +339,23 @@ If Git reports an error, share the output before continuing.
 *Previous: Step 48 (Commit Documentation)  |  Next: Step 50 (Finalize Report)*
 
 ---
+
+## Step 50: Finalize Report
+
+**Step 71 verified.** Your new commit `93978f8` is visible on GitHub.
+
+#### Step 72 — Update the report's completion status
+
+Open `MODULE0_REPORT.md`.
+
+Replace its existing `**Status:**` line with:
+
+```markdown
+**Status:** Module 0 implementation, local verification, documentation, and basic Git security checks completed. Completion tag pending. Architecture and permissions approval required before Module 1.
+```
+
+Save using `Ctrl + S`.
+
+*Previous: Step 49 (Push Documentation)  |  Next: Step 51 (Finalize README)*
+
+---
