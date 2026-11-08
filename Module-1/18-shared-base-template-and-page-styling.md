@@ -777,3 +777,41 @@ Save the file using `Ctrl + S`, then refresh the Create Employee page.
 *Previous: Step 188 (Fix Form Styling)  |  Next: Step 190 (Correct Form Styling)*
 
 ---
+
+## Step 190: Correct Form Styling
+
+**Found the problem.** You added the Bootstrap styling inside `EmployeeEditForm`, not `EmployeeCreationForm`.
+
+Keep that code where it is because we'll need it for editing employees too.
+
+#### Fix — `accounts/forms.py`
+
+Find `EmployeeCreationForm` and replace **only its `__init__()` method** with:
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+**Do not change** `save()` or `EmployeeEditForm`.
+
+#### Verify
+
+1. Save `forms.py`.
+2. Refresh the Create Employee page.
+3. The text fields and role dropdown should now occupy the available form width.
+
+*Previous: Step 189 (Change accounts/forms.py)  |  Next: Step 191 (Change accounts/forms.py)*
+
+---
