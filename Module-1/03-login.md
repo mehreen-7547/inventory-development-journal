@@ -72,3 +72,47 @@ This makes the `role` field available in Django Admin's user forms.
 *Previous: Step 73 (Login View)  |  Next: Step 75 (Login Page)*
 
 ---
+
+## Step 75: Login Page
+
+#### Next: Create the login page
+
+Create a file at **`templates/accounts/login.html`**.
+
+Add:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="username"
+               placeholder="Username" required>
+
+        <input type="password" name="password"
+               placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+```
+
+**What this does:** Creates a form where users enter their username and password. The form sends these values to the `loginpage()` function we created earlier.
+
+**Expected result:** The file saves successfully. We will connect the page to a URL next.
+
+*Previous: Step 74 (models.py vs admin.py)  |  Next: Step 76 (Login URL)*
+
+---
