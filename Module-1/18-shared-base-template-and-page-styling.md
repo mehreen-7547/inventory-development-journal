@@ -815,3 +815,82 @@ Find `EmployeeCreationForm` and replace **only its `__init__()` method** with:
 *Previous: Step 189 (Change accounts/forms.py)  |  Next: Step 191 (Change accounts/forms.py)*
 
 ---
+
+## Step 191: Change accounts/forms.py
+
+**File:** `accounts/forms.py`
+
+Replace the entire file with this code. Both **Create Employee** and **Edit Employee** will have Bootstrap-styled fields.
+
+```python
+from django import forms
+from .models import CustomUser
+
+
+class EmployeeCreationForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'role']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_unusable_password()
+
+        if commit:
+            user.save()
+
+        return user
+
+
+class EmployeeEditForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'role'
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+**After replacing:**
+
+1. Save using `Ctrl + S`.
+2. Refresh the Create Employee page.
+3. Verify that all input fields and the Role dropdown are full-width.
+
+The existing employee creation, editing, role restrictions, and password-setup functionality remain unchanged.
+
+*Previous: Step 190 (Correct Form Styling)  |  Next: Step 192 (Update Edit Employee)*
+
+---
