@@ -1103,3 +1103,202 @@ We'll test simulated email failures automatically in the upcoming testing stage.
 *Previous: Step 192 (Update Edit Employee)  |  Next: Step 194 (Resend Email Error Handling)*
 
 ---
+
+## Step 194: Resend Email Error Handling
+
+#### Step 1 — Update `resend_setup_email()`
+
+**File:** `accounts/views.py`
+
+We already handle email failures during employee creation. Now we'll handle failures when an administrator clicks **Resend Setup Email**.
+
+Find these lines inside `resend_setup_email()`:
+
+```python
+    else:
+        send_welcome_email(request, employee)
+        messages.success(request, 'Password setup email generated successfully.')
+```
+
+Replace them with:
+
+```python
+    else:
+        try:
+            send_welcome_email(request, employee)
+
+        except (SMTPException, OSError):
+            messages.error(
+                request,
+                'Setup email could not be sent. Please try again.'
+            )
+
+        else:
+            messages.success(
+                request,
+                'Password setup email generated successfully.'
+            )
+```
+
+**Important:** Keep the existing `SMTPException` import from Step 324. Do not change the other conditions in this function.
+
+#### Step 2 — Verify
+
+Save `views.py`, then run:
+
+```powershell
+python manage.py check
+```
+
+Expected output:
+
+`System check identified no issues (0 silenced).`
+
+**Result:** If email delivery fails, Django displays an error message instead of an unhandled server error. The employee account remains unchanged.
+
+#### How we checked it
+
+**No. We haven't been committing each Module 1 change to Git as we go.** Our last confirmed Git checkpoint was Module 0.
+
+Your concern is valid. Git can record all the changes we've made, but there's an important distinction:
+
+| What Git can preserve | What Git cannot reconstruct |
+|---|---|
+| Every changed file | The exact order of past edits |
+| Differences from the last commit | Every intermediate version |
+| The final working code | Every terminal command we executed |
+| Future step-by-step commits | Past commits that were never created |
+
+#### What I recommend
+
+We should **start committing regularly now**, rather than waiting until the entire module is finished.
+
+- **Immediately:** Commit our completed Module 1 work as a checkpoint.
+- **Going forward:** Make small, descriptive commits after verified features or fixes.
+- **At module completion:** Create a final module commit and tag.
+- **For detailed history:** Maintain a development journal recording the individual steps, commands, and test results.
+
+This gives us a readable Git history without making unnecessary commits for every line of code.
+
+#### Next step — Check Git status
+
+In your VS Code terminal, run:
+
+```powershell
+git status --short
+```
+
+**Paste the output here.** I'll help you review the changed files, ensure `.env` and other sensitive files aren't included, and create a safe checkpoint before we continue.
+
+We won't lose the code we've already written; we just cannot retroactively recreate its exact commit-by-commit history.
+
+#### How we checked it
+
+For Module 1, I recommend **preserving the development history in two ways: Git commits for code changes and a detailed development journal for individual steps.**
+
+We can still make Module 1 traceable, even though we didn't commit continuously.
+
+#### How we'll handle Module 1
+
+      **1. Reconstruct the development journal**
+
+      Create `docs/module1-development-log.md`.
+
+      Record our completed steps, including filenames, changes, commands, test results, and reasons for decisions. Clearly distinguish confirmed results from steps we haven't verified.
+
+      **2. Create a Module 1 checkpoint commit**
+
+      Review the uncommitted changes, confirm no secrets are included, and commit the current working code together with the journal.
+
+      Git will preserve the complete file-by-file and line-by-line differences from Module 0.
+
+      **3. Commit incrementally from now on**
+
+      Each remaining tested feature or fix gets its own commit, such as email error handling, automated tests, and final Module 1 verification.
+
+#### What the resulting history will look like
+
+    }>
+      **`m0-complete`**
+
+      Module 0 — Existing checkpoint
+
+    }>
+      **`Module 1: accounts implementation checkpoint`**
+
+      Existing work, with retrospective step-by-step journal
+
+    }>
+      **`Module 1: complete email error handling`**
+
+    }>
+      **`Module 1: add authentication and permissions tests`**
+
+    }>
+      **`m1-complete`**
+
+      Final verification and module completion tag
+
+**One limitation:** We cannot honestly turn earlier uncommitted edits into their original chronological Git commits. We could manually reconstruct intermediate versions, but that would be time-consuming and error-prone. A retrospective journal is the safer solution.
+
+#### What we do right now
+
+Before continuing Step 325, run:
+
+```powershell
+git status --short
+```
+
+Paste the output here. We'll inspect the changes and build the Module 1 journal **before making the checkpoint commit**.
+
+From that point forward, I'll explicitly include a Git checkpoint whenever we complete a testable unit of work.
+
+#### How we checked it
+
+**Agreed. From now on, every major development step within a module will have its own Git commit.** We will not wait until the end of a module.
+
+#### 1. How we'll work from Module 2 onward
+
+    Implement one main feature, in small coding steps.
+    Test that feature and understand the code.
+    Commit it to Git with a descriptive message.
+    Push the commit to GitHub after verification.
+    Move to the next feature.
+
+A **commit** saves a checkpoint in your local Git history. A **push** uploads those commits to GitHub.
+
+For example, Module 2 might have separate commits for supplier management, product management, and stock records.
+
+#### 2. What about Module 1?
+
+You're right: most of Module 1 currently exists as one large collection of uncommitted changes.
+
+I recommend:
+
+- Create a **Module 1 implementation checkpoint** now.
+- Prepare a **Module 1 study guide** dividing the existing code into logical stages: user model, authentication, permissions, employee management, emails, and templates.
+- Review those stages individually, referring to the actual files and code.
+- Commit the remaining Module 1 work incrementally, especially error handling and automated tests.
+
+We should not manufacture an artificial Git history for work that was already completed.
+
+#### 3. Was Module 0 committed all at once?
+
+We previously established a Git checkpoint tagged `m0-complete`, but **I cannot confirm whether Module 0 had incremental commits without inspecting its Git history**.
+
+Run these commands in your VS Code terminal:
+
+```powershell
+git log --oneline --decorate --max-count=20
+git status --short
+```
+
+Paste both outputs here.
+
+I'll check how Module 0 was tracked and what remains uncommitted in Module 1. Then we'll establish the incremental workflow before continuing development.
+
+**Our rule going forward: One completed major feature = one verified Git commit.**
+
+*Previous: Step 193 (Email Error Handling)*
+
+---
