@@ -75,3 +75,32 @@ Next, we'll create the actual Logout button.
 *Previous: Step 80 (Logout Function)  |  Next: Step 82 (Logout Button)*
 
 ---
+
+## Step 82: Logout Button
+
+#### Add a Logout button to the homepage
+
+Open your homepage template (`home.html`, the file rendered by `core/views.py`).
+
+Inside the `<body>`, add:
+
+```html
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+```
+
+**What each part means:**
+
+- `<form>` — creates a form.
+- `method="POST"` — sends a POST request when submitted.
+- `{% url 'logout' %}` — finds the URL named `logout` in `accounts/urls.py`.
+- `{% csrf_token %}` — adds a security token that Django checks.
+- `<button>` — submits the form when clicked.
+
+**Expected result:** After logging in, you should see a Logout button on the homepage. Clicking it should return you to the login page.
+
+*Previous: Step 81 (Logout URL)  |  Next: Step 83 (Protect Homepage)*
+
+---
