@@ -291,3 +291,31 @@ Add this code:
 *Previous: Step 88 (Password Change URL)  |  Next: Step 90 (Change Password Link)*
 
 ---
+
+## Step 90: Change Password Link
+
+#### Next: Add a Change Password link to the homepage
+
+Currently, users must manually type `/change-password/` to access the page.
+
+Open your homepage template, **`core/home.html`**.
+
+Add this line above the Logout button:
+
+```html
+<a href="{% url 'change_password' %}">Change Password</a>
+```
+
+**How it works:**
+
+- `<a>` creates a clickable link.
+- `{% url 'change_password' %}` finds the URL with that name in `accounts/urls.py`.
+- Clicking it opens the password-change page.
+
+**Expected result:** Your homepage displays a **Change Password** link. Clicking it opens the form.
+
+We'll style this link later along with the rest of the interface.
+
+*Previous: Step 89 (Password Change Form)  |  Next: Step 91 (Role-Based Homepage)*
+
+---
