@@ -224,3 +224,72 @@ This is still the functional Bootstrap interface, not the final visual design.
 *Previous: Step 180 (Update Login Page)  |  Next: Step 182 (Update Forgot Password Page)*
 
 ---
+
+## Step 182: Update Forgot Password Page
+
+#### Step 1 — Replace the existing HTML
+
+**File:** The password-reset form template you just opened.
+
+Replace its entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Forgot Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+        <h2 class="mb-3">Forgot Password</h2>
+
+        <p>
+            Enter your registered email address
+            to reset your password.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Send Reset Link
+            </button>
+        </form>
+
+        <p class="mt-3">
+            <a href="{% url 'login' %}">
+                Back to Login
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Uses the shared `base.html` layout.
+- Centres the form using Bootstrap.
+- Styles the submit button.
+- Preserves Django's email field, validation, and CSRF protection.
+- Keeps the **Back to Login** link.
+
+#### Step 3 — Test
+
+1. Open the login page.
+2. Click **Forgot Password?**
+3. Confirm the updated page displays correctly.
+4. Click **Back to Login** and verify that it works.
+5. Return and submit a registered test email address. Verify that the password-reset confirmation page appears.
+
+*Previous: Step 181 (Update Change Password Page)  |  Next: Step 183 (Update Reset Confirmation)*
+
+---
