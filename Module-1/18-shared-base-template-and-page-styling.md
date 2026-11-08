@@ -487,3 +487,153 @@ This completes the shared-layout updates for the authentication pages.
 *Previous: Step 184 (Update Set New Password Page)  |  Next: Step 186 (Update Employee List)*
 
 ---
+
+## Step 186: Update Employee List
+
+#### Step 1 — Replace `employee_list.html`
+
+**File:** `templates/accounts/employee_list.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manage Employees - Inventory System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Manage Employees</h2>
+
+<div class="d-flex gap-2 mb-4">
+
+    <a href="{% url 'create_employee' %}"
+       class="btn btn-primary">
+        Add New Employee
+    </a>
+
+    {% if edit_mode %}
+
+        <a href="{% url 'employee_list' %}"
+           class="btn btn-outline-secondary">
+            Cancel Edit
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'employee_list' %}?mode=edit"
+           class="btn btn-outline-primary">
+            Edit Employee
+        </a>
+
+    {% endif %}
+
+</div>
+
+{% if edit_mode %}
+    <p class="text-muted">
+        Select an employee to edit.
+    </p>
+{% endif %}
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-hover align-middle">
+
+        <thead class="table-light">
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for employee in employees %}
+
+            <tr {% if edit_mode %}class="selectable"{% endif %}>
+
+                <td>
+                    {% if edit_mode %}
+                        <a class="row-link"
+                           href="{% url 'edit_employee' employee.id %}">
+                            {{ employee.username }}
+                        </a>
+                    {% else %}
+                        {{ employee.username }}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {{ employee.first_name }}
+                    {{ employee.last_name }}
+                </td>
+
+                <td>{{ employee.email }}</td>
+
+                <td>{{ employee.get_role_display }}</td>
+
+                <td>
+                    {% if employee.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" class="text-center">
+                    No employees found.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<a href="{% url 'home' %}"
+   class="btn btn-outline-secondary mt-3">
+    Back to Home
+</a>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Applied Bootstrap table and button styling.
+- Preserved the existing external `style.css`.
+- Removed duplicate message handling; `base.html` now handles it.
+- Preserved **Add New Employee**, **Edit Employee**, **Cancel Edit**, and clickable employee rows.
+- Added visual status indicators for active and inactive employees.
+
+#### Step 3 — Test
+
+  {@body const checks = ["Employee list displays correctly","Add New Employee opens the creation form","Edit Employee enables clickable rows","Clicking an employee opens the correct edit form","Cancel Edit returns to normal list view"]}
+  {@body const [done,setDone] = DIL.useState([])}
+  {#each checks as check,i}
+    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
+  {/each}
+
+Next, we'll update **Create Employee**, followed by **Edit Employee**.
+
+*Previous: Step 185 (Update Reset Complete Page)  |  Next: Step 187 (Update Create Employee)*
+
+---
