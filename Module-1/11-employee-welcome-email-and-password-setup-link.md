@@ -222,3 +222,68 @@ We're **reusing the existing password-reset confirmation page**, rather than bui
 *Previous: Step 130 (Welcome Email Template)  |  Next: Step 132 (Send Welcome Email)*
 
 ---
+
+## Step 132: Send Welcome Email
+
+#### Next: Create the welcome email function
+
+We already have a function that generates the employee's secure password-setup link.
+
+Now we'll create another function that **uses that link to send a welcome email**.
+
+Open **`accounts/utils.py`**.
+
+Add these imports at the top:
+
+```python
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+```
+
+Then add this function **below `generate_setup_link()`**:
+
+```python
+def send_welcome_email(request, user):
+    setup_link = generate_setup_link(request, user)
+
+    message = render_to_string(
+        'accounts/welcome_email.txt',
+        {
+            'first_name': user.first_name or user.username,
+            'username': user.username,
+            'setup_link': setup_link
+        }
+    )
+
+    send_mail(
+        'Welcome to Inventory System',
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [user.email]
+    )
+```
+
+#### What happens here?
+
+1. `generate_setup_link()` creates the employee's secure link.
+2. `render_to_string()` fills the welcome email template with the employee's details.
+3. `send_mail()` sends the resulting message to Django's configured email backend.
+
+  **NEW vs CLASS — `render_to_string()`**
+
+  Previously, Django rendered HTML templates using `render()`.
+
+  `render_to_string()` works similarly, but returns the completed template as a Python string instead of an HTTP response.
+
+  This makes it useful for constructing email messages.
+
+**For now:** Save `utils.py`.
+
+The email will still appear in the terminal because we're using the console backend. Also, this function won't run automatically yet.
+
+Next, we'll connect it to Django Admin so creating an employee triggers the welcome email.
+
+*Previous: Step 131 (Secure Password-Setup Link)  |  Next: Step 133 (Automatic Welcome Email)*
+
+---
