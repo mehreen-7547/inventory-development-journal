@@ -68,3 +68,61 @@ Next, we'll prepare Gmail authentication using an App Password, without putting 
 *Previous: Step 169 (Message Styling CSS)  |  Next: Step 171 (Configure SMTP Credentials)*
 
 ---
+
+## Step 171: Configure SMTP Credentials
+
+#### Next: Configure Gmail credentials in VS Code
+
+We've generated the Gmail App Password. Now we'll provide it to Django securely, without adding it to our project files.
+
+#### Step 1: Open the VS Code terminal
+
+If your Django server is running, stop it using `Ctrl + C`.
+
+In the **PowerShell terminal**, run these commands:
+
+```powershell
+$env:EMAIL_MODE = "smtp"
+
+$env:EMAIL_HOST_USER = "mehreen7547@gmail.com"
+
+$secure = Read-Host "Enter Gmail App Password" -AsSecureString
+
+$env:EMAIL_HOST_PASSWORD = ([System.Net.NetworkCredential]::new("", $secure).Password) -replace ' ', ''
+
+Remove-Variable secure
+```
+
+When PowerShell asks for your App Password, paste it and press Enter. The password will not be displayed while you type.
+
+#### Step 2: Start Django
+
+In the **same terminal**, run:
+
+```powershell
+python manage.py runserver
+```
+
+#### What have we configured?
+
+| Variable | Purpose |
+|---|---|
+| `EMAIL_MODE` | Enables SMTP delivery |
+| `EMAIL_HOST_USER` | Gmail sending account |
+| `EMAIL_HOST_PASSWORD` | Gmail App Password |
+
+  **NEW vs CLASS — Environment variables**
+
+  Environment variables allow Django to access configuration without hardcoding passwords.
+
+  These variables exist only in the current PowerShell session. If you close that terminal, you'll need to set them again.
+
+  This is suitable for our development and testing stage.
+
+**Expected result:** Django starts normally. No email will be sent until we trigger an email operation.
+
+Next, we'll send a real test email and verify that it arrives in your Gmail inbox.
+
+*Previous: Step 170 (Real Email Configuration)  |  Next: Step 172 (Install python-dotenv)*
+
+---
