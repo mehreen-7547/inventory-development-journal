@@ -1025,3 +1025,81 @@ Once verified, all three employee management pages will use the shared layout. W
 *Previous: Step 191 (Change accounts/forms.py)  |  Next: Step 193 (Email Error Handling)*
 
 ---
+
+## Step 193: Email Error Handling
+
+#### Step 1 — Handle welcome email failures
+
+**File:** `accounts/views.py`
+
+Currently, if Gmail fails while sending a welcome email, Django may display an error even though the employee account has already been created.
+
+We'll handle this without creating duplicate employees.
+
+**A.** Add this import at the top of `views.py`:
+
+```python
+from smtplib import SMTPException
+```
+
+**B.** Inside `create_employee()`, find:
+
+```python
+employee = form.save()
+send_welcome_email(request, employee)
+messages.success(request, 'Employee created successfully.')
+return redirect('employee_list')
+```
+
+Replace those lines with:
+
+```python
+            employee = form.save()
+
+            try:
+                send_welcome_email(request, employee)
+
+            except (SMTPException, OSError):
+                messages.error(
+                    request,
+                    'Employee created, but the setup email could not '
+                    'be sent. Use Resend Setup Email to try again.'
+                )
+
+            else:
+                messages.success(
+                    request,
+                    'Employee created successfully.'
+                )
+
+            return redirect('employee_list')
+```
+
+Keep the indentation exactly as shown.
+
+    NEW vs CLASS — Email Delivery Failure Handling
+
+  **Where:** `accounts/views.py` → `create_employee()`
+  **In class:** `backend/secondproject/user/views.py` sends a welcome email directly using `send_mail()`.
+  **In this project:** We catch SMTP and connection errors.
+  **How they differ:** The class code does not handle delivery failures here. Our code displays an error message and continues to the employee list.
+  **Why chosen:** Prevent a misleading server error after account creation.
+  **Other option:** Send the email directly, as in class.
+
+#### Step 2 — Verify
+
+Save the file and run:
+
+```powershell
+python manage.py check
+```
+
+Expected result:
+
+`System check identified no issues (0 silenced).`
+
+We'll test simulated email failures automatically in the upcoming testing stage.
+
+*Previous: Step 192 (Update Edit Employee)  |  Next: Step 194 (Resend Email Error Handling)*
+
+---
