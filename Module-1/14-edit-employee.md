@@ -407,3 +407,82 @@ Next, we'll make employees selectable while edit mode is active.
 *Previous: Step 150 (Employee Edit Mode)  |  Next: Step 152 (Select Employee)*
 
 ---
+
+## Step 152: Select Employee
+
+#### Step 3: Make employee rows clickable in Edit Mode
+
+When **Edit Employee** is selected, clicking an employee's row should open that employee's edit form.
+
+Open **`templates/accounts/employee_list.html`**.
+
+**1.** Inside `<head>`, add:
+
+```html
+<style>
+    .selectable {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .selectable:hover {
+        background-color: #eeeeee;
+    }
+
+    .row-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+</style>
+```
+
+**2.** Find the `<tr>` immediately after:
+
+```html
+{% for employee in employees %}
+```
+
+Replace that `<tr>` with:
+
+```html
+<tr {% if edit_mode %}class="selectable"{% endif %}>
+```
+
+**3.** Find the username cell:
+
+```html
+<td>{{ employee.username }}</td>
+```
+
+Replace it with:
+
+```html
+<td>
+    {% if edit_mode %}
+        <a class="row-link"
+           href="{% url 'edit_employee' employee.id %}">
+            {{ employee.username }}
+        </a>
+    {% else %}
+        {{ employee.username }}
+    {% endif %}
+</td>
+```
+
+#### Test
+
+1. Open `/employees/` — rows should not be clickable.
+2. Click **Edit Employee** — rows should become selectable.
+3. Click anywhere on `manager1`'s row — the custom Edit Employee page should open.
+4. Click **Back to Manage Employees** to return to the list.
+
+  **NEW vs CLASS — CSS `::after`**
+
+  The `::after` pseudo-element extends the username link's clickable area across the employee's row. This lets us make the whole row clickable without JavaScript.
+
+If you previously added an individual **Edit** link in an Actions column, remove it, since we're replacing that approach.
+
+*Previous: Step 151 (Edit Mode Button)  |  Next: Step 153 (Change templates/accounts/employee_list.html)*
+
+---
