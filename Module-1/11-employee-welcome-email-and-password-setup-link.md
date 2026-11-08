@@ -339,3 +339,39 @@ Do not share the setup token here.
 *Previous: Step 132 (Send Welcome Email)  |  Next: Step 134 (Link Expiration)*
 
 ---
+
+## Step 134: Link Expiration
+
+**Employee onboarding tests passed.** We've verified that employees can set their own passwords and that setup links cannot be reused.
+
+#### Next: Set the expiry time for password links
+
+Currently, Django's default password-reset token lifetime is **3 days**.
+
+For our inventory system, we'll use **24 hours** for both welcome-email setup links and forgot-password links.
+
+Open **`config/settings.py`** and add:
+
+```python
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+#### What does this mean?
+
+- `60 * 60 * 24` = 86,400 seconds = 24 hours.
+- After 24 hours, Django rejects the link.
+- Employees must request a new link if theirs expires.
+
+  **NEW vs CLASS — `PASSWORD_RESET_TIMEOUT`**
+
+  This is a built-in Django setting. It controls how long password-reset tokens remain valid.
+
+  Because our welcome emails reuse Django's password-reset token system, the same setting applies to both workflows.
+
+**Save the file.** No database migration is needed.
+
+Next, we'll implement an administrator-controlled way to resend an expired employee setup link.
+
+*Previous: Step 133 (Automatic Welcome Email)  |  Next: Step 135 (Resend Setup Link)*
+
+---
