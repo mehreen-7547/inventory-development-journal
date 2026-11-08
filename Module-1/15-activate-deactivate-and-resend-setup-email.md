@@ -246,3 +246,43 @@ Next, we'll connect the URL and then add a Resend Setup Email button to the empl
 *Previous: Step 159 (Deactivate/Reactivate Button)  |  Next: Step 161 (Resend Setup Email URL)*
 
 ---
+
+## Step 161: Resend Setup Email URL
+
+#### Next: Connect the Resend Setup Email view
+
+We've created `resend_setup_email()` in `accounts/views.py`.
+
+Now we'll connect it to a URL.
+
+Open **`accounts/urls.py`**.
+
+Add this inside the existing `urlpatterns` list:
+
+```python
+path(
+    'employees/resend-setup/<int:employee_id>/',
+    views.resend_setup_email,
+    name='resend_setup_email'
+),
+```
+
+#### How does it work?
+
+For example:
+
+`/employees/resend-setup/3/`
+
+This URL identifies employee ID `3` and connects to our `resend_setup_email()` view.
+
+Like the Deactivate/Reactivate operation, it accepts **POST requests only**.
+
+Opening the URL directly in a browser should return HTTP 405. This is expected.
+
+**Save `accounts/urls.py`.**
+
+Next, we'll add the **Resend Setup Email** button to the Edit Employee page. It will appear only for active employees who haven't set a password.
+
+*Previous: Step 160 (Resend Setup Email)  |  Next: Step 162 (Resend Setup Email Button)*
+
+---
