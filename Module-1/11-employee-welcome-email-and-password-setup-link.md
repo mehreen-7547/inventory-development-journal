@@ -168,3 +168,57 @@ Next, we'll generate the secure setup link using Django's existing password-rese
 *Previous: Step 129 (Connect Employee Form)  |  Next: Step 131 (Secure Password-Setup Link)*
 
 ---
+
+## Step 131: Secure Password-Setup Link
+
+238 · Module 1 — Accounts · Secure Password-Setup Link
+
+#### Next: Generate the employee's setup link
+
+We already created `welcome_email.txt`. Now we need to generate the secure link that will appear in that email.
+
+Create a new file:
+
+**`accounts/utils.py`**
+
+Paste:
+
+```python
+from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+
+
+def generate_setup_link(request, user):
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = default_token_generator.make_token(user)
+
+    path = reverse(
+        'password_reset_confirm',
+        kwargs={'uidb64': uid, 'token': token}
+    )
+
+    return request.build_absolute_uri(path)
+```
+
+#### What does this function do?
+
+1. **`uid`** — encodes the employee's database ID for the URL.
+2. **`token`** — generates a secure password-setup token using Django's built-in functionality.
+3. **`reverse()`** — constructs the URL using the `password_reset_confirm` route we already created.
+4. **`build_absolute_uri()`** — produces the complete URL, including the website address.
+
+  **NEW vs CLASS — 3 concepts**
+
+  - `default_token_generator` — Django's built-in password-reset token generator.
+  - `urlsafe_base64_encode()` — encodes the user ID for inclusion in a URL.
+  - `reverse()` — the Python equivalent of the `{% url %}` template tag we used earlier.
+
+We're **reusing the existing password-reset confirmation page**, rather than building a separate password-setting system.
+
+**For now:** Save `utils.py`. The function generates a link but doesn't send an email yet.
+
+*Previous: Step 130 (Welcome Email Template)  |  Next: Step 132 (Send Welcome Email)*
+
+---
