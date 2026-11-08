@@ -383,3 +383,19 @@ Save with `Ctrl + S`.
 *Previous: Step 50 (Finalize Report)  |  Next: Step 52 (Stage Final Updates)*
 
 ---
+
+## Step 52: Stage Final Updates
+
+#### Step 74 — Stage the final documentation updates
+
+Run in your VS Code terminal:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
+```
+
+This stages the two updated files for the final Module 0 documentation commit. It does not upload anything.
+
+*Previous: Step 51 (Finalize README)  |  Next: Step 53 (Final Documentation Commit)*
+
+---
