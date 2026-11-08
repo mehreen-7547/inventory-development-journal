@@ -232,3 +232,55 @@ Send me the output. Next, we'll verify the connection before pushing your first 
 *Previous: Step 9 (Create our first Git commit)  |  Next: Step 11 (Connect your local project to GitHub)*
 
 ---
+
+## Step 11: Connect your local project to GitHub
+
+That's the correct public GitHub repository:
+
+ai-assisted-inventory-manager (https://github.com/mehreen-7547/ai-assisted-inventory-manager)
+
+#### Step 13 — Connect your local project to GitHub
+
+In your existing VS Code terminal, run:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
+```
+
+This connects your local Git repository to the GitHub repository.
+
+**It does not upload anything yet.**
+
+Send me the terminal output. Next, we'll verify the connection and push your first commit.
+
+#### How we checked it
+
+**Step 13 completed without errors.** Your local project is now configured to use GitHub as its remote repository.
+
+#### Step 14 — Verify the remote connection
+
+Run:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote -v
+```
+
+**Understanding the command:**
+
+- `git remote` — Shows configured remote repositories.
+- `-v` — Displays their URLs and whether they're used for fetching or pushing.
+
+**Expected output:**
+
+```text
+origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (fetch)
+origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (push)
+```
+
+This checks the saved remote configuration; it doesn't contact GitHub or upload files.
+
+Send me the output. Next, we'll push your first commit to the public repository.
+
+*Previous: Step 10 (Connect your local project to GitHub)  |  Next: Step 12 (Push your first commit to GitHub)*
+
+---
