@@ -457,3 +457,33 @@ We subsequently applied this decorator to the homepage in reply **188** and test
 *Previous: Step 104 (Test Role Restrictions)  |  Next: Step 106 (Apply Role Security)*
 
 ---
+
+## Step 106: Apply Role Security
+
+Your current `core/views.py` uses `@login_required`, which checks only whether the user is logged in.
+
+Now replace the entire file with:
+
+```python
+from django.shortcuts import render
+from accounts.decorators import role_required
+
+
+@role_required('admin', 'manager', 'sales')
+def home(request):
+    return render(request, 'core/home.html')
+```
+
+**What changed?**
+
+1. Removed the `login_required` import.
+2. Imported our custom `role_required` decorator.
+3. Replaced `@login_required` with `@role_required('admin', 'manager', 'sales')`.
+
+Our custom decorator already checks login status, so both decorators aren't necessary here.
+
+**Test:** Save the file and refresh your homepage while logged in. It should work as before.
+
+*Previous: Step 105 (Change accounts/decorators.py)  |  Next: Step 107 (Test Role Security)*
+
+---
