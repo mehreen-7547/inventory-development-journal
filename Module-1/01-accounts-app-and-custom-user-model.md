@@ -260,3 +260,81 @@ When saved, reply **done** so we can verify the configuration before proceeding.
 *Previous: Step 60 (Configure Settings)  |  Next: Step 62 (Understanding CustomUser)*
 
 ---
+
+## Step 62: Understanding CustomUser
+
+**No. We will not use `createsuperuser` for every employee.** That command is only for creating an administrator with special privileges.
+
+Let's understand what our code actually does.
+
+#### 1. Is `CustomUser` a database table?
+
+Yes. Django will create a table for it when we run migrations.
+
+You noticed that our code defines only one field:
+
+```python
+role = models.CharField(...)
+```
+
+But look at this line:
+
+```python
+class CustomUser(AbstractUser):
+```
+
+**`AbstractUser` already provides several fields.** Our `CustomUser` inherits all of them and adds one more: `role`.
+
+For example, the resulting table will contain:
+
+| id | username | email | password | role |
+|---|---|---|---|---|
+| 1 | admin1 | admin@example.com | Hashed | admin |
+| 2 | manager1 | manager@example.com | Hashed | manager |
+| 3 | sales1 | sales@example.com | Hashed | sales |
+
+Illustrative records only. Passwords are stored as secure hashes, not plain text. Other inherited fields include first name, last name, account status and permissions.
+
+So we're **extending Django's existing user structure**, not defining an entire user table from scratch.
+
+#### 2. Where does the email field come from?
+
+It is inherited from `AbstractUser`.
+
+This line:
+
+```python
+REQUIRED_FIELDS = ['email', 'role']
+```
+
+doesn't create those fields. It tells Django's `createsuperuser` command to ask for them.
+
+One distinction: `REQUIRED_FIELDS` does not, by itself, make email mandatory for every account created through Django Admin.
+
+#### 3. How will accounts be created?
+
+      **Initial administrator**
+
+      We run `python manage.py createsuperuser` once to create the first administrator.
+
+      **All other employees**
+
+      The administrator logs into Django Admin and creates their accounts, assigning either `manager` or `sales` as their role.
+
+#### 4. What about the superuser you already created in Module 0?
+
+That superuser belongs to Django's original `auth_user` table.
+
+We are switching to our own `accounts_customuser` table.
+
+Because Module 0 contains only development setup data, Claude approved a **one-time SQLite database reset**. Your old superuser will be deleted during that reset, and we'll create a new one with `role='admin'`.
+
+We have **not performed that reset yet**.
+
+**In short:** One custom user table holds all accounts. Each person has a username, password, email and role. The role determines which parts of the inventory system they can access.
+
+No additional action is needed for this explanation. We can continue with `accounts/models.py` when you're ready.
+
+*Previous: Step 61 (Custom User Model)  |  Next: Step 63 (Understanding AbstractUser)*
+
+---
