@@ -281,3 +281,19 @@ If other files appear, share the output. Otherwise, proceed.
 *Previous: Step 45 (Documenting Model Results)  |  Next: Step 47 (Stage Documentation)*
 
 ---
+
+## Step 47: Stage Documentation
+
+#### Step 69 — Stage the updated documentation
+
+Run:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
+```
+
+This prepares **only these two files** for the next commit. Nothing is uploaded to GitHub yet.
+
+*Previous: Step 46 (Update Module 0 Report)  |  Next: Step 48 (Commit Documentation)*
+
+---
