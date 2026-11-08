@@ -50,3 +50,58 @@ We'll keep `REQUIRED_FIELDS` and add the email field after correcting the existi
 *Previous: Step 107 (Test Role Security)  |  Next: Step 109 (Enforce Email Validation)*
 
 ---
+
+## Step 109: Enforce Email Validation
+
+#### Next: Update the CustomUser model
+
+Assuming you've assigned different email addresses to `manager1` and `sales1`, we can now enforce email validation.
+
+Open **`accounts/models.py`** and update it to:
+
+```python
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Inventory Manager'),
+        ('sales', 'Sales Staff'),
+    )
+
+    email = models.EmailField(
+        unique=True,
+        blank=False
+    )
+
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default='sales'
+    )
+
+    REQUIRED_FIELDS = ['email', 'role']
+```
+
+#### What did we add?
+
+```python
+email = models.EmailField(
+    unique=True,
+    blank=False
+)
+```
+
+- **`EmailField`** — provides email-format validation in Django forms.
+- **`unique=True`** — prevents duplicate email values in the database.
+- **`blank=False`** — makes the email mandatory in Django forms, including Django Admin.
+
+We retain `REQUIRED_FIELDS` because it serves a separate purpose during superuser creation.
+
+**For now:** Save the file. Don't run migrations yet; we'll do that in the next step.
+
+*Previous: Step 108 (REQUIRED_FIELDS)  |  Next: Step 110 (Create Migration)*
+
+---
