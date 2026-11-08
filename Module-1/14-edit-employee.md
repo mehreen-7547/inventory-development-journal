@@ -486,3 +486,131 @@ If you previously added an individual **Edit** link in an Actions column, remove
 *Previous: Step 151 (Edit Mode Button)  |  Next: Step 153 (Change templates/accounts/employee_list.html)*
 
 ---
+
+## Step 153: Change templates/accounts/employee_list.html
+
+Replace the entire contents of **`templates/accounts/employee_list.html`** with this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Employees</title>
+
+    <style>
+        .selectable {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .selectable:hover {
+            background-color: #eeeeee;
+        }
+
+        .row-link::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Manage Employees</h2>
+
+    <p>
+        <a href="{% url 'create_employee' %}">
+            Add New Employee
+        </a>
+    </p>
+
+    {% if edit_mode %}
+
+        <p>Select an employee to edit.</p>
+
+        <a href="{% url 'employee_list' %}">
+            Cancel Edit
+        </a>
+
+    {% else %}
+
+        <p>
+            <a href="{% url 'employee_list' %}?mode=edit">
+                Edit Employee
+            </a>
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+
+        {% for employee in employees %}
+
+        <tr {% if edit_mode %}class="selectable"{% endif %}>
+
+            <td>
+                {% if edit_mode %}
+                    <a class="row-link"
+                       href="{% url 'edit_employee' employee.id %}">
+                        {{ employee.username }}
+                    </a>
+                {% else %}
+                    {{ employee.username }}
+                {% endif %}
+            </td>
+
+            <td>
+                {{ employee.first_name }}
+                {{ employee.last_name }}
+            </td>
+
+            <td>{{ employee.email }}</td>
+
+            <td>{{ employee.get_role_display }}</td>
+
+            <td>
+                {% if employee.is_active %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="{% url 'home' %}">
+            Back to Home
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+**Test:** Open `/employees/` → Click **Edit Employee** → Click an employee's row → The custom edit form should open.
+
+*Previous: Step 152 (Select Employee)  |  Next: Step 154 (External CSS)*
+
+---
