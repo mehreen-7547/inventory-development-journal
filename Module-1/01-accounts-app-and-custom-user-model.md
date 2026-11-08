@@ -338,3 +338,88 @@ No additional action is needed for this explanation. We can continue with `accou
 *Previous: Step 61 (Custom User Model)  |  Next: Step 63 (Understanding AbstractUser)*
 
 ---
+
+## Step 63: Understanding AbstractUser
+
+You're almost correct. **`CustomUser` is a child of `AbstractUser`, but `AbstractUser` is not a database table.**
+
+It is a Python class provided by Django that contains predefined user fields and functionality.
+
+#### 1. Where is `AbstractUser`?
+
+It is part of Django's installed source code, not something we created.
+
+You can find it at approximately:
+
+```text
+.venv/
+  Lib/
+    site-packages/
+      django/
+        contrib/
+          auth/
+            models.py
+```
+
+Inside that file, Django defines a class called `AbstractUser`.
+
+#### How to see the actual code
+
+In VS Code, open `accounts/models.py`, then hold **Ctrl** and click `AbstractUser` in:
+
+```python
+from django.contrib.auth.models import AbstractUser
+```
+
+VS Code should take you directly to Django's source code, where you can inspect the class.
+
+#### 2. What is an abstract model?
+
+Think of it as a reusable blueprint.
+
+    **AbstractUser**
+
+    Python blueprint — no database table
+    username · email · first_name · last_name · password and more
+
+        **Django's User**
+        Creates `auth_user`
+        Used in Module 0
+
+        **Our CustomUser**
+        Creates `accounts_customuser`
+        Adds the `role` field
+
+Both classes inherit from `AbstractUser`, but only the concrete user model selected for the project is used for new user accounts.
+
+#### 3. Why not just use `AbstractUser` directly?
+
+Because it is marked as an **abstract model**:
+
+```python
+class Meta:
+    abstract = True
+```
+
+This tells Django not to create a database table for `AbstractUser` itself.
+
+When we write:
+
+```python
+class CustomUser(AbstractUser):
+    role = models.CharField(max_length=10)
+```
+
+Django combines the inherited fields with our new `role` field and creates a real table when we run migrations.
+
+**So the distinction is:**
+
+- `AbstractUser` = reusable Python blueprint.
+- `CustomUser` = our Python model based on that blueprint.
+- `accounts_customuser` = the actual database table created from our model.
+
+You can inspect `AbstractUser` in VS Code now. No database changes are needed.
+
+*Previous: Step 62 (Understanding CustomUser)  |  Next: Step 64 (User Table Definition)*
+
+---
