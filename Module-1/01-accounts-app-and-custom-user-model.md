@@ -506,3 +506,111 @@ Without this setting, Django would use its default `auth.User` model, which does
 *Previous: Step 64 (User Table Definition)  |  Next: Step 66 (Django Authentication)*
 
 ---
+
+## Step 66: Django Authentication
+
+**Yes. That is exactly the underlying idea.** Your toothbrush analogy is appropriate.
+
+Django already has an established concept of a *user*. Its built-in authentication system knows how to handle user accounts, passwords, logins, permissions and sessions.
+
+It therefore needs a standard answer to one question:
+
+**Which database model represents a user in this project?**
+
+#### 1. Django already has a default answer
+
+Even if you don't write anything in your project's `settings.py`, Django's default setting is:
+
+```python
+AUTH_USER_MODEL = "auth.User"
+```
+
+This default is defined in Django's own settings, not necessarily in your project's settings file.
+
+`auth.User` refers to the built-in `User` model provided by `django.contrib.auth`.
+
+That's what we used in Module 0.
+
+#### 2. We are overriding that answer
+
+    Without our configuration
+
+        `AUTH_USER_MODEL`
+
+        `auth.User`
+
+    Django uses its built-in user model.
+
+    With our configuration
+
+        `AUTH_USER_MODEL`
+
+        `accounts.CustomUser`
+
+    Django uses our custom user model, which includes the role field.
+
+#### 3. Is a user model something every Django app automatically has?
+
+Not quite. **Django provides an authentication framework**, which is normally included when you create a Django project.
+
+That framework has a default user model. Individual apps don't each need to define their own users.
+
+For example, in our inventory project:
+
+- The `sales` app needs to know which employee recorded a sale.
+- The `inventory` app needs to know who adjusted stock.
+- The `accounts` app manages those employee accounts.
+
+All three can refer to the **same configured user model**.
+
+So the more precise version of your understanding is:
+
+**Django's authentication system comes with a default user model. `AUTH_USER_MODEL` lets us replace that default with our own model, which is then used throughout the project.**
+
+And this is why choosing the user model *before creating the database tables* is important.
+
+#### How we checked it
+
+Before creating database tables, let's verify that Django recognizes our custom user model.
+
+In your VS Code terminal, from the folder containing `manage.py`, run:
+
+```powershell
+python manage.py check
+```
+
+**Expected output:**
+
+```text
+System check identified no issues (0 silenced).
+```
+
+This checks our Django configuration without changing the database.
+
+If you haven't yet saved the `CustomUser` code in `accounts/models.py`, do that first using the code from response 89.
+
+**Do not run migrations or delete the database yet.**
+
+Share the terminal output so we can confirm the configuration before proceeding.
+
+#### How we checked it
+
+Before proceeding, I need to confirm the result of the previous command:
+
+```powershell
+python manage.py check
+```
+
+Did your terminal display the following?
+
+```text
+System check identified no issues (0 silenced).
+```
+
+Please reply **yes** if it did, or paste the error message if it didn't.
+
+We won't change the database until this is confirmed.
+
+*Previous: Step 65 (AUTH_USER_MODEL)  |  Next: Step 67 (Migration Preparation)*
+
+---
