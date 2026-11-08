@@ -399,3 +399,23 @@ This stages the two updated files for the final Module 0 documentation commit. I
 *Previous: Step 51 (Finalize README)  |  Next: Step 53 (Final Documentation Commit)*
 
 ---
+
+## Step 53: Final Documentation Commit
+
+#### Step 75 — Save and push the final changes
+
+Run these three commands together in your VS Code terminal:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
+git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: finalize Module 0 completion status"
+git -C .\techmindz_inventory_module0_sqlite_atomic push origin main
+```
+
+This stages, commits, and uploads the final documentation changes.
+
+**Next:** Create the `m0-complete` Git tag. If any command fails, share the error instead of proceeding.
+
+*Previous: Step 52 (Stage Final Updates)  |  Next: Step 54 (Create Completion Tag)*
+
+---
