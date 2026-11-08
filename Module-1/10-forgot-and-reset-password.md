@@ -498,3 +498,54 @@ path(
 *Previous: Step 121 (Set New Password Page)  |  Next: Step 123 (Password Reset Success Page)*
 
 ---
+
+## Step 123: Password Reset Success Page
+
+#### Next: Create the Password Reset Success page
+
+After an employee successfully sets a new password, Django should display a confirmation message.
+
+Create a new file:
+
+`templates/accounts/password_reset_complete.html`
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Complete</title>
+</head>
+<body>
+
+    <h2>Password Reset Successful</h2>
+
+    <p>
+        Your password has been reset successfully.
+        You can now log in using your new password.
+    </p>
+
+    <a href="{% url 'login' %}">Go to Login</a>
+
+</body>
+</html>
+```
+
+#### Where does this page fit?
+
+    **Password Reset Email**
+
+    **Set New Password**
+
+      **Password Reset Complete**
+
+    The page we're creating now
+
+    **Login**
+
+**Save the file.** Next, we'll connect it using Django's built-in `PasswordResetCompleteView`.
+
+*Previous: Step 122 (Reset Link URL)  |  Next: Step 124 (Password Reset Complete URL)*
+
+---
