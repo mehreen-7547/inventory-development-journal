@@ -21,3 +21,29 @@ Do not run `migrate` yet.
 *Previous: Step 67 (Migration Preparation)  |  Next: Step 69 (Database File Locked)*
 
 ---
+
+## Step 69: Database File Locked
+
+Windows cannot delete `db.sqlite3` because another process is currently using it.
+
+The most likely cause is that **Django's development server is still running**.
+
+#### Do this first
+
+1. In VS Code, check your other terminal tabs.
+2. Find the terminal running `python manage.py runserver`.
+3. Press **Ctrl + C** to stop the server.
+
+Then retry:
+
+```powershell
+Remove-Item .\db.sqlite3
+```
+
+**Expected result:** No output, and `db.sqlite3` disappears.
+
+If the same error appears, share it. We will identify the process holding the file.
+
+*Previous: Step 68 (Database Reset)  |  Next: Step 70 (Create Database Tables)*
+
+---
