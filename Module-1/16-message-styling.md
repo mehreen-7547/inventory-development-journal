@@ -94,3 +94,68 @@ Everything else in the code you shared can remain unchanged.
 *Previous: Step 165 (Employee Management Messages)  |  Next: Step 167 (Message Styling)*
 
 ---
+
+## Step 167: Message Styling
+
+#### Next: Prepare success and error messages for CSS
+
+We want success messages to appear in green and error messages in red, using our external stylesheet.
+
+Open **`templates/accounts/employee_list.html`**.
+
+Find the messages section and replace it with:
+
+```html
+{% if messages %}
+
+    {% for message in messages %}
+
+        <p class="message {{ message.tags }}">
+            {{ message }}
+        </p>
+
+    {% endfor %}
+
+{% endif %}
+```
+
+#### What changed?
+
+Previously:
+
+```html
+<p>{{ message }}</p>
+```
+
+Now:
+
+```html
+<p class="message {{ message.tags }}">
+    {{ message }}
+</p>
+```
+
+Django automatically provides message tags such as `success`, `error`, `warning` and `info`.
+
+  **NEW vs CLASS — `message.tags`**
+
+  Django's messages framework identifies the type of message.
+
+  For example, a successful update produces:
+
+  ```html
+  <p class="message success">
+      Employee updated successfully.
+  </p>
+  
+```
+
+  We can use these CSS classes to apply different styles.
+
+**Save the HTML file.** No visual changes are expected yet.
+
+Next, we'll add the styles to `accounts/static/accounts/style.css`.
+
+*Previous: Step 166 (Change edit_employee.html)  |  Next: Step 168 (Change employee_list.html)*
+
+---
