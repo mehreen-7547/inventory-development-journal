@@ -270,3 +270,72 @@ Tell me **done** when the command finishes.
 *Previous: Step 31 (Documenting Superuser Setup)  |  Next: Step 33 (Understanding git add and -C)*
 
 ---
+
+## Step 33: Understanding git add and -C
+
+**Yes, the file already exists.** `git add` doesn't mean creating or adding a new file to the folder.
+
+It means **selecting the current version of a file for the next commit**.
+
+#### 1. Why do we use `git add` repeatedly?
+
+Imagine your journal changes over time:
+
+      **Monday:** Journal contains initial setup notes.
+
+      `git add` → `git commit` saves Version 1.
+
+      **Tuesday:** You add database initialization notes.
+
+      `git add` → `git commit` saves Version 2.
+
+      **Wednesday:** You add Django Admin notes.
+
+      `git add` → `git commit` saves Version 3.
+
+It's always the **same file**. Git is recording its updated contents each time.
+
+#### 2. What does `-C` mean?
+
+Your command:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+Breakdown:
+
+| Part | Meaning |
+|---|---|
+| `git` | Run Git |
+| `-C` | Run Git as though you're inside the specified directory |
+| `C:\...\inventory-development-journal` | Repository directory |
+| `add` | Stage the current file contents |
+| `inventory-development-journal.md` | File being staged |
+
+**Important:** `-C` does not actually move your PowerShell terminal into that folder. It only tells Git which directory to work from.
+
+#### 3. Why not just commit directly?
+
+Git separates editing from committing so you can choose exactly which changes belong in each commit.
+
+    **Working directory**
+    You edit the existing journal
+
+  git add
+
+    **Staging area**
+    Git prepares a snapshot of the changes
+
+  git commit
+
+    **Local Git history**
+    A new version is permanently recorded
+
+**Key distinction:** `git add` stages a version, `git commit` records that version locally, and `git push` uploads the commit to GitHub.
+
+We can now resume **Step 41**, staging your updated development journal.
+
+*Previous: Step 32 (Staging Development Journal Update)  |  Next: Step 34 (Staging Development Journal Update)*
+
+---
