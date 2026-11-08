@@ -371,3 +371,58 @@ No other changes to your `settings.py` are required for this fix.
 *Previous: Step 173 (Fix Email Backend)  |  Next: Step 175 (Change manage.py)*
 
 ---
+
+## Step 175: Change manage.py
+
+#### 1. Exit the current Django Shell
+
+In your VS Code terminal, where you see `>>>`, type:
+
+```python
+exit()
+```
+
+Press **Enter**.
+
+You should now see the PowerShell prompt:
+
+```text
+(.venv) PS C:\Users\mehre\...>
+```
+
+#### 2. Start Django Shell again
+
+Type:
+
+```powershell
+python manage.py shell
+```
+
+Press **Enter**. You'll see `>>>` again.
+
+#### 3. Check the email configuration
+
+Copy and paste these lines:
+
+```python
+from django.conf import settings
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+Press **Enter**.
+
+Expected result:
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+mehreen7547@gmail.com
+```
+
+**Send me the three lines of output you get.**
+
+*Previous: Step 174 (Fix the email configuration)  |  Next: Step 176 (Send a real email through Gmail)*
+
+---
