@@ -109,3 +109,54 @@ Don't submit the form yet. We still need to configure the email templates and re
 *Previous: Step 113 (Forgot Password)  |  Next: Step 115 (Password Reset Confirmation)*
 
 ---
+
+## Step 115: Password Reset Confirmation
+
+#### Next: Create the password-reset confirmation page
+
+After an employee submits their email address, Django should display a confirmation page.
+
+**Create a new file:**
+
+`templates/accounts/password_reset_done.html`
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Requested</title>
+</head>
+<body>
+
+    <h2>Check Your Email</h2>
+
+    <p>
+        If an active account exists with that email address,
+        password reset instructions will be sent.
+    </p>
+
+    <p>
+        Please check your email for the reset link.
+    </p>
+
+    <a href="{% url 'login' %}">Back to Login</a>
+
+</body>
+</html>
+```
+
+#### Why this wording?
+
+Notice we don't say *"An account with this email exists."*
+
+That is intentional. **We shouldn't reveal whether a particular email address is registered in our system.**
+
+The same confirmation message should appear whether the submitted email belongs to an active employee or not.
+
+**For now:** Save the file. Next, we'll connect it to Django's password-reset workflow.
+
+*Previous: Step 114 (Password Reset URL)  |  Next: Step 116 (Template Structure)*
+
+---
