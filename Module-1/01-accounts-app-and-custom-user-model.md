@@ -180,3 +180,35 @@ We won't modify any files until creation is confirmed.
 *Previous: Step 58 (Workflow Correction)  |  Next: Step 60 (Configure Settings)*
 
 ---
+
+## Step 60: Configure Settings
+
+The `accounts` app is now created.
+
+#### Configure the custom user model
+
+Open **`config/settings.py`**.
+
+**1.** Find `INSTALLED_APPS` and add `"accounts",` immediately after `"core",`:
+
+```python
+    "core",
+    "accounts",
+]
+```
+
+**2.** Immediately below the closing `]`, add:
+
+```python
+AUTH_USER_MODEL = "accounts.CustomUser"
+```
+
+This tells Django that our project will use the custom user model in the `accounts` app instead of Django's default User model.
+
+Your instructor also used `AUTH_USER_MODEL` in the training project's settings, so this follows the classroom approach.
+
+**Save the file.** Do not run migrations yet. We will define `CustomUser` next.
+
+*Previous: Step 59 (App Creation)  |  Next: Step 61 (Custom User Model)*
+
+---
