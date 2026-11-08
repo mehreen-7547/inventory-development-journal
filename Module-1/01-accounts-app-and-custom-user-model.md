@@ -106,3 +106,56 @@ The main difference is that our roles represent inventory-system users rather th
 *Previous: Step 56 (Approved — Begin Development)  |  Next: Step 58 (Workflow Correction)*
 
 ---
+
+## Step 58: Workflow Correction
+
+**You are correct. This was my mistake, not yours.**
+
+I instructed you to create the `accounts` app in Step 81, but you never confirmed that you had executed the command. When you clicked **Next**, I incorrectly assumed the step was completed.
+
+I should not have proceeded to editing `accounts/models.py` without verifying that the app existed.
+
+#### What we have actually completed
+
+- **Module 0:** Django project initialized, `core` app created, SQLite configured, and Django's 18 default migrations applied.
+- **Custom inventory tables:** None created.
+- **`accounts` app:** Not yet created, based on what you've told me.
+- **Module 1:** Approved, but implementation has not yet been confirmed.
+
+Your understanding of Module 0 is correct.
+
+#### Corrected Step 81 — Create the accounts app
+
+In your VS Code PowerShell terminal, run:
+
+```powershell
+Set-Location "C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+
+python manage.py startapp accounts
+```
+
+Django should automatically create:
+
+```text
+accounts/
+    __init__.py
+    admin.py
+    apps.py
+    models.py
+    tests.py
+    views.py
+    migrations/
+        __init__.py
+```
+
+**Stop here.** Do not edit `models.py`, change settings, or run migrations yet.
+
+#### How we'll prevent this happening again
+
+From now on, I will distinguish between **instructed**, **confirmed completed**, and **verified** steps. Clicking Next will not be treated as proof that a terminal command succeeded.
+
+Once the `accounts` folder appears, confirm it. Only then will we proceed.
+
+*Previous: Step 57 (Custom User Model)  |  Next: Step 59 (App Creation)*
+
+---
