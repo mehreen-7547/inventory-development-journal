@@ -484,3 +484,59 @@ Send me the terminal output. Next, we'll verify the staged file before creating 
 *Previous: Step 15 (Connect it to GitHub)  |  Next: Step 17 (Change views.py)*
 
 ---
+
+## Step 17: Change views.py
+
+**Staging means selecting which changes you want to include in your next Git commit.**
+
+Think of Git as having three stages:
+
+    **1. Working directory**
+
+    Where you create and edit your files
+
+  git add
+
+    **2. Staging area**
+
+    Changes selected for the next commit
+
+  git commit
+
+    **3. Local Git repository**
+
+    A permanent snapshot recorded in Git history
+
+  git push
+
+    **4. GitHub**
+
+    Your committed changes are uploaded online
+
+#### Example from our project
+
+Suppose you have three files: `views.py`, `models.py`, and `notes.md`.
+
+If you run:
+
+```bash
+git add views.py
+```
+
+Only the current changes in `views.py` are staged. The other two files aren't included in the next commit unless you stage them too.
+
+Then:
+
+```bash
+git commit -m "Add inventory views"
+```
+
+Git records a snapshot of the staged changes.
+
+**Key distinction:** `git add` prepares changes, `git commit` records them locally, and `git push` uploads commits to GitHub.
+
+In our current step, we're staging only `inventory-development-journal.md` in your **private repository**.
+
+*Previous: Step 16 (Stage the journal for Git)  |  Next: Step 18 (Stage the private journal)*
+
+---
