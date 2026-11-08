@@ -423,3 +423,49 @@ You can inspect `AbstractUser` in VS Code now. No database changes are needed.
 *Previous: Step 62 (Understanding CustomUser)  |  Next: Step 64 (User Table Definition)*
 
 ---
+
+## Step 64: User Table Definition
+
+If you're referring to **Django's original User table (`auth_user`)**, you can examine its definition in two places.
+
+#### 1. Python model definition
+
+Open:
+
+```text
+.venv/Lib/site-packages/django/contrib/auth/models.py
+```
+
+Find:
+
+```python
+class User(AbstractUser):
+```
+
+This is Django's built-in User model. It inherits its fields from `AbstractUser`, which is defined in the same file.
+
+#### 2. Actual database table
+
+Your existing SQLite database is:
+
+```text
+techmindz_inventory_module0_sqlite_atomic/db.sqlite3
+```
+
+Open it using a SQLite viewer and find the table named `auth_user`. You can inspect its columns and records.
+
+#### What about our `CustomUser` table?
+
+| | Original User | Our CustomUser |
+|---|---|---|
+| Python definition | Django's `auth/models.py` | `accounts/models.py` |
+| Database table | `auth_user` | `accounts_customuser` |
+| Currently exists? | Yes | Not yet |
+
+**Important:** We have not created the `accounts_customuser` database table yet. Django will generate it from our model when we create and apply migrations.
+
+You don't normally write the SQL table definition yourself in Django. You define the Python model, and Django's migration system generates the database structure.
+
+*Previous: Step 63 (Understanding AbstractUser)  |  Next: Step 65 (AUTH_USER_MODEL)*
+
+---
