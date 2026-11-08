@@ -297,3 +297,21 @@ This prepares **only these two files** for the next commit. Nothing is uploaded 
 *Previous: Step 46 (Update Module 0 Report)  |  Next: Step 48 (Commit Documentation)*
 
 ---
+
+## Step 48: Commit Documentation
+
+#### Step 70 — Commit the Module 0 documentation
+
+Run in your VS Code terminal:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: record Module 0 verification and AI feasibility results"
+```
+
+This saves the staged changes as a new commit in your **local Git history**.
+
+It does not upload anything to GitHub yet.
+
+*Previous: Step 47 (Stage Documentation)  |  Next: Step 49 (Push Documentation)*
+
+---
