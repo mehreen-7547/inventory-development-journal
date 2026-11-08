@@ -742,3 +742,55 @@ Send me the output before we proceed.
 *Previous: Step 20 (Push your journal to private GitHub)  |  Next: Step 22 (Apply database migrations)*
 
 ---
+
+## Step 22: Apply database migrations
+
+**Step 28 completed.** Both GitHub repositories are set up, and Django's migration status has been checked.
+
+Your output shows `[ ]` beside every migration. This means **Django's initial database tables have not been created yet.**
+
+#### Step 29 — Apply database migrations
+
+Run:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py migrate
+```
+
+**What this does:**
+
+- Creates Django's standard database tables for users, permissions, sessions, and admin.
+- Uses your configured SQLite database.
+- Records which migrations have been applied.
+
+**Expected result:** Several lines ending in `OK`, followed by the PowerShell prompt.
+
+This is a database setup operation. It does not modify your project code.
+
+Send me the output before we proceed.
+
+#### How we checked it
+
+**Step 29 completed successfully.**
+
+All 18 Django migrations returned `OK`.
+
+This means Django has created its built-in database tables for authentication, permissions, admin, and sessions.
+
+#### Step 30 — Verify the migrations
+
+Run:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
+```
+
+**Expected result:** Every migration should now display `[X]` instead of `[ ]`.
+
+This confirms that Django has recorded the migrations as applied.
+
+Send me the output. We'll then record this completed setup in your private development journal.
+
+*Previous: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)  |  Next: Step 23 (Update your private development journal)*
+
+---
