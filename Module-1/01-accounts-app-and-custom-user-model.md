@@ -212,3 +212,51 @@ Your instructor also used `AUTH_USER_MODEL` in the training project's settings, 
 *Previous: Step 59 (App Creation)  |  Next: Step 61 (Custom User Model)*
 
 ---
+
+## Step 61: Custom User Model
+
+Assuming you've saved the two changes to `config/settings.py`, we can now define our user model.
+
+#### Open `accounts/models.py`
+
+Replace its default contents with:
+
+```python
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Inventory Manager'),
+        ('sales', 'Sales Staff'),
+    )
+
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default='sales'
+    )
+
+    REQUIRED_FIELDS = ['email', 'role']
+```
+
+This closely follows your instructor's `backend/thirdproject/doctors/models.py`, which also defines `CustomUser(AbstractUser)` with a `role` field.
+
+  **NEW vs CLASS — REQUIRED_FIELDS**
+
+  **Where:** `accounts/models.py` → `CustomUser`
+  **In class:** `backend/thirdproject/doctors/models.py` defines a custom user without `REQUIRED_FIELDS`.
+  **In this project:** We add `REQUIRED_FIELDS = ['email', 'role']`.
+  **How they differ:** The `createsuperuser` command will explicitly ask for email and role.
+  **Why chosen:** To assign the administrator's role during account creation.
+  **Other option:** Assign the role manually after creating the superuser.
+
+Save `models.py`. **Do not run migrations or delete the database yet.**
+
+When saved, reply **done** so we can verify the configuration before proceeding.
+
+*Previous: Step 60 (Configure Settings)  |  Next: Step 62 (Understanding CustomUser)*
+
+---
