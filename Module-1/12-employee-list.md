@@ -128,3 +128,46 @@ Next, we'll add the URL for this page.
 *Previous: Step 136 (Employee Management)  |  Next: Step 138 (Employee List URL)*
 
 ---
+
+## Step 138: Employee List URL
+
+#### Next: Connect the Manage Employees page
+
+We've created the view and HTML template. Now we need a URL to access the page.
+
+Open **`accounts/urls.py`**.
+
+Add this inside your existing `urlpatterns` list:
+
+```python
+path(
+    'employees/',
+    views.employee_list,
+    name='employee_list'
+),
+```
+
+#### What does this do?
+
+- `employees/` — the address of our employee management page.
+- `views.employee_list` — calls the view we created.
+- `name='employee_list'` — allows us to reference this URL in templates.
+
+#### Test
+
+Open:
+
+`http://127.0.0.1:8000/employees/`
+
+You should see a table displaying the managers and sales employees you've created.
+
+**Verify two things:**
+
+- Logged in as Admin → Employee list is visible.
+- Logged in as Sales Staff → Access is denied (HTTP 403).
+
+This confirms that our custom page displays employee data and enforces administrator-only access.
+
+*Previous: Step 137 (Employee List Template)  |  Next: Step 139 (Create Employee View)*
+
+---
