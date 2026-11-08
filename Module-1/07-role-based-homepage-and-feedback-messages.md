@@ -188,3 +188,45 @@ This helps users understand why they weren't logged in.
 *Previous: Step 94 (Admin Access Verified)  |  Next: Step 96 (Password Change Confirmation)*
 
 ---
+
+## Step 96: Password Change Confirmation
+
+#### Next: Show a success message after changing the password
+
+Currently, when a user changes their password successfully, Django redirects them to the homepage without any confirmation.
+
+Open **`accounts/views.py`**.
+
+Find this section inside `changepassword()`:
+
+```python
+if form.is_valid():
+    user = form.save()
+    update_session_auth_hash(request, user)
+    return redirect('home')
+```
+
+Add one line before the redirect:
+
+```python
+if form.is_valid():
+    user = form.save()
+    update_session_auth_hash(request, user)
+    messages.success(request, 'Password changed successfully.')
+    return redirect('home')
+```
+
+#### What does the new line do?
+
+`messages.success()` tells Django to prepare a confirmation message for the user.
+
+- `request` — identifies the current user's request.
+- `'Password changed successfully.'` — the message to display.
+
+**Expected result:** Save the file without errors.
+
+Next, we'll make the homepage display this message.
+
+*Previous: Step 95 (Login Error Messages)  |  Next: Step 97 (Success Message)*
+
+---
