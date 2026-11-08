@@ -431,3 +431,59 @@ Use a test employee account:
 *Previous: Step 183 (Update Reset Confirmation)  |  Next: Step 185 (Update Reset Complete Page)*
 
 ---
+
+## Step 185: Update Reset Complete Page
+
+#### Step 1 — Replace `password_reset_complete.html`
+
+**File:** `templates/accounts/password_reset_complete.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Password Reset Complete - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+
+        <h2 class="mb-4">Password Reset Successful</h2>
+
+        <div class="alert alert-success">
+            Your password has been reset successfully.
+            You can now log in using your new password.
+        </div>
+
+        <a href="{% url 'login' %}"
+           class="btn btn-primary">
+            Go to Login
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Added Bootstrap styling and a success alert.
+- Preserved the confirmation message.
+- Preserved the **Go to Login** link.
+
+#### Step 3 — Test
+
+1. Complete a password reset using a test account.
+2. Verify that **Password Reset Successful** appears.
+3. Click **Go to Login**.
+4. Confirm that you can log in using the new password.
+
+This completes the shared-layout updates for the authentication pages.
+
+*Previous: Step 184 (Update Set New Password Page)  |  Next: Step 186 (Update Employee List)*
+
+---
