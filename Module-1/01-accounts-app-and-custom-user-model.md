@@ -159,3 +159,24 @@ Once the `accounts` folder appears, confirm it. Only then will we proceed.
 *Previous: Step 57 (Custom User Model)  |  Next: Step 59 (App Creation)*
 
 ---
+
+## Step 59: App Creation
+
+Understood. From now on, I'll use **response numbers only**, alongside Claude's module numbers.
+
+You've run:
+
+```powershell
+cd "C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+python manage.py startapp accounts
+```
+
+**Please check VS Code Explorer:** You should now see an `accounts` folder containing `models.py`, `views.py`, `admin.py`, and other default Django files.
+
+If the folder exists, confirm with **“created”**. If the command produced an error, share the error instead.
+
+We won't modify any files until creation is confirmed.
+
+*Previous: Step 58 (Workflow Correction)  |  Next: Step 60 (Configure Settings)*
+
+---
