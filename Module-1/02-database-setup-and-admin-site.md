@@ -131,3 +131,45 @@ You may not see `CustomUser` listed yet. That's normal—we haven't registered o
 *Previous: Step 70 (Create Database Tables)  |  Next: Step 72 (Register CustomUser)*
 
 ---
+
+## Step 72: Register CustomUser
+
+#### Next: Update `accounts/admin.py`
+
+Replace its contents with:
+
+```python
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+
+
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+```
+
+  NEW vs CLASS — CustomUserAdmin
+  **Where:** `accounts/admin.py`
+
+  **Class example:** `backend/thirdproject/doctors/admin.py` uses `admin.site.register(CustomUser)`.
+
+  **Difference:** We extend Django's `UserAdmin` and add the `role` field to its forms.
+
+  **Why:** This preserves Django's password-management functionality while allowing administrators to assign project roles.
+
+  **Simpler alternative:** Register `CustomUser` directly, as in class, but that doesn't provide the same user-management forms.
+
+**Expected result:** After saving, refresh `/admin/`. You should see **Custom users** under Accounts. Opening your administrator account should show an **Inventory Role** section.
+
+*Previous: Step 71 (Create Administrator)  |  Next: Step 73 (Login View)*
+
+---
