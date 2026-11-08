@@ -73,3 +73,89 @@ Verify that the dashboard displays the Bootstrap navbar, welcome message, and co
 *Previous: Step 178 (Change base.html)  |  Next: Step 180 (Update Login Page)*
 
 ---
+
+## Step 180: Update Login Page
+
+Your existing login form is correct. We'll connect it to `base.html`, apply basic Bootstrap styling, and add a link to the password-reset feature we've already implemented.
+
+#### Step 1 — Replace `login.html`
+
+**File:** `templates/accounts/login.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Login - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+
+        <h2 class="mb-4">Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="username" class="form-label">
+                    Username
+                </label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       class="form-control"
+                       placeholder="Enter username"
+                       autocomplete="username"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    Password
+                </label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Enter password"
+                       autocomplete="current-password"
+                       required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+        </form>
+
+        <p class="mt-3 text-center">
+            <a href="{% url 'password_reset' %}">
+                Forgot Password?
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- The page now inherits the shared Bootstrap layout and navbar.
+- The login form is centred with basic Bootstrap styling.
+- Messages are displayed by `base.html`, so we don't repeat them here.
+- The **Forgot Password?** link opens our existing password-reset page.
+- Username, password, and CSRF protection remain unchanged.
+
+#### Step 3 — Test
+
+Open `http://127.0.0.1:8000/login/` after logging out.
+
+Verify that the form is centred, the Login button works, the Forgot Password link opens correctly, and an incorrect password displays an error message without duplicating it.
+
+*Previous: Step 179 (Dashboard Template Inheritance)  |  Next: Step 181 (Update Change Password Page)*
+
+---
