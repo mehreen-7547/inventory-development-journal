@@ -60,3 +60,49 @@ Do not run migrations or delete the database yet. We'll configure the custom use
 *Previous: Step 55 (Publish Completion Tag)  |  Next: Step 57 (Custom User Model)*
 
 ---
+
+## Step 57: Custom User Model
+
+#### Step 82 — Define our custom user model
+
+Open **`accounts/models.py`** in VS Code and replace its contents with:
+
+```python
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Inventory Manager'),
+        ('sales', 'Sales Staff'),
+    )
+
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default='sales'
+    )
+
+    REQUIRED_FIELDS = ['email', 'role']
+```
+
+This follows the `CustomUser(AbstractUser)` approach from your instructor's `backend/thirdproject/doctors/models.py`.
+
+The main difference is that our roles represent inventory-system users rather than doctors and patients.
+
+    NEW vs CLASS — REQUIRED_FIELDS
+
+  **Where:** `accounts/models.py` → `CustomUser`
+  **In class:** `backend/thirdproject/doctors/models.py` defines a custom user and its roles, without `REQUIRED_FIELDS`.
+  **In this project:** We add `REQUIRED_FIELDS = ['email', 'role']`.
+  **How they differ:** Our `createsuperuser` command will ask for the user's role as well as email.
+  **Why chosen:** Ensures we explicitly assign the Admin role when creating the administrator.
+  **Other option:** Create the superuser first and assign its role afterward.
+
+**Do not run migrations yet.** We must configure `AUTH_USER_MODEL` first.
+
+*Previous: Step 56 (Approved — Begin Development)  |  Next: Step 58 (Workflow Correction)*
+
+---
