@@ -443,3 +443,58 @@ Django's built-in `PasswordResetConfirmView` will provide two important values:
 *Previous: Step 120 (Connect Email Subject)  |  Next: Step 122 (Reset Link URL)*
 
 ---
+
+## Step 122: Reset Link URL
+
+#### Next: Connect the Set New Password page
+
+We've created `password_reset_confirm.html`. Now Django needs a URL to open it when an employee clicks the email link.
+
+Open **`accounts/urls.py`**.
+
+Add this inside your existing `urlpatterns`:
+
+```python
+path(
+    'password-reset/confirm/<uidb64>/<token>/',
+    auth_views.PasswordResetConfirmView.as_view(
+        template_name='accounts/password_reset_confirm.html'
+    ),
+    name='password_reset_confirm'
+),
+```
+
+#### Understanding the code
+
+- `PasswordResetConfirmView` — Django's built-in view that validates the reset link and handles setting a new password.
+- `template_name` — specifies the HTML page we created.
+- `uidb64` — identifies the account whose password is being reset.
+- `token` — allows Django to verify that the reset link is valid.
+
+  **NEW vs CLASS — Dynamic URL segments**
+
+  Earlier, our URLs were fixed, such as `login/`.
+
+  Here, `<uidb64>` and `<token>` are **dynamic URL segments**. Django extracts their values from the incoming URL and passes them to the view.
+
+  This is the same concept as a product detail URL containing a product ID.
+
+#### How the pieces connect
+
+    **Password-reset email**
+
+    Contains the generated reset link
+
+    **PasswordResetConfirmView**
+
+    Checks the account and security token
+
+    **password_reset_confirm.html**
+
+    Displays the new-password form if the link is valid
+
+**Save the file.** Next, we'll create the success page displayed after the password has been reset.
+
+*Previous: Step 121 (Set New Password Page)  |  Next: Step 123 (Password Reset Success Page)*
+
+---
