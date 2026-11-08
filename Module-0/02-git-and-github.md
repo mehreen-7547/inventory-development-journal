@@ -284,3 +284,32 @@ Send me the output. Next, we'll push your first commit to the public repository.
 *Previous: Step 10 (Connect your local project to GitHub)  |  Next: Step 12 (Push your first commit to GitHub)*
 
 ---
+
+## Step 12: Push your first commit to GitHub
+
+**Step 14 passed.** Your local Git repository is correctly connected to GitHub for both fetching and pushing.
+
+#### Step 15 — Push your first commit to GitHub
+
+Run:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic push -u origin main
+```
+
+**Understanding the command:**
+
+- `git push` — Uploads local commits to GitHub.
+- `-u` — Sets the upstream branch, so future pushes can simply use `git push`.
+- `origin` — Your GitHub repository.
+- `main` — The branch we're uploading.
+
+**Important:** This is the first command that will publish your committed project files to your public GitHub repository.
+
+Git may ask you to authenticate through your browser. Follow the prompts if they appear.
+
+Send me the terminal output. We'll verify the upload before setting up your separate private development journal repository.
+
+*Previous: Step 11 (Connect your local project to GitHub)  |  Next: Step 13 (Create a separate local journal folder)*
+
+---
