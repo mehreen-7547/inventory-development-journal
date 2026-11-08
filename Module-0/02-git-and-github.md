@@ -203,3 +203,32 @@ Send me the output. Next, we'll create the public GitHub repository named `ai-as
 *Previous: Step 8 (Stage the project files)  |  Next: Step 10 (Connect your local project to GitHub)*
 
 ---
+
+## Step 10: Connect your local project to GitHub
+
+**Step 12 completed.** I've verified that your GitHub repository exists and is public.
+
+ai-assisted-inventory-manager (https://github.com/mehreen-7547/ai-assisted-inventory-manager)
+
+#### Step 13 — Connect your local project to GitHub
+
+Run this in your existing VS Code terminal:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
+```
+
+**Understanding the command:**
+
+- `git remote` — Manages connections to remote repositories.
+- `add` — Creates a new connection.
+- `origin` — The conventional name for your main remote repository.
+- The URL — Identifies your public GitHub repository.
+
+This command **only establishes the connection**. It does not upload your files.
+
+Send me the output. Next, we'll verify the connection before pushing your first commit.
+
+*Previous: Step 9 (Create our first Git commit)  |  Next: Step 11 (Connect your local project to GitHub)*
+
+---
