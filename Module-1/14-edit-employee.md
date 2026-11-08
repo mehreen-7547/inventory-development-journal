@@ -297,3 +297,51 @@ Illustrative table — your page will still show Name and Email.
 *Previous: Step 148 (Edit Employee URL)  |  Next: Step 150 (Employee Edit Mode)*
 
 ---
+
+## Step 150: Employee Edit Mode
+
+#### Step 1: Add an Edit Mode
+
+We want this workflow:
+
+      Click Edit Employee
+
+      Select employee
+
+      Edit details
+
+First, Django needs to know whether the employee list is in normal mode or edit mode.
+
+Open **`accounts/views.py`**.
+
+Find the `employee_list()` function and replace only its `return render(...)` statement with:
+
+```python
+    return render(
+        request,
+        'accounts/employee_list.html',
+        {
+            'employees': employees,
+            'edit_mode': request.GET.get('mode') == 'edit'
+        }
+    )
+```
+
+#### How it works
+
+| URL | Edit mode |
+|---|---|
+| `/employees/` | False |
+| `/employees/?mode=edit` | True |
+
+  **NEW vs CLASS — `request.GET.get()`**
+
+  Reads a value from the URL's query parameters.
+
+  Here, Django checks whether `mode` equals `edit` and sends the resulting `True` or `False` to our HTML template.
+
+**Save `views.py`.** The page won't look different yet; we'll use `edit_mode` in the next step.
+
+*Previous: Step 149 (Employee Edit Link)  |  Next: Step 151 (Edit Mode Button)*
+
+---
