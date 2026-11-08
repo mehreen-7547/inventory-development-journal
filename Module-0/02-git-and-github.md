@@ -458,3 +458,29 @@ Send me the output. If the file is present, we'll stage it, commit it, and push 
 *Previous: Step 14 (Initialize Git for the private journal)  |  Next: Step 16 (Stage the journal for Git)*
 
 ---
+
+## Step 16: Stage the journal for Git
+
+**Step 22 completed.** Your development journal file is present in the correct private repository folder.
+
+#### Step 23 — Stage the journal for Git
+
+Run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**Understanding the command:**
+
+- `git -C` — Runs Git inside your private journal folder.
+- `add` — Stages a file for the next commit.
+- `inventory-development-journal.md` — The specific file we're staging.
+
+This does **not** upload anything to GitHub or affect your public Django repository.
+
+Send me the terminal output. Next, we'll verify the staged file before creating our first private commit.
+
+*Previous: Step 15 (Connect it to GitHub)  |  Next: Step 17 (Change views.py)*
+
+---
