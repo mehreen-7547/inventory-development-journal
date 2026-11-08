@@ -250,3 +250,23 @@ Tell me **done**. We'll save this journal update to GitHub before moving to the 
 *Previous: Step 30 (Understanding the Project Homepage)  |  Next: Step 32 (Staging Development Journal Update)*
 
 ---
+
+## Step 32: Staging Development Journal Update
+
+#### Step 41 — Stage the journal update
+
+Assuming Step 40 completed successfully, run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**What this does:** Stages your Django Admin setup notes for the next Git commit.
+
+This affects only your private journal repository.
+
+Tell me **done** when the command finishes.
+
+*Previous: Step 31 (Documenting Superuser Setup)  |  Next: Step 33 (Understanding git add and -C)*
+
+---
