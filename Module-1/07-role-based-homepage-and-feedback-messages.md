@@ -148,3 +148,43 @@ After refreshing the homepage, the link should disappear.
 *Previous: Step 93 (Admin Access)  |  Next: Step 95 (Login Error Messages)*
 
 ---
+
+## Step 95: Login Error Messages
+
+#### Next: Display an error when login fails
+
+Remember this line in `accounts/views.py`?
+
+```python
+messages.error(request, 'Invalid username or password.')
+```
+
+It creates an error message, but our HTML page must display it.
+
+Open **`templates/accounts/login.html`**.
+
+If it isn't already present, add this code just above the login `<form>`:
+
+```html
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+```
+
+#### How it works
+
+- `messages` — contains messages Django has prepared for the page.
+- `{% for message in messages %}` — goes through those messages one by one.
+- `{{ message }}` — displays each message.
+
+**Test:** Enter an incorrect password on the login page.
+
+Expected output:
+
+  Invalid username or password.
+
+This helps users understand why they weren't logged in.
+
+*Previous: Step 94 (Admin Access Verified)  |  Next: Step 96 (Password Change Confirmation)*
+
+---
