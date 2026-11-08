@@ -345,3 +345,65 @@ Find the `employee_list()` function and replace only its `return render(...)` st
 *Previous: Step 149 (Employee Edit Link)  |  Next: Step 151 (Edit Mode Button)*
 
 ---
+
+## Step 151: Edit Mode Button
+
+#### Step 2: Add the Edit Employee button
+
+We've already added `edit_mode` to our view. Now we'll use it in the HTML template.
+
+Open **`templates/accounts/employee_list.html`**.
+
+Immediately **above the `<table>` tag**, add:
+
+```html
+{% if edit_mode %}
+
+    <p>Select an employee to edit.</p>
+
+    <a href="{% url 'employee_list' %}">
+        Cancel Edit
+    </a>
+
+{% else %}
+
+    <p>
+        <a href="{% url 'employee_list' %}?mode=edit">
+            Edit Employee
+        </a>
+    </p>
+
+{% endif %}
+```
+
+#### How it works
+
+  {@body const [editing,setEditing] = DIL.useState(false)}
+
+  {#if editing}
+    Select an employee to edit.
+  {/if}
+
+      **Username**
+      **Role**
+
+      manager1
+      Inventory Manager
+
+      sales1
+      Sales Staff
+
+  Interactive preview. Employee selection will be enabled in the next step.
+
+#### Test
+
+1. Open `/employees/`.
+2. Click **Edit Employee**.
+3. Verify that **Select an employee to edit** appears.
+4. Click **Cancel Edit** to return to normal mode.
+
+Next, we'll make employees selectable while edit mode is active.
+
+*Previous: Step 150 (Employee Edit Mode)  |  Next: Step 152 (Select Employee)*
+
+---
