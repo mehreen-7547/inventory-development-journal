@@ -204,3 +204,26 @@ If the error persists even when the command returns `True`, share that result.
 *Previous: Step 76 (Login URL)  |  Next: Step 78 (Login Redirect)*
 
 ---
+
+## Step 78: Login Redirect
+
+Because of this line in **`accounts/views.py`**:
+
+```python
+return redirect('/')
+```
+
+Here's what happens:
+
+1. User logs in successfully.
+2. `redirect('/')` sends them to the root URL.
+3. In `core/urls.py`, `path('', views.home, name='home')` matches that URL.
+4. `core.views.home` displays `home.html`.
+
+**So `login.html` doesn't automatically lead to `home.html`. We explicitly instructed Django to redirect there.**
+
+Later, we can redirect users to different dashboards based on their roles.
+
+*Previous: Step 77 (Connect Login URL)  |  Next: Step 79 (Project vs App)*
+
+---
