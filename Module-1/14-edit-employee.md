@@ -683,3 +683,56 @@ Django's `{% static %}` tag locates the external stylesheet through its static-f
 *Previous: Step 153 (Change templates/accounts/employee_list.html)  |  Next: Step 155 (Fix Row Selection)*
 
 ---
+
+## Step 155: Fix Row Selection
+
+Your screenshot shows that **Edit Mode is active**, but the employee usernames appear as plain text rather than clickable links.
+
+The CSS alone cannot make employees selectable. We also need the correct HTML.
+
+#### Step 1: Check the employee list template
+
+Open **`templates/accounts/employee_list.html`**.
+
+Find:
+
+```html
+{% for employee in employees %}
+```
+
+Immediately below it, ensure you have:
+
+```html
+<tr {% if edit_mode %}class="selectable"{% endif %}>
+```
+
+Then replace the existing username `<td>...</td>` with:
+
+```html
+<td>
+    {% if edit_mode %}
+        <a class="row-link"
+           href="{% url 'edit_employee' employee.id %}">
+            {{ employee.username }}
+        </a>
+    {% else %}
+        {{ employee.username }}
+    {% endif %}
+</td>
+```
+
+Keep the remaining Name, Email, Role and Status cells unchanged.
+
+#### Step 2: Test
+
+1. Save the HTML file.
+2. Refresh using `Ctrl + Shift + R`.
+3. Open `/employees/?mode=edit`.
+4. The usernames should now appear as links.
+5. Click an employee's row to open their edit form.
+
+Your existing external `style.css` can remain unchanged.
+
+*Previous: Step 154 (External CSS)  |  Next: Step 156 (Change employee_list.html)*
+
+---
