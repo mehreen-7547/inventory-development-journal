@@ -1,14 +1,52 @@
-# Module 1, Chapter 7: Role-based homepage and feedback messages
+# MODULE 1 — Employee accounts
 
-## Step 91: Role-Based Homepage
+## Chapter 7: Role-based homepage and feedback messages (Steps 91–99)
 
-#### Next: Display different content based on user role
+### Before we begin
 
-Our system has three roles: Admin, Inventory Manager, and Sales Staff.
+The homepage and feedback messages were working, but people with different jobs were seeing similar information.
 
-Open **`core/templates/core/home.html`**.
+### What we worked on
 
-Below the welcome message, add:
+We made the homepage look different by role and showed useful login/password messages. We then saved the code changes in Git.
+
+### Picture it this way
+
+This chapter is about what the user sees. Proper server-side protection for restricted pages is a different matter, and we build it in the next chapter.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 91: Role-Based Homepage](#step-91)
+- [Step 92: Admin Link Visibility](#step-92)
+- [Step 93: Why hiding a link does not secure Django Admin](#step-93)
+- [Step 94: Verify manager access is restricted](#step-94)
+- [Step 95: Login Error Messages](#step-95)
+- [Step 96: Password Change Confirmation](#step-96)
+- [Step 97: Success Message](#step-97)
+- [Step 98: Stage Files](#step-98)
+- [Step 99: Commit Changes](#step-99)
+
+---
+
+<a id="step-91"></a>
+
+### Step 91: Role-Based Homepage
+
+**What was happening before this step?**
+
+The same homepage was being shown to people with different jobs. We wanted the text and options to reflect their role.
+
+**What did we do, and what does it mean?**
+
+The template checks the signed-in user's role and shows suitable labels or sections. For example, an administrator should see account-management options that sales staff do not need.
+
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. Below the welcome message, add.*
 
 ```html
 {% if request.user.role == 'admin' %}
@@ -22,41 +60,42 @@ Below the welcome message, add:
 {% endif %}
 ```
 
-#### How it works
+**Understanding the code, one piece at a time**
 
-Django checks the logged-in user's `role` field and displays the matching message.
+A Django template can ask whether the current person's role is `admin`, `manager` or `sales`, and then show different headings or links. This changes the page the visitor sees, but does not replace permission checks in Python views.
 
-For example:
+**How did we know what happened?**
 
-  Example: Logged in as manager1
-  Welcome, manager1
-  Role: Inventory Manager
+Review the home display under each role; access control is implemented separately in Steps 100–107.
 
-  **Inventory Manager Dashboard**
+**Where to go next:** Previous: [Step 90 — Change Password Link](06-password-change.md#step-90) · Next: [Step 92 — Admin Link Visibility](07-role-based-homepage-and-feedback-messages.md#step-92)
 
-**Important:** This only changes what users *see*. It does not yet prevent them from accessing restricted functionality. We'll implement actual role permissions separately.
-
-**Test:** Log in as `manager1` and `sales1` separately. Each should see their corresponding dashboard heading.
-
-*Previous: Step 90 (Change Password Link)  |  Next: Step 92 (Admin Link Visibility)*
 
 ---
 
-## Step 92: Admin Link Visibility
+<a id="step-92"></a>
 
-#### Next: Show the Django Admin link only to authorized staff
+### Step 92: Admin Link Visibility
 
-Currently, everyone sees the **Open Django admin** link, even though they cannot necessarily access it.
+**What was happening before this step?**
 
-Open **`core/home.html`**.
+The administrator link should not tempt a manager or sales employee to open a page they cannot use.
 
-Replace:
+**What did we do, and what does it mean?**
+
+The template can hide a link when the current person's role is not Admin. This improves the interface, but hiding a link is not a security check; the server must still protect the target page.
+
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. Replace.*
 
 ```html
 <p><a href="/admin/">Open Django admin</a></p>
 ```
 
-With:
+*2. With.*
 
 ```html
 {% if request.user.is_staff %}
@@ -64,46 +103,32 @@ With:
 {% endif %}
 ```
 
-#### How it works
+**How did we know what happened?**
 
-`request.user.is_staff` checks whether the logged-in user has Django staff access.
+The next two entries clarify and verify that Django Admin already rejects unauthorized accounts.
 
-- `admin` (superuser) → sees the link.
-- `manager1` → doesn't see the link.
-- `sales1` → doesn't see the link.
+**Where to go next:** Previous: [Step 91 — Role-Based Homepage](07-role-based-homepage-and-feedback-messages.md#step-91) · Next: [Step 93 — Why hiding a link does not secure Django Admin](07-role-based-homepage-and-feedback-messages.md#step-93)
 
-**Important:** `is_staff` is a Django permission field. It is different from our custom `role` field.
-
-**Expected result:** The admin link appears only for staff users.
-
-This only controls link visibility. Django itself enforces access restrictions on `/admin/`.
-
-*Previous: Step 91 (Role-Based Homepage)  |  Next: Step 93 (Admin Access)*
 
 ---
 
-## Step 93: Admin Access
+<a id="step-93"></a>
 
-**No. Even before we added the `is_staff` condition to `home.html`, manager1 could not access Django's Admin panel.**
+### Step 93: Why hiding a link does not secure Django Admin
 
-Here's why.
+**What was happening before this step?**
 
-We created `manager1` with:
+We had hidden admin-related navigation from other roles. We needed to make sure nobody thought that meant Django Admin was now protected by our custom template rule.
 
-- `role = 'manager'`
-- `is_staff = False`
+**What did we do, and what does it mean?**
 
-Django already uses `is_staff` internally to decide who can access `/admin/`.
+Django Admin has its own permission checks. A user could type its URL directly, so access must be checked on the server. Menu visibility and permission are two separate things.
 
-#### Before and after our change
+**File or place:** `core/templates/core/home.html`.
 
-| | Before | After |
-|---|---|---|
-| Manager sees "Open Django admin" link on homepage | Yes | No |
-| Manager can access Django Admin panel | No | No |
-| Admin superuser can access Django Admin panel | Yes | Yes |
+**Code or command from this step**
 
-#### So what did our code actually change?
+*1. So what did our code actually change?.*
 
 ```html
 {% if request.user.is_staff %}
@@ -111,31 +136,32 @@ Django already uses `is_staff` internally to decide who can access `/admin/`.
 {% endif %}
 ```
 
-**It only hides the link from users who cannot access Django Admin anyway.**
+**How did we know what happened?**
 
-We did not introduce a new security restriction. Django already had that restriction built in.
+The recorded explanation says `manager1` has `is_staff=False`; a direct URL test is discussed next.
 
-Also, when `manager1` visits `/admin/`, Django may show the Admin login screen, but **seeing that login screen does not mean they have permission to enter the Admin panel**.
+**Where to go next:** Previous: [Step 92 — Admin Link Visibility](07-role-based-homepage-and-feedback-messages.md#step-92) · Next: [Step 94 — Verify manager access is restricted](07-role-based-homepage-and-feedback-messages.md#step-94)
 
-*Previous: Step 92 (Admin Link Visibility)  |  Next: Step 94 (Admin Access Verified)*
 
 ---
 
-## Step 94: Admin Access Verified
+<a id="step-94"></a>
 
-That is **the expected result**.
+### Step 94: Verify manager access is restricted
 
-When `manager1` clicks **Open Django admin**:
+**What was happening before this step?**
 
-1. The browser opens `/admin/`.
-2. Django checks whether `manager1` has Admin access.
-3. Because `is_staff=False`, Django displays the Admin login page instead of the dashboard.
+We tested or reviewed what happens when a manager attempts to reach an admin-only location.
 
-So our existing access restriction is working as expected.
+**What did we do, and what does it mean?**
 
-**The `is_staff` condition we added to `home.html` is only meant to hide the Admin link from manager1.** It does not create the access restriction.
+The intended result is that an ordinary manager cannot get administrator privileges merely by knowing the URL. This step checked access behaviour, not just what the homepage looks like.
 
-One thing remains: your screenshot still shows that link for manager1. Make sure you have saved this change in `home.html`:
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. One thing remains: your screenshot still shows that link for manager1. Make sure you have saved this change in home.html.*
 
 ```html
 {% if request.user.is_staff %}
@@ -143,27 +169,38 @@ One thing remains: your screenshot still shows that link for manager1. Make sure
 {% endif %}
 ```
 
-After refreshing the homepage, the link should disappear.
+**How did we know what happened?**
 
-*Previous: Step 93 (Admin Access)  |  Next: Step 95 (Login Error Messages)*
+Our notes describes the manager's denied Admin visit as the expected result.
+
+**Where to go next:** Previous: [Step 93 — Why hiding a link does not secure Django Admin](07-role-based-homepage-and-feedback-messages.md#step-93) · Next: [Step 95 — Login Error Messages](07-role-based-homepage-and-feedback-messages.md#step-95)
+
 
 ---
 
-## Step 95: Login Error Messages
+<a id="step-95"></a>
 
-#### Next: Display an error when login fails
+### Step 95: Login Error Messages
 
-Remember this line in `accounts/views.py`?
+**What was happening before this step?**
+
+A wrong username or password needs an understandable message, otherwise users do not know what happened.
+
+**What did we do, and what does it mean?**
+
+The login template displays the error or feedback set by the view. It does not reveal the correct password or tell a user how to bypass authentication.
+
+**File or place:** `templates/accounts/login.html`.
+
+**Code or command from this step**
+
+*1. Remember this line in accounts/views.py?.*
 
 ```python
 messages.error(request, 'Invalid username or password.')
 ```
 
-It creates an error message, but our HTML page must display it.
-
-Open **`templates/accounts/login.html`**.
-
-If it isn't already present, add this code just above the login `<form>`:
+*2. If it isn't already present, add this code just above the login <form>.*
 
 ```html
 {% for message in messages %}
@@ -171,33 +208,36 @@ If it isn't already present, add this code just above the login `<form>`:
 {% endfor %}
 ```
 
-#### How it works
+**Understanding the code, one piece at a time**
 
-- `messages` — contains messages Django has prepared for the page.
-- `{% for message in messages %}` — goes through those messages one by one.
-- `{{ message }}` — displays each message.
+`{% for ... %}` repeats the HTML inside it for every item in a list, such as one table row for each employee.
 
-**Test:** Enter an incorrect password on the login page.
+**How did we know what happened?**
 
-Expected output:
+Try a wrong password and verify an error appears without logging in. No separate automated check was preserved.
 
-  Invalid username or password.
+**Where to go next:** Previous: [Step 94 — Verify manager access is restricted](07-role-based-homepage-and-feedback-messages.md#step-94) · Next: [Step 96 — Password Change Confirmation](07-role-based-homepage-and-feedback-messages.md#step-96)
 
-This helps users understand why they weren't logged in.
-
-*Previous: Step 94 (Admin Access Verified)  |  Next: Step 96 (Password Change Confirmation)*
 
 ---
 
-## Step 96: Password Change Confirmation
+<a id="step-96"></a>
 
-#### Next: Show a success message after changing the password
+### Step 96: Password Change Confirmation
 
-Currently, when a user changes their password successfully, Django redirects them to the homepage without any confirmation.
+**What was happening before this step?**
 
-Open **`accounts/views.py`**.
+After a successful password change, the user needed an indication that the update worked.
 
-Find this section inside `changepassword()`:
+**What did we do, and what does it mean?**
+
+The view sets a success message so the next page can show confirmation. That message is separate from saving the new password: the database change and the visual feedback have different jobs.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. Find this section inside changepassword().*
 
 ```python
 if form.is_valid():
@@ -206,7 +246,7 @@ if form.is_valid():
     return redirect('home')
 ```
 
-Add one line before the redirect:
+*2. Add one line before the redirect.*
 
 ```python
 if form.is_valid():
@@ -216,28 +256,36 @@ if form.is_valid():
     return redirect('home')
 ```
 
-#### What does the new line do?
+**Understanding the code, one piece at a time**
 
-`messages.success()` tells Django to prepare a confirmation message for the user.
+`redirect(...)` does not display a page itself. It tells the browser which page to open next, often after a form has been saved.
 
-- `request` — identifies the current user's request.
-- `'Password changed successfully.'` — the message to display.
+**How did we know what happened?**
 
-**Expected result:** Save the file without errors.
+The message is only visible after the homepage template displays messages in Step 97.
 
-Next, we'll make the homepage display this message.
+**Where to go next:** Previous: [Step 95 — Login Error Messages](07-role-based-homepage-and-feedback-messages.md#step-95) · Next: [Step 97 — Success Message](07-role-based-homepage-and-feedback-messages.md#step-97)
 
-*Previous: Step 95 (Login Error Messages)  |  Next: Step 97 (Success Message)*
 
 ---
 
-## Step 97: Success Message
+<a id="step-97"></a>
 
-#### Next: Display the password-change success message
+### Step 97: Success Message
 
-Open **`core/templates/core/home.html`**.
+**What was happening before this step?**
 
-Immediately below the `<body>` tag, add:
+We had a message ready to display but needed the homepage template to show it.
+
+**What did we do, and what does it mean?**
+
+Django messages are short notices saved between a redirect and the next page. The template reads them and places them where the user can see them.
+
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. Immediately below the <body> tag, add.*
 
 ```html
 {% for message in messages %}
@@ -245,165 +293,90 @@ Immediately below the `<body>` tag, add:
 {% endfor %}
 ```
 
-#### What happens now?
+**Understanding the code, one piece at a time**
 
-1. The user changes their password.
-2. `messages.success()` creates a confirmation message.
-3. Django redirects the user to the homepage.
-4. The code above displays the message.
+`{% for ... %}` repeats the HTML inside it for every item in a list, such as one table row for each employee.
 
-**Test:** Change your password successfully.
+**How did we know what happened?**
 
-You should return to the homepage and see:
+Change a password, return home, and check for the confirmation. This is a suggested functional check, not a stored test log.
 
-    Password changed successfully.
+**Where to go next:** Previous: [Step 96 — Password Change Confirmation](07-role-based-homepage-and-feedback-messages.md#step-96) · Next: [Step 98 — Stage Files](07-role-based-homepage-and-feedback-messages.md#step-98)
 
-We'll style these messages properly during the UI design phase.
-
-#### How we checked it
-
-#### Next: Check Module 1 for Django configuration errors
-
-We've implemented and tested login, logout, password changes, and role display.
-
-Now open your **VS Code terminal** in the folder containing `manage.py`.
-
-Run:
-
-```bash
-python manage.py check
-```
-
-**What does this do?**
-
-Django examines your project configuration, models, URLs, and other registered components for common errors.
-
-**Expected output:**
-
-```text
-System check identified no issues (0 silenced).
-```
-
-This doesn't test every feature, but it helps confirm that the project configuration is valid.
-
-We're nearing the end of Module 1. We'll enforce role-specific permissions on inventory operations when we create those operations in subsequent modules.
-
-#### How we checked it
-
-#### Next: Check which files have changed
-
-Before saving Module 1 to GitHub, let's review the files Git has detected.
-
-Open your VS Code terminal in the folder containing `manage.py`.
-
-Run:
-
-```bash
-git status --short
-```
-
-**What does this command do?**
-
-It lists files that have been added, modified, or deleted since your last commit.
-
-For example:
-
-```text
- M config/settings.py
- M config/urls.py
- M core/views.py
-?? accounts/
-```
-
-- `M` means an existing file was modified.
-- `??` means Git hasn't started tracking that file or folder yet.
-
-**Important:** We should not commit `db.sqlite3`, `.venv`, or password-containing files.
-
-**Expected result:** A list of changed files. Send me the terminal output so we can review it before committing.
-
-#### How we checked it
-
-Your Git status looks as expected.
-
-| Status | Files | Meaning |
-|---|---|---|
-| Modified | `config/settings.py`, `config/urls.py` | Project configuration changed |
-| Modified | `core/views.py`, `core/templates/core/home.html` | Homepage updated |
-| New | `accounts/` | Accounts app created |
-| New | `templates/` | Login and password-change templates |
-
-**Before committing**, let's check exactly which files are inside those new folders.
-
-Run:
-
-```bash
-git status --short --untracked-files=all
-```
-
-This lists individual files instead of showing only `accounts/` and `templates/`.
-
-**Send me the output.** We'll check that no unnecessary files are included before committing Module 1.
-
-*Previous: Step 96 (Password Change Confirmation)  |  Next: Step 98 (Stage Files)*
 
 ---
 
-## Step 98: Stage Files
+<a id="step-98"></a>
 
-**All 12 changed or new files look appropriate for Module 1.**
+### Step 98: Stage Files
 
-- `accounts/migrations/0001_initial.py` — should be committed because it defines our database structure.
-- `accounts/tests.py` — Django's default test file; fine to include.
-- No database, virtual environment, or password files appear in the list.
+**What was happening before this step?**
 
-#### Next: Stage the files for Git
+Several account pages and messages had changed, and we wanted to record that working point.
 
-Run:
+**What did we do, and what does it mean?**
+
+`git add` selected those application files for the next snapshot. It did not run tests or upload them.
+
+**File or place:** `application Git staging`.
+
+**Code or command from this step**
+
+*1. Run.*
 
 ```bash
 git add config/settings.py config/urls.py core/views.py core/templates/core/home.html accounts/ templates/accounts/
 ```
 
-**What does `git add` do?**
+**How did we know what happened?**
 
-It tells Git which changes to include in the next commit.
+The recorded note says twelve changed/new files were appropriate for this module.
 
-It does **not** upload anything to GitHub yet.
+**Where to go next:** Previous: [Step 97 — Success Message](07-role-based-homepage-and-feedback-messages.md#step-97) · Next: [Step 99 — Commit Changes](07-role-based-homepage-and-feedback-messages.md#step-99)
 
-**Expected result:** The command finishes without displaying an error.
-
-*Previous: Step 97 (Success Message)  |  Next: Step 99 (Commit Changes)*
 
 ---
 
-## Step 99: Commit Changes
+<a id="step-99"></a>
 
-#### Next: Save Module 1 in Git
+### Step 99: Commit Changes
 
-Your files are now staged. Let's create a commit.
+**What was happening before this step?**
 
-Run this in your VS Code terminal:
+After staging the changes, we saved them in the project's Git history.
+
+**What did we do, and what does it mean?**
+
+The commit makes this version easy to find later. It is a local record of the code at that point, not a guarantee that every page has been tested.
+
+**File or place:** `application Git commit`.
+
+**Code or command from this step**
+
+*1. Run this in your VS Code terminal.*
 
 ```bash
 git commit -m "Complete Module 1 accounts and authentication"
 ```
 
-**What does this do?**
-
-A commit saves a snapshot of your staged changes in your local Git repository.
-
-**Expected output:** Something similar to:
+*2. Example result from the notes (not a command to run).*
 
 ```text
 [main abc1234] Complete Module 1 accounts and authentication
 12 files changed, ...
 ```
 
-The commit ID and file counts may differ.
+**How did we know what happened?**
 
-This saves the work **locally**. We will push it to GitHub next.
+No new runtime feature is introduced by this commit.
 
-*Previous: Step 98 (Stage Files)  |  Next: Step 100 (Role Security)*
+**Where to go next:** Previous: [Step 98 — Stage Files](07-role-based-homepage-and-feedback-messages.md#step-98) · Next: [Step 100 — Role Security](08-role-security-decorators.md#step-100)
 
 ---
+
+### The point of this chapter
+
+This chapter is about what the user sees. Proper server-side protection for restricted pages is a different matter, and we build it in the next chapter.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

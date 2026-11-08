@@ -1,29 +1,54 @@
-# Module 1, Chapter 16: Message styling
+# MODULE 1 — Employee accounts
 
-## Step 165: Employee Management Messages
+## Chapter 16: Message styling (Steps 165–169)
 
-#### Next: Display success and error messages
+### Before we begin
 
-Our employee management views already generate messages such as:
+The account-management views were saving changes and setting messages, but those messages were not always easy to see.
 
-- Employee created successfully.
-- Employee updated successfully.
-- Employee deactivated successfully.
-- Password setup email generated successfully.
+### What we worked on
 
-However, our **Manage Employees** page doesn't currently display them.
+We gave the employee screens clear places to show success and error messages, then added styling so the notices would stand out.
 
-#### Step 1: Update the employee list template
+### Picture it this way
 
-Open **`templates/accounts/employee_list.html`**.
+When a view saves a change and redirects back to a list, Django can carry a short message to the next page. The destination page must display that message, otherwise the user does not know what happened.
 
-Immediately below:
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 165: Employee Management Messages](#step-165)
+- [Step 166: Display edit-page feedback messages](#step-166)
+- [Step 167: Message Styling](#step-167)
+- [Step 168: Display employee-list messages](#step-168)
+- [Step 169: Message Styling CSS](#step-169)
+
+---
+
+<a id="step-165"></a>
+
+### Step 165: Employee Management Messages
+
+**What was happening before this step?**
+
+The create and edit views could set success or error messages, but a message is useless if the next page never shows it.
+
+**What did we do, and what does it mean?**
+
+We added message display to the employee-management page. Django carries a short notice across the redirect, and the template prints it for the administrator.
+
+**File or place:** `accounts/views.py and templates`.
+
+**Code or command from this step**
+
+*1. Code or command used at this point.*
 
 ```html
 <h2>Manage Employees</h2>
 ```
 
-Add:
+*2. Add.*
 
 ```html
 {% if messages %}
@@ -37,34 +62,36 @@ Add:
 {% endif %}
 ```
 
-#### Step 2: Test
+**Understanding the code, one piece at a time**
 
-1. Open **Manage Employees**.
-2. Click **Edit Employee** and select an employee.
-3. Change their first name and click **Save Changes**.
-4. You should return to the employee list and see:
+A view can set a message before redirecting to the list page. The list template then displays it. Without that display code, the message exists but the administrator never sees it.
 
-  Manage Employees
+**How did we know what happened?**
 
-    Employee updated successfully.
+The next steps place message display into the edit/list templates and style it.
 
-This also allows the page to display feedback after employee creation, deactivation, reactivation and resending setup emails.
+**Where to go next:** Previous: [Step 164 — Home Template Review](15-activate-deactivate-and-resend-setup-email.md#step-164) · Next: [Step 166 — Display edit-page feedback messages](16-message-styling.md#step-166)
 
-**Save and test.** Next, we'll improve the messages using our external CSS stylesheet.
-
-*Previous: Step 164 (Home Template Review)  |  Next: Step 166 (Change edit_employee.html)*
 
 ---
 
-## Step 166: Change edit_employee.html
+<a id="step-166"></a>
 
-Your `edit_employee.html` is correct for **editing employee details and deactivating/reactivating accounts**.
+### Step 166: Display edit-page feedback messages
 
-However, the **Resend Setup Email** button from Step 275 is missing.
+**What was happening before this step?**
 
-#### 1. Add the missing button
+An employee edit page could also need to show feedback, such as why saving failed.
 
-In `templates/accounts/edit_employee.html`, add this immediately after the Deactivate/Reactivate form's closing `</form>`:
+**What did we do, and what does it mean?**
+
+We made sure the edit template had a place to show messages or field errors. This helps the person know whether they need to correct something.
+
+**File or place:** `templates/accounts/edit_employee.html`.
+
+**Code or command from this step**
+
+*1. In templates/accounts/editemployee.html, add this immediately after the Deactivate/Reactivate form's closing </form>.*
 
 ```html
 {% if employee.is_active and not employee.has_usable_password %}
@@ -83,27 +110,36 @@ In `templates/accounts/edit_employee.html`, add this immediately after the Deact
 {% endif %}
 ```
 
-#### 2. Regarding Step 279
+**Understanding the code, one piece at a time**
 
-The success/error messages code belongs in **`templates/accounts/employee_list.html`**, not `edit_employee.html`.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-Add it immediately below `<h2>Manage Employees</h2>` in that file.
+**How did we know what happened?**
 
-Everything else in the code you shared can remain unchanged.
+The shared styling work follows; test a successful edit and an invalid form submission.
 
-*Previous: Step 165 (Employee Management Messages)  |  Next: Step 167 (Message Styling)*
+**Where to go next:** Previous: [Step 165 — Employee Management Messages](16-message-styling.md#step-165) · Next: [Step 167 — Message Styling](16-message-styling.md#step-167)
+
 
 ---
 
-## Step 167: Message Styling
+<a id="step-167"></a>
 
-#### Next: Prepare success and error messages for CSS
+### Step 167: Message Styling
 
-We want success messages to appear in green and error messages in red, using our external stylesheet.
+**What was happening before this step?**
 
-Open **`templates/accounts/employee_list.html`**.
+Success and error notices looked too similar, so the administrator could miss an important warning.
 
-Find the messages section and replace it with:
+**What did we do, and what does it mean?**
+
+We added styling that makes the type of message more visible. CSS changes how notices look; the view still decides which notice to show.
+
+**File or place:** `template message markup`.
+
+**Code or command from this step**
+
+*1. Find the messages section and replace it with.*
 
 ```html
 {% if messages %}
@@ -119,15 +155,13 @@ Find the messages section and replace it with:
 {% endif %}
 ```
 
-#### What changed?
-
-Previously:
+*2. Code or command used at this point.*
 
 ```html
 <p>{{ message }}</p>
 ```
 
-Now:
+*3. Now.*
 
 ```html
 <p class="message {{ message.tags }}">
@@ -135,36 +169,45 @@ Now:
 </p>
 ```
 
-Django automatically provides message tags such as `success`, `error`, `warning` and `info`.
+*4. For example, a successful update produces.*
 
-  **NEW vs CLASS — `message.tags`**
-
-  Django's messages framework identifies the type of message.
-
-  For example, a successful update produces:
-
-  ```html
+```html
   <p class="message success">
       Employee updated successfully.
   </p>
   
 ```
 
-  We can use these CSS classes to apply different styles.
+**Understanding the code, one piece at a time**
 
-**Save the HTML file.** No visual changes are expected yet.
+`{% for ... %}` repeats the HTML inside it for every item in a list, such as one table row for each employee.
 
-Next, we'll add the styles to `accounts/static/accounts/style.css`.
+**How did we know what happened?**
 
-*Previous: Step 166 (Change edit_employee.html)  |  Next: Step 168 (Change employee_list.html)*
+Later steps apply this pattern consistently across employee pages.
+
+**Where to go next:** Previous: [Step 166 — Display edit-page feedback messages](16-message-styling.md#step-166) · Next: [Step 168 — Display employee-list messages](16-message-styling.md#step-168)
+
 
 ---
 
-## Step 168: Change employee_list.html
+<a id="step-168"></a>
 
-Your code is correct, but the **messages section is missing**. Add it immediately below `<h2>Manage Employees</h2>`.
+### Step 168: Display employee-list messages
 
-#### Add this to `employee_list.html`
+**What was happening before this step?**
+
+The employee list is where many actions return after saving. It needed a reliable place to show the result.
+
+**What did we do, and what does it mean?**
+
+The updated list template displays Django's messages near the employee information. A “saved” notice now has somewhere to appear after the redirect.
+
+**File or place:** `templates/accounts/employee_list.html`.
+
+**Code or command from this step**
+
+*1. Code or command used at this point.*
 
 ```html
 {% if messages %}
@@ -176,7 +219,7 @@ Your code is correct, but the **messages section is missing**. Add it immediatel
 {% endif %}
 ```
 
-The beginning of your `<body>` should now look like this:
+*2. The beginning of your <body> should now look like this.*
 
 ```html
 <body>
@@ -198,23 +241,36 @@ The beginning of your `<body>` should now look like this:
     </p>
 ```
 
-**Everything else in your file can remain unchanged.**
+**Understanding the code, one piece at a time**
 
-Next, we'll style these messages in the existing external CSS file.
+`{% for ... %}` repeats the HTML inside it for every item in a list, such as one table row for each employee.
 
-*Previous: Step 167 (Message Styling)  |  Next: Step 169 (Message Styling CSS)*
+**How did we know what happened?**
+
+The next step adds the CSS that makes these classes visible.
+
+**Where to go next:** Previous: [Step 167 — Message Styling](16-message-styling.md#step-167) · Next: [Step 169 — Message Styling CSS](16-message-styling.md#step-169)
+
 
 ---
 
-## Step 169: Message Styling CSS
+<a id="step-169"></a>
 
-#### Next: Style success and error messages
+### Step 169: Message Styling CSS
 
-We've added the messages section to `employee_list.html`. Now we'll style it using our external CSS file.
+**What was happening before this step?**
 
-Open **`accounts/static/accounts/style.css`**.
+The message text was showing, but we wanted it to be easier to read and recognise.
 
-Add this code at the bottom, keeping your existing CSS unchanged:
+**What did we do, and what does it mean?**
+
+The CSS file gives notices consistent spacing and appearance. This makes feedback clearer without changing the rules for creating or editing employees.
+
+**File or place:** `accounts/static/accounts/style.css`.
+
+**Code or command from this step**
+
+*1. Add this code at the bottom, keeping your existing CSS unchanged.*
 
 ```css
 .message {
@@ -243,27 +299,17 @@ Add this code at the bottom, keeping your existing CSS unchanged:
 }
 ```
 
-#### Expected appearance
+**How did we know what happened?**
 
-    Employee updated successfully.
+Verify both a successful and a failed operation display visibly distinct notices.
 
-    Cannot send setup email to an inactive employee.
-
-  **NEW vs CLASS — `.message.success`**
-
-  This CSS selector targets an element that has **both** the `message` and `success` classes.
-
-  Django supplies the `success` class through `{{ message.tags }}`.
-
-#### Test
-
-1. Save `style.css`.
-2. Open Manage Employees and edit an employee.
-3. Click **Save Changes**.
-4. Verify that the success message appears with green styling.
-
-Next, we'll verify the Resend Setup Email workflow.
-
-*Previous: Step 168 (Change employee_list.html)  |  Next: Step 170 (Real Email Configuration)*
+**Where to go next:** Previous: [Step 168 — Display employee-list messages](16-message-styling.md#step-168) · Next: [Step 170 — Real Email Configuration](17-real-email-delivery-smtp.md#step-170)
 
 ---
+
+### The point of this chapter
+
+When a view saves a change and redirects back to a list, Django can carry a short message to the next page. The destination page must display that message, otherwise the user does not know what happened.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

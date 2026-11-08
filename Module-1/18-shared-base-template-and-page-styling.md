@@ -1,14 +1,59 @@
-# Module 1, Chapter 18: Shared base template and page styling
+# MODULE 1 — Employee accounts
 
-## Step 179: Dashboard Template Inheritance
+## Chapter 18: Shared base template and page styling (Steps 179–194)
 
-Your existing `home.html` is correct functionally. We only need to connect it to `base.html` and remove the duplicated navigation and messages.
+### Before we begin
 
-#### Step 1 — Replace `home.html`
+The login and employee pages had grown one by one. They worked, but many contained repeated headers, menus and form styling.
 
-**File:** `core/templates/core/home.html`
+### What we worked on
 
-Replace the entire contents with:
+We built a shared page layout, updated each account screen to use it and corrected where form styling belonged. At the end, we also handled a case where an employee account saves successfully but its welcome email fails.
+
+### Picture it this way
+
+The shared `base.html` template is a page frame reused everywhere. Each child page fills in only its own content. The last two steps are about making the app explain email failures accurately, not about changing the shared layout.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 179: Dashboard Template Inheritance](#step-179)
+- [Step 180: Update Login Page](#step-180)
+- [Step 181: Update Change Password Page](#step-181)
+- [Step 182: Update Forgot Password Page](#step-182)
+- [Step 183: Update Reset Confirmation](#step-183)
+- [Step 184: Update Set New Password Page](#step-184)
+- [Step 185: Update Reset Complete Page](#step-185)
+- [Step 186: Update Employee List](#step-186)
+- [Step 187: Update Create Employee](#step-187)
+- [Step 188: Fix Form Styling](#step-188)
+- [Step 189: Add CSS classes to creation form widgets](#step-189)
+- [Step 190: Correct Form Styling](#step-190)
+- [Step 191: Consolidate both employee forms](#step-191)
+- [Step 192: Update Edit Employee](#step-192)
+- [Step 193: Email Error Handling](#step-193)
+- [Step 194: Resend Email Error Handling](#step-194)
+
+---
+
+<a id="step-179"></a>
+
+### Step 179: Dashboard Template Inheritance
+
+**What was happening before this step?**
+
+Now that the common layout existed, the homepage needed to use it instead of repeating all its own HTML.
+
+**What did we do, and what does it mean?**
+
+The homepage template extends `base.html` and supplies its own heading and content inside named sections. Django combines both files into the final page shown in the browser.
+
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -47,42 +92,42 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — Understand the changes
-
-| Before | Now |
-|---|---|
-| Repeated HTML structure | Inherited from `base.html` |
-| Separate logout form | Shared navbar handles logout |
-| Separate Change Password link | Shared navbar handles it |
-| Separate messages section | Shared layout displays messages |
-| Role-specific dashboard | Preserved |
-| Django Admin link | Preserved for staff users |
-
-#### Step 3 — Test
-
-Run the Django server if it isn't already running:
+*2. Run the Django server if it isn't already running.*
 
 ```powershell
 python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/`.
+**Understanding the code, one piece at a time**
 
-Verify that the dashboard displays the Bootstrap navbar, welcome message, and correct role-specific heading. Check that **Manage Employees**, **Change Password**, and **Logout** appear only once.
+`{% extends 'base.html' %}` tells Django to start with the common page frame. `{% block content %}` says what belongs in the homepage's own section. Django joins the two when returning the HTML to the browser.
 
-*Previous: Step 178 (Change base.html)  |  Next: Step 180 (Update Login Page)*
+**How did we know what happened?**
+
+Run the server and confirm homepage content appears inside the shared shell.
+
+**Where to go next:** Previous: [Step 178 — Create the shared base.html template](17-real-email-delivery-smtp.md#step-178) · Next: [Step 180 — Update Login Page](18-shared-base-template-and-page-styling.md#step-180)
+
 
 ---
 
-## Step 180: Update Login Page
+<a id="step-180"></a>
 
-Your existing login form is correct. We'll connect it to `base.html`, apply basic Bootstrap styling, and add a link to the password-reset feature we've already implemented.
+### Step 180: Update Login Page
 
-#### Step 1 — Replace `login.html`
+**What was happening before this step?**
 
-**File:** `templates/accounts/login.html`
+The login page still had its old standalone layout and looked different from the rest of the website.
 
-Replace the entire contents with:
+**What did we do, and what does it mean?**
+
+We connected it to the shared `base.html` layout. The username/password form and login check remain the same; only the surrounding page structure and appearance changed.
+
+**File or place:** `templates/accounts/login.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -142,31 +187,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- The page now inherits the shared Bootstrap layout and navbar.
-- The login form is centred with basic Bootstrap styling.
-- Messages are displayed by `base.html`, so we don't repeat them here.
-- The **Forgot Password?** link opens our existing password-reset page.
-- Username, password, and CSRF protection remain unchanged.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-Open `http://127.0.0.1:8000/login/` after logging out.
+Test an invalid login and a valid login; both should still behave as before.
 
-Verify that the form is centred, the Login button works, the Forgot Password link opens correctly, and an incorrect password displays an error message without duplicating it.
+**Where to go next:** Previous: [Step 179 — Dashboard Template Inheritance](18-shared-base-template-and-page-styling.md#step-179) · Next: [Step 181 — Update Change Password Page](18-shared-base-template-and-page-styling.md#step-181)
 
-*Previous: Step 179 (Dashboard Template Inheritance)  |  Next: Step 181 (Update Change Password Page)*
 
 ---
 
-## Step 181: Update Change Password Page
+<a id="step-181"></a>
 
-#### Step 1 — Replace `change_password.html`
+### Step 181: Update Change Password Page
 
-**File:** `templates/accounts/change_password.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+We wanted the change-password page to look and behave like part of the same application.
+
+**What did we do, and what does it mean?**
+
+The template now uses the shared layout, while its form still asks for old and new passwords. Moving HTML into the common design does not remove the password checks in the view.
+
+**File or place:** `templates/accounts/change_password.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -203,35 +253,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Added Bootstrap layout and buttons.
-- Added a **Cancel** link to the dashboard.
-- Preserved `{{ form.as_p }}`, including Django's password validation and field errors.
-- Removed the duplicated HTML structure.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-1. Log in and select **Change Password**.
-2. Enter an incorrect current password.
-3. Submit the form.
-4. Verify that Django displays a validation error and does not change the password.
-5. Click **Cancel** and verify that you return to the dashboard.
+Confirm old-password errors and successful changes still display correctly.
 
-This is still the functional Bootstrap interface, not the final visual design.
+**Where to go next:** Previous: [Step 180 — Update Login Page](18-shared-base-template-and-page-styling.md#step-180) · Next: [Step 182 — Update Forgot Password Page](18-shared-base-template-and-page-styling.md#step-182)
 
-*Previous: Step 180 (Update Login Page)  |  Next: Step 182 (Update Forgot Password Page)*
 
 ---
 
-## Step 182: Update Forgot Password Page
+<a id="step-182"></a>
 
-#### Step 1 — Replace the existing HTML
+### Step 182: Update Forgot Password Page
 
-**File:** The password-reset form template you just opened.
+**What was happening before this step?**
 
-Replace its entire contents with:
+The forgot-password screen was another page that needed the shared header and consistent spacing.
+
+**What did we do, and what does it mean?**
+
+We changed its HTML to reuse the common layout. The purpose of the page remains the same: ask for the email address associated with an account so Django can prepare a reset link.
+
+**File or place:** `templates/accounts/password_reset.html`.
+
+**Code or command from this step**
+
+*1. Replace its entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -274,33 +325,36 @@ Replace its entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Uses the shared `base.html` layout.
-- Centres the form using Bootstrap.
-- Styles the submit button.
-- Preserves Django's email field, validation, and CSRF protection.
-- Keeps the **Back to Login** link.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-1. Open the login page.
-2. Click **Forgot Password?**
-3. Confirm the updated page displays correctly.
-4. Click **Back to Login** and verify that it works.
-5. Return and submit a registered test email address. Verify that the password-reset confirmation page appears.
+Submit a test address in console mode and check the expected confirmation screen.
 
-*Previous: Step 181 (Update Change Password Page)  |  Next: Step 183 (Update Reset Confirmation)*
+**Where to go next:** Previous: [Step 181 — Update Change Password Page](18-shared-base-template-and-page-styling.md#step-181) · Next: [Step 183 — Update Reset Confirmation](18-shared-base-template-and-page-styling.md#step-183)
+
 
 ---
 
-## Step 183: Update Reset Confirmation
+<a id="step-183"></a>
 
-#### Step 1 — Replace `password_reset_done.html`
+### Step 183: Update Reset Confirmation
 
-**File:** `templates/accounts/password_reset_done.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+The “check your email” screen appeared after a password-reset request, and it also needed the new layout.
+
+**What did we do, and what does it mean?**
+
+We kept the neutral confirmation message but placed it inside the shared page frame. The page is meant to reassure the requester without revealing whether that email address exists.
+
+**File or place:** `templates/accounts/password_reset_done.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -334,33 +388,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Added Bootstrap layout and an information alert.
-- Styled the **Back to Login** link.
-- Preserved the existing confirmation message.
+`{% extends ... %}` means this page reuses the common layout file. The page only supplies its own content for the named sections.
 
-**Important:** The message intentionally does not reveal whether an email address belongs to an account. This helps prevent account enumeration.
+**How did we know what happened?**
 
-#### Step 3 — Test
+The existing reset flow should still reach the confirmation screen.
 
-1. Open **Forgot Password**.
-2. Submit a test email address.
-3. Verify that the **Check Your Email** page appears.
-4. Click **Back to Login** and confirm that it works.
+**Where to go next:** Previous: [Step 182 — Update Forgot Password Page](18-shared-base-template-and-page-styling.md#step-182) · Next: [Step 184 — Update Set New Password Page](18-shared-base-template-and-page-styling.md#step-184)
 
-*Previous: Step 182 (Update Forgot Password Page)  |  Next: Step 184 (Update Set New Password Page)*
 
 ---
 
-## Step 184: Update Set New Password Page
+<a id="step-184"></a>
 
-#### Step 1 — Replace `password_reset_confirm.html`
+### Step 184: Update Set New Password Page
 
-**File:** `templates/accounts/password_reset_confirm.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+The password-reset link opens a page outside the normal app navigation, so the recipient should immediately understand what to do.
+
+**What did we do, and what does it mean?**
+
+The reset-confirm template uses the same layout and clearly shows the new-password form or an invalid-link message. Django still decides whether the token can be used; HTML styling does not make the link valid.
+
+**File or place:** `templates/accounts/password_reset_confirm.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -410,35 +467,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Added Bootstrap layout and buttons.
-- Preserved the `validlink` condition.
-- Preserved Django's password validation and CSRF protection.
-- Added a warning alert for invalid or expired links.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-Use a test employee account:
+Test with a valid token and an expired/invalid link; no separate automated output is provided in the notes.
 
-1. Request a password-reset email.
-2. Open the reset link and verify that the **Set New Password** form appears.
-3. Set a valid new password and submit.
-4. Open the same reset link again. It should now show **Invalid Reset Link**.
-5. Click **Request New Link** and verify that the Forgot Password page opens.
+**Where to go next:** Previous: [Step 183 — Update Reset Confirmation](18-shared-base-template-and-page-styling.md#step-183) · Next: [Step 185 — Update Reset Complete Page](18-shared-base-template-and-page-styling.md#step-185)
 
-*Previous: Step 183 (Update Reset Confirmation)  |  Next: Step 185 (Update Reset Complete Page)*
 
 ---
 
-## Step 185: Update Reset Complete Page
+<a id="step-185"></a>
 
-#### Step 1 — Replace `password_reset_complete.html`
+### Step 185: Update Reset Complete Page
 
-**File:** `templates/accounts/password_reset_complete.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+After someone has successfully reset a password, the last screen should make the next action obvious.
+
+**What did we do, and what does it mean?**
+
+We updated the completion page to match the rest of the site and guide the person back to login. No password details need to appear there.
+
+**File or place:** `templates/accounts/password_reset_complete.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -468,33 +526,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Added Bootstrap styling and a success alert.
-- Preserved the confirmation message.
-- Preserved the **Go to Login** link.
+`{% extends ... %}` means this page reuses the common layout file. The page only supplies its own content for the named sections.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-1. Complete a password reset using a test account.
-2. Verify that **Password Reset Successful** appears.
-3. Click **Go to Login**.
-4. Confirm that you can log in using the new password.
+A successful reset should arrive here, and the new password should work at login.
 
-This completes the shared-layout updates for the authentication pages.
+**Where to go next:** Previous: [Step 184 — Update Set New Password Page](18-shared-base-template-and-page-styling.md#step-184) · Next: [Step 186 — Update Employee List](18-shared-base-template-and-page-styling.md#step-186)
 
-*Previous: Step 184 (Update Set New Password Page)  |  Next: Step 186 (Update Employee List)*
 
 ---
 
-## Step 186: Update Employee List
+<a id="step-186"></a>
 
-#### Step 1 — Replace `employee_list.html`
+### Step 186: Update Employee List
 
-**File:** `templates/accounts/employee_list.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+The employee list had become the administrator's main account-management screen, so its table and buttons needed a clearer layout.
+
+**What did we do, and what does it mean?**
+
+We reused the shared template while keeping the employee rows and management actions together. The goal was to make it easy to find a person and understand which action each button performs.
+
+**File or place:** `templates/accounts/employee_list.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -615,36 +676,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Applied Bootstrap table and button styling.
-- Preserved the existing external `style.css`.
-- Removed duplicate message handling; `base.html` now handles it.
-- Preserved **Add New Employee**, **Edit Employee**, **Cancel Edit**, and clickable employee rows.
-- Added visual status indicators for active and inactive employees.
+`{% extends ... %}` means this page reuses the common layout file. The page only supplies its own content for the named sections.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-  {@body const checks = ["Employee list displays correctly","Add New Employee opens the creation form","Edit Employee enables clickable rows","Clicking an employee opens the correct edit form","Cancel Edit returns to normal list view"]}
-  {@body const [done,setDone] = DIL.useState([])}
-  {#each checks as check,i}
-    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
-  {/each}
+Recheck edit selection, activation, and resend actions after the visual update.
 
-Next, we'll update **Create Employee**, followed by **Edit Employee**.
+**Where to go next:** Previous: [Step 185 — Update Reset Complete Page](18-shared-base-template-and-page-styling.md#step-185) · Next: [Step 187 — Update Create Employee](18-shared-base-template-and-page-styling.md#step-187)
 
-*Previous: Step 185 (Update Reset Complete Page)  |  Next: Step 187 (Update Create Employee)*
 
 ---
 
-## Step 187: Update Create Employee
+<a id="step-187"></a>
 
-#### Step 1 — Replace `create_employee.html`
+### Step 187: Update Create Employee
 
-**File:** `templates/accounts/create_employee.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+The form for creating a new employee needed to look consistent with the newly styled employee list.
+
+**What did we do, and what does it mean?**
+
+We moved it into the common page layout and kept a clear form and save action. The server still validates the information before creating a user.
+
+**File or place:** `templates/accounts/create_employee.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -688,40 +749,36 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Added Bootstrap layout and buttons.
-- Added a **Cancel** button.
-- Preserved `{{ form.as_p }}`, form validation, and CSRF protection.
-- Kept the existing employee creation and welcome-email workflow unchanged.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-{@body const checks=["Create Employee page displays correctly","All five fields appear: username, first name, last name, email and role","Submitting an empty form shows validation errors","Cancel returns to Manage Employees"]}
-{@body const [done,setDone]=DIL.useState([])}
+Verify role selection and employee creation still work; input styling is refined next.
 
-  {#each checks as check,i}
-    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
-  {/each}
+**Where to go next:** Previous: [Step 186 — Update Employee List](18-shared-base-template-and-page-styling.md#step-186) · Next: [Step 188 — Fix Form Styling](18-shared-base-template-and-page-styling.md#step-188)
 
-Next: **Edit Employee**, including the activation/deactivation and resend setup email controls.
-
-*Previous: Step 186 (Update Employee List)  |  Next: Step 188 (Fix Form Styling)*
 
 ---
 
-## Step 188: Fix Form Styling
+<a id="step-188"></a>
 
-Your screenshot shows that the page layout is working, but the **form fields are still using Django's default appearance**. The labels, inputs, and help text are not aligned consistently.
+### Step 188: Fix Form Styling
 
-This happens because `{{ form.as_p }}` doesn't automatically apply Bootstrap styling to the input fields.
+**What was happening before this step?**
 
-#### Step 1 — Update `accounts/forms.py`
+The pages looked more consistent, but the boxes and dropdowns generated by Django forms still looked plain.
 
-Find `EmployeeCreationForm` and its existing `__init__()` method.
+**What did we do, and what does it mean?**
 
-**Add this code at the end of that method**, after the role choices:
+Django creates HTML form controls from its Python form fields. We needed to add styling instructions to those controls, not only to the page around them.
+
+**File or place:** `accounts/forms.py (widget styling)`.
+
+**Code or command from this step**
+
+*1. Add this code at the end of that method, after the role choices.*
 
 ```python
         for name, field in self.fields.items():
@@ -731,27 +788,36 @@ Find `EmployeeCreationForm` and its existing `__init__()` method.
                 field.widget.attrs['class'] = 'form-control'
 ```
 
-Keep the existing code unchanged.
+**Understanding the code, one piece at a time**
 
-This applies Bootstrap styling to the five employee fields without adding a new library or changing the form's behaviour. Your instructor's `backend/secondproject/testapp/forms.py` also uses widget attributes to style form fields.
+CSS classes are labels attached to HTML elements. A stylesheet uses those labels to decide how the input boxes and dropdowns look. Adding a class does not alter which database field a form writes to.
 
-#### Step 2 — Check the result
+**How did we know what happened?**
 
-Save `forms.py` and refresh the Create Employee page.
+The next steps add the missing classes inside the form's initialization code.
 
-You should now see full-width input boxes, vertically arranged labels, and a styled role dropdown. This is still the functional UI, not the final design.
+**Where to go next:** Previous: [Step 187 — Update Create Employee](18-shared-base-template-and-page-styling.md#step-187) · Next: [Step 189 — Add CSS classes to creation form widgets](18-shared-base-template-and-page-styling.md#step-189)
 
-*Previous: Step 187 (Update Create Employee)  |  Next: Step 189 (Change accounts/forms.py)*
 
 ---
 
-## Step 189: Change accounts/forms.py
+<a id="step-189"></a>
 
-In `accounts/forms.py`, find the `__init__()` method inside **EmployeeCreationForm**.
+### Step 189: Add CSS classes to creation form widgets
 
-Add the new code immediately after the `self.fields['role'].choices` section.
+**What was happening before this step?**
 
-Your complete `__init__()` method should look like this:
+The employee creation form had text fields and a role dropdown. We wanted both to use the correct styles without changing what they mean.
+
+**What did we do, and what does it mean?**
+
+When Django builds the form, a small method adds a CSS class to each field. Text inputs get one class and the role dropdown another. This changes appearance, not which roles are allowed or how values are saved.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Code or command used at this point.*
 
 ```python
     def __init__(self, *args, **kwargs):
@@ -770,23 +836,36 @@ Your complete `__init__()` method should look like this:
                 field.widget.attrs['class'] = 'form-control'
 ```
 
-**Do not change** the `save()` method or `EmployeeEditForm` yet.
+**Understanding the code, one piece at a time**
 
-Save the file using `Ctrl + S`, then refresh the Create Employee page.
+Inside `__init__`, the form loops over the fields Django created and gives each field's HTML widget an appropriate CSS class. The role dropdown is treated differently from ordinary text inputs because it is a select box.
 
-*Previous: Step 188 (Fix Form Styling)  |  Next: Step 190 (Correct Form Styling)*
+**How did we know what happened?**
+
+The source's next correction indicates this change was initially put in the wrong form class.
+
+**Where to go next:** Previous: [Step 188 — Fix Form Styling](18-shared-base-template-and-page-styling.md#step-188) · Next: [Step 190 — Correct Form Styling](18-shared-base-template-and-page-styling.md#step-190)
+
 
 ---
 
-## Step 190: Correct Form Styling
+<a id="step-190"></a>
 
-**Found the problem.** You added the Bootstrap styling inside `EmployeeEditForm`, not `EmployeeCreationForm`.
+### Step 190: Correct Form Styling
 
-Keep that code where it is because we'll need it for editing employees too.
+**What was happening before this step?**
 
-#### Fix — `accounts/forms.py`
+We noticed the styling instructions were added to the wrong form in an earlier edit.
 
-Find `EmployeeCreationForm` and replace **only its `__init__()` method** with:
+**What did we do, and what does it mean?**
+
+The project had a creation form and an edit form, and they are different Python classes. We corrected which class received the styling method, so the intended creation page would actually use it.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Find EmployeeCreationForm and replace only its init() method with.*
 
 ```python
     def __init__(self, *args, **kwargs):
@@ -804,23 +883,36 @@ Find `EmployeeCreationForm` and replace **only its `__init__()` method** with:
                 field.widget.attrs['class'] = 'form-control'
 ```
 
-**Do not change** `save()` or `EmployeeEditForm`.
+**Understanding the code, one piece at a time**
 
-#### Verify
+The project has both an employee creation form and an employee edit form. Code added to one class does not magically affect the other. We moved the styling to the intended class.
 
-1. Save `forms.py`.
-2. Refresh the Create Employee page.
-3. The text fields and role dropdown should now occupy the available form width.
+**How did we know what happened?**
 
-*Previous: Step 189 (Change accounts/forms.py)  |  Next: Step 191 (Change accounts/forms.py)*
+This is a correction of placement, not an extra form feature.
+
+**Where to go next:** Previous: [Step 189 — Add CSS classes to creation form widgets](18-shared-base-template-and-page-styling.md#step-189) · Next: [Step 191 — Consolidate both employee forms](18-shared-base-template-and-page-styling.md#step-191)
+
 
 ---
 
-## Step 191: Change accounts/forms.py
+<a id="step-191"></a>
 
-**File:** `accounts/forms.py`
+### Step 191: Consolidate both employee forms
 
-Replace the entire file with this code. Both **Create Employee** and **Edit Employee** will have Bootstrap-styled fields.
+**What was happening before this step?**
+
+After several small corrections, the complete form file was easier to understand than a patchwork of partial edits.
+
+**What did we do, and what does it mean?**
+
+We brought the creation and edit form definitions together in one final version. This makes it clearer which fields create a new account, which fields edit an existing one, and where the styling is applied.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Replace the entire file with this code. Both Create Employee and Edit Employee will have Bootstrap-styled fields.*
 
 ```python
 from django import forms
@@ -883,25 +975,36 @@ class EmployeeEditForm(forms.ModelForm):
                 field.widget.attrs['class'] = 'form-control'
 ```
 
-**After replacing:**
+**Understanding the code, one piece at a time**
 
-1. Save using `Ctrl + S`.
-2. Refresh the Create Employee page.
-3. Verify that all input fields and the Role dropdown are full-width.
+The final forms file contains the current versions together. It is useful to compare them: creation makes a new user without a usable password; editing changes an existing record. Both may share styling, but they have different purposes.
 
-The existing employee creation, editing, role restrictions, and password-setup functionality remain unchanged.
+**How did we know what happened?**
 
-*Previous: Step 190 (Correct Form Styling)  |  Next: Step 192 (Update Edit Employee)*
+Refresh both create and edit pages; field styling should be consistent and validation preserved.
+
+**Where to go next:** Previous: [Step 190 — Correct Form Styling](18-shared-base-template-and-page-styling.md#step-190) · Next: [Step 192 — Update Edit Employee](18-shared-base-template-and-page-styling.md#step-192)
+
 
 ---
 
-## Step 192: Update Edit Employee
+<a id="step-192"></a>
 
-#### Step 1 — Replace `edit_employee.html`
+### Step 192: Update Edit Employee
 
-**File:** `templates/accounts/edit_employee.html`
+**What was happening before this step?**
 
-Replace the entire contents with:
+The edit-employee page was one of the remaining screens using its older layout.
+
+**What did we do, and what does it mean?**
+
+We updated its HTML to reuse the common page frame, while keeping the employee's current values, save button and any status or resend actions. The actual update still happens in the view.
+
+**File or place:** `templates/accounts/edit_employee.html`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents with.*
 
 ```html
 {% extends 'base.html' %}
@@ -1002,47 +1105,42 @@ Replace the entire contents with:
 {% endblock %}
 ```
 
-#### Step 2 — What changed?
+**Understanding the code, one piece at a time**
 
-- Connected the page to `base.html`.
-- Applied Bootstrap styling to the layout and buttons.
-- Added a visual indicator for employee status.
-- Preserved the separate POST forms and CSRF protection.
-- Preserved the condition for displaying **Resend Setup Email**.
-- Kept all existing backend functionality unchanged.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Step 3 — Test
+**How did we know what happened?**
 
-{@body const checks=["Employee details display correctly","Save Changes updates employee information","Deactivate Employee works","Reactivate Employee works","Resend Setup Email appears only when eligible","Back to Manage Employees works"]}
-{@body const [done,setDone]=DIL.useState([])}
+Verify an authorized edit saves correctly and a malformed submission returns understandable errors.
 
-  {#each checks as check,i}
-    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
-  {/each}
+**Where to go next:** Previous: [Step 191 — Consolidate both employee forms](18-shared-base-template-and-page-styling.md#step-191) · Next: [Step 193 — Email Error Handling](18-shared-base-template-and-page-styling.md#step-193)
 
-Once verified, all three employee management pages will use the shared layout. We'll then continue with **Module 1 error handling and automated tests**.
-
-*Previous: Step 191 (Change accounts/forms.py)  |  Next: Step 193 (Email Error Handling)*
 
 ---
 
-## Step 193: Email Error Handling
+<a id="step-193"></a>
 
-#### Step 1 — Handle welcome email failures
+### Step 193: Email Error Handling
 
-**File:** `accounts/views.py`
+**What was happening before this step?**
 
-Currently, if Gmail fails while sending a welcome email, Django may display an error even though the employee account has already been created.
+A tricky problem remained: an administrator could save a new employee successfully, but Gmail might fail a moment later. The page could then show an error, making it look as though the account was never created.
 
-We'll handle this without creating duplicate employees.
+**What did we do, and what does it mean?**
 
-**A.** Add this import at the top of `views.py`:
+We separated those two outcomes. First, the employee is saved. Then the code tries to send the welcome email. If sending fails, the page shows a warning about the email rather than pretending the whole employee creation failed.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. A. Add this import at the top of views.py.*
 
 ```python
 from smtplib import SMTPException
 ```
 
-**B.** Inside `create_employee()`, find:
+*2. B. Inside createemployee(), find.*
 
 ```python
 employee = form.save()
@@ -1051,7 +1149,7 @@ messages.success(request, 'Employee created successfully.')
 return redirect('employee_list')
 ```
 
-Replace those lines with:
+*3. Replace those lines with.*
 
 ```python
             employee = form.save()
@@ -1075,44 +1173,42 @@ Replace those lines with:
             return redirect('employee_list')
 ```
 
-Keep the indentation exactly as shown.
-
-    NEW vs CLASS — Email Delivery Failure Handling
-
-  **Where:** `accounts/views.py` → `create_employee()`
-  **In class:** `backend/secondproject/user/views.py` sends a welcome email directly using `send_mail()`.
-  **In this project:** We catch SMTP and connection errors.
-  **How they differ:** The class code does not handle delivery failures here. Our code displays an error message and continues to the employee list.
-  **Why chosen:** Prevent a misleading server error after account creation.
-  **Other option:** Send the email directly, as in class.
-
-#### Step 2 — Verify
-
-Save the file and run:
+*4. Save the file and run.*
 
 ```powershell
 python manage.py check
 ```
 
-Expected result:
+**Understanding the code, one piece at a time**
 
-`System check identified no issues (0 silenced).`
+`try` means “attempt to send the email.” `except` catches the kinds of failures we expect from the mail connection. The saved employee record remains saved; the page shows a warning about sending. If there is no caught error, it shows the success message instead.
 
-We'll test simulated email failures automatically in the upcoming testing stage.
+**How did we know what happened?**
 
-*Previous: Step 192 (Update Edit Employee)  |  Next: Step 194 (Resend Email Error Handling)*
+A failure-injection or temporarily misconfigured SMTP test would confirm the warning path; no such completed test is recorded here.
+
+**Where to go next:** Previous: [Step 192 — Update Edit Employee](18-shared-base-template-and-page-styling.md#step-192) · Next: [Step 194 — Resend Email Error Handling](18-shared-base-template-and-page-styling.md#step-194)
+
 
 ---
 
-## Step 194: Resend Email Error Handling
+<a id="step-194"></a>
 
-#### Step 1 — Update `resend_setup_email()`
+### Step 194: Resend Email Error Handling
 
-**File:** `accounts/views.py`
+**What was happening before this step?**
 
-We already handle email failures during employee creation. Now we'll handle failures when an administrator clicks **Resend Setup Email**.
+The “resend setup email” button could face the same Gmail failure, even though the employee account already existed.
 
-Find these lines inside `resend_setup_email()`:
+**What did we do, and what does it mean?**
+
+We added similar error handling to the resend view. If Gmail is unavailable, the administrator sees a useful message and can try again later; the account record remains intact.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. Find these lines inside resendsetupemail().*
 
 ```python
     else:
@@ -1120,7 +1216,7 @@ Find these lines inside `resend_setup_email()`:
         messages.success(request, 'Password setup email generated successfully.')
 ```
 
-Replace them with:
+*2. Replace them with.*
 
 ```python
     else:
@@ -1140,165 +1236,27 @@ Replace them with:
             )
 ```
 
-**Important:** Keep the existing `SMTPException` import from Step 324. Do not change the other conditions in this function.
-
-#### Step 2 — Verify
-
-Save `views.py`, then run:
+*3. Save views.py, then run.*
 
 ```powershell
 python manage.py check
 ```
 
-Expected output:
+**Understanding the code, one piece at a time**
 
-`System check identified no issues (0 silenced).`
+The resend view does not create another employee. It only asks for another invitation email to be sent. If the mail server fails, the view reports that failure and returns to a usable page rather than showing a crash.
 
-**Result:** If email delivery fails, Django displays an error message instead of an unhandled server error. The employee account remains unchanged.
+**How did we know what happened?**
 
-#### How we checked it
+Our notes includes follow-up checks and analysis, but not a verified end-to-end failure test for every Gmail sending error.
 
-**No. We haven't been committing each Module 1 change to Git as we go.** Our last confirmed Git checkpoint was Module 0.
-
-Your concern is valid. Git can record all the changes we've made, but there's an important distinction:
-
-| What Git can preserve | What Git cannot reconstruct |
-|---|---|
-| Every changed file | The exact order of past edits |
-| Differences from the last commit | Every intermediate version |
-| The final working code | Every terminal command we executed |
-| Future step-by-step commits | Past commits that were never created |
-
-#### What I recommend
-
-We should **start committing regularly now**, rather than waiting until the entire module is finished.
-
-- **Immediately:** Commit our completed Module 1 work as a checkpoint.
-- **Going forward:** Make small, descriptive commits after verified features or fixes.
-- **At module completion:** Create a final module commit and tag.
-- **For detailed history:** Maintain a development journal recording the individual steps, commands, and test results.
-
-This gives us a readable Git history without making unnecessary commits for every line of code.
-
-#### Next step — Check Git status
-
-In your VS Code terminal, run:
-
-```powershell
-git status --short
-```
-
-**Paste the output here.** I'll help you review the changed files, ensure `.env` and other sensitive files aren't included, and create a safe checkpoint before we continue.
-
-We won't lose the code we've already written; we just cannot retroactively recreate its exact commit-by-commit history.
-
-#### How we checked it
-
-For Module 1, I recommend **preserving the development history in two ways: Git commits for code changes and a detailed development journal for individual steps.**
-
-We can still make Module 1 traceable, even though we didn't commit continuously.
-
-#### How we'll handle Module 1
-
-      **1. Reconstruct the development journal**
-
-      Create `docs/module1-development-log.md`.
-
-      Record our completed steps, including filenames, changes, commands, test results, and reasons for decisions. Clearly distinguish confirmed results from steps we haven't verified.
-
-      **2. Create a Module 1 checkpoint commit**
-
-      Review the uncommitted changes, confirm no secrets are included, and commit the current working code together with the journal.
-
-      Git will preserve the complete file-by-file and line-by-line differences from Module 0.
-
-      **3. Commit incrementally from now on**
-
-      Each remaining tested feature or fix gets its own commit, such as email error handling, automated tests, and final Module 1 verification.
-
-#### What the resulting history will look like
-
-    }>
-      **`m0-complete`**
-
-      Module 0 — Existing checkpoint
-
-    }>
-      **`Module 1: accounts implementation checkpoint`**
-
-      Existing work, with retrospective step-by-step journal
-
-    }>
-      **`Module 1: complete email error handling`**
-
-    }>
-      **`Module 1: add authentication and permissions tests`**
-
-    }>
-      **`m1-complete`**
-
-      Final verification and module completion tag
-
-**One limitation:** We cannot honestly turn earlier uncommitted edits into their original chronological Git commits. We could manually reconstruct intermediate versions, but that would be time-consuming and error-prone. A retrospective journal is the safer solution.
-
-#### What we do right now
-
-Before continuing Step 325, run:
-
-```powershell
-git status --short
-```
-
-Paste the output here. We'll inspect the changes and build the Module 1 journal **before making the checkpoint commit**.
-
-From that point forward, I'll explicitly include a Git checkpoint whenever we complete a testable unit of work.
-
-#### How we checked it
-
-**Agreed. From now on, every major development step within a module will have its own Git commit.** We will not wait until the end of a module.
-
-#### 1. How we'll work from Module 2 onward
-
-    Implement one main feature, in small coding steps.
-    Test that feature and understand the code.
-    Commit it to Git with a descriptive message.
-    Push the commit to GitHub after verification.
-    Move to the next feature.
-
-A **commit** saves a checkpoint in your local Git history. A **push** uploads those commits to GitHub.
-
-For example, Module 2 might have separate commits for supplier management, product management, and stock records.
-
-#### 2. What about Module 1?
-
-You're right: most of Module 1 currently exists as one large collection of uncommitted changes.
-
-I recommend:
-
-- Create a **Module 1 implementation checkpoint** now.
-- Prepare a **Module 1 study guide** dividing the existing code into logical stages: user model, authentication, permissions, employee management, emails, and templates.
-- Review those stages individually, referring to the actual files and code.
-- Commit the remaining Module 1 work incrementally, especially error handling and automated tests.
-
-We should not manufacture an artificial Git history for work that was already completed.
-
-#### 3. Was Module 0 committed all at once?
-
-We previously established a Git checkpoint tagged `m0-complete`, but **I cannot confirm whether Module 0 had incremental commits without inspecting its Git history**.
-
-Run these commands in your VS Code terminal:
-
-```powershell
-git log --oneline --decorate --max-count=20
-git status --short
-```
-
-Paste both outputs here.
-
-I'll check how Module 0 was tracked and what remains uncommitted in Module 1. Then we'll establish the incremental workflow before continuing development.
-
-**Our rule going forward: One completed major feature = one verified Git commit.**
-
-*Previous: Step 193 (Email Error Handling)*
+**Where to go next:** Previous: [Step 193 — Email Error Handling](18-shared-base-template-and-page-styling.md#step-193)
 
 ---
+
+### The point of this chapter
+
+The shared `base.html` template is a page frame reused everywhere. Each child page fills in only its own content. The last two steps are about making the app explain email failures accurately, not about changing the shared layout.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

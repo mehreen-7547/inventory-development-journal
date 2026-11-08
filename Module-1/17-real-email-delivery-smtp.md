@@ -1,31 +1,65 @@
-# Module 1, Chapter 17: Real email delivery (SMTP)
+# MODULE 1 — Employee accounts
 
-## Step 170: Real Email Configuration
+## Chapter 17: Real email delivery (SMTP) (Steps 170–178)
 
-#### Next: Prepare Gmail SMTP configuration
+### Before we begin
 
-Our password setup and reset emails currently appear only in the VS Code terminal.
+Until now, an email only appeared as text in our VS Code terminal. That let us examine links, but it could not send a welcome message to a real employee.
 
-We'll configure **Gmail SMTP** so employees can receive actual emails. It requires no paid API, although Gmail has sending limits.
+### What we worked on
 
-#### Step 1: Update Django settings
+We tried using Gmail to send messages, learned where to keep the private Gmail details, found why Django kept printing messages in the terminal and corrected the settings. We then tested sending again.
 
-Open **`config/settings.py`**.
+### Picture it this way
 
-Add this import at the top:
+Imagine the difference between writing a letter on your own desk and posting it to someone. “Console mode” leaves the letter on our desk. “SMTP mode” asks Gmail to deliver it. The chapter follows the mistakes we encountered while switching between those two modes. Steps 177–178 start the next topic: a common design for the website's pages.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 170: Real Email Configuration](#step-170)
+- [Step 171: Configure SMTP Credentials](#step-171)
+- [Step 172: Install python-dotenv](#step-172)
+- [Step 173: Fix Email Backend](#step-173)
+- [Step 174: Remove the conflicting email backend override](#step-174)
+- [Step 175: Restart Django Shell after configuration changes](#step-175)
+- [Step 176: Send a real email through Gmail](#step-176)
+- [Step 177: Plan the shared layout](#step-177)
+- [Step 178: Create the shared base.html template](#step-178)
+
+---
+
+<a id="step-170"></a>
+
+### Step 170: Real Email Configuration
+
+**What was happening before this step?**
+
+We had been testing emails by printing their contents in the VS Code terminal. That was useful for development, but a real employee cannot see our terminal. To receive a welcome email, the message must reach their inbox.
+
+**What did we do, and what does it mean?**
+
+We added a choice in Django's settings: keep printing emails during testing, or send them through Gmail. Gmail accepts messages from programs through a service called SMTP. We also told Django where the Gmail address and password would come from, without typing those private values into Python code.
+
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. Add this import at the top.*
 
 ```python
 import os
 ```
 
-Find your existing email configuration:
+*2. Find your existing email configuration.*
 
 ```python
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 ```
 
-Replace those two lines with:
+*3. Replace those two lines with.*
 
 ```python
 EMAIL_MODE = os.getenv('EMAIL_MODE', 'console')
@@ -46,45 +80,43 @@ else:
     DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 ```
 
-**Keep `PASSWORD_RESET_TIMEOUT` unchanged.**
+**Understanding the code, one piece at a time**
 
-#### How this works
+Read the setting like a choice between two roads. `EMAIL_MODE` asks which road to take. For `console`, Django prints email in VS Code. For `smtp`, Django connects to Gmail. `os.getenv(...)` reads values supplied privately through the computer rather than from hard-coded strings in the shared Python file. `EMAIL_HOST_USER` is the sending address; `EMAIL_HOST_PASSWORD` is its special app password.
 
-| Email mode | Behaviour |
-|---|---|
-| `console` | Emails printed in VS Code terminal |
-| `smtp` | Emails sent through Gmail |
+**How did we know what happened?**
 
-  **NEW vs CLASS — `os.getenv()`**
+We had only changed settings at this point; a genuine external delivery test occurs in Step 176.
 
-  Reads configuration values from environment variables instead of storing sensitive information directly in Python code.
+**Small example:** If `EMAIL_MODE` is `console`, Django prints the message on your laptop. If it is `smtp`, Django tries to pass the message to Gmail. Both choices use the same welcome-email helper.
 
-  This allows us to keep Gmail credentials outside the project files and GitHub repository.
+**Where to go next:** Previous: [Step 169 — Message Styling CSS](16-message-styling.md#step-169) · Next: [Step 171 — Configure SMTP Credentials](17-real-email-delivery-smtp.md#step-171)
 
-**Save `settings.py`.** The system will continue using console email until we explicitly enable SMTP.
-
-Next, we'll prepare Gmail authentication using an App Password, without putting credentials in the code.
-
-*Previous: Step 169 (Message Styling CSS)  |  Next: Step 171 (Configure SMTP Credentials)*
 
 ---
 
-## Step 171: Configure SMTP Credentials
+<a id="step-171"></a>
 
-#### Next: Configure Gmail credentials in VS Code
+### Step 171: Configure SMTP Credentials
 
-We've generated the Gmail App Password. Now we'll provide it to Django securely, without adding it to our project files.
+**What was happening before this step?**
 
-#### Step 1: Open the VS Code terminal
+Once Django knew how to send through Gmail, it needed the details of which Gmail account to use. Those details included a special password, so we did not want to put them in a file shared on GitHub.
 
-If your Django server is running, stop it using `Ctrl + C`.
+**What did we do, and what does it mean?**
 
-In the **PowerShell terminal**, run these commands:
+For this early test, the terminal asked for the Gmail app password and held it only during that terminal session. Django could then read it while running. Closing the terminal would lose those temporary settings, which led to the next step.
+
+**File or place:** `PowerShell session variables`.
+
+**Code or command from this step**
+
+*1. In the PowerShell terminal, run these commands.*
 
 ```powershell
 $env:EMAIL_MODE = "smtp"
 
-$env:EMAIL_HOST_USER = "mehreen7547@gmail.com"
+$env:EMAIL_HOST_USER = "youraddress@gmail.com"
 
 $secure = Read-Host "Enter Gmail App Password" -AsSecureString
 
@@ -93,150 +125,95 @@ $env:EMAIL_HOST_PASSWORD = ([System.Net.NetworkCredential]::new("", $secure).Pas
 Remove-Variable secure
 ```
 
-When PowerShell asks for your App Password, paste it and press Enter. The password will not be displayed while you type.
-
-#### Step 2: Start Django
-
-In the **same terminal**, run:
+*2. In the same terminal, run.*
 
 ```powershell
 python manage.py runserver
 ```
 
-#### What have we configured?
+**Understanding the code, one piece at a time**
 
-| Variable | Purpose |
-|---|---|
-| `EMAIL_MODE` | Enables SMTP delivery |
-| `EMAIL_HOST_USER` | Gmail sending account |
-| `EMAIL_HOST_PASSWORD` | Gmail App Password |
+`$env:EMAIL_MODE = "smtp"` tells programs started from that PowerShell window to use Gmail mode. The `Read-Host ... -AsSecureString` line asks for the app password without plainly displaying it while typed. This was a temporary method; the next step makes the setting easier to reuse.
 
-  **NEW vs CLASS — Environment variables**
+**How did we know what happened?**
 
-  Environment variables allow Django to access configuration without hardcoding passwords.
+The next steps replace temporary session variables with a local `.env` approach.
 
-  These variables exist only in the current PowerShell session. If you close that terminal, you'll need to set them again.
+**Small example:** The employee never sees the special Gmail password. It belongs only to the Gmail account we use to send outgoing messages, not to the employee account being created.
 
-  This is suitable for our development and testing stage.
+**Where to go next:** Previous: [Step 170 — Real Email Configuration](17-real-email-delivery-smtp.md#step-170) · Next: [Step 172 — Install python-dotenv](17-real-email-delivery-smtp.md#step-172)
 
-**Expected result:** Django starts normally. No email will be sent until we trigger an email operation.
-
-Next, we'll send a real test email and verify that it arrives in your Gmail inbox.
-
-*Previous: Step 170 (Real Email Configuration)  |  Next: Step 172 (Install python-dotenv)*
 
 ---
 
-## Step 172: Install python-dotenv
+<a id="step-172"></a>
 
-Yes. We can save them permanently for development using a **`.env` file**. This is preferable to entering credentials every time you open PowerShell.
+### Step 172: Install python-dotenv
 
-The file stays on your computer and is excluded from GitHub.
+**What was happening before this step?**
 
-#### Step 1: Install `python-dotenv`
+Typing the Gmail details again every time was inconvenient. We needed somewhere on this computer to keep them without uploading them to GitHub.
 
-In your VS Code terminal, run:
+**What did we do, and what does it mean?**
 
-```powershell
-python -m pip install python-dotenv
-```
+We used a file named `.env`, which is just a small private settings file containing lines like `EMAIL_MODE=smtp`. The `python-dotenv` package reads that file when Django starts. This only works if Django loads the file before it asks what email mode to use.
 
-#### Step 2: Create a `.env` file
+**File or place:** `.env and config/settings.py`.
 
-Create it in your project root, alongside `manage.py`.
+**Code or command from this step**
 
-    **techmindz_inventory_module0_sqlite_atomic/**
+*1. Inside .env, add.*
 
-      manage.py
-
-      **.env**
-
-      .gitignore
-
-      config/
-
-Inside `.env`, add:
-
-```dotenv
+```ini
 EMAIL_MODE=smtp
-EMAIL_HOST_USER=mehreen7547@gmail.com
+EMAIL_HOST_USER=youraddress@gmail.com
 EMAIL_HOST_PASSWORD=YOUR_16_CHARACTER_APP_PASSWORD
 ```
 
-Replace the placeholder with your Gmail App Password, without spaces.
-
-#### Step 3: Update `config/settings.py`
-
-At the top, add:
-
-```python
-from dotenv import load_dotenv
-```
-
-Find the existing `BASE_DIR` definition:
+*2. Find the existing BASEDIR definition.*
 
 ```python
 BASE_DIR = Path(__file__).resolve().parent.parent
 ```
 
-Immediately below it, add:
+*3. In your VS Code terminal, run.*
 
-```python
-load_dotenv(BASE_DIR / '.env')
+```powershell
+python -m pip install python-dotenv
 ```
 
-Keep the existing SMTP configuration using `os.getenv()` unchanged.
+**Understanding the code, one piece at a time**
 
-#### Step 4: Protect your credentials
+The three lines in `.env` mean “send real email,” “use this Gmail address,” and “use this special Gmail app password.” Installing `python-dotenv` lets Python read those lines. The important order is: load `.env` first, then read values with `os.getenv`.
 
-Open `.gitignore` and add:
+**How did we know what happened?**
 
-```gitignore
-.env
-```
+The following steps diagnose why console delivery was still being used despite those settings.
 
-This prevents Git from adding the file in future commits, provided it wasn't already tracked. You can verify with `git status --ignored --short .env` — it should show `!! .env`.
+**Small example:** `.env` is like a note kept on your own desk. It can say which email account to use, while `settings.py` contains the general instructions for reading that note.
 
-**Important:** `.env` stores credentials as plain text. Keep it private, never upload it, and don't share its contents.
+**Where to go next:** Previous: [Step 171 — Configure SMTP Credentials](17-real-email-delivery-smtp.md#step-171) · Next: [Step 173 — Fix Email Backend](17-real-email-delivery-smtp.md#step-173)
 
-#### Result
-
-Django will automatically read the credentials whenever it starts, including after restarting VS Code or your computer. You won't need to re-enter them in PowerShell.
-
-*Previous: Step 171 (Configure SMTP Credentials)  |  Next: Step 173 (Fix Email Backend)*
 
 ---
 
-## Step 173: Fix Email Backend
+<a id="step-173"></a>
 
-**Found the problem. Django is still using the Console Email Backend, not Gmail SMTP.**
+### Step 173: Fix Email Backend
 
-Your output confirms this:
+**What was happening before this step?**
 
-```text
-From: no-reply@example.com
-```
+We tried sending an email, but the message still appeared in the terminal. That told us Django was behaving as if testing mode were still selected.
 
-Also, the entire email was printed in your terminal. That is console-backend behaviour.
+**What did we do, and what does it mean?**
 
-The `1` means Django successfully processed one email using the configured backend. **It does not mean Gmail sent it.**
+We checked what email mode Django was actually using, instead of assuming the new settings worked. The investigation pointed to when `.env` was loaded. If the settings are read before that file is loaded, Django cannot see the Gmail details and may use the default terminal mode.
 
-#### Step 1: Check `config/settings.py`
+**File or place:** `config/settings.py`.
 
-At the top, ensure you have:
+**Code or command from this step**
 
-```python
-import os
-from dotenv import load_dotenv
-```
-
-Immediately below your existing `BASE_DIR` definition:
-
-```python
-load_dotenv(BASE_DIR / '.env')
-```
-
-Then verify your email configuration contains:
+*1. Code or command used at this point.*
 
 ```python
 EMAIL_MODE = os.getenv('EMAIL_MODE', 'console')
@@ -257,23 +234,7 @@ else:
     DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 ```
 
-Make sure your `.env` file is saved alongside `manage.py` and contains `EMAIL_MODE=smtp`.
-
-#### Step 2: Verify
-
-Exit Django Shell:
-
-```python
-exit()
-```
-
-Start a new Django Shell:
-
-```powershell
-python manage.py shell
-```
-
-Run:
+*2. Run.*
 
 ```python
 from django.conf import settings
@@ -283,29 +244,45 @@ print(settings.EMAIL_BACKEND)
 print(settings.DEFAULT_FROM_EMAIL)
 ```
 
-Expected:
+*3. Code or command used at this point.*
 
-```text
-smtp
-django.core.mail.backends.smtp.EmailBackend
-mehreen7547@gmail.com
+```python
+import os
+from dotenv import load_dotenv
 ```
 
-If it still shows `console`, an existing PowerShell environment variable may be overriding your `.env` file.
+**Understanding the code, one piece at a time**
 
-**Do not send another test email until these three values are correct.**
+The `print(settings.EMAIL_BACKEND)` check tells us what Django actually chose. If it displays a name ending in `console.EmailBackend`, the app is still printing mail locally. A name ending in `smtp.EmailBackend` means it is configured to try Gmail, though we still need a delivery test.
 
-*Previous: Step 172 (Install python-dotenv)  |  Next: Step 174 (Fix the email configuration)*
+**How did we know what happened?**
+
+Our notes explicitly identifies console-backend output, so this step is a configuration diagnosis rather than proof of delivery.
+
+**Small example:** If Django reads the email option before opening `.env`, it may assume `console`. This explains why an email could still print in VS Code even after we typed Gmail details into `.env`.
+
+**Where to go next:** Previous: [Step 172 — Install python-dotenv](17-real-email-delivery-smtp.md#step-172) · Next: [Step 174 — Remove the conflicting email backend override](17-real-email-delivery-smtp.md#step-174)
+
 
 ---
 
-## Step 174: Fix the email configuration
+<a id="step-174"></a>
 
-**Found the issue.** Your `settings.py` is correctly loading `.env`, but the last two lines are forcing Django to use the Console Email Backend.
+### Step 174: Remove the conflicting email backend override
 
-#### Step 289 — Fix the email configuration
+**What was happening before this step?**
 
-In `config/settings.py`, find these lines at the bottom:
+Even after dealing with the private settings file, the email still used the wrong mode. We found another cause in `settings.py`.
+
+**What did we do, and what does it mean?**
+
+The file was setting the email option twice: first in the new “Gmail or terminal” choice, then later again to “terminal.” Python keeps the last value it sees, so the later line cancelled our Gmail setting. Removing that extra line allowed the original choice to work.
+
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. In config/settings.py, find these lines at the bottom.*
 
 ```python
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -313,7 +290,7 @@ DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
 ```
 
-**Replace those three lines** with:
+*2. Replace those three lines with.*
 
 ```python
 # Email configuration
@@ -336,19 +313,15 @@ else:
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
 ```
 
-Your `.env` file should contain these entries alongside its existing settings:
+*3. Your .env file should contain these entries alongside its existing settings.*
 
-```dotenv
+```ini
 EMAIL_MODE=smtp
-EMAIL_HOST_USER=mehreen7547@gmail.com
+EMAIL_HOST_USER=youraddress@gmail.com
 EMAIL_HOST_PASSWORD=YOUR_GMAIL_APP_PASSWORD
 ```
 
-Replace the password placeholder with your actual App Password. Do not share it or commit `.env` to GitHub.
-
-#### Verify
-
-Restart Django Shell and run:
+*4. Restart Django Shell and run.*
 
 ```python
 from django.conf import settings
@@ -358,51 +331,46 @@ print(settings.EMAIL_BACKEND)
 print(settings.DEFAULT_FROM_EMAIL)
 ```
 
-Expected output:
+*5. Example result from the notes (not a command to run).*
 
 ```text
 smtp
 django.core.mail.backends.smtp.EmailBackend
-mehreen7547@gmail.com
+youraddress@gmail.com
 ```
 
-No other changes to your `settings.py` are required for this fix.
+**Understanding the code, one piece at a time**
 
-*Previous: Step 173 (Fix Email Backend)  |  Next: Step 175 (Change manage.py)*
+Python reads the settings file from top to bottom. If we set `EMAIL_BACKEND` to Gmail and later set it to console again, the later value wins. Removing the extra console assignment fixes the clash without changing how the email helper builds messages.
+
+**How did we know what happened?**
+
+The updated settings are followed by a fresh Django shell and delivery test.
+
+**Small example:** Imagine writing `mode = "gmail"` and then, further down, `mode = "terminal"`. The second line wins. That was the kind of conflict we removed.
+
+**Where to go next:** Previous: [Step 173 — Fix Email Backend](17-real-email-delivery-smtp.md#step-173) · Next: [Step 175 — Restart Django Shell after configuration changes](17-real-email-delivery-smtp.md#step-175)
+
 
 ---
 
-## Step 175: Change manage.py
+<a id="step-175"></a>
 
-#### 1. Exit the current Django Shell
+### Step 175: Restart Django Shell after configuration changes
 
-In your VS Code terminal, where you see `>>>`, type:
+**What was happening before this step?**
 
-```python
-exit()
-```
+We had changed Django's settings file, but our already-open Django shell might still have been using values it loaded earlier.
 
-Press **Enter**.
+**What did we do, and what does it mean?**
 
-You should now see the PowerShell prompt:
+A Django shell is an interactive Python window connected to the project. Restarting it makes it read the updated settings afresh. Without restarting, another email test might still use the old terminal-only option and confuse us.
 
-```text
-(.venv) PS C:\Users\mehre\...>
-```
+**File or place:** `Django shell (restart)`.
 
-#### 2. Start Django Shell again
+**Code or command from this step**
 
-Type:
-
-```powershell
-python manage.py shell
-```
-
-Press **Enter**. You'll see `>>>` again.
-
-#### 3. Check the email configuration
-
-Copy and paste these lines:
+*1. Copy and paste these lines.*
 
 ```python
 from django.conf import settings
@@ -411,29 +379,38 @@ print(settings.EMAIL_BACKEND)
 print(settings.DEFAULT_FROM_EMAIL)
 ```
 
-Press **Enter**.
+**Understanding the code, one piece at a time**
 
-Expected result:
+The Django shell starts with whatever settings existed when it opened. Exiting and opening a new shell makes it read the updated file. We then print the email settings to see which mode it loaded.
 
-```text
-smtp
-django.core.mail.backends.smtp.EmailBackend
-mehreen7547@gmail.com
-```
+**How did we know what happened?**
 
-**Send me the three lines of output you get.**
+The next step sends a test email from the fresh environment.
 
-*Previous: Step 174 (Fix the email configuration)  |  Next: Step 176 (Send a real email through Gmail)*
+**Small example:** Changing a recipe on disk does not update a cake already in the oven. Similarly, an already-open Python shell can still hold settings loaded before the edit. Restarting reads them again.
+
+**Where to go next:** Previous: [Step 174 — Remove the conflicting email backend override](17-real-email-delivery-smtp.md#step-174) · Next: [Step 176 — Send a real email through Gmail](17-real-email-delivery-smtp.md#step-176)
+
 
 ---
 
-## Step 176: Send a real email through Gmail
+<a id="step-176"></a>
 
-#### Step 290 — Send a real email through Gmail
+### Step 176: Send a real email through Gmail
 
-Your SMTP configuration is now correct. Let's test whether Gmail can actually send an email.
+**What was happening before this step?**
 
-**1.** In the same Django Shell, where you see `>>>`, paste:
+After fixing the settings and restarting the shell, we needed to see whether a real message could arrive in Gmail.
+
+**What did we do, and what does it mean?**
+
+We sent a test message with Django's mail function. The function can tell us it handed the message to the chosen sending service, but that alone does not prove it reached the inbox. We also needed to look in the receiving mailbox to confirm delivery.
+
+**File or place:** `Django shell (send_mail)`.
+
+**Code or command from this step**
+
+*1. In the same Django Shell, where you see >>>, paste.*
 
 ```python
 from django.core.mail import send_mail
@@ -443,131 +420,57 @@ result = send_mail(
     'Techmindz SMTP Test',
     'This is a real email sent from Django using Gmail SMTP.',
     settings.DEFAULT_FROM_EMAIL,
-    ['mehreen7547+sales1@gmail.com'],
+    ['example+sales1@gmail.com'],
     fail_silently=False
 )
 
 print(result)
 ```
 
-**2.** Press Enter.
-
-Expected output:
+*2. Example result from the notes (not a command to run).*
 
 ```text
 1
 ```
 
-This means the SMTP server accepted the email.
-
-**3.** Open Gmail and search:
+*3. Example result from the notes (not a command to run).*
 
 ```text
 in:anywhere subject:"Techmindz SMTP Test"
 ```
 
-Check whether the new email appears. Since you're sending to your own Gmail alias, it may appear under **Sent** or **All Mail** rather than Primary.
+**Understanding the code, one piece at a time**
 
-#### How we checked it
+The `send_mail` function takes a subject, message text, sender address and recipient list. It returns a count of messages accepted for sending. The count alone is not a receipt from the employee. We still look in the recipient's mailbox.
 
-The password reset tests passed. Before saving our completed work to GitHub, we need to verify that **your `.env` file is excluded from Git**.
+**How did we know what happened?**
 
-#### Step 1: Check `.gitignore`
+The notes show the send result and subsequent checks. Do not interpret a console backend's `1` as proof of SMTP delivery.
 
-Open `.gitignore` in VS Code and ensure it contains:
+**Small example:** A message count of `1` is not the same as seeing the email in the inbox. We check the selected sending mode and the recipient mailbox too.
 
-```gitignore
-.env
-```
+**Where to go next:** Previous: [Step 175 — Restart Django Shell after configuration changes](17-real-email-delivery-smtp.md#step-175) · Next: [Step 177 — Plan the shared layout](17-real-email-delivery-smtp.md#step-177)
 
-#### Step 2: Verify Git is ignoring it
-
-In the VS Code PowerShell terminal, run:
-
-```powershell
-git status --ignored --short -- .env
-```
-
-#### Expected output
-
-```text
-!! .env
-```
-
-This means Git is ignoring your `.env` file, which contains your Gmail App Password and Django secret key.
-
-If you see `?? .env` or no output, **do not commit yet**. We'll investigate first.
-
-#### How we checked it
-
-#### Step 299 — Run Django System Check
-
-Your `.env` file is correctly excluded from Git. Before committing Module 1, we'll check the Django configuration for errors.
-
-**1.** Open your VS Code PowerShell terminal.
-
-If you're inside Django Shell (`>>>`), type `exit()` first.
-
-**2.** Run:
-
-```powershell
-python manage.py check
-```
-
-**3.** Expected output:
-
-```text
-System check identified no issues (0 silenced).
-```
-
-This confirms that Django's built-in system checks found no configuration issues. It does not replace functional or security testing.
-
-*Previous: Step 175 (Change manage.py)  |  Next: Step 177 (Change base.html)*
 
 ---
 
-## Step 177: Change base.html
+<a id="step-177"></a>
 
-Agreed. **Your decisions override Claude's recommendation wherever you explicitly choose a different approach.**
+### Step 177: Plan the shared layout
 
-We'll retain custom employee management and complete the remaining Module 1 requirements from v3.
+**What was happening before this step?**
 
-#### Remaining work
+Once the email test was working, we turned to the appearance of the account pages. Several pages repeated similar headings, menus and messages.
 
-  {@body const tasks = ["Change unauthorized access to dashboard redirect + error message","Create shared base.html, Bootstrap layout and navbar","Review NEW vs CLASS cards and restore their required format","Add automated Django tests","Handle email-sending failures safely","Prepare Module 1 report and development journal","Run final checks and commit Module 1"]}
-  {@body const [done,setDone] = DIL.useState([])}
-  {#each tasks as task,i}
-    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{task}
-  {/each}
-  Checklist for the remaining work. We'll complete and verify each item separately.
+**What did we do, and what does it mean?**
 
-#### First correction: Unauthorized access
+We reviewed what should be shared across pages. The goal was one common layout, so changing a navigation link later would not mean editing every HTML file separately. The actual shared template begins in the following step.
 
-Yes, this requires only a small code change.
+**File or place:** `template/layout planning`.
 
-**File:** `accounts/decorators.py`
+**Code or command from this step**
 
-**1.** Remove this import:
-
-```python
-from django.core.exceptions import PermissionDenied
-```
-
-Replace it with:
-
-```python
-from django.contrib import messages
-from django.shortcuts import redirect
-```
-
-**2.** Find:
-
-```python
-if request.user.role not in roles:
-    raise PermissionDenied
-```
-
-Replace it with:
+*1. Replace it with.*
 
 ```python
 if request.user.role not in roles:
@@ -575,43 +478,36 @@ if request.user.role not in roles:
     return redirect('home')
 ```
 
-Nothing else needs changing in this file.
+**Understanding the code, one piece at a time**
 
-  NEW vs CLASS — Centralized role protection
-  **Where:** `accounts/decorators.py` → `role_required()`
-  **In class:** `backend/thirdproject/doctors/views.py` → `doctor_dashboard()` checked the role inside the view and redirected to an error page.
-  **In this project:** A reusable decorator checks permissions and redirects unauthorized users to the dashboard with a message.
-  **How they differ:** Class checks each view individually. Our decorator applies the same rule to multiple views.
-  **Why chosen:** Less repeated code and consistent access control.
-  **Other option:** Keep individual role checks or return HTTP 403.
+`redirect(...)` does not display a page itself. It tells the browser which page to open next, often after a form has been saved.
 
-#### Verify
+**How did we know what happened?**
 
-1. Log in as `sales1`.
-2. Visit `http://127.0.0.1:8000/employees/`.
-3. You should return to the dashboard and see:
+This is a transition and review step; it is not evidence that every template was already converted.
 
-> You do not have permission to access this page.
+**Where to go next:** Previous: [Step 176 — Send a real email through Gmail](17-real-email-delivery-smtp.md#step-176) · Next: [Step 178 — Create the shared base.html template](17-real-email-delivery-smtp.md#step-178)
 
-The employee-management page must not open.
-
-*Previous: Step 176 (Send a real email through Gmail)  |  Next: Step 178 (Change base.html)*
 
 ---
 
-## Step 178: Change base.html
+<a id="step-178"></a>
 
-Yes. From now on, every **NEW vs CLASS** card will have a light-purple background, a purple dashed border, and the same seven fields required by Claude's instructions.
+### Step 178: Create the shared base.html template
 
-STEP 301 · MODULE 1 — ACCOUNTS
+**What was happening before this step?**
 
-#### Create the shared `base.html`
+The login, home and employee pages had similar parts, but each page was carrying its own copy. That made them harder to keep consistent.
 
-This will provide a common Bootstrap layout, navigation bar, and message display for our application.
+**What did we do, and what does it mean?**
 
-**File:** `templates/base.html`
+We created `base.html`, the common starting layout. Other pages can say “use this layout” and provide only their own content. It is like using the same page frame for several different forms.
 
-Create this new file in the main `templates` folder, then paste:
+**File or place:** `templates/base.html`.
+
+**Code or command from this step**
+
+*1. Create this new file in the main templates folder, then paste.*
 
 ```html
 {% load static %}
@@ -679,21 +575,21 @@ Create this new file in the main `templates` folder, then paste:
 </html>
 ```
 
-    NEW vs CLASS — Role-aware navigation
+**Understanding the code, one piece at a time**
 
-  **Where:** `templates/base.html` → navbar
-  **In class:** `backend/secondproject/templates/lib-base.html` displayed navigation links directly, including a logout link.
-  **In this project:** Links depend on the user's login status and role. Logout uses a POST form.
-  **How they differ:** Employees see only appropriate navigation links. Logout submits a protected request instead of using a normal link.
-  **Why chosen:** Better access control and safer logout handling.
-  **Other option:** Use unconditional navigation links and a GET logout route.
+The common layout contains the HTML structure used by many pages, such as navigation and a place for messages. A named `{% block content %}` is an empty slot each individual page can fill when it extends `base.html`.
 
-#### Expected result
+**How did we know what happened?**
 
-Save the file. **Your existing pages will not change visually yet**, because they haven't been connected to `base.html`.
+The individual pages still have to be updated to extend the base template in later steps.
 
-In the next step, we'll update the dashboard template to inherit this layout, without duplicating its navbar or messages.
-
-*Previous: Step 177 (Change base.html)  |  Next: Step 179 (Dashboard Template Inheritance)*
+**Where to go next:** Previous: [Step 177 — Plan the shared layout](17-real-email-delivery-smtp.md#step-177) · Next: [Step 179 — Dashboard Template Inheritance](18-shared-base-template-and-page-styling.md#step-179)
 
 ---
+
+### The point of this chapter
+
+Imagine the difference between writing a letter on your own desk and posting it to someone. “Console mode” leaves the letter on our desk. “SMTP mode” asks Gmail to deliver it. The chapter follows the mistakes we encountered while switching between those two modes. Steps 177–178 start the next topic: a common design for the website's pages.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

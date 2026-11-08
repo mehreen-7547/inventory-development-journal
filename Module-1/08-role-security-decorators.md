@@ -1,16 +1,51 @@
-# Module 1, Chapter 8: Role security (decorators)
+# MODULE 1 — Employee accounts
 
-## Step 100: Role Security
+## Chapter 8: Role security (decorators) (Steps 100–107)
 
-#### Next: Create the role-permission decorator
+### Before we begin
 
-Our homepage currently displays different content for Admin, Manager and Sales users. However, **displaying different content is not the same as restricting access**.
+We had started showing different links to different roles. That made the page nicer, but it did not make an address secure.
 
-We need a reusable permission check.
+### What we worked on
 
-**Create a new file:** `accounts/decorators.py`
+We wrote a role-checking decorator, attached it to selected views and tested what happens when a person with the wrong role tries to open a page.
 
-Paste:
+### Picture it this way
+
+A decorator is a guard placed in front of a Django view. It checks who is asking and which role they have before allowing the real page function to run.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 100: Role Security](#step-100)
+- [Step 101: Understand nested decorator functions](#step-101)
+- [Step 102: Trace the decorator execution order](#step-102)
+- [Step 103: Apply Role Security](#step-103)
+- [Step 104: Test Role Restrictions](#step-104)
+- [Step 105: Review the role decorator](#step-105)
+- [Step 106: Apply Role Security](#step-106)
+- [Step 107: Test Role Security](#step-107)
+
+---
+
+<a id="step-100"></a>
+
+### Step 100: Role Security
+
+**What was happening before this step?**
+
+We could hide links by role, but someone could still type a restricted address directly. We needed real protection in the Django views.
+
+**What did we do, and what does it mean?**
+
+A decorator is a small function wrapped around another function. Our role decorator checks the current user's role before allowing a protected view to do its normal work.
+
+**File or place:** `accounts/decorators.py`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```python
 from functools import wraps
@@ -33,9 +68,7 @@ def role_required(*roles):
     return decorator
 ```
 
-#### What this will do
-
-Later, we can protect a view like this:
+*2. Code or command used at this point. This is a shortened illustration, not a complete file.*
 
 ```python
 @role_required('admin', 'manager')
@@ -43,27 +76,36 @@ def example_view(request):
     ...
 ```
 
-- Admin and Manager can access it.
-- Sales users receive **403 Forbidden**.
-- Users who aren't logged in are redirected to the login page.
+**Understanding the code, one piece at a time**
 
-    **NEW vs CLASS — 2 concepts**
+A decorator can be read as “before running this view, do one extra check.” In this project, the extra check is whether the current user has the required business role. Only accepted requests reach the original view function.
 
-  **1. Custom decorator:** Your instructor used Django's built-in `@login_required`. We're creating a similar reusable check for roles.
+**How did we know what happened?**
 
-  **2. `PermissionDenied`:** Django's built-in exception for rejecting unauthorized access with HTTP 403.
+Its enforcement and temporary restriction tests appear in Steps 103–107.
 
-For now, **only create and save this file**. We'll apply and test the decorator next.
+**Where to go next:** Previous: [Step 99 — Commit Changes](07-role-based-homepage-and-feedback-messages.md#step-99) · Next: [Step 101 — Understand nested decorator functions](08-role-security-decorators.md#step-101)
 
-*Previous: Step 99 (Commit Changes)  |  Next: Step 101 (Understanding Execution Flow)*
 
 ---
 
-## Step 101: Understanding Execution Flow
+<a id="step-101"></a>
 
-The missing connection is this: **`def` creates a function, while `return` sends something back to whoever called that function.** And importantly, returning a function is different from executing it.
+### Step 101: Understand nested decorator functions
 
-Look at our code without the extra security details:
+**What was happening before this step?**
+
+The decorator had several nested functions, so the order of execution was difficult to picture.
+
+**What did we do, and what does it mean?**
+
+Think of a security guard standing before a room. The outside function sets up which roles may enter. When someone requests the page, the guard checks the current user before letting the actual view run.
+
+**File or place:** `accounts/decorators.py`.
+
+**Code or command from this step**
+
+*1. Look at our code without the extra security details.*
 
 ```python
 def role_required(*roles):
@@ -76,183 +118,32 @@ def role_required(*roles):
     return decorator
 ```
 
-There are **three functions nested inside one another**. Let's follow exactly what Python does.
+**How did we know what happened?**
 
-#### Part 1 — When Django prepares the view
+This is an explanation of the decorator's execution order, not another new permission rule.
 
-Suppose you write:
+**Where to go next:** Previous: [Step 100 — Role Security](08-role-security-decorators.md#step-100) · Next: [Step 102 — Trace the decorator execution order](08-role-security-decorators.md#step-102)
 
-```python
-@role_required('admin', 'manager')
-def inventory_report(request):
-    return ...
-```
-
-**First**, Python calls `role_required('admin', 'manager')`.
-
-It enters the outer function:
-
-```python
-def role_required(*roles):
-```
-
-It remembers the allowed roles and encounters:
-
-```python
-    def decorator(view_func):
-```
-
-Does Python execute `decorator` now? **No.** The `def` statement merely creates that function.
-
-Python continues until:
-
-```python
-    return decorator
-```
-
-This means: *Give the `decorator` function itself back to whoever called `role_required`.*
-
-Notice that we wrote `return decorator`, **not** `return decorator()`. There are no parentheses, so we're returning the function, not calling it.
-
-**Second**, Python calls that returned `decorator` function, passing the original `inventory_report` function into its `view_func` parameter.
-
-Now Python enters:
-
-```python
-def decorator(view_func):
-```
-
-Here, `view_func` refers to our original `inventory_report` function.
-
-Inside, Python encounters:
-
-```python
-    def wrapper(request, *args, **kwargs):
-```
-
-Again, this `def` only creates a function. It does not execute the wrapper.
-
-Then Python reaches:
-
-```python
-    return wrapper
-```
-
-This returns the `wrapper` function itself.
-
-**What has happened?** Python has now replaced the name `inventory_report` with the wrapper function. But the wrapper still remembers the original `inventory_report` through `view_func`.
-
-#### Part 2 — When someone actually visits the page
-
-Now imagine a Manager opens `/inventory-report/`.
-
-Django calls what it knows as `inventory_report`. But remember, that name now refers to the wrapper.
-
-So Python finally executes:
-
-```python
-def wrapper(request, *args, **kwargs):
-```
-
-Here, `request` is the actual HTTP request. `*args` and `**kwargs` carry any additional arguments the original view might need.
-
-Our full wrapper checks whether the user is logged in and whether their role is allowed.
-
-If the Manager passes those checks, Python reaches:
-
-```python
-return view_func(request, *args, **kwargs)
-```
-
-**This return is different.** Notice the parentheses after `view_func`.
-
-We're now **calling the original inventory report function**, passing it the request and any additional arguments. That original function produces a response, and `return` sends that response back through the wrapper to Django.
-
-#### The complete flow
-
-  ONCE, WHEN THE VIEW IS PREPARED
-
-    `role_required('admin', 'manager')`
-
-    `return decorator`
-
-    `decorator(inventory_report)`
-
-    `return wrapper`
-
-  EVERY TIME A VISITOR REQUESTS THE PAGE
-
-    `wrapper(request, ...)`
-
-    Check login and role
-
-    `return view_func(request, ...)`
-
-    Original view runs and its response is returned
-
-The essential distinction is:
-
-- `return decorator` — hands back a function to be used in the next preparation stage.
-- `return wrapper` — hands back the function that will handle future requests.
-- `return view_func(...)` — actually executes the original view and returns its result.
-
-**So the first two returns prepare the protection. The third return happens when an authorized visitor actually requests the page.**
-
-That is why we need the three nested functions: one receives the allowed roles, one receives the view to protect, and one receives the actual request.
-
-*Previous: Step 100 (Role Security)  |  Next: Step 102 (Complete Execution Flow)*
 
 ---
 
-## Step 102: Complete Execution Flow
+<a id="step-102"></a>
 
-You're very close, but there is **one important mistake** in your understanding: the three functions do not execute one after another and pass their results back up the chain.
+### Step 102: Trace the decorator execution order
 
-Instead, **the first two functions prepare the third function. The third function executes later, when someone visits the page.**
+**What was happening before this step?**
 
-Let's connect everything, including who passes the arguments.
+We followed one protected request through the full decorator to understand each return.
 
-#### First, look at where we use the decorator
+**What did we do, and what does it mean?**
 
-```python
-@role_required('admin', 'manager')
-def inventory_report(request):
-    return render(request, 'inventory/report.html')
-```
+The browser asks for a page, the decorator checks login and allowed roles, and only then calls the original view. If the user is not allowed, Django returns a refusal instead of showing the protected information.
 
-When Python encounters this code, it does something equivalent to:
+**File or place:** `accounts/decorators.py`.
 
-```python
-original_view = inventory_report
+**Code or command from this step**
 
-step1 = role_required('admin', 'manager')
-
-step2 = step1(original_view)
-
-inventory_report = step2
-```
-
-This is the connection you were missing.
-
-**First:** Python calls `role_required('admin', 'manager')`. That function creates `decorator` and executes `return decorator`. So `step1` now refers to the `decorator` function.
-
-**Second:** Python calls `step1(original_view)`. Since `step1` is actually `decorator`, Python is now calling:
-
-```python
-decorator(original_view)
-```
-
-That's how `decorator` receives `view_func`. **Python automatically passes the original view function to the decorator because we used the `@` syntax.** It receives the actual function object, not merely its name.
-
-Inside `decorator`, Python creates `wrapper`, applies the two decorators above it, and executes `return wrapper`.
-
-**Third:** The returned, protected wrapper is assigned to the name `inventory_report`.
-
-At this point, the preparation is finished. Neither `role_required` nor `decorator` needs to execute again for each visitor.
-
-#### Now, what about `@login_required` and `@wraps`?
-
-Look at this portion:
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```python
 @login_required(login_url='/login/')
@@ -264,76 +155,36 @@ def wrapper(request, *args, **kwargs):
     return view_func(request, *args, **kwargs)
 ```
 
-These are also decorators! They work on the same principle.
+**Understanding the code, one piece at a time**
 
-- **`@wraps(view_func)`** preserves information about the original view, such as its name, on `wrapper`.
-- **`@login_required(...)`** adds another protective layer around `wrapper`. It checks whether the visitor is logged in before allowing the role check to execute.
+There are three possible situations to picture: an unsigned visitor needs to log in; a signed-in person with the wrong role is refused; a signed-in person with an allowed role reaches the page. A secure view needs to handle all three.
 
-Python applies `@wraps` first, then `@login_required`.
+**How did we know what happened?**
 
-So our final protected view has two security checks: login first, then role.
+The code snippets demonstrate the flow. No separate implementation change was made.
 
-#### Finally, who gives `wrapper` its `request`?
+**Where to go next:** Previous: [Step 101 — Understand nested decorator functions](08-role-security-decorators.md#step-101) · Next: [Step 103 — Apply Role Security](08-role-security-decorators.md#step-103)
 
-**Django does.**
-
-Imagine a Manager opens `/inventory-report/` in the browser.
-
-Django receives an HTTP request, checks `urls.py`, finds the view assigned to that URL, and calls it with the request object.
-
-Remember that `inventory_report` now refers to the protected wrapper.
-
-The execution looks like this:
-
-    **Browser requests `/inventory-report/`**
-
-    **Django calls the protected view with `request`**
-
-    **`login_required` checks login**
-
-    **`wrapper` checks the user's role**
-
-    **`view_func(request, ...)` executes the original view**
-
-    **HTTP response returns to Django**
-
-The `*args` and `**kwargs` are additional positional and keyword arguments that Django may pass from the URL. For example, a URL containing a product ID might supply `product_id=5`. The wrapper accepts those arguments and passes them unchanged to the original view.
-
-#### Now, let's correct your original explanation
-
-You said:
-
-> Wrapper gives its result back to decorator, decorator gives its result back to role_required, and role_required gives its result back to whoever called it.
-
-**That part is incorrect.**
-
-The actual sequence is:
-
-**During preparation:**
-
-`role_required()` returns the `decorator` function → `decorator()` returns the protected `wrapper` function → Python assigns that function to the view's name.
-
-**During an HTTP request:**
-
-Django calls the protected function → `wrapper` calls the original view → the original view returns its response → `wrapper` returns that response through the login-check layer to Django.
-
-The outer functions have already finished. The wrapper doesn't return its response to them.
-
-**The key distinction:** Nesting functions in the code does not mean their execution and return values follow the same nesting. Each `return` goes back to the caller of that particular function.
-
-*Previous: Step 101 (Understanding Execution Flow)  |  Next: Step 103 (Apply Role Security)*
 
 ---
 
-## Step 103: Apply Role Security
+<a id="step-103"></a>
 
-#### Next: Apply our decorator to the homepage
+### Step 103: Apply Role Security
 
-We created `role_required()` in `accounts/decorators.py`. Now we'll actually use it.
+**What was happening before this step?**
 
-Open **`core/views.py`**.
+The role-checking function was written. Now a page actually had to use it.
 
-Replace its existing code with:
+**What did we do, and what does it mean?**
+
+Placing `@role_required(...)` above a view attaches that check to requests for this page. Without applying it, writing the decorator file alone would not protect anything.
+
+**File or place:** `core/views.py`.
+
+**Code or command from this step**
+
+*1. Replace its existing code with.*
 
 ```python
 from django.shortcuts import render
@@ -345,81 +196,85 @@ def home(request):
     return render(request, 'core/home.html')
 ```
 
-#### What changed?
-
-Previously, we used:
+*2. Code or command used at this point.*
 
 ```python
 @login_required(login_url='/login/')
 ```
 
-Now we use:
+*3. Now we use.*
 
 ```python
 @role_required('admin', 'manager', 'sales')
 ```
 
-Our custom decorator already includes `login_required`, so we don't need both on this view.
+**Understanding the code, one piece at a time**
 
-This means:
+`render(...)` combines a page template with data from the view and returns the result to the browser.
 
-- Visitors who aren't logged in are redirected to `/login/`.
-- Admin, Manager and Sales users can access the homepage.
-- Logged-in users with any other role receive HTTP 403.
+**How did we know what happened?**
 
-We're allowing all three roles because the homepage is shared. Later, individual inventory operations will have more restrictive permissions.
+All three roles remained allowed initially; the next step temporarily removes one role to test denial.
 
-**For now:** Save the file and refresh the homepage while logged in as `manager1`. It should continue working normally.
+**Where to go next:** Previous: [Step 102 — Trace the decorator execution order](08-role-security-decorators.md#step-102) · Next: [Step 104 — Test Role Restrictions](08-role-security-decorators.md#step-104)
 
-*Previous: Step 102 (Complete Execution Flow)  |  Next: Step 104 (Test Role Restrictions)*
 
 ---
 
-## Step 104: Test Role Restrictions
+<a id="step-104"></a>
 
-#### Next: Verify that unauthorized users receive HTTP 403
+### Step 104: Test Role Restrictions
 
-Our homepage currently allows all three roles. To test whether the decorator actually blocks someone, we'll **temporarily restrict it**.
+**What was happening before this step?**
 
-**1.** In `core/views.py`, change:
+Security needs to be tested with a person who should be refused, not only someone who should succeed.
+
+**What did we do, and what does it mean?**
+
+We tried or planned the denied-role case. A signed-in person with the wrong role should be stopped even though their username and password are valid.
+
+**File or place:** `core/views.py`.
+
+**Code or command from this step**
+
+*1. In core/views.py, change.*
 
 ```python
 @role_required('admin', 'manager', 'sales')
 ```
 
-to:
+*2. Code or command used at this point.*
 
 ```python
 @role_required('admin', 'manager')
 ```
 
-**2.** Log in as `sales1` and open:
+**How did we know what happened?**
 
-`http://127.0.0.1:8000/`
+Our notes gives the expected 403 test procedure. This temporary restriction is not the final design.
 
-  **Expected result: 403 Forbidden**
+**Where to go next:** Previous: [Step 103 — Apply Role Security](08-role-security-decorators.md#step-103) · Next: [Step 105 — Review the role decorator](08-role-security-decorators.md#step-105)
 
-  The Sales user is authenticated but does not have permission to access this view.
-
-**3. Important — restore the original code:**
-
-```python
-@role_required('admin', 'manager', 'sales')
-```
-
-Save the file and refresh. The homepage should work again for `sales1`.
-
-This confirms that our decorator can enforce role restrictions, not merely display role-specific content.
-
-*Previous: Step 103 (Apply Role Security)  |  Next: Step 105 (Change accounts/decorators.py)*
 
 ---
 
-## Step 105: Change accounts/decorators.py
+<a id="step-105"></a>
 
-#### Reply 179 — Module 1: Role Security
+### Step 105: Review the role decorator
 
-This was the step where we created **`accounts/decorators.py`** to restrict access based on user roles.
+**What was happening before this step?**
+
+We reviewed the finished decorator code after testing and corrections.
+
+**What did we do, and what does it mean?**
+
+The important parts are still the same: identify the current user, compare their role with the allowed roles, and either run the view or return a denial. This step consolidated the earlier explanation rather than inventing a new security system.
+
+**File or place:** `accounts/decorators.py`.
+
+**Code or command from this step**
+
+*1. This was the step where we created accounts/decorators.py to restrict access based on user roles.*
 
 ```python
 from functools import wraps
@@ -442,27 +297,36 @@ def role_required(*roles):
     return decorator
 ```
 
-**Purpose:** Allow us to protect views using:
+**Understanding the code, one piece at a time**
 
-```python
-@role_required('admin', 'manager')
-def inventory_report(request):
-    ...
-```
+`@login_required` is written above the view so Django checks whether the visitor has signed in before showing that page.
 
-We subsequently applied this decorator to the homepage in reply **188** and tested role restrictions in **189**.
+**How did we know what happened?**
 
-**Current status:** The role-security implementation and its manual test are complete. Automated tests are still pending.
+This is partly a review/repetition of Step 100, not a new second decorator.
 
-*Previous: Step 104 (Test Role Restrictions)  |  Next: Step 106 (Apply Role Security)*
+**Where to go next:** Previous: [Step 104 — Test Role Restrictions](08-role-security-decorators.md#step-104) · Next: [Step 106 — Apply Role Security](08-role-security-decorators.md#step-106)
+
 
 ---
 
-## Step 106: Apply Role Security
+<a id="step-106"></a>
 
-Your current `core/views.py` uses `@login_required`, which checks only whether the user is logged in.
+### Step 106: Apply Role Security
 
-Now replace the entire file with:
+**What was happening before this step?**
+
+One working homepage version still checked only whether a person was signed in. That was too broad for the latest rules.
+
+**What did we do, and what does it mean?**
+
+We replaced the login-only check with the role-aware decorator where required. Being signed in answers who you are; role permission answers whether you may use this page.
+
+**File or place:** `core/views.py`.
+
+**Code or command from this step**
+
+*1. Now replace the entire file with.*
 
 ```python
 from django.shortcuts import render
@@ -474,54 +338,58 @@ def home(request):
     return render(request, 'core/home.html')
 ```
 
-**What changed?**
+**Understanding the code, one piece at a time**
 
-1. Removed the `login_required` import.
-2. Imported our custom `role_required` decorator.
-3. Replaced `@login_required` with `@role_required('admin', 'manager', 'sales')`.
+`render(...)` combines a page template with data from the view and returns the result to the browser.
 
-Our custom decorator already checks login status, so both decorators aren't necessary here.
+**How did we know what happened?**
 
-**Test:** Save the file and refresh your homepage while logged in. It should work as before.
+The following step supplies a concrete denial test using a sales account.
 
-*Previous: Step 105 (Change accounts/decorators.py)  |  Next: Step 107 (Test Role Security)*
+**Where to go next:** Previous: [Step 105 — Review the role decorator](08-role-security-decorators.md#step-105) · Next: [Step 107 — Test Role Security](08-role-security-decorators.md#step-107)
+
 
 ---
 
-## Step 107: Test Role Security
+<a id="step-107"></a>
 
-#### Next: Verify that role restrictions work
+### Step 107: Test Role Security
 
-**1.** In `core/views.py`, temporarily change:
+**What was happening before this step?**
+
+With the decorator attached, we checked a case where the person was signed in but did not have the right permission.
+
+**What did we do, and what does it mean?**
+
+A “forbidden” result tells us the server blocked the request. The important test is what the server returns, not whether a button happens to be hidden.
+
+**File or place:** `core/views.py`.
+
+**Code or command from this step**
+
+*1. In core/views.py, temporarily change.*
 
 ```python
 @role_required('admin', 'manager', 'sales')
 ```
 
-to:
+*2. Code or command used at this point.*
 
 ```python
 @role_required('admin', 'manager')
 ```
 
-**2.** Log in as `sales1` and visit:
+**How did we know what happened?**
 
-`http://127.0.0.1:8000/`
+Our notes describes this manual test and restoration, but does not include an automated test result.
 
-**Expected result:** `403 Forbidden`
-
-Why? The user is logged in, but `'sales'` is not among the permitted roles.
-
-**3.** Restore the original decorator:
-
-```python
-@role_required('admin', 'manager', 'sales')
-```
-
-Save and refresh the homepage. `sales1` should now have access.
-
-This confirms that our custom decorator actually blocks unauthorized roles.
-
-*Previous: Step 106 (Apply Role Security)  |  Next: Step 108 (REQUIRED_FIELDS)*
+**Where to go next:** Previous: [Step 106 — Apply Role Security](08-role-security-decorators.md#step-106) · Next: [Step 108 — Understand REQUIRED_FIELDS](09-email-validation-and-email-setup.md#step-108)
 
 ---
+
+### The point of this chapter
+
+A decorator is a guard placed in front of a Django view. It checks who is asking and which role they have before allowing the real page function to run.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

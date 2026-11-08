@@ -1,18 +1,51 @@
-# Module 1, Chapter 11: Employee welcome email and password-setup link
+# MODULE 1 — Employee accounts
 
-## Step 128: Employee Creation Form
+## Chapter 11: Employee welcome email and password-setup link (Steps 128–135)
 
-Your `admin.py` currently uses Django's default user-creation form, which includes password fields.
+### Before we begin
 
-We need to change that so **the administrator creates an employee account without choosing the employee's password**.
+An administrator could create employee accounts in Django Admin, but employees should not receive a password chosen by someone else.
 
-#### Next: Create a custom employee form
+### What we worked on
 
-Create a new file:
+We prepared the employee form, welcome email and secure first-time password link. We also considered link expiry and the ability to resend an invitation.
 
-`accounts/forms.py`
+### Picture it this way
 
-Paste:
+Creating an employee and letting the employee choose a password are separate moments. The account can exist before that first password is set. The welcome message connects those moments.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 128: Employee Creation Form](#step-128)
+- [Step 129: Connect Employee Form](#step-129)
+- [Step 130: Welcome Email Template](#step-130)
+- [Step 131: Secure Password-Setup Link](#step-131)
+- [Step 132: Send Welcome Email](#step-132)
+- [Step 133: Automatic Welcome Email](#step-133)
+- [Step 134: Link Expiration](#step-134)
+- [Step 135: Resend Setup Link](#step-135)
+
+---
+
+<a id="step-128"></a>
+
+### Step 128: Employee Creation Form
+
+**What was happening before this step?**
+
+Administrators needed to create employee accounts, but employees should choose their own passwords.
+
+**What did we do, and what does it mean?**
+
+The creation form records details such as name, email and role while leaving the new account without a usable password. A separate email link will later let that employee choose a private password.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```python
 from django import forms
@@ -35,32 +68,36 @@ class EmployeeCreationForm(forms.ModelForm):
         return user
 ```
 
-#### What does this code do?
+**Understanding the code, one piece at a time**
 
-- `ModelForm` — creates a form based on our `CustomUser` model.
-- `fields` — specifies which details the administrator enters.
-- `set_unusable_password()` — prevents the employee from logging in with a password until they set one through a secure setup link.
-- `save()` — saves the employee account.
+In an employee creation form, `form.save(commit=False)` prepares a user object without saving it right away. Then `set_unusable_password()` makes sure it has no working password yet. Only after that do we save the new account. The employee later sets a password using a secure link.
 
-  **NEW vs CLASS — 2 concepts**
+**How did we know what happened?**
 
-  `ModelForm` builds on the Django forms we've already used.
+A view is needed to show the form and save submitted data; that wiring appears later.
 
-  `set_unusable_password()` is a built-in Django user-model method. It does not create a temporary password.
+**Where to go next:** Previous: [Step 127 — Email Testing](10-forgot-and-reset-password.md#step-127) · Next: [Step 129 — Connect Employee Form](11-employee-welcome-email-and-password-setup-link.md#step-129)
 
-**For now:** Save `forms.py`. Don't change `admin.py` yet.
-
-Next, we'll connect this form to Django Admin so the employee-creation page no longer asks the administrator to enter a password.
-
-*Previous: Step 127 (Email Testing)  |  Next: Step 129 (Connect Employee Form)*
 
 ---
 
-## Step 129: Connect Employee Form
+<a id="step-129"></a>
 
-#### Next: Connect our employee form to Django Admin
+### Step 129: Connect Employee Form
 
-Open **`accounts/admin.py`** and replace its entire contents with:
+**What was happening before this step?**
+
+The employee form was written, but it had to be connected to the account-creation screen used at this stage.
+
+**What did we do, and what does it mean?**
+
+Django Admin can use a custom add form when an administrator creates a user. This is an early onboarding route; later we build our own employee-creation page inside the application.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Open accounts/admin.py and replace its entire contents with.*
 
 ```python
 from django.contrib import admin
@@ -93,41 +130,32 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 ```
 
-#### What changed?
+**How did we know what happened?**
 
-- `add_form` tells Django Admin to use our custom employee-creation form.
-- `add_fieldsets` specifies the fields displayed when creating an employee.
-- `fieldsets` preserves the existing configuration for editing users.
+The complete browser interface is built in Steps 139–143; this is an early form integration step.
 
-  **NEW vs CLASS — `add_form`**
+**Where to go next:** Previous: [Step 128 — Employee Creation Form](11-employee-welcome-email-and-password-setup-link.md#step-128) · Next: [Step 130 — Welcome Email Template](11-employee-welcome-email-and-password-setup-link.md#step-130)
 
-  `add_form` is a built-in configuration attribute of Django's `UserAdmin`. We assign our `EmployeeCreationForm` to it.
-
-#### Test
-
-1. Save `admin.py`.
-2. Open `http://127.0.0.1:8000/admin/`.
-3. Navigate to **Users → Add user**.
-
-**Expected:** You should see username, first name, last name, email and role — without password fields.
-
-Don't create an employee yet. We still need to implement the welcome email and password-setup link.
-
-*Previous: Step 128 (Employee Creation Form)  |  Next: Step 130 (Welcome Email Template)*
 
 ---
 
-## Step 130: Welcome Email Template
+<a id="step-130"></a>
 
-#### Next: Create the employee welcome email
+### Step 130: Welcome Email Template
 
-When an administrator creates an employee account, the employee should receive an email containing a secure link to set their password.
+**What was happening before this step?**
 
-Create:
+A newly created employee needs to know why they received an email and what to do next.
 
-`templates/accounts/welcome_email.txt`
+**What did we do, and what does it mean?**
 
-Paste:
+The welcome-email template is the message body. It introduces the account and includes a link for setting the password rather than sending a password in plain text.
+
+**File or place:** `templates/accounts/welcome_email.txt`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```django
 Hello {{ first_name }},
@@ -149,39 +177,32 @@ If you were not expecting this email, please contact your administrator.
 Inventory System
 ```
 
-#### How will this work?
+**How did we know what happened?**
 
-- `{{ first_name }}` — employee's first name.
-- `{{ username }}` — employee's login username.
-- `{{ setup_link }}` — secure password-setup link generated by Django.
+The secure tokenized link is assembled in Step 131.
 
-  **NEW vs CLASS — Custom template variables**
+**Where to go next:** Previous: [Step 129 — Connect Employee Form](11-employee-welcome-email-and-password-setup-link.md#step-129) · Next: [Step 131 — Secure Password-Setup Link](11-employee-welcome-email-and-password-setup-link.md#step-131)
 
-  Previously, Django supplied variables such as `{{ token }}` automatically in password-reset emails.
-
-  Here, `first_name`, `username` and `setup_link` are variables **we will supply ourselves** when sending the welcome email.
-
-**For now:** Save the file. It will not send emails automatically yet.
-
-Next, we'll generate the secure setup link using Django's existing password-reset functionality, without creating a separate password system.
-
-*Previous: Step 129 (Connect Employee Form)  |  Next: Step 131 (Secure Password-Setup Link)*
 
 ---
 
-## Step 131: Secure Password-Setup Link
+<a id="step-131"></a>
 
-238 · Module 1 — Accounts · Secure Password-Setup Link
+### Step 131: Secure Password-Setup Link
 
-#### Next: Generate the employee's setup link
+**What was happening before this step?**
 
-We already created `welcome_email.txt`. Now we need to generate the secure link that will appear in that email.
+The welcome email needed a link that belongs only to that employee and does not stay valid forever.
 
-Create a new file:
+**What did we do, and what does it mean?**
 
-**`accounts/utils.py`**
+A helper function builds a link using the employee's record and a Django-generated token. Django checks the token later, so simply guessing an employee ID is not enough to set their password.
 
-Paste:
+**File or place:** `accounts/utils.py`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```python
 from django.contrib.auth.tokens import default_token_generator
@@ -202,38 +223,36 @@ def generate_setup_link(request, user):
     return request.build_absolute_uri(path)
 ```
 
-#### What does this function do?
+**Understanding the code, one piece at a time**
 
-1. **`uid`** — encodes the employee's database ID for the URL.
-2. **`token`** — generates a secure password-setup token using Django's built-in functionality.
-3. **`reverse()`** — constructs the URL using the `password_reset_confirm` route we already created.
-4. **`build_absolute_uri()`** — produces the complete URL, including the website address.
+A helper starts with the employee's account ID and asks Django to generate a temporary token. It then builds a link to the password-setting view. A full address is needed because the recipient will click it from an email, not from inside the website.
 
-  **NEW vs CLASS — 3 concepts**
+**How did we know what happened?**
 
-  - `default_token_generator` — Django's built-in password-reset token generator.
-  - `urlsafe_base64_encode()` — encodes the user ID for inclusion in a URL.
-  - `reverse()` — the Python equivalent of the `{% url %}` template tag we used earlier.
+The link mechanism is integrated into sending in Step 132 and expiration is discussed later.
 
-We're **reusing the existing password-reset confirmation page**, rather than building a separate password-setting system.
+**Where to go next:** Previous: [Step 130 — Welcome Email Template](11-employee-welcome-email-and-password-setup-link.md#step-130) · Next: [Step 132 — Send Welcome Email](11-employee-welcome-email-and-password-setup-link.md#step-132)
 
-**For now:** Save `utils.py`. The function generates a link but doesn't send an email yet.
-
-*Previous: Step 130 (Welcome Email Template)  |  Next: Step 132 (Send Welcome Email)*
 
 ---
 
-## Step 132: Send Welcome Email
+<a id="step-132"></a>
 
-#### Next: Create the welcome email function
+### Step 132: Send Welcome Email
 
-We already have a function that generates the employee's secure password-setup link.
+**What was happening before this step?**
 
-Now we'll create another function that **uses that link to send a welcome email**.
+We could build the link. We still needed one place in the code that prepares and sends the complete welcome message.
 
-Open **`accounts/utils.py`**.
+**What did we do, and what does it mean?**
 
-Add these imports at the top:
+The helper fills the email template with the employee's details and passes it to Django's mail function. Whether the result appears in the terminal or goes to Gmail depends on the email setting chosen elsewhere.
+
+**File or place:** `accounts/utils.py`.
+
+**Code or command from this step**
+
+*1. Add these imports at the top.*
 
 ```python
 from django.conf import settings
@@ -241,7 +260,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 ```
 
-Then add this function **below `generate_setup_link()`**:
+*2. Then add this function below generatesetuplink().*
 
 ```python
 def send_welcome_email(request, user):
@@ -264,45 +283,42 @@ def send_welcome_email(request, user):
     )
 ```
 
-#### What happens here?
+**Understanding the code, one piece at a time**
 
-1. `generate_setup_link()` creates the employee's secure link.
-2. `render_to_string()` fills the welcome email template with the employee's details.
-3. `send_mail()` sends the resulting message to Django's configured email backend.
+The email helper first prepares a link, then fills the message template with employee details, then asks Django to send it. The helper can be reused both when an account is first created and when a new invitation is requested.
 
-  **NEW vs CLASS — `render_to_string()`**
+**How did we know what happened?**
 
-  Previously, Django rendered HTML templates using `render()`.
+Automatic invocation from the employee-creation workflow is connected in Step 133.
 
-  `render_to_string()` works similarly, but returns the completed template as a Python string instead of an HTTP response.
+**Where to go next:** Previous: [Step 131 — Secure Password-Setup Link](11-employee-welcome-email-and-password-setup-link.md#step-131) · Next: [Step 133 — Automatic Welcome Email](11-employee-welcome-email-and-password-setup-link.md#step-133)
 
-  This makes it useful for constructing email messages.
-
-**For now:** Save `utils.py`.
-
-The email will still appear in the terminal because we're using the console backend. Also, this function won't run automatically yet.
-
-Next, we'll connect it to Django Admin so creating an employee triggers the welcome email.
-
-*Previous: Step 131 (Secure Password-Setup Link)  |  Next: Step 133 (Automatic Welcome Email)*
 
 ---
 
-## Step 133: Automatic Welcome Email
+<a id="step-133"></a>
 
-#### Next: Send the welcome email when an admin creates an employee
+### Step 133: Automatic Welcome Email
 
-We already created `send_welcome_email()`. Now we'll make Django call it automatically.
+**What was happening before this step?**
 
-Open **`accounts/admin.py`**.
+An administrator should not have to send the welcome email manually after creating each employee.
 
-**1. Add this import** at the top:
+**What did we do, and what does it mean?**
+
+The account-creation workflow calls the email helper after saving the account. Saving and sending are two different actions; a later step adds clearer handling if sending fails.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. Add this import at the top.*
 
 ```python
 from .utils import send_welcome_email
 ```
 
-**2. Inside `CustomUserAdmin`,** below `add_fieldsets`, add:
+*2. Inside CustomUserAdmin, below addfieldsets, add.*
 
 ```python
     def save_model(self, request, obj, form, change):
@@ -312,81 +328,67 @@ from .utils import send_welcome_email
             send_welcome_email(request, obj)
 ```
 
-#### What happens?
+**Understanding the code, one piece at a time**
 
-- `save_model()` — Django Admin calls this when saving a user.
-- `super().save_model(...)` — saves the user using Django's existing functionality.
-- `if not change:` — checks whether this is a **new account**, rather than an existing account being edited.
-- `send_welcome_email()` — generates the setup link and sends the welcome message.
+Notice the order: the account is saved first, then an email is attempted. These are two tasks. If Gmail has a problem, it does not automatically mean the database save failed.
 
-  **NEW vs CLASS — `save_model()`**
+**How did we know what happened?**
 
-  This is a built-in Django Admin method that we're overriding.
+End-to-end testing requires the form, URL, and mail backend; those are completed at later steps.
 
-  It's similar to how we overrode `save()` in `EmployeeCreationForm`, except this method belongs to Django Admin and receives the HTTP request.
+**Where to go next:** Previous: [Step 132 — Send Welcome Email](11-employee-welcome-email-and-password-setup-link.md#step-132) · Next: [Step 134 — Link Expiration](11-employee-welcome-email-and-password-setup-link.md#step-134)
 
-#### Test
-
-1. Save `admin.py`.
-2. Open Django Admin → Users → Add user.
-3. Create a new test employee using a dummy email address.
-4. Check your Django server terminal.
-
-**Expected:** A welcome email appears containing the employee's username and password-setup link.
-
-Do not share the setup token here.
-
-*Previous: Step 132 (Send Welcome Email)  |  Next: Step 134 (Link Expiration)*
 
 ---
 
-## Step 134: Link Expiration
+<a id="step-134"></a>
 
-**Employee onboarding tests passed.** We've verified that employees can set their own passwords and that setup links cannot be reused.
+### Step 134: Link Expiration
 
-#### Next: Set the expiry time for password links
+**What was happening before this step?**
 
-Currently, Django's default password-reset token lifetime is **3 days**.
+A password-setup link should not work forever if somebody finds an old email.
 
-For our inventory system, we'll use **24 hours** for both welcome-email setup links and forgot-password links.
+**What did we do, and what does it mean?**
 
-Open **`config/settings.py`** and add:
+Django lets us set how long reset tokens remain useful. We reused that mechanism for first-time password setup so old links stop working after the configured period.
+
+**File or place:** `config/settings.py (token timeout)`.
+
+**Code or command from this step**
+
+*1. Open config/settings.py and add.*
 
 ```python
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
 ```
 
-#### What does this mean?
+**How did we know what happened?**
 
-- `60 * 60 * 24` = 86,400 seconds = 24 hours.
-- After 24 hours, Django rejects the link.
-- Employees must request a new link if theirs expires.
+Check the configured timeout and test old tokens as part of security verification; no elapsed-time test is recorded here.
 
-  **NEW vs CLASS — `PASSWORD_RESET_TIMEOUT`**
+**Where to go next:** Previous: [Step 133 — Automatic Welcome Email](11-employee-welcome-email-and-password-setup-link.md#step-133) · Next: [Step 135 — Resend Setup Link](11-employee-welcome-email-and-password-setup-link.md#step-135)
 
-  This is a built-in Django setting. It controls how long password-reset tokens remain valid.
-
-  Because our welcome emails reuse Django's password-reset token system, the same setting applies to both workflows.
-
-**Save the file.** No database migration is needed.
-
-Next, we'll implement an administrator-controlled way to resend an expired employee setup link.
-
-*Previous: Step 133 (Automatic Welcome Email)  |  Next: Step 135 (Resend Setup Link)*
 
 ---
 
-## Step 135: Resend Setup Link
+<a id="step-135"></a>
 
-#### Next: Allow administrators to resend expired setup links
+### Step 135: Resend Setup Link
 
-Suppose an employee hasn't set their password within 24 hours. Their original link expires.
+**What was happening before this step?**
 
-Instead of deleting and recreating their account, the administrator should be able to **send another setup email**.
+A person might lose their first email or let its link expire, but we should not create another account for them.
 
-Open **`accounts/admin.py`**.
+**What did we do, and what does it mean?**
 
-Inside the existing `CustomUserAdmin` class, add the following code below `save_model()`:
+The resend action prepares a fresh setup link for an eligible existing employee. It reuses the same user record rather than duplicating people in the database.
+
+**File or place:** `accounts/utils.py`.
+
+**Code or command from this step**
+
+*1. Inside the existing CustomUserAdmin class, add the following code below savemodel().*
 
 ```python
     actions = ['resend_setup_email']
@@ -406,24 +408,17 @@ Inside the existing `CustomUserAdmin` class, add the following code below `save_
         )
 ```
 
-#### What does this do?
+**How did we know what happened?**
 
-- `actions` — adds a selectable action to Django Admin.
-- `queryset` — contains the employee accounts selected by the administrator.
-- `has_usable_password()` — checks whether an employee has already created a password.
-- `send_welcome_email()` — generates and sends another setup link.
-- `message_user()` — displays the number of emails generated.
+The user interface for resending is added in Steps 160–162.
 
-The action skips inactive employees and employees who already have a usable password. Those who have forgotten an existing password should use **Forgot Password** instead.
-
-  **NEW vs CLASS — Django Admin actions**
-
-  `@admin.action` is Django's built-in decorator for adding operations to the Admin interface.
-
-  Unlike `save_model()`, which runs when an account is saved, this action runs only when an administrator explicitly selects it.
-
-**Save the file.** We'll test this action next. For now, emails will still appear in the terminal rather than an inbox.
-
-*Previous: Step 134 (Link Expiration)  |  Next: Step 136 (Employee Management)*
+**Where to go next:** Previous: [Step 134 — Link Expiration](11-employee-welcome-email-and-password-setup-link.md#step-134) · Next: [Step 136 — Employee Management](12-employee-list.md#step-136)
 
 ---
+
+### The point of this chapter
+
+Creating an employee and letting the employee choose a password are separate moments. The account can exist before that first password is set. The welcome message connects those moments.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

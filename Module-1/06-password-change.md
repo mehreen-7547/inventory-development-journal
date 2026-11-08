@@ -1,14 +1,48 @@
-# Module 1, Chapter 6: Password change
+# MODULE 1 — Employee accounts
 
-## Step 86: Change Password
+## Chapter 6: Password change (Steps 86–90)
 
-#### Next: Create the change-password function
+### Before we begin
 
-We want logged-in users to be able to change their own passwords.
+Employees could enter their accounts, but could not yet change a password they already knew.
 
-Open **`accounts/views.py`**.
+### What we worked on
 
-**Add these imports:**
+We created a password-change view, linked it to a page and added the menu link that lets employees reach it.
+
+### Picture it this way
+
+The page first asks for the old password and the new one. Django checks the form before saving the change, then keeps the current session working as intended. This is different from forgotten-password recovery, which comes later.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 86: Change Password](#step-86)
+- [Step 87: Walk through password change](#step-87)
+- [Step 88: Password Change URL](#step-88)
+- [Step 89: Password Change Form](#step-89)
+- [Step 90: Change Password Link](#step-90)
+
+---
+
+<a id="step-86"></a>
+
+### Step 86: Change Password
+
+**What was happening before this step?**
+
+Employees could sign in, but they had no normal way to change a password they already knew.
+
+**What did we do, and what does it mean?**
+
+The password-change view uses a Django form that asks for the old password and a new one. It checks the old password first, then saves the new one only if the form is valid.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. Add these imports.*
 
 ```python
 from django.contrib.auth.forms import PasswordChangeForm
@@ -16,7 +50,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 ```
 
-**Add this function at the bottom:**
+*2. Add this function at the bottom.*
 
 ```python
 @login_required(login_url='/login/')
@@ -34,192 +68,71 @@ def changepassword(request):
     return render(request, 'accounts/change_password.html', {'form': form})
 ```
 
-**In simple terms:**
+**Understanding the code, one piece at a time**
 
-- `PasswordChangeForm` — Django's ready-made form for changing passwords.
-- `form.is_valid()` — checks whether the old password is correct and the new password meets the rules.
-- `form.save()` — saves the new password securely.
-- `update_session_auth_hash()` — keeps the user logged in after changing their password.
+`PasswordChangeForm` supplies the fields and checks for changing an existing password. `form.is_valid()` means Django accepted the entered values. Saving the form changes the password; `update_session_auth_hash(...)` helps keep the session consistent after the change.
 
-  NEW vs CLASS
-  **Where:** `accounts/views.py`
+**How did we know what happened?**
 
-  **Class reference:** `backend/secondproject/library/views.py` uses function-based authentication views.
+The page and URL are built in later steps, so this view was not yet testable end to end.
 
-  **Difference:** Our password-change function uses Django's built-in `PasswordChangeForm` and session-update helper, which weren't present in the training views examined.
+**Where to go next:** Previous: [Step 85 — Login Page Check](05-homepage-protection-and-navigation.md#step-85) · Next: [Step 87 — Walk through password change](06-password-change.md#step-87)
 
-  **Why:** To handle password changes safely without writing our own password-validation logic.
-
-  **Alternative:** Django's built-in `PasswordChangeView`, which uses a class-based view.
-
-**Expected result:** Save the file without errors. We'll create its URL and HTML page next.
-
-*Previous: Step 85 (Login Page Check)  |  Next: Step 87 (Code Walkthrough)*
 
 ---
 
-## Step 87: Code Walkthrough
+<a id="step-87"></a>
 
-Imagine **manager1** wants to change their password.
+### Step 87: Walk through password change
 
-We'll follow what happens from the moment they open the password-change page.
+**What was happening before this step?**
 
-#### Scene 1 — Manager1 opens the page
+That view contained several steps in one function, so we slowed down and followed one browser request at a time.
 
-```python
-@login_required(login_url='/login/')
-def changepassword(request):
-```
+**What did we do, and what does it mean?**
 
-Django first checks: **Is manager1 logged in?**
+Opening the page normally is a GET request, so the view shows a blank form. Submitting it is POST, so the view checks the entered values. If the change succeeds, Django updates the login session so the user can stay signed in.
 
-- Yes → Continue.
-- No → Send them to `/login/`.
+**File or place:** `accounts/views.py`.
 
-Now Django enters the `changepassword()` function.
+**Code or command from this step**
 
-```python
-if request.method == 'POST':
-```
-
-Django asks: **Has manager1 submitted the form?**
-
-Not yet! They have only opened the page, so the request is GET.
-
-Django skips the `if` block and goes to `else`.
-
-```python
-else:
-    form = PasswordChangeForm(request.user)
-```
-
-Django prepares an empty password-change form for manager1.
-
-  What manager1 will see
-
-    Old password
-
-    New password
-
-    Confirm new password
-
-  Change Password
-  Illustration only — we'll build the actual HTML form next.
-
-Then:
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```python
 return render(request, 'accounts/change_password.html', {'form': form})
 ```
 
-Django displays the HTML page and gives it the form we just prepared.
+**Understanding the code, one piece at a time**
 
-#### Scene 2 — Manager1 submits the form
+`render(...)` combines a page template with data from the view and returns the result to the browser.
 
-Manager1 enters their old password, chooses a new password, and clicks **Change Password**.
+**How did we know what happened?**
 
-The browser sends those details to Django using POST.
+This is a conceptual walkthrough. It does not represent eleven separate edits despite containing code examples.
 
-The same function runs again, but this time:
+**Where to go next:** Previous: [Step 86 — Change Password](06-password-change.md#step-86) · Next: [Step 88 — Password Change URL](06-password-change.md#step-88)
 
-```python
-if request.method == 'POST':
-```
-
-The answer is **Yes**.
-
-```python
-form = PasswordChangeForm(request.user, request.POST)
-```
-
-Django creates a form using:
-
-- `request.user` → manager1, whose password is being changed.
-- `request.POST` → the password details submitted by manager1.
-
-Now:
-
-```python
-if form.is_valid():
-```
-
-Django checks whether the old password is correct, the new passwords match, and the new password satisfies the password rules.
-
-#### Scene 3 — The password is valid
-
-```python
-user = form.save()
-```
-
-Django securely saves manager1's new password.
-
-```python
-update_session_auth_hash(request, user)
-```
-
-Normally, changing a password can invalidate the current login session.
-
-This line updates the session so **manager1 stays logged in**.
-
-```python
-return redirect('home')
-```
-
-Finally, Django sends manager1 back to the homepage.
-
-#### But what if the password is wrong?
-
-If `form.is_valid()` returns `False`, Django skips the password-saving code.
-
-It reaches:
-
-```python
-return render(request, 'accounts/change_password.html', {'form': form})
-```
-
-The form is displayed again, this time containing validation errors so manager1 can correct them.
 
 ---
 
-#### The entire story in one diagram
+<a id="step-88"></a>
 
-    **Manager1 opens Change Password**
+### Step 88: Password Change URL
 
-    Is manager1 logged in?
+**What was happening before this step?**
 
-        No
+The password-change code existed, but it still needed a public address.
 
-        Login page
+**What did we do, and what does it mean?**
 
-        Yes
+A URL rule points to the password-change view. Naming the URL also lets templates create links without hard-coding a full address.
 
-        Show empty form (GET)
+**File or place:** `accounts/urls.py`.
 
-    **Manager1 submits form (POST)**
+**Code or command from this step**
 
-    Are the password details valid?
-
-        No
-
-          Show form with errors
-
-        Yes
-
-          Save password → Keep logged in → Home
-
-**The key idea:** This single function handles two situations: **GET displays the form; POST processes the submitted form.**
-
-*Previous: Step 86 (Change Password)  |  Next: Step 88 (Password Change URL)*
-
----
-
-## Step 88: Password Change URL
-
-#### Next: Connect the password-change function to a URL
-
-Open **`accounts/urls.py`**.
-
-Add the third path:
+*1. Add the third path.*
 
 ```python
 urlpatterns = [
@@ -229,29 +142,36 @@ urlpatterns = [
 ]
 ```
 
-**What this means:**
+**Understanding the code, one piece at a time**
 
-When someone visits `/change-password/`, Django calls the `changepassword()` function in `accounts/views.py`.
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-That function will eventually display our password-change form.
+**How did we know what happened?**
 
-**Expected result:** Save the file. There should be no errors.
+The form template is the next missing part.
 
-Don't open the URL yet. We haven't created its HTML template.
+**Where to go next:** Previous: [Step 87 — Walk through password change](06-password-change.md#step-87) · Next: [Step 89 — Password Change Form](06-password-change.md#step-89)
 
-*Previous: Step 87 (Code Walkthrough)  |  Next: Step 89 (Password Change Form)*
 
 ---
 
-## Step 89: Password Change Form
+<a id="step-89"></a>
 
-#### Next: Create the password-change page
+### Step 89: Password Change Form
 
-Inside the same folder as `login.html`, create:
+**What was happening before this step?**
 
-**`templates/accounts/change_password.html`**
+The user needed to see the old-password and new-password fields in the browser.
 
-Add this code:
+**What did we do, and what does it mean?**
+
+The HTML template displays the Django form, any field errors and a submit button. The view performs the checks; the template's job is to show the form clearly.
+
+**File or place:** `templates/accounts/change_password.html`.
+
+**Code or command from this step**
+
+*1. Add this code.*
 
 ```html
 <!DOCTYPE html>
@@ -272,50 +192,52 @@ Add this code:
 </html>
 ```
 
-#### Understand the important lines
+**Understanding the code, one piece at a time**
 
-- `method="POST"` — submits the entered passwords to Django.
-- `{% csrf_token %}` — adds Django's form security token.
-- `{{ form.as_p }}` — displays the password fields provided by `PasswordChangeForm`, each in a paragraph.
-- `<button type="submit">` — submits the form when clicked.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-#### Test it
+**How did we know what happened?**
 
-1. Log in as `manager1`.
-2. Open `http://127.0.0.1:8000/change-password/`.
-3. Enter the current password and a valid new password twice.
-4. Click **Change Password**.
+Verify with an incorrect old password and with valid new values after the homepage link is added.
 
-**Expected result:** You return to the homepage and remain logged in. The new password should work the next time you log in.
+**Where to go next:** Previous: [Step 88 — Password Change URL](06-password-change.md#step-88) · Next: [Step 90 — Change Password Link](06-password-change.md#step-90)
 
-*Previous: Step 88 (Password Change URL)  |  Next: Step 90 (Change Password Link)*
 
 ---
 
-## Step 90: Change Password Link
+<a id="step-90"></a>
 
-#### Next: Add a Change Password link to the homepage
+### Step 90: Change Password Link
 
-Currently, users must manually type `/change-password/` to access the page.
+**What was happening before this step?**
 
-Open your homepage template, **`core/home.html`**.
+Even a working page is difficult to use if nobody can find it.
 
-Add this line above the Logout button:
+**What did we do, and what does it mean?**
+
+We added a change-password link on the homepage. This is a navigation change, not another password-checking function.
+
+**File or place:** `core/templates/core/home.html`.
+
+**Code or command from this step**
+
+*1. Add this line above the Logout button.*
 
 ```html
 <a href="{% url 'change_password' %}">Change Password</a>
 ```
 
-**How it works:**
+**How did we know what happened?**
 
-- `<a>` creates a clickable link.
-- `{% url 'change_password' %}` finds the URL with that name in `accounts/urls.py`.
-- Clicking it opens the password-change page.
+Once added, a logged-in user should be able to move from homepage to password-change form.
 
-**Expected result:** Your homepage displays a **Change Password** link. Clicking it opens the form.
-
-We'll style this link later along with the rest of the interface.
-
-*Previous: Step 89 (Password Change Form)  |  Next: Step 91 (Role-Based Homepage)*
+**Where to go next:** Previous: [Step 89 — Password Change Form](06-password-change.md#step-89) · Next: [Step 91 — Role-Based Homepage](07-role-based-homepage-and-feedback-messages.md#step-91)
 
 ---
+
+### The point of this chapter
+
+The page first asks for the old password and the new one. Django checks the form before saving the change, then keeps the current session working as intended. This is different from forgotten-password recovery, which comes later.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

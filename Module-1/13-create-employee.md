@@ -1,21 +1,56 @@
-# Module 1, Chapter 13: Create employee
+# MODULE 1 — Employee accounts
 
-## Step 139: Create Employee View
+## Chapter 13: Create employee (Steps 139–144)
 
-**Employee list tests passed.** Now we'll allow administrators to create employees directly from our inventory application.
+### Before we begin
 
-#### Next: Create the employee registration view
+We could see employees in a list, but adding a new person still relied on Django's built-in administration page.
 
-Open **`accounts/views.py`**.
+### What we worked on
 
-Add these imports at the top:
+We built our own Create Employee page with a form, a view that saves the account, role restrictions and a way to open the form from the list.
+
+### Picture it this way
+
+When an admin first opens the page, Django shows empty fields. After the admin submits them, Django validates the values, saves the employee and starts the welcome-email process. This is the same journey described in your example chapter.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 139: Create Employee View](#step-139)
+- [Step 140: Restrict Employee Roles](#step-140)
+- [Step 141: Create Employee Template](#step-141)
+- [Step 142: Create Employee URL](#step-142)
+- [Step 143: Add Employee Link](#step-143)
+- [Step 144: Refine the Create Employee link](#step-144)
+
+---
+
+<a id="step-139"></a>
+
+### Step 139: Create Employee View
+
+**What was happening before this step?**
+
+We now had a page listing employees. An administrator needed a way to add another person from inside the application.
+
+**What did we do, and what does it mean?**
+
+The create view shows an empty form when opened and checks filled-in values when submitted. If they are valid, it saves the employee, tries to send the welcome message and returns to the list. The URL and HTML page are connected in following steps.
+
+**File or place:** `accounts/views.py`.
+
+**Code or command from this step**
+
+*1. Add these imports at the top.*
 
 ```python
 from .forms import EmployeeCreationForm
 from .utils import send_welcome_email
 ```
 
-Then add this function at the bottom:
+*2. Then add this function at the bottom.*
 
 ```python
 @role_required('admin')
@@ -46,37 +81,36 @@ def create_employee(request):
     )
 ```
 
-#### What happens here?
+**Understanding the code, one piece at a time**
 
-    **Admin-only access**
+There are two paths through the same function. On GET, the administrator has only opened the page, so Django creates an empty form. On POST, the administrator has clicked Save, so Django checks the filled form. A valid form saves the employee and attempts the welcome message. An invalid form shows the same fields with errors. The URL and HTML screen are connected in the following steps.
 
-    **GET:** Display the employee registration form
+**How did we know what happened?**
 
-    **POST:** Validate and save the employee
+The HTML page and named URL are added in Steps 141–142, so the complete feature is not yet testable here.
 
-    **Send:** Generate the welcome email and setup link
+**Where to go next:** Previous: [Step 138 — Employee List URL](12-employee-list.md#step-138) · Next: [Step 140 — Restrict Employee Roles](13-create-employee.md#step-140)
 
-    **Redirect:** Return to Manage Employees
-
-We're reusing `EmployeeCreationForm` and `send_welcome_email()` from our earlier Django Admin implementation.
-
-**For now:** Save `views.py`. Before connecting this page, we'll restrict the form's role choices to Manager and Sales Staff so this employee-registration workflow cannot create administrator accounts.
-
-*Previous: Step 138 (Employee List URL)  |  Next: Step 140 (Restrict Employee Roles)*
 
 ---
 
-## Step 140: Restrict Employee Roles
+<a id="step-140"></a>
 
-#### Next: Restrict roles in the employee creation form
+### Step 140: Restrict Employee Roles
 
-Our `CustomUser` model supports three roles: Admin, Manager and Sales Staff.
+**What was happening before this step?**
 
-However, the **Create Employee** page should only allow Manager and Sales Staff. Administrators shouldn't be able to create additional administrator accounts through this form.
+The creation form showed Admin as a possible role, but this staff form was only meant for Manager and Sales Staff.
 
-Open **`accounts/forms.py`**.
+**What did we do, and what does it mean?**
 
-Inside `EmployeeCreationForm`, add this method **between `Meta` and `save()`**:
+We changed the form so its role choices contain only those two jobs. Django checks the selected value when the form is submitted, so hiding Admin in the dropdown is not the only protection.
+
+**File or place:** `accounts/forms.py`.
+
+**Code or command from this step**
+
+*1. Inside EmployeeCreationForm, add this method between Meta and save().*
 
 ```python
     def __init__(self, *args, **kwargs):
@@ -88,39 +122,36 @@ Inside `EmployeeCreationForm`, add this method **between `Meta` and `save()`**:
         ]
 ```
 
-#### What does this do?
+**Understanding the code, one piece at a time**
 
-- `__init__()` — runs when Django creates an instance of our form.
-- `super().__init__()` — performs the normal Django form initialization.
-- `self.fields['role'].choices` — limits the available roles to Manager and Sales Staff.
+`__init__` runs whenever the form object is made. `super().__init__()` first gives us the normal Django fields. Then `self.fields['role'].choices` replaces the role options with Manager and Sales Staff. This is also checked when someone submits the form, not just when the dropdown is displayed.
 
-This also enforces the restriction during form validation, not just in the dropdown.
+**How did we know what happened?**
 
-  **NEW vs CLASS — `__init__()`**
+Once the page exists, confirm the dropdown excludes Admin and a forged Admin choice is rejected.
 
-  `__init__()` is Python's object initialization method.
+**Where to go next:** Previous: [Step 139 — Create Employee View](13-create-employee.md#step-139) · Next: [Step 141 — Create Employee Template](13-create-employee.md#step-141)
 
-  We're overriding it to customize the form after Django creates its fields, similar to how we previously overrode `save()`.
-
-**Save the file.** The employee creation view can now use this restricted form.
-
-Next, we'll create `create_employee.html`.
-
-*Previous: Step 139 (Create Employee View)  |  Next: Step 141 (Create Employee Template)*
 
 ---
 
-## Step 141: Create Employee Template
+<a id="step-141"></a>
 
-#### Next: Create the employee registration page
+### Step 141: Create Employee Template
 
-We've created the view and restricted the available roles. Now we'll build the HTML form.
+**What was happening before this step?**
 
-Create:
+The create view was ready, but administrators still needed the page where they could type an employee's information.
 
-**`templates/accounts/create_employee.html`**
+**What did we do, and what does it mean?**
 
-Paste:
+The template displays the creation form and a save button. If the input is missing or invalid, it can show the same form with errors so the administrator can correct it.
+
+**File or place:** `templates/accounts/create_employee.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -155,31 +186,36 @@ Paste:
 </html>
 ```
 
-#### What will the page contain?
+**Understanding the code, one piece at a time**
 
-- Username
-- First name and last name
-- Email address
-- Role: Inventory Manager or Sales Staff
-- Create Employee button
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-**No password field is required.** Employees will set their own passwords using the welcome email.
+**How did we know what happened?**
 
-We're reusing `{{ form.as_p }}` and `{% csrf_token %}` from our earlier forms.
+The route is added in Step 142 before the page can be opened normally.
 
-**For now:** Save the file. Next, we'll connect its URL and test employee creation through our application's interface.
+**Where to go next:** Previous: [Step 140 — Restrict Employee Roles](13-create-employee.md#step-140) · Next: [Step 142 — Create Employee URL](13-create-employee.md#step-142)
 
-*Previous: Step 140 (Restrict Employee Roles)  |  Next: Step 142 (Create Employee URL)*
 
 ---
 
-## Step 142: Create Employee URL
+<a id="step-142"></a>
 
-#### Next: Connect the Create Employee page
+### Step 142: Create Employee URL
 
-Open **`accounts/urls.py`**.
+**What was happening before this step?**
 
-Add this inside the existing `urlpatterns` list:
+The creation page had a view and template but no address in the accounts URL file.
+
+**What did we do, and what does it mean?**
+
+The new route links the browser's address to the create view. Together, view, template and URL form a usable page.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Add this inside the existing urlpatterns list.*
 
 ```python
 path(
@@ -189,43 +225,42 @@ path(
 ),
 ```
 
-#### Test
+**Understanding the code, one piece at a time**
 
-1. Run your Django server.
-2. Log in as Admin.
-3. Open `http://127.0.0.1:8000/employees/create/`
-4. Create a test employee using a new username and unique email address. Select **Sales Staff**.
-5. Confirm that you're redirected to the employee list and the new employee appears there.
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-Also check your VS Code terminal. Since we're currently using Django's console email backend, the **welcome email and password setup link** should appear there rather than in an actual inbox.
+**How did we know what happened?**
 
-**Security check:** Log in as Sales Staff and try opening `/employees/create/`. You should receive HTTP 403.
+The next step makes the entry point visible from the employee list.
 
-  **Expected result**
+**Where to go next:** Previous: [Step 141 — Create Employee Template](13-create-employee.md#step-141) · Next: [Step 143 — Add Employee Link](13-create-employee.md#step-143)
 
-  The Admin can create an employee without setting their password. The employee receives a setup link (currently displayed in the terminal), while Sales Staff cannot access employee creation.
-
-*Previous: Step 141 (Create Employee Template)  |  Next: Step 143 (Add Employee Link)*
 
 ---
 
-## Step 143: Add Employee Link
+<a id="step-143"></a>
 
-#### Next: Connect employee creation to the employee list
+### Step 143: Add Employee Link
 
-Both employee creation and access tests passed.
+**What was happening before this step?**
 
-Currently, administrators must manually enter `/employees/create/` to create an employee. Let's add a link to the **Manage Employees** page.
+The employee list was visible, but there was no obvious way to reach the new creation page.
 
-Open **`templates/accounts/employee_list.html`**.
+**What did we do, and what does it mean?**
 
-Immediately below:
+We added a “Create Employee” action to the list page. This is only navigation; the actual employee record is created by the protected view.
+
+**File or place:** `templates/accounts/employee_list.html`.
+
+**Code or command from this step**
+
+*1. Code or command used at this point.*
 
 ```html
 <h2>Manage Employees</h2>
 ```
 
-Add:
+*2. Add.*
 
 ```html
 <p>
@@ -235,40 +270,38 @@ Add:
 </p>
 ```
 
-#### Test
+**How did we know what happened?**
 
-1. Log in as Admin.
-2. Open `http://127.0.0.1:8000/employees/`.
-3. Click **Add New Employee**.
-4. Verify that the employee registration form opens.
+From the list, select Add Employee and confirm that the create form opens.
 
-  **Our employee management interface so far**
+**Where to go next:** Previous: [Step 142 — Create Employee URL](13-create-employee.md#step-142) · Next: [Step 144 — Refine the Create Employee link](13-create-employee.md#step-144)
 
-      Employee List
-      /employees/
-
-      Create Employee
-      /employees/create/
-
-Next, we'll implement **Edit Employee**, allowing administrators to update employee details and roles.
-
-*Previous: Step 142 (Create Employee URL)  |  Next: Step 144 (Change templates/accounts/employee_list.html)*
 
 ---
 
-## Step 144: Change templates/accounts/employee_list.html
+<a id="step-144"></a>
 
-Your screenshot shows the **existing Employee List page**, but the **Add New Employee** link hasn't been added yet.
+### Step 144: Refine the Create Employee link
 
-Open `templates/accounts/employee_list.html`.
+**What was happening before this step?**
 
-Find:
+We adjusted where the create action appears so it would be easier to spot on the employee list.
+
+**What did we do, and what does it mean?**
+
+The link still leads to the same creation page. The change was about making the workflow clear, not adding a second way to save employees.
+
+**File or place:** `templates/accounts/employee_list.html`.
+
+**Code or command from this step**
+
+*1. Find.*
 
 ```html
 <h2>Manage Employees</h2>
 ```
 
-Immediately below it, add:
+*2. Immediately below it, add.*
 
 ```html
 <p>
@@ -278,10 +311,17 @@ Immediately below it, add:
 </p>
 ```
 
-Save the file (`Ctrl + S`) and refresh your browser (`Ctrl + R`).
+**How did we know what happened?**
 
-You should now see **Add New Employee** above the table. Clicking it should open the employee registration form.
+Check that the link is visible only where intended and opens the existing create route.
 
-*Previous: Step 143 (Add Employee Link)  |  Next: Step 145 (Edit Employee Form)*
+**Where to go next:** Previous: [Step 143 — Add Employee Link](13-create-employee.md#step-143) · Next: [Step 145 — Edit Employee Form](14-edit-employee.md#step-145)
 
 ---
+
+### The point of this chapter
+
+When an admin first opens the page, Django shows empty fields. After the admin submits them, Django validates the values, saves the employee and starts the welcome-email process. This is the same journey described in your example chapter.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

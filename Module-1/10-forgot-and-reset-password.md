@@ -1,18 +1,58 @@
-# Module 1, Chapter 10: Forgot and reset password
+# MODULE 1 — Employee accounts
 
-## Step 113: Forgot Password
+## Chapter 10: Forgot and reset password (Steps 113–127)
 
-#### Next: Create the Forgot Password page
+### Before we begin
 
-We're beginning the **password recovery workflow**.
+We already had a way to change a password while signed in. But someone who forgot their password could not use it.
 
-When an employee forgets their password, they should be able to enter their registered email address and request a reset link.
+### What we worked on
 
-**Create a new file:**
+We built the full forgotten-password journey: request a link, display a confirmation, send a message, open the link, choose a new password and return to login.
 
-`templates/accounts/password_reset.html`
+### Picture it this way
 
-Paste:
+There are several small pages because each has a different job. Django's built-in reset views handle token checks; our templates decide what the person sees.
+
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
+
+### Jump to a step
+
+- [Step 113: Forgot Password](#step-113)
+- [Step 114: Password Reset URL](#step-114)
+- [Step 115: Password Reset Confirmation](#step-115)
+- [Step 116: Understand the password reset templates](#step-116)
+- [Step 117: Confirmation Page URL](#step-117)
+- [Step 118: Password Reset Email](#step-118)
+- [Step 119: Connect Email Template](#step-119)
+- [Step 120: Connect Email Subject](#step-120)
+- [Step 121: Set New Password Page](#step-121)
+- [Step 122: Reset Link URL](#step-122)
+- [Step 123: Password Reset Success Page](#step-123)
+- [Step 124: Password Reset Complete URL](#step-124)
+- [Step 125: Fix the password reset URL error](#step-125)
+- [Step 126: Consolidate the accounts URL patterns](#step-126)
+- [Step 127: Email Testing](#step-127)
+
+---
+
+<a id="step-113"></a>
+
+### Step 113: Forgot Password
+
+**What was happening before this step?**
+
+A signed-in person can change a known password, but someone who has forgotten it cannot use that screen.
+
+**What did we do, and what does it mean?**
+
+We started a separate “Forgot password?” page where a user can enter an email address. Django then handles the reset process without requiring the old password.
+
+**File or place:** `templates/accounts/password_reset.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -40,36 +80,42 @@ Paste:
 </html>
 ```
 
-#### What is happening here?
+**Understanding the code, one piece at a time**
 
-- `method="POST"` — submits the entered email to Django.
-- `{% csrf_token %}` — protects the form against CSRF attacks.
-- `{{ form.as_p }}` — displays Django's built-in password-reset form, including its email field.
-- **Send Reset Link** — submits the request.
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-We're reusing the same Django form-rendering approach as our Change Password page.
+**How did we know what happened?**
 
-**For now:** Create and save the file. It won't be accessible yet because we haven't connected its URL and view.
+The page cannot yet send a reset request until its URL is added in Step 114.
 
-*Previous: Step 112 (Email Configuration)  |  Next: Step 114 (Password Reset URL)*
+**Where to go next:** Previous: [Step 112 — Email Configuration](09-email-validation-and-email-setup.md#step-112) · Next: [Step 114 — Password Reset URL](10-forgot-and-reset-password.md#step-114)
+
 
 ---
 
-## Step 114: Password Reset URL
+<a id="step-114"></a>
 
-#### Next: Connect the Forgot Password page to Django
+### Step 114: Password Reset URL
 
-We've created `password_reset.html`. Now we need a URL and a view to display it.
+**What was happening before this step?**
 
-Open **`accounts/urls.py`**.
+The forgot-password form needed a web address and a Django view to handle its submission.
 
-**1. Add this import** at the top:
+**What did we do, and what does it mean?**
+
+Django provides a ready-made password-reset view. We connected it to our template, so the form can ask Django to prepare a reset email when submitted.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Add this import at the top.*
 
 ```python
 from django.contrib.auth import views as auth_views
 ```
 
-**2. Add this entry** inside your existing `urlpatterns` list:
+*2. Add this entry inside your existing urlpatterns list.*
 
 ```python
 path(
@@ -81,46 +127,36 @@ path(
 ),
 ```
 
-Keep your existing login, logout and change-password URLs unchanged.
+**Understanding the code, one piece at a time**
 
-#### What does this do?
+Django's built-in `PasswordResetView` does the work of receiving the email address and preparing the reset. Our URL rule tells the browser where to reach it, and the template decides which form is displayed.
 
-- `password-reset/` — the address employees will visit.
-- `PasswordResetView` — Django's built-in view for requesting a password-reset email.
-- `as_view()` — makes this class-based view usable in our URL configuration.
-- `template_name` — tells Django which HTML file to display.
+**How did we know what happened?**
 
-  **NEW vs CLASS — Class-based views**
+The next steps build the confirmation and email templates used by the view.
 
-  So far, we've written views using `def`, such as `def loginpage(request)`.
+**Where to go next:** Previous: [Step 113 — Forgot Password](10-forgot-and-reset-password.md#step-113) · Next: [Step 115 — Password Reset Confirmation](10-forgot-and-reset-password.md#step-115)
 
-  Django also provides ready-made views as classes. `PasswordResetView.as_view()` lets us reuse one without writing the entire password-reset process ourselves.
-
-#### Test
-
-Save the file and open:
-
-`http://127.0.0.1:8000/password-reset/`
-
-**Expected result:** Your Forgot Password page appears with an email field and a **Send Reset Link** button.
-
-Don't submit the form yet. We still need to configure the email templates and remaining reset URLs.
-
-*Previous: Step 113 (Forgot Password)  |  Next: Step 115 (Password Reset Confirmation)*
 
 ---
 
-## Step 115: Password Reset Confirmation
+<a id="step-115"></a>
 
-#### Next: Create the password-reset confirmation page
+### Step 115: Password Reset Confirmation
 
-After an employee submits their email address, Django should display a confirmation page.
+**What was happening before this step?**
 
-**Create a new file:**
+After entering an email, a person should know the request has been accepted without being told whether the address belongs to an account.
 
-`templates/accounts/password_reset_done.html`
+**What did we do, and what does it mean?**
 
-Paste:
+The confirmation page gives a neutral message. This helps people understand the next step while avoiding information that could help someone guess which employees are registered.
+
+**File or place:** `templates/accounts/password_reset_done.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -147,57 +183,63 @@ Paste:
 </html>
 ```
 
-#### Why this wording?
+**How did we know what happened?**
 
-Notice we don't say *"An account with this email exists."*
+The route to this template is connected in Step 117.
 
-That is intentional. **We shouldn't reveal whether a particular email address is registered in our system.**
+**Where to go next:** Previous: [Step 114 — Password Reset URL](10-forgot-and-reset-password.md#step-114) · Next: [Step 116 — Understand the password reset templates](10-forgot-and-reset-password.md#step-116)
 
-The same confirmation message should appear whether the submitted email belongs to an active employee or not.
-
-**For now:** Save the file. Next, we'll connect it to Django's password-reset workflow.
-
-*Previous: Step 114 (Password Reset URL)  |  Next: Step 116 (Template Structure)*
 
 ---
 
-## Step 116: Template Structure
+<a id="step-116"></a>
 
-Yes. **All three HTML files should be inside the same `templates/accounts/` folder.**
+### Step 116: Understand the password reset templates
 
-    **templates/**
+**What was happening before this step?**
 
-      **accounts/**
+The password-reset journey uses more than one screen, and their filenames were getting confusing.
 
-      {#each ["login.html","change_password.html","password_reset.html","password_reset_done.html"] as file}
+**What did we do, and what does it mean?**
 
-          {file}
+We mapped the journey in order: enter email, see confirmation, open the link, set a new password, then see completion. Each template has one place in that journey.
 
-      {/each}
+**File or place:** `templates/accounts/ (reference)`.
 
-The `accounts` folder groups templates related to authentication.
+**Code or command from this step**
 
-In `accounts/urls.py`, this path:
+*1. In accounts/urls.py, this path.*
 
 ```python
 template_name='accounts/password_reset.html'
 ```
 
-tells Django to find `password_reset.html` inside the `accounts` template folder.
+**How did we know what happened?**
 
-*Previous: Step 115 (Password Reset Confirmation)  |  Next: Step 117 (Confirmation Page URL)*
+This organizational step does not introduce another view.
+
+**Where to go next:** Previous: [Step 115 — Password Reset Confirmation](10-forgot-and-reset-password.md#step-115) · Next: [Step 117 — Confirmation Page URL](10-forgot-and-reset-password.md#step-117)
+
 
 ---
 
-## Step 117: Confirmation Page URL
+<a id="step-117"></a>
 
-#### Next: Connect the confirmation page to Django
+### Step 117: Confirmation Page URL
 
-We've created `password_reset_done.html`. Now we need Django to display it after a password-reset request.
+**What was happening before this step?**
 
-Open **`accounts/urls.py`**.
+The password-reset view needed to know which page to show after the email request.
 
-Add this inside your existing `urlpatterns` list:
+**What did we do, and what does it mean?**
+
+We connected the confirmation URL as the next destination. Otherwise users could submit the form but end up on the wrong page or encounter a missing link.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Add this inside your existing urlpatterns list.*
 
 ```python
 path(
@@ -209,43 +251,36 @@ path(
 ),
 ```
 
-#### How does this work?
+**Understanding the code, one piece at a time**
 
-    **PasswordResetView**
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-    Processes the submitted email address
+**How did we know what happened?**
 
-    **PasswordResetDoneView**
+Test the flow after the email and password confirmation routes are finished.
 
-    Displays password_reset_done.html
+**Where to go next:** Previous: [Step 116 — Understand the password reset templates](10-forgot-and-reset-password.md#step-116) · Next: [Step 118 — Password Reset Email](10-forgot-and-reset-password.md#step-118)
 
-Django's built-in `PasswordResetView` automatically looks for the URL named `password_reset_done` after processing a valid form submission.
-
-#### Test
-
-Save the file and visit:
-
-`http://127.0.0.1:8000/password-reset/done/`
-
-You should see the **Check Your Email** page.
-
-**Do not submit the password-reset form yet.** We still need to create the email templates used to generate the secure reset link.
-
-*Previous: Step 116 (Template Structure)  |  Next: Step 118 (Password Reset Email)*
 
 ---
 
-## Step 118: Password Reset Email
+<a id="step-118"></a>
 
-#### Next: Create the password-reset email template
+### Step 118: Password Reset Email
 
-When an employee requests a password reset, Django needs to know **what message to send**.
+**What was happening before this step?**
 
-Create a new file:
+The email had to tell the user where to set a new password.
 
-`templates/accounts/password_reset_email.txt`
+**What did we do, and what does it mean?**
 
-Paste:
+The email template builds a link containing information Django can later check. It does not contain the person's password and it does not change the password just by being opened.
+
+**File or place:** `templates/accounts/password_reset_email.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```django
 Hello,
@@ -261,40 +296,42 @@ If you did not request this password reset, you can ignore this email.
 Inventory System
 ```
 
-#### Understanding the important line
+*2. Understanding the important line.*
 
 ```django
 {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
 ```
 
-Django will generate a link containing:
+**Understanding the code, one piece at a time**
 
-- `protocol` — HTTP or HTTPS.
-- `domain` — the website's domain.
-- `uid` — an encoded identifier for the employee's account.
-- `token` — a security token used to validate the reset request.
+The reset email is not a password. It contains a link with temporary information Django can check. Opening the link sends the recipient to Django's password-setting page; it does not reveal the old password.
 
-  **NEW vs CLASS — Dynamic URL parameters**
+**How did we know what happened?**
 
-  Earlier, we used `{% url 'login' %}` to generate a fixed URL.
+The reset view still needs to reference this template in the next step.
 
-  Here, `{% url 'password_reset_confirm' uidb64=uid token=token %}` generates a URL containing values specific to the password-reset request.
+**Where to go next:** Previous: [Step 117 — Confirmation Page URL](10-forgot-and-reset-password.md#step-117) · Next: [Step 119 — Connect Email Template](10-forgot-and-reset-password.md#step-119)
 
-**For now:** Save the file. We haven't connected this email template or created the reset-link destination yet.
-
-*Previous: Step 117 (Confirmation Page URL)  |  Next: Step 119 (Connect Email Template)*
 
 ---
 
-## Step 119: Connect Email Template
+<a id="step-119"></a>
 
-#### Next: Tell Django which email template to use
+### Step 119: Connect Email Template
 
-We've created `password_reset_email.txt`, but Django doesn't know to use it yet.
+**What was happening before this step?**
 
-Open **`accounts/urls.py`**.
+We created the email text, but Django would not use it unless we explicitly pointed the reset view to it.
 
-Find your existing `PasswordResetView` and update it to:
+**What did we do, and what does it mean?**
+
+The URL configuration names the email template. When Django prepares a reset message, it fills that template with the appropriate reset link.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Find your existing PasswordResetView and update it to.*
 
 ```python
 path(
@@ -307,36 +344,42 @@ path(
 ),
 ```
 
-#### What changed?
-
-We added one line:
+*2. We added one line.*
 
 ```python
 email_template_name='accounts/password_reset_email.txt'
 ```
 
-Django now knows which template contains the password-reset email message.
+**Understanding the code, one piece at a time**
 
-The two templates serve different purposes:
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-| Setting | Purpose |
-|---|---|
-| `template_name` | HTML page where the employee enters their email |
-| `email_template_name` | Text message Django sends with the reset link |
+**How did we know what happened?**
 
-**Save the file.** Don't submit the form yet. We still need to configure the email subject and the page where employees set their new password.
+The next step configures the message subject as well.
 
-*Previous: Step 118 (Password Reset Email)  |  Next: Step 120 (Connect Email Subject)*
+**Where to go next:** Previous: [Step 118 — Password Reset Email](10-forgot-and-reset-password.md#step-118) · Next: [Step 120 — Connect Email Subject](10-forgot-and-reset-password.md#step-120)
+
 
 ---
 
-## Step 120: Connect Email Subject
+<a id="step-120"></a>
 
-#### Next: Connect the email subject template
+### Step 120: Connect Email Subject
 
-Open **`accounts/urls.py`**.
+**What was happening before this step?**
 
-Find your existing `PasswordResetView` and update it to:
+The reset message also needed a clear subject line so a recipient could recognise it.
+
+**What did we do, and what does it mean?**
+
+The subject is a small text template used as the email's title. This change helps people understand why they received the message; it does not change reset-link security.
+
+**File or place:** `accounts/urls.py and subject template`.
+
+**Code or command from this step**
+
+*1. Find your existing PasswordResetView and update it to.*
 
 ```python
 path(
@@ -350,41 +393,42 @@ path(
 ),
 ```
 
-#### What changed?
-
-We added:
+*2. We added.*
 
 ```python
 subject_template_name='accounts/password_reset_subject.txt'
 ```
 
-`subject_template_name` is another **built-in Django attribute**, just like `email_template_name`.
+**Understanding the code, one piece at a time**
 
-Django now knows where to find all three templates:
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-| Attribute | File |
-|---|---|
-| `template_name` | Password-reset request page |
-| `email_template_name` | Email body |
-| `subject_template_name` | Email subject |
+**How did we know what happened?**
 
-**Save the file.** Next, we'll create the page employees reach after clicking their password-reset link.
+The notes record the configuration but no delivered-email test yet.
 
-*Previous: Step 119 (Connect Email Template)  |  Next: Step 121 (Set New Password Page)*
+**Where to go next:** Previous: [Step 119 — Connect Email Template](10-forgot-and-reset-password.md#step-119) · Next: [Step 121 — Set New Password Page](10-forgot-and-reset-password.md#step-121)
+
 
 ---
 
-## Step 121: Set New Password Page
+<a id="step-121"></a>
 
-#### Next: Create the Set New Password page
+### Step 121: Set New Password Page
 
-When an employee clicks the link in their password-reset email, they should reach a page where they can enter a new password.
+**What was happening before this step?**
 
-Create:
+The recipient clicked a reset link. We now needed the screen where the replacement password could be entered.
 
-`templates/accounts/password_reset_confirm.html`
+**What did we do, and what does it mean?**
 
-Paste:
+The confirmation template displays Django's new-password form. Django checks whether the link is valid before allowing the actual password update.
+
+**File or place:** `templates/accounts/password_reset_confirm.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -425,34 +469,36 @@ Paste:
 </html>
 ```
 
-#### How does this work?
+**Understanding the code, one piece at a time**
 
-Django's built-in `PasswordResetConfirmView` will provide two important values:
+`{% csrf_token %}` adds a hidden safety value to the form, so Django can check that a request really came through the site. `{{ form.as_p }}` asks Django to display the fields as simple paragraphs.
 
-- **`validlink`** — `True` if the reset link is valid; otherwise `False`.
-- **`form`** — Django's form for entering and confirming a new password.
+**How did we know what happened?**
 
-  **NEW vs CLASS — `validlink`**
+The URL that receives token-bearing links is added next.
 
-  `validlink` is a built-in template context variable supplied by `PasswordResetConfirmView`.
+**Where to go next:** Previous: [Step 120 — Connect Email Subject](10-forgot-and-reset-password.md#step-120) · Next: [Step 122 — Reset Link URL](10-forgot-and-reset-password.md#step-122)
 
-  We use `{% if validlink %}` to show the password form only when the reset link is valid.
-
-**For now:** Save the file. Next, we'll connect it to the URL contained in the reset email.
-
-*Previous: Step 120 (Connect Email Subject)  |  Next: Step 122 (Reset Link URL)*
 
 ---
 
-## Step 122: Reset Link URL
+<a id="step-122"></a>
 
-#### Next: Connect the Set New Password page
+### Step 122: Reset Link URL
 
-We've created `password_reset_confirm.html`. Now Django needs a URL to open it when an employee clicks the email link.
+**What was happening before this step?**
 
-Open **`accounts/urls.py`**.
+The reset URL looks unusual because it carries a user identifier and a temporary token.
 
-Add this inside your existing `urlpatterns`:
+**What did we do, and what does it mean?**
+
+The identifier tells Django which account the link is for. The token is a check that Django generates and validates. If the link is wrong or too old, it should not let someone set a password.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Add this inside your existing urlpatterns.*
 
 ```python
 path(
@@ -464,52 +510,36 @@ path(
 ),
 ```
 
-#### Understanding the code
+**Understanding the code, one piece at a time**
 
-- `PasswordResetConfirmView` — Django's built-in view that validates the reset link and handles setting a new password.
-- `template_name` — specifies the HTML page we created.
-- `uidb64` — identifies the account whose password is being reset.
-- `token` — allows Django to verify that the reset link is valid.
+The identifier in the link points to an account, and the token helps Django decide whether the link is allowed. A token that is invalid or too old should not let someone set a new password.
 
-  **NEW vs CLASS — Dynamic URL segments**
+**How did we know what happened?**
 
-  Earlier, our URLs were fixed, such as `login/`.
+This should be tested using an email link, not a manually invented token.
 
-  Here, `<uidb64>` and `<token>` are **dynamic URL segments**. Django extracts their values from the incoming URL and passes them to the view.
+**Where to go next:** Previous: [Step 121 — Set New Password Page](10-forgot-and-reset-password.md#step-121) · Next: [Step 123 — Password Reset Success Page](10-forgot-and-reset-password.md#step-123)
 
-  This is the same concept as a product detail URL containing a product ID.
-
-#### How the pieces connect
-
-    **Password-reset email**
-
-    Contains the generated reset link
-
-    **PasswordResetConfirmView**
-
-    Checks the account and security token
-
-    **password_reset_confirm.html**
-
-    Displays the new-password form if the link is valid
-
-**Save the file.** Next, we'll create the success page displayed after the password has been reset.
-
-*Previous: Step 121 (Set New Password Page)  |  Next: Step 123 (Password Reset Success Page)*
 
 ---
 
-## Step 123: Password Reset Success Page
+<a id="step-123"></a>
 
-#### Next: Create the Password Reset Success page
+### Step 123: Password Reset Success Page
 
-After an employee successfully sets a new password, Django should display a confirmation message.
+**What was happening before this step?**
 
-Create a new file:
+After changing the password, the person needed a clear “finished” screen.
 
-`templates/accounts/password_reset_complete.html`
+**What did we do, and what does it mean?**
 
-Paste:
+The completion template tells them the reset has succeeded and normally gives a way back to login. It does not repeat the password or reveal it on screen.
+
+**File or place:** `templates/accounts/password_reset_complete.html`.
+
+**Code or command from this step**
+
+*1. Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -532,33 +562,32 @@ Paste:
 </html>
 ```
 
-#### Where does this page fit?
+**How did we know what happened?**
 
-    **Password Reset Email**
+The route to this final screen is connected in Step 124.
 
-    **Set New Password**
+**Where to go next:** Previous: [Step 122 — Reset Link URL](10-forgot-and-reset-password.md#step-122) · Next: [Step 124 — Password Reset Complete URL](10-forgot-and-reset-password.md#step-124)
 
-      **Password Reset Complete**
-
-    The page we're creating now
-
-    **Login**
-
-**Save the file.** Next, we'll connect it using Django's built-in `PasswordResetCompleteView`.
-
-*Previous: Step 122 (Reset Link URL)  |  Next: Step 124 (Password Reset Complete URL)*
 
 ---
 
-## Step 124: Password Reset Complete URL
+<a id="step-124"></a>
 
-#### Next: Connect the Password Reset Success page
+### Step 124: Password Reset Complete URL
 
-We've created `password_reset_complete.html`. Now we need Django to display it after an employee successfully resets their password.
+**What was happening before this step?**
 
-Open **`accounts/urls.py`**.
+The reset-confirmation view needed to know where to go after a valid new password had been saved.
 
-Add this inside your existing `urlpatterns`:
+**What did we do, and what does it mean?**
+
+Its success destination points to the completion page. This completes the chain from the original email request to the final screen.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Add this inside your existing urlpatterns.*
 
 ```python
 path(
@@ -570,48 +599,43 @@ path(
 ),
 ```
 
-#### How does this work?
+**Understanding the code, one piece at a time**
 
-- **`PasswordResetCompleteView`** — Django's built-in view for displaying the successful password-reset message.
-- **`template_name`** — specifies the HTML file to display.
-- **`name='password_reset_complete'`** — the URL name Django's `PasswordResetConfirmView` uses after saving the new password.
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-We don't need to write our own redirect logic.
+**How did we know what happened?**
 
-#### Test
+At this point the intended end-to-end route exists, subject to fixing the URL issue found next.
 
-Save the file and visit:
+**Where to go next:** Previous: [Step 123 — Password Reset Success Page](10-forgot-and-reset-password.md#step-123) · Next: [Step 125 — Fix the password reset URL error](10-forgot-and-reset-password.md#step-125)
 
-`http://127.0.0.1:8000/password-reset/complete/`
-
-You should see **Password Reset Successful** with a link to the login page.
-
-This verifies that the page works, but **not yet that a password has actually been reset**.
-
-Next, we'll test the complete password-reset workflow.
-
-*Previous: Step 123 (Password Reset Success Page)  |  Next: Step 125 (Fix Django Error)*
 
 ---
 
-## Step 125: Fix Django Error
+<a id="step-125"></a>
 
-#### What went wrong?
+### Step 125: Fix the password reset URL error
 
-Your terminal shows:
+**What was happening before this step?**
+
+A Django error showed that an option had been given to the wrong part of the reset process.
+
+**What did we do, and what does it mean?**
+
+The view that sends emails needs email-template settings. The view that merely displays “check your inbox” does not. We moved the option to the part that actually uses it, instead of changing the whole workflow.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Example result from the notes (not a command to run).*
 
 ```text
 TypeError: PasswordResetDoneView() received an invalid
 keyword 'email_template_name'.
 ```
 
-You appear to have added `email_template_name` to **`PasswordResetDoneView` instead of `PasswordResetView`**.
-
-Only `PasswordResetView` sends the email. `PasswordResetDoneView` simply displays the confirmation page.
-
-#### Fix
-
-Open `accounts/urls.py` and make sure these two URL entries look exactly like this:
+*2. Code or command used at this point.*
 
 ```python
 path(
@@ -633,32 +657,49 @@ path(
 ),
 ```
 
-**Important:** Both `email_template_name` and `subject_template_name` belong to `PasswordResetView`, not `PasswordResetDoneView`.
-
-#### Verify
-
-Save the file and run:
+*3. Save the file and run.*
 
 ```powershell
 python manage.py runserver
 ```
 
-Expected:
+*4. Example result from the notes (not a command to run).*
 
 ```text
 System check identified no issues (0 silenced).
 Starting development server at http://127.0.0.1:8000/
 ```
 
-Once the server starts successfully, we can resume testing the password-reset email.
+**Understanding the code, one piece at a time**
 
-*Previous: Step 124 (Password Reset Complete URL)  |  Next: Step 126 (Change accounts/urls.py)*
+`PasswordResetView` is for requesting and sending a reset email. `PasswordResetDoneView` is just the confirmation page shown after the request. It does not use email-template settings, which is why the earlier placement caused an error.
+
+**How did we know what happened?**
+
+The error prompted a revised URL configuration in Step 126.
+
+**Where to go next:** Previous: [Step 124 — Password Reset Complete URL](10-forgot-and-reset-password.md#step-124) · Next: [Step 126 — Consolidate the accounts URL patterns](10-forgot-and-reset-password.md#step-126)
+
 
 ---
 
-## Step 126: Change accounts/urls.py
+<a id="step-126"></a>
 
-Replace the entire contents of **`accounts/urls.py`** with this corrected version:
+### Step 126: Consolidate the accounts URL patterns
+
+**What was happening before this step?**
+
+After several edits, the accounts URL file contained pieces of the reset flow that were hard to follow.
+
+**What did we do, and what does it mean?**
+
+We brought the URL rules together in one orderly file. That makes it easier to see each address and the view that handles it and reduces the chance of conflicting routes.
+
+**File or place:** `accounts/urls.py`.
+
+**Code or command from this step**
+
+*1. Replace the entire contents of accounts/urls.py with this corrected version.*
 
 ```python
 from django.urls import path
@@ -706,50 +747,52 @@ urlpatterns = [
 ]
 ```
 
-**Correction made:** Moved `email_template_name` and `subject_template_name` from `PasswordResetDoneView` to `PasswordResetView`.
+**Understanding the code, one piece at a time**
 
-After saving, restart the Django server if necessary and visit:
+`path(...)` connects a browser address to a Django view. The `name` is a nickname other files can use when creating a link.
 
-`http://127.0.0.1:8000/password-reset/`
+**How did we know what happened?**
 
-Enter an active test account's email address and submit. The reset email should appear in your server terminal.
+The following step tests email output using the now-connected flow.
 
-*Previous: Step 125 (Fix Django Error)  |  Next: Step 127 (Email Testing)*
+**Where to go next:** Previous: [Step 125 — Fix the password reset URL error](10-forgot-and-reset-password.md#step-125) · Next: [Step 127 — Email Testing](10-forgot-and-reset-password.md#step-127)
+
 
 ---
 
-## Step 127: Email Testing
+<a id="step-127"></a>
 
-#### 1. Why didn't you receive the email?
+### Step 127: Email Testing
 
-Because we configured Django to use:
+**What was happening before this step?**
+
+We wanted to know whether the reset flow actually generated an email for a registered account.
+
+**What did we do, and what does it mean?**
+
+In console mode the email appears in the terminal rather than someone's inbox. The useful checks were that the form accepted the request, the message appeared and the link led to the expected reset screen.
+
+**File or place:** `Django terminal email backend`.
+
+**Code or command from this step**
+
+*1. Code or command used at this point.*
 
 ```python
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ```
 
-This is Django's **console email backend**.
+**How did we know what happened?**
 
-- Django generates the email.
-- The email is printed in your VS Code terminal.
-- **Nothing is actually sent to your inbox**, even when you use your real email address.
+The notes describe email testing; they do not prove real SMTP delivery at this stage.
 
-This is expected behaviour, not an error.
-
-For now, we'll continue using console emails to test password-reset links. Actual email delivery requires configuring an SMTP server or email service later.
-
-#### 2. VS Code terminal shortcuts
-
-| Action | Shortcut |
-|---|---|
-| Show/hide terminal panel | **Ctrl + `** |
-| Create a new terminal | Ctrl + Shift + ` |
-| Close the active terminal | Type `exit` (when no process is running) |
-
-The backtick (`) key is usually located below **Esc**.
-
-**Important:** Hiding the terminal doesn't stop your Django server. It continues running in the background.
-
-*Previous: Step 126 (Change accounts/urls.py)  |  Next: Step 128 (Employee Creation Form)*
+**Where to go next:** Previous: [Step 126 — Consolidate the accounts URL patterns](10-forgot-and-reset-password.md#step-126) · Next: [Step 128 — Employee Creation Form](11-employee-welcome-email-and-password-setup-link.md#step-128)
 
 ---
+
+### The point of this chapter
+
+There are several small pages because each has a different job. Django's built-in reset views handle token checks; our templates decide what the person sees.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

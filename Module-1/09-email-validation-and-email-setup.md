@@ -1,63 +1,79 @@
-# Module 1, Chapter 9: Email validation and email setup
+# MODULE 1 — Employee accounts
 
-## Step 108: REQUIRED_FIELDS
+## Chapter 9: Email validation and email setup (Steps 108–112)
 
-`REQUIRED_FIELDS = ['email', 'role']` tells Django **which additional information to ask for when creating a superuser through the terminal**.
+### Before we begin
 
-For example, when you run:
+Employee accounts were going to receive important links by email, so we needed better email addresses and a safe way to try sending messages.
 
-```bash
-python manage.py createsuperuser
-```
+### What we worked on
 
-Django prompts you for:
+We required each account to have its own email, updated the database, and made Django print test emails in the terminal.
 
-```text
-Username: admin
-Email address: admin@example.com
-Role: admin
-Password:
-Password (again):
-```
+### Picture it this way
 
-This happens because of `REQUIRED_FIELDS`.
+When we say “console email,” we mean Django prints the message where we ran the server. It does not send anything to an inbox yet. That temporary method is useful while building password recovery.
 
-#### Why didn't it work for `manager1` and `sales1`?
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
 
-Because `REQUIRED_FIELDS` is **not a database validation rule**.
+### Jump to a step
 
-| Situation | Does `REQUIRED_FIELDS` enforce email? |
-|---|---|
-| Creating a superuser through `createsuperuser` | Yes, prompts for it |
-| Creating a user through Django Admin | No |
-| Creating a user through Python code | No |
-| Saving a user to the database | No |
+- [Step 108: Understand REQUIRED_FIELDS](#step-108)
+- [Step 109: Enforce Email Validation](#step-109)
+- [Step 110: Create Migration](#step-110)
+- [Step 111: Apply Migration](#step-111)
+- [Step 112: Email Configuration](#step-112)
 
-#### What we actually need
+---
+
+<a id="step-108"></a>
+
+### Step 108: Understand REQUIRED_FIELDS
+
+**What was happening before this step?**
+
+Django's administrator-creation command was asking for fields such as email and role. We wanted to know why.
+
+**What did we do, and what does it mean?**
+
+`REQUIRED_FIELDS` tells Django which extra fields to prompt for when creating a superuser from the terminal. It does not by itself decide all validation rules for every web form.
+
+**File or place:** `accounts/models.py`.
+
+**Code or command from this step**
+
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```python
 email = models.EmailField(unique=True, blank=False)
 ```
 
-- `EmailField` — validates email format through Django's forms and model validation.
-- `unique=True` — prevents two users from having the same email.
-- `blank=False` — requires an email in Django forms.
+**How did we know what happened?**
 
-**In short:** `REQUIRED_FIELDS` controls the `createsuperuser` prompts. The email field definition controls validation and database uniqueness.
+The explanation distinguishes command-line prompts from model-level constraints.
 
-We'll keep `REQUIRED_FIELDS` and add the email field after correcting the existing accounts.
+**Where to go next:** Previous: [Step 107 — Test Role Security](08-role-security-decorators.md#step-107) · Next: [Step 109 — Enforce Email Validation](09-email-validation-and-email-setup.md#step-109)
 
-*Previous: Step 107 (Test Role Security)  |  Next: Step 109 (Enforce Email Validation)*
 
 ---
 
-## Step 109: Enforce Email Validation
+<a id="step-109"></a>
 
-#### Next: Update the CustomUser model
+### Step 109: Enforce Email Validation
 
-Assuming you've assigned different email addresses to `manager1` and `sales1`, we can now enforce email validation.
+**What was happening before this step?**
 
-Open **`accounts/models.py`** and update it to:
+We were about to send password links by email, so we needed usable email addresses and no duplicates.
+
+**What did we do, and what does it mean?**
+
+If two employees share the same email, a reset message might reach the wrong person. We changed the user model so email is required and unique, then prepared to update the database to match.
+
+**File or place:** `accounts/models.py`.
+
+**Code or command from this step**
+
+*1. Open accounts/models.py and update it to.*
 
 ```python
 from django.contrib.auth.models import AbstractUser
@@ -85,7 +101,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['email', 'role']
 ```
 
-#### What did we add?
+*2. What did we add?.*
 
 ```python
 email = models.EmailField(
@@ -94,35 +110,42 @@ email = models.EmailField(
 )
 ```
 
-- **`EmailField`** — provides email-format validation in Django forms.
-- **`unique=True`** — prevents duplicate email values in the database.
-- **`blank=False`** — makes the email mandatory in Django forms, including Django Admin.
+**Understanding the code, one piece at a time**
 
-We retain `REQUIRED_FIELDS` because it serves a separate purpose during superuser creation.
+`blank=False` means an email is required during normal Django form validation. `unique=True` means each saved email value must be different from the others after the database has been updated. They protect different mistakes.
 
-**For now:** Save the file. Don't run migrations yet; we'll do that in the next step.
+**How did we know what happened?**
 
-*Previous: Step 108 (REQUIRED_FIELDS)  |  Next: Step 110 (Create Migration)*
+The next steps create and apply the corresponding migration.
+
+**Where to go next:** Previous: [Step 108 — Understand REQUIRED_FIELDS](09-email-validation-and-email-setup.md#step-108) · Next: [Step 110 — Create Migration](09-email-validation-and-email-setup.md#step-110)
+
 
 ---
 
-## Step 110: Create Migration
+<a id="step-110"></a>
 
-#### Next: Create the database migration
+### Step 110: Create Migration
 
-We've updated `CustomUser` to require unique email addresses. Now Django needs to prepare the corresponding database change.
+**What was happening before this step?**
 
-Open your VS Code terminal and run:
+We changed the Python model, but the database table still had its old rules.
+
+**What did we do, and what does it mean?**
+
+`makemigrations` compares the model with the recorded schema and writes a migration file explaining the change. It prepares the database work; it does not apply it yet.
+
+**File or place:** `accounts/migrations/0002_alter_customuser_email.py`.
+
+**Code or command from this step**
+
+*1. Open your VS Code terminal and run.*
 
 ```bash
 python manage.py makemigrations accounts
 ```
 
-**What happens?**
-
-Django compares your updated `models.py` with the previous migration and creates a new migration file.
-
-**Expected output (approximately):**
+*2. Example result from the notes (not a command to run).*
 
 ```text
 Migrations for 'accounts':
@@ -130,59 +153,77 @@ Migrations for 'accounts':
     ~ Alter field email on customuser
 ```
 
-The migration filename may differ.
+**Understanding the code, one piece at a time**
 
-**Important:** This command creates the migration instructions. It does not apply them to the database yet.
+When Django creates a migration file, it stores the intended change to the table as code. That file goes into Git so other computers can apply the same change later.
 
-Don't run `migrate` yet. We'll do that next.
+**How did we know what happened?**
 
-*Previous: Step 109 (Enforce Email Validation)  |  Next: Step 111 (Apply Migration)*
+Our notes shows the expected `0002_alter_customuser_email.py` migration filename.
+
+**Where to go next:** Previous: [Step 109 — Enforce Email Validation](09-email-validation-and-email-setup.md#step-109) · Next: [Step 111 — Apply Migration](09-email-validation-and-email-setup.md#step-111)
+
 
 ---
 
-## Step 111: Apply Migration
+<a id="step-111"></a>
 
-#### Next: Apply the email-field migration
+### Step 111: Apply Migration
 
-We've created the migration file. Now we need to apply its changes to the actual database.
+**What was happening before this step?**
 
-Before proceeding, ensure `admin`, `manager1`, and `sales1` have different, non-empty email addresses.
+The migration instruction existed. Now the actual database needed to follow it.
 
-Run:
+**What did we do, and what does it mean?**
+
+`migrate` applies the new rule so SQLite can reject duplicate email addresses. Until this command runs successfully, editing `models.py` alone is not enough.
+
+**File or place:** `database (via migrate)`.
+
+**Code or command from this step**
+
+*1. Run.*
 
 ```bash
 python manage.py migrate
 ```
 
-**What does this do?**
-
-Django executes any pending migrations, including our new email-field migration.
-
-**Expected output (approximately):**
+*2. Example result from the notes (not a command to run).*
 
 ```text
 Applying accounts.0002_alter_customuser_email... OK
 ```
 
-After this, the database will enforce unique email addresses.
+**Understanding the code, one piece at a time**
 
-**Important:** If you receive an error, don't modify or delete anything. Send me the terminal output so we can identify the cause.
+The `migrate` command is the point where SQLite is asked to enforce the new email rule. Until it is applied, the Python model and the actual database may disagree.
 
-*Previous: Step 110 (Create Migration)  |  Next: Step 112 (Email Configuration)*
+**How did we know what happened?**
+
+Our notes shows `Applying accounts.0002_alter_customuser_email... OK`.
+
+**Where to go next:** Previous: [Step 110 — Create Migration](09-email-validation-and-email-setup.md#step-110) · Next: [Step 112 — Email Configuration](09-email-validation-and-email-setup.md#step-112)
+
 
 ---
 
-## Step 112: Email Configuration
+<a id="step-112"></a>
 
-**Email uniqueness test passed.**
+### Step 112: Email Configuration
 
-Django correctly rejected `manager1@example.com` because another account already uses it.
+**What was happening before this step?**
 
-You can leave the form without saving. The invalid email was not stored.
+We wanted to develop password-reset emails without sending real messages or exposing a Gmail password.
 
-#### Next: Configure local email testing
+**What did we do, and what does it mean?**
 
-Open **`config/settings.py`** and add these lines at the bottom:
+The console email setting tells Django to print the email text and link in the VS Code terminal. This lets us test the message safely. We would switch to real sending only later.
+
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. Open config/settings.py and add these lines at the bottom.*
 
 ```python
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -190,59 +231,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@example.com'
 ```
 
-**What do these settings mean?**
+**Understanding the code, one piece at a time**
 
-- `EMAIL_BACKEND` tells Django how to handle outgoing emails.
-- `console.EmailBackend` prints emails in the terminal instead of actually sending them.
-- `DEFAULT_FROM_EMAIL` specifies the sender address.
+The console backend is deliberately a fake delivery service for development. The application still prepares the email message and link, but instead of contacting Gmail, Django prints them in the terminal so we can inspect them.
 
-  NEW vs CLASS — Email backend
-  This introduces Django's built-in email configuration. It uses the same `VARIABLE = value` syntax as other settings in `settings.py`.
+**How did we know what happened?**
 
-**For now:** Save the file. We'll test sending an email in the next step.
+The notes explicitly report an email-uniqueness check had passed before configuring this backend.
 
-#### How we checked it
-
-**No, you don't need to stop the server.**
-
-Keep Django running in its current terminal.
-
-1. Open a **new terminal** in VS Code using the `+` button in the Terminal panel.
-2. Make sure your virtual environment `(.venv)` is active.
-3. Run:
-
-```bash
-python manage.py shell
-```
-
-You can now test email sending while the Django server continues running in the first terminal.
-
-#### How we checked it
-
-You're currently **one folder above** the Django project directory.
-
-First, run:
-
-```powershell
-cd techmindz_inventory_module0_sqlite_atomic
-```
-
-Your terminal should then show:
-
-```text
-(.venv) PS C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic>
-```
-
-Now run:
-
-```powershell
-python manage.py shell
-```
-
-This opens Django's Python shell so you can test email sending.
-
-**Keep your Django server running in the other terminal.**
-
-*Previous: Step 111 (Apply Migration)  |  Next: Step 113 (Forgot Password)*
+**Where to go next:** Previous: [Step 111 — Apply Migration](09-email-validation-and-email-setup.md#step-111) · Next: [Step 113 — Forgot Password](10-forgot-and-reset-password.md#step-113)
 
 ---
+
+### The point of this chapter
+
+When we say “console email,” we mean Django prints the message where we ran the server. It does not send anything to an inbox yet. That temporary method is useful while building password recovery.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+

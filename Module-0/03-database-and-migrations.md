@@ -1,231 +1,152 @@
-# Module 0, Chapter 3: Database and migrations
+# MODULE 0 — Getting started
 
-## Step 25: Committing Development Journal Update
+## Chapter 3: Database and migrations (Steps 25–28)
 
-**Step 33 completed.** The journal was staged successfully. The LF/CRLF warning is harmless.
+### Before we begin
 
-#### Step 34 — Commit the journal update
+Django was installed, but its database tables still had to be created, and our notes had to record the work.
 
-Run:
+### What we worked on
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Django database initialization"
-```
+We ran the database setup and then saved the result in the journal. Some steps repeat Git commands because the original development record contains each save and upload separately.
 
-**What this does:** Creates a new local Git commit containing your migration notes.
+### Picture it this way
 
-It does not upload anything to GitHub yet.
+The key difference is between a database change and a journal update. Writing notes about a table is not the same as creating that table.
 
-Send me the output, and we'll push the commit to your private repository.
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
 
-*Previous: Step 24 (Stage the updated journal)  |  Next: Step 26 (Committing Development Journal Update)*
+### Jump to a step
 
----
-
-## Step 26: Committing Development Journal Update
-
-#### Step 34 — Commit the journal update
-
-Run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Django database initialization"
-```
-
-**What this does:** Saves the staged migration notes as a new commit in your local private journal repository.
-
-It does not upload anything to GitHub yet.
-
-Send me the terminal output. Next, we'll push the commit to GitHub.
-
-*Previous: Step 25 (Committing Development Journal Update)  |  Next: Step 27 (Pushing Development Journal to GitHub)*
+- [Step 25: Committing Development Journal Update](#step-25)
+- [Step 26: Clarify the journal commit](#step-26)
+- [Step 27: Pushing Development Journal to GitHub](#step-27)
+- [Step 28: Understanding the Migration Workflow](#step-28)
 
 ---
 
-## Step 27: Pushing Development Journal to GitHub
+<a id="step-25"></a>
 
-#### Step 35 — Push the journal update
+### Step 25: Committing Development Journal Update
 
-Run:
+**What was happening before this step?**
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push
-```
+The database milestone was staged, and the journal needed a new saved version.
 
-**What this does:** Uploads your latest local journal commit to your private GitHub repository.
+**What did we do, and what does it mean?**
 
-Because we previously configured the tracking branch, `git push` is sufficient.
+The commit adds a restore point to the journal's history. It records the documentation change, not a new database migration.
 
-**Expected result:** A message showing `main -> main`.
+**Code or command from this step**
 
-Send me the output. We'll verify the upload before continuing Django development.
-
-#### How we checked it
-
-**Step 35 completed.** I verified that your latest journal commit is available in your private GitHub repository.
-
-#### Step 36 — Start the Django development server
-
-Run:
+*1. Run. **Historical only: do not run it without understanding its effect on current files.***
 
 ```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Django database initialization"
 ```
 
-**What this does:**
-- Starts Django's local development server.
-- Checks whether the project can start successfully.
-- Makes the application accessible through your browser.
+**How did we know what happened?**
 
-**Expected output:**
+This was followed by a repeated commit instruction rather than a new functional change.
 
-```text
-Starting development server at http://127.0.0.1:8000/
-```
+**Where to go next:** Previous: [Step 24 — Stage the updated journal](02-git-and-github.md#step-24) · Next: [Step 26 — Clarify the journal commit](03-database-and-migrations.md#step-26)
 
-The terminal will remain occupied while the server is running. This is normal.
-
-Send me the terminal output. We'll then test the application in your browser.
-
-*Previous: Step 26 (Committing Development Journal Update)  |  Next: Step 28 (Understanding the Migration Workflow)*
 
 ---
 
-## Step 28: Understanding the Migration Workflow
+<a id="step-26"></a>
 
-#### What exactly did we accomplish?
+### Step 26: Clarify the journal commit
 
-We prepared the database so Django can store and manage information such as user accounts, permissions, and login sessions.
+**What was happening before this step?**
 
-Think of the database as an empty office building. Django provides the instructions for constructing the rooms (tables) it needs.
+We repeated the commit instruction because it was important to distinguish saving notes locally from uploading them.
 
-#### 1. Before initialization
+**What did we do, and what does it mean?**
 
-      **Django project**
-      Code and settings exist
+The key idea is that a commit happens on the laptop. It is normal for the remote GitHub journal to remain unchanged until a separate push is performed.
 
-      **Database**
-      Tables not yet created
+**Code or command from this step**
 
-Your Django project was configured to use SQLite, but its built-in database structure had not yet been initialized.
+*1. Run. **Historical only: do not run it without understanding its effect on current files.***
 
-#### 2. First command — `showmigrations`
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Django database initialization"
+```
+
+**How did we know what happened?**
+
+No separate success result is recorded for this repetition.
+
+**Where to go next:** Previous: [Step 25 — Committing Development Journal Update](03-database-and-migrations.md#step-25) · Next: [Step 27 — Pushing Development Journal to GitHub](03-database-and-migrations.md#step-27)
+
+
+---
+
+<a id="step-27"></a>
+
+### Step 27: Pushing Development Journal to GitHub
+
+**What was happening before this step?**
+
+The latest journal commit still existed only locally.
+
+**What did we do, and what does it mean?**
+
+This push uploaded that recorded milestone to the private repository. The application and database were not moved by this command; only the Git history of the journal was sent.
+
+**Code or command from this step**
+
+*1. Run. **Historical only: do not run it without understanding its effect on current files.***
+
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal push
+```
+
+**How did we know what happened?**
+
+The following notes proceed with database and server study, consistent with the journal update being finished.
+
+**Where to go next:** Previous: [Step 26 — Clarify the journal commit](03-database-and-migrations.md#step-26) · Next: [Step 28 — Understanding the Migration Workflow](03-database-and-migrations.md#step-28)
+
+
+---
+
+<a id="step-28"></a>
+
+### Step 28: Understanding the Migration Workflow
+
+**What was happening before this step?**
+
+We had run the migration command, but it was not enough to memorize the word `migrate`. We wanted to know what it actually did.
+
+**What did we do, and what does it mean?**
+
+Django looks at the migration instructions stored in project files, applies any outstanding changes to the database, and remembers which instructions it has already applied. Changing model code by itself is not enough to update an existing database.
+
+**Code or command from this step**
+
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```powershell
 python manage.py showmigrations
 ```
 
-This asks Django: **Which database changes have already been applied?**
+**Understanding the code, one piece at a time**
 
-Your output showed:
+If we change a model and run only `makemigrations`, we have written instructions but have not changed the table. If we then run `migrate`, Django follows those instructions. This distinction comes up often in Django interviews.
 
-```text
-auth
- [ ] 0001_initial
- [ ] 0002_alter_permission_name_max_length
-```
+**How did we know what happened?**
 
-`[ ]` meant the migration was pending.
+The earlier `[X]` results support that the initial Django database setup succeeded.
 
-A *migration* is a set of instructions describing a database structure change, such as creating a table or modifying a column.
-
-#### 3. Second command — `migrate`
-
-```powershell
-python manage.py migrate
-```
-
-This told Django to execute all pending migrations.
-
-    **Migration instructions**
-    Provided by Django's installed apps
-
-    migrate
-
-    {#each [{name:"auth_user",desc:"User accounts"},{name:"auth_permission",desc:"Permissions"},{name:"django_session",desc:"Login sessions"},{name:"django_admin_log",desc:"Admin activity"}] as t}
-
-          {t.name}
-          {t.desc}
-
-    {/each}
-
-  Examples of tables created in the SQLite database
-
-You saw 18 operations ending with `OK`. These are **18 migrations, not necessarily 18 tables**.
-
-#### 4. Third command — `showmigrations` again
-
-You repeated the first command and saw:
-
-```text
-auth
- [X] 0001_initial
- [X] 0002_alter_permission_name_max_length
-```
-
-`[X]` means Django successfully applied and recorded that migration.
-
-Django maintains a table named `django_migrations` to remember which migrations have already run.
-
-#### 5. What about `makemigrations`?
-
-We did not run it because Django already supplies the migrations for its built-in applications.
-
-| Command | Purpose |
-|---|---|
-| `makemigrations` | Generates migration instructions from model changes |
-| `migrate` | Applies those instructions to the database |
-| `showmigrations` | Displays migration status |
-
-Later, when we create our own `Product` model, we'll use `makemigrations` followed by `migrate` to create its database table.
-
-**Current result:** Django's built-in database structure is initialized. We have not yet created the inventory-specific tables.
+**Where to go next:** Previous: [Step 27 — Pushing Development Journal to GitHub](03-database-and-migrations.md#step-27) · Next: [Step 29 — Confirming Terminal Environment](04-server-and-admin-account.md#step-29)
 
 ---
 
-#### Quick understanding check
+### The point of this chapter
 
-{@body const [answer,setAnswer] = DIL.useState("")}
+The key difference is between a database change and a journal update. Writing notes about a table is not the same as creating that table.
 
-  **Suppose we create a Django `Product` model. Which command generates the migration instructions for it?**
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
 
-    `showmigrations`
-    `makemigrations`
-    `migrate`
-
-  {#if answer}
-
-        **{answer==="b"?"Correct":"Not quite"}**
-
-      `makemigrations` generates the instructions. `migrate` then applies them to the database.
-
-  {/if}
-
-#### How we checked it
-
-#### Step 36 — Start the Django development server
-
-Run this in your VS Code terminal:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-**What this does:**
-- Starts Django's local development server.
-- Checks whether the project starts without errors.
-- Makes the application accessible at `http://127.0.0.1:8000/`.
-
-**Expected output:**
-
-```text
-Starting development server at http://127.0.0.1:8000/
-```
-
-The terminal will remain occupied while the server runs. This is normal.
-
-**Next:** Send me the terminal output. We'll verify the application in your browser.
-
-*Previous: Step 27 (Pushing Development Journal to GitHub)  |  Next: Step 29 (Confirming Terminal Environment)*
-
----

@@ -1,71 +1,85 @@
-# Module 1, Chapter 1: Accounts app and custom user model
+# MODULE 1 — Employee accounts
 
-## Step 56: Approved — Begin Development
+## Chapter 1: Accounts app and custom user model (Steps 56–67)
 
-Claude has **approved Module 1**, subject to the stated corrections. No further approval is needed.
+### Before we begin
 
-#### Final role-permission matrix
+The basic Django project could run, but it still treated users as generic Django accounts. Our business needs employees with different jobs.
 
-| Action | Admin | Manager | Sales |
-|---|:---:|:---:|:---:|
-| Login, logout, change own password | Yes | Yes | Yes |
-| View own dashboard | Yes | Yes | Yes |
-| Access Django admin | Yes | No | No |
-| Create, deactivate or reset user accounts | Yes | No | No |
-| Change another user's role | Yes | No | No |
-| Manage suppliers, including deactivate/reactivate | No | Yes | No |
-| Manage products, including deactivate/reactivate | No | Yes | No |
-| View active products and stock | No | Yes | Yes* |
-| Record opening stock | No | Yes | No |
-| Adjust stock and view movement history | No | Yes | No |
-| Record sales | No | No | Yes |
-| View own sales | No | N/A | Yes |
-| View all sales | No | Yes | No |
-| Void sales | No | Yes | No |
-| Create and edit draft purchase orders | No | Yes | No |
-| Order, cancel or close purchase orders | No | Yes | No |
-| Edit expected date of an ordered PO | No | Yes | No |
-| Record planned or unplanned receipts | No | Yes | No |
-| View low-stock and overdue-order reports | No | Yes | No |
-| Import historical sales CSV | No | Yes | No |
-| Set forecasting service level | No | Yes | No |
-| Generate forecasts and recommendations | No | Yes | No |
-| Accept, defer or dismiss recommendations | No | Yes | No |
-| Create draft PO from accepted recommendation | No | Yes | No |
-| Mark anomalies Open / Reviewed / Expected | No | Yes | No |
-| View business reports | No | Yes | No |
-| Automatic ordering | Not available | Not available | Not available |
+### What we worked on
 
-*Sales Staff can see only active products' SKU, name, price and available quantity.*
+We created an accounts app and described a user record with roles for administrator, inventory manager and sales staff. We also learnt why Django already provides many username and password fields.
 
-The Admin dashboard will show only a user count and a Django admin link. Sales Staff must ask a Manager to void sales. Every restricted URL will have server-side permission enforcement and tests.
+### Picture it this way
 
-The app structure remains the approved **10 core tables and 4 stretch tables**. `core` will contain only homepage/dashboard views, with no models or business logic.
+Every person signs in through the same Django login system, but their role helps us decide which pages to allow later. A model describes the record; it does not become a database table until migrations are run.
 
-#### Step 81 — Create the `accounts` app
+> **How to use these notes:** This chapter tells the story of how the project was built. It is not asking you to run every old command again. Some steps show a first attempt that is corrected later.
 
-In your VS Code PowerShell terminal, run:
+### Jump to a step
+
+- [Step 56: Begin the Accounts module](#step-56)
+- [Step 57: Custom User Model](#step-57)
+- [Step 58: Clarify account creation workflow](#step-58)
+- [Step 59: App Creation](#step-59)
+- [Step 60: Configure Settings](#step-60)
+- [Step 61: Custom User Model](#step-61)
+- [Step 62: Understand CustomUser inheritance](#step-62)
+- [Step 63: Understanding AbstractUser](#step-63)
+- [Step 64: Inspect Django’s built-in User model](#step-64)
+- [Step 65: AUTH_USER_MODEL](#step-65)
+- [Step 66: Django Authentication](#step-66)
+- [Step 67: Migration Preparation](#step-67)
+
+---
+
+<a id="step-56"></a>
+
+### Step 56: Begin the Accounts module
+
+**What was happening before this step?**
+
+Up to this point, we had mostly prepared Django and the development environment. Now we started the first feature ordinary users would interact with: accounts.
+
+**What did we do, and what does it mean?**
+
+The inventory system needed different people to sign in. We planned an administrator, an inventory manager, and sales staff. These roles would later decide who could open which pages.
+
+**Code or command from this step**
+
+*1. In your VS Code PowerShell terminal, run.*
 
 ```powershell
 cd .\techmindz_inventory_module0_sqlite_atomic
 python manage.py startapp accounts
 ```
 
-**Expected result:** A new `accounts` folder appears with files such as `models.py`, `views.py` and `admin.py`.
+**How did we know what happened?**
 
-This is the standard Django app-creation process used in your training.
+No code test was expected before the account models and views were created.
 
-Do not run migrations or delete the database yet. We'll configure the custom user model first and verify the existing data before the approved reset.
+**Where to go next:** Previous: [Step 55 — Publish Completion Tag](../Module-0/07-module-0-completion.md#step-55) · Next: [Step 57 — Custom User Model](01-accounts-app-and-custom-user-model.md#step-57)
 
-*Previous: Step 55 (Publish Completion Tag)  |  Next: Step 57 (Custom User Model)*
 
 ---
 
-## Step 57: Custom User Model
+<a id="step-57"></a>
 
-#### Step 82 — Define our custom user model
+### Step 57: Custom User Model
 
-Open **`accounts/models.py`** in VS Code and replace its contents with:
+**What was happening before this step?**
+
+Django already knew how to store a username and password, but we needed to remember each person's role in our business.
+
+**What did we do, and what does it mean?**
+
+We planned a custom user model: our own version of Django's user record, with an added role field. This lets one account represent a manager or a salesperson without creating a completely separate login system.
+
+**File or place:** `accounts/models.py`.
+
+**Code or command from this step**
+
+*1. Open accounts/models.py in VS Code and replace its contents with.*
 
 ```python
 from django.contrib.auth.models import AbstractUser
@@ -88,108 +102,99 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['email', 'role']
 ```
 
-This follows the `CustomUser(AbstractUser)` approach from your instructor's `backend/thirdproject/doctors/models.py`.
+**Understanding the code, one piece at a time**
 
-The main difference is that our roles represent inventory-system users rather than doctors and patients.
+A role field might contain values such as `admin`, `manager` or `sales`. These are business roles. Django already stores usernames and password information, so we did not need a separate password system for every role.
 
-    NEW vs CLASS — REQUIRED_FIELDS
+**How did we know what happened?**
 
-  **Where:** `accounts/models.py` → `CustomUser`
-  **In class:** `backend/thirdproject/doctors/models.py` defines a custom user and its roles, without `REQUIRED_FIELDS`.
-  **In this project:** We add `REQUIRED_FIELDS = ['email', 'role']`.
-  **How they differ:** Our `createsuperuser` command will ask for the user's role as well as email.
-  **Why chosen:** Ensures we explicitly assign the Admin role when creating the administrator.
-  **Other option:** Create the superuser first and assign its role afterward.
+The model definition was proposed here; migrations and actual account tests come in later steps.
 
-**Do not run migrations yet.** We must configure `AUTH_USER_MODEL` first.
+**Where to go next:** Previous: [Step 56 — Begin the Accounts module](01-accounts-app-and-custom-user-model.md#step-56) · Next: [Step 58 — Clarify account creation workflow](01-accounts-app-and-custom-user-model.md#step-58)
 
-*Previous: Step 56 (Approved — Begin Development)  |  Next: Step 58 (Workflow Correction)*
 
 ---
 
-## Step 58: Workflow Correction
+<a id="step-58"></a>
 
-**You are correct. This was my mistake, not yours.**
+### Step 58: Clarify account creation workflow
 
-I instructed you to create the `accounts` app in Step 81, but you never confirmed that you had executed the command. When you clicked **Next**, I incorrectly assumed the step was completed.
+**What was happening before this step?**
 
-I should not have proceeded to editing `accounts/models.py` without verifying that the app existed.
+Before creating database tables, we corrected how employee accounts were supposed to be added and used.
 
-#### What we have actually completed
+**What did we do, and what does it mean?**
 
-- **Module 0:** Django project initialized, `core` app created, SQLite configured, and Django's 18 default migrations applied.
-- **Custom inventory tables:** None created.
-- **`accounts` app:** Not yet created, based on what you've told me.
-- **Module 1:** Approved, but implementation has not yet been confirmed.
+This was a decision-checking step. We wanted the account rules clear first so we did not build a login process that contradicted our agreed workflow. It was not a second user model.
 
-Your understanding of Module 0 is correct.
+**Code or command from this step**
 
-#### Corrected Step 81 — Create the accounts app
-
-In your VS Code PowerShell terminal, run:
+*1. In your VS Code PowerShell terminal, run.*
 
 ```powershell
-Set-Location "C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+Set-Location "C:\Users\YOUR_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
 
 python manage.py startapp accounts
 ```
 
-Django should automatically create:
+**How did we know what happened?**
 
-```text
-accounts/
-    __init__.py
-    admin.py
-    apps.py
-    models.py
-    tests.py
-    views.py
-    migrations/
-        __init__.py
-```
+This is a design correction in the source, not a separate runtime operation.
 
-**Stop here.** Do not edit `models.py`, change settings, or run migrations yet.
+**Where to go next:** Previous: [Step 57 — Custom User Model](01-accounts-app-and-custom-user-model.md#step-57) · Next: [Step 59 — App Creation](01-accounts-app-and-custom-user-model.md#step-59)
 
-#### How we'll prevent this happening again
-
-From now on, I will distinguish between **instructed**, **confirmed completed**, and **verified** steps. Clicking Next will not be treated as proof that a terminal command succeeded.
-
-Once the `accounts` folder appears, confirm it. Only then will we proceed.
-
-*Previous: Step 57 (Custom User Model)  |  Next: Step 59 (App Creation)*
 
 ---
 
-## Step 59: App Creation
+<a id="step-59"></a>
 
-Understood. From now on, I'll use **response numbers only**, alongside Claude's module numbers.
+### Step 59: App Creation
 
-You've run:
+**What was happening before this step?**
+
+We needed a place inside Django to keep the files related to employees and login.
+
+**What did we do, and what does it mean?**
+
+A Django app is a folder of related features. Creating the `accounts` app gave us a home for user models, forms, views, and URL rules. It did not automatically make login work.
+
+**File or place:** `accounts/ (Django app)`.
+
+**Code or command from this step**
+
+*1. You've run.*
 
 ```powershell
-cd "C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+cd "C:\Users\YOUR_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
 python manage.py startapp accounts
 ```
 
-**Please check VS Code Explorer:** You should now see an `accounts` folder containing `models.py`, `views.py`, `admin.py`, and other default Django files.
+**How did we know what happened?**
 
-If the folder exists, confirm with **“created”**. If the command produced an error, share the error instead.
+The following steps add settings and model code; no independent test was recorded here.
 
-We won't modify any files until creation is confirmed.
+**Where to go next:** Previous: [Step 58 — Clarify account creation workflow](01-accounts-app-and-custom-user-model.md#step-58) · Next: [Step 60 — Configure Settings](01-accounts-app-and-custom-user-model.md#step-60)
 
-*Previous: Step 58 (Workflow Correction)  |  Next: Step 60 (Configure Settings)*
 
 ---
 
-## Step 60: Configure Settings
+<a id="step-60"></a>
 
-The `accounts` app is now created.
+### Step 60: Configure Settings
 
-#### Configure the custom user model
+**What was happening before this step?**
 
-Open **`config/settings.py`**.
+The new `accounts` folder existed, but Django would not automatically know that it should use it.
 
-**1.** Find `INSTALLED_APPS` and add `"accounts",` immediately after `"core",`:
+**What did we do, and what does it mean?**
+
+In the settings file, we registered the app and identified its user model. That tells Django to include its database definitions and use our employee account type for authentication.
+
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. Find INSTALLEDAPPS and add "accounts", immediately after "core",.*
 
 ```python
     "core",
@@ -197,29 +202,42 @@ Open **`config/settings.py`**.
 ]
 ```
 
-**2.** Immediately below the closing `]`, add:
+*2. Immediately below the closing ], add.*
 
 ```python
 AUTH_USER_MODEL = "accounts.CustomUser"
 ```
 
-This tells Django that our project will use the custom user model in the `accounts` app instead of Django's default User model.
+**Understanding the code, one piece at a time**
 
-Your instructor also used `AUTH_USER_MODEL` in the training project's settings, so this follows the classroom approach.
+`INSTALLED_APPS` is Django's list of app folders to load. `AUTH_USER_MODEL` tells it which user class represents the signed-in person. Both are settings, but they answer different questions.
 
-**Save the file.** Do not run migrations yet. We will define `CustomUser` next.
+**How did we know what happened?**
 
-*Previous: Step 59 (App Creation)  |  Next: Step 61 (Custom User Model)*
+The next step defines the model itself. This setting should be checked before migration.
+
+**Where to go next:** Previous: [Step 59 — App Creation](01-accounts-app-and-custom-user-model.md#step-59) · Next: [Step 61 — Custom User Model](01-accounts-app-and-custom-user-model.md#step-61)
+
 
 ---
 
-## Step 61: Custom User Model
+<a id="step-61"></a>
 
-Assuming you've saved the two changes to `config/settings.py`, we can now define our user model.
+### Step 61: Custom User Model
 
-#### Open `accounts/models.py`
+**What was happening before this step?**
 
-Replace its default contents with:
+With the app registered, it was time to define what an employee account actually contains.
+
+**What did we do, and what does it mean?**
+
+In `accounts/models.py`, the `CustomUser` class builds on Django's normal user fields and adds our role choice. A model is a Python description of information Django will store in a database table.
+
+**File or place:** `accounts/models.py`.
+
+**Code or command from this step**
+
+*1. Replace its default contents with.*
 
 ```python
 from django.contrib.auth.models import AbstractUser
@@ -242,396 +260,202 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['email', 'role']
 ```
 
-This closely follows your instructor's `backend/thirdproject/doctors/models.py`, which also defines `CustomUser(AbstractUser)` with a `role` field.
+**Understanding the code, one piece at a time**
 
-  **NEW vs CLASS — REQUIRED_FIELDS**
+`class CustomUser(AbstractUser)` means we are starting with Django's ordinary user behaviour and adding our own fields. We did not write a password checker in this model; Django already supplies one.
 
-  **Where:** `accounts/models.py` → `CustomUser`
-  **In class:** `backend/thirdproject/doctors/models.py` defines a custom user without `REQUIRED_FIELDS`.
-  **In this project:** We add `REQUIRED_FIELDS = ['email', 'role']`.
-  **How they differ:** The `createsuperuser` command will explicitly ask for email and role.
-  **Why chosen:** To assign the administrator's role during account creation.
-  **Other option:** Assign the role manually after creating the superuser.
+**How did we know what happened?**
 
-Save `models.py`. **Do not run migrations or delete the database yet.**
+The notes record the code but not a database verification at this exact step.
 
-When saved, reply **done** so we can verify the configuration before proceeding.
+**Where to go next:** Previous: [Step 60 — Configure Settings](01-accounts-app-and-custom-user-model.md#step-60) · Next: [Step 62 — Understand CustomUser inheritance](01-accounts-app-and-custom-user-model.md#step-62)
 
-*Previous: Step 60 (Configure Settings)  |  Next: Step 62 (Understanding CustomUser)*
 
 ---
 
-## Step 62: Understanding CustomUser
+<a id="step-62"></a>
 
-**No. We will not use `createsuperuser` for every employee.** That command is only for creating an administrator with special privileges.
+### Step 62: Understand CustomUser inheritance
 
-Let's understand what our code actually does.
+**What was happening before this step?**
 
-#### 1. Is `CustomUser` a database table?
+The `CustomUser` class was short, but it seemed to gain many fields without writing them out. We needed to understand why.
 
-Yes. Django will create a table for it when we run migrations.
+**What did we do, and what does it mean?**
 
-You noticed that our code defines only one field:
+`AbstractUser` is Django's ready-made user blueprint. By inheriting from it, our class gets username, password and other account behaviour. We add only the business-specific difference: the role. Later migrations turn this model into database tables.
 
-```python
-role = models.CharField(...)
-```
+**File or place:** `accounts/models.py`.
 
-But look at this line:
+**Code or command from this step**
 
-```python
-class CustomUser(AbstractUser):
-```
-
-**`AbstractUser` already provides several fields.** Our `CustomUser` inherits all of them and adds one more: `role`.
-
-For example, the resulting table will contain:
-
-| id | username | email | password | role |
-|---|---|---|---|---|
-| 1 | admin1 | admin@example.com | Hashed | admin |
-| 2 | manager1 | manager@example.com | Hashed | manager |
-| 3 | sales1 | sales@example.com | Hashed | sales |
-
-Illustrative records only. Passwords are stored as secure hashes, not plain text. Other inherited fields include first name, last name, account status and permissions.
-
-So we're **extending Django's existing user structure**, not defining an entire user table from scratch.
-
-#### 2. Where does the email field come from?
-
-It is inherited from `AbstractUser`.
-
-This line:
+*1. This line.*
 
 ```python
 REQUIRED_FIELDS = ['email', 'role']
 ```
 
-doesn't create those fields. It tells Django's `createsuperuser` command to ask for them.
+**How did we know what happened?**
 
-One distinction: `REQUIRED_FIELDS` does not, by itself, make email mandatory for every account created through Django Admin.
+This is a learning explanation using small examples, not a second model implementation.
 
-#### 3. How will accounts be created?
+**Where to go next:** Previous: [Step 61 — Custom User Model](01-accounts-app-and-custom-user-model.md#step-61) · Next: [Step 63 — Understanding AbstractUser](01-accounts-app-and-custom-user-model.md#step-63)
 
-      **Initial administrator**
-
-      We run `python manage.py createsuperuser` once to create the first administrator.
-
-      **All other employees**
-
-      The administrator logs into Django Admin and creates their accounts, assigning either `manager` or `sales` as their role.
-
-#### 4. What about the superuser you already created in Module 0?
-
-That superuser belongs to Django's original `auth_user` table.
-
-We are switching to our own `accounts_customuser` table.
-
-Because Module 0 contains only development setup data, Claude approved a **one-time SQLite database reset**. Your old superuser will be deleted during that reset, and we'll create a new one with `role='admin'`.
-
-We have **not performed that reset yet**.
-
-**In short:** One custom user table holds all accounts. Each person has a username, password, email and role. The role determines which parts of the inventory system they can access.
-
-No additional action is needed for this explanation. We can continue with `accounts/models.py` when you're ready.
-
-*Previous: Step 61 (Custom User Model)  |  Next: Step 63 (Understanding AbstractUser)*
 
 ---
 
-## Step 63: Understanding AbstractUser
+<a id="step-63"></a>
 
-You're almost correct. **`CustomUser` is a child of `AbstractUser`, but `AbstractUser` is not a database table.**
+### Step 63: Understanding AbstractUser
 
-It is a Python class provided by Django that contains predefined user fields and functionality.
+**What was happening before this step?**
 
-#### 1. Where is `AbstractUser`?
+We wanted to make sure that using `AbstractUser` did not create an unexplained second user table.
 
-It is part of Django's installed source code, not something we created.
+**What did we do, and what does it mean?**
 
-You can find it at approximately:
+Think of it as borrowing a blueprint rather than copying a completed house. `AbstractUser` supplies definitions; `CustomUser` is the concrete model our project uses. Django creates tables for the concrete model after migrations.
 
-```text
-.venv/
-  Lib/
-    site-packages/
-      django/
-        contrib/
-          auth/
-            models.py
-```
+**File or place:** `django.contrib.auth.models (framework reference)`.
 
-Inside that file, Django defines a class called `AbstractUser`.
+**Code or command from this step**
 
-#### How to see the actual code
-
-In VS Code, open `accounts/models.py`, then hold **Ctrl** and click `AbstractUser` in:
-
-```python
-from django.contrib.auth.models import AbstractUser
-```
-
-VS Code should take you directly to Django's source code, where you can inspect the class.
-
-#### 2. What is an abstract model?
-
-Think of it as a reusable blueprint.
-
-    **AbstractUser**
-
-    Python blueprint — no database table
-    username · email · first_name · last_name · password and more
-
-        **Django's User**
-        Creates `auth_user`
-        Used in Module 0
-
-        **Our CustomUser**
-        Creates `accounts_customuser`
-        Adds the `role` field
-
-Both classes inherit from `AbstractUser`, but only the concrete user model selected for the project is used for new user accounts.
-
-#### 3. Why not just use `AbstractUser` directly?
-
-Because it is marked as an **abstract model**:
-
-```python
-class Meta:
-    abstract = True
-```
-
-This tells Django not to create a database table for `AbstractUser` itself.
-
-When we write:
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```python
 class CustomUser(AbstractUser):
     role = models.CharField(max_length=10)
 ```
 
-Django combines the inherited fields with our new `role` field and creates a real table when we run migrations.
+**How did we know what happened?**
 
-**So the distinction is:**
+This was conceptual verification, so the code examples illustrate inheritance rather than new edits.
 
-- `AbstractUser` = reusable Python blueprint.
-- `CustomUser` = our Python model based on that blueprint.
-- `accounts_customuser` = the actual database table created from our model.
+**Where to go next:** Previous: [Step 62 — Understand CustomUser inheritance](01-accounts-app-and-custom-user-model.md#step-62) · Next: [Step 64 — Inspect Django’s built-in User model](01-accounts-app-and-custom-user-model.md#step-64)
 
-You can inspect `AbstractUser` in VS Code now. No database changes are needed.
-
-*Previous: Step 62 (Understanding CustomUser)  |  Next: Step 64 (User Table Definition)*
 
 ---
 
-## Step 64: User Table Definition
+<a id="step-64"></a>
 
-If you're referring to **Django's original User table (`auth_user`)**, you can examine its definition in two places.
+### Step 64: Inspect Django’s built-in User model
 
-#### 1. Python model definition
+**What was happening before this step?**
 
-Open:
+We examined Django's standard user fields so the new model would feel less mysterious.
 
-```text
-.venv/Lib/site-packages/django/contrib/auth/models.py
-```
+**What did we do, and what does it mean?**
 
-Find:
+Django's existing user class defines things such as usernames, names, email and password behaviour. Our model does not need to declare all of these again; it receives them through inheritance.
+
+**File or place:** `Django source (reference only)`.
+
+**Code or command from this step**
+
+*1. Find.*
 
 ```python
 class User(AbstractUser):
 ```
 
-This is Django's built-in User model. It inherits its fields from `AbstractUser`, which is defined in the same file.
+**How did we know what happened?**
 
-#### 2. Actual database table
+Reading the framework model is not the same as modifying installed Django files.
 
-Your existing SQLite database is:
+**Where to go next:** Previous: [Step 63 — Understanding AbstractUser](01-accounts-app-and-custom-user-model.md#step-63) · Next: [Step 65 — AUTH_USER_MODEL](01-accounts-app-and-custom-user-model.md#step-65)
 
-```text
-techmindz_inventory_module0_sqlite_atomic/db.sqlite3
-```
-
-Open it using a SQLite viewer and find the table named `auth_user`. You can inspect its columns and records.
-
-#### What about our `CustomUser` table?
-
-| | Original User | Our CustomUser |
-|---|---|---|
-| Python definition | Django's `auth/models.py` | `accounts/models.py` |
-| Database table | `auth_user` | `accounts_customuser` |
-| Currently exists? | Yes | Not yet |
-
-**Important:** We have not created the `accounts_customuser` database table yet. Django will generate it from our model when we create and apply migrations.
-
-You don't normally write the SQL table definition yourself in Django. You define the Python model, and Django's migration system generates the database structure.
-
-*Previous: Step 63 (Understanding AbstractUser)  |  Next: Step 65 (AUTH_USER_MODEL)*
 
 ---
 
-## Step 65: AUTH_USER_MODEL
+<a id="step-65"></a>
+
+### Step 65: AUTH_USER_MODEL
+
+**What was happening before this step?**
+
+There can be only one main user model for the project's login system. Django needed to know which one we chose.
+
+**What did we do, and what does it mean?**
+
+`AUTH_USER_MODEL` tells Django to use `accounts.CustomUser` whenever it needs the project user type. Without that setting, Django may keep expecting its default user model instead.
+
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. Example used to explain the idea (not necessarily a file edit).*
 
 ```python
 AUTH_USER_MODEL = "accounts.CustomUser"
 ```
 
-This line tells Django:
+**Understanding the code, one piece at a time**
 
-**"Whenever you need a user model, use the `CustomUser` class defined in our `accounts` app."**
+`AUTH_USER_MODEL = 'accounts.CustomUser'` can be read aloud as “the user class is named `CustomUser` and it lives in the `accounts` app.” It should be chosen early, before the main database has real users.
 
-#### Breaking it down
+**How did we know what happened?**
 
-| Part | Meaning |
-|---|---|
-| `AUTH_USER_MODEL` | Django setting that specifies which user model to use |
-| `accounts` | Name of our Django app |
-| `CustomUser` | Name of the model class inside `accounts/models.py` |
-| `"accounts.CustomUser"` | Django's reference to that model, written as `app_label.ModelName` |
+The model was then prepared for the first migration.
 
-#### What happens because of this setting?
+**Where to go next:** Previous: [Step 64 — Inspect Django’s built-in User model](01-accounts-app-and-custom-user-model.md#step-64) · Next: [Step 66 — Django Authentication](01-accounts-app-and-custom-user-model.md#step-66)
 
-    **Django needs to create or authenticate a user**
-
-    Checks `AUTH_USER_MODEL`
-    `"accounts.CustomUser"`
-
-    **Uses our `CustomUser` model**
-    Username, email, password, role, etc.
-
-Without this setting, Django would use its default `auth.User` model, which doesn't have our `role` field.
-
-**Important:** This setting does not create a table immediately. It tells Django which model to use. The actual `accounts_customuser` table will be created when we run migrations.
-
-*Previous: Step 64 (User Table Definition)  |  Next: Step 66 (Django Authentication)*
 
 ---
 
-## Step 66: Django Authentication
+<a id="step-66"></a>
 
-**Yes. That is exactly the underlying idea.** Your toothbrush analogy is appropriate.
+### Step 66: Django Authentication
 
-Django already has an established concept of a *user*. Its built-in authentication system knows how to handle user accounts, passwords, logins, permissions and sessions.
+**What was happening before this step?**
 
-It therefore needs a standard answer to one question:
+After creating the custom user, we reviewed how the rest of Django's login machinery would use it.
 
-**Which database model represents a user in this project?**
+**What did we do, and what does it mean?**
 
-#### 1. Django already has a default answer
+Authentication asks “who is this person?” Django checks usernames and passwords against the configured user model. Role checks, added later, will ask the separate question “what is this person allowed to do?”
 
-Even if you don't write anything in your project's `settings.py`, Django's default setting is:
+**File or place:** `config/settings.py`.
+
+**Code or command from this step**
+
+*1. Even if you don't write anything in your project's settings.py, Django's default setting is.*
 
 ```python
 AUTH_USER_MODEL = "auth.User"
 ```
 
-This default is defined in Django's own settings, not necessarily in your project's settings file.
+**How did we know what happened?**
 
-`auth.User` refers to the built-in `User` model provided by `django.contrib.auth`.
+This conceptual step did not add a new authentication function.
 
-That's what we used in Module 0.
+**Where to go next:** Previous: [Step 65 — AUTH_USER_MODEL](01-accounts-app-and-custom-user-model.md#step-65) · Next: [Step 67 — Migration Preparation](01-accounts-app-and-custom-user-model.md#step-67)
 
-#### 2. We are overriding that answer
-
-    Without our configuration
-
-        `AUTH_USER_MODEL`
-
-        `auth.User`
-
-    Django uses its built-in user model.
-
-    With our configuration
-
-        `AUTH_USER_MODEL`
-
-        `accounts.CustomUser`
-
-    Django uses our custom user model, which includes the role field.
-
-#### 3. Is a user model something every Django app automatically has?
-
-Not quite. **Django provides an authentication framework**, which is normally included when you create a Django project.
-
-That framework has a default user model. Individual apps don't each need to define their own users.
-
-For example, in our inventory project:
-
-- The `sales` app needs to know which employee recorded a sale.
-- The `inventory` app needs to know who adjusted stock.
-- The `accounts` app manages those employee accounts.
-
-All three can refer to the **same configured user model**.
-
-So the more precise version of your understanding is:
-
-**Django's authentication system comes with a default user model. `AUTH_USER_MODEL` lets us replace that default with our own model, which is then used throughout the project.**
-
-And this is why choosing the user model *before creating the database tables* is important.
-
-#### How we checked it
-
-Before creating database tables, let's verify that Django recognizes our custom user model.
-
-In your VS Code terminal, from the folder containing `manage.py`, run:
-
-```powershell
-python manage.py check
-```
-
-**Expected output:**
-
-```text
-System check identified no issues (0 silenced).
-```
-
-This checks our Django configuration without changing the database.
-
-If you haven't yet saved the `CustomUser` code in `accounts/models.py`, do that first using the code from response 89.
-
-**Do not run migrations or delete the database yet.**
-
-Share the terminal output so we can confirm the configuration before proceeding.
-
-#### How we checked it
-
-Before proceeding, I need to confirm the result of the previous command:
-
-```powershell
-python manage.py check
-```
-
-Did your terminal display the following?
-
-```text
-System check identified no issues (0 silenced).
-```
-
-Please reply **yes** if it did, or paste the error message if it didn't.
-
-We won't change the database until this is confirmed.
-
-*Previous: Step 65 (AUTH_USER_MODEL)  |  Next: Step 67 (Migration Preparation)*
 
 ---
 
-## Step 67: Migration Preparation
+<a id="step-67"></a>
 
-Understood. From now on:
+### Step 67: Migration Preparation
 
-- **Next** means you completed the previous instruction and received the expected output.
-- If something goes wrong, you'll share the actual output.
-- I won't repeatedly ask you to confirm successful commands.
+**What was happening before this step?**
 
-#### Next: Generate the CustomUser migration
+The Python user class had been written, but writing a class does not create a table in SQLite.
 
-Run this in the terminal:
+**What did we do, and what does it mean?**
+
+`makemigrations` prepares the instructions for the database change. The next step is `migrate`, which applies those instructions and creates the actual table.
+
+**File or place:** `accounts/migrations/`.
+
+**Code or command from this step**
+
+*1. Run this in the terminal.*
 
 ```powershell
 python manage.py makemigrations accounts
 ```
 
-**Expected output:**
+*2. Example result from the notes (not a command to run).*
 
 ```text
 Migrations for 'accounts':
@@ -639,10 +463,21 @@ Migrations for 'accounts':
     + Create model CustomUser
 ```
 
-This generates the instructions for creating our custom user table. **It does not create the table yet.**
+**Understanding the code, one piece at a time**
 
-Do not run `migrate` or delete `db.sqlite3` yet. We'll handle the approved database reset separately.
+`makemigrations` writes instructions about the database change; it does not change the tables yet. `migrate` is the separate command that applies those instructions.
 
-*Previous: Step 66 (Django Authentication)  |  Next: Step 68 (Database Reset)*
+**How did we know what happened?**
+
+Our notes shows the expected `0001_initial.py` creation message; applying the schema happens later.
+
+**Where to go next:** Previous: [Step 66 — Django Authentication](01-accounts-app-and-custom-user-model.md#step-66) · Next: [Step 68 — Database Reset](02-database-setup-and-admin-site.md#step-68)
 
 ---
+
+### The point of this chapter
+
+Every person signs in through the same Django login system, but their role helps us decide which pages to allow later. A model describes the record; it does not become a database table until migrations are run.
+
+**Interview practice:** Close the code and explain the chapter in your own words: what problem existed, which file handled it, and what happened when someone used the feature.
+
