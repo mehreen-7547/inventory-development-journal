@@ -313,3 +313,49 @@ Send me the terminal output. We'll verify the upload before setting up your sepa
 *Previous: Step 11 (Connect your local project to GitHub)  |  Next: Step 13 (Create a separate local journal folder)*
 
 ---
+
+## Step 13: Create a separate local journal folder
+
+**Step 16 completed.** I've verified that your development journal repository exists and is **private**.
+
+inventory-development-journal (https://github.com/mehreen-7547/inventory-development-journal)
+
+Your repositories are now:
+
+| Repository | Visibility |
+|---|---|
+| `ai-assisted-inventory-manager` | Public |
+| `inventory-development-journal` | Private |
+
+#### Step 17 — Create a separate local journal folder
+
+In your existing VS Code PowerShell terminal, run:
+
+```powershell
+New-Item -ItemType Directory -Path C:\Users\mehre\projects2026\inventory-development-journal
+```
+
+**Understanding the command:**
+- `New-Item` — Creates a new item.
+- `-ItemType Directory` — Specifies that we're creating a folder.
+- `-Path` — Specifies its location.
+
+Our local folders will be separate:
+
+```text
+projects2026/
+├── Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│   └── techmindz_inventory_module0_sqlite_atomic/
+│       └── Django project (public Git repository)
+│
+└── inventory-development-journal/
+    └── Learning journal (private Git repository)
+```
+
+This separation prevents your private learning notes from accidentally entering your public project's Git history.
+
+**Send me the command output.** Next, we'll connect this folder to the private GitHub repository and add the journal covering our completed setup steps.
+
+*Previous: Step 12 (Push your first commit to GitHub)  |  Next: Step 14 (Initialize Git for the private journal)*
+
+---
