@@ -57,3 +57,158 @@ def changepassword(request):
 *Previous: Step 85 (Login Page Check)  |  Next: Step 87 (Code Walkthrough)*
 
 ---
+
+## Step 87: Code Walkthrough
+
+Imagine **manager1** wants to change their password.
+
+We'll follow what happens from the moment they open the password-change page.
+
+#### Scene 1 — Manager1 opens the page
+
+```python
+@login_required(login_url='/login/')
+def changepassword(request):
+```
+
+Django first checks: **Is manager1 logged in?**
+
+- Yes → Continue.
+- No → Send them to `/login/`.
+
+Now Django enters the `changepassword()` function.
+
+```python
+if request.method == 'POST':
+```
+
+Django asks: **Has manager1 submitted the form?**
+
+Not yet! They have only opened the page, so the request is GET.
+
+Django skips the `if` block and goes to `else`.
+
+```python
+else:
+    form = PasswordChangeForm(request.user)
+```
+
+Django prepares an empty password-change form for manager1.
+
+  What manager1 will see
+
+    Old password
+
+    New password
+
+    Confirm new password
+
+  Change Password
+  Illustration only — we'll build the actual HTML form next.
+
+Then:
+
+```python
+return render(request, 'accounts/change_password.html', {'form': form})
+```
+
+Django displays the HTML page and gives it the form we just prepared.
+
+#### Scene 2 — Manager1 submits the form
+
+Manager1 enters their old password, chooses a new password, and clicks **Change Password**.
+
+The browser sends those details to Django using POST.
+
+The same function runs again, but this time:
+
+```python
+if request.method == 'POST':
+```
+
+The answer is **Yes**.
+
+```python
+form = PasswordChangeForm(request.user, request.POST)
+```
+
+Django creates a form using:
+
+- `request.user` → manager1, whose password is being changed.
+- `request.POST` → the password details submitted by manager1.
+
+Now:
+
+```python
+if form.is_valid():
+```
+
+Django checks whether the old password is correct, the new passwords match, and the new password satisfies the password rules.
+
+#### Scene 3 — The password is valid
+
+```python
+user = form.save()
+```
+
+Django securely saves manager1's new password.
+
+```python
+update_session_auth_hash(request, user)
+```
+
+Normally, changing a password can invalidate the current login session.
+
+This line updates the session so **manager1 stays logged in**.
+
+```python
+return redirect('home')
+```
+
+Finally, Django sends manager1 back to the homepage.
+
+#### But what if the password is wrong?
+
+If `form.is_valid()` returns `False`, Django skips the password-saving code.
+
+It reaches:
+
+```python
+return render(request, 'accounts/change_password.html', {'form': form})
+```
+
+The form is displayed again, this time containing validation errors so manager1 can correct them.
+
+---
+
+#### The entire story in one diagram
+
+    **Manager1 opens Change Password**
+
+    Is manager1 logged in?
+
+        No
+
+        Login page
+
+        Yes
+
+        Show empty form (GET)
+
+    **Manager1 submits form (POST)**
+
+    Are the password details valid?
+
+        No
+
+          Show form with errors
+
+        Yes
+
+          Save password → Keep logged in → Home
+
+**The key idea:** This single function handles two situations: **GET displays the form; POST processes the submitted form.**
+
+*Previous: Step 86 (Change Password)  |  Next: Step 88 (Password Change URL)*
+
+---
