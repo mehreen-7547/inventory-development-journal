@@ -637,3 +637,76 @@ Next, we'll update **Create Employee**, followed by **Edit Employee**.
 *Previous: Step 185 (Update Reset Complete Page)  |  Next: Step 187 (Update Create Employee)*
 
 ---
+
+## Step 187: Update Create Employee
+
+#### Step 1 — Replace `create_employee.html`
+
+**File:** `templates/accounts/create_employee.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Create Employee - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <h2 class="mb-3">Create Employee</h2>
+
+        <p class="text-muted mb-4">
+            Enter the employee details below.
+            A password setup link will be sent to their email.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Create Employee
+                </button>
+
+                <a href="{% url 'employee_list' %}"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Added Bootstrap layout and buttons.
+- Added a **Cancel** button.
+- Preserved `{{ form.as_p }}`, form validation, and CSRF protection.
+- Kept the existing employee creation and welcome-email workflow unchanged.
+
+#### Step 3 — Test
+
+{@body const checks=["Create Employee page displays correctly","All five fields appear: username, first name, last name, email and role","Submitting an empty form shows validation errors","Cancel returns to Manage Employees"]}
+{@body const [done,setDone]=DIL.useState([])}
+
+  {#each checks as check,i}
+    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
+  {/each}
+
+Next: **Edit Employee**, including the activation/deactivation and resend setup email controls.
+
+*Previous: Step 186 (Update Employee List)  |  Next: Step 188 (Fix Form Styling)*
+
+---
