@@ -201,3 +201,52 @@ Tell me whether you successfully logged in.
 *Previous: Step 29 (Confirming Terminal Environment)  |  Next: Step 31 (Documenting Superuser Setup)*
 
 ---
+
+## Step 31: Documenting Superuser Setup
+
+**Step 39 completed.** Your superuser login works, and the Django Admin dashboard is accessible.
+
+#### Step 40 — Record the successful setup
+
+Open a **new VS Code terminal** so the Django server can continue running.
+
+Execute:
+
+```powershell
+Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Django Admin Setup
+
+### Objective
+Create and verify an administrator account.
+
+### Commands
+- python manage.py createsuperuser
+- python manage.py runserver
+
+### Results
+- Superuser created successfully.
+- Django development server started without errors.
+- Admin login succeeded at http://127.0.0.1:8000/admin/
+- Django Administration dashboard loaded.
+
+### What I learned
+- A superuser has full Django administration permissions.
+- Django Admin is provided by the framework.
+- User credentials are stored in the database, with passwords stored as hashes.
+
+### Errors
+None.
+
+### Revision question
+What is the difference between a Django staff user and a superuser?
+'@
+```
+
+**Important:** We document the setup, not your actual username, email, or password.
+
+Tell me **done**. We'll save this journal update to GitHub before moving to the next development task.
+
+*Previous: Step 30 (Understanding the Project Homepage)  |  Next: Step 32 (Staging Development Journal Update)*
+
+---
