@@ -414,3 +414,46 @@ This confirms that our decorator can enforce role restrictions, not merely displ
 *Previous: Step 103 (Apply Role Security)  |  Next: Step 105 (Change accounts/decorators.py)*
 
 ---
+
+## Step 105: Change accounts/decorators.py
+
+#### Reply 179 — Module 1: Role Security
+
+This was the step where we created **`accounts/decorators.py`** to restrict access based on user roles.
+
+```python
+from functools import wraps
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
+
+def role_required(*roles):
+    def decorator(view_func):
+        @login_required(login_url='/login/')
+        @wraps(view_func)
+        def wrapper(request, *args, **kwargs):
+            if request.user.role not in roles:
+                raise PermissionDenied
+
+            return view_func(request, *args, **kwargs)
+
+        return wrapper
+
+    return decorator
+```
+
+**Purpose:** Allow us to protect views using:
+
+```python
+@role_required('admin', 'manager')
+def inventory_report(request):
+    ...
+```
+
+We subsequently applied this decorator to the homepage in reply **188** and tested role restrictions in **189**.
+
+**Current status:** The role-security implementation and its manual test are complete. Automated tests are still pending.
+
+*Previous: Step 104 (Test Role Restrictions)  |  Next: Step 106 (Apply Role Security)*
+
+---
