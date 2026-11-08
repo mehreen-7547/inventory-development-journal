@@ -373,3 +373,73 @@ Django now knows where to find all three templates:
 *Previous: Step 119 (Connect Email Template)  |  Next: Step 121 (Set New Password Page)*
 
 ---
+
+## Step 121: Set New Password Page
+
+#### Next: Create the Set New Password page
+
+When an employee clicks the link in their password-reset email, they should reach a page where they can enter a new password.
+
+Create:
+
+`templates/accounts/password_reset_confirm.html`
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set New Password</title>
+</head>
+<body>
+
+    {% if validlink %}
+
+        <h2>Set New Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">Reset Password</button>
+        </form>
+
+    {% else %}
+
+        <h2>Invalid Reset Link</h2>
+
+        <p>
+            This password reset link is invalid or has expired.
+            Please request a new one.
+        </p>
+
+        <a href="{% url 'password_reset' %}">
+            Request New Link
+        </a>
+
+    {% endif %}
+
+</body>
+</html>
+```
+
+#### How does this work?
+
+Django's built-in `PasswordResetConfirmView` will provide two important values:
+
+- **`validlink`** — `True` if the reset link is valid; otherwise `False`.
+- **`form`** — Django's form for entering and confirming a new password.
+
+  **NEW vs CLASS — `validlink`**
+
+  `validlink` is a built-in template context variable supplied by `PasswordResetConfirmView`.
+
+  We use `{% if validlink %}` to show the password form only when the reset link is valid.
+
+**For now:** Save the file. Next, we'll connect it to the URL contained in the reset email.
+
+*Previous: Step 120 (Connect Email Subject)  |  Next: Step 122 (Reset Link URL)*
+
+---
