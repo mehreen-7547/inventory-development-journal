@@ -55,3 +55,64 @@ Next, we'll connect this form to Django Admin so the employee-creation page no l
 *Previous: Step 127 (Email Testing)  |  Next: Step 129 (Connect Employee Form)*
 
 ---
+
+## Step 129: Connect Employee Form
+
+#### Next: Connect our employee form to Django Admin
+
+Open **`accounts/admin.py`** and replace its entire contents with:
+
+```python
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+from .forms import EmployeeCreationForm
+
+
+class CustomUserAdmin(UserAdmin):
+
+    add_form = EmployeeCreationForm
+
+    fieldsets = UserAdmin.fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+    add_fieldsets = (
+        (None, {
+            'fields': (
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+                'role'
+            )
+        }),
+    )
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+```
+
+#### What changed?
+
+- `add_form` tells Django Admin to use our custom employee-creation form.
+- `add_fieldsets` specifies the fields displayed when creating an employee.
+- `fieldsets` preserves the existing configuration for editing users.
+
+  **NEW vs CLASS — `add_form`**
+
+  `add_form` is a built-in configuration attribute of Django's `UserAdmin`. We assign our `EmployeeCreationForm` to it.
+
+#### Test
+
+1. Save `admin.py`.
+2. Open `http://127.0.0.1:8000/admin/`.
+3. Navigate to **Users → Add user**.
+
+**Expected:** You should see username, first name, last name, email and role — without password fields.
+
+Don't create an employee yet. We still need to implement the welcome email and password-setup link.
+
+*Previous: Step 128 (Employee Creation Form)  |  Next: Step 130 (Welcome Email Template)*
+
+---
