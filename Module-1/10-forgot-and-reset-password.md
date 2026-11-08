@@ -188,3 +188,49 @@ tells Django to find `password_reset.html` inside the `accounts` template folder
 *Previous: Step 115 (Password Reset Confirmation)  |  Next: Step 117 (Confirmation Page URL)*
 
 ---
+
+## Step 117: Confirmation Page URL
+
+#### Next: Connect the confirmation page to Django
+
+We've created `password_reset_done.html`. Now we need Django to display it after a password-reset request.
+
+Open **`accounts/urls.py`**.
+
+Add this inside your existing `urlpatterns` list:
+
+```python
+path(
+    'password-reset/done/',
+    auth_views.PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'
+    ),
+    name='password_reset_done'
+),
+```
+
+#### How does this work?
+
+    **PasswordResetView**
+
+    Processes the submitted email address
+
+    **PasswordResetDoneView**
+
+    Displays password_reset_done.html
+
+Django's built-in `PasswordResetView` automatically looks for the URL named `password_reset_done` after processing a valid form submission.
+
+#### Test
+
+Save the file and visit:
+
+`http://127.0.0.1:8000/password-reset/done/`
+
+You should see the **Check Your Email** page.
+
+**Do not submit the password-reset form yet.** We still need to create the email templates used to generate the secure reset link.
+
+*Previous: Step 116 (Template Structure)  |  Next: Step 118 (Password Reset Email)*
+
+---
