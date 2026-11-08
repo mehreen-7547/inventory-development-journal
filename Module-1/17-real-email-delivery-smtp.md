@@ -525,3 +525,76 @@ This confirms that Django's built-in system checks found no configuration issues
 *Previous: Step 175 (Change manage.py)  |  Next: Step 177 (Change base.html)*
 
 ---
+
+## Step 177: Change base.html
+
+Agreed. **Your decisions override Claude's recommendation wherever you explicitly choose a different approach.**
+
+We'll retain custom employee management and complete the remaining Module 1 requirements from v3.
+
+#### Remaining work
+
+  {@body const tasks = ["Change unauthorized access to dashboard redirect + error message","Create shared base.html, Bootstrap layout and navbar","Review NEW vs CLASS cards and restore their required format","Add automated Django tests","Handle email-sending failures safely","Prepare Module 1 report and development journal","Run final checks and commit Module 1"]}
+  {@body const [done,setDone] = DIL.useState([])}
+  {#each tasks as task,i}
+    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{task}
+  {/each}
+  Checklist for the remaining work. We'll complete and verify each item separately.
+
+#### First correction: Unauthorized access
+
+Yes, this requires only a small code change.
+
+**File:** `accounts/decorators.py`
+
+**1.** Remove this import:
+
+```python
+from django.core.exceptions import PermissionDenied
+```
+
+Replace it with:
+
+```python
+from django.contrib import messages
+from django.shortcuts import redirect
+```
+
+**2.** Find:
+
+```python
+if request.user.role not in roles:
+    raise PermissionDenied
+```
+
+Replace it with:
+
+```python
+if request.user.role not in roles:
+    messages.error(request, 'You do not have permission to access this page.')
+    return redirect('home')
+```
+
+Nothing else needs changing in this file.
+
+  NEW vs CLASS — Centralized role protection
+  **Where:** `accounts/decorators.py` → `role_required()`
+  **In class:** `backend/thirdproject/doctors/views.py` → `doctor_dashboard()` checked the role inside the view and redirected to an error page.
+  **In this project:** A reusable decorator checks permissions and redirects unauthorized users to the dashboard with a message.
+  **How they differ:** Class checks each view individually. Our decorator applies the same rule to multiple views.
+  **Why chosen:** Less repeated code and consistent access control.
+  **Other option:** Keep individual role checks or return HTTP 403.
+
+#### Verify
+
+1. Log in as `sales1`.
+2. Visit `http://127.0.0.1:8000/employees/`.
+3. You should return to the dashboard and see:
+
+> You do not have permission to access this page.
+
+The employee-management page must not open.
+
+*Previous: Step 176 (Send a real email through Gmail)  |  Next: Step 178 (Change base.html)*
+
+---
