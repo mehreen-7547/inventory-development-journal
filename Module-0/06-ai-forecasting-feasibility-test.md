@@ -34,3 +34,41 @@ Send the terminal output after installation. We'll install the remaining AI depe
 *Previous: Step 41 (Record and Push Test Results)  |  Next: Step 43 (Understanding python -m)*
 
 ---
+
+## Step 43: Understanding python -m
+
+The `-m` in `python -m pip` stands for **module**.
+
+It tells Python to run a Python module as a program.
+
+#### Compare
+
+```powershell
+pip install torch
+```
+
+Runs the `pip` command directly.
+
+```powershell
+python -m pip install torch
+```
+
+Tells Python to find the `pip` module and run it.
+
+#### Why do we prefer `python -m pip`?
+
+Your computer may have multiple Python installations. Using `python -m pip` ensures that **pip belongs to the Python interpreter you're currently running**.
+
+For example:
+
+- `python` — selects your active virtual environment's Python.
+- `-m pip` — runs that Python's pip module.
+- `install torch` — asks pip to install PyTorch.
+
+**Remember:** `-m` is an option belonging to Python, not pip. It can run other modules too, such as `python -m django --version`.
+
+We're still at **Step 53**; no additional command is needed until PyTorch installation finishes.
+
+*Previous: Step 42 (Installing PyTorch)  |  Next: Step 44 (Installing AI Dependencies)*
+
+---
