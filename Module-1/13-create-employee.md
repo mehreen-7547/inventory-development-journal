@@ -65,3 +65,47 @@ We're reusing `EmployeeCreationForm` and `send_welcome_email()` from our earlier
 *Previous: Step 138 (Employee List URL)  |  Next: Step 140 (Restrict Employee Roles)*
 
 ---
+
+## Step 140: Restrict Employee Roles
+
+#### Next: Restrict roles in the employee creation form
+
+Our `CustomUser` model supports three roles: Admin, Manager and Sales Staff.
+
+However, the **Create Employee** page should only allow Manager and Sales Staff. Administrators shouldn't be able to create additional administrator accounts through this form.
+
+Open **`accounts/forms.py`**.
+
+Inside `EmployeeCreationForm`, add this method **between `Meta` and `save()`**:
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+```
+
+#### What does this do?
+
+- `__init__()` — runs when Django creates an instance of our form.
+- `super().__init__()` — performs the normal Django form initialization.
+- `self.fields['role'].choices` — limits the available roles to Manager and Sales Staff.
+
+This also enforces the restriction during form validation, not just in the dropdown.
+
+  **NEW vs CLASS — `__init__()`**
+
+  `__init__()` is Python's object initialization method.
+
+  We're overriding it to customize the form after Django creates its fields, similar to how we previously overrode `save()`.
+
+**Save the file.** The employee creation view can now use this restricted form.
+
+Next, we'll create `create_employee.html`.
+
+*Previous: Step 139 (Create Employee View)  |  Next: Step 141 (Create Employee Template)*
+
+---
