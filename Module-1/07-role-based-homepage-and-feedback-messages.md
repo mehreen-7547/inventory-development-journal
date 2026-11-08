@@ -376,3 +376,34 @@ It does **not** upload anything to GitHub yet.
 *Previous: Step 97 (Success Message)  |  Next: Step 99 (Commit Changes)*
 
 ---
+
+## Step 99: Commit Changes
+
+#### Next: Save Module 1 in Git
+
+Your files are now staged. Let's create a commit.
+
+Run this in your VS Code terminal:
+
+```bash
+git commit -m "Complete Module 1 accounts and authentication"
+```
+
+**What does this do?**
+
+A commit saves a snapshot of your staged changes in your local Git repository.
+
+**Expected output:** Something similar to:
+
+```text
+[main abc1234] Complete Module 1 accounts and authentication
+12 files changed, ...
+```
+
+The commit ID and file counts may differ.
+
+This saves the work **locally**. We will push it to GitHub next.
+
+*Previous: Step 98 (Stage Files)  |  Next: Step 100 (Role Security)*
+
+---
