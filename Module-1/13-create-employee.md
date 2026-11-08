@@ -172,3 +172,39 @@ We're reusing `{{ form.as_p }}` and `{% csrf_token %}` from our earlier forms.
 *Previous: Step 140 (Restrict Employee Roles)  |  Next: Step 142 (Create Employee URL)*
 
 ---
+
+## Step 142: Create Employee URL
+
+#### Next: Connect the Create Employee page
+
+Open **`accounts/urls.py`**.
+
+Add this inside the existing `urlpatterns` list:
+
+```python
+path(
+    'employees/create/',
+    views.create_employee,
+    name='create_employee'
+),
+```
+
+#### Test
+
+1. Run your Django server.
+2. Log in as Admin.
+3. Open `http://127.0.0.1:8000/employees/create/`
+4. Create a test employee using a new username and unique email address. Select **Sales Staff**.
+5. Confirm that you're redirected to the employee list and the new employee appears there.
+
+Also check your VS Code terminal. Since we're currently using Django's console email backend, the **welcome email and password setup link** should appear there rather than in an actual inbox.
+
+**Security check:** Log in as Sales Staff and try opening `/employees/create/`. You should receive HTTP 403.
+
+  **Expected result**
+
+  The Admin can create an employee without setting their password. The employee receives a setup link (currently displayed in the terminal), while Sales Staff cannot access employee creation.
+
+*Previous: Step 141 (Create Employee Template)  |  Next: Step 143 (Add Employee Link)*
+
+---
