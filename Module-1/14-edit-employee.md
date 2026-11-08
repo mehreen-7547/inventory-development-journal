@@ -237,3 +237,63 @@ Also verify that Sales Staff cannot access the edit page (HTTP 403).
 *Previous: Step 147 (Edit Employee Template)  |  Next: Step 149 (Employee Edit Link)*
 
 ---
+
+## Step 149: Employee Edit Link
+
+#### Next: Add an Edit button to each employee
+
+The custom Edit Employee page is working. Now we'll make it accessible directly from the employee list, without needing to find employee IDs manually.
+
+Open **`templates/accounts/employee_list.html`**.
+
+**1.** Find the table headings and add:
+
+```html
+<th>Actions</th>
+```
+
+Place it immediately after:
+
+```html
+<th>Status</th>
+```
+
+**2.** Inside the `{% for employee in employees %}` loop, add this cell immediately after the employee's status `</td>`:
+
+```html
+<td>
+    <a href="{% url 'edit_employee' employee.id %}">
+        Edit
+    </a>
+</td>
+```
+
+**3.** Find the empty-table message:
+
+```html
+<td colspan="5">No employees found.</td>
+```
+
+Change `colspan="5"` to `colspan="6"` because the table now has six columns.
+
+#### Expected result
+
+| Username | Role | Status | Actions |
+|---|---|---|---|
+| manager1 | Inventory Manager | Active | Edit |
+| sales1 | Sales Staff | Active | Edit |
+
+Illustrative table — your page will still show Name and Email.
+
+#### Test
+
+1. Open `/employees/` as Admin.
+2. Click **Edit** beside any employee.
+3. Confirm that the correct employee's details appear.
+4. Click **Back to Manage Employees**.
+
+**Save the file and test.** Next, we'll implement employee account deactivation.
+
+*Previous: Step 148 (Edit Employee URL)  |  Next: Step 150 (Employee Edit Mode)*
+
+---
