@@ -81,3 +81,42 @@ This only controls link visibility. Django itself enforces access restrictions o
 *Previous: Step 91 (Role-Based Homepage)  |  Next: Step 93 (Admin Access)*
 
 ---
+
+## Step 93: Admin Access
+
+**No. Even before we added the `is_staff` condition to `home.html`, manager1 could not access Django's Admin panel.**
+
+Here's why.
+
+We created `manager1` with:
+
+- `role = 'manager'`
+- `is_staff = False`
+
+Django already uses `is_staff` internally to decide who can access `/admin/`.
+
+#### Before and after our change
+
+| | Before | After |
+|---|---|---|
+| Manager sees "Open Django admin" link on homepage | Yes | No |
+| Manager can access Django Admin panel | No | No |
+| Admin superuser can access Django Admin panel | Yes | Yes |
+
+#### So what did our code actually change?
+
+```html
+{% if request.user.is_staff %}
+    <p><a href="/admin/">Open Django admin</a></p>
+{% endif %}
+```
+
+**It only hides the link from users who cannot access Django Admin anyway.**
+
+We did not introduce a new security restriction. Django already had that restriction built in.
+
+Also, when `manager1` visits `/admin/`, Django may show the Admin login screen, but **seeing that login screen does not mean they have permission to enter the Admin panel**.
+
+*Previous: Step 92 (Admin Link Visibility)  |  Next: Step 94 (Admin Access Verified)*
+
+---
