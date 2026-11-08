@@ -590,3 +590,52 @@ Send me the output. Then we'll create the first commit in your private repositor
 *Previous: Step 17 (Change views.py)  |  Next: Step 19 (Commit the private development journal)*
 
 ---
+
+## Step 19: Commit the private development journal
+
+#### Step 25 — Commit the private development journal
+
+Assuming Step 24 showed only `inventory-development-journal.md`, run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: add initial development and setup journal"
+```
+
+**Understanding the command:**
+
+- `git commit` — Records the staged file in local Git history.
+- `-m` — Specifies the commit message.
+- `docs:` — Indicates a documentation-related change.
+
+**What happens?** Git saves the first version of your learning journal. Future updates can be tracked as separate commits.
+
+This does **not** upload anything or affect your public Django repository.
+
+Send me the output. Next, we'll push the journal to your private GitHub repository.
+
+#### How we checked it
+
+#### Step 26 — Verify the private GitHub connection
+
+Before uploading your journal, let's confirm that it is connected to the **private repository**, not the public one.
+
+Run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal remote -v
+```
+
+**Expected output:**
+
+```text
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
+```
+
+This only checks the connection; it doesn't upload anything.
+
+Send me the output. Then we'll push your journal to GitHub.
+
+*Previous: Step 18 (Stage the private journal)  |  Next: Step 20 (Push your journal to private GitHub)*
+
+---
