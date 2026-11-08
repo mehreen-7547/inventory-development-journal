@@ -744,3 +744,36 @@ You should now see full-width input boxes, vertically arranged labels, and a sty
 *Previous: Step 187 (Update Create Employee)  |  Next: Step 189 (Change accounts/forms.py)*
 
 ---
+
+## Step 189: Change accounts/forms.py
+
+In `accounts/forms.py`, find the `__init__()` method inside **EmployeeCreationForm**.
+
+Add the new code immediately after the `self.fields['role'].choices` section.
+
+Your complete `__init__()` method should look like this:
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        # Bootstrap styling
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+**Do not change** the `save()` method or `EmployeeEditForm` yet.
+
+Save the file using `Ctrl + S`, then refresh the Create Employee page.
+
+*Previous: Step 188 (Fix Form Styling)  |  Next: Step 190 (Correct Form Styling)*
+
+---
