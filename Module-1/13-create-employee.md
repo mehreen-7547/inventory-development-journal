@@ -208,3 +208,50 @@ Also check your VS Code terminal. Since we're currently using Django's console e
 *Previous: Step 141 (Create Employee Template)  |  Next: Step 143 (Add Employee Link)*
 
 ---
+
+## Step 143: Add Employee Link
+
+#### Next: Connect employee creation to the employee list
+
+Both employee creation and access tests passed.
+
+Currently, administrators must manually enter `/employees/create/` to create an employee. Let's add a link to the **Manage Employees** page.
+
+Open **`templates/accounts/employee_list.html`**.
+
+Immediately below:
+
+```html
+<h2>Manage Employees</h2>
+```
+
+Add:
+
+```html
+<p>
+    <a href="{% url 'create_employee' %}">
+        Add New Employee
+    </a>
+</p>
+```
+
+#### Test
+
+1. Log in as Admin.
+2. Open `http://127.0.0.1:8000/employees/`.
+3. Click **Add New Employee**.
+4. Verify that the employee registration form opens.
+
+  **Our employee management interface so far**
+
+      Employee List
+      /employees/
+
+      Create Employee
+      /employees/create/
+
+Next, we'll implement **Edit Employee**, allowing administrators to update employee details and roles.
+
+*Previous: Step 142 (Create Employee URL)  |  Next: Step 144 (Change templates/accounts/employee_list.html)*
+
+---
