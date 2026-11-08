@@ -41,3 +41,34 @@ This follows the login-function approach taught in class.
 *Previous: Step 72 (Register CustomUser)  |  Next: Step 74 (models.py vs admin.py)*
 
 ---
+
+## Step 74: models.py vs admin.py
+
+Because the two files have **different purposes**.
+
+- **`models.py`** defines what information is stored in the database.
+- **`admin.py`** defines how that information is displayed and managed in Django Admin.
+
+In our project:
+
+```python
+# models.py
+class CustomUser(AbstractUser):
+    role = models.CharField(...)
+```
+
+This creates the `role` database field.
+
+```python
+# admin.py
+class CustomUserAdmin(UserAdmin):
+    ...
+```
+
+This makes the `role` field available in Django Admin's user forms.
+
+**Simply put:** `models.py` defines the data; `admin.py` controls its administration interface.
+
+*Previous: Step 73 (Login View)  |  Next: Step 75 (Login Page)*
+
+---
