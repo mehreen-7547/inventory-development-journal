@@ -717,3 +717,39 @@ Enter an active test account's email address and submit. The reset email should 
 *Previous: Step 125 (Fix Django Error)  |  Next: Step 127 (Email Testing)*
 
 ---
+
+## Step 127: Email Testing
+
+#### 1. Why didn't you receive the email?
+
+Because we configured Django to use:
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+```
+
+This is Django's **console email backend**.
+
+- Django generates the email.
+- The email is printed in your VS Code terminal.
+- **Nothing is actually sent to your inbox**, even when you use your real email address.
+
+This is expected behaviour, not an error.
+
+For now, we'll continue using console emails to test password-reset links. Actual email delivery requires configuring an SMTP server or email service later.
+
+#### 2. VS Code terminal shortcuts
+
+| Action | Shortcut |
+|---|---|
+| Show/hide terminal panel | **Ctrl + `** |
+| Create a new terminal | Ctrl + Shift + ` |
+| Close the active terminal | Type `exit` (when no process is running) |
+
+The backtick (`) key is usually located below **Esc**.
+
+**Important:** Hiding the terminal doesn't stop your Django server. It continues running in the background.
+
+*Previous: Step 126 (Change accounts/urls.py)  |  Next: Step 128 (Employee Creation Form)*
+
+---
