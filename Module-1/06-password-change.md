@@ -212,3 +212,33 @@ The form is displayed again, this time containing validation errors so manager1 
 *Previous: Step 86 (Change Password)  |  Next: Step 88 (Password Change URL)*
 
 ---
+
+## Step 88: Password Change URL
+
+#### Next: Connect the password-change function to a URL
+
+Open **`accounts/urls.py`**.
+
+Add the third path:
+
+```python
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutpage, name='logout'),
+    path('change-password/', views.changepassword, name='change_password'),
+]
+```
+
+**What this means:**
+
+When someone visits `/change-password/`, Django calls the `changepassword()` function in `accounts/views.py`.
+
+That function will eventually display our password-change form.
+
+**Expected result:** Save the file. There should be no errors.
+
+Don't open the URL yet. We haven't created its HTML template.
+
+*Previous: Step 87 (Code Walkthrough)  |  Next: Step 89 (Password Change Form)*
+
+---
