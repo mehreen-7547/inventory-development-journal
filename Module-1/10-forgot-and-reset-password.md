@@ -285,3 +285,47 @@ Django will generate a link containing:
 *Previous: Step 117 (Confirmation Page URL)  |  Next: Step 119 (Connect Email Template)*
 
 ---
+
+## Step 119: Connect Email Template
+
+#### Next: Tell Django which email template to use
+
+We've created `password_reset_email.txt`, but Django doesn't know to use it yet.
+
+Open **`accounts/urls.py`**.
+
+Find your existing `PasswordResetView` and update it to:
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt'
+    ),
+    name='password_reset'
+),
+```
+
+#### What changed?
+
+We added one line:
+
+```python
+email_template_name='accounts/password_reset_email.txt'
+```
+
+Django now knows which template contains the password-reset email message.
+
+The two templates serve different purposes:
+
+| Setting | Purpose |
+|---|---|
+| `template_name` | HTML page where the employee enters their email |
+| `email_template_name` | Text message Django sends with the reset link |
+
+**Save the file.** Don't submit the form yet. We still need to configure the email subject and the page where employees set their new password.
+
+*Previous: Step 118 (Password Reset Email)  |  Next: Step 120 (Connect Email Subject)*
+
+---
