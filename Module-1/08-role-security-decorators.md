@@ -324,3 +324,53 @@ The outer functions have already finished. The wrapper doesn't return its respon
 *Previous: Step 101 (Understanding Execution Flow)  |  Next: Step 103 (Apply Role Security)*
 
 ---
+
+## Step 103: Apply Role Security
+
+#### Next: Apply our decorator to the homepage
+
+We created `role_required()` in `accounts/decorators.py`. Now we'll actually use it.
+
+Open **`core/views.py`**.
+
+Replace its existing code with:
+
+```python
+from django.shortcuts import render
+from accounts.decorators import role_required
+
+
+@role_required('admin', 'manager', 'sales')
+def home(request):
+    return render(request, 'core/home.html')
+```
+
+#### What changed?
+
+Previously, we used:
+
+```python
+@login_required(login_url='/login/')
+```
+
+Now we use:
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+Our custom decorator already includes `login_required`, so we don't need both on this view.
+
+This means:
+
+- Visitors who aren't logged in are redirected to `/login/`.
+- Admin, Manager and Sales users can access the homepage.
+- Logged-in users with any other role receive HTTP 403.
+
+We're allowing all three roles because the homepage is shared. Later, individual inventory operations will have more restrictive permissions.
+
+**For now:** Save the file and refresh the homepage while logged in as `manager1`. It should continue working normally.
+
+*Previous: Step 102 (Complete Execution Flow)  |  Next: Step 104 (Test Role Restrictions)*
+
+---
