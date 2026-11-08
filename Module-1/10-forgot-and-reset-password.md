@@ -593,3 +593,65 @@ Next, we'll test the complete password-reset workflow.
 *Previous: Step 123 (Password Reset Success Page)  |  Next: Step 125 (Fix Django Error)*
 
 ---
+
+## Step 125: Fix Django Error
+
+#### What went wrong?
+
+Your terminal shows:
+
+```text
+TypeError: PasswordResetDoneView() received an invalid
+keyword 'email_template_name'.
+```
+
+You appear to have added `email_template_name` to **`PasswordResetDoneView` instead of `PasswordResetView`**.
+
+Only `PasswordResetView` sends the email. `PasswordResetDoneView` simply displays the confirmation page.
+
+#### Fix
+
+Open `accounts/urls.py` and make sure these two URL entries look exactly like this:
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt',
+        subject_template_name='accounts/password_reset_subject.txt'
+    ),
+    name='password_reset'
+),
+
+path(
+    'password-reset/done/',
+    auth_views.PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'
+    ),
+    name='password_reset_done'
+),
+```
+
+**Important:** Both `email_template_name` and `subject_template_name` belong to `PasswordResetView`, not `PasswordResetDoneView`.
+
+#### Verify
+
+Save the file and run:
+
+```powershell
+python manage.py runserver
+```
+
+Expected:
+
+```text
+System check identified no issues (0 silenced).
+Starting development server at http://127.0.0.1:8000/
+```
+
+Once the server starts successfully, we can resume testing the password-reset email.
+
+*Previous: Step 124 (Password Reset Complete URL)  |  Next: Step 126 (Change accounts/urls.py)*
+
+---
