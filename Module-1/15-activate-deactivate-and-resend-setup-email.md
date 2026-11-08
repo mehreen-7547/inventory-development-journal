@@ -71,3 +71,49 @@ Next, we'll add the URL for this view.
 *Previous: Step 156 (Change employee_list.html)  |  Next: Step 158 (Employee Status URL)*
 
 ---
+
+## Step 158: Employee Status URL
+
+#### Next: Connect the Deactivate/Reactivate view
+
+We've created `toggle_employee_status()` in `accounts/views.py`.
+
+Now we'll add a URL that connects to it.
+
+Open **`accounts/urls.py`**.
+
+Add this inside the existing `urlpatterns` list:
+
+```python
+path(
+    'employees/status/<int:employee_id>/',
+    views.toggle_employee_status,
+    name='toggle_employee_status'
+),
+```
+
+#### How does this work?
+
+For example:
+
+`/employees/status/3/`
+
+Django passes employee ID `3` to `toggle_employee_status()`.
+
+The view then changes the employee's status:
+
+      **Active**
+      Can log in
+
+      **Inactive**
+      Cannot log in
+
+**Important:** This URL accepts only POST requests because we used `@require_POST`. Opening it directly in the browser will return HTTP 405 (Method Not Allowed). That is expected.
+
+Save `accounts/urls.py`.
+
+Next, we'll add the **Deactivate/Reactivate** button to `edit_employee.html`.
+
+*Previous: Step 157 (Employee Deactivation)  |  Next: Step 159 (Deactivate/Reactivate Button)*
+
+---
