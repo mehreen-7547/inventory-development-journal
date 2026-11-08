@@ -137,3 +137,59 @@ Next, we'll configure Django and SQLite.
 *Previous: Step 2 (Create the virtual environment)  |  Next: Step 4 (Create the configuration file)*
 
 ---
+
+## Step 4: Create the configuration file
+
+**Step 3 completed successfully.**
+
+Django 6.0.9 and all required packages are installed in your Python 3.12 virtual environment.
+
+The internet connection timed out briefly, but pip retried and completed the installation. The pip update notice is optional.
+
+We can now configure Django to use SQLite.
+
+#### Step 4 — Create the configuration file
+
+Run this command in the same terminal:
+
+```powershell
+Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+**What this does:** Creates a `.env` file for private configuration, including the Django secret key and database settings.
+
+The database is already configured as SQLite.
+
+Run the command and tell me whether it completes without errors. Next, we'll generate the secret key.
+
+#### How we checked it
+
+The `.venv` folder in your screenshot is **correctly created and working**.
+
+It contains your project's isolated Python 3.12 environment, including the Django packages we just installed.
+
+#### Do we need to activate it?
+
+**Not necessarily.** We've been using:
+
+```powershell
+.\.venv\Scripts\python.exe
+```
+
+This directly uses the virtual environment, even without activating it.
+
+#### Configure VS Code to use it
+
+This will also help VS Code recognize Django imports.
+
+1. Press `Ctrl + Shift + P`.
+2. Search for **Python: Select Interpreter**.
+3. Select `.venv\Scripts\python.exe` (Python 3.12.12).
+
+Your `.venv` is currently in the outer folder, while `manage.py` is inside the project subfolder. **That's fine. No need to move or recreate anything.**
+
+After selecting the interpreter, we can continue configuring `.env`.
+
+*Previous: Step 3 (Install Django and required packages)  |  Next: Step 5 (Change manage.py)*
+
+---
