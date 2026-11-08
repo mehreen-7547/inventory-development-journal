@@ -387,3 +387,74 @@ Send me the output. Next, we'll connect this new local repository to your privat
 *Previous: Step 13 (Create a separate local journal folder)  |  Next: Step 15 (Connect it to GitHub)*
 
 ---
+
+## Step 15: Connect it to GitHub
+
+**Step 18 completed successfully.** Your private journal now has its own local Git repository on the `main` branch.
+
+#### Step 19 — Connect it to GitHub
+
+Run this in your existing terminal:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal remote add origin https://github.com/mehreen-7547/inventory-development-journal.git
+```
+
+**Understanding the command:**
+
+- `git remote add` — Registers a remote repository.
+- `origin` — The conventional name for the main remote.
+- The URL — Points to your **private** GitHub journal repository.
+
+This command only saves the connection. It does not upload files or affect your public Django repository.
+
+Send me the output. Next, we'll verify the connection and add your development journal.
+
+#### How we checked it
+
+#### Step 20 — Verify the private repository connection
+
+Assuming you've completed Step 19, run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal remote -v
+```
+
+**What this does:** Displays the GitHub repository connected to your local journal folder.
+
+**Expected output:**
+
+```text
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
+```
+
+This command does not upload or modify anything.
+
+Send me the output. Next, we'll add the development journal documenting everything completed so far.
+
+#### How we checked it
+
+#### Step 22 — Verify the journal file
+
+Before committing, let's confirm that the journal is in your private repository folder.
+
+Run:
+
+```powershell
+Get-ChildItem C:\Users\mehre\projects2026\inventory-development-journal -Name
+```
+
+**What this does:** Lists the files inside your private journal folder without modifying anything.
+
+**Expected output:**
+
+```text
+inventory-development-journal.md
+```
+
+Send me the output. If the file is present, we'll stage it, commit it, and push it to your private GitHub repository.
+
+*Previous: Step 14 (Initialize Git for the private journal)  |  Next: Step 16 (Stage the journal for Git)*
+
+---
