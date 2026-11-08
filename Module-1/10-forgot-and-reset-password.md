@@ -160,3 +160,31 @@ The same confirmation message should appear whether the submitted email belongs 
 *Previous: Step 114 (Password Reset URL)  |  Next: Step 116 (Template Structure)*
 
 ---
+
+## Step 116: Template Structure
+
+Yes. **All three HTML files should be inside the same `templates/accounts/` folder.**
+
+    **templates/**
+
+      **accounts/**
+
+      {#each ["login.html","change_password.html","password_reset.html","password_reset_done.html"] as file}
+
+          {file}
+
+      {/each}
+
+The `accounts` folder groups templates related to authentication.
+
+In `accounts/urls.py`, this path:
+
+```python
+template_name='accounts/password_reset.html'
+```
+
+tells Django to find `password_reset.html` inside the `accounts` template folder.
+
+*Previous: Step 115 (Password Reset Confirmation)  |  Next: Step 117 (Confirmation Page URL)*
+
+---
