@@ -361,3 +361,23 @@ Tell me **done** when the command finishes.
 *Previous: Step 33 (Understanding git add and -C)  |  Next: Step 35 (Committing Development Journal Update)*
 
 ---
+
+## Step 35: Committing Development Journal Update
+
+#### Step 42 — Commit the journal update
+
+Assuming Step 41 completed successfully, run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Django admin setup"
+```
+
+**What this does:** Saves the staged Django Admin setup notes as a new version in your local Git history.
+
+It does not upload the changes to GitHub yet.
+
+Tell me **done** when the command finishes.
+
+*Previous: Step 34 (Staging Development Journal Update)  |  Next: Step 36 (Pushing Development Journal to GitHub)*
+
+---
