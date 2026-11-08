@@ -339,3 +339,25 @@ We can now resume **Step 41**, staging your updated development journal.
 *Previous: Step 32 (Staging Development Journal Update)  |  Next: Step 34 (Staging Development Journal Update)*
 
 ---
+
+## Step 34: Staging Development Journal Update
+
+Understood. Whenever you send a number alone, I'll resume from that numbered response. Response numbering will continue normally.
+
+#### Step 41 — Stage the journal update
+
+Assuming you've completed Step 40 (adding the Django Admin notes), run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**What this does:** Stages the latest version of your journal for the next commit.
+
+It does not create another file or upload anything to GitHub.
+
+Tell me **done** when the command finishes.
+
+*Previous: Step 33 (Understanding git add and -C)  |  Next: Step 35 (Committing Development Journal Update)*
+
+---
