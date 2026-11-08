@@ -614,3 +614,72 @@ Replace the entire contents of **`templates/accounts/employee_list.html`** with 
 *Previous: Step 152 (Select Employee)  |  Next: Step 154 (External CSS)*
 
 ---
+
+## Step 154: External CSS
+
+Yes. We'll maintain **external CSS files** instead of writing CSS inside HTML templates. This will keep our Django project cleaner and make styling easier to maintain.
+
+#### Step 1: Create a shared stylesheet
+
+Inside the `accounts` app, create these folders and file:
+
+    **accounts/**
+
+      static/
+
+        accounts/
+
+          style.css
+
+Add this to **`accounts/static/accounts/style.css`**:
+
+```css
+.selectable {
+    position: relative;
+    cursor: pointer;
+}
+
+.selectable:hover {
+    background-color: #eeeeee;
+}
+
+.row-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+```
+
+#### Step 2: Connect CSS to HTML
+
+Open `templates/accounts/employee_list.html`.
+
+Add this at the very beginning:
+
+```django
+{% load static %}
+```
+
+Replace the entire existing `<head>...</head>` section with:
+
+```html
+<head>
+    <title>Manage Employees</title>
+    <link rel="stylesheet"
+          href="{% static 'accounts/style.css' %}">
+</head>
+```
+
+The previous internal `<style>...</style>` section should be removed.
+
+#### Step 3: Test
+
+Refresh `/employees/?mode=edit` and verify that the hover effect still works.
+
+Django's `{% static %}` tag locates the external stylesheet through its static-file system.
+
+**Going forward:** We'll keep styling in separate CSS files and reuse this stylesheet across the Accounts pages.
+
+*Previous: Step 153 (Change templates/accounts/employee_list.html)  |  Next: Step 155 (Fix Row Selection)*
+
+---
