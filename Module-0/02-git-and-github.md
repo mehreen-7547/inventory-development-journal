@@ -170,3 +170,36 @@ Send me the output. After verification, we'll proceed toward our first Git commi
 *Previous: Step 7 (Initialize the Git repository)  |  Next: Step 9 (Create our first Git commit)*
 
 ---
+
+## Step 9: Create our first Git commit
+
+**Step 10 passed.** Django reports:
+
+```text
+System check identified no issues (0 silenced).
+```
+
+This confirms Django's system checks found no configuration problems. It does not yet mean all application tests have passed.
+
+#### Step 11 — Create our first Git commit
+
+Run:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "chore: initialize Django project (module 0)"
+```
+
+**Understanding the command:**
+
+- `git commit` — Saves a snapshot of the staged files in local Git history.
+- `-m` — Specifies the commit message.
+- `chore:` — Indicates project setup or maintenance work.
+- `module 0` — Identifies the development stage.
+
+**Important:** This creates a local commit only. Nothing becomes public until we push it to GitHub.
+
+Send me the output. Next, we'll create the public GitHub repository named `ai-assisted-inventory-manager`. We'll also set up the separate private journal repository.
+
+*Previous: Step 8 (Stage the project files)  |  Next: Step 10 (Connect your local project to GitHub)*
+
+---
