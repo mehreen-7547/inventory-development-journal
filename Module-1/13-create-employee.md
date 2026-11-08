@@ -255,3 +255,33 @@ Next, we'll implement **Edit Employee**, allowing administrators to update emplo
 *Previous: Step 142 (Create Employee URL)  |  Next: Step 144 (Change templates/accounts/employee_list.html)*
 
 ---
+
+## Step 144: Change templates/accounts/employee_list.html
+
+Your screenshot shows the **existing Employee List page**, but the **Add New Employee** link hasn't been added yet.
+
+Open `templates/accounts/employee_list.html`.
+
+Find:
+
+```html
+<h2>Manage Employees</h2>
+```
+
+Immediately below it, add:
+
+```html
+<p>
+    <a href="{% url 'create_employee' %}">
+        Add New Employee
+    </a>
+</p>
+```
+
+Save the file (`Ctrl + S`) and refresh your browser (`Ctrl + R`).
+
+You should now see **Add New Employee** above the table. Clicking it should open the employee registration form.
+
+*Previous: Step 143 (Add Employee Link)  |  Next: Step 145 (Edit Employee Form)*
+
+---
