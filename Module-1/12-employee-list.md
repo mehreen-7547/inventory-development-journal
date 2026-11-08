@@ -51,3 +51,80 @@ def employee_list(request):
 *Previous: Step 135 (Resend Setup Link)  |  Next: Step 137 (Employee List Template)*
 
 ---
+
+## Step 137: Employee List Template
+
+#### Next: Create the Manage Employees page
+
+We've created `employee_list()` in `accounts/views.py`. Now we'll create the HTML page that displays employees.
+
+Create:
+
+**`templates/accounts/employee_list.html`**
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Employees</title>
+</head>
+<body>
+
+    <h2>Manage Employees</h2>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.username }}</td>
+            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.get_role_display }}</td>
+            <td>
+                {% if employee.is_active %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+
+</body>
+</html>
+```
+
+#### What does this display?
+
+Each employee will appear as a row containing their username, name, email, role and account status.
+
+  **NEW vs CLASS — `{% empty %}`**
+
+  We already know `{% for %}` loops through records.
+
+  `{% empty %}` is Django's built-in way to display a message when there are no records to loop through.
+
+**Save the file.** No URL is connected yet, so we won't test it in the browser now.
+
+Next, we'll add the URL for this page.
+
+*Previous: Step 136 (Employee Management)  |  Next: Step 138 (Employee List URL)*
+
+---
