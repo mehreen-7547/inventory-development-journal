@@ -1,10 +1,38 @@
-# Module 1, Chapter 3: Login
+# MODULE 1 — Accounts
 
-## Step 73: Login View
+## Chapter 3: Login (Steps 73–79)
 
-#### Next: Create the login function
+**Where we are.** An account table alone cannot sign a user in. We connected a browser form to a Django authentication view and a URL.
 
-Open `accounts/views.py` and replace its contents with:
+**What this chapter gives us.** Trace username/password POST data through authenticate(), login(), redirect(), and a session.
+
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
+
+**Interview checkpoint.** Explain what happens when a user submits valid versus invalid credentials.
+
+### Find a step
+
+- [Step 73: Login View](#step-73)
+- [Step 74: Understand models.py versus admin.py](#step-74)
+- [Step 75: Login Page](#step-75)
+- [Step 76: Login URL](#step-76)
+- [Step 77: Connect Login URL](#step-77)
+- [Step 78: Login Redirect](#step-78)
+- [Step 79: Understand a Django project versus an app](#step-79)
+
+---
+
+<a id="step-73"></a>
+
+### Step 73: Login View
+
+**Why we are doing this.** We wanted staff to sign in from the inventory application, not rely on the built-in admin login.
+
+**File / location.** `accounts/views.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Open accounts/views.py and replace its contents with.*
 
 ```python
 from django.shortcuts import render, redirect
@@ -32,24 +60,28 @@ def loginpage(request):
     return render(request, 'accounts/login.html')
 ```
 
-**What it does:** Checks the username and password, logs in the user if valid, and redirects to the homepage.
+**How it works.** The login view receives form data on POST, calls `authenticate` to check credentials, calls `login` to start a session, and redirects successful users. A GET request simply displays the login form.
 
-This follows the login-function approach taught in class.
+**Follow the flow.** A normal page visit is a GET request, so `loginpage` renders `accounts/login.html`. Submitting the form sends a POST with the username and password. `authenticate` checks them and returns a user object only when they are valid. `login` starts the session; `redirect('/')` asks the browser to open the homepage. With wrong details, `messages.error` prepares feedback and the form is shown again. The password is never compared to a stored plain-text password by our view.
 
-**Expected result:** The file saves without errors. We'll create the login page next.
+**How we checked it.** The view cannot be opened from a browser until its template and URL are connected in Steps 75–77.
 
-*Previous: Step 72 (Register CustomUser)  |  Next: Step 74 (models.py vs admin.py)*
+**Connects to.** Previous: [Step 72 — Register CustomUser](02-database-setup-and-admin-site.md#step-72) · Next: [Step 74 — Understand models.py versus admin.py](03-login.md#step-74)
+
 
 ---
 
-## Step 74: models.py vs admin.py
+<a id="step-74"></a>
 
-Because the two files have **different purposes**.
+### Step 74: Understand models.py versus admin.py
 
-- **`models.py`** defines what information is stored in the database.
-- **`admin.py`** defines how that information is displayed and managed in Django Admin.
+**Why we are doing this.** The files `models.py` and `admin.py` were easy to confuse, so we clarified their responsibilities before proceeding.
 
-In our project:
+**File / location.** `accounts/models.py and accounts/admin.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; In our project (illustrative or partial; not a complete paste-ready file).*
 
 ```python
 # models.py
@@ -57,29 +89,26 @@ class CustomUser(AbstractUser):
     role = models.CharField(...)
 ```
 
-This creates the `role` database field.
+**How it works.** `models.py` defines the stored data and model methods; `admin.py` configures Django Admin's management screens for those models. Editing one does not replace the other.
 
-```python
-# admin.py
-class CustomUserAdmin(UserAdmin):
-    ...
-```
+**How we checked it.** The examples are illustrative; there was no additional feature in this step.
 
-This makes the `role` field available in Django Admin's user forms.
+**Connects to.** Previous: [Step 73 — Login View](03-login.md#step-73) · Next: [Step 75 — Login Page](03-login.md#step-75)
 
-**Simply put:** `models.py` defines the data; `admin.py` controls its administration interface.
-
-*Previous: Step 73 (Login View)  |  Next: Step 75 (Login Page)*
 
 ---
 
-## Step 75: Login Page
+<a id="step-75"></a>
 
-#### Next: Create the login page
+### Step 75: Login Page
 
-Create a file at **`templates/accounts/login.html`**.
+**Why we are doing this.** A browser needs an HTML form so a person can submit the username and password to the view built in Step 73.
 
-Add:
+**File / location.** `templates/accounts/login.html`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Add.*
 
 ```html
 <!DOCTYPE html>
@@ -109,21 +138,28 @@ Add:
 </html>
 ```
 
-**What this does:** Creates a form where users enter their username and password. The form sends these values to the `loginpage()` function we created earlier.
+**How it works.** The template renders input fields and submits a POST request. Django's CSRF token prevents certain forged form submissions.
 
-**Expected result:** The file saves successfully. We will connect the page to a URL next.
+**Follow the flow.** The form is the browser-side half of the workflow. Its inputs provide names the Python view reads from `request.POST`. `method="POST"` sends submitted values as a form submission, and the CSRF token helps Django check that submission. The HTML does not authenticate the user itself.
 
-*Previous: Step 74 (models.py vs admin.py)  |  Next: Step 76 (Login URL)*
+**How we checked it.** The file exists here, but the route is connected in Steps 76–77; successful login is tested after that.
+
+**Connects to.** Previous: [Step 74 — Understand models.py versus admin.py](03-login.md#step-74) · Next: [Step 76 — Login URL](03-login.md#step-76)
+
 
 ---
 
-## Step 76: Login URL
+<a id="step-76"></a>
 
-#### Next: Create `accounts/urls.py`
+### Step 76: Login URL
 
-Inside the existing `accounts` folder, create a file named `urls.py`.
+**Why we are doing this.** Although the view and HTML file existed, Django still needed a URL within the accounts app that pointed to the view.
 
-Paste:
+**File / location.** `accounts/urls.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Paste.*
 
 ```python
 from django.urls import path
@@ -134,19 +170,26 @@ urlpatterns = [
 ]
 ```
 
-**What this does:** Connects the URL `/login/` to our `loginpage()` function in `accounts/views.py`.
+**How it works.** `path('login/', views.loginpage, name='login')` maps a request path to the Python function. The route name allows templates to refer to it without hardcoding the address.
 
-**Expected result:** File saves successfully. Next, we'll connect these URLs to the main project.
+**How we checked it.** The app's URL module must still be included in the project's top-level URL configuration.
 
-*Previous: Step 75 (Login Page)  |  Next: Step 77 (Connect Login URL)*
+**Connects to.** Previous: [Step 75 — Login Page](03-login.md#step-75) · Next: [Step 77 — Connect Login URL](03-login.md#step-77)
+
 
 ---
 
-## Step 77: Connect Login URL
+<a id="step-77"></a>
 
-#### Next: Update `config/urls.py`
+### Step 77: Connect Login URL
 
-Replace its contents with:
+**Why we are doing this.** Django starts URL resolution from the project-level `config/urls.py`, so the new app URLs had to be included there.
+
+**File / location.** `config/urls.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Replace its contents with.*
 
 ```python
 from django.contrib import admin
@@ -159,109 +202,73 @@ urlpatterns = [
 ]
 ```
 
-**What changed?**
-
-We added:
+*2. Recorded snippet; We added.*
 
 ```python
 path("", include("accounts.urls")),
 ```
 
-This tells Django to look inside `accounts/urls.py` for account-related URLs.
+**How it works.** `include('accounts.urls')` delegates matching account-related paths to the accounts app. This completes the browser-to-URL-to-view-to-template chain.
 
-**Expected result:** With the development server running, opening `http://127.0.0.1:8000/login/` displays your login form.
+**Follow the flow.** The outer URL file is like a receptionist: it sees an incoming path and delegates it to the right app. Including `accounts.urls` allows `/login/` to reach `loginpage`. Including `core.urls` allows the homepage to reach the core view. The project and app URL files therefore work together.
 
-#### How we checked it
+**How we checked it.** The original notes then discuss redirect behavior, showing the route connections were being reviewed.
 
-Django found your login function, but **cannot locate `login.html`**.
+**Connects to.** Previous: [Step 76 — Login URL](03-login.md#step-76) · Next: [Step 78 — Login Redirect](03-login.md#step-78)
 
-#### Next: Check the file location
-
-In the VS Code terminal, run:
-
-```powershell
-Test-Path .\templates\accounts\login.html
-```
-
-**Expected output:** `True`
-
-If it says `False`, ensure your file is located here:
-
-```text
-techmindz_inventory_module0_sqlite_atomic/
-├── manage.py
-└── templates/
-    └── accounts/
-        └── login.html
-```
-
-The `templates` folder must be in the **same folder as `manage.py`**.
-
-Once corrected, refresh `/login/`.
-
-If the error persists even when the command returns `True`, share that result.
-
-*Previous: Step 76 (Login URL)  |  Next: Step 78 (Login Redirect)*
 
 ---
 
-## Step 78: Login Redirect
+<a id="step-78"></a>
 
-Because of this line in **`accounts/views.py`**:
+### Step 78: Login Redirect
+
+**Why we are doing this.** After successful login, the view sends users to `/`. We wanted to understand why that route opens the application homepage.
+
+**File / location.** `accounts/views.py and core/urls.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; Because of this line in accounts/views.py.*
 
 ```python
 return redirect('/')
 ```
 
-Here's what happens:
+**How it works.** `redirect('/')` sends a new browser request to the root URL, where the core app's URL/view renders home. Logging in and rendering the homepage are separate requests.
 
-1. User logs in successfully.
-2. `redirect('/')` sends them to the root URL.
-3. In `core/urls.py`, `path('', views.home, name='home')` matches that URL.
-4. `core.views.home` displays `home.html`.
+**How we checked it.** This is an explanation of existing code, not a new redirect implementation.
 
-**So `login.html` doesn't automatically lead to `home.html`. We explicitly instructed Django to redirect there.**
+**Connects to.** Previous: [Step 77 — Connect Login URL](03-login.md#step-77) · Next: [Step 79 — Understand a Django project versus an app](03-login.md#step-79)
 
-Later, we can redirect users to different dashboards based on their roles.
-
-*Previous: Step 77 (Connect Login URL)  |  Next: Step 79 (Project vs App)*
 
 ---
 
-## Step 79: Project vs App
+<a id="step-79"></a>
 
-**Yes, exactly.** That's the structure Django creates by default.
+### Step 79: Understand a Django project versus an app
 
-For example, when you run:
+**Why we are doing this.** Django's project and app folder names can look similar; misunderstanding them makes imports and file paths confusing.
+
+**File / location.** `Django project folder structure`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; For example, when you run.*
 
 ```bash
 django-admin startproject myproject
 ```
 
-Django creates:
+**How it works.** A Django project holds global settings and URL routing; apps hold features such as `accounts` and `core`. `manage.py` is the command launcher at project level.
 
-```text
-myproject/
-├── manage.py
-└── myproject/
-    ├── settings.py
-    └── urls.py
-```
+**How we checked it.** The sample project tree illustrates the concept; no new `startproject` was intended here.
 
-The inner `myproject` folder has the **same name as the project**.
-
-Your instructor called it the *main app*, but technically it's the **project configuration package**, not a Django app.
-
-In our project, we named that folder `config` instead.
-
-So:
-
-- `config/urls.py` — connects URLs from other apps.
-- `core/urls.py` — defines homepage URLs.
-- `accounts/urls.py` — defines account-related URLs.
-
-**The structure is the same as what you learned. Only the name of the main configuration folder is different.**
-
-*Previous: Step 78 (Login Redirect)  |  Next: Step 80 (Logout Function)*
+**Connects to.** Previous: [Step 78 — Login Redirect](03-login.md#step-78) · Next: [Step 80 — Logout Function](04-logout.md#step-80)
 
 ---
+
+**Chapter recap.** Trace username/password POST data through authenticate(), login(), redirect(), and a session.
+
+**Practice explaining:** Explain what happens when a user submits valid versus invalid credentials.
+

@@ -1,14 +1,43 @@
-# Module 1, Chapter 14: Edit employee
+# MODULE 1 — Accounts
 
-## Step 145: Edit Employee Form
+## Chapter 14: Edit employee (Steps 145–156)
 
-#### Next: Create the Edit Employee form
+**Where we are.** Employee information changes over time. We added an edit form and then improved how administrators select the right employee.
 
-Administrators should be able to update an employee's name, email and role without changing their password.
+**What this chapter gives us.** Use ModelForm instances and ID-based URLs; follow the evolution of edit mode and row-selection fixes.
 
-Open **`accounts/forms.py`**.
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
 
-Add this new class below `EmployeeCreationForm`:
+**Interview checkpoint.** Explain why editing needs an existing model instance instead of creating a new user.
+
+### Find a step
+
+- [Step 145: Edit Employee Form](#step-145)
+- [Step 146: Edit Employee View](#step-146)
+- [Step 147: Edit Employee Template](#step-147)
+- [Step 148: Edit Employee URL](#step-148)
+- [Step 149: Employee Edit Link](#step-149)
+- [Step 150: Employee Edit Mode](#step-150)
+- [Step 151: Edit Mode Button](#step-151)
+- [Step 152: Select Employee](#step-152)
+- [Step 153: Combine the list and selection controls](#step-153)
+- [Step 154: External CSS](#step-154)
+- [Step 155: Fix Row Selection](#step-155)
+- [Step 156: Correct employee row selection](#step-156)
+
+---
+
+<a id="step-145"></a>
+
+### Step 145: Edit Employee Form
+
+**Why we are doing this.** Administrators also need to change an existing employee's details without creating a new account.
+
+**File / location.** `accounts/forms.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Add this new class below EmployeeCreationForm.*
 
 ```python
 class EmployeeEditForm(forms.ModelForm):
@@ -31,44 +60,35 @@ class EmployeeEditForm(forms.ModelForm):
         ]
 ```
 
-#### Why a separate form?
+**How it works.** `EmployeeEditForm` is bound to an existing `CustomUser` instance and controls which fields can be edited. Password changes are kept separate from ordinary employee details.
 
-| Creation form | Edit form |
-|---|---|
-| Creates a new account | Updates an existing account |
-| Sets an unusable password | Preserves the existing password |
-| Includes username | Keeps username unchanged |
+**Follow the flow.** The edit form is based on the same model as the creation form but exposes only the fields administrators are allowed to change. In particular, editing ordinary profile details should not silently create a new employee or replace the employee's password. The view will bind the form to an existing record in the next step.
 
-  **NEW vs CLASS — Separate forms for different operations**
+**How we checked it.** The edit view that loads and saves the form is added in Step 146.
 
-  Although both forms use `ModelForm`, they have different responsibilities.
+**Connects to.** Previous: [Step 144 — Refine the Create Employee link](13-create-employee.md#step-144) · Next: [Step 146 — Edit Employee View](14-edit-employee.md#step-146)
 
-  Reusing our creation form for editing would be dangerous because its `save()` method calls `set_unusable_password()`.
-
-**Save `forms.py`.** No browser testing is needed yet.
-
-Next, we'll create the `edit_employee` view.
-
-*Previous: Step 144 (Change templates/accounts/employee_list.html)  |  Next: Step 146 (Edit Employee View)*
 
 ---
 
-## Step 146: Edit Employee View
+<a id="step-146"></a>
 
-#### Next: Create the Edit Employee view
+### Step 146: Edit Employee View
 
-We've created `EmployeeEditForm`. Now we need a view that retrieves an existing employee, displays their details and saves changes.
+**Why we are doing this.** The edit form needs a view that finds the correct employee and handles both initial display and submitted changes.
 
-Open **`accounts/views.py`**.
+**File / location.** `accounts/views.py`.
 
-Add these imports at the top:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Add these imports at the top.*
 
 ```python
 from django.shortcuts import get_object_or_404
 from .forms import EmployeeEditForm
 ```
 
-Then add this function at the bottom:
+*2. Recorded snippet; Then add this function at the bottom.*
 
 ```python
 @role_required('admin')
@@ -109,38 +129,28 @@ def edit_employee(request, employee_id):
     )
 ```
 
-#### How does this work?
+**How it works.** The view uses a user identifier to fetch the employee, passes it as `instance=...`, validates POST data, saves updates, and redirects with a notice.
 
-- `employee_id` identifies the employee being edited.
-- `get_object_or_404()` retrieves that employee or returns HTTP 404 if no matching employee exists.
-- `instance=employee` tells Django to **update the existing record**, rather than create a new one.
-- Only Manager and Sales Staff accounts can be edited through this view.
+**Follow the flow.** The view gets an `employee_id` from the URL and looks up the corresponding Manager or Sales user. If no match exists, `get_object_or_404` returns a 404. On GET, `EmployeeEditForm(instance=employee)` pre-fills current values. On POST, `EmployeeEditForm(request.POST, instance=employee)` edits *that same row*. Successful validation saves changes and redirects to the list; errors are shown on the form. The admin decorator keeps editing restricted.
 
-  **NEW vs CLASS — `instance=employee`**
+**How we checked it.** The corresponding template and URL are implemented in Steps 147–148.
 
-  Without `instance`, a `ModelForm` normally creates a new database record when saved.
+**Connects to.** Previous: [Step 145 — Edit Employee Form](14-edit-employee.md#step-145) · Next: [Step 147 — Edit Employee Template](14-edit-employee.md#step-147)
 
-  With `instance`, it updates the specified existing record.
-
-**Save `views.py`.** We haven't connected the template or URL yet.
-
-Next, we'll create `edit_employee.html`.
-
-*Previous: Step 145 (Edit Employee Form)  |  Next: Step 147 (Edit Employee Template)*
 
 ---
 
-## Step 147: Edit Employee Template
+<a id="step-147"></a>
 
-#### Next: Create the Edit Employee page
+### Step 147: Edit Employee Template
 
-We've created the `edit_employee()` view. Now we'll create the HTML form that administrators will use to update employee details.
+**Why we are doing this.** An edit view cannot be used comfortably without a page showing the current values and save controls.
 
-Create:
+**File / location.** `templates/accounts/edit_employee.html`.
 
-**`templates/accounts/edit_employee.html`**
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Paste:
+*1. Recorded snippet; Paste.*
 
 ```html
 <!DOCTYPE html>
@@ -174,28 +184,28 @@ Paste:
 </html>
 ```
 
-#### What will this page do?
+**How it works.** The edit template renders the bound form and includes a CSRF token. Field validation errors remain visible on the same page.
 
-- Display the employee's username (read-only).
-- Show their existing name, email and role.
-- Allow the administrator to modify those details.
-- Save changes without affecting the employee's password.
+The token helps Django reject forged state-changing form submissions.
 
-**Save the file.** The page isn't accessible yet because we haven't added its URL.
+**How we checked it.** The URL and navigation are connected in the next steps.
 
-Next, we'll connect the Edit Employee URL.
+**Connects to.** Previous: [Step 146 — Edit Employee View](14-edit-employee.md#step-146) · Next: [Step 148 — Edit Employee URL](14-edit-employee.md#step-148)
 
-*Previous: Step 146 (Edit Employee View)  |  Next: Step 148 (Edit Employee URL)*
 
 ---
 
-## Step 148: Edit Employee URL
+<a id="step-148"></a>
 
-#### Next: Connect the Edit Employee page
+### Step 148: Edit Employee URL
 
-Open **`accounts/urls.py`**.
+**Why we are doing this.** The edit-employee view needs a route that tells it which employee is being edited.
 
-Add this inside your existing `urlpatterns` list:
+**File / location.** `accounts/urls.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Add this inside your existing urlpatterns list.*
 
 ```python
 path(
@@ -205,60 +215,38 @@ path(
 ),
 ```
 
-#### What does this URL mean?
+**How it works.** A URL parameter such as the employee ID is passed into the view. Django resolves that path to a record or returns not found when no matching record exists.
 
-For example:
+**How we checked it.** A link or selection mechanism must still provide the correct ID from the employee list.
 
-`http://127.0.0.1:8000/employees/edit/3/`
+**Connects to.** Previous: [Step 147 — Edit Employee Template](14-edit-employee.md#step-147) · Next: [Step 149 — Employee Edit Link](14-edit-employee.md#step-149)
 
-Django extracts `3` from the URL and passes it to our view as `employee_id`.
-
-  **NEW vs CLASS — `<int:employee_id>`**
-
-  This is a Django URL path converter.
-
-  - `int` means the value must be an integer.
-  - `employee_id` is the variable name passed to the view.
-
-  This allows one view to edit different employees.
-
-#### Test
-
-1. Log in as Admin.
-2. Open `/employees/edit/3/`, replacing `3` with an existing employee's ID.
-3. Change the employee's first name or role.
-4. Click **Save Changes**.
-5. Confirm the changes appear in `/employees/`.
-
-Also verify that Sales Staff cannot access the edit page (HTTP 403).
-
-**Note:** The employee list currently displays usernames, not database IDs. You can find an employee's ID in Django Admin. We'll add an **Edit** link beside each employee next.
-
-*Previous: Step 147 (Edit Employee Template)  |  Next: Step 149 (Employee Edit Link)*
 
 ---
 
-## Step 149: Employee Edit Link
+<a id="step-149"></a>
 
-#### Next: Add an Edit button to each employee
+### Step 149: Employee Edit Link
 
-The custom Edit Employee page is working. Now we'll make it accessible directly from the employee list, without needing to find employee IDs manually.
+**Why we are doing this.** Administrators need a way to reach an individual edit page from the employee list.
 
-Open **`templates/accounts/employee_list.html`**.
+**File / location.** `templates/accounts/employee_list.html`.
 
-**1.** Find the table headings and add:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Find the table headings and add.*
 
 ```html
 <th>Actions</th>
 ```
 
-Place it immediately after:
+*2. Recorded snippet; Place it immediately after.*
 
 ```html
 <th>Status</th>
 ```
 
-**2.** Inside the `{% for employee in employees %}` loop, add this cell immediately after the employee's status `</td>`:
+*3. Recorded snippet; Inside the {% for employee in employees %} loop, add this cell immediately after the employee's status </td>.*
 
 ```html
 <td>
@@ -268,53 +256,32 @@ Place it immediately after:
 </td>
 ```
 
-**3.** Find the empty-table message:
+*4. Recorded snippet; Find the empty-table message.*
 
 ```html
 <td colspan="5">No employees found.</td>
 ```
 
-Change `colspan="5"` to `colspan="6"` because the table now has six columns.
+**How it works.** A template link builds the named edit URL with that employee's ID. This connects the displayed row to the edit view.
 
-#### Expected result
+**How we checked it.** The next steps explore a selection-based editing interface.
 
-| Username | Role | Status | Actions |
-|---|---|---|---|
-| manager1 | Inventory Manager | Active | Edit |
-| sales1 | Sales Staff | Active | Edit |
+**Connects to.** Previous: [Step 148 — Edit Employee URL](14-edit-employee.md#step-148) · Next: [Step 150 — Employee Edit Mode](14-edit-employee.md#step-150)
 
-Illustrative table — your page will still show Name and Email.
-
-#### Test
-
-1. Open `/employees/` as Admin.
-2. Click **Edit** beside any employee.
-3. Confirm that the correct employee's details appear.
-4. Click **Back to Manage Employees**.
-
-**Save the file and test.** Next, we'll implement employee account deactivation.
-
-*Previous: Step 148 (Edit Employee URL)  |  Next: Step 150 (Employee Edit Mode)*
 
 ---
 
-## Step 150: Employee Edit Mode
+<a id="step-150"></a>
 
-#### Step 1: Add an Edit Mode
+### Step 150: Employee Edit Mode
 
-We want this workflow:
+**Why we are doing this.** The first edit link worked, but the page design was changed to make editing an explicit action instead of accidental navigation.
 
-      Click Edit Employee
+**File / location.** `templates/accounts/employee_list.html`.
 
-      Select employee
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-      Edit details
-
-First, Django needs to know whether the employee list is in normal mode or edit mode.
-
-Open **`accounts/views.py`**.
-
-Find the `employee_list()` function and replace only its `return render(...)` statement with:
+*1. Recorded snippet; Find the employeelist() function and replace only its return render(...) statement with.*
 
 ```python
     return render(
@@ -327,34 +294,26 @@ Find the `employee_list()` function and replace only its `return render(...)` st
     )
 ```
 
-#### How it works
+**How it works.** An edit-mode state controls when employee rows can be selected for modification. This is a user-interface workflow on top of the same edit view.
 
-| URL | Edit mode |
-|---|---|
-| `/employees/` | False |
-| `/employees/?mode=edit` | True |
+**How we checked it.** The selection behavior is completed and corrected over Steps 151–156.
 
-  **NEW vs CLASS — `request.GET.get()`**
+**Connects to.** Previous: [Step 149 — Employee Edit Link](14-edit-employee.md#step-149) · Next: [Step 151 — Edit Mode Button](14-edit-employee.md#step-151)
 
-  Reads a value from the URL's query parameters.
-
-  Here, Django checks whether `mode` equals `edit` and sends the resulting `True` or `False` to our HTML template.
-
-**Save `views.py`.** The page won't look different yet; we'll use `edit_mode` in the next step.
-
-*Previous: Step 149 (Employee Edit Link)  |  Next: Step 151 (Edit Mode Button)*
 
 ---
 
-## Step 151: Edit Mode Button
+<a id="step-151"></a>
 
-#### Step 2: Add the Edit Employee button
+### Step 151: Edit Mode Button
 
-We've already added `edit_mode` to our view. Now we'll use it in the HTML template.
+**Why we are doing this.** We introduced an Edit control so a user deliberately enters employee-selection mode.
 
-Open **`templates/accounts/employee_list.html`**.
+**File / location.** `templates/accounts/employee_list.html`.
 
-Immediately **above the `<table>` tag**, add:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Immediately above the <table> tag, add.*
 
 ```html
 {% if edit_mode %}
@@ -376,47 +335,26 @@ Immediately **above the `<table>` tag**, add:
 {% endif %}
 ```
 
-#### How it works
+**How it works.** The button changes the page's interaction state; JavaScript or template logic then decides which row should open editing.
 
-  {@body const [editing,setEditing] = DIL.useState(false)}
+**How we checked it.** The next step implements selecting a specific employee.
 
-  {#if editing}
-    Select an employee to edit.
-  {/if}
+**Connects to.** Previous: [Step 150 — Employee Edit Mode](14-edit-employee.md#step-150) · Next: [Step 152 — Select Employee](14-edit-employee.md#step-152)
 
-      **Username**
-      **Role**
-
-      manager1
-      Inventory Manager
-
-      sales1
-      Sales Staff
-
-  Interactive preview. Employee selection will be enabled in the next step.
-
-#### Test
-
-1. Open `/employees/`.
-2. Click **Edit Employee**.
-3. Verify that **Select an employee to edit** appears.
-4. Click **Cancel Edit** to return to normal mode.
-
-Next, we'll make employees selectable while edit mode is active.
-
-*Previous: Step 150 (Employee Edit Mode)  |  Next: Step 152 (Select Employee)*
 
 ---
 
-## Step 152: Select Employee
+<a id="step-152"></a>
 
-#### Step 3: Make employee rows clickable in Edit Mode
+### Step 152: Select Employee
 
-When **Edit Employee** is selected, clicking an employee's row should open that employee's edit form.
+**Why we are doing this.** Once edit mode was available, the administrator needed to choose one of the listed employees.
 
-Open **`templates/accounts/employee_list.html`**.
+**File / location.** `templates/accounts/employee_list.html`.
 
-**1.** Inside `<head>`, add:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Inside <head>, add.*
 
 ```html
 <style>
@@ -437,25 +375,25 @@ Open **`templates/accounts/employee_list.html`**.
 </style>
 ```
 
-**2.** Find the `<tr>` immediately after:
+*2. Recorded snippet; Find the <tr> immediately after.*
 
 ```html
 {% for employee in employees %}
 ```
 
-Replace that `<tr>` with:
+*3. Recorded snippet; Replace that <tr> with.*
 
 ```html
 <tr {% if edit_mode %}class="selectable"{% endif %}>
 ```
 
-**3.** Find the username cell:
+*4. Recorded snippet; Find the username cell.*
 
 ```html
 <td>{{ employee.username }}</td>
 ```
 
-Replace it with:
+*5. Recorded snippet; Replace it with.*
 
 ```html
 <td>
@@ -470,26 +408,26 @@ Replace it with:
 </td>
 ```
 
-#### Test
+**How it works.** Row selection stores or follows the chosen employee ID, then uses the existing edit route. The distinction between selection and submission avoids editing the wrong user.
 
-1. Open `/employees/` — rows should not be clickable.
-2. Click **Edit Employee** — rows should become selectable.
-3. Click anywhere on `manager1`'s row — the custom Edit Employee page should open.
-4. Click **Back to Manage Employees** to return to the list.
+**How we checked it.** The fuller template version and a selection fix follow in Steps 153–156.
 
-  **NEW vs CLASS — CSS `::after`**
+**Connects to.** Previous: [Step 151 — Edit Mode Button](14-edit-employee.md#step-151) · Next: [Step 153 — Combine the list and selection controls](14-edit-employee.md#step-153)
 
-  The `::after` pseudo-element extends the username link's clickable area across the employee's row. This lets us make the whole row clickable without JavaScript.
-
-If you previously added an individual **Edit** link in an Actions column, remove it, since we're replacing that approach.
-
-*Previous: Step 151 (Edit Mode Button)  |  Next: Step 153 (Change templates/accounts/employee_list.html)*
 
 ---
 
-## Step 153: Change templates/accounts/employee_list.html
+<a id="step-153"></a>
 
-Replace the entire contents of **`templates/accounts/employee_list.html`** with this:
+### Step 153: Combine the list and selection controls
+
+**Why we are doing this.** The earlier list template fragments needed to be combined into one functioning employee table with edit-mode controls.
+
+**File / location.** `templates/accounts/employee_list.html`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Replace the entire contents of templates/accounts/employeelist.html with this.*
 
 ```html
 <!DOCTYPE html>
@@ -609,29 +547,28 @@ Replace the entire contents of **`templates/accounts/employee_list.html`** with 
 </html>
 ```
 
-**Test:** Open `/employees/` → Click **Edit Employee** → Click an employee's row → The custom edit form should open.
+**How it works.** This replacement updates the HTML and associated JavaScript together. Read it as a later version of the same page, not an additional employee-list feature.
 
-*Previous: Step 152 (Select Employee)  |  Next: Step 154 (External CSS)*
+This flag allows deactivation without deleting the user’s record and associated history.
+
+**How we checked it.** The selection behavior still needed the corrections noted in subsequent steps.
+
+**Connects to.** Previous: [Step 152 — Select Employee](14-edit-employee.md#step-152) · Next: [Step 154 — External CSS](14-edit-employee.md#step-154)
+
 
 ---
 
-## Step 154: External CSS
+<a id="step-154"></a>
 
-Yes. We'll maintain **external CSS files** instead of writing CSS inside HTML templates. This will keep our Django project cleaner and make styling easier to maintain.
+### Step 154: External CSS
 
-#### Step 1: Create a shared stylesheet
+**Why we are doing this.** The growing amount of list styling made the template harder to read and maintain.
 
-Inside the `accounts` app, create these folders and file:
+**File / location.** `accounts/static/accounts/style.css`.
 
-    **accounts/**
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-      static/
-
-        accounts/
-
-          style.css
-
-Add this to **`accounts/static/accounts/style.css`**:
+*1. Recorded snippet; Add this to accounts/static/accounts/style.css.*
 
 ```css
 .selectable {
@@ -650,17 +587,13 @@ Add this to **`accounts/static/accounts/style.css`**:
 }
 ```
 
-#### Step 2: Connect CSS to HTML
-
-Open `templates/accounts/employee_list.html`.
-
-Add this at the very beginning:
+*2. Recorded snippet; Add this at the very beginning.*
 
 ```django
 {% load static %}
 ```
 
-Replace the entire existing `<head>...</head>` section with:
+*3. Recorded snippet; Replace the entire existing <head>...</head> section with.*
 
 ```html
 <head>
@@ -670,43 +603,38 @@ Replace the entire existing `<head>...</head>` section with:
 </head>
 ```
 
-The previous internal `<style>...</style>` section should be removed.
+**How it works.** Moving CSS into an external static stylesheet separates layout from HTML behavior. `{% load static %}` and a stylesheet link let Django serve that file.
 
-#### Step 3: Test
+**How we checked it.** Confirm the static file is loaded and the table retains its appearance.
 
-Refresh `/employees/?mode=edit` and verify that the hover effect still works.
+**Connects to.** Previous: [Step 153 — Combine the list and selection controls](14-edit-employee.md#step-153) · Next: [Step 155 — Fix Row Selection](14-edit-employee.md#step-155)
 
-Django's `{% static %}` tag locates the external stylesheet through its static-file system.
-
-**Going forward:** We'll keep styling in separate CSS files and reuse this stylesheet across the Accounts pages.
-
-*Previous: Step 153 (Change templates/accounts/employee_list.html)  |  Next: Step 155 (Fix Row Selection)*
 
 ---
 
-## Step 155: Fix Row Selection
+<a id="step-155"></a>
 
-Your screenshot shows that **Edit Mode is active**, but the employee usernames appear as plain text rather than clickable links.
+### Step 155: Fix Row Selection
 
-The CSS alone cannot make employees selectable. We also need the correct HTML.
+**Why we are doing this.** The row-selection interaction did not behave as intended in its first implementation.
 
-#### Step 1: Check the employee list template
+**File / location.** `templates/accounts/employee_list.html`.
 
-Open **`templates/accounts/employee_list.html`**.
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Find:
+*1. Recorded snippet; Find.*
 
 ```html
 {% for employee in employees %}
 ```
 
-Immediately below it, ensure you have:
+*2. Recorded snippet.*
 
 ```html
 <tr {% if edit_mode %}class="selectable"{% endif %}>
 ```
 
-Then replace the existing username `<td>...</td>` with:
+*3. Recorded snippet; Then replace the existing username <td>...</td> with.*
 
 ```html
 <td>
@@ -721,35 +649,26 @@ Then replace the existing username `<td>...</td>` with:
 </td>
 ```
 
-Keep the remaining Name, Email, Role and Status cells unchanged.
+**How it works.** The JavaScript/markup update changes how an employee row becomes selected and when an Edit action is enabled. The row's ID must remain tied to the correct employee.
 
-#### Step 2: Test
+**How we checked it.** This is a bug-fix step, not a new permission rule.
 
-1. Save the HTML file.
-2. Refresh using `Ctrl + Shift + R`.
-3. Open `/employees/?mode=edit`.
-4. The usernames should now appear as links.
-5. Click an employee's row to open their edit form.
+**Connects to.** Previous: [Step 154 — External CSS](14-edit-employee.md#step-154) · Next: [Step 156 — Correct employee row selection](14-edit-employee.md#step-156)
 
-Your existing external `style.css` can remain unchanged.
-
-*Previous: Step 154 (External CSS)  |  Next: Step 156 (Change employee_list.html)*
 
 ---
 
-## Step 156: Change employee_list.html
+<a id="step-156"></a>
 
-I checked your code. The problem is in the HTML, not the CSS.
+### Step 156: Correct employee row selection
 
-**Two changes are missing:**
-1. The employee rows don't have the `selectable` class.
-2. The usernames are plain text instead of links to the Edit Employee page.
+**Why we are doing this.** After identifying the selection bug, we replaced the affected list template with a corrected version.
 
-Your external stylesheet is linked correctly.
+**File / location.** `templates/accounts/employee_list.html`.
 
-#### Corrected `employee_list.html`
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Replace the entire file with:
+*1. Recorded snippet; Replace the entire file with.*
 
 ```html
 {% load static %}
@@ -856,16 +775,17 @@ Replace the entire file with:
 </html>
 ```
 
-Keep your existing `accounts/static/accounts/style.css` unchanged.
+**How it works.** The updated HTML integrates selection classes, buttons, and event handling consistently. It supersedes earlier list-template fragments.
 
-#### Test
+This flag allows deactivation without deleting the user’s record and associated history.
 
-Open `/employees/?mode=edit`, then:
+**How we checked it.** Test selecting different rows and confirm the correct employee opens in edit mode.
 
-1. Hover over an employee row. Its background should turn light grey.
-2. Click the row. The custom Edit Employee page should open.
-3. Click **Cancel Edit**. The employee rows should no longer be selectable.
-
-*Previous: Step 155 (Fix Row Selection)  |  Next: Step 157 (Employee Deactivation)*
+**Connects to.** Previous: [Step 155 — Fix Row Selection](14-edit-employee.md#step-155) · Next: [Step 157 — Employee Deactivation](15-activate-deactivate-and-resend-setup-email.md#step-157)
 
 ---
+
+**Chapter recap.** Use ModelForm instances and ID-based URLs; follow the evolution of edit mode and row-selection fixes.
+
+**Practice explaining:** Explain why editing needs an existing model instance instead of creating a new user.
+

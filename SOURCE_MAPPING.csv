@@ -1,0 +1,195 @@
+journal_step,original_chat_message_index,original_chat_badge,original_module,original_chapter,original_title
+1,215,,0,Environment setup,Check Python
+2,219,,0,Environment setup,Create the virtual environment
+3,223,,0,Environment setup,Install Django and required packages
+4,225,,0,Environment setup,Create the configuration file
+5,229,,0,Environment setup,Change manage.py
+6,231,,0,Environment setup,Create .env
+7,272,,0,Git and GitHub,Initialize the Git repository
+8,278,,0,Git and GitHub,Stage the project files
+9,284,,0,Git and GitHub,Create our first Git commit
+10,288,,0,Git and GitHub,Connect your local project to GitHub
+11,290,,0,Git and GitHub,Connect your local project to GitHub
+12,294,,0,Git and GitHub,Push your first commit to GitHub
+13,298,,0,Git and GitHub,Create a separate local journal folder
+14,300,,0,Git and GitHub,Initialize Git for the private journal
+15,302,,0,Git and GitHub,Connect it to GitHub
+16,312,,0,Git and GitHub,Stage the journal for Git
+17,314,,0,Git and GitHub,Change views.py
+18,316,,0,Git and GitHub,Stage the private journal
+19,320,,0,Git and GitHub,Commit the private development journal
+20,324,,0,Git and GitHub,Push your journal to private GitHub
+21,326,,0,Git and GitHub,Yes. Both your local Git repository and your GitHub repository can have a branch
+22,330,,0,Git and GitHub,Apply database migrations
+23,344,,0,Git and GitHub,Update your private development journal
+24,348,,0,Git and GitHub,Stage the updated journal
+25,352,2,0,Database and migrations,Committing Development Journal Update
+26,356,4,0,Database and migrations,Committing Development Journal Update
+27,358,5,0,Database and migrations,Pushing Development Journal to GitHub
+28,362,7,0,Database and migrations,Understanding the Migration Workflow
+29,370,11,0,Server and admin account,Confirming Terminal Environment
+30,384,16,0,Server and admin account,Understanding the Project Homepage
+31,392,20,0,Server and admin account,Documenting Superuser Setup
+32,394,21,0,Server and admin account,Staging Development Journal Update
+33,396,22,0,Server and admin account,Understanding git add and -C
+34,398,23,0,Server and admin account,Staging Development Journal Update
+35,400,24,0,Server and admin account,Committing Development Journal Update
+36,402,25,0,Server and admin account,Pushing Development Journal to GitHub
+37,411,29,0,Security checks,Staging Security Verification Notes
+38,413,30,0,Security checks,Committing Security Verification Notes
+39,415,31,0,Security checks,Pushing Security Verification Notes
+40,423,33,0,Security checks,Understanding Temporary Test Models
+41,427,35,0,Security checks,Record and Push Test Results
+42,435,36,0,AI forecasting feasibility test,Installing PyTorch
+43,437,37,0,AI forecasting feasibility test,Understanding python -m
+44,439,38,0,AI forecasting feasibility test,Installing AI Dependencies
+45,449,43,0,AI forecasting feasibility test,Documenting Model Results
+46,468,47,0,Module 0 completion,Update Module 0 Report
+47,503,63,0,Module 0 completion,Stage Documentation
+48,505,64,0,Module 0 completion,Commit Documentation
+49,507,65,0,Module 0 completion,Push Documentation
+50,511,66,0,Module 0 completion,Finalize Report
+51,513,67,0,Module 0 completion,Finalize README
+52,515,68,0,Module 0 completion,Stage Final Updates
+53,519,70,0,Module 0 completion,Final Documentation Commit
+54,523,72,0,Module 0 completion,Create Completion Tag
+55,525,73,0,Module 0 completion,Publish Completion Tag
+56,547,82,1,Accounts app and custom user model,Approved — Begin Development
+57,551,84,1,Accounts app and custom user model,Custom User Model
+58,553,85,1,Accounts app and custom user model,Workflow Correction
+59,557,87,1,Accounts app and custom user model,App Creation
+60,560,88,1,Accounts app and custom user model,Configure Settings
+61,562,89,1,Accounts app and custom user model,Custom User Model
+62,564,90,1,Accounts app and custom user model,Understanding CustomUser
+63,566,91,1,Accounts app and custom user model,Understanding AbstractUser
+64,570,93,1,Accounts app and custom user model,User Table Definition
+65,574,95,1,Accounts app and custom user model,AUTH_USER_MODEL
+66,576,96,1,Accounts app and custom user model,Django Authentication
+67,590,103,1,Accounts app and custom user model,Migration Preparation
+68,592,104,1,Database setup and admin site,Database Reset
+69,594,105,1,Database setup and admin site,Database File Locked
+70,596,106,1,Database setup and admin site,Create Database Tables
+71,598,107,1,Database setup and admin site,Create Administrator
+72,602,109,1,Database setup and admin site,Register CustomUser
+73,616,116,1,Login,Login View
+74,620,118,1,Login,models.py vs admin.py
+75,632,123,1,Login,Login Page
+76,637,125,1,Login,Login URL
+77,640,126,1,Login,Connect Login URL
+78,647,130,1,Login,Login Redirect
+79,652,132,1,Login,Project vs App
+80,654,133,1,Logout,Logout Function
+81,664,138,1,Logout,Logout URL
+82,666,139,1,Logout,Logout Button
+83,668,140,1,Homepage protection and navigation,Protect Homepage
+84,670,141,1,Homepage protection and navigation,Display User Details
+85,676,144,1,Homepage protection and navigation,Login Page Check
+86,678,145,1,Password change,Change Password
+87,682,147,1,Password change,Code Walkthrough
+88,686,149,1,Password change,Password Change URL
+89,688,150,1,Password change,Password Change Form
+90,690,151,1,Password change,Change Password Link
+91,700,156,1,Role-based homepage and feedback messages,Role-Based Homepage
+92,704,158,1,Role-based homepage and feedback messages,Admin Link Visibility
+93,714,163,1,Role-based homepage and feedback messages,Admin Access
+94,718,165,1,Role-based homepage and feedback messages,Admin Access Verified
+95,720,166,1,Role-based homepage and feedback messages,Login Error Messages
+96,722,167,1,Role-based homepage and feedback messages,Password Change Confirmation
+97,724,168,1,Role-based homepage and feedback messages,Success Message
+98,736,174,1,Role-based homepage and feedback messages,Stage Files
+99,738,175,1,Role-based homepage and feedback messages,Commit Changes
+100,746,179,1,Role security (decorators),Role Security
+101,750,181,1,Role security (decorators),Understanding Execution Flow
+102,758,185,1,Role security (decorators),Complete Execution Flow
+103,770,188,1,Role security (decorators),Apply Role Security
+104,772,189,1,Role security (decorators),Test Role Restrictions
+105,778,,1,Role security (decorators),Change accounts/decorators.py
+106,780,192,1,Role security (decorators),Apply Role Security
+107,782,193,1,Role security (decorators),Test Role Security
+108,793,199,1,Email validation and email setup,REQUIRED_FIELDS
+109,795,200,1,Email validation and email setup,Enforce Email Validation
+110,797,201,1,Email validation and email setup,Create Migration
+111,799,202,1,Email validation and email setup,Apply Migration
+112,802,204,1,Email validation and email setup,Email Configuration
+113,814,208,1,Forgot and reset password,Forgot Password
+114,816,209,1,Forgot and reset password,Password Reset URL
+115,820,211,1,Forgot and reset password,Password Reset Confirmation
+116,822,212,1,Forgot and reset password,Template Structure
+117,824,213,1,Forgot and reset password,Confirmation Page URL
+118,828,215,1,Forgot and reset password,Password Reset Email
+119,830,216,1,Forgot and reset password,Connect Email Template
+120,836,219,1,Forgot and reset password,Connect Email Subject
+121,838,220,1,Forgot and reset password,Set New Password Page
+122,840,221,1,Forgot and reset password,Reset Link URL
+123,842,222,1,Forgot and reset password,Password Reset Success Page
+124,844,223,1,Forgot and reset password,Password Reset Complete URL
+125,848,225,1,Forgot and reset password,Fix Django Error
+126,850,,1,Forgot and reset password,Change accounts/urls.py
+127,852,226,1,Forgot and reset password,Email Testing
+128,871,235,1,Employee welcome email and password-setup link,Employee Creation Form
+129,873,236,1,Employee welcome email and password-setup link,Connect Employee Form
+130,875,237,1,Employee welcome email and password-setup link,Welcome Email Template
+131,877,,1,Employee welcome email and password-setup link,Secure Password-Setup Link
+132,879,239,1,Employee welcome email and password-setup link,Send Welcome Email
+133,881,240,1,Employee welcome email and password-setup link,Automatic Welcome Email
+134,887,243,1,Employee welcome email and password-setup link,Link Expiration
+135,891,245,1,Employee welcome email and password-setup link,Resend Setup Link
+136,902,251,1,Employee list,Employee Management
+137,904,252,1,Employee list,Employee List Template
+138,906,253,1,Employee list,Employee List URL
+139,908,254,1,Create employee,Create Employee View
+140,910,255,1,Create employee,Restrict Employee Roles
+141,912,256,1,Create employee,Create Employee Template
+142,914,257,1,Create employee,Create Employee URL
+143,918,258,1,Create employee,Add Employee Link
+144,920,,1,Create employee,Change templates/accounts/employee_list.html
+145,924,259,1,Edit employee,Edit Employee Form
+146,926,260,1,Edit employee,Edit Employee View
+147,928,261,1,Edit employee,Edit Employee Template
+148,930,262,1,Edit employee,Edit Employee URL
+149,935,263,1,Edit employee,Employee Edit Link
+150,939,264,1,Edit employee,Employee Edit Mode
+151,944,265,1,Edit employee,Edit Mode Button
+152,946,266,1,Edit employee,Select Employee
+153,948,,1,Edit employee,Change templates/accounts/employee_list.html
+154,950,267,1,Edit employee,External CSS
+155,952,268,1,Edit employee,Fix Row Selection
+156,954,,1,Edit employee,Change employee_list.html
+157,956,269,1,"Activate, deactivate and resend setup email",Employee Deactivation
+158,958,270,1,"Activate, deactivate and resend setup email",Employee Status URL
+159,960,271,1,"Activate, deactivate and resend setup email",Deactivate/Reactivate Button
+160,964,273,1,"Activate, deactivate and resend setup email",Resend Setup Email
+161,966,274,1,"Activate, deactivate and resend setup email",Resend Setup Email URL
+162,968,275,1,"Activate, deactivate and resend setup email",Resend Setup Email Button
+163,972,277,1,"Activate, deactivate and resend setup email",Home Page Navigation
+164,974,278,1,"Activate, deactivate and resend setup email",Home Template Review
+165,976,279,1,Message styling,Employee Management Messages
+166,978,,1,Message styling,Change edit_employee.html
+167,980,280,1,Message styling,Message Styling
+168,982,,1,Message styling,Change employee_list.html
+169,984,281,1,Message styling,Message Styling CSS
+170,988,283,1,Real email delivery (SMTP),Real Email Configuration
+171,996,285,1,Real email delivery (SMTP),Configure SMTP Credentials
+172,1002,,1,Real email delivery (SMTP),Install python-dotenv
+173,1006,288,1,Real email delivery (SMTP),Fix Email Backend
+174,1008,,1,Real email delivery (SMTP),Fix the email configuration
+175,1010,,1,Real email delivery (SMTP),Change manage.py
+176,1012,,1,Real email delivery (SMTP),Send a real email through Gmail
+177,1038,,1,Real email delivery (SMTP),Change base.html
+178,1040,,1,Real email delivery (SMTP),Change base.html
+179,1046,303,1,Shared base template and page styling,Dashboard Template Inheritance
+180,1050,305,1,Shared base template and page styling,Update Login Page
+181,1056,307,1,Shared base template and page styling,Update Change Password Page
+182,1060,309,1,Shared base template and page styling,Update Forgot Password Page
+183,1064,311,1,Shared base template and page styling,Update Reset Confirmation
+184,1070,313,1,Shared base template and page styling,Update Set New Password Page
+185,1074,315,1,Shared base template and page styling,Update Reset Complete Page
+186,1078,316,1,Shared base template and page styling,Update Employee List
+187,1082,318,1,Shared base template and page styling,Update Create Employee
+188,1083,319,1,Shared base template and page styling,Fix Form Styling
+189,1085,,1,Shared base template and page styling,Change accounts/forms.py
+190,1090,321,1,Shared base template and page styling,Correct Form Styling
+191,1092,,1,Shared base template and page styling,Change accounts/forms.py
+192,1096,323,1,Shared base template and page styling,Update Edit Employee
+193,1098,324,1,Shared base template and page styling,Email Error Handling
+194,1100,325,1,Shared base template and page styling,Resend Email Error Handling

@@ -1,219 +1,89 @@
-# Module 0, Chapter 4: Server and admin account
+# MODULE 0 — Foundations
 
-## Step 29: Confirming Terminal Environment
+## Chapter 4: Server and admin account (Steps 29–36)
 
-**No problem. Your terminal is ready.**
+**Where we are.** With the basic database present, we checked the development-server environment and prepared an administrator account.
 
-Your output confirms:
+**What this chapter gives us.** Recognize the project root, the URL-view-template path, and the Django superuser workflow.
 
-- **Correct project directory:** Yes
-- **Virtual environment activated:** Yes — `(.venv)`
-- **Django server:** The previous terminal session has ended.
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
 
-You haven't lost your project files, database, or Git commits.
+**Interview checkpoint.** Trace a page request from a browser through urls.py and views.py to a template.
 
-#### Step 37 — Completed
+### Find a step
 
-We can proceed directly to the next step.
+- [Step 29: Confirming Terminal Environment](#step-29)
+- [Step 30: Trace the homepage request](#step-30)
+- [Step 31: Documenting Superuser Setup](#step-31)
+- [Step 32: Staging Development Journal Update](#step-32)
+- [Step 33: Understand git -C and git add](#step-33)
+- [Step 34: Staging Development Journal Update](#step-34)
+- [Step 35: Committing Development Journal Update](#step-35)
+- [Step 36: Pushing Development Journal to GitHub](#step-36)
 
-#### Step 38 — Create a Django superuser
+---
 
-Run:
+<a id="step-29"></a>
+
+### Step 29: Confirming Terminal Environment
+
+**Why we are doing this.** We needed to confirm the terminal was running commands from the correct virtual environment and project folder before starting the server.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; Run.*
 
 ```powershell
 python .\techmindz_inventory_module0_sqlite_atomic\manage.py createsuperuser
 ```
 
-**What this does:** Starts the process of creating an administrator account for Django's admin panel.
+**How it works.** The current prompt and `python` executable help locate the active environment. Running Django commands in the wrong folder cannot find `manage.py`.
 
-Django will ask you for a username, email address, and password.
+**How we checked it.** The source contains follow-up environment checks, but not a new project-code change here.
 
-**Send me the first prompt you see.** We'll proceed one step at a time.
+**Connects to.** Previous: [Step 28 — Understanding the Migration Workflow](03-database-and-migrations.md#step-28) · Next: [Step 30 — Trace the homepage request](04-server-and-admin-account.md#step-30)
 
-#### How we checked it
-
-**Step 38 completed.** Your Django superuser account has been created successfully.
-
-#### Step 39 — Start the Django server
-
-Run:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-Then open:
-
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-
-Log in using the superuser credentials you just created.
-
-**Expected result:** You should see the Django Administration dashboard with **Groups** and **Users**.
-
-Tell me whether the dashboard opens successfully.
-
-#### How we checked it
-
-With the Django server running, open a **new PowerShell terminal** and execute:
-
-```powershell
-Start-Process "http://127.0.0.1:8000/admin/"
-```
-
-This opens the Django admin login page in your default browser.
-
-#### How we checked it
-
-Run the original command:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-Then open this address in your browser:
-
-http://127.0.0.1:8000/admin/
-
-*Previous: Step 28 (Understanding the Migration Workflow)  |  Next: Step 30 (Understanding the Project Homepage)*
 
 ---
 
-## Step 30: Understanding the Project Homepage
+<a id="step-30"></a>
 
-The page displaying your **project title and a link** is the project's homepage.
+### Step 30: Trace the homepage request
 
-The command:
+**Why we are doing this.** With Django configured, we wanted to understand the page served at the application's root URL.
 
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-doesn't create that page. It simply starts the server so Django can display pages defined in your project.
+*1. Illustration from the original explanation — **not necessarily an edit**.*
 
-Django treats these as two different addresses:
-
-- `http://127.0.0.1:8000/` — Your project's homepage.
-- `http://127.0.0.1:8000/admin/` — Django's built-in administration interface.
-
-#### How was that page created?
-
-I checked your actual project code on GitHub. The homepage was already included in the initial project setup.
-
-Three files work together:
-
-    **1. `config/urls.py`**
-
-    ```python
-    path("", include("core.urls"))
-    
-```
-
-    Sends homepage requests to the `core` application.
-
-    **2. `core/views.py`**
-
-    ```python
-    def home(request):
-        return render(request, "core/home.html")
-    
-```
-
-    Tells Django which HTML page to display.
-
-    **3. `core/templates/core/home.html`**
-
-    ```html
+```html
     <h1>Inventory &amp; Demand Intelligence</h1>
     <p>Module 0 setup is running.</p>
     <p><a href="/admin/">Open Django admin</a></p>
     
 ```
 
-    Defines the title, message, and clickable admin link.
+**How it works.** A URL pattern selects a view; the view chooses a template; the template produces the HTML page. This explains the connection among URL, view, and browser.
 
-**In short:** The URL configuration finds the view, the view loads the HTML template, and your browser displays it.
+**How we checked it.** The notes discuss the homepage's observed output and initial checks. No separate business function was added.
 
-This is a temporary setup homepage, not the final inventory dashboard.
+**Connects to.** Previous: [Step 29 — Confirming Terminal Environment](04-server-and-admin-account.md#step-29) · Next: [Step 31 — Documenting Superuser Setup](04-server-and-admin-account.md#step-31)
 
-#### How we checked it
-
-`manage.py` is located in the **Django project root**, outside both `config` and `core`.
-
-Your folder structure:
-
-```text
-Techmindz_Inventory_Module0_SQLite_Atomic_Update/
-│
-├── .venv/
-│
-└── techmindz_inventory_module0_sqlite_atomic/
-    │
-    ├── manage.py           ← HERE
-    │
-    ├── config/
-    │   ├── settings.py
-    │   ├── urls.py
-    │   ├── asgi.py
-    │   └── wsgi.py
-    │
-    └── core/
-        ├── views.py
-        ├── urls.py
-        └── models.py
-```
-
-**Why is it outside both folders?**
-
-Because `manage.py` manages the entire Django project, not just one app.
-
-For example, it lets you run the server, apply migrations, and create superusers.
-
-That's why we've been running:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-We're pointing Python to `manage.py` inside the Django project folder.
-
-#### How we checked it
-
-#### Step 39 — Verify Django Admin Login
-
-We previously created your superuser account. Now we'll verify that it works.
-
-**1.** If the Django server isn't running, execute:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-**2.** Open this address in your browser:
-
-http://127.0.0.1:8000/admin/
-
-**3.** Log in using the superuser credentials you created.
-
-**Expected result:** The Django Administration dashboard should appear, showing **Users** and **Groups**.
-
-Tell me whether you successfully logged in.
-
-*Previous: Step 29 (Confirming Terminal Environment)  |  Next: Step 31 (Documenting Superuser Setup)*
 
 ---
 
-## Step 31: Documenting Superuser Setup
+<a id="step-31"></a>
 
-**Step 39 completed.** Your superuser login works, and the Django Admin dashboard is accessible.
+### Step 31: Documenting Superuser Setup
 
-#### Step 40 — Record the successful setup
+**Why we are doing this.** A usable Django admin site requires an administrator account. We documented how one is created, not just the end result.
 
-Open a **new VS Code terminal** so the Django server can continue running.
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Execute:
+*1. Recorded snippet.*
 
 ```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+Add-Content -Path "C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
 
 ## Django Admin Setup
 
@@ -243,255 +113,130 @@ What is the difference between a Django staff user and a superuser?
 '@
 ```
 
-**Important:** We document the setup, not your actual username, email, or password.
+**How it works.** `createsuperuser` asks for account details and saves a superuser with elevated permissions. Its password should never be written into the journal.
 
-Tell me **done**. We'll save this journal update to GitHub before moving to the next development task.
+**How we checked it.** The recorded setup notes mention the administrator workflow, but do not reproduce the account's private credentials.
 
-*Previous: Step 30 (Understanding the Project Homepage)  |  Next: Step 32 (Staging Development Journal Update)*
+**Connects to.** Previous: [Step 30 — Trace the homepage request](04-server-and-admin-account.md#step-30) · Next: [Step 32 — Staging Development Journal Update](04-server-and-admin-account.md#step-32)
 
----
-
-## Step 32: Staging Development Journal Update
-
-#### Step 41 — Stage the journal update
-
-Assuming Step 40 completed successfully, run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
-
-**What this does:** Stages your Django Admin setup notes for the next Git commit.
-
-This affects only your private journal repository.
-
-Tell me **done** when the command finishes.
-
-*Previous: Step 31 (Documenting Superuser Setup)  |  Next: Step 33 (Understanding git add and -C)*
 
 ---
 
-## Step 33: Understanding git add and -C
+<a id="step-32"></a>
 
-**Yes, the file already exists.** `git add` doesn't mean creating or adding a new file to the folder.
+### Step 32: Staging Development Journal Update
 
-It means **selecting the current version of a file for the next commit**.
+**Why we are doing this.** After adding the administrator milestone to the journal, we prepared the updated file for a new commit.
 
-#### 1. Why do we use `git add` repeatedly?
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Imagine your journal changes over time:
-
-      **Monday:** Journal contains initial setup notes.
-
-      `git add` → `git commit` saves Version 1.
-
-      **Tuesday:** You add database initialization notes.
-
-      `git add` → `git commit` saves Version 2.
-
-      **Wednesday:** You add Django Admin notes.
-
-      `git add` → `git commit` saves Version 3.
-
-It's always the **same file**. Git is recording its updated contents each time.
-
-#### 2. What does `-C` mean?
-
-Your command:
+*1. Recorded snippet; Assuming Step 40 completed successfully, run.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-Breakdown:
+**How it works.** The `git add` command stages the current Markdown notes, keeping this documentation change separate from the Django application.
 
-| Part | Meaning |
-|---|---|
-| `git` | Run Git |
-| `-C` | Run Git as though you're inside the specified directory |
-| `C:\...\inventory-development-journal` | Repository directory |
-| `add` | Stage the current file contents |
-| `inventory-development-journal.md` | File being staged |
+**How we checked it.** No independent project test belongs to this documentation-only step.
 
-**Important:** `-C` does not actually move your PowerShell terminal into that folder. It only tells Git which directory to work from.
+**Connects to.** Previous: [Step 31 — Documenting Superuser Setup](04-server-and-admin-account.md#step-31) · Next: [Step 33 — Understand git -C and git add](04-server-and-admin-account.md#step-33)
 
-#### 3. Why not just commit directly?
-
-Git separates editing from committing so you can choose exactly which changes belong in each commit.
-
-    **Working directory**
-    You edit the existing journal
-
-  git add
-
-    **Staging area**
-    Git prepares a snapshot of the changes
-
-  git commit
-
-    **Local Git history**
-    A new version is permanently recorded
-
-**Key distinction:** `git add` stages a version, `git commit` records that version locally, and `git push` uploads the commit to GitHub.
-
-We can now resume **Step 41**, staging your updated development journal.
-
-*Previous: Step 32 (Staging Development Journal Update)  |  Next: Step 34 (Staging Development Journal Update)*
 
 ---
 
-## Step 34: Staging Development Journal Update
+<a id="step-33"></a>
 
-Understood. Whenever you send a number alone, I'll resume from that numbered response. Response numbering will continue normally.
+### Step 33: Understand git -C and git add
 
-#### Step 41 — Stage the journal update
+**Why we are doing this.** The Git syntax `git -C <folder> add ...` was unclear, so we explained the command before proceeding.
 
-Assuming you've completed Step 40 (adding the Django Admin notes), run:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; Your command.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**What this does:** Stages the latest version of your journal for the next commit.
+**How it works.** `-C` changes Git's working directory for that command; `add` stages the named file. Neither option uploads content.
 
-It does not create another file or upload anything to GitHub.
+**How we checked it.** This was an explanation of the command already used, not another application change.
 
-Tell me **done** when the command finishes.
+**Connects to.** Previous: [Step 32 — Staging Development Journal Update](04-server-and-admin-account.md#step-32) · Next: [Step 34 — Staging Development Journal Update](04-server-and-admin-account.md#step-34)
 
-*Previous: Step 33 (Understanding git add and -C)  |  Next: Step 35 (Committing Development Journal Update)*
 
 ---
 
-## Step 35: Committing Development Journal Update
+<a id="step-34"></a>
 
-#### Step 42 — Commit the journal update
+### Step 34: Staging Development Journal Update
 
-Assuming Step 41 completed successfully, run:
+**Why we are doing this.** With the command understood, we staged the updated journal again.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Assuming you've completed Step 40 (adding the Django Admin notes), run (historical; **do not rerun blindly**).*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Django admin setup"
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**What this does:** Saves the staged Django Admin setup notes as a new version in your local Git history.
+**How it works.** The source repeats the staging instruction so the user could continue confidently after clarifying `-C`.
 
-It does not upload the changes to GitHub yet.
+**How we checked it.** No new functionality or independent test was recorded.
 
-Tell me **done** when the command finishes.
+**Connects to.** Previous: [Step 33 — Understand git -C and git add](04-server-and-admin-account.md#step-33) · Next: [Step 35 — Committing Development Journal Update](04-server-and-admin-account.md#step-35)
 
-*Previous: Step 34 (Staging Development Journal Update)  |  Next: Step 36 (Pushing Development Journal to GitHub)*
 
 ---
 
-## Step 36: Pushing Development Journal to GitHub
+<a id="step-35"></a>
 
-#### Step 43 — Push the journal update
+### Step 35: Committing Development Journal Update
 
-Assuming Step 42 completed successfully, run:
+**Why we are doing this.** The staged server/admin notes needed a local history entry.
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push
-```
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-**What this does:** Uploads your latest local commit containing the Django Admin setup notes to your private GitHub repository.
-
-**Expected output:** A line showing `main -> main`.
-
-Tell me **done** when the command finishes. We'll verify the upload before proceeding.
-
-#### How we checked it
-
-**Step 43 completed.** I verified that your Django Admin setup notes are now on your private GitHub repository.
-
-#### Step 44 — Check that sensitive files are protected
-
-Your Django project now contains a database with administrator account information. Before continuing, we'll verify that Git excludes sensitive local files from your **public repository**.
-
-Run:
+*1. Recorded snippet; Assuming Step 41 completed successfully, run (historical; **do not rerun blindly**).*
 
 ```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic check-ignore -v .env db.sqlite3
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Django admin setup"
 ```
 
-**What this does:** Checks whether `.gitignore` prevents Git from tracking:
+**How it works.** The commit message captures this documentation milestone; the commit belongs to the journal repository rather than the Django app.
 
-- `.env` — Contains configuration secrets.
-- `db.sqlite3` — Contains your local database, including user account records.
+**How we checked it.** The next step publishes the journal change.
 
-**Expected result:** Two lines identifying the `.gitignore` rules responsible for excluding these files.
+**Connects to.** Previous: [Step 34 — Staging Development Journal Update](04-server-and-admin-account.md#step-34) · Next: [Step 36 — Pushing Development Journal to GitHub](04-server-and-admin-account.md#step-36)
 
-This command only checks the rules. It changes nothing.
-
-Send me the output before proceeding.
-
-#### How we checked it
-
-**Step 44 completed successfully.**
-
-Your output confirms that `.gitignore` excludes both files:
-
-- `.env` — Excluded by the `.env` rule on line 2.
-- `db.sqlite3` — Excluded by the `*.sqlite3` rule on line 5.
-
-#### Step 45 — Verify Git isn't tracking these files
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic ls-files -- .env db.sqlite3
-```
-
-**What this does:** Checks whether either file is already being tracked by Git.
-
-This additional check matters because `.gitignore` does not stop tracking files that were previously committed.
-
-**Expected result:** No output, just the PowerShell prompt.
-
-Send me the result. We'll then continue with the Django project setup.
-
-#### How we checked it
-
-**Step 45 completed successfully.**
-
-The empty output confirms that neither `.env` nor `db.sqlite3` is tracked by Git.
-
-Your public repository is correctly configured to exclude these files.
-
-#### Step 46 — Record the security checks
-
-Run:
-
-```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
-
-## Git Repository Security Verification
-
-### Objective
-Ensure sensitive local files are excluded from the public repository.
-
-### Commands
-1. git check-ignore -v .env db.sqlite3
-2. git ls-files -- .env db.sqlite3
-
-### Results
-- .env is excluded by .gitignore.
-- db.sqlite3 is excluded by .gitignore.
-- Neither file is currently tracked by Git.
-
-### What I learned
-- .gitignore prevents untracked files from being added accidentally.
-- git check-ignore identifies matching ignore rules.
-- git ls-files checks which files Git currently tracks.
-- Ignoring a file does not automatically untrack it.
-
-### Errors
-None.
-'@
-```
-
-**What this does:** Appends the security verification results to your private learning journal.
-
-Tell me **done**. We'll save this entry and then move on to the next project setup activity.
-
-*Previous: Step 35 (Committing Development Journal Update)  |  Next: Step 37 (Staging Security Verification Notes)*
 
 ---
+
+<a id="step-36"></a>
+
+### Step 36: Pushing Development Journal to GitHub
+
+**Why we are doing this.** The latest journal commit was still only on the laptop until it was pushed.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Assuming Step 42 completed successfully, run (historical; **do not rerun blindly**).*
+
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal push
+```
+
+**How it works.** `git push` sends the journal's tracked branch to its private GitHub remote.
+
+**How we checked it.** The source includes follow-up confirmation and discussion of the remote state.
+
+**Connects to.** Previous: [Step 35 — Committing Development Journal Update](04-server-and-admin-account.md#step-35) · Next: [Step 37 — Staging Security Verification Notes](05-security-checks.md#step-37)
+
+---
+
+**Chapter recap.** Recognize the project root, the URL-view-template path, and the Django superuser workflow.
+
+**Practice explaining:** Trace a page request from a browser through urls.py and views.py to a template.
+

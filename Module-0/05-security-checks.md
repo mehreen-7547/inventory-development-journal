@@ -1,209 +1,130 @@
-# Module 0, Chapter 5: Security checks
+# MODULE 0 — Foundations
 
-## Step 37: Staging Security Verification Notes
+## Chapter 5: Security checks (Steps 37–41)
 
-#### Step 47 — Stage the updated journal
+**Where we are.** Before adding application users, we reviewed what should and should not enter version control, and recorded the setup checks.
 
-Assuming Step 46 completed successfully, run:
+**What this chapter gives us.** Differentiate documentation/Git operations from actual security tests.
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
 
-**What this does:** Stages the latest journal changes, including the security verification results, for the next Git commit.
+**Interview checkpoint.** Explain why .env, database files, and credentials must not be committed.
 
-This affects only your private journal repository.
+### Find a step
 
-Tell me **done** when the command finishes.
-
-*Previous: Step 36 (Pushing Development Journal to GitHub)  |  Next: Step 38 (Committing Security Verification Notes)*
-
----
-
-## Step 38: Committing Security Verification Notes
-
-#### Step 48 — Commit the journal update
-
-Assuming Step 47 completed successfully, run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Git security verification"
-```
-
-**What this does:** Saves the staged security verification notes as a new commit in your local journal repository.
-
-It does not upload the changes to GitHub yet.
-
-Tell me **done** when the command finishes.
-
-*Previous: Step 37 (Staging Security Verification Notes)  |  Next: Step 39 (Pushing Security Verification Notes)*
+- [Step 37: Staging Security Verification Notes](#step-37)
+- [Step 38: Committing Security Verification Notes](#step-38)
+- [Step 39: Pushing Security Verification Notes](#step-39)
+- [Step 40: Understand feasibility models](#step-40)
+- [Step 41: Record and Push Test Results](#step-41)
 
 ---
 
-## Step 39: Pushing Security Verification Notes
+<a id="step-37"></a>
 
-#### Step 49 — Push the journal update to GitHub
+### Step 37: Staging Security Verification Notes
 
-Assuming Step 48 completed successfully, run:
+**Why we are doing this.** We recorded the repository-security checks so future readers could see why local secrets were not committed.
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push
-```
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-**What this does:** Uploads your latest journal commit to your private GitHub repository.
-
-**Expected result:** A line showing `main -> main`.
-
-Tell me **done** when it finishes. We'll verify the upload before continuing.
-
-#### How we checked it
-
-**Step 49 completed.** I verified that your security verification notes have been pushed to your private GitHub repository.
-
-#### Step 50 — Run Django's automated tests
-
-Your project already contains five tests in `core/tests.py`. They check the homepage, timezone, SQLite connection, stock deduction, and transaction rollback.
-
-Run:
+*1. Recorded snippet; Assuming Step 46 completed successfully, run.*
 
 ```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**What this does:**
-- Creates a temporary test database.
-- Runs the five tests.
-- Reports whether each test passes.
-- Removes the temporary test database afterward.
+**How it works.** Staging the security note prepares a documentation revision. It does not modify the `.gitignore` policy by itself.
 
-Your existing SQLite data and superuser account will remain unaffected.
+**How we checked it.** The security findings were written into the journal; no new automated security test is created here.
 
-**Expected result:** `Ran 5 tests` followed by `OK`.
+**Connects to.** Previous: [Step 36 — Pushing Development Journal to GitHub](04-server-and-admin-account.md#step-36) · Next: [Step 38 — Committing Security Verification Notes](05-security-checks.md#step-38)
 
-If the Django server is still running, use a second VS Code terminal with the virtual environment activated.
-
-Send me the output before we proceed.
-
-*Previous: Step 38 (Committing Security Verification Notes)  |  Next: Step 40 (Understanding Temporary Test Models)*
 
 ---
 
-## Step 40: Understanding Temporary Test Models
+<a id="step-38"></a>
 
-You're correct. **We haven't created any actual inventory models or tables yet.**
+### Step 38: Committing Security Verification Notes
 
-I checked your `core/tests.py`. Tests 4 and 5 use a **temporary `ExampleProduct` model** defined inside the test code.
+**Why we are doing this.** The security verification needed its own local commit for traceability.
 
-#### Test 4 — Preventing stock from becoming negative
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-The test temporarily creates a product with one unit in stock.
+*1. Recorded snippet; Assuming Step 47 completed successfully, run (historical; **do not rerun blindly**).*
 
-    **Initial stock**
-    1
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Git security verification"
+```
 
-    **Final stock**
-    0
+**How it works.** `git commit` saves the staged security notes locally and gives the milestone a searchable label.
 
-This tests whether our proposed stock deduction method refuses a sale when insufficient stock remains.
+**How we checked it.** No code test occurs during the commit itself.
 
-**Limitation:** The two sales are attempted sequentially. This does not yet prove safety under genuinely simultaneous requests.
+**Connects to.** Previous: [Step 37 — Staging Security Verification Notes](05-security-checks.md#step-37) · Next: [Step 39 — Pushing Security Verification Notes](05-security-checks.md#step-39)
 
-#### Test 5 — Rolling back a failed transaction
 
-Imagine a sale starts processing:
+---
 
-1. Product stock starts at 2.
-2. The database deducts 1 unit.
-3. Something fails before the sale is completed.
-4. The database must undo the deduction.
+<a id="step-39"></a>
 
-The test verifies that the stock returns to **2**, rather than incorrectly remaining at 1.
+### Step 39: Pushing Security Verification Notes
 
-#### Where does the temporary model come from?
+**Why we are doing this.** The security notes were published so the private journal had the latest record.
 
-Inside `core/tests.py`, we have code similar to:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Assuming Step 48 completed successfully, run (historical; **do not rerun blindly**).*
+
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal push
+```
+
+**How it works.** `git push` synchronizes local journal history with its remote. The application repository remains separate.
+
+**How we checked it.** The following note indicates the published security entry was part of the journal history.
+
+**Connects to.** Previous: [Step 38 — Committing Security Verification Notes](05-security-checks.md#step-38) · Next: [Step 40 — Understand feasibility models](05-security-checks.md#step-40)
+
+
+---
+
+<a id="step-40"></a>
+
+### Step 40: Understand feasibility models
+
+**Why we are doing this.** Before trying time-series forecasting, we clarified that test models were temporary feasibility checks, not the finished AI inventory feature.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; Inside core/tests.py, we have code similar to.*
 
 ```python
 class ExampleProduct(models.Model):
     on_hand = models.PositiveIntegerField(default=0)
 ```
 
-The test then creates a temporary database table using Django's `schema_editor()` and deletes it afterward.
+**How it works.** The experimental scripts measure whether chosen models run under available computing resources. Results must be understood as environment tests, not production forecasting accuracy.
 
-| | Temporary test model | Actual inventory model |
-|---|---|---|
-| Created? | During testing | Not yet |
-| Stores real business data? | No | Eventually |
-| Persists after testing? | No | Yes |
-| Purpose | Verify database behavior | Run the inventory system |
+**How we checked it.** The source distinguishes feasibility testing from an implemented inventory forecasting module.
 
-**Why are we testing this now?**
+**Connects to.** Previous: [Step 39 — Pushing Security Verification Notes](05-security-checks.md#step-39) · Next: [Step 41 — Record and Push Test Results](05-security-checks.md#step-41)
 
-We're checking whether SQLite supports the basic stock-update and rollback behavior we plan to use before implementing the actual inventory workflow.
-
-These are preliminary technical checks, not tests of a completed inventory system.
-
-**Current position:** Step 50 — Running the five Module 0 tests.
-
-#### How we checked it
-
-**All five tests passed.** Your output confirms that Django successfully ran the tests without errors.
-
-#### Breaking down the command
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
-```
-
-| Part | Meaning |
-|---|---|
-| `python` | Runs Python. |
-| `.\` | Means start from the current terminal directory. |
-| `techmindz_inventory_module0_sqlite_atomic\` | The folder containing your Django project. |
-| `manage.py` | Django's command-line management script. |
-| `test` | Tells Django to run automated tests. |
-| `core` | Specifies which Django app to test. |
-
-#### What happens internally?
-
-    **Python executes `manage.py`**
-
-    **Django receives `test core`**
-    Find tests belonging to the core app
-
-    **Creates a temporary test database**
-
-    **Executes five tests**
-    ..... = five successful tests
-
-    **Deletes the test database**
-    OK — all tests passed
-
-#### Why specify `core`?
-
-Compare:
-
-- `python manage.py test` — discovers and runs tests across the Django project.
-- `python manage.py test core` — runs only tests belonging to the `core` app.
-
-We use the longer command because your terminal is currently in the **outer folder**, whereas `manage.py` is inside the inner Django project folder.
-
-**Next:** We'll record the successful test results in your private development journal before continuing Module 0.
-
-*Previous: Step 39 (Pushing Security Verification Notes)  |  Next: Step 41 (Record and Push Test Results)*
 
 ---
 
-## Step 41: Record and Push Test Results
+<a id="step-41"></a>
 
-From now on, I'll provide **journal entry, staging, committing, and pushing commands together** whenever we reach a documentation milestone.
+### Step 41: Record and Push Test Results
 
-#### Step 51 — Append the test results
+**Why we are doing this.** We needed to preserve early feasibility findings in the development record and publish them alongside the setup notes.
 
-Run this in your VS Code PowerShell terminal:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run this in your VS Code PowerShell terminal.*
 
 ```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+Add-Content -Path "C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
 
 ## Module 0 — Django Automated Testing
 
@@ -248,34 +169,33 @@ PASS — All five Module 0 tests completed successfully.
 '@
 ```
 
-#### Step 52 — Stage, commit, and push
-
-Run these three commands in order:
-
-**1. Stage**
+*2. Recorded snippet.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**2. Commit**
+*3. Recorded snippet.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Module 0 automated test results"
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Module 0 automated test results"
 ```
 
-**3. Push**
+*4. Recorded snippet.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal push
 ```
 
-**Expected result:** The push output ends with `main -> main`.
+**How it works.** The example commands/text record test observations and then commit/push the journal update. They document experiments rather than adding a live AI endpoint.
 
-This updates only your **private development journal**. No changes to the public code repository are necessary because we haven't modified the code.
+**How we checked it.** The historical note provides results but does not reproduce a complete independent benchmark here.
 
-Once completed, send **done**.
-
-*Previous: Step 40 (Understanding Temporary Test Models)  |  Next: Step 42 (Installing PyTorch)*
+**Connects to.** Previous: [Step 40 — Understand feasibility models](05-security-checks.md#step-40) · Next: [Step 42 — Installing PyTorch](06-ai-forecasting-feasibility-test.md#step-42)
 
 ---
+
+**Chapter recap.** Differentiate documentation/Git operations from actual security tests.
+
+**Practice explaining:** Explain why .env, database files, and credentials must not be committed.
+

@@ -1,44 +1,39 @@
-# Module 0, Chapter 7: Module 0 completion
+# MODULE 0 — Foundations
 
-## Step 46: Update Module 0 Report
+## Chapter 7: Module 0 completion (Steps 46–55)
 
-#### Step 60 — Replace the report content
+**Where we are.** Module 0 ended with a report, README updates, commits, and a completion tag.
 
-In the opened `MODULE0_REPORT.md` file:
+**What this chapter gives us.** Understand which foundations were verified and how that milestone was recorded.
 
-1. Press `Ctrl + A` to select everything.
-2. Replace it with the following report.
-3. Press `Ctrl + S` to save.
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
 
-This preserves the required **a–h structure** and adds our verified results.
+**Interview checkpoint.** Explain the purpose of a project README, progress report, and Git tag.
 
-#### Module 0 Report — Django, SQLite and AI Feasibility
+### Find a step
 
-**Status:** Local verification completed. Final security audit, documentation update and completion tag pending.
+- [Step 46: Update Module 0 Report](#step-46)
+- [Step 47: Stage Documentation](#step-47)
+- [Step 48: Commit Documentation](#step-48)
+- [Step 49: Push Documentation](#step-49)
+- [Step 50: Finalize Report](#step-50)
+- [Step 51: Finalize README](#step-51)
+- [Step 52: Stage Final Updates](#step-52)
+- [Step 53: Final Documentation Commit](#step-53)
+- [Step 54: Create Completion Tag](#step-54)
+- [Step 55: Publish Completion Tag](#step-55)
 
-#### a) Built (five lines)
+---
 
-1. Configured Django 6.0.9 with SQLite using environment variables.
-2. Retained optional MySQL configuration for a future approved migration.
-3. Verified conditional stock deduction and transaction rollback using temporary test models.
-4. Tested Chronos-Bolt Tiny and Chronos-2 locally using pretrained weights on CPU.
-5. Selected **Chronos-Bolt Tiny as the default forecasting model** based on lower memory usage.
+<a id="step-46"></a>
 
-#### b) Files created/changed
+### Step 46: Update Module 0 Report
 
-- `config/settings.py` — environment-based database configuration and application settings.
-- `.env.example` — safe configuration template.
-- `core/tests.py` — five automated tests.
-- `scripts/ai_probe.py` — CPU forecasting feasibility test.
-- `requirements.txt` — pinned core dependencies.
-- `requirements-ai.txt` — pinned AI dependencies.
-- `README_M0.md` — installation and execution instructions.
-- `SQLITE_ARCHITECTURE_AMENDMENT.md` — database and stock-update decisions.
-- `MODULE0_REPORT.md` — verification results and conclusions.
+**Why we are doing this.** Module 0 needed a readable report explaining the environment decisions, security precautions, and AI feasibility work.
 
-No production inventory or sales models have been implemented.
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-#### c) Commands executed
+*1. Recorded snippet; c) Commands executed.*
 
 ```powershell
 python -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\requirements.txt
@@ -53,358 +48,174 @@ python .\techmindz_inventory_module0_sqlite_atomic\scripts\ai_probe.py --model b
 python .\techmindz_inventory_module0_sqlite_atomic\scripts\ai_probe.py
 ```
 
-Commands were executed from the parent project directory with the virtual environment activated.
+**How it works.** The report consolidates what was actually configured or tested, including limitations. It is a summary artifact, not an extra Django feature.
 
-#### d) Manual checks and actual results
+**How we checked it.** The source contains checks of report content and follow-up corrections.
 
-**Development environment**
+**Connects to.** Previous: [Step 45 — Documenting Model Results](06-ai-forecasting-feasibility-test.md#step-45) · Next: [Step 47 — Stage Documentation](07-module-0-completion.md#step-47)
 
-- Python 3.12.12
-- Django 6.0.9
-- SQLite database initialized successfully.
-- All 18 initial Django migrations applied.
-- Development server and homepage worked.
-- Django admin login verified.
-- `.env` and `db.sqlite3` confirmed ignored and untracked.
-
-**AI feasibility — both-model run**
-
-| Measurement | Chronos-Bolt Tiny | Chronos-2 |
-|---|---|---|
-| Status | PASS | PASS |
-| Total execution | 7.30 seconds | 59.74 seconds |
-| Peak process memory | 363.5 MB | 811.8 MB |
-| Forecast computation | 0.01 seconds | 0.05 seconds |
-| First-day P10 | 7.37 | 8.85 |
-| First-day P50 | 8.42 | 9.03 |
-| First-day P90 | 9.39 | 9.15 |
-
-Both models received the same 90-day synthetic sales history and generated 30-day forecasts.
-
-Chronos-2's execution time included its initial model download. Total execution times are therefore not directly comparable.
-
-**Model recommendation:** Chronos-Bolt Tiny is the default because it completed the test successfully while using substantially less memory. Chronos-2 remains an alternative for later evaluation.
-
-#### e) Automated tests and failure conditions
-
-**Result: 5 tests passed, 0 failures.**
-
-1. Homepage test — verifies successful response and expected content.
-2. Timezone test — verifies `Asia/Kolkata` and `USE_TZ = True`.
-3. SQLite test — verifies the configured database connection.
-4. Last-unit stock test — verifies that a second sequential deduction is refused.
-5. Transaction rollback test — verifies that stock is restored after a simulated failure.
-
-The stock tests use temporary models and tables, not production inventory models.
-
-#### f) Assumptions, decisions and limitations
-
-**Confirmed decisions**
-
-- Python 3.12 and Django 6.0.9.
-- SQLite for local development instead of MySQL.
-- Database settings read from `.env`, allowing a later approved MySQL migration.
-- Chronos-Bolt Tiny as the default forecasting model.
-- Separate core and AI dependency files.
-- CPU-only forecasting without model training or paid APIs.
-
-**Limitations**
-
-- SQLite sequential tests do not prove safety or throughput under simultaneous requests. Concurrent writes may encounter database-lock errors.
-- Actual Product, Sale and StockMovement models and services remain unimplemented.
-- Forecast accuracy has not been established.
-- Formal backtesting, baseline comparison and P10–P90 interval coverage are deferred to Module 8.
-- AI dependencies are used by the standalone forecasting script, not required for the current Django application's startup.
-- Real inventory tests must be introduced when production models and stock services are implemented.
-- Final Git history security verification remains pending.
-
-#### g) Suggested Git commit message
-
-`docs: finalize Module 0 verification and model recommendation`
-
-After completing all mandatory checks, tag the verified commit:
-
-`m0-complete`
-
-#### h) Interview questions
-
-**1. How do you prevent stock from becoming negative?**
-
-Use an atomic conditional database update inside a transaction. The deduction succeeds only when sufficient stock exists.
-
-**2. What happens if a sale fails after stock is deducted?**
-
-The database transaction rolls back, restoring the original stock quantity.
-
-**3. Why did you select Chronos-Bolt Tiny?**
-
-Both pretrained models worked locally, but Chronos-Bolt Tiny used substantially less memory. Forecast accuracy will be evaluated later before any final production decision.
-
-#### Learn this
-
-- **Virtual environment:** Isolates project-specific Python packages.
-- **`.env`:** Stores local configuration separately from source code.
-- **SQLite:** Provides a file-based relational database.
-- **`transaction.atomic()`:** Ensures grouped database operations commit or roll back together.
-- **Conditional update:** Changes stock only when a database-level condition is satisfied.
-- **Forecast quantiles:** P10, P50 and P90 represent different points in a predictive distribution, not guaranteed minimum and maximum sales.
-
-**Three Django concepts:** Settings configuration, automated test cases, and ORM conditional updates.
-
-Once saved, reply **done**. We'll update the README next, then complete the remaining checks before committing and tagging.
-
-#### How we checked it
-
-#### Step 61 — Open the README
-
-The report has been saved locally. Next, we'll update the README to reflect the completed tests and model recommendation.
-
-Run:
-
-```powershell
-code .\techmindz_inventory_module0_sqlite_atomic\README_M0.md
-```
-
-We'll update the outdated setup status, record **Chronos-Bolt Tiny as the default model**, and ensure the instructions match your actual project directory.
-
-Reply **opened** when the file is open.
-
-#### How we checked it
-
-#### Step 63 — Check which files have changed
-
-Before committing, we'll verify that Git recognizes our documentation updates.
-
-Run this command in your VS Code terminal:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic status --short
-```
-
-**Expected output:**
-
-```text
- M MODULE0_REPORT.md
- M README_M0.md
-```
-
-- `M` means the file has been modified.
-- Both files should appear because we edited them.
-- No `.env`, database, or other sensitive files should appear.
-
-This command only checks Git's status. It does not change anything.
-
-After confirming the output, click **Next**.
-
- GenUI.issueNewTurn("next")}>Next
-
-#### How we checked it
-
-#### Step 64 — Check for formatting errors
-
-Before committing our updated report and README, run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic diff --check
-```
-
-**What this does:** Checks your modified files for common formatting problems, such as trailing whitespace.
-
-**Expected result:** No output. This means Git found no whitespace errors.
-
-This does not modify your files or commit anything.
-
-If an error appears, share it. Otherwise, continue.
-
-#### How we checked it
-
-#### Step 65 — Check Git history for sensitive files
-
-Before finalizing Module 0, we need to ensure that private files were never committed to the public repository.
-
-Run this in your VS Code terminal:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic log --all --format= --name-only | Sort-Object -Unique
-```
-
-This lists every filename recorded in Git history.
-
-**Check that these are absent:**
-- `.env` (but `.env.example` is safe)
-- `db.sqlite3`
-- Private keys or credential files
-
-This checks filenames only. We'll separately check the committed contents for exposed secrets.
-
-If you see anything suspicious, share the filename. Otherwise, click **Next**.
-
-#### How we checked it
-
-**Step 65 passed.** Your Git history contains only the expected 20 project files. Neither `.env` nor `db.sqlite3` appears.
-
-#### Step 66 — Check committed files for potential secrets
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic grep -I -l -i -E 'secret_key|password|api_key|access_token|private.key' $(git -C .\techmindz_inventory_module0_sqlite_atomic rev-list --all)
-```
-
-This searches committed file contents across Git history for terms commonly associated with credentials.
-
-**Important:** It displays filenames, not secret values. Files such as `.env.example` and `config/settings.py` may appear legitimately.
-
-Share the output so we can review any matches.
-
-#### How we checked it
-
-#### Step 68 — Verify documentation changes
-
-Our security checks are complete. Before committing, let's confirm which files have changed.
-
-Run in your VS Code terminal:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic diff --stat
-```
-
-**Expected:** Only these two files should appear:
-
-- `MODULE0_REPORT.md`
-- `README_M0.md`
-
-The command shows how many lines changed in each file. It does not modify anything.
-
-If other files appear, share the output. Otherwise, proceed.
-
-*Previous: Step 45 (Documenting Model Results)  |  Next: Step 47 (Stage Documentation)*
 
 ---
 
-## Step 47: Stage Documentation
+<a id="step-47"></a>
 
-#### Step 69 — Stage the updated documentation
+### Step 47: Stage Documentation
 
-Run:
+**Why we are doing this.** The completed report had to be staged before it could become part of the journal history.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run.*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
 ```
 
-This prepares **only these two files** for the next commit. Nothing is uploaded to GitHub yet.
+**How it works.** `git add` selects the modified documentation files. It does not publish them.
 
-*Previous: Step 46 (Update Module 0 Report)  |  Next: Step 48 (Commit Documentation)*
+**How we checked it.** This is a documentation workflow step with no application test.
+
+**Connects to.** Previous: [Step 46 — Update Module 0 Report](07-module-0-completion.md#step-46) · Next: [Step 48 — Commit Documentation](07-module-0-completion.md#step-48)
+
 
 ---
 
-## Step 48: Commit Documentation
+<a id="step-48"></a>
 
-#### Step 70 — Commit the Module 0 documentation
+### Step 48: Commit Documentation
 
-Run in your VS Code terminal:
+**Why we are doing this.** We saved the report as a local version-control milestone.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run in your VS Code terminal.*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: record Module 0 verification and AI feasibility results"
 ```
 
-This saves the staged changes as a new commit in your **local Git history**.
+**How it works.** `git commit` records the staged report snapshot with a descriptive message.
 
-It does not upload anything to GitHub yet.
+**How we checked it.** The next step uploads that commit.
 
-*Previous: Step 47 (Stage Documentation)  |  Next: Step 49 (Push Documentation)*
+**Connects to.** Previous: [Step 47 — Stage Documentation](07-module-0-completion.md#step-47) · Next: [Step 49 — Push Documentation](07-module-0-completion.md#step-49)
+
 
 ---
 
-## Step 49: Push Documentation
+<a id="step-49"></a>
 
-#### Step 71 — Push the commit to GitHub
+### Step 49: Push Documentation
 
-Run in your VS Code terminal:
+**Why we are doing this.** The latest report should be accessible in the private remote repository.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run in your VS Code terminal (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic push origin main
 ```
 
-This uploads your committed Module 0 documentation changes to the **public GitHub repository**.
-
-Expected output includes:
+*2. Recorded example/output — **do not type this as an instruction**; Expected output includes (historical; **do not rerun blindly**).*
 
 ```text
 main -> main
 ```
 
-If Git reports an error, share the output before continuing.
+**How it works.** `git push` publishes the current journal branch. Any status command simply verifies local Git state.
 
-*Previous: Step 48 (Commit Documentation)  |  Next: Step 50 (Finalize Report)*
+**How we checked it.** There is no new Django functionality to test at this step.
+
+**Connects to.** Previous: [Step 48 — Commit Documentation](07-module-0-completion.md#step-48) · Next: [Step 50 — Finalize Report](07-module-0-completion.md#step-50)
+
 
 ---
 
-## Step 50: Finalize Report
+<a id="step-50"></a>
 
-**Step 71 verified.** Your new commit `93978f8` is visible on GitHub.
+### Step 50: Finalize Report
 
-#### Step 72 — Update the report's completion status
+**Why we are doing this.** Before closing Module 0, we refined the report's final language and scope.
 
-Open `MODULE0_REPORT.md`.
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Replace its existing `**Status:**` line with:
+*1. Recorded snippet; Replace its existing Status: line with.*
 
 ```markdown
 **Status:** Module 0 implementation, local verification, documentation, and basic Git security checks completed. Completion tag pending. Architecture and permissions approval required before Module 1.
 ```
 
-Save using `Ctrl + S`.
+**How it works.** The documentation edit clarifies what was completed, what was only tested, and what remains for development. It must not be read as proof of an unimplemented feature.
 
-*Previous: Step 49 (Push Documentation)  |  Next: Step 51 (Finalize README)*
+**How we checked it.** The source contains the text to be put in the report; no new runtime check is documented.
+
+**Connects to.** Previous: [Step 49 — Push Documentation](07-module-0-completion.md#step-49) · Next: [Step 51 — Finalize README](07-module-0-completion.md#step-51)
+
 
 ---
 
-## Step 51: Finalize README
+<a id="step-51"></a>
 
-#### Step 73 — Update the README completion status
+### Step 51: Finalize README
 
-Open `README_M0.md` and make two changes.
+**Why we are doing this.** The README needed to direct a future reader to the completed report rather than leaving the repository as unorganized files.
 
-**1. Replace the Status line with:**
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Replace the Status line with.*
 
 ```markdown
 **Status:** Module 0 implementation, local verification, documentation, and basic Git security checks completed. Completion tag pending. Architecture and permissions approval required before Module 1.
 ```
 
-**2. Replace item 5 under Module 0 acceptance checks with:**
+*2. Recorded snippet; Replace item 5 under Module 0 acceptance checks with.*
 
 ```markdown
 5. PASS — Module 0 verification, documentation, and basic security checks completed. PENDING — Create the `m0-complete` tag and obtain architecture and permissions approval before Module 1.
 ```
 
-Save with `Ctrl + S`.
+**How it works.** The README update acts as a landing page linking the detailed material. It changes navigation, not code.
 
-*Previous: Step 50 (Finalize Report)  |  Next: Step 52 (Stage Final Updates)*
+**How we checked it.** The notes show the intended README content but no separate automated validation.
+
+**Connects to.** Previous: [Step 50 — Finalize Report](07-module-0-completion.md#step-50) · Next: [Step 52 — Stage Final Updates](07-module-0-completion.md#step-52)
+
 
 ---
 
-## Step 52: Stage Final Updates
+<a id="step-52"></a>
 
-#### Step 74 — Stage the final documentation updates
+### Step 52: Stage Final Updates
 
-Run in your VS Code terminal:
+**Why we are doing this.** The final README and report edits were ready to be recorded together.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run in your VS Code terminal.*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
 ```
 
-This stages the two updated files for the final Module 0 documentation commit. It does not upload anything.
+**How it works.** The staging command selects the closing documentation updates.
 
-*Previous: Step 51 (Finalize README)  |  Next: Step 53 (Final Documentation Commit)*
+**How we checked it.** No new test occurred; this is a Git housekeeping step.
+
+**Connects to.** Previous: [Step 51 — Finalize README](07-module-0-completion.md#step-51) · Next: [Step 53 — Final Documentation Commit](07-module-0-completion.md#step-53)
+
 
 ---
 
-## Step 53: Final Documentation Commit
+<a id="step-53"></a>
 
-#### Step 75 — Save and push the final changes
+### Step 53: Final Documentation Commit
 
-Run these three commands together in your VS Code terminal:
+**Why we are doing this.** We created the final local commit for Module 0 documentation.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run these three commands together in your VS Code terminal (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
@@ -412,58 +223,67 @@ git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: finalize Mod
 git -C .\techmindz_inventory_module0_sqlite_atomic push origin main
 ```
 
-This stages, commits, and uploads the final documentation changes.
+**How it works.** The commit labels the completed foundation stage so it can be found later in history.
 
-**Next:** Create the `m0-complete` Git tag. If any command fails, share the error instead of proceeding.
+**How we checked it.** The next two steps add and publish a tag for the milestone.
 
-*Previous: Step 52 (Stage Final Updates)  |  Next: Step 54 (Create Completion Tag)*
+**Connects to.** Previous: [Step 52 — Stage Final Updates](07-module-0-completion.md#step-52) · Next: [Step 54 — Create Completion Tag](07-module-0-completion.md#step-54)
+
 
 ---
 
-## Step 54: Create Completion Tag
+<a id="step-54"></a>
 
-**Step 75 verified.** Your latest commit `9d1a112` is on GitHub.
+### Step 54: Create Completion Tag
 
-#### Step 76 — Create the Module 0 completion tag
+**Why we are doing this.** A Git tag gives the finished Module 0 snapshot a stable human-readable name, independent of later commits.
 
-Run this command:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run this command (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic tag -a m0-complete -m "Module 0 completed and verified"
 ```
 
-**What is a Git tag?**
+**How it works.** `git tag` attaches a label to a particular commit. It does not create another branch or change files.
 
-A tag permanently identifies a specific commit. Here, `m0-complete` marks the version of your project that completed Module 0.
+**How we checked it.** The tag was prepared locally; publishing it happens next.
 
-Unlike a branch, the tag does not automatically move when you make new commits.
+**Connects to.** Previous: [Step 53 — Final Documentation Commit](07-module-0-completion.md#step-53) · Next: [Step 55 — Publish Completion Tag](07-module-0-completion.md#step-55)
 
-This command creates the tag locally. We'll upload it to GitHub next.
-
-*Previous: Step 53 (Final Documentation Commit)  |  Next: Step 55 (Publish Completion Tag)*
 
 ---
 
-## Step 55: Publish Completion Tag
+<a id="step-55"></a>
 
-#### Step 77 — Push the completion tag to GitHub
+### Step 55: Publish Completion Tag
 
-Run in your VS Code terminal:
+**Why we are doing this.** The Module 0 completion marker had to be available on GitHub as well as the laptop.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run in your VS Code terminal (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic push origin m0-complete
 ```
 
-**Expected output:**
+*2. Recorded example/output — **do not type this as an instruction**; Expected output (historical; **do not rerun blindly**).*
 
 ```text
 [new tag] m0-complete -> m0-complete
 ```
 
-This publishes the `m0-complete` tag to GitHub, marking the completed Module 0 version.
+**How it works.** `git push origin <tag>` publishes the tag. The tagged commit remains accessible after Module 1 begins.
 
-After this, we'll prepare the **application architecture and role-permission plan** for approval before starting Module 1.
+**How we checked it.** This step ends the recorded Module 0 setup and feasibility work.
 
-*Previous: Step 54 (Create Completion Tag)  |  Next: Step 56 (Approved — Begin Development)*
+**Connects to.** Previous: [Step 54 — Create Completion Tag](07-module-0-completion.md#step-54) · Next: [Step 56 — Begin the Accounts module](../Module-1/01-accounts-app-and-custom-user-model.md#step-56)
 
 ---
+
+**Chapter recap.** Understand which foundations were verified and how that milestone was recorded.
+
+**Practice explaining:** Explain the purpose of a project README, progress report, and Git tag.
+

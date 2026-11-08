@@ -1,346 +1,197 @@
-# Module 0, Chapter 2: Git and GitHub
+# MODULE 0 — Foundations
 
-## Step 7: Initialize the Git repository
+## Chapter 2: Git and GitHub (Steps 7–24)
 
-This is expected. It means **Git has not yet been initialized** in your Django project.
+**Where we are.** A working project is easy to lose if there is no version history. We set up Git for both the public code and a separate private development journal.
 
-#### Step 5 — Initialize the Git repository
+**What this chapter gives us.** Understand staging, commits, remotes, branches, and pushes without mixing the two repositories.
 
-Run:
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
+
+**Interview checkpoint.** Explain the difference between git add, git commit, and git push.
+
+### Find a step
+
+- [Step 7: Initialize the Git repository](#step-7)
+- [Step 8: Stage the project files](#step-8)
+- [Step 9: Create our first Git commit](#step-9)
+- [Step 10: Connect your local project to GitHub](#step-10)
+- [Step 11: Connect your local project to GitHub](#step-11)
+- [Step 12: Push your first commit to GitHub](#step-12)
+- [Step 13: Create a separate local journal folder](#step-13)
+- [Step 14: Initialize Git for the private journal](#step-14)
+- [Step 15: Connect it to GitHub](#step-15)
+- [Step 16: Stage the journal for Git](#step-16)
+- [Step 17: Understand staging versus committing](#step-17)
+- [Step 18: Stage the private journal](#step-18)
+- [Step 19: Commit the private development journal](#step-19)
+- [Step 20: Push your journal to private GitHub](#step-20)
+- [Step 21: Understand local and remote main branches](#step-21)
+- [Step 22: Apply database migrations](#step-22)
+- [Step 23: Update your private development journal](#step-23)
+- [Step 24: Stage the updated journal](#step-24)
+
+---
+
+<a id="step-7"></a>
+
+### Step 7: Initialize the Git repository
+
+**Why we are doing this.** After the starter project worked locally, we needed version control so changes could be recorded and recovered.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic init -b main
 ```
 
-**Understanding the command:**
+**How it works.** `git init -b main` creates a local `.git` history with `main` as the initial branch. At this point the files are not uploaded to GitHub.
 
-- `git init` — Creates a local Git repository.
-- `-C` — Specifies your Django project folder.
-- `-b main` — Names the initial branch `main`.
+**How we checked it.** The initial response indicated Git was not initialized; the next step proceeded to staging, consistent with initialization.
 
-**What happens?** Git creates a hidden `.git` folder to store version history.
+**Connects to.** Previous: [Step 6 — Create .env](01-environment-setup.md#step-6) · Next: [Step 8 — Stage the project files](02-git-and-github.md#step-8)
 
-This does **not** upload anything to GitHub or make your files public.
-
-Our GitHub repository will be named `ai-assisted-inventory-manager`, as you requested.
-
-Run the command and send me the output. We'll then verify which files Git is preparing to track before making the first commit.
-
-#### How we checked it
-
-**Git initialization was successful.** Your Django project now has a local Git repository with `main` as its initial branch.
-
-#### Step 6 — Check which files Git can track
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic status --short --untracked-files=all
-```
-
-**Understanding the command:**
-
-- `status` — Checks the repository's current state.
-- `--short` — Displays a compact list.
-- `--untracked-files=all` — Lists individual files Git hasn't started tracking.
-
-You may see `??` beside filenames. This means they're **untracked**, not that anything is wrong.
-
-This command does not change or upload files.
-
-**Send me the output.** We'll review it before staging anything, ensuring that no secrets or private journal files enter the public repository.
-
-#### How we checked it
-
-**The file list looks correct.** Git has identified 19 project files, and none has been committed or uploaded yet.
-
-Importantly:
-- `.env` is not listed — your secret key file is excluded.
-- `.venv` is not listed — installed dependencies are excluded.
-- Your private development journal is not listed.
-- `.env.example` is included — this is normal, provided it contains only placeholder values.
-
-#### Step 7 — Verify `.env.example`
-
-Before our first public commit, run:
-
-```powershell
-Get-Content .\techmindz_inventory_module0_sqlite_atomic\.env.example
-```
-
-**Why?** `.env.example` is intended to show other developers which configuration variables they need, without exposing actual passwords or secret keys.
-
-This command only displays the file; it makes no changes.
-
-Send me the output, but redact any real passwords or secret keys if present. Then we'll proceed toward our first commit.
-
-*Previous: Step 6 (Create .env)  |  Next: Step 8 (Stage the project files)*
 
 ---
 
-## Step 8: Stage the project files
+<a id="step-8"></a>
 
-**Verified. Your `.env.example` is safe to include in the public repository.**
+### Step 8: Stage the project files
 
-- The secret key is a placeholder, not your actual key.
-- No database passwords are present.
-- SQLite is configured as agreed.
-- MySQL settings are included for possible future use, without enabling MySQL.
+**Why we are doing this.** Git does not automatically place every edited file in the next commit. We first selected the project files to record.
 
-#### Step 8 — Stage the project files
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Run:
+*1. Recorded snippet; Run.*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic add .
 ```
 
-**Understanding the command:**
+**How it works.** `git add .` moves current changes into Git's staging area. It does not create a commit or publish anything; `.gitignore` must exclude the real `.env`, local database, and environment files.
 
-- `git add` — Prepares files for the next commit.
-- `.` — Includes all eligible files within the repository.
-- Git respects the `.gitignore` rules we checked.
+**How we checked it.** The notes explicitly verified `.env.example` contained placeholders, but a final staged-file audit was not reproduced here.
 
-**Important:** Staging does not upload anything to GitHub or make anything public.
+**Connects to.** Previous: [Step 7 — Initialize the Git repository](02-git-and-github.md#step-7) · Next: [Step 9 — Create our first Git commit](02-git-and-github.md#step-9)
 
-After this, we'll inspect the staged files and run Django's checks before creating our first commit.
-
-Send me the terminal output. An empty output usually means the command succeeded.
-
-#### How we checked it
-
-**Git staging completed without errors.** The empty output is normal.
-
-Your files are now prepared for the first commit, but nothing has been committed or uploaded to GitHub.
-
-#### Step 9 — Verify the staged files
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic diff --cached --name-only
-```
-
-**Understanding the command:**
-
-- `git diff` — Examines changes.
-- `--cached` — Looks specifically at staged changes.
-- `--name-only` — Displays filenames without their contents.
-
-**Why are we doing this?** Before committing to a public repository, we want to confirm that `.env`, passwords, and private journal files are not included.
-
-This command only displays information. It doesn't change anything.
-
-Send me the output. We'll review it, then run Django's checks before our first commit.
-
-#### How we checked it
-
-**Step 9 passed.** All 20 staged files belong to the Django project.
-
-- `.env` and `.venv` are excluded.
-- The private development journal is not included.
-- No unexpected files appear in the list.
-
-Nothing has been committed or uploaded yet.
-
-#### Step 10 — Check Django's configuration
-
-Run:
-
-```powershell
-.\.venv\Scripts\python.exe .\techmindz_inventory_module0_sqlite_atomic\manage.py check
-```
-
-**Understanding the command:**
-
-- `python.exe` — Uses Python from your virtual environment.
-- `manage.py` — Django's project management script.
-- `check` — Runs Django's built-in system checks for configuration problems.
-
-**Expected output:**
-
-```text
-System check identified no issues (0 silenced).
-```
-
-This does not modify your database.
-
-Send me the output. After verification, we'll proceed toward our first Git commit for `ai-assisted-inventory-manager`.
-
-*Previous: Step 7 (Initialize the Git repository)  |  Next: Step 9 (Create our first Git commit)*
 
 ---
 
-## Step 9: Create our first Git commit
+<a id="step-9"></a>
 
-**Step 10 passed.** Django reports:
+### Step 9: Create our first Git commit
+
+**Why we are doing this.** With the intended starter files staged, we created a named restore point for the initial Django setup.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded example/output — **do not type this as an instruction**.*
 
 ```text
 System check identified no issues (0 silenced).
 ```
 
-This confirms Django's system checks found no configuration problems. It does not yet mean all application tests have passed.
-
-#### Step 11 — Create our first Git commit
-
-Run:
+*2. Recorded snippet; Run.*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "chore: initialize Django project (module 0)"
 ```
 
-**Understanding the command:**
+**How it works.** `git commit -m ...` saves staged changes locally. The message identifies the purpose of that snapshot; it does not upload code by itself.
 
-- `git commit` — Saves a snapshot of the staged files in local Git history.
-- `-m` — Specifies the commit message.
-- `chore:` — Indicates project setup or maintenance work.
-- `module 0` — Identifies the development stage.
+**How we checked it.** The source records Django's system check returned zero configuration issues before the commit. That is not a complete application test.
 
-**Important:** This creates a local commit only. Nothing becomes public until we push it to GitHub.
+**Connects to.** Previous: [Step 8 — Stage the project files](02-git-and-github.md#step-8) · Next: [Step 10 — Connect your local project to GitHub](02-git-and-github.md#step-10)
 
-Send me the output. Next, we'll create the public GitHub repository named `ai-assisted-inventory-manager`. We'll also set up the separate private journal repository.
-
-*Previous: Step 8 (Stage the project files)  |  Next: Step 10 (Connect your local project to GitHub)*
 
 ---
 
-## Step 10: Connect your local project to GitHub
+<a id="step-10"></a>
 
-**Step 12 completed.** I've verified that your GitHub repository exists and is public.
+### Step 10: Connect your local project to GitHub
 
-ai-assisted-inventory-manager (https://github.com/mehreen-7547/ai-assisted-inventory-manager)
+**Why we are doing this.** The local repository needed a destination for its first public backup of the application code.
 
-#### Step 13 — Connect your local project to GitHub
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Run this in your existing VS Code terminal:
+*1. Recorded snippet; Run this in your existing VS Code terminal (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
 ```
 
-**Understanding the command:**
+**How it works.** `git remote add origin ...` records the GitHub repository URL under the name `origin`. It does not upload files.
 
-- `git remote` — Manages connections to remote repositories.
-- `add` — Creates a new connection.
-- `origin` — The conventional name for your main remote repository.
-- The URL — Identifies your public GitHub repository.
+**How we checked it.** The original notes refer to a public application repository. Connection and pushing were addressed in subsequent steps.
 
-This command **only establishes the connection**. It does not upload your files.
+**Connects to.** Previous: [Step 9 — Create our first Git commit](02-git-and-github.md#step-9) · Next: [Step 11 — Connect your local project to GitHub](02-git-and-github.md#step-11)
 
-Send me the output. Next, we'll verify the connection before pushing your first commit.
-
-*Previous: Step 9 (Create our first Git commit)  |  Next: Step 11 (Connect your local project to GitHub)*
 
 ---
 
-## Step 11: Connect your local project to GitHub
+<a id="step-11"></a>
 
-That's the correct public GitHub repository:
+### Step 11: Connect your local project to GitHub
 
-ai-assisted-inventory-manager (https://github.com/mehreen-7547/ai-assisted-inventory-manager)
+**Why we are doing this.** We revisited the remote setup to be certain we were linking the Django application, not the separate private study journal.
 
-#### Step 13 — Connect your local project to GitHub
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-In your existing VS Code terminal, run:
+*1. Recorded snippet; In your existing VS Code terminal, run (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
 ```
 
-This connects your local Git repository to the GitHub repository.
+**How it works.** The repeated `remote add origin` command is an alternative attempt at the same operation, not a second remote requirement. If `origin` already exists, inspect it rather than blindly adding it again.
 
-**It does not upload anything yet.**
+**How we checked it.** The later note says the remote connection was verified. This historical repeat should not be executed twice.
 
-Send me the terminal output. Next, we'll verify the connection and push your first commit.
+**Connects to.** Previous: [Step 10 — Connect your local project to GitHub](02-git-and-github.md#step-10) · Next: [Step 12 — Push your first commit to GitHub](02-git-and-github.md#step-12)
 
-#### How we checked it
-
-**Step 13 completed without errors.** Your local project is now configured to use GitHub as its remote repository.
-
-#### Step 14 — Verify the remote connection
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic remote -v
-```
-
-**Understanding the command:**
-
-- `git remote` — Shows configured remote repositories.
-- `-v` — Displays their URLs and whether they're used for fetching or pushing.
-
-**Expected output:**
-
-```text
-origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (fetch)
-origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (push)
-```
-
-This checks the saved remote configuration; it doesn't contact GitHub or upload files.
-
-Send me the output. Next, we'll push your first commit to the public repository.
-
-*Previous: Step 10 (Connect your local project to GitHub)  |  Next: Step 12 (Push your first commit to GitHub)*
 
 ---
 
-## Step 12: Push your first commit to GitHub
+<a id="step-12"></a>
 
-**Step 14 passed.** Your local Git repository is correctly connected to GitHub for both fetching and pushing.
+### Step 12: Push your first commit to GitHub
 
-#### Step 15 — Push your first commit to GitHub
+**Why we are doing this.** After committing locally and connecting `origin`, the application needed to be uploaded to GitHub.
 
-Run:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run (historical; **do not rerun blindly**).*
 
 ```powershell
 git -C .\techmindz_inventory_module0_sqlite_atomic push -u origin main
 ```
 
-**Understanding the command:**
+**How it works.** `git push -u origin main` sends the local `main` commits to the remote. `-u` remembers the upstream so later pushes need fewer arguments.
 
-- `git push` — Uploads local commits to GitHub.
-- `-u` — Sets the upstream branch, so future pushes can simply use `git push`.
-- `origin` — Your GitHub repository.
-- `main` — The branch we're uploading.
+**How we checked it.** The next note confirms the public application repository and separate private journal repository existed.
 
-**Important:** This is the first command that will publish your committed project files to your public GitHub repository.
+**Connects to.** Previous: [Step 11 — Connect your local project to GitHub](02-git-and-github.md#step-11) · Next: [Step 13 — Create a separate local journal folder](02-git-and-github.md#step-13)
 
-Git may ask you to authenticate through your browser. Follow the prompts if they appear.
-
-Send me the terminal output. We'll verify the upload before setting up your separate private development journal repository.
-
-*Previous: Step 11 (Connect your local project to GitHub)  |  Next: Step 13 (Create a separate local journal folder)*
 
 ---
 
-## Step 13: Create a separate local journal folder
+<a id="step-13"></a>
 
-**Step 16 completed.** I've verified that your development journal repository exists and is **private**.
+### Step 13: Create a separate local journal folder
 
-inventory-development-journal (https://github.com/mehreen-7547/inventory-development-journal)
+**Why we are doing this.** We decided to keep learning notes separate from the application source, because the journal may contain detailed implementation commentary.
 
-Your repositories are now:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-| Repository | Visibility |
-|---|---|
-| `ai-assisted-inventory-manager` | Public |
-| `inventory-development-journal` | Private |
-
-#### Step 17 — Create a separate local journal folder
-
-In your existing VS Code PowerShell terminal, run:
+*1. Recorded snippet; In your existing VS Code PowerShell terminal, run.*
 
 ```powershell
-New-Item -ItemType Directory -Path C:\Users\mehre\projects2026\inventory-development-journal
+New-Item -ItemType Directory -Path C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal
 ```
 
-**Understanding the command:**
-- `New-Item` — Creates a new item.
-- `-ItemType Directory` — Specifies that we're creating a folder.
-- `-Path` — Specifies its location.
-
-Our local folders will be separate:
+*2. Recorded example/output — **do not type this as an instruction**.*
 
 ```text
 projects2026/
@@ -352,461 +203,236 @@ projects2026/
     └── Learning journal (private Git repository)
 ```
 
-This separation prevents your private learning notes from accidentally entering your public project's Git history.
+**How it works.** `New-Item -ItemType Directory` creates a local folder for a second repository. It is not inside the Django application's Git history.
 
-**Send me the command output.** Next, we'll connect this folder to the private GitHub repository and add the journal covering our completed setup steps.
+**How we checked it.** The next step says the private journal directory had been created successfully.
 
-*Previous: Step 12 (Push your first commit to GitHub)  |  Next: Step 14 (Initialize Git for the private journal)*
+**Connects to.** Previous: [Step 12 — Push your first commit to GitHub](02-git-and-github.md#step-12) · Next: [Step 14 — Initialize Git for the private journal](02-git-and-github.md#step-14)
 
----
-
-## Step 14: Initialize Git for the private journal
-
-**Step 17 completed.** Your private journal folder has been created successfully.
-
-#### Step 18 — Initialize Git for the private journal
-
-Run this in your existing VS Code terminal:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal init -b main
-```
-
-**Understanding the command:**
-
-- `git init` — Creates a new local Git repository.
-- `-C` — Specifies the journal folder.
-- `-b main` — Names its initial branch `main`.
-
-**Why?** Your public Django project already has its own Git repository. We need a second, independent repository to track your private learning journal.
-
-This command does not upload anything or change your public project.
-
-Send me the output. Next, we'll connect this new local repository to your private GitHub repository.
-
-*Previous: Step 13 (Create a separate local journal folder)  |  Next: Step 15 (Connect it to GitHub)*
 
 ---
 
-## Step 15: Connect it to GitHub
+<a id="step-14"></a>
 
-**Step 18 completed successfully.** Your private journal now has its own local Git repository on the `main` branch.
+### Step 14: Initialize Git for the private journal
 
-#### Step 19 — Connect it to GitHub
+**Why we are doing this.** The private journal needed its own independent version history before it could be synchronized with GitHub.
 
-Run this in your existing terminal:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal remote add origin https://github.com/mehreen-7547/inventory-development-journal.git
-```
-
-**Understanding the command:**
-
-- `git remote add` — Registers a remote repository.
-- `origin` — The conventional name for the main remote.
-- The URL — Points to your **private** GitHub journal repository.
-
-This command only saves the connection. It does not upload files or affect your public Django repository.
-
-Send me the output. Next, we'll verify the connection and add your development journal.
-
-#### How we checked it
-
-#### Step 20 — Verify the private repository connection
-
-Assuming you've completed Step 19, run:
+*1. Recorded snippet; Run this in your existing VS Code terminal (historical; **do not rerun blindly**).*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal remote -v
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal init -b main
 ```
 
-**What this does:** Displays the GitHub repository connected to your local journal folder.
+**How it works.** Running `git init -b main` inside the journal folder initializes a separate repository. Two repositories can both have a branch named `main` without conflict.
 
-**Expected output:**
+**How we checked it.** The source confirms the private journal was initialized on `main`.
 
-```text
-origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
-origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
-```
+**Connects to.** Previous: [Step 13 — Create a separate local journal folder](02-git-and-github.md#step-13) · Next: [Step 15 — Connect it to GitHub](02-git-and-github.md#step-15)
 
-This command does not upload or modify anything.
-
-Send me the output. Next, we'll add the development journal documenting everything completed so far.
-
-#### How we checked it
-
-#### Step 22 — Verify the journal file
-
-Before committing, let's confirm that the journal is in your private repository folder.
-
-Run:
-
-```powershell
-Get-ChildItem C:\Users\mehre\projects2026\inventory-development-journal -Name
-```
-
-**What this does:** Lists the files inside your private journal folder without modifying anything.
-
-**Expected output:**
-
-```text
-inventory-development-journal.md
-```
-
-Send me the output. If the file is present, we'll stage it, commit it, and push it to your private GitHub repository.
-
-*Previous: Step 14 (Initialize Git for the private journal)  |  Next: Step 16 (Stage the journal for Git)*
 
 ---
 
-## Step 16: Stage the journal for Git
+<a id="step-15"></a>
 
-**Step 22 completed.** Your development journal file is present in the correct private repository folder.
+### Step 15: Connect it to GitHub
 
-#### Step 23 — Stage the journal for Git
+**Why we are doing this.** The local journal directory was not yet connected to the private GitHub repository where we wanted to store notes.
 
-Run:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run this in your existing terminal (historical; **do not rerun blindly**).*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal remote add origin https://github.com/mehreen-7547/inventory-development-journal.git
 ```
 
-**Understanding the command:**
+**How it works.** `git remote add origin ...` tells this second repository where to push and fetch. Its URL differs from the public application repository.
 
-- `git -C` — Runs Git inside your private journal folder.
-- `add` — Stages a file for the next commit.
-- `inventory-development-journal.md` — The specific file we're staging.
+**How we checked it.** A later check confirmed the journal remote, although this step was partially repeated during setup.
 
-This does **not** upload anything to GitHub or affect your public Django repository.
+**Connects to.** Previous: [Step 14 — Initialize Git for the private journal](02-git-and-github.md#step-14) · Next: [Step 16 — Stage the journal for Git](02-git-and-github.md#step-16)
 
-Send me the terminal output. Next, we'll verify the staged file before creating our first private commit.
-
-*Previous: Step 15 (Connect it to GitHub)  |  Next: Step 17 (Change views.py)*
 
 ---
 
-## Step 17: Change views.py
+<a id="step-16"></a>
 
-**Staging means selecting which changes you want to include in your next Git commit.**
+### Step 16: Stage the journal for Git
 
-Think of Git as having three stages:
+**Why we are doing this.** The first journal entry existed locally, but Git would ignore it until it was staged.
 
-    **1. Working directory**
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-    Where you create and edit your files
+*1. Recorded snippet; Run.*
 
-  git add
-
-    **2. Staging area**
-
-    Changes selected for the next commit
-
-  git commit
-
-    **3. Local Git repository**
-
-    A permanent snapshot recorded in Git history
-
-  git push
-
-    **4. GitHub**
-
-    Your committed changes are uploaded online
-
-#### Example from our project
-
-Suppose you have three files: `views.py`, `models.py`, and `notes.md`.
-
-If you run:
-
-```bash
-git add views.py
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-Only the current changes in `views.py` are staged. The other two files aren't included in the next commit unless you stage them too.
+**How it works.** The `git add` command names the Markdown journal file and selects its current contents for the next commit. Staging is still local.
 
-Then:
+**How we checked it.** The notes show a subsequent repetition of staging, so this entry describes the intended action rather than a distinct feature.
+
+**Connects to.** Previous: [Step 15 — Connect it to GitHub](02-git-and-github.md#step-15) · Next: [Step 17 — Understand staging versus committing](02-git-and-github.md#step-17)
+
+
+---
+
+<a id="step-17"></a>
+
+### Step 17: Understand staging versus committing
+
+**Why we are doing this.** During the Git discussion, we clarified the difference between editing a code file and recording that edit. This was a teaching example, not a new inventory view.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**.*
 
 ```bash
 git commit -m "Add inventory views"
 ```
 
-Git records a snapshot of the staged changes.
+**How it works.** `git add views.py` is an example of staging one file; `git commit` is the separate action that saves it. The example must not be mistaken for proof that `views.py` was modified here.
 
-**Key distinction:** `git add` prepares changes, `git commit` records them locally, and `git push` uploads commits to GitHub.
+**How we checked it.** No Django view was created in this step. The note was explanatory only.
 
-In our current step, we're staging only `inventory-development-journal.md` in your **private repository**.
+**Connects to.** Previous: [Step 16 — Stage the journal for Git](02-git-and-github.md#step-16) · Next: [Step 18 — Stage the private journal](02-git-and-github.md#step-18)
 
-*Previous: Step 16 (Stage the journal for Git)  |  Next: Step 18 (Stage the private journal)*
-
----
-
-## Step 18: Stage the private journal
-
-#### Step 23 — Stage the private journal
-
-Run this in your VS Code terminal:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
-
-This selects the journal file for the next Git commit. It does not upload anything.
-
-Send me the terminal output, and we'll verify the staged file before committing.
-
-#### How we checked it
-
-**Step 23 completed.** Your journal file has been staged successfully.
-
-The warning is harmless:
-
-- **LF** — Unix-style line endings.
-- **CRLF** — Windows-style line endings.
-- Git is informing you that it may convert the line endings when working with the file.
-
-This does not mean your journal content is damaged.
-
-#### Step 24 — Verify the staged file
-
-Run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal diff --cached --name-only
-```
-
-**What this does:** Lists the files selected for the next commit.
-
-**Expected output:**
-
-```text
-inventory-development-journal.md
-```
-
-This command makes no changes.
-
-Send me the output. Then we'll create the first commit in your private repository.
-
-*Previous: Step 17 (Change views.py)  |  Next: Step 19 (Commit the private development journal)*
 
 ---
 
-## Step 19: Commit the private development journal
+<a id="step-18"></a>
 
-#### Step 25 — Commit the private development journal
+### Step 18: Stage the private journal
 
-Assuming Step 24 showed only `inventory-development-journal.md`, run:
+**Why we are doing this.** We returned from the Git example to the real private journal file and prepared its first saved revision.
 
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: add initial development and setup journal"
-```
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-**Understanding the command:**
-
-- `git commit` — Records the staged file in local Git history.
-- `-m` — Specifies the commit message.
-- `docs:` — Indicates a documentation-related change.
-
-**What happens?** Git saves the first version of your learning journal. Future updates can be tracked as separate commits.
-
-This does **not** upload anything or affect your public Django repository.
-
-Send me the output. Next, we'll push the journal to your private GitHub repository.
-
-#### How we checked it
-
-#### Step 26 — Verify the private GitHub connection
-
-Before uploading your journal, let's confirm that it is connected to the **private repository**, not the public one.
-
-Run:
+*1. Recorded snippet; Run this in your VS Code terminal.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal remote -v
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**Expected output:**
+**How it works.** This repeat of `git add` points to the journal Markdown file. It makes the next commit include the current notes, not the application code.
 
-```text
-origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
-origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
-```
+**How we checked it.** The following step shows the intended local commit operation.
 
-This only checks the connection; it doesn't upload anything.
+**Connects to.** Previous: [Step 17 — Understand staging versus committing](02-git-and-github.md#step-17) · Next: [Step 19 — Commit the private development journal](02-git-and-github.md#step-19)
 
-Send me the output. Then we'll push your journal to GitHub.
-
-*Previous: Step 18 (Stage the private journal)  |  Next: Step 20 (Push your journal to private GitHub)*
 
 ---
 
-## Step 20: Push your journal to private GitHub
+<a id="step-19"></a>
 
-#### Step 27 — Push your journal to private GitHub
+### Step 19: Commit the private development journal
 
-Assuming the remote URL from Step 26 was correct, run:
+**Why we are doing this.** Once the journal file was staged, we recorded it as a local commit so the first notes had a stable history.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Assuming Step 24 showed only inventory-development-journal.md, run.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push -u origin main
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal commit -m "docs: add initial development and setup journal"
 ```
 
-**Understanding the command:**
+**How it works.** `git commit` groups staged content with a description. Unlike `push`, it works without network access.
 
-- `git push` — Uploads your local commits to GitHub.
-- `-u` — Links your local `main` branch to GitHub's `main` branch.
-- `origin` — Your private GitHub repository.
-- `main` — The branch being uploaded.
+**How we checked it.** The record then proceeds to publishing the journal, indicating the local commit workflow was followed.
 
-**Result:** Your development journal will be backed up in your private repository, accessible only to you and anyone you explicitly authorize.
+**Connects to.** Previous: [Step 18 — Stage the private journal](02-git-and-github.md#step-18) · Next: [Step 20 — Push your journal to private GitHub](02-git-and-github.md#step-20)
 
-Send me the terminal output. We'll verify the upload before returning to Django development.
-
-*Previous: Step 19 (Commit the private development journal)  |  Next: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)*
 
 ---
 
-## Step 21: Yes. Both your local Git repository and your GitHub repository can have a branch
+<a id="step-20"></a>
 
-**Yes. Both your local Git repository and your GitHub repository can have a branch named `main`.**
+### Step 20: Push your journal to private GitHub
 
-They are separate branches that Git can keep synchronized.
+**Why we are doing this.** The journal's first local commit needed to be copied to the private remote repository.
 
-      **Local Git repository**
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-    Branch: `main`
-    Your computer
+*1. Recorded snippet; Assuming the remote URL from Step 26 was correct, run (historical; **do not rerun blindly**).*
 
-    git push / git pull
+```powershell
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal push -u origin main
+```
 
-      **GitHub repository**
+**How it works.** `git push -u origin main` publishes the journal branch and configures tracking. This does not affect the application repository.
 
-    Branch: `main`
-    Online
+**How we checked it.** Later source notes refer to the private repository as successfully synchronized.
 
-#### What happens when you work?
+**Connects to.** Previous: [Step 19 — Commit the private development journal](02-git-and-github.md#step-19) · Next: [Step 21 — Understand local and remote main branches](02-git-and-github.md#step-21)
 
-1. **Edit a file** — Changes exist on your computer.
-2. **`git add`** — Select changes for the next commit.
-3. **`git commit`** — Save changes to your local `main` branch.
-4. **`git push origin main`** — Send those commits to GitHub's `main` branch.
-5. **`git pull`** — Retrieve and integrate changes from GitHub into your local branch.
 
-#### What does `-u` do?
+---
 
-In our command:
+<a id="step-21"></a>
+
+### Step 21: Understand local and remote main branches
+
+**Why we are doing this.** We clarified how local and remote branches relate because both repositories used a branch named `main`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Illustration from the original explanation — **not necessarily an edit**; In our command (historical; **do not rerun blindly**).*
 
 ```powershell
 git push -u origin main
 ```
 
-`-u` establishes a tracking relationship between your local `main` and the remote branch `origin/main`.
+**How it works.** A branch is a named sequence of commits within one repository. `git push -u` links local `main` to remote `main`; later `git push` uses that link.
 
-After that, you can usually run just:
+**How we checked it.** This was a conceptual explanation. No additional file change or standalone test occurred.
 
-```powershell
-git push
-```
+**Connects to.** Previous: [Step 20 — Push your journal to private GitHub](02-git-and-github.md#step-20) · Next: [Step 22 — Apply database migrations](02-git-and-github.md#step-22)
 
-**Remember:** A commit is saved locally first. It only appears on GitHub after you push it.
-
-#### How we checked it
-
-**Step 27 completed.** I verified the upload on GitHub.
-
-Your two repositories are now set up:
-
-| Repository | Visibility | Status |
-|---|---|---|
-| [AI Inventory Manager](https://github.com/mehreen-7547/ai-assisted-inventory-manager) | Public | Initial code pushed |
-| [Development Journal](https://github.com/mehreen-7547/inventory-development-journal) | Private | Initial journal pushed |
-
-#### Step 28 — Return to Django development
-
-We'll continue Module 0 and maintain both repositories as we progress.
-
-Run this in your current VS Code terminal:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
-```
-
-**What it does:** Shows Django's database migrations and whether they have been applied.
-
-- `[X]` — Migration applied.
-- `[ ]` — Migration not yet applied.
-
-This command only checks migration status. It does not change your database.
-
-Send me the output before we proceed.
-
-*Previous: Step 20 (Push your journal to private GitHub)  |  Next: Step 22 (Apply database migrations)*
 
 ---
 
-## Step 22: Apply database migrations
+<a id="step-22"></a>
 
-**Step 28 completed.** Both GitHub repositories are set up, and Django's migration status has been checked.
+### Step 22: Apply database migrations
 
-Your output shows `[ ]` beside every migration. This means **Django's initial database tables have not been created yet.**
+**Why we are doing this.** Django was installed, but its built-in account, session, and admin tables had not yet been created in SQLite.
 
-#### Step 29 — Apply database migrations
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Run:
+*1. Recorded snippet; Run (historical; **do not rerun blindly**).*
 
 ```powershell
 python .\techmindz_inventory_module0_sqlite_atomic\manage.py migrate
 ```
 
-**What this does:**
+**How it works.** `manage.py migrate` executes unapplied database migrations. A migration describes a schema change; running it changes the database.
 
-- Creates Django's standard database tables for users, permissions, sessions, and admin.
-- Uses your configured SQLite database.
-- Records which migrations have been applied.
+**Follow the flow.** Django keeps migration files as a record of schema changes. `migrate` checks which ones are missing and runs those changes against SQLite. This is why seeing migration files in the repository is not enough: the local database needs to apply them too.
 
-**Expected result:** Several lines ending in `OK`, followed by the PowerShell prompt.
+**How we checked it.** The following entry reports all 18 initial migrations were marked `[X]`, showing they were applied.
 
-This is a database setup operation. It does not modify your project code.
+**Connects to.** Previous: [Step 21 — Understand local and remote main branches](02-git-and-github.md#step-21) · Next: [Step 23 — Update your private development journal](02-git-and-github.md#step-23)
 
-Send me the output before we proceed.
-
-#### How we checked it
-
-**Step 29 completed successfully.**
-
-All 18 Django migrations returned `OK`.
-
-This means Django has created its built-in database tables for authentication, permissions, admin, and sessions.
-
-#### Step 30 — Verify the migrations
-
-Run:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
-```
-
-**Expected result:** Every migration should now display `[X]` instead of `[ ]`.
-
-This confirms that Django has recorded the migrations as applied.
-
-Send me the output. We'll then record this completed setup in your private development journal.
-
-*Previous: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)  |  Next: Step 23 (Update your private development journal)*
 
 ---
 
-## Step 23: Update your private development journal
+<a id="step-23"></a>
 
-**Step 30 completed successfully.**
+### Step 23: Update your private development journal
 
-All 18 migrations now show `[X]`, confirming that Django has successfully initialized its built-in database tables.
+**Why we are doing this.** After initializing the database, we wanted the private journal to record the milestone and how it had been verified.
 
-#### Step 31 — Update your private development journal
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
 
-Run this PowerShell command:
+*1. Recorded snippet; Run this PowerShell command.*
 
 ```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+Add-Content -Path "C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
 
 ## Django Database Initialization — Initial Migrations
 
@@ -838,54 +464,38 @@ What is the difference between makemigrations and migrate?
 '@
 ```
 
-**What this does:** `Add-Content` appends this entry to your existing journal without replacing previous notes.
+**How it works.** `Add-Content` appends a written account of the migration result to the journal file. This changes documentation, not the database.
 
-No changes are being made to the Django project code.
+**How we checked it.** The next note states the new journal entry was appended and checked.
 
-Once you've run it, tell me **done**. We'll verify the journal update before committing it to your private Git repository.
+**Connects to.** Previous: [Step 22 — Apply database migrations](02-git-and-github.md#step-22) · Next: [Step 24 — Stage the updated journal](02-git-and-github.md#step-24)
 
-#### How we checked it
-
-#### Step 32 — Verify the journal entry
-
-Run:
-
-```powershell
-Get-Content "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Tail 25
-```
-
-**What this does:**
-- `Get-Content` — Reads the journal file.
-- `-Tail 25` — Displays its last 25 lines.
-
-**Expected result:** The new section titled **Django Database Initialization — Initial Migrations** should appear, including the commands, results, and revision question.
-
-This command only reads the file. It makes no changes.
-
-Send me the output. Next, we'll commit the updated journal to your private Git repository.
-
-*Previous: Step 22 (Apply database migrations)  |  Next: Step 24 (Stage the updated journal)*
 
 ---
 
-## Step 24: Stage the updated journal
+<a id="step-24"></a>
 
-**Step 32 completed.** The journal entry was successfully appended and verified.
+### Step 24: Stage the updated journal
 
-#### Step 33 — Stage the updated journal
+**Why we are doing this.** The migration milestone had been written to the journal but was not yet staged for version control.
 
-Run:
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Run.*
 
 ```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+git -C C:\Users\YOUR_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
 ```
 
-**What this does:** Stages the updated journal for its next Git commit.
+**How it works.** `git add` stages the updated Markdown file. The database itself is not committed to the journal.
 
-Your previous journal entry remains preserved in Git history.
+**How we checked it.** The source confirms staging completed; the line-ending warning was harmless.
 
-Send me the output, or say **done** if the command completes without errors.
-
-*Previous: Step 23 (Update your private development journal)  |  Next: Step 25 (Committing Development Journal Update)*
+**Connects to.** Previous: [Step 23 — Update your private development journal](02-git-and-github.md#step-23) · Next: [Step 25 — Committing Development Journal Update](03-database-and-migrations.md#step-25)
 
 ---
+
+**Chapter recap.** Understand staging, commits, remotes, branches, and pushes without mixing the two repositories.
+
+**Practice explaining:** Explain the difference between git add, git commit, and git push.
+

@@ -1,24 +1,46 @@
-# Module 1, Chapter 4: Logout
+# MODULE 1 — Accounts
 
-## Step 80: Logout Function
+## Chapter 4: Logout (Steps 80–82)
 
-#### Next: Add logout functionality
+**Where we are.** Login begins a session; logout must safely end it and give users a visible control.
 
-Open `accounts/views.py`.
+**What this chapter gives us.** Connect a POST-protected logout view, named URL, and CSRF-protected form.
 
-**1.** Change the existing authentication import to:
+**How to read this chapter.** These are retrospective notes of what was done, not a list of commands to run again on your current project. Some early versions are intentionally shown before later fixes. The original raw records remain on GitHub `main`.
+
+**Interview checkpoint.** Explain why logout is a state-changing POST request.
+
+### Find a step
+
+- [Step 80: Logout Function](#step-80)
+- [Step 81: Logout URL](#step-81)
+- [Step 82: Logout Button](#step-82)
+
+---
+
+<a id="step-80"></a>
+
+### Step 80: Logout Function
+
+**Why we are doing this.** Successful login created sessions; users also needed a way to end them securely.
+
+**File / location.** `accounts/views.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Change the existing authentication import to.*
 
 ```python
 from django.contrib.auth import authenticate, login, logout
 ```
 
-**2.** Add this import:
+*2. Recorded snippet; Add this import.*
 
 ```python
 from django.views.decorators.http import require_POST
 ```
 
-**3.** Add this function below `loginpage()`:
+*3. Recorded snippet; Add this function below loginpage().*
 
 ```python
 @require_POST
@@ -27,32 +49,28 @@ def logoutpage(request):
     return redirect('login')
 ```
 
-**What it does:** Logs out the current user and redirects them to the login page.
+**How it works.** The logout view calls Django's `logout(request)` to clear session authentication. Using a POST-only endpoint prevents ordinary GET links from triggering state-changing logout.
 
-  NEW vs CLASS
-  **Where:** `accounts/views.py`
+**Follow the flow.** `@require_POST` rejects ordinary GET requests to the logout endpoint. Inside the view, `logout(request)` clears the authenticated session. Only after that does the redirect send the browser back to the login page. The HTML form from Step 82 supplies the required POST request.
 
-  **Class example:** `backend/secondproject/library/views.py` uses `logout(request)`.
+**How we checked it.** The URL and button were still missing, so this function was not yet a complete browser workflow.
 
-  **Difference:** We added `@require_POST`.
+**Connects to.** Previous: [Step 79 — Understand a Django project versus an app](03-login.md#step-79) · Next: [Step 81 — Logout URL](04-logout.md#step-81)
 
-  **Why:** Prevents logout through an ordinary link or GET request.
-
-  **Alternative:** The class version without this restriction.
-
-**Expected result:** File saves successfully. We'll connect the logout URL next.
-
-*Previous: Step 79 (Project vs App)  |  Next: Step 81 (Logout URL)*
 
 ---
 
-## Step 81: Logout URL
+<a id="step-81"></a>
 
-#### Connect the logout function to a URL
+### Step 81: Logout URL
 
-Open **`accounts/urls.py`**.
+**Why we are doing this.** The logout function existed, but users needed an address Django could route to it.
 
-Add the logout path below the login path:
+**File / location.** `accounts/urls.py`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Add the logout path below the login path.*
 
 ```python
 urlpatterns = [
@@ -61,28 +79,26 @@ urlpatterns = [
 ]
 ```
 
-**What this means:**
+**How it works.** An app URL pattern maps `/logout/` to `logoutpage`. The named URL can be reused in the logout form.
 
-- `/login/` → executes `loginpage()`
-- `/logout/` → connects to `logoutpage()`
+**How we checked it.** The next step adds the actual form on the homepage.
 
-Because we used `@require_POST`, simply typing `/logout/` in the browser won't log you out.
+**Connects to.** Previous: [Step 80 — Logout Function](04-logout.md#step-80) · Next: [Step 82 — Logout Button](04-logout.md#step-82)
 
-**Expected result:** Save the file. Django should show no errors.
-
-Next, we'll create the actual Logout button.
-
-*Previous: Step 80 (Logout Function)  |  Next: Step 82 (Logout Button)*
 
 ---
 
-## Step 82: Logout Button
+<a id="step-82"></a>
 
-#### Add a Logout button to the homepage
+### Step 82: Logout Button
 
-Open your homepage template (`home.html`, the file rendered by `core/views.py`).
+**Why we are doing this.** Users needed a visible control that would submit the logout POST request.
 
-Inside the `<body>`, add:
+**File / location.** `core/templates/core/home.html`.
+
+**Original code or command, placed in context.** The snippets below come from the recorded development step. Explanatory examples and expected output are labelled; later steps may supersede this version.
+
+*1. Recorded snippet; Inside the <body>, add.*
 
 ```html
 <form method="POST" action="{% url 'logout' %}">
@@ -91,16 +107,17 @@ Inside the `<body>`, add:
 </form>
 ```
 
-**What each part means:**
+**How it works.** The HTML form uses `{% url 'logout' %}` to build the endpoint and `{% csrf_token %}` to protect the request. The submit button triggers the POST.
 
-- `<form>` — creates a form.
-- `method="POST"` — sends a POST request when submitted.
-- `{% url 'logout' %}` — finds the URL named `logout` in `accounts/urls.py`.
-- `{% csrf_token %}` — adds a security token that Django checks.
-- `<button>` — submits the form when clicked.
+The token helps Django reject forged state-changing form submissions.
 
-**Expected result:** After logging in, you should see a Logout button on the homepage. Clicking it should return you to the login page.
+**How we checked it.** To verify, log in, use Logout, then try visiting a protected page again; the notes do not record a distinct test result here.
 
-*Previous: Step 81 (Logout URL)  |  Next: Step 83 (Protect Homepage)*
+**Connects to.** Previous: [Step 81 — Logout URL](04-logout.md#step-81) · Next: [Step 83 — Protect Homepage](05-homepage-protection-and-navigation.md#step-83)
 
 ---
+
+**Chapter recap.** Connect a POST-protected logout view, named URL, and CSRF-protected form.
+
+**Practice explaining:** Explain why logout is a state-changing POST request.
+
