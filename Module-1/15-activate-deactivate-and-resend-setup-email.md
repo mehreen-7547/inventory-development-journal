@@ -286,3 +286,60 @@ Next, we'll add the **Resend Setup Email** button to the Edit Employee page. It 
 *Previous: Step 160 (Resend Setup Email)  |  Next: Step 162 (Resend Setup Email Button)*
 
 ---
+
+## Step 162: Resend Setup Email Button
+
+#### Next: Add the Resend Setup Email button
+
+We've created the view and URL. Now we'll add the button to the employee editing page.
+
+Open **`templates/accounts/edit_employee.html`**.
+
+Find the existing **Deactivate/Reactivate** form.
+
+Immediately **below its closing `</form>` tag**, add:
+
+```html
+{% if employee.is_active and not employee.has_usable_password %}
+
+    <form method="POST"
+          action="{% url 'resend_setup_email' employee.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Resend Setup Email
+        </button>
+
+    </form>
+
+{% endif %}
+```
+
+#### When will the button appear?
+
+| Employee status | Password set? | Button |
+|---|---|---|
+| Active | No | Visible |
+| Active | Yes | Hidden |
+| Inactive | No | Hidden |
+| Inactive | Yes | Hidden |
+
+This prevents administrators from accidentally sending a setup email to employees who already have passwords.
+
+**Important:** Keep this as a separate form, outside the Save Changes and Deactivate/Reactivate forms.
+
+No internal CSS is needed. We'll continue using external stylesheets.
+
+#### Test
+
+1. Open an active employee who hasn't set a password.
+2. Verify that **Resend Setup Email** appears.
+3. Open an employee who has already set a password.
+4. Verify that the button is hidden.
+
+Next, we'll test sending the email and verify its password setup link.
+
+*Previous: Step 161 (Resend Setup Email URL)  |  Next: Step 163 (Home Page Navigation)*
+
+---
