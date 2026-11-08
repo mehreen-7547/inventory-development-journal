@@ -234,3 +234,54 @@ You should see the **Check Your Email** page.
 *Previous: Step 116 (Template Structure)  |  Next: Step 118 (Password Reset Email)*
 
 ---
+
+## Step 118: Password Reset Email
+
+#### Next: Create the password-reset email template
+
+When an employee requests a password reset, Django needs to know **what message to send**.
+
+Create a new file:
+
+`templates/accounts/password_reset_email.txt`
+
+Paste:
+
+```django
+Hello,
+
+We received a request to reset your Inventory System password.
+
+Click the link below to set a new password:
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+If you did not request this password reset, you can ignore this email.
+
+Inventory System
+```
+
+#### Understanding the important line
+
+```django
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+```
+
+Django will generate a link containing:
+
+- `protocol` — HTTP or HTTPS.
+- `domain` — the website's domain.
+- `uid` — an encoded identifier for the employee's account.
+- `token` — a security token used to validate the reset request.
+
+  **NEW vs CLASS — Dynamic URL parameters**
+
+  Earlier, we used `{% url 'login' %}` to generate a fixed URL.
+
+  Here, `{% url 'password_reset_confirm' uidb64=uid token=token %}` generates a URL containing values specific to the password-reset request.
+
+**For now:** Save the file. We haven't connected this email template or created the reset-link destination yet.
+
+*Previous: Step 117 (Confirmation Page URL)  |  Next: Step 119 (Connect Email Template)*
+
+---
