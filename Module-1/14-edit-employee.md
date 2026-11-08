@@ -129,3 +129,62 @@ Next, we'll create `edit_employee.html`.
 *Previous: Step 145 (Edit Employee Form)  |  Next: Step 147 (Edit Employee Template)*
 
 ---
+
+## Step 147: Edit Employee Template
+
+#### Next: Create the Edit Employee page
+
+We've created the `edit_employee()` view. Now we'll create the HTML form that administrators will use to update employee details.
+
+Create:
+
+**`templates/accounts/edit_employee.html`**
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Employee</title>
+</head>
+<body>
+
+    <h2>Edit Employee</h2>
+
+    <p>Username: {{ employee.username }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Changes
+        </button>
+    </form>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Back to Manage Employees
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+#### What will this page do?
+
+- Display the employee's username (read-only).
+- Show their existing name, email and role.
+- Allow the administrator to modify those details.
+- Save changes without affecting the employee's password.
+
+**Save the file.** The page isn't accessible yet because we haven't added its URL.
+
+Next, we'll connect the Edit Employee URL.
+
+*Previous: Step 146 (Edit Employee View)  |  Next: Step 148 (Edit Employee URL)*
+
+---
