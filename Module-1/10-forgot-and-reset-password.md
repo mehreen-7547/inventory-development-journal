@@ -655,3 +655,65 @@ Once the server starts successfully, we can resume testing the password-reset em
 *Previous: Step 124 (Password Reset Complete URL)  |  Next: Step 126 (Change accounts/urls.py)*
 
 ---
+
+## Step 126: Change accounts/urls.py
+
+Replace the entire contents of **`accounts/urls.py`** with this corrected version:
+
+```python
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutpage, name='logout'),
+    path('change-password/', views.changepassword, name='change_password'),
+
+    path(
+        'password-reset/',
+        auth_views.PasswordResetView.as_view(
+            template_name='accounts/password_reset.html',
+            email_template_name='accounts/password_reset_email.txt',
+            subject_template_name='accounts/password_reset_subject.txt'
+        ),
+        name='password_reset'
+    ),
+
+    path(
+        'password-reset/done/',
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='accounts/password_reset_done.html'
+        ),
+        name='password_reset_done'
+    ),
+
+    path(
+        'password-reset/confirm/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='accounts/password_reset_confirm.html'
+        ),
+        name='password_reset_confirm'
+    ),
+
+    path(
+        'password-reset/complete/',
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='accounts/password_reset_complete.html'
+        ),
+        name='password_reset_complete'
+    ),
+]
+```
+
+**Correction made:** Moved `email_template_name` and `subject_template_name` from `PasswordResetDoneView` to `PasswordResetView`.
+
+After saving, restart the Django server if necessary and visit:
+
+`http://127.0.0.1:8000/password-reset/`
+
+Enter an active test account's email address and submit. The reset email should appear in your server terminal.
+
+*Previous: Step 125 (Fix Django Error)  |  Next: Step 127 (Email Testing)*
+
+---
