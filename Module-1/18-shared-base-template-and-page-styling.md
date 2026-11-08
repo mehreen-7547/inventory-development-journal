@@ -159,3 +159,68 @@ Verify that the form is centred, the Login button works, the Forgot Password lin
 *Previous: Step 179 (Dashboard Template Inheritance)  |  Next: Step 181 (Update Change Password Page)*
 
 ---
+
+## Step 181: Update Change Password Page
+
+#### Step 1 — Replace `change_password.html`
+
+**File:** `templates/accounts/change_password.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Change Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+        <h2 class="mb-4">Change Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Change Password
+            </button>
+
+            <a href="{% url 'home' %}"
+               class="btn btn-outline-secondary">
+                Cancel
+            </a>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Added Bootstrap layout and buttons.
+- Added a **Cancel** link to the dashboard.
+- Preserved `{{ form.as_p }}`, including Django's password validation and field errors.
+- Removed the duplicated HTML structure.
+
+#### Step 3 — Test
+
+1. Log in and select **Change Password**.
+2. Enter an incorrect current password.
+3. Submit the form.
+4. Verify that Django displays a validation error and does not change the password.
+5. Click **Cancel** and verify that you return to the dashboard.
+
+This is still the functional Bootstrap interface, not the final visual design.
+
+*Previous: Step 180 (Update Login Page)  |  Next: Step 182 (Update Forgot Password Page)*
+
+---
