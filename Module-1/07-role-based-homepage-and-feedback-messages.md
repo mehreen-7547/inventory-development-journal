@@ -120,3 +120,31 @@ Also, when `manager1` visits `/admin/`, Django may show the Admin login screen, 
 *Previous: Step 92 (Admin Link Visibility)  |  Next: Step 94 (Admin Access Verified)*
 
 ---
+
+## Step 94: Admin Access Verified
+
+That is **the expected result**.
+
+When `manager1` clicks **Open Django admin**:
+
+1. The browser opens `/admin/`.
+2. Django checks whether `manager1` has Admin access.
+3. Because `is_staff=False`, Django displays the Admin login page instead of the dashboard.
+
+So our existing access restriction is working as expected.
+
+**The `is_staff` condition we added to `home.html` is only meant to hide the Admin link from manager1.** It does not create the access restriction.
+
+One thing remains: your screenshot still shows that link for manager1. Make sure you have saved this change in `home.html`:
+
+```html
+{% if request.user.is_staff %}
+    <p><a href="/admin/">Open Django admin</a></p>
+{% endif %}
+```
+
+After refreshing the homepage, the link should disappear.
+
+*Previous: Step 93 (Admin Access)  |  Next: Step 95 (Login Error Messages)*
+
+---
