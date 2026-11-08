@@ -287,3 +287,55 @@ Next, we'll connect it to Django Admin so creating an employee triggers the welc
 *Previous: Step 131 (Secure Password-Setup Link)  |  Next: Step 133 (Automatic Welcome Email)*
 
 ---
+
+## Step 133: Automatic Welcome Email
+
+#### Next: Send the welcome email when an admin creates an employee
+
+We already created `send_welcome_email()`. Now we'll make Django call it automatically.
+
+Open **`accounts/admin.py`**.
+
+**1. Add this import** at the top:
+
+```python
+from .utils import send_welcome_email
+```
+
+**2. Inside `CustomUserAdmin`,** below `add_fieldsets`, add:
+
+```python
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        if not change:
+            send_welcome_email(request, obj)
+```
+
+#### What happens?
+
+- `save_model()` — Django Admin calls this when saving a user.
+- `super().save_model(...)` — saves the user using Django's existing functionality.
+- `if not change:` — checks whether this is a **new account**, rather than an existing account being edited.
+- `send_welcome_email()` — generates the setup link and sends the welcome message.
+
+  **NEW vs CLASS — `save_model()`**
+
+  This is a built-in Django Admin method that we're overriding.
+
+  It's similar to how we overrode `save()` in `EmployeeCreationForm`, except this method belongs to Django Admin and receives the HTTP request.
+
+#### Test
+
+1. Save `admin.py`.
+2. Open Django Admin → Users → Add user.
+3. Create a new test employee using a dummy email address.
+4. Check your Django server terminal.
+
+**Expected:** A welcome email appears containing the employee's username and password-setup link.
+
+Do not share the setup token here.
+
+*Previous: Step 132 (Send Welcome Email)  |  Next: Step 134 (Link Expiration)*
+
+---
