@@ -343,3 +343,54 @@ Next, we'll test sending the email and verify its password setup link.
 *Previous: Step 161 (Resend Setup Email URL)  |  Next: Step 163 (Home Page Navigation)*
 
 ---
+
+## Step 163: Home Page Navigation
+
+We haven't added the **Manage Employees** link to the Home page yet. The employee management system exists, but currently you can access it only through its URL.
+
+#### Add Manage Employees to the Home page
+
+Open **`core/templates/core/home.html`**.
+
+Find:
+
+```html
+<p>Administrator Dashboard</p>
+```
+
+Immediately below it, add:
+
+```html
+{% if user.role == 'admin' %}
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Manage Employees
+        </a>
+    </p>
+
+{% endif %}
+```
+
+#### Expected result
+
+Your Admin home page will now contain:
+
+  Inventory & Demand Intelligence
+  **Welcome, admin**
+
+  Role: Admin
+
+  Administrator Dashboard
+
+    Manage Employees
+
+  Change Password
+
+Only users with the Admin role will see this link. The employee management views are also protected by our `@role_required('admin')` decorator.
+
+**Test:** Save the file, refresh `http://127.0.0.1:8000/`, and click **Manage Employees**.
+
+*Previous: Step 162 (Resend Setup Email Button)  |  Next: Step 164 (Home Template Review)*
+
+---
