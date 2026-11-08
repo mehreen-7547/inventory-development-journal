@@ -47,3 +47,31 @@ If the same error appears, share it. We will identify the process holding the fi
 *Previous: Step 68 (Database Reset)  |  Next: Step 70 (Create Database Tables)*
 
 ---
+
+## Step 70: Create Database Tables
+
+#### Next: Apply database migrations
+
+Now that the old database has been deleted, run:
+
+```powershell
+python manage.py migrate
+```
+
+**Expected output:** Several migrations ending with `OK`, including:
+
+```text
+Applying accounts.0001_initial... OK
+```
+
+This command will:
+
+- Create a fresh `db.sqlite3` file.
+- Create our `accounts_customuser` table.
+- Create Django's other required tables.
+
+**Important:** No user accounts exist in this new database yet. We'll create the administrator next.
+
+*Previous: Step 69 (Database File Locked)  |  Next: Step 71 (Create Administrator)*
+
+---
