@@ -109,3 +109,66 @@ Next, we'll create `create_employee.html`.
 *Previous: Step 139 (Create Employee View)  |  Next: Step 141 (Create Employee Template)*
 
 ---
+
+## Step 141: Create Employee Template
+
+#### Next: Create the employee registration page
+
+We've created the view and restricted the available roles. Now we'll build the HTML form.
+
+Create:
+
+**`templates/accounts/create_employee.html`**
+
+Paste:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Employee</title>
+</head>
+<body>
+
+    <h2>Create Employee</h2>
+
+    <p>
+        Enter the employee details below.
+        A password setup link will be sent to their email.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Create Employee</button>
+    </form>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Back to Manage Employees
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+#### What will the page contain?
+
+- Username
+- First name and last name
+- Email address
+- Role: Inventory Manager or Sales Staff
+- Create Employee button
+
+**No password field is required.** Employees will set their own passwords using the welcome email.
+
+We're reusing `{{ form.as_p }}` and `{% csrf_token %}` from our earlier forms.
+
+**For now:** Save the file. Next, we'll connect its URL and test employee creation through our application's interface.
+
+*Previous: Step 140 (Restrict Employee Roles)  |  Next: Step 142 (Create Employee URL)*
+
+---
