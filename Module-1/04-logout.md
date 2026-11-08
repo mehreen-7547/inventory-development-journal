@@ -45,3 +45,33 @@ def logoutpage(request):
 *Previous: Step 79 (Project vs App)  |  Next: Step 81 (Logout URL)*
 
 ---
+
+## Step 81: Logout URL
+
+#### Connect the logout function to a URL
+
+Open **`accounts/urls.py`**.
+
+Add the logout path below the login path:
+
+```python
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutpage, name='logout'),
+]
+```
+
+**What this means:**
+
+- `/login/` → executes `loginpage()`
+- `/logout/` → connects to `logoutpage()`
+
+Because we used `@require_POST`, simply typing `/logout/` in the browser won't log you out.
+
+**Expected result:** Save the file. Django should show no errors.
+
+Next, we'll create the actual Logout button.
+
+*Previous: Step 80 (Logout Function)  |  Next: Step 82 (Logout Button)*
+
+---
