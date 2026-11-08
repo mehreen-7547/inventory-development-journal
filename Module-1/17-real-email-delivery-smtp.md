@@ -426,3 +426,102 @@ mehreen7547@gmail.com
 *Previous: Step 174 (Fix the email configuration)  |  Next: Step 176 (Send a real email through Gmail)*
 
 ---
+
+## Step 176: Send a real email through Gmail
+
+#### Step 290 — Send a real email through Gmail
+
+Your SMTP configuration is now correct. Let's test whether Gmail can actually send an email.
+
+**1.** In the same Django Shell, where you see `>>>`, paste:
+
+```python
+from django.core.mail import send_mail
+from django.conf import settings
+
+result = send_mail(
+    'Techmindz SMTP Test',
+    'This is a real email sent from Django using Gmail SMTP.',
+    settings.DEFAULT_FROM_EMAIL,
+    ['mehreen7547+sales1@gmail.com'],
+    fail_silently=False
+)
+
+print(result)
+```
+
+**2.** Press Enter.
+
+Expected output:
+
+```text
+1
+```
+
+This means the SMTP server accepted the email.
+
+**3.** Open Gmail and search:
+
+```text
+in:anywhere subject:"Techmindz SMTP Test"
+```
+
+Check whether the new email appears. Since you're sending to your own Gmail alias, it may appear under **Sent** or **All Mail** rather than Primary.
+
+#### How we checked it
+
+The password reset tests passed. Before saving our completed work to GitHub, we need to verify that **your `.env` file is excluded from Git**.
+
+#### Step 1: Check `.gitignore`
+
+Open `.gitignore` in VS Code and ensure it contains:
+
+```gitignore
+.env
+```
+
+#### Step 2: Verify Git is ignoring it
+
+In the VS Code PowerShell terminal, run:
+
+```powershell
+git status --ignored --short -- .env
+```
+
+#### Expected output
+
+```text
+!! .env
+```
+
+This means Git is ignoring your `.env` file, which contains your Gmail App Password and Django secret key.
+
+If you see `?? .env` or no output, **do not commit yet**. We'll investigate first.
+
+#### How we checked it
+
+#### Step 299 — Run Django System Check
+
+Your `.env` file is correctly excluded from Git. Before committing Module 1, we'll check the Django configuration for errors.
+
+**1.** Open your VS Code PowerShell terminal.
+
+If you're inside Django Shell (`>>>`), type `exit()` first.
+
+**2.** Run:
+
+```powershell
+python manage.py check
+```
+
+**3.** Expected output:
+
+```text
+System check identified no issues (0 silenced).
+```
+
+This confirms that Django's built-in system checks found no configuration issues. It does not replace functional or security testing.
+
+*Previous: Step 175 (Change manage.py)  |  Next: Step 177 (Change base.html)*
+
+---
