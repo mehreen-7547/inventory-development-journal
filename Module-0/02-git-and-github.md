@@ -867,3 +867,25 @@ Send me the output. Next, we'll commit the updated journal to your private Git r
 *Previous: Step 22 (Apply database migrations)  |  Next: Step 24 (Stage the updated journal)*
 
 ---
+
+## Step 24: Stage the updated journal
+
+**Step 32 completed.** The journal entry was successfully appended and verified.
+
+#### Step 33 — Stage the updated journal
+
+Run:
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**What this does:** Stages the updated journal for its next Git commit.
+
+Your previous journal entry remains preserved in Git history.
+
+Send me the output, or say **done** if the command completes without errors.
+
+*Previous: Step 23 (Update your private development journal)  |  Next: Step 25 (Committing Development Journal Update)*
+
+---
