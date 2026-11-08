@@ -1,0 +1,64 @@
+# Module 0
+
+- [Chapter 1: Environment setup](01-environment-setup.md) - Steps 1 to 6
+    - Step 1: Check Python
+    - Step 2: Create the virtual environment
+    - Step 3: Install Django and required packages
+    - Step 4: Create the configuration file
+    - Step 5: Change manage.py
+    - Step 6: Create .env
+- [Chapter 2: Git and GitHub](02-git-and-github.md) - Steps 7 to 24
+    - Step 7: Initialize the Git repository
+    - Step 8: Stage the project files
+    - Step 9: Create our first Git commit
+    - Step 10: Connect your local project to GitHub
+    - Step 11: Connect your local project to GitHub
+    - Step 12: Push your first commit to GitHub
+    - Step 13: Create a separate local journal folder
+    - Step 14: Initialize Git for the private journal
+    - Step 15: Connect it to GitHub
+    - Step 16: Stage the journal for Git
+    - Step 17: Change views.py
+    - Step 18: Stage the private journal
+    - Step 19: Commit the private development journal
+    - Step 20: Push your journal to private GitHub
+    - Step 21: Yes. Both your local Git repository and your GitHub repository can have a branch
+    - Step 22: Apply database migrations
+    - Step 23: Update your private development journal
+    - Step 24: Stage the updated journal
+- [Chapter 3: Database and migrations](03-database-and-migrations.md) - Steps 25 to 28
+    - Step 25: Committing Development Journal Update
+    - Step 26: Committing Development Journal Update
+    - Step 27: Pushing Development Journal to GitHub
+    - Step 28: Understanding the Migration Workflow
+- [Chapter 4: Server and admin account](04-server-and-admin-account.md) - Steps 29 to 36
+    - Step 29: Confirming Terminal Environment
+    - Step 30: Understanding the Project Homepage
+    - Step 31: Documenting Superuser Setup
+    - Step 32: Staging Development Journal Update
+    - Step 33: Understanding git add and -C
+    - Step 34: Staging Development Journal Update
+    - Step 35: Committing Development Journal Update
+    - Step 36: Pushing Development Journal to GitHub
+- [Chapter 5: Security checks](05-security-checks.md) - Steps 37 to 41
+    - Step 37: Staging Security Verification Notes
+    - Step 38: Committing Security Verification Notes
+    - Step 39: Pushing Security Verification Notes
+    - Step 40: Understanding Temporary Test Models
+    - Step 41: Record and Push Test Results
+- [Chapter 6: AI forecasting feasibility test](06-ai-forecasting-feasibility-test.md) - Steps 42 to 45
+    - Step 42: Installing PyTorch
+    - Step 43: Understanding python -m
+    - Step 44: Installing AI Dependencies
+    - Step 45: Documenting Model Results
+- [Chapter 7: Module 0 completion](07-module-0-completion.md) - Steps 46 to 55
+    - Step 46: Update Module 0 Report
+    - Step 47: Stage Documentation
+    - Step 48: Commit Documentation
+    - Step 49: Push Documentation
+    - Step 50: Finalize Report
+    - Step 51: Finalize README
+    - Step 52: Stage Final Updates
+    - Step 53: Final Documentation Commit
+    - Step 54: Create Completion Tag
+    - Step 55: Publish Completion Tag
