@@ -664,3 +664,81 @@ Send me the terminal output. We'll verify the upload before returning to Django 
 *Previous: Step 19 (Commit the private development journal)  |  Next: Step 21 (Yes. Both your local Git repository and your GitHub repository can have a branch)*
 
 ---
+
+## Step 21: Yes. Both your local Git repository and your GitHub repository can have a branch
+
+**Yes. Both your local Git repository and your GitHub repository can have a branch named `main`.**
+
+They are separate branches that Git can keep synchronized.
+
+      **Local Git repository**
+
+    Branch: `main`
+    Your computer
+
+    git push / git pull
+
+      **GitHub repository**
+
+    Branch: `main`
+    Online
+
+#### What happens when you work?
+
+1. **Edit a file** — Changes exist on your computer.
+2. **`git add`** — Select changes for the next commit.
+3. **`git commit`** — Save changes to your local `main` branch.
+4. **`git push origin main`** — Send those commits to GitHub's `main` branch.
+5. **`git pull`** — Retrieve and integrate changes from GitHub into your local branch.
+
+#### What does `-u` do?
+
+In our command:
+
+```powershell
+git push -u origin main
+```
+
+`-u` establishes a tracking relationship between your local `main` and the remote branch `origin/main`.
+
+After that, you can usually run just:
+
+```powershell
+git push
+```
+
+**Remember:** A commit is saved locally first. It only appears on GitHub after you push it.
+
+#### How we checked it
+
+**Step 27 completed.** I verified the upload on GitHub.
+
+Your two repositories are now set up:
+
+| Repository | Visibility | Status |
+|---|---|---|
+| [AI Inventory Manager](https://github.com/mehreen-7547/ai-assisted-inventory-manager) | Public | Initial code pushed |
+| [Development Journal](https://github.com/mehreen-7547/inventory-development-journal) | Private | Initial journal pushed |
+
+#### Step 28 — Return to Django development
+
+We'll continue Module 0 and maintain both repositories as we progress.
+
+Run this in your current VS Code terminal:
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
+```
+
+**What it does:** Shows Django's database migrations and whether they have been applied.
+
+- `[X]` — Migration applied.
+- `[ ]` — Migration not yet applied.
+
+This command only checks migration status. It does not change your database.
+
+Send me the output before we proceed.
+
+*Previous: Step 20 (Push your journal to private GitHub)  |  Next: Step 22 (Apply database migrations)*
+
+---
