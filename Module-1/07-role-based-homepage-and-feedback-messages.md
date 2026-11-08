@@ -348,3 +348,31 @@ This lists individual files instead of showing only `accounts/` and `templates/`
 *Previous: Step 96 (Password Change Confirmation)  |  Next: Step 98 (Stage Files)*
 
 ---
+
+## Step 98: Stage Files
+
+**All 12 changed or new files look appropriate for Module 1.**
+
+- `accounts/migrations/0001_initial.py` — should be committed because it defines our database structure.
+- `accounts/tests.py` — Django's default test file; fine to include.
+- No database, virtual environment, or password files appear in the list.
+
+#### Next: Stage the files for Git
+
+Run:
+
+```bash
+git add config/settings.py config/urls.py core/views.py core/templates/core/home.html accounts/ templates/accounts/
+```
+
+**What does `git add` do?**
+
+It tells Git which changes to include in the next commit.
+
+It does **not** upload anything to GitHub yet.
+
+**Expected result:** The command finishes without displaying an error.
+
+*Previous: Step 97 (Success Message)  |  Next: Step 99 (Commit Changes)*
+
+---
