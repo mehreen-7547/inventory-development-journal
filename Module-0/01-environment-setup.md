@@ -193,3 +193,79 @@ After selecting the interpreter, we can continue configuring `.env`.
 *Previous: Step 3 (Install Django and required packages)  |  Next: Step 5 (Change manage.py)*
 
 ---
+
+## Step 5: Change manage.py
+
+#### Module 0 — What we've done so far
+
+We're setting up the foundation for your **AI Inventory & Demand Intelligence System**. We haven't started building the actual inventory features yet.
+
+#### Our progress
+
+    **Environment setup**
+    3 of 6 steps completed
+
+  {#each [
+    {name:"Downloaded and opened the Django starter",detail:"The project files are available in VS Code.",done:true},
+    {name:"Selected Python 3.12.12",detail:"Your computer also has Python 3.14, but we're using 3.12 for better AI package compatibility.",done:true},
+    {name:"Created .venv and installed packages",detail:"Django 6.0.9 and its dependencies installed successfully.",done:true},
+    {name:"Configure .env",detail:"Copy the example configuration and set a Django secret key.",done:false},
+    {name:"Initialize SQLite and run Django tests",detail:"Create database tables and test stock-safety logic.",done:false},
+    {name:"Install and test AI models",detail:"Measure whether Chronos-Bolt Tiny and Chronos-2 run on your laptop.",done:false}
+  ] as s,i}
+
+        {s.name}
+        {s.detail}
+
+  {/each}
+
+#### Understanding what we installed
+
+    Your laptop
+
+    Installed Python versions
+    Python 3.14 and Python 3.12.12
+
+    .venv — Project environment
+
+    Python
+    3.12.12
+
+    Django
+    6.0.9
+
+  The virtual environment keeps your project's Python packages separate from other projects. We can install more packages here without changing your system-wide Python setup.
+
+#### Your current folder structure
+
+```text
+Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│
+├── .venv/                 ← Python environment
+│
+└── techmindz_inventory_module0_sqlite_atomic/
+    ├── config/            ← Django configuration
+    ├── core/              ← Initial Django app
+    ├── scripts/           ← AI testing scripts
+    ├── manage.py          ← Django command entry point
+    ├── requirements.txt   ← Python dependencies
+    └── .env.example       ← Configuration template
+```
+
+#### What comes next?
+
+**Step 4: Create the `.env` file.** This will tell Django which database to use and where to read its private settings.
+
+You can continue with this command in your current terminal:
+
+```powershell
+Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+After that, we'll generate a Django secret key, create the SQLite database and run the initial tests.
+
+**Current status:** Python and Django are ready. The application and AI models have not been run yet.
+
+*Previous: Step 4 (Create the configuration file)  |  Next: Step 6 (Create .env)*
+
+---
