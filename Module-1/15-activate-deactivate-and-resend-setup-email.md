@@ -394,3 +394,62 @@ Only users with the Admin role will see this link. The employee management views
 *Previous: Step 162 (Resend Setup Email Button)  |  Next: Step 164 (Home Template Review)*
 
 ---
+
+## Step 164: Home Template Review
+
+Yes, almost correct. The **Manage Employees** link will work, but two small corrections are needed.
+
+#### 1. Remove the duplicate Admin condition
+
+Replace your entire Dashboard section with:
+
+```html
+<!-- DASHBOARD -->
+{% if request.user.role == 'admin' %}
+
+    <p>Administrator Dashboard</p>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Manage Employees
+        </a>
+    </p>
+
+{% elif request.user.role == 'manager' %}
+
+    <p>Inventory Manager Dashboard</p>
+
+{% elif request.user.role == 'sales' %}
+
+    <p>Sales Staff Dashboard</p>
+
+{% endif %}
+```
+
+You don't need a second `{% if user.role == 'admin' %}` inside the first one.
+
+#### 2. Move the messages inside `<body>`
+
+At the bottom of your file, replace everything from `<!-- LOGOUT -->` onwards with:
+
+```html
+<!-- LOGOUT -->
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+<!-- MESSAGES -->
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+</body>
+</html>
+```
+
+**Everything else is correct.** Save and refresh the Home page. You should now see **Manage Employees** below Administrator Dashboard.
+
+*Previous: Step 163 (Home Page Navigation)  |  Next: Step 165 (Employee Management Messages)*
+
+---
