@@ -141,3 +141,66 @@ urlpatterns = [
 *Previous: Step 75 (Login Page)  |  Next: Step 77 (Connect Login URL)*
 
 ---
+
+## Step 77: Connect Login URL
+
+#### Next: Update `config/urls.py`
+
+Replace its contents with:
+
+```python
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("accounts.urls")),
+    path("", include("core.urls")),
+]
+```
+
+**What changed?**
+
+We added:
+
+```python
+path("", include("accounts.urls")),
+```
+
+This tells Django to look inside `accounts/urls.py` for account-related URLs.
+
+**Expected result:** With the development server running, opening `http://127.0.0.1:8000/login/` displays your login form.
+
+#### How we checked it
+
+Django found your login function, but **cannot locate `login.html`**.
+
+#### Next: Check the file location
+
+In the VS Code terminal, run:
+
+```powershell
+Test-Path .\templates\accounts\login.html
+```
+
+**Expected output:** `True`
+
+If it says `False`, ensure your file is located here:
+
+```text
+techmindz_inventory_module0_sqlite_atomic/
+├── manage.py
+└── templates/
+    └── accounts/
+        └── login.html
+```
+
+The `templates` folder must be in the **same folder as `manage.py`**.
+
+Once corrected, refresh `/login/`.
+
+If the error persists even when the command returns `True`, share that result.
+
+*Previous: Step 76 (Login URL)  |  Next: Step 78 (Login Redirect)*
+
+---
