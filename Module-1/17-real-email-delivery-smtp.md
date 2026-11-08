@@ -598,3 +598,102 @@ The employee-management page must not open.
 *Previous: Step 176 (Send a real email through Gmail)  |  Next: Step 178 (Change base.html)*
 
 ---
+
+## Step 178: Change base.html
+
+Yes. From now on, every **NEW vs CLASS** card will have a light-purple background, a purple dashed border, and the same seven fields required by Claude's instructions.
+
+STEP 301 · MODULE 1 — ACCOUNTS
+
+#### Create the shared `base.html`
+
+This will provide a common Bootstrap layout, navigation bar, and message display for our application.
+
+**File:** `templates/base.html`
+
+Create this new file in the main `templates` folder, then paste:
+
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Inventory System{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar bg-body-tertiary border-bottom">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            Inventory System
+        </a>
+
+        {% if user.is_authenticated %}
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+
+            {% if user.role == 'admin' %}
+            <a href="{% url 'employee_list' %}">
+                Manage Employees
+            </a>
+            {% endif %}
+
+            <a href="{% url 'change_password' %}">
+                Change Password
+            </a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary btn-sm">
+                    Logout
+                </button>
+            </form>
+
+        </div>
+        {% endif %}
+    </div>
+</nav>
+
+<main class="container py-4">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if 'error' in message.tags %}alert-danger{% elif 'success' in message.tags %}alert-success{% else %}alert-info{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+</main>
+
+</body>
+</html>
+```
+
+    NEW vs CLASS — Role-aware navigation
+
+  **Where:** `templates/base.html` → navbar
+  **In class:** `backend/secondproject/templates/lib-base.html` displayed navigation links directly, including a logout link.
+  **In this project:** Links depend on the user's login status and role. Logout uses a POST form.
+  **How they differ:** Employees see only appropriate navigation links. Logout submits a protected request instead of using a normal link.
+  **Why chosen:** Better access control and safer logout handling.
+  **Other option:** Use unconditional navigation links and a GET logout route.
+
+#### Expected result
+
+Save the file. **Your existing pages will not change visually yet**, because they haven't been connected to `base.html`.
+
+In the next step, we'll update the dashboard template to inherit this layout, without duplicating its navbar or messages.
+
+*Previous: Step 177 (Change base.html)  |  Next: Step 179 (Dashboard Template Inheritance)*
+
+---
