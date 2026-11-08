@@ -894,3 +894,134 @@ The existing employee creation, editing, role restrictions, and password-setup f
 *Previous: Step 190 (Correct Form Styling)  |  Next: Step 192 (Update Edit Employee)*
 
 ---
+
+## Step 192: Update Edit Employee
+
+#### Step 1 — Replace `edit_employee.html`
+
+**File:** `templates/accounts/edit_employee.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Edit Employee - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <h2 class="mb-3">Edit Employee</h2>
+
+        <p class="text-muted">
+            Username: <strong>{{ employee.username }}</strong>
+        </p>
+
+        <!-- EDIT EMPLOYEE DETAILS -->
+        <form method="POST" class="mb-4">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Changes
+            </button>
+        </form>
+
+        <hr>
+
+        <!-- EMPLOYEE STATUS -->
+        <h5 class="mt-4">Account Status</h5>
+
+        <p>
+            Current status:
+            {% if employee.is_active %}
+                <span class="badge bg-success">Active</span>
+            {% else %}
+                <span class="badge bg-secondary">Inactive</span>
+            {% endif %}
+        </p>
+
+        <form method="POST"
+              action="{% url 'toggle_employee_status' employee.id %}"
+              class="mb-4">
+
+            {% csrf_token %}
+
+            {% if employee.is_active %}
+                <button type="submit" class="btn btn-outline-danger">
+                    Deactivate Employee
+                </button>
+            {% else %}
+                <button type="submit" class="btn btn-outline-success">
+                    Reactivate Employee
+                </button>
+            {% endif %}
+
+        </form>
+
+        <!-- PASSWORD SETUP -->
+        {% if employee.is_active and not employee.has_usable_password %}
+
+            <hr>
+
+            <h5 class="mt-4">Password Setup</h5>
+
+            <p class="text-muted">
+                This employee has not set a password yet.
+            </p>
+
+            <form method="POST"
+                  action="{% url 'resend_setup_email' employee.id %}"
+                  class="mb-4">
+
+                {% csrf_token %}
+
+                <button type="submit" class="btn btn-outline-primary">
+                    Resend Setup Email
+                </button>
+
+            </form>
+
+        {% endif %}
+
+        <hr>
+
+        <a href="{% url 'employee_list' %}"
+           class="btn btn-outline-secondary mt-2">
+            Back to Manage Employees
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Applied Bootstrap styling to the layout and buttons.
+- Added a visual indicator for employee status.
+- Preserved the separate POST forms and CSRF protection.
+- Preserved the condition for displaying **Resend Setup Email**.
+- Kept all existing backend functionality unchanged.
+
+#### Step 3 — Test
+
+{@body const checks=["Employee details display correctly","Save Changes updates employee information","Deactivate Employee works","Reactivate Employee works","Resend Setup Email appears only when eligible","Back to Manage Employees works"]}
+{@body const [done,setDone]=DIL.useState([])}
+
+  {#each checks as check,i}
+    setDone(old=>v?[...old,i]:old.filter(x=>x!==i))} lineThrough={false}>{check}
+  {/each}
+
+Once verified, all three employee management pages will use the shared layout. We'll then continue with **Module 1 error handling and automated tests**.
+
+*Previous: Step 191 (Change accounts/forms.py)  |  Next: Step 193 (Email Error Handling)*
+
+---
