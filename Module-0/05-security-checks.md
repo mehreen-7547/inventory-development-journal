@@ -193,3 +193,89 @@ We use the longer command because your terminal is currently in the **outer fold
 *Previous: Step 39 (Pushing Security Verification Notes)  |  Next: Step 41 (Record and Push Test Results)*
 
 ---
+
+## Step 41: Record and Push Test Results
+
+From now on, I'll provide **journal entry, staging, committing, and pushing commands together** whenever we reach a documentation milestone.
+
+#### Step 51 — Append the test results
+
+Run this in your VS Code PowerShell terminal:
+
+```powershell
+Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Module 0 — Django Automated Testing
+
+### Objective
+Verify that the initial Django setup and proposed SQLite stock-update approach work correctly.
+
+### Command
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
+
+### Command Explanation
+- python: Executes Python.
+- .\: Refers to the current directory.
+- manage.py: Django's management script.
+- test: Runs automated tests.
+- core: Limits testing to the core Django app.
+
+### Tests Performed
+1. Homepage returns HTTP 200.
+2. Django uses the Asia/Kolkata timezone.
+3. SQLite database connection works.
+4. Conditional stock deduction refuses a second sale when stock is exhausted.
+5. A failed database transaction rolls back its stock deduction.
+
+### Actual Results
+Found 5 test(s).
+System check identified no issues (0 silenced).
+Ran 5 tests in 0.084s
+OK
+
+### Important Observations
+- No permanent inventory models or tables have been created yet.
+- Tests 4 and 5 use temporary ExampleProduct models and database tables.
+- Django creates and destroys a separate test database.
+- The existing development database and superuser remain unaffected.
+- The stock test is sequential; it does not establish simultaneous-request safety.
+
+### Errors
+None.
+
+### Status
+PASS — All five Module 0 tests completed successfully.
+'@
+```
+
+#### Step 52 — Stage, commit, and push
+
+Run these three commands in order:
+
+**1. Stage**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**2. Commit**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Module 0 automated test results"
+```
+
+**3. Push**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal push
+```
+
+**Expected result:** The push output ends with `main -> main`.
+
+This updates only your **private development journal**. No changes to the public code repository are necessary because we haven't modified the code.
+
+Once completed, send **done**.
+
+*Previous: Step 40 (Understanding Temporary Test Models)  |  Next: Step 42 (Installing PyTorch)*
+
+---
