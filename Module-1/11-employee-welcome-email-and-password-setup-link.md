@@ -375,3 +375,55 @@ Next, we'll implement an administrator-controlled way to resend an expired emplo
 *Previous: Step 133 (Automatic Welcome Email)  |  Next: Step 135 (Resend Setup Link)*
 
 ---
+
+## Step 135: Resend Setup Link
+
+#### Next: Allow administrators to resend expired setup links
+
+Suppose an employee hasn't set their password within 24 hours. Their original link expires.
+
+Instead of deleting and recreating their account, the administrator should be able to **send another setup email**.
+
+Open **`accounts/admin.py`**.
+
+Inside the existing `CustomUserAdmin` class, add the following code below `save_model()`:
+
+```python
+    actions = ['resend_setup_email']
+
+    @admin.action(description='Resend password setup email')
+    def resend_setup_email(self, request, queryset):
+        count = 0
+
+        for user in queryset:
+            if user.is_active and not user.has_usable_password() and user.email:
+                send_welcome_email(request, user)
+                count += 1
+
+        self.message_user(
+            request,
+            f'Setup email generated for {count} employee(s).'
+        )
+```
+
+#### What does this do?
+
+- `actions` — adds a selectable action to Django Admin.
+- `queryset` — contains the employee accounts selected by the administrator.
+- `has_usable_password()` — checks whether an employee has already created a password.
+- `send_welcome_email()` — generates and sends another setup link.
+- `message_user()` — displays the number of emails generated.
+
+The action skips inactive employees and employees who already have a usable password. Those who have forgotten an existing password should use **Forgot Password** instead.
+
+  **NEW vs CLASS — Django Admin actions**
+
+  `@admin.action` is Django's built-in decorator for adding operations to the Admin interface.
+
+  Unlike `save_model()`, which runs when an account is saved, this action runs only when an administrator explicitly selects it.
+
+**Save the file.** We'll test this action next. For now, emails will still appear in the terminal rather than an inbox.
+
+*Previous: Step 134 (Link Expiration)  |  Next: Step 136 (Employee Management)*
+
+---
