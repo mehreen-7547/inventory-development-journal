@@ -293,3 +293,63 @@ Replace its entire contents with:
 *Previous: Step 181 (Update Change Password Page)  |  Next: Step 183 (Update Reset Confirmation)*
 
 ---
+
+## Step 183: Update Reset Confirmation
+
+#### Step 1 — Replace `password_reset_done.html`
+
+**File:** `templates/accounts/password_reset_done.html`
+
+Replace the entire contents with:
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Password Reset Requested - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+
+        <h2 class="mb-4">Check Your Email</h2>
+
+        <div class="alert alert-info">
+            If an active account exists with that email address,
+            password reset instructions will be sent.
+        </div>
+
+        <p>
+            Please check your email for the reset link.
+        </p>
+
+        <a href="{% url 'login' %}"
+           class="btn btn-outline-primary mt-2">
+            Back to Login
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### Step 2 — What changed?
+
+- Connected the page to `base.html`.
+- Added Bootstrap layout and an information alert.
+- Styled the **Back to Login** link.
+- Preserved the existing confirmation message.
+
+**Important:** The message intentionally does not reveal whether an email address belongs to an account. This helps prevent account enumeration.
+
+#### Step 3 — Test
+
+1. Open **Forgot Password**.
+2. Submit a test email address.
+3. Verify that the **Check Your Email** page appears.
+4. Click **Back to Login** and confirm that it works.
+
+*Previous: Step 182 (Update Forgot Password Page)  |  Next: Step 184 (Update Set New Password Page)*
+
+---
