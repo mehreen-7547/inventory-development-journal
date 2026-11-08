@@ -736,3 +736,136 @@ Your existing external `style.css` can remain unchanged.
 *Previous: Step 154 (External CSS)  |  Next: Step 156 (Change employee_list.html)*
 
 ---
+
+## Step 156: Change employee_list.html
+
+I checked your code. The problem is in the HTML, not the CSS.
+
+**Two changes are missing:**
+1. The employee rows don't have the `selectable` class.
+2. The usernames are plain text instead of links to the Edit Employee page.
+
+Your external stylesheet is linked correctly.
+
+#### Corrected `employee_list.html`
+
+Replace the entire file with:
+
+```html
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Employees</title>
+    <link rel="stylesheet"
+          href="{% static 'accounts/style.css' %}">
+</head>
+
+<body>
+
+    <h2>Manage Employees</h2>
+
+    <p>
+        <a href="{% url 'create_employee' %}">
+            Add New Employee
+        </a>
+    </p>
+
+    {% if edit_mode %}
+
+        <p>Select an employee to edit.</p>
+
+        <a href="{% url 'employee_list' %}">
+            Cancel Edit
+        </a>
+
+    {% else %}
+
+        <p>
+            <a href="{% url 'employee_list' %}?mode=edit">
+                Edit Employee
+            </a>
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+
+        {% for employee in employees %}
+
+        <tr {% if edit_mode %}class="selectable"{% endif %}>
+
+            <td>
+                {% if edit_mode %}
+                    <a class="row-link"
+                       href="{% url 'edit_employee' employee.id %}">
+                        {{ employee.username }}
+                    </a>
+                {% else %}
+                    {{ employee.username }}
+                {% endif %}
+            </td>
+
+            <td>
+                {{ employee.first_name }}
+                {{ employee.last_name }}
+            </td>
+
+            <td>{{ employee.email }}</td>
+
+            <td>{{ employee.get_role_display }}</td>
+
+            <td>
+                {% if employee.is_active %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="{% url 'home' %}">
+            Back to Home
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+Keep your existing `accounts/static/accounts/style.css` unchanged.
+
+#### Test
+
+Open `/employees/?mode=edit`, then:
+
+1. Hover over an employee row. Its background should turn light grey.
+2. Click the row. The custom Edit Employee page should open.
+3. Click **Cancel Edit**. The employee rows should no longer be selectable.
+
+*Previous: Step 155 (Fix Row Selection)  |  Next: Step 157 (Employee Deactivation)*
+
+---
