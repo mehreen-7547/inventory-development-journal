@@ -55,3 +55,42 @@ This also allows the page to display feedback after employee creation, deactivat
 *Previous: Step 164 (Home Template Review)  |  Next: Step 166 (Change edit_employee.html)*
 
 ---
+
+## Step 166: Change edit_employee.html
+
+Your `edit_employee.html` is correct for **editing employee details and deactivating/reactivating accounts**.
+
+However, the **Resend Setup Email** button from Step 275 is missing.
+
+#### 1. Add the missing button
+
+In `templates/accounts/edit_employee.html`, add this immediately after the Deactivate/Reactivate form's closing `</form>`:
+
+```html
+{% if employee.is_active and not employee.has_usable_password %}
+
+    <form method="POST"
+          action="{% url 'resend_setup_email' employee.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Resend Setup Email
+        </button>
+
+    </form>
+
+{% endif %}
+```
+
+#### 2. Regarding Step 279
+
+The success/error messages code belongs in **`templates/accounts/employee_list.html`**, not `edit_employee.html`.
+
+Add it immediately below `<h2>Manage Employees</h2>` in that file.
+
+Everything else in the code you shared can remain unchanged.
+
+*Previous: Step 165 (Employee Management Messages)  |  Next: Step 167 (Message Styling)*
+
+---
