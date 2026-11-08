@@ -315,3 +315,27 @@ It does not upload anything to GitHub yet.
 *Previous: Step 47 (Stage Documentation)  |  Next: Step 49 (Push Documentation)*
 
 ---
+
+## Step 49: Push Documentation
+
+#### Step 71 — Push the commit to GitHub
+
+Run in your VS Code terminal:
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic push origin main
+```
+
+This uploads your committed Module 0 documentation changes to the **public GitHub repository**.
+
+Expected output includes:
+
+```text
+main -> main
+```
+
+If Git reports an error, share the output before continuing.
+
+*Previous: Step 48 (Commit Documentation)  |  Next: Step 50 (Finalize Report)*
+
+---
