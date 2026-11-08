@@ -115,3 +115,25 @@ Send me the output. Then we'll install the required packages.
 *Previous: Step 1 (Check Python)  |  Next: Step 3 (Install Django and required packages)*
 
 ---
+
+## Step 3: Install Django and required packages
+
+**Python 3.12.12 is confirmed.** Your virtual environment is working correctly.
+
+#### Step 3 — Install Django and required packages
+
+Run this in the same terminal:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\requirements.txt
+```
+
+**What this does:** Installs the project's required Python packages inside `.venv`, without affecting your other projects.
+
+Wait until the installation finishes, then send me the last few lines of the terminal output.
+
+Next, we'll configure Django and SQLite.
+
+*Previous: Step 2 (Create the virtual environment)  |  Next: Step 4 (Create the configuration file)*
+
+---
