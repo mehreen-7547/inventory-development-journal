@@ -52,3 +52,66 @@ This will show which Python versions are installed.
 *Next: Step 2 (Create the virtual environment)*
 
 ---
+
+## Step 2: Create the virtual environment
+
+**Python 3.12.12 is already installed**, through Astral. No additional installation is needed.
+
+#### Step 2 — Create the virtual environment
+
+In VS Code, open the folder containing `manage.py`, then run:
+
+```powershell
+py -V:Astral/CPython3.12.12 -m venv .venv
+```
+
+Once it finishes, verify the Python version:
+
+```powershell
+.\.venv\Scripts\python.exe --version
+```
+
+**Expected output:**
+```text
+Python 3.12.12
+```
+
+Send me the output. Next, we'll install the Django dependencies.
+
+#### How we checked it
+
+We just created a **Python virtual environment** called `.venv` for your inventory project.
+
+#### What does that mean?
+
+A virtual environment is an isolated space where we install the Python packages needed for this project.
+
+For example:
+
+- Your computer has Python 3.14 as its default.
+- We created `.venv` using **Python 3.12.12**, which is more suitable for our AI dependencies.
+- Django, PyTorch and other packages will be installed inside `.venv` without interfering with your other Python projects.
+
+In your screenshot, the `.venv` folder contains `Include`, `Lib`, `Scripts` and `pyvenv.cfg`. This indicates the environment was created successfully.
+
+**We haven't installed Django or run the project yet.**
+
+#### Next step — Verify Python
+
+In the same terminal, run:
+
+```powershell
+.\.venv\Scripts\python.exe --version
+```
+
+Expected:
+
+```text
+Python 3.12.12
+```
+
+Send me the output. Then we'll install the required packages.
+
+*Previous: Step 1 (Check Python)  |  Next: Step 3 (Install Django and required packages)*
+
+---
