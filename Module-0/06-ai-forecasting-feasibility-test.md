@@ -214,3 +214,139 @@ Send the complete output. We'll compare their feasibility before selecting a mod
 *Previous: Step 43 (Understanding python -m)  |  Next: Step 45 (Documenting Model Results)*
 
 ---
+
+## Step 45: Documenting Model Results
+
+Both forecasting models passed the feasibility test. Before testing prediction accuracy, we'll save these results in your private development journal.
+
+#### Step 58 — Append, stage, commit and push
+
+Run the following PowerShell commands in order:
+
+**1. Append the journal entry**
+
+```powershell
+Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Module 0 — AI Forecasting Feasibility Test
+
+### Objective
+Determine whether two pretrained forecasting models can run locally on my laptop without training, paid APIs or cloud computing.
+
+### Models
+1. Amazon Chronos-Bolt Tiny
+2. Amazon Chronos-2
+
+### Libraries
+- PyTorch 2.10.0+cpu
+- chronos-forecasting
+- psutil
+
+### Commands
+python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\requirements-ai.txt
+python -c "import torch, chronos, psutil; print('Torch:', torch.__version__)"
+python .\techmindz_inventory_module0_sqlite_atomic\scripts\ai_probe.py --model bolt
+python .\techmindz_inventory_module0_sqlite_atomic\scripts\ai_probe.py
+
+### Test Data
+- 90 days of synthetic daily sales.
+- Forecast horizon: 30 days.
+- Both models received the same history.
+- No model training was performed.
+
+### Results — Both-Model Run
+
+Chronos-Bolt Tiny:
+- Status: PASS
+- Total execution: 7.30 seconds
+- Peak process memory: 363.5 MB
+- Forecast computation: 0.01 seconds
+- First-day P10/P50/P90: 7.37 / 8.42 / 9.39
+
+Chronos-2:
+- Status: PASS
+- Total execution: 59.74 seconds
+- Peak process memory: 811.8 MB
+- Forecast computation: 0.05 seconds
+- First-day P10/P50/P90: 8.85 / 9.03 / 9.15
+
+### Interpretation
+- Both models successfully generated forecasts on CPU.
+- Chronos-Bolt Tiny used less memory in this test.
+- Chronos-2's first run included downloading model weights.
+- Total execution times are therefore not directly comparable.
+- P10, P50 and P90 represent prediction quantiles.
+- The results prove technical feasibility, not forecast accuracy.
+
+### Issues
+PyTorch displayed an informational warning about Windows redirects. Imports and model execution succeeded.
+
+### Next Steps
+- Evaluate prediction accuracy using held-out sales data.
+- Compare models against a simple forecasting baseline.
+- Select a model based on accuracy and resource requirements.
+
+### Status
+PASS — Both pretrained models run locally.
+Model selection remains pending.
+'@
+```
+
+**2. Stage**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**3. Commit**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record AI forecasting feasibility results"
+```
+
+**4. Push**
+
+```powershell
+git -C C:\Users\mehre\projects2026\inventory-development-journal push
+```
+
+#### Next: Step 59 — Forecast Accuracy Testing
+
+We'll create a separate evaluation script that compares predictions with actual held-out values, using metrics such as **MAE (Mean Absolute Error)**.
+
+This will help us choose a forecasting model based on evidence rather than simply whether it runs.
+
+Send **done** after pushing the journal update.
+
+#### How we checked it
+
+We'll follow Claude's instructions and **close Module 0 without expanding its scope**.
+
+The decisions are:
+
+- **Default AI model:** Chronos-Bolt Tiny, because it worked successfully with substantially lower memory usage.
+- **Forecast accuracy testing:** Deferred to Module 8, including interval coverage.
+- **Module 1:** Not started until the architecture and permissions are reviewed and approved.
+
+I also checked your public GitHub repository and confirmed that `config/settings.py` already has `TIME_ZONE = "Asia/Kolkata"` and `USE_TZ = True`. The separate, pinned requirements files, `.env.example`, and README are present. The README still needs its completion status updated. A final Git history security audit remains necessary before tagging.
+
+#### Step 59 — Open the Module 0 report
+
+Run this command in your current VS Code PowerShell terminal:
+
+```powershell
+code .\techmindz_inventory_module0_sqlite_atomic\MODULE0_REPORT.md
+```
+
+This opens the existing report for editing.
+
+We'll preserve Claude's required **a–h report structure**, replace the pending-verification statements with actual results, and record the Chronos-Bolt Tiny recommendation.
+
+After the report and README are updated, we'll verify the changes, commit them, review the planned app structure and permission table, and only then create the `m0-complete` tag.
+
+Tell me when the report is open.
+
+*Previous: Step 44 (Installing AI Dependencies)  |  Next: Step 46 (Update Module 0 Report)*
+
+---
