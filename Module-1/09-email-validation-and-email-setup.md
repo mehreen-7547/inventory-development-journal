@@ -105,3 +105,37 @@ We retain `REQUIRED_FIELDS` because it serves a separate purpose during superuse
 *Previous: Step 108 (REQUIRED_FIELDS)  |  Next: Step 110 (Create Migration)*
 
 ---
+
+## Step 110: Create Migration
+
+#### Next: Create the database migration
+
+We've updated `CustomUser` to require unique email addresses. Now Django needs to prepare the corresponding database change.
+
+Open your VS Code terminal and run:
+
+```bash
+python manage.py makemigrations accounts
+```
+
+**What happens?**
+
+Django compares your updated `models.py` with the previous migration and creates a new migration file.
+
+**Expected output (approximately):**
+
+```text
+Migrations for 'accounts':
+  accounts/migrations/0002_alter_customuser_email.py
+    ~ Alter field email on customuser
+```
+
+The migration filename may differ.
+
+**Important:** This command creates the migration instructions. It does not apply them to the database yet.
+
+Don't run `migrate` yet. We'll do that next.
+
+*Previous: Step 109 (Enforce Email Validation)  |  Next: Step 111 (Apply Migration)*
+
+---
