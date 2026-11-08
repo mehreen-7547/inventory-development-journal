@@ -159,3 +159,49 @@ Next, we'll add the styles to `accounts/static/accounts/style.css`.
 *Previous: Step 166 (Change edit_employee.html)  |  Next: Step 168 (Change employee_list.html)*
 
 ---
+
+## Step 168: Change employee_list.html
+
+Your code is correct, but the **messages section is missing**. Add it immediately below `<h2>Manage Employees</h2>`.
+
+#### Add this to `employee_list.html`
+
+```html
+{% if messages %}
+    {% for message in messages %}
+        <p class="message {{ message.tags }}">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}
+```
+
+The beginning of your `<body>` should now look like this:
+
+```html
+<body>
+
+    <h2>Manage Employees</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message {{ message.tags }}">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <p>
+        <a href="{% url 'create_employee' %}">
+            Add New Employee
+        </a>
+    </p>
+```
+
+**Everything else in your file can remain unchanged.**
+
+Next, we'll style these messages in the existing external CSS file.
+
+*Previous: Step 167 (Message Styling)  |  Next: Step 169 (Message Styling CSS)*
+
+---
