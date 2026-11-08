@@ -203,3 +203,124 @@ That is why we need the three nested functions: one receives the allowed roles, 
 *Previous: Step 100 (Role Security)  |  Next: Step 102 (Complete Execution Flow)*
 
 ---
+
+## Step 102: Complete Execution Flow
+
+You're very close, but there is **one important mistake** in your understanding: the three functions do not execute one after another and pass their results back up the chain.
+
+Instead, **the first two functions prepare the third function. The third function executes later, when someone visits the page.**
+
+Let's connect everything, including who passes the arguments.
+
+#### First, look at where we use the decorator
+
+```python
+@role_required('admin', 'manager')
+def inventory_report(request):
+    return render(request, 'inventory/report.html')
+```
+
+When Python encounters this code, it does something equivalent to:
+
+```python
+original_view = inventory_report
+
+step1 = role_required('admin', 'manager')
+
+step2 = step1(original_view)
+
+inventory_report = step2
+```
+
+This is the connection you were missing.
+
+**First:** Python calls `role_required('admin', 'manager')`. That function creates `decorator` and executes `return decorator`. So `step1` now refers to the `decorator` function.
+
+**Second:** Python calls `step1(original_view)`. Since `step1` is actually `decorator`, Python is now calling:
+
+```python
+decorator(original_view)
+```
+
+That's how `decorator` receives `view_func`. **Python automatically passes the original view function to the decorator because we used the `@` syntax.** It receives the actual function object, not merely its name.
+
+Inside `decorator`, Python creates `wrapper`, applies the two decorators above it, and executes `return wrapper`.
+
+**Third:** The returned, protected wrapper is assigned to the name `inventory_report`.
+
+At this point, the preparation is finished. Neither `role_required` nor `decorator` needs to execute again for each visitor.
+
+#### Now, what about `@login_required` and `@wraps`?
+
+Look at this portion:
+
+```python
+@login_required(login_url='/login/')
+@wraps(view_func)
+def wrapper(request, *args, **kwargs):
+    if request.user.role not in roles:
+        raise PermissionDenied
+
+    return view_func(request, *args, **kwargs)
+```
+
+These are also decorators! They work on the same principle.
+
+- **`@wraps(view_func)`** preserves information about the original view, such as its name, on `wrapper`.
+- **`@login_required(...)`** adds another protective layer around `wrapper`. It checks whether the visitor is logged in before allowing the role check to execute.
+
+Python applies `@wraps` first, then `@login_required`.
+
+So our final protected view has two security checks: login first, then role.
+
+#### Finally, who gives `wrapper` its `request`?
+
+**Django does.**
+
+Imagine a Manager opens `/inventory-report/` in the browser.
+
+Django receives an HTTP request, checks `urls.py`, finds the view assigned to that URL, and calls it with the request object.
+
+Remember that `inventory_report` now refers to the protected wrapper.
+
+The execution looks like this:
+
+    **Browser requests `/inventory-report/`**
+
+    **Django calls the protected view with `request`**
+
+    **`login_required` checks login**
+
+    **`wrapper` checks the user's role**
+
+    **`view_func(request, ...)` executes the original view**
+
+    **HTTP response returns to Django**
+
+The `*args` and `**kwargs` are additional positional and keyword arguments that Django may pass from the URL. For example, a URL containing a product ID might supply `product_id=5`. The wrapper accepts those arguments and passes them unchanged to the original view.
+
+#### Now, let's correct your original explanation
+
+You said:
+
+> Wrapper gives its result back to decorator, decorator gives its result back to role_required, and role_required gives its result back to whoever called it.
+
+**That part is incorrect.**
+
+The actual sequence is:
+
+**During preparation:**
+
+`role_required()` returns the `decorator` function → `decorator()` returns the protected `wrapper` function → Python assigns that function to the view's name.
+
+**During an HTTP request:**
+
+Django calls the protected function → `wrapper` calls the original view → the original view returns its response → `wrapper` returns that response through the login-check layer to Django.
+
+The outer functions have already finished. The wrapper doesn't return its response to them.
+
+**The key distinction:** Nesting functions in the code does not mean their execution and return values follow the same nesting. Each `return` goes back to the caller of that particular function.
+
+*Previous: Step 101 (Understanding Execution Flow)  |  Next: Step 103 (Apply Role Security)*
+
+---
