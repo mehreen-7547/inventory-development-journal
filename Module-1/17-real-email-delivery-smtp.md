@@ -126,3 +126,83 @@ Next, we'll send a real test email and verify that it arrives in your Gmail inbo
 *Previous: Step 170 (Real Email Configuration)  |  Next: Step 172 (Install python-dotenv)*
 
 ---
+
+## Step 172: Install python-dotenv
+
+Yes. We can save them permanently for development using a **`.env` file**. This is preferable to entering credentials every time you open PowerShell.
+
+The file stays on your computer and is excluded from GitHub.
+
+#### Step 1: Install `python-dotenv`
+
+In your VS Code terminal, run:
+
+```powershell
+python -m pip install python-dotenv
+```
+
+#### Step 2: Create a `.env` file
+
+Create it in your project root, alongside `manage.py`.
+
+    **techmindz_inventory_module0_sqlite_atomic/**
+
+      manage.py
+
+      **.env**
+
+      .gitignore
+
+      config/
+
+Inside `.env`, add:
+
+```dotenv
+EMAIL_MODE=smtp
+EMAIL_HOST_USER=mehreen7547@gmail.com
+EMAIL_HOST_PASSWORD=YOUR_16_CHARACTER_APP_PASSWORD
+```
+
+Replace the placeholder with your Gmail App Password, without spaces.
+
+#### Step 3: Update `config/settings.py`
+
+At the top, add:
+
+```python
+from dotenv import load_dotenv
+```
+
+Find the existing `BASE_DIR` definition:
+
+```python
+BASE_DIR = Path(__file__).resolve().parent.parent
+```
+
+Immediately below it, add:
+
+```python
+load_dotenv(BASE_DIR / '.env')
+```
+
+Keep the existing SMTP configuration using `os.getenv()` unchanged.
+
+#### Step 4: Protect your credentials
+
+Open `.gitignore` and add:
+
+```gitignore
+.env
+```
+
+This prevents Git from adding the file in future commits, provided it wasn't already tracked. You can verify with `git status --ignored --short .env` — it should show `!! .env`.
+
+**Important:** `.env` stores credentials as plain text. Keep it private, never upload it, and don't share its contents.
+
+#### Result
+
+Django will automatically read the credentials whenever it starts, including after restarting VS Code or your computer. You won't need to re-enter them in PowerShell.
+
+*Previous: Step 171 (Configure SMTP Credentials)  |  Next: Step 173 (Fix Email Backend)*
+
+---
