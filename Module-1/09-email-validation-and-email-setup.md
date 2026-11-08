@@ -171,3 +171,78 @@ After this, the database will enforce unique email addresses.
 *Previous: Step 110 (Create Migration)  |  Next: Step 112 (Email Configuration)*
 
 ---
+
+## Step 112: Email Configuration
+
+**Email uniqueness test passed.**
+
+Django correctly rejected `manager1@example.com` because another account already uses it.
+
+You can leave the form without saving. The invalid email was not stored.
+
+#### Next: Configure local email testing
+
+Open **`config/settings.py`** and add these lines at the bottom:
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+```
+
+**What do these settings mean?**
+
+- `EMAIL_BACKEND` tells Django how to handle outgoing emails.
+- `console.EmailBackend` prints emails in the terminal instead of actually sending them.
+- `DEFAULT_FROM_EMAIL` specifies the sender address.
+
+  NEW vs CLASS — Email backend
+  This introduces Django's built-in email configuration. It uses the same `VARIABLE = value` syntax as other settings in `settings.py`.
+
+**For now:** Save the file. We'll test sending an email in the next step.
+
+#### How we checked it
+
+**No, you don't need to stop the server.**
+
+Keep Django running in its current terminal.
+
+1. Open a **new terminal** in VS Code using the `+` button in the Terminal panel.
+2. Make sure your virtual environment `(.venv)` is active.
+3. Run:
+
+```bash
+python manage.py shell
+```
+
+You can now test email sending while the Django server continues running in the first terminal.
+
+#### How we checked it
+
+You're currently **one folder above** the Django project directory.
+
+First, run:
+
+```powershell
+cd techmindz_inventory_module0_sqlite_atomic
+```
+
+Your terminal should then show:
+
+```text
+(.venv) PS C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic>
+```
+
+Now run:
+
+```powershell
+python manage.py shell
+```
+
+This opens Django's Python shell so you can test email sending.
+
+**Keep your Django server running in the other terminal.**
+
+*Previous: Step 111 (Apply Migration)  |  Next: Step 113 (Forgot Password)*
+
+---
