@@ -206,3 +206,95 @@ Django will automatically read the credentials whenever it starts, including aft
 *Previous: Step 171 (Configure SMTP Credentials)  |  Next: Step 173 (Fix Email Backend)*
 
 ---
+
+## Step 173: Fix Email Backend
+
+**Found the problem. Django is still using the Console Email Backend, not Gmail SMTP.**
+
+Your output confirms this:
+
+```text
+From: no-reply@example.com
+```
+
+Also, the entire email was printed in your terminal. That is console-backend behaviour.
+
+The `1` means Django successfully processed one email using the configured backend. **It does not mean Gmail sent it.**
+
+#### Step 1: Check `config/settings.py`
+
+At the top, ensure you have:
+
+```python
+import os
+from dotenv import load_dotenv
+```
+
+Immediately below your existing `BASE_DIR` definition:
+
+```python
+load_dotenv(BASE_DIR / '.env')
+```
+
+Then verify your email configuration contains:
+
+```python
+EMAIL_MODE = os.getenv('EMAIL_MODE', 'console')
+
+if EMAIL_MODE == 'smtp':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+```
+
+Make sure your `.env` file is saved alongside `manage.py` and contains `EMAIL_MODE=smtp`.
+
+#### Step 2: Verify
+
+Exit Django Shell:
+
+```python
+exit()
+```
+
+Start a new Django Shell:
+
+```powershell
+python manage.py shell
+```
+
+Run:
+
+```python
+from django.conf import settings
+
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+Expected:
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+mehreen7547@gmail.com
+```
+
+If it still shows `console`, an existing PowerShell environment variable may be overriding your `.env` file.
+
+**Do not send another test email until these three values are correct.**
+
+*Previous: Step 172 (Install python-dotenv)  |  Next: Step 174 (Fix the email configuration)*
+
+---
