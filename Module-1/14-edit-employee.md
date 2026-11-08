@@ -188,3 +188,52 @@ Next, we'll connect the Edit Employee URL.
 *Previous: Step 146 (Edit Employee View)  |  Next: Step 148 (Edit Employee URL)*
 
 ---
+
+## Step 148: Edit Employee URL
+
+#### Next: Connect the Edit Employee page
+
+Open **`accounts/urls.py`**.
+
+Add this inside your existing `urlpatterns` list:
+
+```python
+path(
+    'employees/edit/<int:employee_id>/',
+    views.edit_employee,
+    name='edit_employee'
+),
+```
+
+#### What does this URL mean?
+
+For example:
+
+`http://127.0.0.1:8000/employees/edit/3/`
+
+Django extracts `3` from the URL and passes it to our view as `employee_id`.
+
+  **NEW vs CLASS — `<int:employee_id>`**
+
+  This is a Django URL path converter.
+
+  - `int` means the value must be an integer.
+  - `employee_id` is the variable name passed to the view.
+
+  This allows one view to edit different employees.
+
+#### Test
+
+1. Log in as Admin.
+2. Open `/employees/edit/3/`, replacing `3` with an existing employee's ID.
+3. Change the employee's first name or role.
+4. Click **Save Changes**.
+5. Confirm the changes appear in `/employees/`.
+
+Also verify that Sales Staff cannot access the edit page (HTTP 403).
+
+**Note:** The employee list currently displays usernames, not database IDs. You can find an employee's ID in Django Admin. We'll add an **Edit** link beside each employee next.
+
+*Previous: Step 147 (Edit Employee Template)  |  Next: Step 149 (Employee Edit Link)*
+
+---
