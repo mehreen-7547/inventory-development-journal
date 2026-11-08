@@ -116,3 +116,28 @@ Add:
 *Previous: Step 74 (models.py vs admin.py)  |  Next: Step 76 (Login URL)*
 
 ---
+
+## Step 76: Login URL
+
+#### Next: Create `accounts/urls.py`
+
+Inside the existing `accounts` folder, create a file named `urls.py`.
+
+Paste:
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+]
+```
+
+**What this does:** Connects the URL `/login/` to our `loginpage()` function in `accounts/views.py`.
+
+**Expected result:** File saves successfully. Next, we'll connect these URLs to the main project.
+
+*Previous: Step 75 (Login Page)  |  Next: Step 77 (Connect Login URL)*
+
+---
