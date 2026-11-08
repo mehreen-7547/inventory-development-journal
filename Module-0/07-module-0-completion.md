@@ -359,3 +359,27 @@ Save using `Ctrl + S`.
 *Previous: Step 49 (Push Documentation)  |  Next: Step 51 (Finalize README)*
 
 ---
+
+## Step 51: Finalize README
+
+#### Step 73 — Update the README completion status
+
+Open `README_M0.md` and make two changes.
+
+**1. Replace the Status line with:**
+
+```markdown
+**Status:** Module 0 implementation, local verification, documentation, and basic Git security checks completed. Completion tag pending. Architecture and permissions approval required before Module 1.
+```
+
+**2. Replace item 5 under Module 0 acceptance checks with:**
+
+```markdown
+5. PASS — Module 0 verification, documentation, and basic security checks completed. PENDING — Create the `m0-complete` tag and obtain architecture and permissions approval before Module 1.
+```
+
+Save with `Ctrl + S`.
+
+*Previous: Step 50 (Finalize Report)  |  Next: Step 52 (Stage Final Updates)*
+
+---
