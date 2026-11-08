@@ -614,3 +614,35 @@ We won't change the database until this is confirmed.
 *Previous: Step 65 (AUTH_USER_MODEL)  |  Next: Step 67 (Migration Preparation)*
 
 ---
+
+## Step 67: Migration Preparation
+
+Understood. From now on:
+
+- **Next** means you completed the previous instruction and received the expected output.
+- If something goes wrong, you'll share the actual output.
+- I won't repeatedly ask you to confirm successful commands.
+
+#### Next: Generate the CustomUser migration
+
+Run this in the terminal:
+
+```powershell
+python manage.py makemigrations accounts
+```
+
+**Expected output:**
+
+```text
+Migrations for 'accounts':
+  accounts\migrations\0001_initial.py
+    + Create model CustomUser
+```
+
+This generates the instructions for creating our custom user table. **It does not create the table yet.**
+
+Do not run `migrate` or delete `db.sqlite3` yet. We'll handle the approved database reset separately.
+
+*Previous: Step 66 (Django Authentication)  |  Next: Step 68 (Database Reset)*
+
+---
