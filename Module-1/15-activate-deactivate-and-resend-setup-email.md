@@ -17,6 +17,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 ### Find a step
 
 - [Step 157: Employee Deactivation](#step-157)
+- [Step 158: Employee Status URL](#step-158)
 
 ---
 
@@ -93,3 +94,44 @@ Not tested yet at Step 157. For Step 157, the proposed way to check employee dea
 #### Next
 
 [Step 156: Correct employee row selection](../Module-1/14-edit-employee.md#step-156) · [Step 158: Employee Status URL](#step-158)
+
+
+---
+
+<a id="step-158"></a>
+
+### Step 158: Employee Status URL
+
+#### Before this step
+
+The activate/deactivate function needed an address that specified whose account should change. Immediately before this, Step 157 dealt with employee deactivation; the work here continued the same part of the application.
+
+#### What we did and why
+
+The URL carries the employee ID to the protected view. The view performs the database change; the URL only helps Django find it.
+
+#### Code and commands
+
+**Step 158, block 1.** This code sample or terminal command was used while working on employee status url. The content below remains in its original sequence for Step 158, block 1.
+
+```python
+path(
+    'employees/status/<int:employee_id>/',
+    views.toggle_employee_status,
+    name='toggle_employee_status'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 158, employee status url involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `path(` begins a URL rule connecting a browser address with the function that answers it. `name='toggle_employee_status'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 158. For Step 158, the proposed way to check employee status url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Development continued in Step 159 before a complete result could be claimed.
+
+#### Next
+
+[Step 157: Employee Deactivation](#step-157) · [Step 159: Deactivate/Reactivate Button](#step-159)
