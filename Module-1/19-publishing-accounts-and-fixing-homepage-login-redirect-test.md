@@ -1,6 +1,6 @@
 # MODULE 1 — Employee accounts
 
-## Chapter 19: Safeguard the baseline and correct an outdated test (Steps 195–203)
+## Chapter 19: Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test (Steps 195–203)
 
 ### Before we begin
 

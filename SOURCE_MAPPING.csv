@@ -193,12 +193,12 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 192,1096,323,1,Shared base template and page styling,Update Edit Employee
 193,1098,324,1,Shared base template and page styling,Email Error Handling
 194,1100,325,1,Shared base template and page styling,Resend Email Error Handling
-195,,326–328,1,Safeguard the baseline and correct an outdated test,Preserve the working project before Git changes
-196,,329,1,Safeguard the baseline and correct an outdated test,Choose one baseline commit instead of replaying old work
-197,,330,1,Safeguard the baseline and correct an outdated test,Check that local secrets are excluded
-198,,331–333,1,Safeguard the baseline and correct an outdated test,Stage and review the accounts implementation
-199,,334,1,Safeguard the baseline and correct an outdated test,Inspect staged code for possible credentials
-200,,335–339,1,Safeguard the baseline and correct an outdated test,Commit and publish the Module 1 baseline
-201,,340–341,1,Safeguard the baseline and correct an outdated test,Discover why an old home-page test failed
-202,,342–344,1,Safeguard the baseline and correct an outdated test,Test the intended login redirect
-203,,345–347,1,Safeguard the baseline and correct an outdated test,Commit and push the corrected test
+195,,326–328,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Preserve the working project before Git changes
+196,,329,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Choose one baseline commit instead of replaying old work
+197,,330,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Check that local secrets are excluded
+198,,331–333,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Stage and review the accounts implementation
+199,,334,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Inspect staged code for possible credentials
+200,,335–339,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Commit and publish the Module 1 baseline
+201,,340–341,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Discover why an old home-page test failed
+202,,342–344,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Test the intended login redirect
+203,,345–347,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Commit and push the corrected test

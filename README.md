@@ -44,4 +44,4 @@ These are **203 development steps in 26 chapters**, rewritten so you can underst
 - [Chapter 18: Shared base template and page styling](Module-1/18-shared-base-template-and-page-styling.md) — Steps 179–194
 
 
-- [Chapter 19: Safeguard the baseline and correct an outdated test](Module-1/19-baseline-and-homepage-test.md) — Steps 195–203
+- [Chapter 19: Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md) — Steps 195–203

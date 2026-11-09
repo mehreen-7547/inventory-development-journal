@@ -198,12 +198,12 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 192 | M1 · Ch 18 | [Update Edit Employee](Module-1/18-shared-base-template-and-page-styling.md#step-192) |
 | 193 | M1 · Ch 18 | [Email Error Handling](Module-1/18-shared-base-template-and-page-styling.md#step-193) |
 | 194 | M1 · Ch 18 | [Resend Email Error Handling](Module-1/18-shared-base-template-and-page-styling.md#step-194) |
-| 195 | M1 · Ch 19 | [Preserve the working project before Git changes](Module-1/19-baseline-and-homepage-test.md#step-195) |
-| 196 | M1 · Ch 19 | [Choose one baseline commit instead of replaying old work](Module-1/19-baseline-and-homepage-test.md#step-196) |
-| 197 | M1 · Ch 19 | [Check that local secrets are excluded](Module-1/19-baseline-and-homepage-test.md#step-197) |
-| 198 | M1 · Ch 19 | [Stage and review the accounts implementation](Module-1/19-baseline-and-homepage-test.md#step-198) |
-| 199 | M1 · Ch 19 | [Inspect staged code for possible credentials](Module-1/19-baseline-and-homepage-test.md#step-199) |
-| 200 | M1 · Ch 19 | [Commit and publish the Module 1 baseline](Module-1/19-baseline-and-homepage-test.md#step-200) |
-| 201 | M1 · Ch 19 | [Discover why an old home-page test failed](Module-1/19-baseline-and-homepage-test.md#step-201) |
-| 202 | M1 · Ch 19 | [Test the intended login redirect](Module-1/19-baseline-and-homepage-test.md#step-202) |
-| 203 | M1 · Ch 19 | [Commit and push the corrected test](Module-1/19-baseline-and-homepage-test.md#step-203) |
+| 195 | M1 · Ch 19 | [Preserve the working project before Git changes](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-195) |
+| 196 | M1 · Ch 19 | [Choose one baseline commit instead of replaying old work](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-196) |
+| 197 | M1 · Ch 19 | [Check that local secrets are excluded](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-197) |
+| 198 | M1 · Ch 19 | [Stage and review the accounts implementation](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-198) |
+| 199 | M1 · Ch 19 | [Inspect staged code for possible credentials](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-199) |
+| 200 | M1 · Ch 19 | [Commit and publish the Module 1 baseline](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-200) |
+| 201 | M1 · Ch 19 | [Discover why an old home-page test failed](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-201) |
+| 202 | M1 · Ch 19 | [Test the intended login redirect](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-202) |
+| 203 | M1 · Ch 19 | [Commit and push the corrected test](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-203) |
