@@ -18,6 +18,7 @@ When we say “console email,” we mean Django prints the message where we ran 
 
 - [Step 108: Understand REQUIRED_FIELDS](#step-108)
 - [Step 109: Enforce Email Validation](#step-109)
+- [Step 110: Create Migration](#step-110)
 
 ---
 
@@ -156,3 +157,52 @@ Not tested yet at Step 109. For Step 109, the proposed way to check enforce emai
 #### Next
 
 [Step 108: Understand REQUIRED_FIELDS](#step-108) · [Step 110: Create Migration](#step-110)
+
+
+---
+
+<a id="step-110"></a>
+
+### Step 110: Create Migration
+
+#### Before this step
+
+We changed the Python model, but the database table still had its old rules. Immediately before this, Step 109 dealt with enforce email validation; the work here continued the same part of the application.
+
+#### What we did and why
+
+makemigrations compares the model with the previous database structure and writes a migration file explaining the change. It prepares the database work; it does not apply it yet.
+
+#### Code and commands
+
+**Step 110, block 1.** This code sample or terminal command was used while working on create migration. The content below remains in its original sequence for Step 110, block 1.
+
+```bash
+python manage.py makemigrations accounts
+```
+
+**Step 110, block 2.** This output was used while working on create migration. The content below remains in its original sequence for Step 110, block 2.
+
+```text
+Migrations for 'accounts':
+  accounts/migrations/0002_alter_customuser_email.py
+    ~ Alter field email on customuser
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 110, create migration involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py makemigrations accounts` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 3 lines).** In Step 110, create migration involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 110, output block 2 showed the result rather than another command. Its visible value was `Migrations for 'accounts':`, which mattered for create migration.
+
+#### How we checked it
+
+Not tested yet at Step 110. For Step 110, the proposed way to check create migration was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 111 before a complete result could be claimed.
+
+#### Next
+
+[Step 109: Enforce Email Validation](#step-109) · [Step 111: Apply Migration](#step-111)
