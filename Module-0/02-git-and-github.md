@@ -23,6 +23,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 11: Connect your local project to GitHub](#step-11)
 - [Step 12: Push your first commit to GitHub](#step-12)
 - [Step 13: Create a separate local journal folder](#step-13)
+- [Step 14: Initialize Git for the private journal](#step-14)
 
 ---
 
@@ -378,3 +379,40 @@ Not tested yet at Step 13. For Step 13, the proposed way to check create a separ
 #### Next
 
 [Step 12: Push your first commit to GitHub](#step-12) · [Step 14: Initialize Git for the private journal](#step-14)
+
+
+---
+
+<a id="step-14"></a>
+
+### Step 14: Initialize Git for the private journal
+
+#### Before this step
+
+The journal folder existed, but it did not yet have its own change history. Immediately before this, Step 13 dealt with create a separate local journal folder; the work here continued the same part of the application.
+
+#### What we did and why
+
+Running Git initialization inside the journal starts a second, independent history. Saving the journal does not automatically save or change the Django application.
+
+#### Code and commands
+
+**Step 14, block 1.** This code sample or terminal command was used while working on initialize git for the private journal. The content below remains in its original sequence for Step 14, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal init -b main
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 14, initialize git for the private journal involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal init -b m` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 14. For Step 14, the proposed way to check initialize git for the private journal was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 15 before a complete result could be claimed.
+
+#### Next
+
+[Step 13: Create a separate local journal folder](#step-13) · [Step 15: Connect it to GitHub](#step-15)
