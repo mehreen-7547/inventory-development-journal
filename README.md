@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **223 development steps in 29 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **231 development steps in 30 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -48,3 +48,4 @@ These are **223 development steps in 29 chapters**, rewritten so you can underst
 - [Chapter 20: Testing Django Login, Logout, Inactive Accounts and Authentication Sessions](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md) — Steps 204–209
 - [Chapter 21: Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails](Module-1/21-testing-employee-management-and-admin-permissions.md) — Steps 210–216
 - [Chapter 22: Testing Unauthorized Employee Changes, Form Validation and Account Reactivation](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md) — Steps 217–223
+- [Chapter 23: Testing Password Changes, Password Recovery and Account Setup Emails](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md) — Steps 224–231

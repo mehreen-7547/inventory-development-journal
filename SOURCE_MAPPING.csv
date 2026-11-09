@@ -222,3 +222,11 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 221,,358–360,1,Testing Unauthorized Employee Changes, Form Validation and Account Reactivation,Preserve existing emails and enforce setup-email rules
 222,,358–360,1,Testing Unauthorized Employee Changes, Form Validation and Account Reactivation,Run all 35 tests in an isolated Django database
 223,,358–360,1,Testing Unauthorized Employee Changes, Form Validation and Account Reactivation,Commit the passing tests and verify the GitHub branch
+224,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Inspect password-change, reset and email source files
+225,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Add test imports and isolate email delivery
+226,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Check password-change access and successful session preservation
+227,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Reject an incorrect current password
+228,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Test password-reset requests and unknown addresses
+229,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Prevent recovery emails for inactive accounts
+230,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Validate the account-setup token and welcome-email content
+231,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Run the full 45-test suite and verify the GitHub commit

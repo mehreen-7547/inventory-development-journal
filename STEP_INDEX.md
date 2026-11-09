@@ -227,3 +227,11 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 221 | M1 · Ch 22 | [Preserve existing emails and enforce setup-email rules](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-221) |
 | 222 | M1 · Ch 22 | [Run all 35 tests in an isolated Django database](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-222) |
 | 223 | M1 · Ch 22 | [Commit the passing tests and verify the GitHub branch](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-223) |
+| 224 | M1 · Ch 23 | [Inspect password-change, reset and email source files](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-224) |
+| 225 | M1 · Ch 23 | [Add test imports and isolate email delivery](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-225) |
+| 226 | M1 · Ch 23 | [Check password-change access and successful session preservation](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-226) |
+| 227 | M1 · Ch 23 | [Reject an incorrect current password](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-227) |
+| 228 | M1 · Ch 23 | [Test password-reset requests and unknown addresses](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-228) |
+| 229 | M1 · Ch 23 | [Prevent recovery emails for inactive accounts](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-229) |
+| 230 | M1 · Ch 23 | [Validate the account-setup token and welcome-email content](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-230) |
+| 231 | M1 · Ch 23 | [Run the full 45-test suite and verify the GitHub commit](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-231) |
