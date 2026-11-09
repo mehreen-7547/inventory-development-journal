@@ -73,3 +73,4 @@
 | 69 | Module 1, Chapter 2 | [ Database File Locked ](Module-1/02-database-setup-and-admin-site.md#step-69) |
 | 70 | Module 1, Chapter 2 | [ Create Database Tables ](Module-1/02-database-setup-and-admin-site.md#step-70) |
 | 71 | Module 1, Chapter 2 | [ Create Administrator ](Module-1/02-database-setup-and-admin-site.md#step-71) |
+| 72 | Module 1, Chapter 2 | [ Register CustomUser ](Module-1/02-database-setup-and-admin-site.md#step-72) |

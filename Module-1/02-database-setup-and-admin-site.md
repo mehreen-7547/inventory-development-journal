@@ -20,6 +20,7 @@ This is an early-development correction. On a live system, deleting the database
 - [Step 69: Database File Locked](#step-69)
 - [Step 70: Create Database Tables](#step-70)
 - [Step 71: Create Administrator](#step-71)
+- [Step 72: Register CustomUser](#step-72)
 
 ---
 
@@ -197,3 +198,64 @@ Not tested yet at Step 71. For Step 71, the proposed way to check create adminis
 #### Next
 
 [Step 70: Create Database Tables](#step-70) · [Step 72: Register CustomUser](#step-72)
+
+
+---
+
+<a id="step-72"></a>
+
+### Step 72: Register CustomUser
+
+#### Before this step
+
+Our new user model existed, but the built-in Django admin page needed to be told how to show it. Immediately before this, Step 71 dealt with create administrator; the work here continued the same part of the application.
+
+#### What we did and why
+
+accounts/admin.py controls how records appear in Django Admin. Registering the model lets an administrator view and edit user records there; it does not change the database fields.
+
+#### Code and commands
+
+**Step 72, block 1.** This code sample or terminal command was used while working on register customuser. The content below remains in its original sequence for Step 72, block 1.
+
+```python
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+
+
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+```
+
+#### How the code works
+
+**Block 1 (python, 16 lines).** In Step 72, register customuser involved `accounts/admin.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.contrib import admin` makes a Python function, class or module available to the code that follows. `from django.contrib.auth.admin import UserAdmin` makes a Python function, class or module available to the code that follows. `from .models import CustomUser` makes a Python function, class or module available to the code that follows. `class CustomUserAdmin(UserAdmin):` declares a Python class, grouping related data or behaviour together.
+
+**Lines 8–14:** `add_fieldsets = UserAdmin.add_fieldsets + (` sets the named value used by the next operation in this file.
+
+**Lines 15–16:** The lines starting with `admin.site.register(CustomUser, CustomUserAdmin)` supply the values or page content for this part of accounts/admin.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 72. For Step 72, the proposed way to check register customuser was to revisit `accounts/admin.py` and run the corresponding command or feature to see its result. Step 72 did not establish a successful outcome for register customuser.
+
+#### Next
+
+[Step 71: Create Administrator](#step-71) · [Step 73: Login View](../Module-1/03-login.md#step-73)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **database setup and admin site** was needed at this point, and describe what the application did differently after the final step of this chapter.
