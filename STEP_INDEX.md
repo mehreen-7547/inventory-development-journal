@@ -124,3 +124,4 @@
 | 120 | Module 1, Chapter 10 | [ Connect Email Subject ](Module-1/10-forgot-and-reset-password.md#step-120) |
 | 121 | Module 1, Chapter 10 | [ Set New Password Page ](Module-1/10-forgot-and-reset-password.md#step-121) |
 | 122 | Module 1, Chapter 10 | [ Reset Link URL ](Module-1/10-forgot-and-reset-password.md#step-122) |
+| 123 | Module 1, Chapter 10 | [ Password Reset Success Page ](Module-1/10-forgot-and-reset-password.md#step-123) |

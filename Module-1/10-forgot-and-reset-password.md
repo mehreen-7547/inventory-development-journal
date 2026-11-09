@@ -26,6 +26,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 120: Connect Email Subject](#step-120)
 - [Step 121: Set New Password Page](#step-121)
 - [Step 122: Reset Link URL](#step-122)
+- [Step 123: Password Reset Success Page](#step-123)
 
 ---
 
@@ -584,3 +585,61 @@ Not tested yet at Step 122. For Step 122, the proposed way to check reset link u
 #### Next
 
 [Step 121: Set New Password Page](#step-121) · [Step 123: Password Reset Success Page](#step-123)
+
+
+---
+
+<a id="step-123"></a>
+
+### Step 123: Password Reset Success Page
+
+#### Before this step
+
+After changing the password, the person needed a clear “finished” screen. Immediately before this, Step 122 dealt with reset link url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The completion template tells them the reset has succeeded and normally gives a way back to login. It does not repeat the password or reveal it on screen.
+
+#### Code and commands
+
+**Step 123, block 1.** This code sample or terminal command was used while working on password reset success page. The content below remains in its original sequence for Step 123, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Complete</title>
+</head>
+<body>
+
+    <h2>Password Reset Successful</h2>
+
+    <p>
+        Your password has been reset successfully.
+        You can now log in using your new password.
+    </p>
+
+    <a href="{% url 'login' %}">Go to Login</a>
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 18 lines).** In Step 123, password reset success page involved `templates/accounts/password_reset_complete.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Password Reset Complete</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<h2>Password Reset Successful</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–18:** `<a href="{% url 'login' %}">Go to Login</a>` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 123. For Step 123, the proposed way to check password reset success page was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/password_reset_complete.html`. Development continued in Step 124 before a complete result could be claimed.
+
+#### Next
+
+[Step 122: Reset Link URL](#step-122) · [Step 124: Password Reset Complete URL](#step-124)
