@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **247 development steps in 32 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **251 development steps in 33 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapter 1 (Supplier setup and list), Steps 1–247. Module 2 is in progress; later inventory or forecasting features are not claimed as implemented.
+**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapter 1 (Supplier setup and list), Steps 1–251. Module 2 is in progress; later inventory or forecasting features are not claimed as implemented.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -55,3 +55,4 @@ These are **247 development steps in 32 chapters**, rewritten so you can underst
 ## Module 2 — Supplier and inventory foundations
 
 - [Chapter 1: Supplier setup and list](Module-2/01-supplier-setup-and-list.md) — Steps 236–247 (documented from local development; source not yet pushed)
+- [Chapter 2: Create Supplier](Module-2/02-create-supplier.md) — Steps 248–251 (documented from local development)
