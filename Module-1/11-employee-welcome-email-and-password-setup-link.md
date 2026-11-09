@@ -19,6 +19,7 @@ Creating an employee and letting the employee choose a password are separate mom
 - [Step 128: Employee Creation Form](#step-128)
 - [Step 129: Connect Employee Form](#step-129)
 - [Step 130: Welcome Email Template](#step-130)
+- [Step 131: Secure Password-Setup Link](#step-131)
 
 ---
 
@@ -203,3 +204,59 @@ Not tested yet at Step 130. For Step 130, the proposed way to check welcome emai
 #### Next
 
 [Step 129: Connect Employee Form](#step-129) · [Step 131: Secure Password-Setup Link](#step-131)
+
+
+---
+
+<a id="step-131"></a>
+
+### Step 131: Secure Password-Setup Link
+
+#### Before this step
+
+The welcome email needed a link that belongs only to that employee and does not stay valid forever. Immediately before this, Step 130 dealt with welcome email template; the work here continued the same part of the application.
+
+#### What we did and why
+
+A helper function builds a link using the employee's record and a Django-generated token. Django checks the token later, so simply guessing an employee ID is not enough to set their password.
+
+#### Code and commands
+
+**Step 131, block 1.** This code sample or terminal command was used while working on secure password-setup link. The content below remains in its original sequence for Step 131, block 1.
+
+```python
+from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+
+
+def generate_setup_link(request, user):
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = default_token_generator.make_token(user)
+
+    path = reverse(
+        'password_reset_confirm',
+        kwargs={'uidb64': uid, 'token': token}
+    )
+
+    return request.build_absolute_uri(path)
+```
+
+#### How the code works
+
+**Block 1 (python, 16 lines).** In Step 131, secure password-setup link involved `welcome_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.contrib.auth.tokens import default_token_generator` makes a Python function, class or module available to the code that follows. `from django.urls import reverse` makes a Python function, class or module available to the code that follows. `from django.utils.encoding import force_bytes` makes a Python function, class or module available to the code that follows. `from django.utils.http import urlsafe_base64_encode` makes a Python function, class or module available to the code that follows.
+
+**Lines 8–14:** `uid = urlsafe_base64_encode(force_bytes(user.pk))` sets the named value used by the next operation in this file. `token = default_token_generator.make_token(user)` sets the named value used by the next operation in this file. `path = reverse(` sets the named value used by the next operation in this file. `kwargs={'uidb64': uid, 'token': token}` sets the named value used by the next operation in this file.
+
+**Lines 15–16:** `return request.build_absolute_uri(path)` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 131. For Step 131, the proposed way to check secure password-setup link was to open the password-related page and try the expected form flow with a test account. Development continued in Step 132 before a complete result could be claimed.
+
+#### Next
+
+[Step 130: Welcome Email Template](#step-130) · [Step 132: Send Welcome Email](#step-132)
