@@ -1,175 +1,55 @@
-# Module 1, Chapter 2: Database setup and admin site
+# MODULE 1 — Employee accounts
 
-## Step 68: Database Reset
+## Chapter 2: Database setup and admin site (Steps 68–72)
 
-#### Next: Remove the old SQLite database
+### Before we begin
 
-Our Module 0 database contains Django's initial tables and the temporary superuser. We need a fresh database so Django can create `CustomUser` as the user model from the beginning.
+We had written our new employee user model, but the old test database was prepared for Django's default user model.
 
-In the VS Code PowerShell terminal, from the folder containing `manage.py`, run:
+### What we worked on
+
+While the database still contained only disposable development data, we reset it, created tables for the new model, made an administrator and registered users in Django Admin.
+
+### Picture it this way
+
+This is an early-development correction. On a live system, deleting the database would lose real records, so a database reset is not a normal way to update employee models.
+
+### Find a step
+
+- [Step 68: Database Reset](#step-68)
+
+---
+
+<a id="step-68"></a>
+
+### Step 68: Database Reset
+
+#### Before this step
+
+The starter database had already been created before our custom user model existed. That could leave early development tables referring to the wrong user type. The preceding step, Step 67, covered migration preparation, so this was the next part of the development sequence.
+
+#### What we did and why
+
+Because this was still a disposable test database, the written explanation show resetting it and rebuilding with the chosen user model. This is not something to repeat with real employee records: deleting a database also deletes its data.
+
+#### Code and commands
+
+**Step 68, block 1.** This code sample or terminal command was used while working on database reset. The content below remains in its original sequence for Step 68, block 1.
 
 ```powershell
 Remove-Item .\db.sqlite3
 ```
 
-**Expected result:** No output. The file `db.sqlite3` disappears from the project folder.
+#### How the code works
 
-This permanently deletes the Module 0 superuser and other records in that database. It does **not** delete your Python code or the migration file we just generated.
+**Block 1 (powershell, 1 lines).** In Step 68, database reset involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-Do not run `migrate` yet.
-
-*Previous: Step 67 (Migration Preparation)  |  Next: Step 69 (Database File Locked)*
-
----
-
-## Step 69: Database File Locked
-
-Windows cannot delete `db.sqlite3` because another process is currently using it.
-
-The most likely cause is that **Django's development server is still running**.
-
-#### Do this first
-
-1. In VS Code, check your other terminal tabs.
-2. Find the terminal running `python manage.py runserver`.
-3. Press **Ctrl + C** to stop the server.
-
-Then retry:
-
-```powershell
-Remove-Item .\db.sqlite3
-```
-
-**Expected result:** No output, and `db.sqlite3` disappears.
-
-If the same error appears, share it. We will identify the process holding the file.
-
-*Previous: Step 68 (Database Reset)  |  Next: Step 70 (Create Database Tables)*
-
----
-
-## Step 70: Create Database Tables
-
-#### Next: Apply database migrations
-
-Now that the old database has been deleted, run:
-
-```powershell
-python manage.py migrate
-```
-
-**Expected output:** Several migrations ending with `OK`, including:
-
-```text
-Applying accounts.0001_initial... OK
-```
-
-This command will:
-
-- Create a fresh `db.sqlite3` file.
-- Create our `accounts_customuser` table.
-- Create Django's other required tables.
-
-**Important:** No user accounts exist in this new database yet. We'll create the administrator next.
-
-*Previous: Step 69 (Database File Locked)  |  Next: Step 71 (Create Administrator)*
-
----
-
-## Step 71: Create Administrator
-
-#### Next: Create our project's administrator account
-
-Run:
-
-```powershell
-python manage.py createsuperuser
-```
-
-When prompted, enter:
-
-- **Username:** `admin`
-- **Email:** Your email address
-- **Role:** `admin`
-- **Password:** A secure password of your choice
-- **Password confirmation:** Enter the same password again
-
-The exact prompt wording may vary. Your password will not be visible while typing.
-
-**Expected output:**
-
-```text
-Superuser created successfully.
-```
-
-This creates a record in `accounts_customuser` with:
-
-- `role = 'admin'` — our project's administrator role.
-- `is_superuser = True` — Django's unrestricted superuser permission.
-- `is_staff = True` — permission to access Django Admin.
-
-We now have an administrator using our **CustomUser model**, rather than Django's original `User` model.
+**Lines 1–1:** The lines starting with `Remove-Item .\db.sqlite3` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
 
 #### How we checked it
 
-#### Next: Test the new administrator account
+Not tested yet at Step 68. For Step 68, the proposed way to check database reset was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 69 before a complete result could be claimed.
 
-Start Django's development server:
+#### Next
 
-```powershell
-python manage.py runserver
-```
-
-Open Django Admin (http://127.0.0.1:8000/admin/) in your browser.
-
-Log in using the **username and password you just created**.
-
-**Expected result:** Django's administration dashboard opens successfully.
-
-You may not see `CustomUser` listed yet. That's normal—we haven't registered our model in `accounts/admin.py`.
-
-*Previous: Step 70 (Create Database Tables)  |  Next: Step 72 (Register CustomUser)*
-
----
-
-## Step 72: Register CustomUser
-
-#### Next: Update `accounts/admin.py`
-
-Replace its contents with:
-
-```python
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
-
-
-class CustomUserAdmin(UserAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        ('Inventory Role', {'fields': ('role',)}),
-    )
-
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Inventory Role', {'fields': ('role',)}),
-    )
-
-
-admin.site.register(CustomUser, CustomUserAdmin)
-```
-
-  NEW vs CLASS — CustomUserAdmin
-  **Where:** `accounts/admin.py`
-
-  **Class example:** `backend/thirdproject/doctors/admin.py` uses `admin.site.register(CustomUser)`.
-
-  **Difference:** We extend Django's `UserAdmin` and add the `role` field to its forms.
-
-  **Why:** This preserves Django's password-management functionality while allowing administrators to assign project roles.
-
-  **Simpler alternative:** Register `CustomUser` directly, as in class, but that doesn't provide the same user-management forms.
-
-**Expected result:** After saving, refresh `/admin/`. You should see **Custom users** under Accounts. Opening your administrator account should show an **Inventory Role** section.
-
-*Previous: Step 71 (Create Administrator)  |  Next: Step 73 (Login View)*
-
----
+[Step 67: Migration Preparation](../Module-1/01-accounts-app-and-custom-user-model.md#step-67) · [Step 69: Database File Locked](#step-69)
