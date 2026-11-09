@@ -22,6 +22,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 94: Verify manager access is restricted](#step-94)
 - [Step 95: Login Error Messages](#step-95)
 - [Step 96: Password Change Confirmation](#step-96)
+- [Step 97: Success Message](#step-97)
 
 ---
 
@@ -298,3 +299,95 @@ Not tested yet at Step 96. For Step 96, the proposed way to check password chang
 #### Next
 
 [Step 95: Login Error Messages](#step-95) · [Step 97: Success Message](#step-97)
+
+
+---
+
+<a id="step-97"></a>
+
+### Step 97: Success Message
+
+#### Before this step
+
+We had a message ready to display but needed the homepage template to show it. Immediately before this, Step 96 dealt with password change confirmation; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django messages are short notices saved between a redirect and the next page. The template reads them and places them where the user can see them.
+
+#### Code and commands
+
+**Step 97, block 1.** This code sample or terminal command was used while working on success message. The content below remains in its original sequence for Step 97, block 1.
+
+```html
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+```
+
+**Step 97, block 2.** This code sample or terminal command was used while working on success message. The content below remains in its original sequence for Step 97, block 2.
+
+```bash
+python manage.py check
+```
+
+**Step 97, block 3.** This output was used while working on success message. The content below remains in its original sequence for Step 97, block 3.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+**Step 97, block 4.** This code sample or terminal command was used while working on success message. The content below remains in its original sequence for Step 97, block 4.
+
+```bash
+git status --short
+```
+
+**Step 97, block 5.** This output was used while working on success message. The content below remains in its original sequence for Step 97, block 5.
+
+```text
+ M config/settings.py
+ M config/urls.py
+ M core/views.py
+?? accounts/
+```
+
+**Step 97, block 6.** This code sample or terminal command was used while working on success message. The content below remains in its original sequence for Step 97, block 6.
+
+```bash
+git status --short --untracked-files=all
+```
+
+#### How the code works
+
+**Block 1 (html, 3 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p>{{ message }}</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (bash, 1 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py check` starts Python or one of its tools from the development terminal.
+
+**Block 3 (text, 1 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 97, output block 3 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for success message.
+
+**Block 4 (bash, 1 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git status --short` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 5 (text, 4 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 97, output block 5 showed the result rather than another command. Its visible value was ` M config/settings.py`, which mattered for success message.
+
+**Block 6 (bash, 1 lines).** In Step 97, success message involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git status --short --untracked-files=all` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 97. For Step 97, the proposed way to check success message was to revisit `core/templates/core/home.html` and run the corresponding command or feature to see its result. Development continued in Step 98 before a complete result could be claimed.
+
+#### Next
+
+[Step 96: Password Change Confirmation](#step-96) · [Step 98: Stage Files](#step-98)
