@@ -31,6 +31,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 19: Commit the private development journal](#step-19)
 - [Step 20: Push your journal to private GitHub](#step-20)
 - [Step 21: Understand local and remote main branches](#step-21)
+- [Step 22: Apply database migrations](#step-22)
 
 ---
 
@@ -794,3 +795,50 @@ Not tested yet at Step 21. For Step 21, the proposed way to check understand loc
 #### Next
 
 [Step 20: Push your journal to private GitHub](#step-20) · [Step 22: Apply database migrations](#step-22)
+
+
+---
+
+<a id="step-22"></a>
+
+### Step 22: Apply database migrations
+
+#### Before this step
+
+Django had been installed, but the database still lacked the tables Django needs for users, sessions, and the administration site. Immediately before this, Step 21 dealt with understand local and remote main branches; the work here continued the same part of the application.
+
+#### What we did and why
+
+A database table is a place where Django stores a type of information. The migration command creates or changes tables according to Django's prepared instructions. We needed these basic tables before user accounts could work.
+
+#### Code and commands
+
+**Step 22, block 1.** This code sample or terminal command was used while working on apply database migrations. The content below remains in its original sequence for Step 22, block 1.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py migrate
+```
+
+**Step 22, block 2.** This code sample or terminal command was used while working on apply database migrations. The content below remains in its original sequence for Step 22, block 2.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 22, apply database migrations involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py migrate` starts Python or one of its tools from the development terminal.
+
+**Block 2 (powershell, 1 lines).** In Step 22, apply database migrations involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+For Step 22 (Apply database migrations), we compared the visible terminal output with the requested action. The visible result for Step 22 was described as “your output shows”; this only addressed the apply database migrations check in `manage.py`.
+
+#### Next
+
+[Step 21: Understand local and remote main branches](#step-21) · [Step 23: Update your private development journal](#step-23)

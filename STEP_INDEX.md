@@ -23,3 +23,4 @@
 | 19 | Module 0, Chapter 2 | [ Commit the private development journal ](Module-0/02-git-and-github.md#step-19) |
 | 20 | Module 0, Chapter 2 | [ Push your journal to private GitHub ](Module-0/02-git-and-github.md#step-20) |
 | 21 | Module 0, Chapter 2 | [ Understand local and remote main branches ](Module-0/02-git-and-github.md#step-21) |
+| 22 | Module 0, Chapter 2 | [ Apply database migrations ](Module-0/02-git-and-github.md#step-22) |
