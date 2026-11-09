@@ -18,6 +18,7 @@ The main lesson is that protecting a page happens in its Django view. Hiding a m
 
 - [Step 83: Protect Homepage](#step-83)
 - [Step 84: Display User Details](#step-84)
+- [Step 85: Login Page Check](#step-85)
 
 ---
 
@@ -97,3 +98,47 @@ Not tested yet at Step 84. For Step 84, the proposed way to check display user d
 #### Next
 
 [Step 83: Protect Homepage](#step-83) · [Step 85: Login Page Check](#step-85)
+
+
+---
+
+<a id="step-85"></a>
+
+### Step 85: Login Page Check
+
+#### Before this step
+
+A person who is already signed in does not need to see the login form again. Immediately before this, Step 84 dealt with display user details; the work here continued the same part of the application.
+
+#### What we did and why
+
+We checked the login behaviour and adjusted or confirmed the redirect so an authenticated user reaches the appropriate page. This avoids presenting an unnecessary username/password form to a current user.
+
+#### Code and commands
+
+**Step 85, block 1.** This code sample or terminal command was used while working on login page check. The content below remains in its original sequence for Step 85, block 1.
+
+```python
+def loginpage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 85, login page check involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `def loginpage(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `if request.user.is_authenticated:` is a condition: the code inside this branch only runs when its condition is satisfied. `return redirect('home')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 85. For Step 85, the proposed way to check login page check was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Step 85 did not establish a successful outcome for login page check.
+
+#### Next
+
+[Step 84: Display User Details](#step-84) · [Step 86: Change Password](../Module-1/06-password-change.md#step-86)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **homepage protection and navigation** was needed at this point, and describe what the application did differently after the final step of this chapter.
