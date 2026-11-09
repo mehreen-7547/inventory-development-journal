@@ -21,6 +21,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 - [Step 102: Trace the decorator execution order](#step-102)
 - [Step 103: Apply Role Security](#step-103)
 - [Step 104: Test Role Restrictions](#step-104)
+- [Step 105: Review the role decorator](#step-105)
 
 ---
 
@@ -429,3 +430,73 @@ Not tested yet at Step 104. For Step 104, the proposed way to check test role re
 #### Next
 
 [Step 103: Apply Role Security](#step-103) · [Step 105: Review the role decorator](#step-105)
+
+
+---
+
+<a id="step-105"></a>
+
+### Step 105: Review the role decorator
+
+#### Before this step
+
+We reviewed the finished decorator code after testing and corrections. Immediately before this, Step 104 dealt with test role restrictions; the work here continued the same part of the application.
+
+#### What we did and why
+
+The important parts are still the same: identify the current user, compare their role with the allowed roles, and either run the view or return a denial. This step consolidated the earlier explanation rather than inventing a new security system.
+
+#### Code and commands
+
+**Step 105, block 1.** This code sample or terminal command was used while working on review the role decorator. The content below remains in its original sequence for Step 105, block 1.
+
+```python
+from functools import wraps
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
+
+def role_required(*roles):
+    def decorator(view_func):
+        @login_required(login_url='/login/')
+        @wraps(view_func)
+        def wrapper(request, *args, **kwargs):
+            if request.user.role not in roles:
+                raise PermissionDenied
+
+            return view_func(request, *args, **kwargs)
+
+        return wrapper
+
+    return decorator
+```
+
+**Step 105, block 2.** This code sample or terminal command was used while working on review the role decorator. The content below remains in its original sequence for Step 105, block 2.
+
+```python
+@role_required('admin', 'manager')
+def inventory_report(request):
+    ...
+```
+
+#### How the code works
+
+**Block 1 (python, 18 lines).** In Step 105, review the role decorator involved `accounts/decorators.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from functools import wraps` makes a Python function, class or module available to the code that follows. `from django.contrib.auth.decorators import login_required` makes a Python function, class or module available to the code that follows. `from django.core.exceptions import PermissionDenied` makes a Python function, class or module available to the code that follows. `def role_required(*roles):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Lines 8–14:** `@login_required(login_url='/login/')` adds a check or behaviour around the view before Django runs the view itself. `@wraps(view_func)` adds a check or behaviour around the view before Django runs the view itself. `def wrapper(request, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `if request.user.role not in roles:` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+**Lines 15–18:** `return wrapper` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser. `return decorator` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 2 (python, 3 lines).** In Step 105, review the role decorator involved `accounts/decorators.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `@role_required('admin', 'manager')` adds a check or behaviour around the view before Django runs the view itself. `def inventory_report(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+#### How we checked it
+
+Not tested yet at Step 105. For Step 105, the proposed way to check review the role decorator was to open the related page in the browser and check that the route reached the intended view or template in `accounts/decorators.py`. Development continued in Step 106 before a complete result could be claimed.
+
+#### Next
+
+[Step 104: Test Role Restrictions](#step-104) · [Step 106: Apply Role Security](#step-106)
