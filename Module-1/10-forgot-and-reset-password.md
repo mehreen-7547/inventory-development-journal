@@ -27,6 +27,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 121: Set New Password Page](#step-121)
 - [Step 122: Reset Link URL](#step-122)
 - [Step 123: Password Reset Success Page](#step-123)
+- [Step 124: Password Reset Complete URL](#step-124)
 
 ---
 
@@ -643,3 +644,46 @@ Not tested yet at Step 123. For Step 123, the proposed way to check password res
 #### Next
 
 [Step 122: Reset Link URL](#step-122) · [Step 124: Password Reset Complete URL](#step-124)
+
+
+---
+
+<a id="step-124"></a>
+
+### Step 124: Password Reset Complete URL
+
+#### Before this step
+
+The reset-confirmation view needed to know where to go after a valid new password had been saved. Immediately before this, Step 123 dealt with password reset success page; the work here continued the same part of the application.
+
+#### What we did and why
+
+Its success destination points to the completion page. This completes the chain from the original email request to the final screen.
+
+#### Code and commands
+
+**Step 124, block 1.** This code sample or terminal command was used while working on password reset complete url. The content below remains in its original sequence for Step 124, block 1.
+
+```python
+path(
+    'password-reset/complete/',
+    auth_views.PasswordResetCompleteView.as_view(
+        template_name='accounts/password_reset_complete.html'
+    ),
+    name='password_reset_complete'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 124, password reset complete url involved `password_reset_complete.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset_complete.html'` sets the named value used by the next operation in this file. `name='password_reset_complete'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 124. For Step 124, the proposed way to check password reset complete url was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_complete.html`. Development continued in Step 125 before a complete result could be claimed.
+
+#### Next
+
+[Step 123: Password Reset Success Page](#step-123) · [Step 125: Fix the password reset URL error](#step-125)
