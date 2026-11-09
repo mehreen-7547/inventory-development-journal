@@ -17,6 +17,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 ### Find a step
 
 - [Step 73: Login View](#step-73)
+- [Step 74: Understand models.py versus admin.py](#step-74)
 
 ---
 
@@ -81,3 +82,54 @@ Not tested yet at Step 73. For Step 73, the proposed way to check login view was
 #### Next
 
 [Step 72: Register CustomUser](../Module-1/02-database-setup-and-admin-site.md#step-72) · [Step 74: Understand models.py versus admin.py](#step-74)
+
+
+---
+
+<a id="step-74"></a>
+
+### Step 74: Understand models.py versus admin.py
+
+#### Before this step
+
+The filenames models.py and admin.py looked similar, but they do different jobs. Immediately before this, Step 73 dealt with login view; the work here continued the same part of the application.
+
+#### What we did and why
+
+models.py defines what information exists in the database. admin.py decides how that information appears inside Django's administrative interface. Neither file replaces the login view.
+
+#### Code and commands
+
+**Step 74, block 1.** This code sample or terminal command was used while working on understand models.py versus admin.py. The content below remains in its original sequence for Step 74, block 1.
+
+```python
+# models.py
+class CustomUser(AbstractUser):
+    role = models.CharField(...)
+```
+
+**Step 74, block 2.** This code sample or terminal command was used while working on understand models.py versus admin.py. The content below remains in its original sequence for Step 74, block 2.
+
+```python
+# admin.py
+class CustomUserAdmin(UserAdmin):
+    ...
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 74, understand models.py versus admin.py involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The comment `# models.py` explains the intention of the following section; it does not execute as application logic. `class CustomUser(AbstractUser):` declares a Python class, grouping related data or behaviour together. `role = models.CharField(...)` sets the named value used by the next operation in this file.
+
+**Block 2 (python, 3 lines).** In Step 74, understand models.py versus admin.py involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The comment `# admin.py` explains the intention of the following section; it does not execute as application logic. `class CustomUserAdmin(UserAdmin):` declares a Python class, grouping related data or behaviour together.
+
+#### How we checked it
+
+Not tested yet at Step 74. For Step 74, the proposed way to check understand models.py versus admin.py was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 75 before a complete result could be claimed.
+
+#### Next
+
+[Step 73: Login View](#step-73) · [Step 75: Login Page](#step-75)
