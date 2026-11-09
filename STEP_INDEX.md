@@ -168,3 +168,4 @@
 | 164 | Module 1, Chapter 15 | [ Home Template Review ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-164) |
 | 165 | Module 1, Chapter 16 | [ Employee Management Messages ](Module-1/16-message-styling.md#step-165) |
 | 166 | Module 1, Chapter 16 | [ Display edit-page feedback messages ](Module-1/16-message-styling.md#step-166) |
+| 167 | Module 1, Chapter 16 | [ Message Styling ](Module-1/16-message-styling.md#step-167) |

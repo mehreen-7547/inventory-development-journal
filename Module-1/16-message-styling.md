@@ -18,6 +18,7 @@ When a view saves a change and redirects back to a list, Django can carry a shor
 
 - [Step 165: Employee Management Messages](#step-165)
 - [Step 166: Display edit-page feedback messages](#step-166)
+- [Step 167: Message Styling](#step-167)
 
 ---
 
@@ -126,3 +127,87 @@ Not tested yet at Step 166. For Step 166, the proposed way to check display edit
 #### Next
 
 [Step 165: Employee Management Messages](#step-165) · [Step 167: Message Styling](#step-167)
+
+
+---
+
+<a id="step-167"></a>
+
+### Step 167: Message Styling
+
+#### Before this step
+
+Success and error notices looked too similar, so the administrator could miss an important warning. Immediately before this, Step 166 dealt with display edit-page feedback messages; the work here continued the same part of the application.
+
+#### What we did and why
+
+We added styling that makes the type of message more visible. CSS changes how notices look; the view still decides which notice to show.
+
+#### Code and commands
+
+**Step 167, block 1.** This code sample or terminal command was used while working on message styling. The content below remains in its original sequence for Step 167, block 1.
+
+```html
+{% if messages %}
+
+    {% for message in messages %}
+
+        <p class="message {{ message.tags }}">
+            {{ message }}
+        </p>
+
+    {% endfor %}
+
+{% endif %}
+```
+
+**Step 167, block 2.** This code sample or terminal command was used while working on message styling. The content below remains in its original sequence for Step 167, block 2.
+
+```html
+<p>{{ message }}</p>
+```
+
+**Step 167, block 3.** This code sample or terminal command was used while working on message styling. The content below remains in its original sequence for Step 167, block 3.
+
+```html
+<p class="message {{ message.tags }}">
+    {{ message }}
+</p>
+```
+
+**Step 167, block 4.** This code sample or terminal command was used while working on message styling. The content below remains in its original sequence for Step 167, block 4.
+
+```html
+  <p class="message success">
+      Employee updated successfully.
+  </p>
+  
+```
+
+#### How the code works
+
+**Block 1 (html, 11 lines).** In Step 167, message styling involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if messages %}` decides which HTML is included based on the value Django provided. `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p class="message {{ message.tags }}">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–11:** The lines starting with `{% endfor %}` supply the values or page content for this part of templates/accounts/employee_list.html. These lines are kept together because their order and indentation matter.
+
+**Block 2 (html, 1 lines).** In Step 167, message styling involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<p>{{ message }}</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 3 (html, 3 lines).** In Step 167, message styling involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The HTML element `<p class="message {{ message.tags }}">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 4 (html, 4 lines).** In Step 167, message styling involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** The HTML element `<p class="message success">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 167. For Step 167, the proposed way to check message styling was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 168 before a complete result could be claimed.
+
+#### Next
+
+[Step 166: Display edit-page feedback messages](#step-166) · [Step 168: Display employee-list messages](#step-168)
