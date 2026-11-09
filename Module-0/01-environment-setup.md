@@ -18,6 +18,7 @@ Think of this as setting up the desk and tools before starting a piece of work. 
 
 - [Step 1: Check Python](#step-1)
 - [Step 2: Create the virtual environment](#step-2)
+- [Step 3: Install Django and required packages](#step-3)
 
 ---
 
@@ -151,3 +152,40 @@ Not tested yet at Step 2. For Step 2, the proposed way to check create the virtu
 #### Next
 
 [Step 1: Check Python](#step-1) · [Step 3: Install Django and required packages](#step-3)
+
+
+---
+
+<a id="step-3"></a>
+
+### Step 3: Install Django and required packages
+
+#### Before this step
+
+The private Python environment was ready, but it did not yet have the packages needed to run the starter project. Immediately before this, Step 2 dealt with create the virtual environment; the work here continued the same part of the application.
+
+#### What we did and why
+
+A package is ready-made Python code we install instead of writing everything ourselves. The requirements file lists the packages this project needs. Installing them here is like gathering the tools before beginning construction; we have not built any application features yet.
+
+#### Code and commands
+
+**Step 3, block 1.** This code sample or terminal command was used while working on install django and required packages. The content below remains in its original sequence for Step 3, block 1.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\requirements.txt
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 3, install django and required packages involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `.\.venv\Scripts\python.exe -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\r` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 3. For Step 3, the proposed way to check install django and required packages was to revisit `requirements.txt` and run the corresponding command or feature to see its result. Development continued in Step 4 before a complete result could be claimed.
+
+#### Next
+
+[Step 2: Create the virtual environment](#step-2) · [Step 4: Create the configuration file](#step-4)
