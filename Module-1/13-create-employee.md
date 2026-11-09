@@ -18,6 +18,7 @@ When an admin first opens the page, Django shows empty fields. After the admin s
 
 - [Step 139: Create Employee View](#step-139)
 - [Step 140: Restrict Employee Roles](#step-140)
+- [Step 141: Create Employee Template](#step-141)
 
 ---
 
@@ -139,3 +140,77 @@ Not tested yet at Step 140. For Step 140, the proposed way to check restrict emp
 #### Next
 
 [Step 139: Create Employee View](#step-139) · [Step 141: Create Employee Template](#step-141)
+
+
+---
+
+<a id="step-141"></a>
+
+### Step 141: Create Employee Template
+
+#### Before this step
+
+The create view was ready, but administrators still needed the page where they could type an employee's information. Immediately before this, Step 140 dealt with restrict employee roles; the work here continued the same part of the application.
+
+#### What we did and why
+
+The template displays the creation form and a save button. If the input is missing or invalid, it can show the same form with errors so the administrator can correct it.
+
+#### Code and commands
+
+**Step 141, block 1.** This code sample or terminal command was used while working on create employee template. The content below remains in its original sequence for Step 141, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Employee</title>
+</head>
+<body>
+
+    <h2>Create Employee</h2>
+
+    <p>
+        Enter the employee details below.
+        A password setup link will be sent to their email.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Create Employee</button>
+    </form>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Back to Manage Employees
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 30 lines).** In Step 141, create employee template involved `templates/accounts/create_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Create Employee</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<h2>Create Employee</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `<button type="submit">Create Employee</button>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–30:** The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 141. For Step 141, the proposed way to check create employee template was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/create_employee.html`. Development continued in Step 142 before a complete result could be claimed.
+
+#### Next
+
+[Step 140: Restrict Employee Roles](#step-140) · [Step 142: Create Employee URL](#step-142)
