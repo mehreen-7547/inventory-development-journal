@@ -23,6 +23,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 - [Step 104: Test Role Restrictions](#step-104)
 - [Step 105: Review the role decorator](#step-105)
 - [Step 106: Apply Role Security](#step-106)
+- [Step 107: Test Role Security](#step-107)
 
 ---
 
@@ -546,3 +547,65 @@ Not tested yet at Step 106. For Step 106, the proposed way to check apply role s
 #### Next
 
 [Step 105: Review the role decorator](#step-105) · [Step 107: Test Role Security](#step-107)
+
+
+---
+
+<a id="step-107"></a>
+
+### Step 107: Test Role Security
+
+#### Before this step
+
+With the decorator attached, we checked a case where the person was signed in but did not have the right permission. Immediately before this, Step 106 dealt with apply role security; the work here continued the same part of the application.
+
+#### What we did and why
+
+A “forbidden” result tells us the server blocked the request. The important test is what the server returns, not whether a button happens to be hidden.
+
+#### Code and commands
+
+**Step 107, block 1.** This code sample or terminal command was used while working on test role security. The content below remains in its original sequence for Step 107, block 1.
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+**Step 107, block 2.** This code sample or terminal command was used while working on test role security. The content below remains in its original sequence for Step 107, block 2.
+
+```python
+@role_required('admin', 'manager')
+```
+
+**Step 107, block 3.** This code sample or terminal command was used while working on test role security. The content below remains in its original sequence for Step 107, block 3.
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 107, test role security involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself.
+
+**Block 2 (python, 1 lines).** In Step 107, test role security involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager')` adds a check or behaviour around the view before Django runs the view itself.
+
+**Block 3 (python, 1 lines).** In Step 107, test role security involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself.
+
+#### How we checked it
+
+Not tested yet at Step 107. For Step 107, the proposed way to check test role security was to revisit `core/views.py` and run the corresponding command or feature to see its result. Step 107 did not establish a successful outcome for test role security.
+
+#### Next
+
+[Step 106: Apply Role Security](#step-106) · [Step 108: Understand REQUIRED_FIELDS](../Module-1/09-email-validation-and-email-setup.md#step-108)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **role security (decorators)** was needed at this point, and describe what the application did differently after the final step of this chapter.
