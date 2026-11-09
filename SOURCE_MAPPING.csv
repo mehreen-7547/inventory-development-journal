@@ -202,3 +202,9 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 201,,340–341,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Discover why an old home-page test failed
 202,,342–344,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Test the intended login redirect
 203,,345–347,1,Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test,Commit and push the corrected test
+204,,348–351,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Create a repeatable test employee
+205,,351,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Check the login page and a successful login
+206,,351,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Reject wrong passwords and inactive employees
+207,,351,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Require POST for logout and clear the session
+208,,351–352,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Run all eleven Django tests together
+209,,352–354,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Commit and push the authentication tests

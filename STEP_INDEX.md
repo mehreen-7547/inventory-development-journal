@@ -207,3 +207,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 201 | M1 · Ch 19 | [Discover why an old home-page test failed](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-201) |
 | 202 | M1 · Ch 19 | [Test the intended login redirect](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-202) |
 | 203 | M1 · Ch 19 | [Commit and push the corrected test](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md#step-203) |
+| 204 | M1 · Ch 20 | [Create a repeatable test employee](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-204) |
+| 205 | M1 · Ch 20 | [Check the login page and a successful login](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-205) |
+| 206 | M1 · Ch 20 | [Reject wrong passwords and inactive employees](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-206) |
+| 207 | M1 · Ch 20 | [Require POST for logout and clear the session](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-207) |
+| 208 | M1 · Ch 20 | [Run all eleven Django tests together](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-208) |
+| 209 | M1 · Ch 20 | [Commit and push the authentication tests](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-209) |

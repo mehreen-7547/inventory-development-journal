@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **203 development steps in 26 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **209 development steps in 27 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0 (setup) and Module 1 (employee accounts), Steps 1–203. They do not claim that the later inventory or forecasting modules were implemented.
+**Scope:** These notes cover Module 0 (setup) and Module 1 (employee accounts), Steps 1–209. They do not claim that the later inventory or forecasting modules were implemented.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -45,3 +45,4 @@ These are **203 development steps in 26 chapters**, rewritten so you can underst
 
 
 - [Chapter 19: Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md) — Steps 195–203
+- [Chapter 20: Testing Django Login, Logout, Inactive Accounts and Authentication Sessions](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md) — Steps 204–209
