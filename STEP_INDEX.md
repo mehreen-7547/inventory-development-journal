@@ -99,3 +99,4 @@
 | 95 | Module 1, Chapter 7 | [ Login Error Messages ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-95) |
 | 96 | Module 1, Chapter 7 | [ Password Change Confirmation ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-96) |
 | 97 | Module 1, Chapter 7 | [ Success Message ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-97) |
+| 98 | Module 1, Chapter 7 | [ Stage Files ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-98) |

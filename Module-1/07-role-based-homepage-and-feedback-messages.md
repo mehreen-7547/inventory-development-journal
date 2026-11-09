@@ -23,6 +23,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 95: Login Error Messages](#step-95)
 - [Step 96: Password Change Confirmation](#step-96)
 - [Step 97: Success Message](#step-97)
+- [Step 98: Stage Files](#step-98)
 
 ---
 
@@ -391,3 +392,40 @@ Not tested yet at Step 97. For Step 97, the proposed way to check success messag
 #### Next
 
 [Step 96: Password Change Confirmation](#step-96) · [Step 98: Stage Files](#step-98)
+
+
+---
+
+<a id="step-98"></a>
+
+### Step 98: Stage Files
+
+#### Before this step
+
+Several account pages and messages had changed, and we wanted to record that working point. Immediately before this, Step 97 dealt with success message; the work here continued the same part of the application.
+
+#### What we did and why
+
+git add selected those application files for the next snapshot. It did not run tests or upload them.
+
+#### Code and commands
+
+**Step 98, block 1.** This code sample or terminal command was used while working on stage files. The content below remains in its original sequence for Step 98, block 1.
+
+```bash
+git add config/settings.py config/urls.py core/views.py core/templates/core/home.html accounts/ templates/accounts/
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 98, stage files involved `accounts/migrations/0001_initial.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `git add config/settings.py config/urls.py core/views.py core/templates/core/home.html acco` reads one of the Django configuration values used by this feature.
+
+#### How we checked it
+
+Not tested yet at Step 98. For Step 98, the proposed way to check stage files was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 99 before a complete result could be claimed.
+
+#### Next
+
+[Step 97: Success Message](#step-97) · [Step 99: Commit Changes](#step-99)
