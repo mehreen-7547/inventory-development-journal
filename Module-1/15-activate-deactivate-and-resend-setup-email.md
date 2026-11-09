@@ -23,6 +23,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 - [Step 161: Resend Setup Email URL](#step-161)
 - [Step 162: Resend Setup Email Button](#step-162)
 - [Step 163: Home Page Navigation](#step-163)
+- [Step 164: Home Template Review](#step-164)
 
 ---
 
@@ -435,3 +436,94 @@ Not tested yet at Step 163. For Step 163, the proposed way to check home page na
 #### Next
 
 [Step 162: Resend Setup Email Button](#step-162) · [Step 164: Home Template Review](#step-164)
+
+
+---
+
+<a id="step-164"></a>
+
+### Step 164: Home Template Review
+
+#### Before this step
+
+After adding links and role-specific content, we reviewed the homepage as a whole. Immediately before this, Step 163 dealt with home page navigation; the work here continued the same part of the application.
+
+#### What we did and why
+
+The check was about a coherent experience: correct links for each role, readable account details and useful notices. It was a review rather than an entirely new Django feature.
+
+#### Code and commands
+
+**Earlier version for Step 164:** No complete preceding version of `the Django project files` was available for line-by-line comparison. The changes shown here therefore need manual comparison with the working file.
+
+**Step 164, block 1.** This code sample or terminal command was used while working on home template review. The content below remains in its original sequence for Step 164, block 1.
+
+```html
+<!-- DASHBOARD -->
+{% if request.user.role == 'admin' %}
+
+    <p>Administrator Dashboard</p>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Manage Employees
+        </a>
+    </p>
+
+{% elif request.user.role == 'manager' %}
+
+    <p>Inventory Manager Dashboard</p>
+
+{% elif request.user.role == 'sales' %}
+
+    <p>Sales Staff Dashboard</p>
+
+{% endif %}
+```
+
+**Step 164, block 2.** This code sample or terminal command was used while working on home template review. The content below remains in its original sequence for Step 164, block 2.
+
+```html
+<!-- LOGOUT -->
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+<!-- MESSAGES -->
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 20 lines).** In Step 164, home template review involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `<!-- DASHBOARD -->` explains the intention of the following section; it does not execute as application logic. `{% if request.user.role == 'admin' %}` decides which HTML is included based on the value Django provided. The HTML element `<p>Administrator Dashboard</p>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser. `{% elif request.user.role == 'manager' %}` decides which HTML is included based on the value Django provided. The HTML element `<p>Inventory Manager Dashboard</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–20:** `{% elif request.user.role == 'sales' %}` decides which HTML is included based on the value Django provided. The HTML element `<p>Sales Staff Dashboard</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 13 lines).** In Step 164, home template review involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `<!-- LOGOUT -->` explains the intention of the following section; it does not execute as application logic. `<form method="POST" action="{% url 'logout' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<button type="submit">Logout</button>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–13:** `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p>{{ message }}</p>` creates or closes part of the page structure seen by the browser. The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 164. For Step 164, the proposed way to check home template review was to open the related page in the browser and check that the route reached the intended view or template in `the Django project files`. Step 164 did not establish a successful outcome for home template review.
+
+#### Next
+
+[Step 163: Home Page Navigation](#step-163) · [Step 165: Employee Management Messages](../Module-1/16-message-styling.md#step-165)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **activate, deactivate and resend setup email** was needed at this point, and describe what the application did differently after the final step of this chapter.
