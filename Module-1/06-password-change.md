@@ -20,6 +20,7 @@ The page first asks for the old password and the new one. Django checks the form
 - [Step 87: Walk through password change](#step-87)
 - [Step 88: Password Change URL](#step-88)
 - [Step 89: Password Change Form](#step-89)
+- [Step 90: Change Password Link](#step-90)
 
 ---
 
@@ -318,3 +319,45 @@ Not tested yet at Step 89. For Step 89, the proposed way to check password chang
 #### Next
 
 [Step 88: Password Change URL](#step-88) · [Step 90: Change Password Link](#step-90)
+
+
+---
+
+<a id="step-90"></a>
+
+### Step 90: Change Password Link
+
+#### Before this step
+
+Even a working page is difficult to use if nobody can find it. Immediately before this, Step 89 dealt with password change form; the work here continued the same part of the application.
+
+#### What we did and why
+
+We added a change-password link on the homepage. This is a navigation change, not another password-checking function.
+
+#### Code and commands
+
+**Step 90, block 1.** This code sample or terminal command was used while working on change password link. The content below remains in its original sequence for Step 90, block 1.
+
+```html
+<a href="{% url 'change_password' %}">Change Password</a>
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 90, change password link involved `core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `<a href="{% url 'change_password' %}">Change Password</a>` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+#### How we checked it
+
+Not tested yet at Step 90. For Step 90, the proposed way to check change password link was to open the password-related page and try the expected form flow with a test account. Step 90 did not establish a successful outcome for change password link.
+
+#### Next
+
+[Step 89: Password Change Form](#step-89) · [Step 91: Role-Based Homepage](../Module-1/07-role-based-homepage-and-feedback-messages.md#step-91)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **password change** was needed at this point, and describe what the application did differently after the final step of this chapter.
