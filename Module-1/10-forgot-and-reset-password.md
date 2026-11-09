@@ -18,6 +18,7 @@ There are several small pages because each has a different job. Django's built-i
 
 - [Step 113: Forgot Password](#step-113)
 - [Step 114: Password Reset URL](#step-114)
+- [Step 115: Password Reset Confirmation](#step-115)
 
 ---
 
@@ -135,3 +136,67 @@ Not tested yet at Step 114. For Step 114, the proposed way to check password res
 #### Next
 
 [Step 113: Forgot Password](#step-113) · [Step 115: Password Reset Confirmation](#step-115)
+
+
+---
+
+<a id="step-115"></a>
+
+### Step 115: Password Reset Confirmation
+
+#### Before this step
+
+After entering an email, a person should know the request has been accepted without being told whether the address belongs to an account. Immediately before this, Step 114 dealt with password reset url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The confirmation page gives a neutral message. This helps people understand the next step while avoiding information that could help someone guess which employees are registered.
+
+#### Code and commands
+
+**Step 115, block 1.** This code sample or terminal command was used while working on password reset confirmation. The content below remains in its original sequence for Step 115, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Requested</title>
+</head>
+<body>
+
+    <h2>Check Your Email</h2>
+
+    <p>
+        If an active account exists with that email address,
+        password reset instructions will be sent.
+    </p>
+
+    <p>
+        Please check your email for the reset link.
+    </p>
+
+    <a href="{% url 'login' %}">Back to Login</a>
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 22 lines).** In Step 115, password reset confirmation involved `templates/accounts/password_reset_done.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Password Reset Requested</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<h2>Check Your Email</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'login' %}">Back to Login</a>` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</body>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–22:** The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 115. For Step 115, the proposed way to check password reset confirmation was to open the password-related page and try the expected form flow with a test account. Development continued in Step 116 before a complete result could be claimed.
+
+#### Next
+
+[Step 114: Password Reset URL](#step-114) · [Step 116: Understand the password reset templates](#step-116)
