@@ -20,6 +20,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 57: Custom User Model](#step-57)
 - [Step 58: Clarify account creation workflow](#step-58)
 - [Step 59: App Creation](#step-59)
+- [Step 60: Configure Settings](#step-60)
 
 ---
 
@@ -210,3 +211,52 @@ Not tested yet at Step 59. For Step 59, the proposed way to check app creation w
 #### Next
 
 [Step 58: Clarify account creation workflow](#step-58) · [Step 60: Configure Settings](#step-60)
+
+
+---
+
+<a id="step-60"></a>
+
+### Step 60: Configure Settings
+
+#### Before this step
+
+The new accounts folder existed, but Django would not automatically know that it should use it. Immediately before this, Step 59 dealt with app creation; the work here continued the same part of the application.
+
+#### What we did and why
+
+In the settings file, we registered the app and identified its user model. That tells Django to include its database definitions and use our employee account type for authentication.
+
+#### Code and commands
+
+**Step 60, block 1.** This code sample or terminal command was used while working on configure settings. The content below remains in its original sequence for Step 60, block 1.
+
+```python
+    "core",
+    "accounts",
+]
+```
+
+**Step 60, block 2.** This code sample or terminal command was used while working on configure settings. The content below remains in its original sequence for Step 60, block 2.
+
+```python
+AUTH_USER_MODEL = "accounts.CustomUser"
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 60, configure settings involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The lines starting with `"core",` supply the values or page content for this part of config/settings.py. These lines are kept together because their order and indentation matter.
+
+**Block 2 (python, 1 lines).** In Step 60, configure settings involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `AUTH_USER_MODEL = "accounts.CustomUser"` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 60. For Step 60, the proposed way to check configure settings was to revisit `config/settings.py` and run the corresponding command or feature to see its result. Development continued in Step 61 before a complete result could be claimed.
+
+#### Next
+
+[Step 59: App Creation](#step-59) · [Step 61: Custom User Model](#step-61)
