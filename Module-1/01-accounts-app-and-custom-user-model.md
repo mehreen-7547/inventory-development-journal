@@ -21,6 +21,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 58: Clarify account creation workflow](#step-58)
 - [Step 59: App Creation](#step-59)
 - [Step 60: Configure Settings](#step-60)
+- [Step 61: Custom User Model](#step-61)
 
 ---
 
@@ -260,3 +261,61 @@ Not tested yet at Step 60. For Step 60, the proposed way to check configure sett
 #### Next
 
 [Step 59: App Creation](#step-59) · [Step 61: Custom User Model](#step-61)
+
+
+---
+
+<a id="step-61"></a>
+
+### Step 61: Custom User Model
+
+#### Before this step
+
+With the app registered, it was time to define what an employee account actually contains. Immediately before this, Step 60 dealt with configure settings; the work here continued the same part of the application.
+
+#### What we did and why
+
+In accounts/models.py, the CustomUser class builds on Django's normal user fields and adds our role choice. A model is a Python description of information Django will store in a database table.
+
+#### Code and commands
+
+**Step 61, block 1.** This code sample or terminal command was used while working on custom user model. The content below remains in its original sequence for Step 61, block 1.
+
+```python
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Inventory Manager'),
+        ('sales', 'Sales Staff'),
+    )
+
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default='sales'
+    )
+
+    REQUIRED_FIELDS = ['email', 'role']
+```
+
+#### How the code works
+
+**Block 1 (python, 18 lines).** In Step 61, custom user model involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.contrib.auth.models import AbstractUser` makes a Python function, class or module available to the code that follows. `from django.db import models` makes a Python function, class or module available to the code that follows. `class CustomUser(AbstractUser):` declares a Python class, grouping related data or behaviour together. `ROLE_CHOICES = (` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `role = models.CharField(` sets the named value used by the next operation in this file. `max_length=10,` sets the named value used by the next operation in this file. `choices=ROLE_CHOICES,` sets the named value used by the next operation in this file.
+
+**Lines 15–18:** `default='sales'` sets the named value used by the next operation in this file. `REQUIRED_FIELDS = ['email', 'role']` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 61. For Step 61, the proposed way to check custom user model was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 62 before a complete result could be claimed.
+
+#### Next
+
+[Step 60: Configure Settings](#step-60) · [Step 62: Understand CustomUser inheritance](#step-62)
