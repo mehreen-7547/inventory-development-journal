@@ -17,6 +17,7 @@ Imagine the difference between writing a letter on your own desk and posting it 
 ### Find a step
 
 - [Step 170: Real Email Configuration](#step-170)
+- [Step 171: Configure SMTP Credentials](#step-171)
 
 ---
 
@@ -93,3 +94,60 @@ Not tested yet at Step 170. For Step 170, the proposed way to check real email c
 #### Next
 
 [Step 169: Message Styling CSS](../Module-1/16-message-styling.md#step-169) · [Step 171: Configure SMTP Credentials](#step-171)
+
+
+---
+
+<a id="step-171"></a>
+
+### Step 171: Configure SMTP Credentials
+
+#### Before this step
+
+Once Django knew how to send through Gmail, it needed the details of which Gmail account to use. Those details included a special password, so we did not want to put them in a file shared on GitHub. Immediately before this, Step 170 dealt with real email configuration; the work here continued the same part of the application.
+
+#### What we did and why
+
+For this early test, the terminal asked for the Gmail app password and held it only during that terminal session. Django could then read it while running. Closing the terminal would lose those temporary settings, which led to the next step.
+
+#### Code and commands
+
+**Step 171, block 1.** This code sample or terminal command was used while working on configure smtp credentials. The content below remains in its original sequence for Step 171, block 1.
+
+```powershell
+$env:EMAIL_MODE = "smtp"
+
+$env:EMAIL_HOST_USER = "YOUR_GMAIL_ADDRESS"
+
+$secure = Read-Host "Enter Gmail App Password" -AsSecureString
+
+$env:EMAIL_HOST_PASSWORD = ([System.Net.NetworkCredential]::new("", $secure).Password) -replace ' ', ''
+
+Remove-Variable secure
+```
+
+**Step 171, block 2.** This code sample or terminal command was used while working on configure smtp credentials. The content below remains in its original sequence for Step 171, block 2.
+
+```powershell
+python manage.py runserver
+```
+
+#### How the code works
+
+**Block 1 (powershell, 9 lines).** In Step 171, configure smtp credentials involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `$env:EMAIL_MODE = "smtp"` sets the named value used by the next operation in this file. `$env:EMAIL_HOST_USER = "YOUR_GMAIL_ADDRESS"` sets the named value used by the next operation in this file. `$secure = Read-Host "Enter Gmail App Password" -AsSecureString` sets the named value used by the next operation in this file. `$env:EMAIL_HOST_PASSWORD = ([System.Net.NetworkCredential]::new("", $secure).Password) -re` sets the named value used by the next operation in this file.
+
+**Lines 8–9:** The lines starting with `Remove-Variable secure` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+**Block 2 (powershell, 1 lines).** In Step 171, configure smtp credentials involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py runserver` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 171. For Step 171, the proposed way to check configure smtp credentials was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 172 before a complete result could be claimed.
+
+#### Next
+
+[Step 170: Real Email Configuration](#step-170) · [Step 172: Install python-dotenv](#step-172)
