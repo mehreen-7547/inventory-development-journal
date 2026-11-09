@@ -32,3 +32,4 @@
 | 28 | Module 0, Chapter 3 | [ Understanding the Migration Workflow ](Module-0/03-database-and-migrations.md#step-28) |
 | 29 | Module 0, Chapter 4 | [ Confirming Terminal Environment ](Module-0/04-server-and-admin-account.md#step-29) |
 | 30 | Module 0, Chapter 4 | [ Trace the homepage request ](Module-0/04-server-and-admin-account.md#step-30) |
+| 31 | Module 0, Chapter 4 | [ Documenting Superuser Setup ](Module-0/04-server-and-admin-account.md#step-31) |

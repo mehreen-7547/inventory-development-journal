@@ -18,6 +18,7 @@ If someone opens the home address, Django needs to decide which view will answer
 
 - [Step 29: Confirming Terminal Environment](#step-29)
 - [Step 30: Trace the homepage request](#step-30)
+- [Step 31: Documenting Superuser Setup](#step-31)
 
 ---
 
@@ -204,3 +205,73 @@ Not tested yet at Step 30. For Step 30, the proposed way to check trace the home
 #### Next
 
 [Step 29: Confirming Terminal Environment](#step-29) · [Step 31: Documenting Superuser Setup](#step-31)
+
+
+---
+
+<a id="step-31"></a>
+
+### Step 31: Documenting Superuser Setup
+
+#### Before this step
+
+The built-in Django administration page cannot be used until we have an account with permission to manage the site. Immediately before this, Step 30 dealt with trace the homepage request; the work here continued the same part of the application.
+
+#### What we did and why
+
+A superuser is a special Django account with broad access. Creating one gave us a way to open the administration page and check the project. It was a development setup step, not our finished employee-management screen.
+
+#### Code and commands
+
+**Step 31, block 1.** This code sample or terminal command was used while working on documenting superuser setup. The content below remains in its original sequence for Step 31, block 1.
+
+```powershell
+Add-Content -Path "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Django Admin Setup
+
+### Objective
+Create and verify an administrator account.
+
+### Commands
+- python manage.py createsuperuser
+- python manage.py runserver
+
+### Results
+- Superuser created successfully.
+- Django development server started without errors.
+- Admin login succeeded at http://127.0.0.1:8000/admin/
+- Django Administration dashboard loaded.
+
+### What I learned
+- A superuser has full Django administration permissions.
+- Django Admin is provided by the framework.
+- User credentials are stored in the database, with passwords stored as hashes.
+
+### Errors
+None.
+
+### Revision question
+What is the difference between a Django staff user and a superuser?
+'@
+```
+
+#### How the code works
+
+**Block 1 (powershell, 28 lines).** In Step 31, documenting superuser setup involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `## Django Admin Setup` explains the intention of the following section; it does not execute as application logic. The comment `### Objective` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 8–14:** The comment `### Commands` explains the intention of the following section; it does not execute as application logic. The command `- python manage.py createsuperuser` starts Python or one of its tools from the development terminal. The command `- python manage.py runserver` starts Python or one of its tools from the development terminal. The comment `### Results` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 15–21:** The comment `### What I learned` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 22–28:** The comment `### Errors` explains the intention of the following section; it does not execute as application logic. The comment `### Revision question` explains the intention of the following section; it does not execute as application logic.
+
+#### How we checked it
+
+Not tested yet at Step 31. For Step 31, the proposed way to check documenting superuser setup was to revisit `inventory-development-journal.md` and run the corresponding command or feature to see its result. Development continued in Step 32 before a complete result could be claimed.
+
+#### Next
+
+[Step 30: Trace the homepage request](#step-30) · [Step 32: Staging Development Journal Update](#step-32)
