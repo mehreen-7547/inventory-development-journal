@@ -25,6 +25,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 13: Create a separate local journal folder](#step-13)
 - [Step 14: Initialize Git for the private journal](#step-14)
 - [Step 15: Connect it to GitHub](#step-15)
+- [Step 16: Stage the journal for Git](#step-16)
 
 ---
 
@@ -495,3 +496,40 @@ Not tested yet at Step 15. For Step 15, the proposed way to check connect it to 
 #### Next
 
 [Step 14: Initialize Git for the private journal](#step-14) · [Step 16: Stage the journal for Git](#step-16)
+
+
+---
+
+<a id="step-16"></a>
+
+### Step 16: Stage the journal for Git
+
+#### Before this step
+
+The first journal file had been written, but Git was not yet preparing to save it. Immediately before this, Step 15 dealt with connect it to github; the work here continued the same part of the application.
+
+#### What we did and why
+
+git add selects that one journal file for the next commit. This is useful because the journal could eventually contain many files and we may not want to commit all of them at once.
+
+#### Code and commands
+
+**Step 16, block 1.** This code sample or terminal command was used while working on stage the journal for git. The content below remains in its original sequence for Step 16, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 16, stage the journal for git involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inven` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 16. For Step 16, the proposed way to check stage the journal for git was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 17 before a complete result could be claimed.
+
+#### Next
+
+[Step 15: Connect it to GitHub](#step-15) · [Step 17: Understand staging versus committing](#step-17)
