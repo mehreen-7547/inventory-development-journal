@@ -30,3 +30,4 @@
 | 26 | Module 0, Chapter 3 | [ Clarify the journal commit ](Module-0/03-database-and-migrations.md#step-26) |
 | 27 | Module 0, Chapter 3 | [ Pushing Development Journal to GitHub ](Module-0/03-database-and-migrations.md#step-27) |
 | 28 | Module 0, Chapter 3 | [ Understanding the Migration Workflow ](Module-0/03-database-and-migrations.md#step-28) |
+| 29 | Module 0, Chapter 4 | [ Confirming Terminal Environment ](Module-0/04-server-and-admin-account.md#step-29) |

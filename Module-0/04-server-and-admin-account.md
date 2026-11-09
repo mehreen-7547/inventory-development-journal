@@ -1,497 +1,85 @@
-# Module 0, Chapter 4: Server and admin account
+# MODULE 0 — Foundations
 
-## Step 29: Confirming Terminal Environment
+## Chapter 4: Server and admin account (Steps 29–36)
 
-**No problem. Your terminal is ready.**
+### Before we begin
 
-Your output confirms:
+We had the basic Django project, but needed to understand the homepage and prepare an account for Django's built-in administration screen.
 
-- **Correct project directory:** Yes
-- **Virtual environment activated:** Yes — `(.venv)`
-- **Django server:** The previous terminal session has ended.
+### What we worked on
 
-You haven't lost your project files, database, or Git commits.
+We looked at the path from a browser address to a Django function and an HTML page. We also saved how to create an administrator.
 
-#### Step 37 — Completed
+### Picture it this way
 
-We can proceed directly to the next step.
+If someone opens the home address, Django needs to decide which view will answer. A view is a Python function that returns the page. An administrator account is a separate setup task.
 
-#### Step 38 — Create a Django superuser
+### Find a step
 
-Run:
+- [Step 29: Confirming Terminal Environment](#step-29)
+
+---
+
+<a id="step-29"></a>
+
+### Step 29: Confirming Terminal Environment
+
+#### Before this step
+
+Before starting the website, we checked that the terminal was in the correct project folder and was using the correct Python environment. The preceding step, Step 28, covered understanding the migration workflow, so this was the next part of the development sequence.
+
+#### What we did and why
+
+If the terminal points to the wrong folder, Django may not find manage.py. If it uses the wrong Python, it may not find installed packages. These checks prevent confusing errors before we even run the server.
+
+#### Code and commands
+
+**Step 29, block 1.** This code sample or terminal command was used while working on confirming terminal environment. The content below remains in its original sequence for Step 29, block 1.
 
 ```powershell
 python .\techmindz_inventory_module0_sqlite_atomic\manage.py createsuperuser
 ```
 
-**What this does:** Starts the process of creating an administrator account for Django's admin panel.
-
-Django will ask you for a username, email address, and password.
-
-**Send me the first prompt you see.** We'll proceed one step at a time.
-
-#### How we checked it
-
-**Step 38 completed.** Your Django superuser account has been created successfully.
-
-#### Step 39 — Start the Django server
-
-Run:
+**Step 29, block 2.** This code sample or terminal command was used while working on confirming terminal environment. The content below remains in its original sequence for Step 29, block 2.
 
 ```powershell
 python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
 ```
 
-Then open:
-
-[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
-
-Log in using the superuser credentials you just created.
-
-**Expected result:** You should see the Django Administration dashboard with **Groups** and **Users**.
-
-Tell me whether the dashboard opens successfully.
-
-#### How we checked it
-
-With the Django server running, open a **new PowerShell terminal** and execute:
+**Step 29, block 3.** This code sample or terminal command was used while working on confirming terminal environment. The content below remains in its original sequence for Step 29, block 3.
 
 ```powershell
 Start-Process "http://127.0.0.1:8000/admin/"
 ```
 
-This opens the Django admin login page in your default browser.
-
-#### How we checked it
-
-Run the original command:
+**Step 29, block 4.** This code sample or terminal command was used while working on confirming terminal environment. The content below remains in its original sequence for Step 29, block 4.
 
 ```powershell
 python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
 ```
 
-Then open this address in your browser:
+#### How the code works
 
-http://127.0.0.1:8000/admin/
+**Block 1 (powershell, 1 lines).** In Step 29, confirming terminal environment involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-*Previous: Step 28 (Understanding the Migration Workflow)  |  Next: Step 30 (Understanding the Project Homepage)*
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py createsuperuser` starts Python or one of its tools from the development terminal.
 
----
+**Block 2 (powershell, 1 lines).** In Step 29, confirming terminal environment involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-## Step 30: Understanding the Project Homepage
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
 
-The page displaying your **project title and a link** is the project's homepage.
+**Block 3 (powershell, 1 lines).** In Step 29, confirming terminal environment involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-The command:
+**Lines 1–1:** The lines starting with `Start-Process "http://127.0.0.1:8000/admin/"` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
 
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
+**Block 4 (powershell, 1 lines).** In Step 29, confirming terminal environment involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-doesn't create that page. It simply starts the server so Django can display pages defined in your project.
-
-Django treats these as two different addresses:
-
-- `http://127.0.0.1:8000/` — Your project's homepage.
-- `http://127.0.0.1:8000/admin/` — Django's built-in administration interface.
-
-#### How was that page created?
-
-I checked your actual project code on GitHub. The homepage was already included in the initial project setup.
-
-Three files work together:
-
-    **1. `config/urls.py`**
-
-    ```python
-    path("", include("core.urls"))
-    
-```
-
-    Sends homepage requests to the `core` application.
-
-    **2. `core/views.py`**
-
-    ```python
-    def home(request):
-        return render(request, "core/home.html")
-    
-```
-
-    Tells Django which HTML page to display.
-
-    **3. `core/templates/core/home.html`**
-
-    ```html
-    <h1>Inventory &amp; Demand Intelligence</h1>
-    <p>Module 0 setup is running.</p>
-    <p><a href="/admin/">Open Django admin</a></p>
-    
-```
-
-    Defines the title, message, and clickable admin link.
-
-**In short:** The URL configuration finds the view, the view loads the HTML template, and your browser displays it.
-
-This is a temporary setup homepage, not the final inventory dashboard.
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
 
 #### How we checked it
 
-`manage.py` is located in the **Django project root**, outside both `config` and `core`.
+For Step 29 (Confirming Terminal Environment), we compared the visible terminal output with the requested action. The visible result for Step 29 was described as “your output confirms”; this only addressed the confirming terminal environment check in `manage.py`.
 
-Your folder structure:
+#### Next
 
-```text
-Techmindz_Inventory_Module0_SQLite_Atomic_Update/
-│
-├── .venv/
-│
-└── techmindz_inventory_module0_sqlite_atomic/
-    │
-    ├── manage.py           ← HERE
-    │
-    ├── config/
-    │   ├── settings.py
-    │   ├── urls.py
-    │   ├── asgi.py
-    │   └── wsgi.py
-    │
-    └── core/
-        ├── views.py
-        ├── urls.py
-        └── models.py
-```
-
-**Why is it outside both folders?**
-
-Because `manage.py` manages the entire Django project, not just one app.
-
-For example, it lets you run the server, apply migrations, and create superusers.
-
-That's why we've been running:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-We're pointing Python to `manage.py` inside the Django project folder.
-
-#### How we checked it
-
-#### Step 39 — Verify Django Admin Login
-
-We previously created your superuser account. Now we'll verify that it works.
-
-**1.** If the Django server isn't running, execute:
-
-```powershell
-python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
-```
-
-**2.** Open this address in your browser:
-
-http://127.0.0.1:8000/admin/
-
-**3.** Log in using the superuser credentials you created.
-
-**Expected result:** The Django Administration dashboard should appear, showing **Users** and **Groups**.
-
-Tell me whether you successfully logged in.
-
-*Previous: Step 29 (Confirming Terminal Environment)  |  Next: Step 31 (Documenting Superuser Setup)*
-
----
-
-## Step 31: Documenting Superuser Setup
-
-**Step 39 completed.** Your superuser login works, and the Django Admin dashboard is accessible.
-
-#### Step 40 — Record the successful setup
-
-Open a **new VS Code terminal** so the Django server can continue running.
-
-Execute:
-
-```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
-
-## Django Admin Setup
-
-### Objective
-Create and verify an administrator account.
-
-### Commands
-- python manage.py createsuperuser
-- python manage.py runserver
-
-### Results
-- Superuser created successfully.
-- Django development server started without errors.
-- Admin login succeeded at http://127.0.0.1:8000/admin/
-- Django Administration dashboard loaded.
-
-### What I learned
-- A superuser has full Django administration permissions.
-- Django Admin is provided by the framework.
-- User credentials are stored in the database, with passwords stored as hashes.
-
-### Errors
-None.
-
-### Revision question
-What is the difference between a Django staff user and a superuser?
-'@
-```
-
-**Important:** We document the setup, not your actual username, email, or password.
-
-Tell me **done**. We'll save this journal update to GitHub before moving to the next development task.
-
-*Previous: Step 30 (Understanding the Project Homepage)  |  Next: Step 32 (Staging Development Journal Update)*
-
----
-
-## Step 32: Staging Development Journal Update
-
-#### Step 41 — Stage the journal update
-
-Assuming Step 40 completed successfully, run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
-
-**What this does:** Stages your Django Admin setup notes for the next Git commit.
-
-This affects only your private journal repository.
-
-Tell me **done** when the command finishes.
-
-*Previous: Step 31 (Documenting Superuser Setup)  |  Next: Step 33 (Understanding git add and -C)*
-
----
-
-## Step 33: Understanding git add and -C
-
-**Yes, the file already exists.** `git add` doesn't mean creating or adding a new file to the folder.
-
-It means **selecting the current version of a file for the next commit**.
-
-#### 1. Why do we use `git add` repeatedly?
-
-Imagine your journal changes over time:
-
-      **Monday:** Journal contains initial setup notes.
-
-      `git add` → `git commit` saves Version 1.
-
-      **Tuesday:** You add database initialization notes.
-
-      `git add` → `git commit` saves Version 2.
-
-      **Wednesday:** You add Django Admin notes.
-
-      `git add` → `git commit` saves Version 3.
-
-It's always the **same file**. Git is recording its updated contents each time.
-
-#### 2. What does `-C` mean?
-
-Your command:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
-
-Breakdown:
-
-| Part | Meaning |
-|---|---|
-| `git` | Run Git |
-| `-C` | Run Git as though you're inside the specified directory |
-| `C:\...\inventory-development-journal` | Repository directory |
-| `add` | Stage the current file contents |
-| `inventory-development-journal.md` | File being staged |
-
-**Important:** `-C` does not actually move your PowerShell terminal into that folder. It only tells Git which directory to work from.
-
-#### 3. Why not just commit directly?
-
-Git separates editing from committing so you can choose exactly which changes belong in each commit.
-
-    **Working directory**
-    You edit the existing journal
-
-  git add
-
-    **Staging area**
-    Git prepares a snapshot of the changes
-
-  git commit
-
-    **Local Git history**
-    A new version is permanently recorded
-
-**Key distinction:** `git add` stages a version, `git commit` records that version locally, and `git push` uploads the commit to GitHub.
-
-We can now resume **Step 41**, staging your updated development journal.
-
-*Previous: Step 32 (Staging Development Journal Update)  |  Next: Step 34 (Staging Development Journal Update)*
-
----
-
-## Step 34: Staging Development Journal Update
-
-Understood. Whenever you send a number alone, I'll resume from that numbered response. Response numbering will continue normally.
-
-#### Step 41 — Stage the journal update
-
-Assuming you've completed Step 40 (adding the Django Admin notes), run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal add inventory-development-journal.md
-```
-
-**What this does:** Stages the latest version of your journal for the next commit.
-
-It does not create another file or upload anything to GitHub.
-
-Tell me **done** when the command finishes.
-
-*Previous: Step 33 (Understanding git add and -C)  |  Next: Step 35 (Committing Development Journal Update)*
-
----
-
-## Step 35: Committing Development Journal Update
-
-#### Step 42 — Commit the journal update
-
-Assuming Step 41 completed successfully, run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal commit -m "docs: record Django admin setup"
-```
-
-**What this does:** Saves the staged Django Admin setup notes as a new version in your local Git history.
-
-It does not upload the changes to GitHub yet.
-
-Tell me **done** when the command finishes.
-
-*Previous: Step 34 (Staging Development Journal Update)  |  Next: Step 36 (Pushing Development Journal to GitHub)*
-
----
-
-## Step 36: Pushing Development Journal to GitHub
-
-#### Step 43 — Push the journal update
-
-Assuming Step 42 completed successfully, run:
-
-```powershell
-git -C C:\Users\mehre\projects2026\inventory-development-journal push
-```
-
-**What this does:** Uploads your latest local commit containing the Django Admin setup notes to your private GitHub repository.
-
-**Expected output:** A line showing `main -> main`.
-
-Tell me **done** when the command finishes. We'll verify the upload before proceeding.
-
-#### How we checked it
-
-**Step 43 completed.** I verified that your Django Admin setup notes are now on your private GitHub repository.
-
-#### Step 44 — Check that sensitive files are protected
-
-Your Django project now contains a database with administrator account information. Before continuing, we'll verify that Git excludes sensitive local files from your **public repository**.
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic check-ignore -v .env db.sqlite3
-```
-
-**What this does:** Checks whether `.gitignore` prevents Git from tracking:
-
-- `.env` — Contains configuration secrets.
-- `db.sqlite3` — Contains your local database, including user account records.
-
-**Expected result:** Two lines identifying the `.gitignore` rules responsible for excluding these files.
-
-This command only checks the rules. It changes nothing.
-
-Send me the output before proceeding.
-
-#### How we checked it
-
-**Step 44 completed successfully.**
-
-Your output confirms that `.gitignore` excludes both files:
-
-- `.env` — Excluded by the `.env` rule on line 2.
-- `db.sqlite3` — Excluded by the `*.sqlite3` rule on line 5.
-
-#### Step 45 — Verify Git isn't tracking these files
-
-Run:
-
-```powershell
-git -C .\techmindz_inventory_module0_sqlite_atomic ls-files -- .env db.sqlite3
-```
-
-**What this does:** Checks whether either file is already being tracked by Git.
-
-This additional check matters because `.gitignore` does not stop tracking files that were previously committed.
-
-**Expected result:** No output, just the PowerShell prompt.
-
-Send me the result. We'll then continue with the Django project setup.
-
-#### How we checked it
-
-**Step 45 completed successfully.**
-
-The empty output confirms that neither `.env` nor `db.sqlite3` is tracked by Git.
-
-Your public repository is correctly configured to exclude these files.
-
-#### Step 46 — Record the security checks
-
-Run:
-
-```powershell
-Add-Content -Path "C:\Users\mehre\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
-
-## Git Repository Security Verification
-
-### Objective
-Ensure sensitive local files are excluded from the public repository.
-
-### Commands
-1. git check-ignore -v .env db.sqlite3
-2. git ls-files -- .env db.sqlite3
-
-### Results
-- .env is excluded by .gitignore.
-- db.sqlite3 is excluded by .gitignore.
-- Neither file is currently tracked by Git.
-
-### What I learned
-- .gitignore prevents untracked files from being added accidentally.
-- git check-ignore identifies matching ignore rules.
-- git ls-files checks which files Git currently tracks.
-- Ignoring a file does not automatically untrack it.
-
-### Errors
-None.
-'@
-```
-
-**What this does:** Appends the security verification results to your private learning journal.
-
-Tell me **done**. We'll save this entry and then move on to the next project setup activity.
-
-*Previous: Step 35 (Committing Development Journal Update)  |  Next: Step 37 (Staging Security Verification Notes)*
-
----
+[Step 28: Understanding the Migration Workflow](../Module-0/03-database-and-migrations.md#step-28) · [Step 30: Trace the homepage request](#step-30)
