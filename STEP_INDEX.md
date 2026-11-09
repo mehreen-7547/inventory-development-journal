@@ -137,3 +137,4 @@
 | 133 | Module 1, Chapter 11 | [ Automatic Welcome Email ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-133) |
 | 134 | Module 1, Chapter 11 | [ Link Expiration ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-134) |
 | 135 | Module 1, Chapter 11 | [ Resend Setup Link ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-135) |
+| 136 | Module 1, Chapter 12 | [ Employee Management ](Module-1/12-employee-list.md#step-136) |

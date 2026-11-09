@@ -1,23 +1,47 @@
-# Module 1, Chapter 12: Employee list
+# MODULE 1 — Employee accounts
 
-## Step 136: Employee Management
+## Chapter 12: Employee list (Steps 136–138)
 
-We'll build a **Manage Employees** section inside the inventory application, accessible only to administrators.
+### Before we begin
 
-It will support creating employees, changing roles, deactivating/reactivating accounts, and resending password-setup links.
+Employee accounts existed, but an administrator needed one place inside the website to see them together.
 
-#### Next: Create the Employee List view
+### What we worked on
 
-Open `accounts/views.py`.
+We created a view that reads employee records, an HTML table that displays them and a URL that opens the list.
 
-Add these imports:
+### Picture it this way
+
+Think of the employee list as the starting screen for account management. At this stage it mostly shows information; the next chapters add ways to create and edit accounts.
+
+### Find a step
+
+- [Step 136: Employee Management](#step-136)
+
+---
+
+<a id="step-136"></a>
+
+### Step 136: Employee Management
+
+#### Before this step
+
+We could create employee accounts, but administrators still needed a screen where they could see them together. The preceding step, Step 135, covered resend setup link, so this was the next part of the development sequence.
+
+#### What we did and why
+
+The employee-list view asks the database for staff accounts and passes the results to an HTML template. A list is the starting point for later create, edit and status actions.
+
+#### Code and commands
+
+**Step 136, block 1.** This code sample or terminal command was used while working on employee management. The content below remains in its original sequence for Step 136, block 1.
 
 ```python
 from .models import CustomUser
 from .decorators import role_required
 ```
 
-Then add this function at the bottom:
+**Step 136, block 2.** This code sample or terminal command was used while working on employee management. The content below remains in its original sequence for Step 136, block 2.
 
 ```python
 @role_required('admin')
@@ -33,141 +57,22 @@ def employee_list(request):
     )
 ```
 
-#### What does this do?
+#### How the code works
 
-- `@role_required('admin')` — prevents non-admin users from accessing this page.
-- `filter(role__in=...)` — retrieves managers and sales employees from the database.
-- `order_by('username')` — sorts them alphabetically.
-- `render()` — passes the employees to an HTML template.
+**Block 1 (python, 2 lines).** In Step 136, employee management involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  **NEW vs CLASS — 1 concept**
+**Lines 1–2:** `from .models import CustomUser` makes a Python function, class or module available to the code that follows. `from .decorators import role_required` makes a Python function, class or module available to the code that follows.
 
-  `role__in` is a Django ORM lookup that checks whether a field matches any value in a supplied list.
+**Block 2 (python, 11 lines).** In Step 136, employee management involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  Here, it means: retrieve users whose role is either `manager` or `sales`.
+**Lines 1–7:** `@role_required('admin')` adds a check or behaviour around the view before Django runs the view itself. `def employee_list(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `employees = CustomUser.objects.filter(` sets the named value used by the next operation in this file. `role__in=['manager', 'sales']` sets the named value used by the next operation in this file.
 
-**Save `views.py`.** Next, we'll create the HTML page that displays these employees.
+**Lines 8–11:** The lines starting with `request,` supply the values or page content for this part of accounts/views.py. These lines are kept together because their order and indentation matter.
 
-*Previous: Step 135 (Resend Setup Link)  |  Next: Step 137 (Employee List Template)*
+#### How we checked it
 
----
+Not tested yet at Step 136. For Step 136, the proposed way to check employee management was to revisit `accounts/views.py` and run the corresponding command or feature to see its result. Development continued in Step 137 before a complete result could be claimed.
 
-## Step 137: Employee List Template
+#### Next
 
-#### Next: Create the Manage Employees page
-
-We've created `employee_list()` in `accounts/views.py`. Now we'll create the HTML page that displays employees.
-
-Create:
-
-**`templates/accounts/employee_list.html`**
-
-Paste:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Manage Employees</title>
-</head>
-<body>
-
-    <h2>Manage Employees</h2>
-
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-        </tr>
-
-        {% for employee in employees %}
-        <tr>
-            <td>{{ employee.username }}</td>
-            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.get_role_display }}</td>
-            <td>
-                {% if employee.is_active %}
-                    Active
-                {% else %}
-                    Inactive
-                {% endif %}
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5">No employees found.</td>
-        </tr>
-        {% endfor %}
-
-    </table>
-
-    <p><a href="{% url 'home' %}">Back to Home</a></p>
-
-</body>
-</html>
-```
-
-#### What does this display?
-
-Each employee will appear as a row containing their username, name, email, role and account status.
-
-  **NEW vs CLASS — `{% empty %}`**
-
-  We already know `{% for %}` loops through records.
-
-  `{% empty %}` is Django's built-in way to display a message when there are no records to loop through.
-
-**Save the file.** No URL is connected yet, so we won't test it in the browser now.
-
-Next, we'll add the URL for this page.
-
-*Previous: Step 136 (Employee Management)  |  Next: Step 138 (Employee List URL)*
-
----
-
-## Step 138: Employee List URL
-
-#### Next: Connect the Manage Employees page
-
-We've created the view and HTML template. Now we need a URL to access the page.
-
-Open **`accounts/urls.py`**.
-
-Add this inside your existing `urlpatterns` list:
-
-```python
-path(
-    'employees/',
-    views.employee_list,
-    name='employee_list'
-),
-```
-
-#### What does this do?
-
-- `employees/` — the address of our employee management page.
-- `views.employee_list` — calls the view we created.
-- `name='employee_list'` — allows us to reference this URL in templates.
-
-#### Test
-
-Open:
-
-`http://127.0.0.1:8000/employees/`
-
-You should see a table displaying the managers and sales employees you've created.
-
-**Verify two things:**
-
-- Logged in as Admin → Employee list is visible.
-- Logged in as Sales Staff → Access is denied (HTTP 403).
-
-This confirms that our custom page displays employee data and enforces administrator-only access.
-
-*Previous: Step 137 (Employee List Template)  |  Next: Step 139 (Create Employee View)*
-
----
+[Step 135: Resend Setup Link](../Module-1/11-employee-welcome-email-and-password-setup-link.md#step-135) · [Step 137: Employee List Template](#step-137)
