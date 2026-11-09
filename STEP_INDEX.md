@@ -68,3 +68,4 @@
 | 64 | Module 1, Chapter 1 | [ Inspect Django’s built-in User model ](Module-1/01-accounts-app-and-custom-user-model.md#step-64) |
 | 65 | Module 1, Chapter 1 | [ AUTH_USER_MODEL ](Module-1/01-accounts-app-and-custom-user-model.md#step-65) |
 | 66 | Module 1, Chapter 1 | [ Django Authentication ](Module-1/01-accounts-app-and-custom-user-model.md#step-66) |
+| 67 | Module 1, Chapter 1 | [ Migration Preparation ](Module-1/01-accounts-app-and-custom-user-model.md#step-67) |

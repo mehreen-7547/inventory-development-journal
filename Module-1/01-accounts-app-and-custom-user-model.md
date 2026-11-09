@@ -27,6 +27,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 64: Inspect Django’s built-in User model](#step-64)
 - [Step 65: AUTH_USER_MODEL](#step-65)
 - [Step 66: Django Authentication](#step-66)
+- [Step 67: Migration Preparation](#step-67)
 
 ---
 
@@ -627,3 +628,57 @@ Not tested yet at Step 66. For Step 66, the proposed way to check django authent
 #### Next
 
 [Step 65: AUTH_USER_MODEL](#step-65) · [Step 67: Migration Preparation](#step-67)
+
+
+---
+
+<a id="step-67"></a>
+
+### Step 67: Migration Preparation
+
+#### Before this step
+
+The Python user class had been written, but writing a class does not create a table in SQLite. Immediately before this, Step 66 dealt with django authentication; the work here continued the same part of the application.
+
+#### What we did and why
+
+makemigrations prepares the instructions for the database change. The next step is migrate, which applies those instructions and creates the actual table.
+
+#### Code and commands
+
+**Step 67, block 1.** This code sample or terminal command was used while working on migration preparation. The content below remains in its original sequence for Step 67, block 1.
+
+```powershell
+python manage.py makemigrations accounts
+```
+
+**Step 67, block 2.** This output was used while working on migration preparation. The content below remains in its original sequence for Step 67, block 2.
+
+```text
+Migrations for 'accounts':
+  accounts\migrations\0001_initial.py
+    + Create model CustomUser
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 67, migration preparation involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py makemigrations accounts` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 3 lines).** In Step 67, migration preparation involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 67, output block 2 showed the result rather than another command. Its visible value was `Migrations for 'accounts':`, which mattered for migration preparation.
+
+#### How we checked it
+
+Not tested yet at Step 67. For Step 67, the proposed way to check migration preparation was to run the appropriate Django migration or model check and inspect its result in the terminal. Step 67 did not establish a successful outcome for migration preparation.
+
+#### Next
+
+[Step 66: Django Authentication](#step-66) · [Step 68: Database Reset](../Module-1/02-database-setup-and-admin-site.md#step-68)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **accounts app and custom user model** was needed at this point, and describe what the application did differently after the final step of this chapter.
