@@ -26,6 +26,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 14: Initialize Git for the private journal](#step-14)
 - [Step 15: Connect it to GitHub](#step-15)
 - [Step 16: Stage the journal for Git](#step-16)
+- [Step 17: Understand staging versus committing](#step-17)
 
 ---
 
@@ -533,3 +534,50 @@ Not tested yet at Step 16. For Step 16, the proposed way to check stage the jour
 #### Next
 
 [Step 15: Connect it to GitHub](#step-15) · [Step 17: Understand staging versus committing](#step-17)
+
+
+---
+
+<a id="step-17"></a>
+
+### Step 17: Understand staging versus committing
+
+#### Before this step
+
+While learning Git, we needed an example that made “edit a file” different from “save an edit in Git.”. Immediately before this, Step 16 dealt with stage the journal for git; the work here continued the same part of the application.
+
+#### What we did and why
+
+Changing views.py changes the working file, but Git does not create a snapshot automatically. You must stage and commit. The code discussed here was used to explain that difference; it was not the start of a new inventory feature.
+
+#### Code and commands
+
+**Step 17, block 1.** This code sample or terminal command was used while working on understand staging versus committing. The content below remains in its original sequence for Step 17, block 1.
+
+```bash
+git add views.py
+```
+
+**Step 17, block 2.** This code sample or terminal command was used while working on understand staging versus committing. The content below remains in its original sequence for Step 17, block 2.
+
+```bash
+git commit -m "Add inventory views"
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 17, understand staging versus committing involved `views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git add views.py` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (bash, 1 lines).** In Step 17, understand staging versus committing involved `views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git commit -m "Add inventory views"` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 17. For Step 17, the proposed way to check understand staging versus committing was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 18 before a complete result could be claimed.
+
+#### Next
+
+[Step 16: Stage the journal for Git](#step-16) · [Step 18: Stage the private journal](#step-18)
