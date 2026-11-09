@@ -20,6 +20,7 @@ Creating an employee and letting the employee choose a password are separate mom
 - [Step 129: Connect Employee Form](#step-129)
 - [Step 130: Welcome Email Template](#step-130)
 - [Step 131: Secure Password-Setup Link](#step-131)
+- [Step 132: Send Welcome Email](#step-132)
 
 ---
 
@@ -260,3 +261,73 @@ Not tested yet at Step 131. For Step 131, the proposed way to check secure passw
 #### Next
 
 [Step 130: Welcome Email Template](#step-130) · [Step 132: Send Welcome Email](#step-132)
+
+
+---
+
+<a id="step-132"></a>
+
+### Step 132: Send Welcome Email
+
+#### Before this step
+
+We could build the link. We still needed one place in the code that prepares and sends the complete welcome message. Immediately before this, Step 131 dealt with secure password-setup link; the work here continued the same part of the application.
+
+#### What we did and why
+
+The helper fills the email template with the employee's details and passes it to Django's mail function. Whether the result appears in the terminal or goes to Gmail depends on the email setting chosen elsewhere.
+
+#### Code and commands
+
+**Step 132, block 1.** This code sample or terminal command was used while working on send welcome email. The content below remains in its original sequence for Step 132, block 1.
+
+```python
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+```
+
+**Step 132, block 2.** This code sample or terminal command was used while working on send welcome email. The content below remains in its original sequence for Step 132, block 2.
+
+```python
+def send_welcome_email(request, user):
+    setup_link = generate_setup_link(request, user)
+
+    message = render_to_string(
+        'accounts/welcome_email.txt',
+        {
+            'first_name': user.first_name or user.username,
+            'username': user.username,
+            'setup_link': setup_link
+        }
+    )
+
+    send_mail(
+        'Welcome to Inventory System',
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [user.email]
+    )
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 132, send welcome email involved `accounts/utils.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `from django.conf import settings` makes a Python function, class or module available to the code that follows. `from django.core.mail import send_mail` makes a Python function, class or module available to the code that follows. `from django.template.loader import render_to_string` makes a Python function, class or module available to the code that follows.
+
+**Block 2 (python, 18 lines).** In Step 132, send welcome email involved `accounts/utils.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `def send_welcome_email(request, user):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `setup_link = generate_setup_link(request, user)` sets the named value used by the next operation in this file. `message = render_to_string(` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** The lines starting with `'username': user.username,` supply the values or page content for this part of accounts/utils.py. These lines are kept together because their order and indentation matter.
+
+**Lines 15–18:** `settings.DEFAULT_FROM_EMAIL,` reads one of the Django configuration values used by this feature.
+
+#### How we checked it
+
+Not tested yet at Step 132. For Step 132, the proposed way to check send welcome email was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 133 before a complete result could be claimed.
+
+#### Next
+
+[Step 131: Secure Password-Setup Link](#step-131) · [Step 133: Automatic Welcome Email](#step-133)

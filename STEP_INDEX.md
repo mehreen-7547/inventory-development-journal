@@ -133,3 +133,4 @@
 | 129 | Module 1, Chapter 11 | [ Connect Employee Form ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-129) |
 | 130 | Module 1, Chapter 11 | [ Welcome Email Template ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-130) |
 | 131 | Module 1, Chapter 11 | [ Secure Password-Setup Link ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-131) |
+| 132 | Module 1, Chapter 11 | [ Send Welcome Email ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-132) |
