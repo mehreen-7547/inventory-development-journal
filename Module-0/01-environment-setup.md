@@ -19,6 +19,7 @@ Think of this as setting up the desk and tools before starting a piece of work. 
 - [Step 1: Check Python](#step-1)
 - [Step 2: Create the virtual environment](#step-2)
 - [Step 3: Install Django and required packages](#step-3)
+- [Step 4: Create the configuration file](#step-4)
 
 ---
 
@@ -189,3 +190,50 @@ Not tested yet at Step 3. For Step 3, the proposed way to check install django a
 #### Next
 
 [Step 2: Create the virtual environment](#step-2) · [Step 4: Create the configuration file](#step-4)
+
+
+---
+
+<a id="step-4"></a>
+
+### Step 4: Create the configuration file
+
+#### Before this step
+
+Our program will need some values that can differ between computers, such as local settings and private keys. We did not want to hard-code those values into files shared on GitHub. Immediately before this, Step 3 dealt with install django and required packages; the work here continued the same part of the application.
+
+#### What we did and why
+
+The example configuration file is a blank template with the right variable names. Copying it creates a local working file. The example can be shared; the working copy may contain private information and should not be uploaded.
+
+#### Code and commands
+
+**Step 4, block 1.** This code sample or terminal command was used while working on create the configuration file. The content below remains in its original sequence for Step 4, block 1.
+
+```powershell
+Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+**Step 4, block 2.** This code sample or terminal command was used while working on create the configuration file. The content below remains in its original sequence for Step 4, block 2.
+
+```powershell
+.\.venv\Scripts\python.exe
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 4, create the configuration file involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_invent` supply the values or page content for this part of VS Code terminal / project setup. These lines are kept together because their order and indentation matter.
+
+**Block 2 (powershell, 1 lines).** In Step 4, create the configuration file involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `.\.venv\Scripts\python.exe` supply the values or page content for this part of VS Code terminal / project setup. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 4. For Step 4, the proposed way to check create the configuration file was to revisit `VS Code terminal / project setup` and run the corresponding command or feature to see its result. Development continued in Step 5 before a complete result could be claimed.
+
+#### Next
+
+[Step 3: Install Django and required packages](#step-3) · [Step 5: Understand the Django project folders](#step-5)
