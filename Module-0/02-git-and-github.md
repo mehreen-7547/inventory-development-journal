@@ -20,6 +20,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 8: Stage the project files](#step-8)
 - [Step 9: Create our first Git commit](#step-9)
 - [Step 10: Connect your local project to GitHub](#step-10)
+- [Step 11: Connect your local project to GitHub](#step-11)
 
 ---
 
@@ -227,3 +228,61 @@ Not tested yet at Step 10. For Step 10, the proposed way to check connect your l
 #### Next
 
 [Step 9: Create our first Git commit](#step-9) · [Step 11: Connect your local project to GitHub](#step-11)
+
+
+---
+
+<a id="step-11"></a>
+
+### Step 11: Connect your local project to GitHub
+
+#### Before this step
+
+Because we also had a separate learning journal, we checked that the project folder was connected to the correct GitHub destination. Immediately before this, Step 10 dealt with connect your local project to github; the work here continued the same part of the application.
+
+#### What we did and why
+
+The same Git command can point two folders to different repositories. This check was about avoiding a mix-up: application code belongs in the application repository, and private notes belong in the journal repository.
+
+#### Code and commands
+
+**Step 11, block 1.** This code sample or terminal command was used while working on connect your local project to github. The content below remains in its original sequence for Step 11, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
+```
+
+**Step 11, block 2.** This code sample or terminal command was used while working on connect your local project to github. The content below remains in its original sequence for Step 11, block 2.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote -v
+```
+
+**Step 11, block 3.** This output was used while working on connect your local project to github. The content below remains in its original sequence for Step 11, block 3.
+
+```text
+origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (fetch)
+origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (push)
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 11, connect your local project to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/me` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 11, connect your local project to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic remote -v` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (text, 2 lines).** In Step 11, connect your local project to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 11, output block 3 showed the result rather than another command. Its visible value was `origin  https://github.com/mehreen-7547/ai-assisted-inventory-manager.git (fetch)`, which mattered for connect your local project to github.
+
+#### How we checked it
+
+Not tested yet at Step 11. For Step 11, the proposed way to check connect your local project to github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 12 before a complete result could be claimed.
+
+#### Next
+
+[Step 10: Connect your local project to GitHub](#step-10) · [Step 12: Push your first commit to GitHub](#step-12)

@@ -12,3 +12,4 @@
 | 8 | Module 0, Chapter 2 | [ Stage the project files ](Module-0/02-git-and-github.md#step-8) |
 | 9 | Module 0, Chapter 2 | [ Create our first Git commit ](Module-0/02-git-and-github.md#step-9) |
 | 10 | Module 0, Chapter 2 | [ Connect your local project to GitHub ](Module-0/02-git-and-github.md#step-10) |
+| 11 | Module 0, Chapter 2 | [ Connect your local project to GitHub ](Module-0/02-git-and-github.md#step-11) |
