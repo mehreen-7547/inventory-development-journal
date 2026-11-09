@@ -251,3 +251,7 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 245 | M2 · Ch 1 | [Create the Supplier List template](Module-2/01-supplier-setup-and-list.md#step-245) |
 | 246 | M2 · Ch 1 | [Connect the Supplier URL](Module-2/01-supplier-setup-and-list.md#step-246) |
 | 247 | M2 · Ch 1 | [Diagnose the missing SQLite table and verify the page](Module-2/01-supplier-setup-and-list.md#step-247) |
+| 248 | M2 · Ch 2 | [Create the Manager-only Supplier Create view](Module-2/02-create-supplier.md#step-248) |
+| 249 | M2 · Ch 2 | [Create the Add Supplier HTML form](Module-2/02-create-supplier.md#step-249) |
+| 250 | M2 · Ch 2 | [Register the Add Supplier URL and test saving](Module-2/02-create-supplier.md#step-250) |
+| 251 | M2 · Ch 2 | [Add the Add Supplier link to the list page](Module-2/02-create-supplier.md#step-251) |
