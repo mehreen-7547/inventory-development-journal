@@ -18,6 +18,7 @@ The report explains the work to a human reader. The tag is a bookmark in Git. Ne
 
 - [Step 46: Update Module 0 Report](#step-46)
 - [Step 47: Stage Documentation](#step-47)
+- [Step 48: Commit Documentation](#step-48)
 
 ---
 
@@ -173,3 +174,40 @@ Not tested yet at Step 47. For Step 47, the proposed way to check stage document
 #### Next
 
 [Step 46: Update Module 0 Report](#step-46) · [Step 48: Commit Documentation](#step-48)
+
+
+---
+
+<a id="step-48"></a>
+
+### Step 48: Commit Documentation
+
+#### Before this step
+
+We now had a complete staged set of Module 0 documentation. Immediately before this, Step 47 dealt with stage documentation; the work here continued the same part of the application.
+
+#### What we did and why
+
+The commit saved this state of the report in the local journal history. If the report is edited later, this version can still be found.
+
+#### Code and commands
+
+**Step 48, block 1.** This code sample or terminal command was used while working on commit documentation. The content below remains in its original sequence for Step 48, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: record Module 0 verification and AI feasibility results"
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 48, commit documentation involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "docs: record Module 0 verifi` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 48. For Step 48, the proposed way to check commit documentation was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 49 before a complete result could be claimed.
+
+#### Next
+
+[Step 47: Stage Documentation](#step-47) · [Step 49: Push Documentation](#step-49)
