@@ -93,3 +93,4 @@
 | 89 | Module 1, Chapter 6 | [ Password Change Form ](Module-1/06-password-change.md#step-89) |
 | 90 | Module 1, Chapter 6 | [ Change Password Link ](Module-1/06-password-change.md#step-90) |
 | 91 | Module 1, Chapter 7 | [ Role-Based Homepage ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-91) |
+| 92 | Module 1, Chapter 7 | [ Admin Link Visibility ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-92) |

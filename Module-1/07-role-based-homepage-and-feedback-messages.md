@@ -17,6 +17,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 ### Find a step
 
 - [Step 91: Role-Based Homepage](#step-91)
+- [Step 92: Admin Link Visibility](#step-92)
 
 ---
 
@@ -63,3 +64,52 @@ Not tested yet at Step 91. For Step 91, the proposed way to check role-based hom
 #### Next
 
 [Step 90: Change Password Link](../Module-1/06-password-change.md#step-90) · [Step 92: Admin Link Visibility](#step-92)
+
+
+---
+
+<a id="step-92"></a>
+
+### Step 92: Admin Link Visibility
+
+#### Before this step
+
+The administrator link should not tempt a manager or sales employee to open a page they cannot use. Immediately before this, Step 91 dealt with role-based homepage; the work here continued the same part of the application.
+
+#### What we did and why
+
+The template can hide a link when the current person's role is not Admin. This improves the interface, but hiding a link is not a security check; the server must still protect the target page.
+
+#### Code and commands
+
+**Step 92, block 1.** This code sample or terminal command was used while working on admin link visibility. The content below remains in its original sequence for Step 92, block 1.
+
+```html
+<p><a href="/admin/">Open Django admin</a></p>
+```
+
+**Step 92, block 2.** This code sample or terminal command was used while working on admin link visibility. The content below remains in its original sequence for Step 92, block 2.
+
+```html
+{% if request.user.is_staff %}
+    <p><a href="/admin/">Open Django admin</a></p>
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 92, admin link visibility involved `core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The link `<p><a href="/admin/">Open Django admin</a></p>` lets the user navigate to the named screen from this page.
+
+**Block 2 (html, 3 lines).** In Step 92, admin link visibility involved `core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `{% if request.user.is_staff %}` decides which HTML is included based on the value Django provided. The link `<p><a href="/admin/">Open Django admin</a></p>` lets the user navigate to the named screen from this page.
+
+#### How we checked it
+
+Not tested yet at Step 92. For Step 92, the proposed way to check admin link visibility was to revisit `core/home.html` and run the corresponding command or feature to see its result. Development continued in Step 93 before a complete result could be claimed.
+
+#### Next
+
+[Step 91: Role-Based Homepage](#step-91) · [Step 93: Why hiding a link does not secure Django Admin](#step-93)
