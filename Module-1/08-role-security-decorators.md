@@ -17,6 +17,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 ### Find a step
 
 - [Step 100: Role Security](#step-100)
+- [Step 101: Understand nested decorator functions](#step-101)
 
 ---
 
@@ -86,3 +87,141 @@ Not tested yet at Step 100. For Step 100, the proposed way to check role securit
 #### Next
 
 [Step 99: Commit Changes](../Module-1/07-role-based-homepage-and-feedback-messages.md#step-99) · [Step 101: Understand nested decorator functions](#step-101)
+
+
+---
+
+<a id="step-101"></a>
+
+### Step 101: Understand nested decorator functions
+
+#### Before this step
+
+The decorator had several nested functions, so the order of execution was difficult to picture. Immediately before this, Step 100 dealt with role security; the work here continued the same part of the application.
+
+#### What we did and why
+
+Think of a security guard standing before a room. The outside function sets up which roles may enter. When someone requests the page, the guard checks the current user before letting the actual view run.
+
+#### Code and commands
+
+**Step 101, block 1.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 1.
+
+```python
+def role_required(*roles):
+    def decorator(view_func):
+        def wrapper(request, *args, **kwargs):
+            return view_func(request, *args, **kwargs)
+
+        return wrapper
+
+    return decorator
+```
+
+**Step 101, block 2.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 2.
+
+```python
+@role_required('admin', 'manager')
+def inventory_report(request):
+    return ...
+```
+
+**Step 101, block 3.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 3.
+
+```python
+def role_required(*roles):
+```
+
+**Step 101, block 4.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 4.
+
+```python
+    def decorator(view_func):
+```
+
+**Step 101, block 5.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 5.
+
+```python
+    return decorator
+```
+
+**Step 101, block 6.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 6.
+
+```python
+def decorator(view_func):
+```
+
+**Step 101, block 7.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 7.
+
+```python
+    def wrapper(request, *args, **kwargs):
+```
+
+**Step 101, block 8.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 8.
+
+```python
+    return wrapper
+```
+
+**Step 101, block 9.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 9.
+
+```python
+def wrapper(request, *args, **kwargs):
+```
+
+**Step 101, block 10.** This code sample or terminal command was used while working on understand nested decorator functions. The content below remains in its original sequence for Step 101, block 10.
+
+```python
+return view_func(request, *args, **kwargs)
+```
+
+#### How the code works
+
+**Block 1 (python, 8 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `def role_required(*roles):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `def decorator(view_func):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `def wrapper(request, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `return view_func(request, *args, **kwargs)` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Lines 8–8:** `return decorator` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 2 (python, 3 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `@role_required('admin', 'manager')` adds a check or behaviour around the view before Django runs the view itself. `def inventory_report(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `return ...` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 3 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `def role_required(*roles):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 4 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `def decorator(view_func):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 5 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return decorator` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 6 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `def decorator(view_func):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 7 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `def wrapper(request, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 8 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return wrapper` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 9 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `def wrapper(request, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 10 (python, 1 lines).** In Step 101, understand nested decorator functions involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return view_func(request, *args, **kwargs)` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 101. For Step 101, the proposed way to check understand nested decorator functions was to revisit `the Django project files` and run the corresponding command or feature to see its result. Development continued in Step 102 before a complete result could be claimed.
+
+#### Next
+
+[Step 100: Role Security](#step-100) · [Step 102: Trace the decorator execution order](#step-102)
