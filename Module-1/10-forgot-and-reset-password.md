@@ -24,6 +24,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 118: Password Reset Email](#step-118)
 - [Step 119: Connect Email Template](#step-119)
 - [Step 120: Connect Email Subject](#step-120)
+- [Step 121: Set New Password Page](#step-121)
 
 ---
 
@@ -457,3 +458,85 @@ Not tested yet at Step 120. For Step 120, the proposed way to check connect emai
 #### Next
 
 [Step 119: Connect Email Template](#step-119) · [Step 121: Set New Password Page](#step-121)
+
+
+---
+
+<a id="step-121"></a>
+
+### Step 121: Set New Password Page
+
+#### Before this step
+
+The recipient clicked a reset link. We now needed the screen where the replacement password could be entered. Immediately before this, Step 120 dealt with connect email subject; the work here continued the same part of the application.
+
+#### What we did and why
+
+The confirmation template displays Django's new-password form. Django checks whether the link is valid before allowing the actual password update.
+
+#### Code and commands
+
+**Step 121, block 1.** This code sample or terminal command was used while working on set new password page. The content below remains in its original sequence for Step 121, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set New Password</title>
+</head>
+<body>
+
+    {% if validlink %}
+
+        <h2>Set New Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">Reset Password</button>
+        </form>
+
+    {% else %}
+
+        <h2>Invalid Reset Link</h2>
+
+        <p>
+            This password reset link is invalid or has expired.
+            Please request a new one.
+        </p>
+
+        <a href="{% url 'password_reset' %}">
+            Request New Link
+        </a>
+
+    {% endif %}
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 36 lines).** In Step 121, set new password page involved `templates/accounts/password_reset_confirm.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Set New Password</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** `{% if validlink %}` decides which HTML is included based on the value Django provided. The HTML element `<h2>Set New Password</h2>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 15–21:** `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `<button type="submit">Reset Password</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `<h2>Invalid Reset Link</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** `<a href="{% url 'password_reset' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</body>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–36:** The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 121. For Step 121, the proposed way to check set new password page was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/password_reset_confirm.html`. Development continued in Step 122 before a complete result could be claimed.
+
+#### Next
+
+[Step 120: Connect Email Subject](#step-120) · [Step 122: Reset Link URL](#step-122)
