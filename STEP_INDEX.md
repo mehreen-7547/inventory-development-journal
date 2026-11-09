@@ -87,3 +87,4 @@
 | 83 | Module 1, Chapter 5 | [ Protect Homepage ](Module-1/05-homepage-protection-and-navigation.md#step-83) |
 | 84 | Module 1, Chapter 5 | [ Display User Details ](Module-1/05-homepage-protection-and-navigation.md#step-84) |
 | 85 | Module 1, Chapter 5 | [ Login Page Check ](Module-1/05-homepage-protection-and-navigation.md#step-85) |
+| 86 | Module 1, Chapter 6 | [ Change Password ](Module-1/06-password-change.md#step-86) |
