@@ -20,6 +20,7 @@ Imagine keeping a notebook of checks performed before accepting more changes. We
 - [Step 38: Committing Security Verification Notes](#step-38)
 - [Step 39: Pushing Security Verification Notes](#step-39)
 - [Step 40: Understand feasibility models](#step-40)
+- [Step 41: Record and Push Test Results](#step-41)
 
 ---
 
@@ -188,3 +189,129 @@ For Step 40 (Understand feasibility models), we compared the visible terminal ou
 #### Next
 
 [Step 39: Pushing Security Verification Notes](#step-39) · [Step 41: Record and Push Test Results](#step-41)
+
+
+---
+
+<a id="step-41"></a>
+
+### Step 41: Record and Push Test Results
+
+#### Before this step
+
+We had early experiment results and wanted a written record of what worked and what did not. Immediately before this, Step 40 dealt with understand feasibility models; the work here continued the same part of the application.
+
+#### What we did and why
+
+Documenting the result prevents us from forgetting the conditions of the test. This step saved and uploaded notes; it did not make a forecasting model available inside the Django website.
+
+#### Code and commands
+
+**Step 41, block 1.** This code sample or terminal command was used while working on record and push test results. The content below remains in its original sequence for Step 41, block 1.
+
+```powershell
+Add-Content -Path "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Module 0 — Django Automated Testing
+
+### Objective
+Verify that the initial Django setup and proposed SQLite stock-update approach work correctly.
+
+### Command
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
+
+### Command Explanation
+- python: Executes Python.
+- .\: Refers to the current directory.
+- manage.py: Django's management script.
+- test: Runs automated tests.
+- core: Limits testing to the core Django app.
+
+### Tests Performed
+1. Homepage returns HTTP 200.
+2. Django uses the Asia/Kolkata timezone.
+3. SQLite database connection works.
+4. Conditional stock deduction refuses a second sale when stock is exhausted.
+5. A failed database transaction rolls back its stock deduction.
+
+### Actual Results
+Found 5 test(s).
+System check identified no issues (0 silenced).
+Ran 5 tests in 0.084s
+OK
+
+### Important Observations
+- No permanent inventory models or tables have been created yet.
+- Tests 4 and 5 use temporary ExampleProduct models and database tables.
+- Django creates and destroys a separate test database.
+- The existing development database and superuser remain unaffected.
+- The stock test is sequential; it does not establish simultaneous-request safety.
+
+### Errors
+None.
+
+### Status
+PASS — All five Module 0 tests completed successfully.
+'@
+```
+
+**Step 41, block 2.** This code sample or terminal command was used while working on record and push test results. The content below remains in its original sequence for Step 41, block 2.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**Step 41, block 3.** This code sample or terminal command was used while working on record and push test results. The content below remains in its original sequence for Step 41, block 3.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal commit -m "docs: record Module 0 automated test results"
+```
+
+**Step 41, block 4.** This code sample or terminal command was used while working on record and push test results. The content below remains in its original sequence for Step 41, block 4.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push
+```
+
+#### How the code works
+
+**Block 1 (powershell, 43 lines).** In Step 41, record and push test results involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `## Module 0 — Django Automated Testing` explains the intention of the following section; it does not execute as application logic. The comment `### Objective` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 8–14:** The comment `### Command` explains the intention of the following section; it does not execute as application logic. The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core` starts Python or one of its tools from the development terminal. The comment `### Command Explanation` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 15–21:** The comment `### Tests Performed` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 22–28:** The comment `### Actual Results` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 29–35:** The comment `### Important Observations` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 36–42:** The comment `### Errors` explains the intention of the following section; it does not execute as application logic. The comment `### Status` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 43–43:** The lines starting with `'@` supply the values or page content for this part of inventory-development-journal.md. These lines are kept together because their order and indentation matter.
+
+**Block 2 (powershell, 1 lines).** In Step 41, record and push test results involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inven` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (powershell, 1 lines).** In Step 41, record and push test results involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal commit -m` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 4 (powershell, 1 lines).** In Step 41, record and push test results involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 41. For Step 41, the proposed way to check record and push test results was to run `git status` and inspect the local or remote history for the expected change. Step 41 did not establish a successful outcome for record and push test results.
+
+#### Next
+
+[Step 40: Understand feasibility models](#step-40) · [Step 42: Installing PyTorch](../Module-0/06-ai-forecasting-feasibility-test.md#step-42)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **security checks** was needed at this point, and describe what the application did differently after the final step of this chapter.
