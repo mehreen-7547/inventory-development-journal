@@ -27,6 +27,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 15: Connect it to GitHub](#step-15)
 - [Step 16: Stage the journal for Git](#step-16)
 - [Step 17: Understand staging versus committing](#step-17)
+- [Step 18: Stage the private journal](#step-18)
 
 ---
 
@@ -581,3 +582,60 @@ Not tested yet at Step 17. For Step 17, the proposed way to check understand sta
 #### Next
 
 [Step 16: Stage the journal for Git](#step-16) · [Step 18: Stage the private journal](#step-18)
+
+
+---
+
+<a id="step-18"></a>
+
+### Step 18: Stage the private journal
+
+#### Before this step
+
+After that explanation, we returned to our actual journal folder and selected the journal file for saving. Immediately before this, Step 17 dealt with understand staging versus committing; the work here continued the same part of the application.
+
+#### What we did and why
+
+This repeated staging step mattered because we were working with two separate Git repositories. It made sure the journal, not the application code, was the file being prepared.
+
+#### Code and commands
+
+**Step 18, block 1.** This code sample or terminal command was used while working on stage the private journal. The content below remains in its original sequence for Step 18, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+**Step 18, block 2.** This code sample or terminal command was used while working on stage the private journal. The content below remains in its original sequence for Step 18, block 2.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal diff --cached --name-only
+```
+
+**Step 18, block 3.** This output was used while working on stage the private journal. The content below remains in its original sequence for Step 18, block 3.
+
+```text
+inventory-development-journal.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 18, stage the private journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inven` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 18, stage the private journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal diff --ca` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (text, 1 lines).** In Step 18, stage the private journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 18, output block 3 showed the result rather than another command. Its visible value was `inventory-development-journal.md`, which mattered for stage the private journal.
+
+#### How we checked it
+
+Not tested yet at Step 18. For Step 18, the proposed way to check stage the private journal was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 19 before a complete result could be claimed.
+
+#### Next
+
+[Step 17: Understand staging versus committing](#step-17) · [Step 19: Commit the private development journal](#step-19)

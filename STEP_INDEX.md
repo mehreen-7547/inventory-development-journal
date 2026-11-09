@@ -19,3 +19,4 @@
 | 15 | Module 0, Chapter 2 | [ Connect it to GitHub ](Module-0/02-git-and-github.md#step-15) |
 | 16 | Module 0, Chapter 2 | [ Stage the journal for Git ](Module-0/02-git-and-github.md#step-16) |
 | 17 | Module 0, Chapter 2 | [ Understand staging versus committing ](Module-0/02-git-and-github.md#step-17) |
+| 18 | Module 0, Chapter 2 | [ Stage the private journal ](Module-0/02-git-and-github.md#step-18) |
