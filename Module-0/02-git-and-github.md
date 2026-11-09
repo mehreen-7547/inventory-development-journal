@@ -29,6 +29,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 17: Understand staging versus committing](#step-17)
 - [Step 18: Stage the private journal](#step-18)
 - [Step 19: Commit the private development journal](#step-19)
+- [Step 20: Push your journal to private GitHub](#step-20)
 
 ---
 
@@ -698,3 +699,40 @@ Not tested yet at Step 19. For Step 19, the proposed way to check commit the pri
 #### Next
 
 [Step 18: Stage the private journal](#step-18) · [Step 20: Push your journal to private GitHub](#step-20)
+
+
+---
+
+<a id="step-20"></a>
+
+### Step 20: Push your journal to private GitHub
+
+#### Before this step
+
+The journal commit was safe locally but still absent from its GitHub repository. Immediately before this, Step 19 dealt with commit the private development journal; the work here continued the same part of the application.
+
+#### What we did and why
+
+Pushing copies the saved journal version to its online destination. It does not publish the Django application or merge the two repositories.
+
+#### Code and commands
+
+**Step 20, block 1.** This code sample or terminal command was used while working on push your journal to private github. The content below remains in its original sequence for Step 20, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push -u origin main
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 20, push your journal to private github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push -u o` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 20. For Step 20, the proposed way to check push your journal to private github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 21 before a complete result could be claimed.
+
+#### Next
+
+[Step 19: Commit the private development journal](#step-19) · [Step 21: Understand local and remote main branches](#step-21)
