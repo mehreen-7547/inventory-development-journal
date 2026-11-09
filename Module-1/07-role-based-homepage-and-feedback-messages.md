@@ -18,6 +18,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 
 - [Step 91: Role-Based Homepage](#step-91)
 - [Step 92: Admin Link Visibility](#step-92)
+- [Step 93: Why hiding a link does not secure Django Admin](#step-93)
 
 ---
 
@@ -113,3 +114,42 @@ Not tested yet at Step 92. For Step 92, the proposed way to check admin link vis
 #### Next
 
 [Step 91: Role-Based Homepage](#step-91) · [Step 93: Why hiding a link does not secure Django Admin](#step-93)
+
+
+---
+
+<a id="step-93"></a>
+
+### Step 93: Why hiding a link does not secure Django Admin
+
+#### Before this step
+
+We had hidden admin-related navigation from other roles. We needed to make sure nobody thought that meant Django Admin was now protected by our custom template rule. Immediately before this, Step 92 dealt with admin link visibility; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django Admin has its own permission checks. A user could type its URL directly, so access must be checked on the server. Menu visibility and permission are two separate things.
+
+#### Code and commands
+
+**Step 93, block 1.** This code sample or terminal command was used while working on why hiding a link does not secure django admin. The content below remains in its original sequence for Step 93, block 1.
+
+```html
+{% if request.user.is_staff %}
+    <p><a href="/admin/">Open Django admin</a></p>
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 3 lines).** In Step 93, why hiding a link does not secure django admin involved `home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `{% if request.user.is_staff %}` decides which HTML is included based on the value Django provided. The link `<p><a href="/admin/">Open Django admin</a></p>` lets the user navigate to the named screen from this page.
+
+#### How we checked it
+
+Not tested yet at Step 93. For Step 93, the proposed way to check why hiding a link does not secure django admin was to revisit `home.html` and run the corresponding command or feature to see its result. Development continued in Step 94 before a complete result could be claimed.
+
+#### Next
+
+[Step 92: Admin Link Visibility](#step-92) · [Step 94: Verify manager access is restricted](#step-94)
