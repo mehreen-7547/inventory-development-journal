@@ -19,6 +19,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 - [Step 73: Login View](#step-73)
 - [Step 74: Understand models.py versus admin.py](#step-74)
 - [Step 75: Login Page](#step-75)
+- [Step 76: Login URL](#step-76)
 
 ---
 
@@ -201,3 +202,45 @@ Not tested yet at Step 75. For Step 75, the proposed way to check login page was
 #### Next
 
 [Step 74: Understand models.py versus admin.py](#step-74) · [Step 76: Login URL](#step-76)
+
+
+---
+
+<a id="step-76"></a>
+
+### Step 76: Login URL
+
+#### Before this step
+
+We had a login function and a login page, but no web address linked to them yet. Immediately before this, Step 75 dealt with login page; the work here continued the same part of the application.
+
+#### What we did and why
+
+A URL rule maps an address such as /accounts/login/ to a view. Adding it in the accounts app is like putting a signpost in front of an existing room.
+
+#### Code and commands
+
+**Step 76, block 1.** This code sample or terminal command was used while working on login url. The content below remains in its original sequence for Step 76, block 1.
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+]
+```
+
+#### How the code works
+
+**Block 1 (python, 6 lines).** In Step 76, login url involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–6:** `from django.urls import path` makes a Python function, class or module available to the code that follows. `from . import views` makes a Python function, class or module available to the code that follows. `urlpatterns = [` sets the named value used by the next operation in this file. `path('login/', views.loginpage, name='login'),` begins a URL rule connecting a browser address with the function that answers it.
+
+#### How we checked it
+
+Not tested yet at Step 76. For Step 76, the proposed way to check login url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 77 before a complete result could be claimed.
+
+#### Next
+
+[Step 75: Login Page](#step-75) · [Step 77: Connect Login URL](#step-77)
