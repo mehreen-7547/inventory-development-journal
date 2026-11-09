@@ -26,6 +26,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 63: Understanding AbstractUser](#step-63)
 - [Step 64: Inspect Django’s built-in User model](#step-64)
 - [Step 65: AUTH_USER_MODEL](#step-65)
+- [Step 66: Django Authentication](#step-66)
 
 ---
 
@@ -549,3 +550,80 @@ Not tested yet at Step 65. For Step 65, the proposed way to check auth_user_mode
 #### Next
 
 [Step 64: Inspect Django’s built-in User model](#step-64) · [Step 66: Django Authentication](#step-66)
+
+
+---
+
+<a id="step-66"></a>
+
+### Step 66: Django Authentication
+
+#### Before this step
+
+After creating the custom user, we reviewed how the rest of Django's login machinery would use it. Immediately before this, Step 65 dealt with auth_user_model; the work here continued the same part of the application.
+
+#### What we did and why
+
+Authentication asks “who is this person?” Django checks usernames and passwords against the configured user model. Role checks, added later, will ask the separate question “what is this person allowed to do?”.
+
+#### Code and commands
+
+**Step 66, block 1.** This code sample or terminal command was used while working on django authentication. The content below remains in its original sequence for Step 66, block 1.
+
+```python
+AUTH_USER_MODEL = "auth.User"
+```
+
+**Step 66, block 2.** This code sample or terminal command was used while working on django authentication. The content below remains in its original sequence for Step 66, block 2.
+
+```powershell
+python manage.py check
+```
+
+**Step 66, block 3.** This output was used while working on django authentication. The content below remains in its original sequence for Step 66, block 3.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+**Step 66, block 4.** This code sample or terminal command was used while working on django authentication. The content below remains in its original sequence for Step 66, block 4.
+
+```powershell
+python manage.py check
+```
+
+**Step 66, block 5.** This output was used while working on django authentication. The content below remains in its original sequence for Step 66, block 5.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 66, django authentication involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `AUTH_USER_MODEL = "auth.User"` sets the named value used by the next operation in this file.
+
+**Block 2 (powershell, 1 lines).** In Step 66, django authentication involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py check` starts Python or one of its tools from the development terminal.
+
+**Block 3 (text, 1 lines).** In Step 66, django authentication involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 66, output block 3 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for django authentication.
+
+**Block 4 (powershell, 1 lines).** In Step 66, django authentication involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py check` starts Python or one of its tools from the development terminal.
+
+**Block 5 (text, 1 lines).** In Step 66, django authentication involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 66, output block 5 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for django authentication.
+
+#### How we checked it
+
+Not tested yet at Step 66. For Step 66, the proposed way to check django authentication was to revisit `settings.py` and run the corresponding command or feature to see its result. Development continued in Step 67 before a complete result could be claimed.
+
+#### Next
+
+[Step 65: AUTH_USER_MODEL](#step-65) · [Step 67: Migration Preparation](#step-67)
