@@ -89,3 +89,4 @@
 | 85 | Module 1, Chapter 5 | [ Login Page Check ](Module-1/05-homepage-protection-and-navigation.md#step-85) |
 | 86 | Module 1, Chapter 6 | [ Change Password ](Module-1/06-password-change.md#step-86) |
 | 87 | Module 1, Chapter 6 | [ Walk through password change ](Module-1/06-password-change.md#step-87) |
+| 88 | Module 1, Chapter 6 | [ Password Change URL ](Module-1/06-password-change.md#step-88) |

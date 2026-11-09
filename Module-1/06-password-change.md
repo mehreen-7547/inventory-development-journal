@@ -18,6 +18,7 @@ The page first asks for the old password and the new one. Django checks the form
 
 - [Step 86: Change Password](#step-86)
 - [Step 87: Walk through password change](#step-87)
+- [Step 88: Password Change URL](#step-88)
 
 ---
 
@@ -219,3 +220,44 @@ Not tested yet at Step 87. For Step 87, the proposed way to check walk through p
 #### Next
 
 [Step 86: Change Password](#step-86) · [Step 88: Password Change URL](#step-88)
+
+
+---
+
+<a id="step-88"></a>
+
+### Step 88: Password Change URL
+
+#### Before this step
+
+The password-change code existed, but it still needed a public address. Immediately before this, Step 87 dealt with walk through password change; the work here continued the same part of the application.
+
+#### What we did and why
+
+A URL rule points to the password-change view. Naming the URL also lets templates create links without hard-coding a full address.
+
+#### Code and commands
+
+**Step 88, block 1.** This code sample or terminal command was used while working on password change url. The content below remains in its original sequence for Step 88, block 1.
+
+```python
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutpage, name='logout'),
+    path('change-password/', views.changepassword, name='change_password'),
+]
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 88, password change url involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `urlpatterns = [` sets the named value used by the next operation in this file. `path('login/', views.loginpage, name='login'),` begins a URL rule connecting a browser address with the function that answers it. `path('logout/', views.logoutpage, name='logout'),` begins a URL rule connecting a browser address with the function that answers it. `path('change-password/', views.changepassword, name='change_password'),` begins a URL rule connecting a browser address with the function that answers it.
+
+#### How we checked it
+
+Not tested yet at Step 88. For Step 88, the proposed way to check password change url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 89 before a complete result could be claimed.
+
+#### Next
+
+[Step 87: Walk through password change](#step-87) · [Step 89: Password Change Form](#step-89)
