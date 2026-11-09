@@ -21,6 +21,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 - [Step 159: Deactivate/Reactivate Button](#step-159)
 - [Step 160: Resend Setup Email](#step-160)
 - [Step 161: Resend Setup Email URL](#step-161)
+- [Step 162: Resend Setup Email Button](#step-162)
 
 ---
 
@@ -324,3 +325,55 @@ Not tested yet at Step 161. For Step 161, the proposed way to check resend setup
 #### Next
 
 [Step 160: Resend Setup Email](#step-160) · [Step 162: Resend Setup Email Button](#step-162)
+
+
+---
+
+<a id="step-162"></a>
+
+### Step 162: Resend Setup Email Button
+
+#### Before this step
+
+An administrator should be able to request the fresh link from the employee-management screen rather than using Django Admin or the terminal. Immediately before this, Step 161 dealt with resend setup email url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The page gained a resend button for eligible employee accounts. The button starts a server-side action; it does not contain the employee's password or the actual reset token.
+
+#### Code and commands
+
+**Step 162, block 1.** This code sample or terminal command was used while working on resend setup email button. The content below remains in its original sequence for Step 162, block 1.
+
+```html
+{% if employee.is_active and not employee.has_usable_password %}
+
+    <form method="POST"
+          action="{% url 'resend_setup_email' employee.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Resend Setup Email
+        </button>
+
+    </form>
+
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 14 lines).** In Step 162, resend setup email button involved `templates/accounts/edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if employee.is_active and not employee.has_usable_password %}` decides which HTML is included based on the value Django provided. The form sends submitted fields to the server as a POST request, rather than just opening a page. `action="{% url 'resend_setup_email' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 8–14:** The HTML element `<button type="submit">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 162. For Step 162, the proposed way to check resend setup email button was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 163 before a complete result could be claimed.
+
+#### Next
+
+[Step 161: Resend Setup Email URL](#step-161) · [Step 163: Home Page Navigation](#step-163)
