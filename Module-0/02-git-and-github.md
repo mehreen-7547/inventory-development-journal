@@ -18,6 +18,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 
 - [Step 7: Initialize the Git repository](#step-7)
 - [Step 8: Stage the project files](#step-8)
+- [Step 9: Create our first Git commit](#step-9)
 
 ---
 
@@ -141,3 +142,50 @@ Not tested yet at Step 8. For Step 8, the proposed way to check stage the projec
 #### Next
 
 [Step 7: Initialize the Git repository](#step-7) · [Step 9: Create our first Git commit](#step-9)
+
+
+---
+
+<a id="step-9"></a>
+
+### Step 9: Create our first Git commit
+
+#### Before this step
+
+The correct files were now selected. We needed to save the first meaningful version of the project. Immediately before this, Step 8 dealt with stage the project files; the work here continued the same part of the application.
+
+#### What we did and why
+
+A commit is a named snapshot of the selected files. After this, Git can show what changed between this version and later ones. The commit stays on the laptop until we upload it.
+
+#### Code and commands
+
+**Step 9, block 1.** This output was used while working on create our first git commit. The content below remains in its original sequence for Step 9, block 1.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+**Step 9, block 2.** This code sample or terminal command was used while working on create our first git commit. The content below remains in its original sequence for Step 9, block 2.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "chore: initialize Django project (module 0)"
+```
+
+#### How the code works
+
+**Block 1 (text, 1 lines).** In Step 9, create our first git commit involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 9, output block 1 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for create our first git commit.
+
+**Block 2 (powershell, 1 lines).** In Step 9, create our first git commit involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic commit -m "chore: initialize Django pro` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 9. For Step 9, the proposed way to check create our first git commit was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 10 before a complete result could be claimed.
+
+#### Next
+
+[Step 8: Stage the project files](#step-8) · [Step 10: Connect your local project to GitHub](#step-10)
