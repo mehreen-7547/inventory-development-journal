@@ -25,3 +25,4 @@
 | 21 | Module 0, Chapter 2 | [ Understand local and remote main branches ](Module-0/02-git-and-github.md#step-21) |
 | 22 | Module 0, Chapter 2 | [ Apply database migrations ](Module-0/02-git-and-github.md#step-22) |
 | 23 | Module 0, Chapter 2 | [ Update your private development journal ](Module-0/02-git-and-github.md#step-23) |
+| 24 | Module 0, Chapter 2 | [ Stage the updated journal ](Module-0/02-git-and-github.md#step-24) |

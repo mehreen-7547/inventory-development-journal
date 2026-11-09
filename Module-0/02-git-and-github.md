@@ -33,6 +33,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 21: Understand local and remote main branches](#step-21)
 - [Step 22: Apply database migrations](#step-22)
 - [Step 23: Update your private development journal](#step-23)
+- [Step 24: Stage the updated journal](#step-24)
 
 ---
 
@@ -927,3 +928,45 @@ Not tested yet at Step 23. For Step 23, the proposed way to check update your pr
 #### Next
 
 [Step 22: Apply database migrations](#step-22) · [Step 24: Stage the updated journal](#step-24)
+
+
+---
+
+<a id="step-24"></a>
+
+### Step 24: Stage the updated journal
+
+#### Before this step
+
+The new database notes had been written in the journal file but were not yet included in the next Git snapshot. Immediately before this, Step 23 dealt with update your private development journal; the work here continued the same part of the application.
+
+#### What we did and why
+
+Staging selects the updated notes. We followed the same add–commit–push process each time so the journal could be read from GitHub.
+
+#### Code and commands
+
+**Step 24, block 1.** This code sample or terminal command was used while working on stage the updated journal. The content below remains in its original sequence for Step 24, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 24, stage the updated journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inven` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+For Step 24 (Stage the updated journal), we compared the visible terminal output with the requested action. The visible result for Step 24 was described as “was successful”; this only addressed the stage the updated journal check in `inventory-development-journal.md`.
+
+#### Next
+
+[Step 23: Update your private development journal](#step-23) · [Step 25: Committing Development Journal Update](../Module-0/03-database-and-migrations.md#step-25)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **git and github** was needed at this point, and describe what the application did differently after the final step of this chapter.
