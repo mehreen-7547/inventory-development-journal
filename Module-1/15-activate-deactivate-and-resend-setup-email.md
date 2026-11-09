@@ -22,6 +22,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 - [Step 160: Resend Setup Email](#step-160)
 - [Step 161: Resend Setup Email URL](#step-161)
 - [Step 162: Resend Setup Email Button](#step-162)
+- [Step 163: Home Page Navigation](#step-163)
 
 ---
 
@@ -377,3 +378,60 @@ Not tested yet at Step 162. For Step 162, the proposed way to check resend setup
 #### Next
 
 [Step 161: Resend Setup Email URL](#step-161) · [Step 163: Home Page Navigation](#step-163)
+
+
+---
+
+<a id="step-163"></a>
+
+### Step 163: Home Page Navigation
+
+#### Before this step
+
+With employee management added, users needed a way to find it from the homepage. Immediately before this, Step 162 dealt with resend setup email button; the work here continued the same part of the application.
+
+#### What we did and why
+
+We added navigation pointing to the relevant screen for people with permission. This reduces the need to remember URLs manually.
+
+#### Code and commands
+
+**Step 163, block 1.** This code sample or terminal command was used while working on home page navigation. The content below remains in its original sequence for Step 163, block 1.
+
+```html
+<p>Administrator Dashboard</p>
+```
+
+**Step 163, block 2.** This code sample or terminal command was used while working on home page navigation. The content below remains in its original sequence for Step 163, block 2.
+
+```html
+{% if user.role == 'admin' %}
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Manage Employees
+        </a>
+    </p>
+
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 163, home page navigation involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<p>Administrator Dashboard</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 9 lines).** In Step 163, home page navigation involved `core/templates/core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if user.role == 'admin' %}` decides which HTML is included based on the value Django provided. The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–9:** The lines starting with `{% endif %}` supply the values or page content for this part of core/templates/core/home.html. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 163. For Step 163, the proposed way to check home page navigation was to open the related page in the browser and check that the route reached the intended view or template in `core/templates/core/home.html`. Development continued in Step 164 before a complete result could be claimed.
+
+#### Next
+
+[Step 162: Resend Setup Email Button](#step-162) · [Step 164: Home Template Review](#step-164)

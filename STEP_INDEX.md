@@ -164,3 +164,4 @@
 | 160 | Module 1, Chapter 15 | [ Resend Setup Email ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-160) |
 | 161 | Module 1, Chapter 15 | [ Resend Setup Email URL ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-161) |
 | 162 | Module 1, Chapter 15 | [ Resend Setup Email Button ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-162) |
+| 163 | Module 1, Chapter 15 | [ Home Page Navigation ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-163) |
