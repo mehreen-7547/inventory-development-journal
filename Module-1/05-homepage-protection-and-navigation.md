@@ -17,6 +17,7 @@ The main lesson is that protecting a page happens in its Django view. Hiding a m
 ### Find a step
 
 - [Step 83: Protect Homepage](#step-83)
+- [Step 84: Display User Details](#step-84)
 
 ---
 
@@ -58,3 +59,41 @@ Not tested yet at Step 83. For Step 83, the proposed way to check protect homepa
 #### Next
 
 [Step 82: Logout Button](../Module-1/04-logout.md#step-82) · [Step 84: Display User Details](#step-84)
+
+
+---
+
+<a id="step-84"></a>
+
+### Step 84: Display User Details
+
+#### Before this step
+
+Now that only signed-in users could see the homepage, we wanted them to know whose account was open. Immediately before this, Step 83 dealt with protect homepage; the work here continued the same part of the application.
+
+#### What we did and why
+
+The template displays information from request.user, which is Django's record of the current visitor after login. It is not a list of all employees; it is the currently signed-in person.
+
+#### Code and commands
+
+**Step 84, block 1.** This code sample or terminal command was used while working on display user details. The content below remains in its original sequence for Step 84, block 1.
+
+```html
+<h2>Welcome, {{ request.user.username }}</h2>
+<p>Role: {{ request.user.get_role_display }}</p>
+```
+
+#### How the code works
+
+**Block 1 (html, 2 lines).** In Step 84, display user details involved `core/home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The HTML element `<h2>Welcome, {{ request.user.username }}</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>Role: {{ request.user.get_role_display }}</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 84. For Step 84, the proposed way to check display user details was to revisit `core/home.html` and run the corresponding command or feature to see its result. Development continued in Step 85 before a complete result could be claimed.
+
+#### Next
+
+[Step 83: Protect Homepage](#step-83) · [Step 85: Login Page Check](#step-85)
