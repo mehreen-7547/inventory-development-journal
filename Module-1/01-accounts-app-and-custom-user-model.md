@@ -23,6 +23,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 60: Configure Settings](#step-60)
 - [Step 61: Custom User Model](#step-61)
 - [Step 62: Understand CustomUser inheritance](#step-62)
+- [Step 63: Understanding AbstractUser](#step-63)
 
 ---
 
@@ -377,3 +378,78 @@ Not tested yet at Step 62. For Step 62, the proposed way to check understand cus
 #### Next
 
 [Step 61: Custom User Model](#step-61) · [Step 63: Understanding AbstractUser](#step-63)
+
+
+---
+
+<a id="step-63"></a>
+
+### Step 63: Understanding AbstractUser
+
+#### Before this step
+
+We wanted to make sure that using AbstractUser did not create an unexplained second user table. Immediately before this, Step 62 dealt with understand customuser inheritance; the work here continued the same part of the application.
+
+#### What we did and why
+
+Think of it as borrowing a blueprint rather than copying a completed house. AbstractUser supplies definitions; CustomUser is the concrete model our project uses. Django creates tables for the concrete model after migrations.
+
+#### Code and commands
+
+**Step 63, block 1.** This output was used while working on understanding abstractuser. The content below remains in its original sequence for Step 63, block 1.
+
+```text
+.venv/
+  Lib/
+    site-packages/
+      django/
+        contrib/
+          auth/
+            models.py
+```
+
+**Step 63, block 2.** This code sample or terminal command was used while working on understanding abstractuser. The content below remains in its original sequence for Step 63, block 2.
+
+```python
+from django.contrib.auth.models import AbstractUser
+```
+
+**Step 63, block 3.** This code sample or terminal command was used while working on understanding abstractuser. The content below remains in its original sequence for Step 63, block 3.
+
+```python
+class Meta:
+    abstract = True
+```
+
+**Step 63, block 4.** This code sample or terminal command was used while working on understanding abstractuser. The content below remains in its original sequence for Step 63, block 4.
+
+```python
+class CustomUser(AbstractUser):
+    role = models.CharField(max_length=10)
+```
+
+#### How the code works
+
+**Block 1 (text, 7 lines).** In Step 63, understanding abstractuser involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 63, output block 1 showed the result rather than another command. Its visible value was `.venv/`, which mattered for understanding abstractuser.
+
+**Block 2 (python, 1 lines).** In Step 63, understanding abstractuser involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `from django.contrib.auth.models import AbstractUser` makes a Python function, class or module available to the code that follows.
+
+**Block 3 (python, 2 lines).** In Step 63, understanding abstractuser involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `class Meta:` declares a Python class, grouping related data or behaviour together. `abstract = True` sets the named value used by the next operation in this file.
+
+**Block 4 (python, 2 lines).** In Step 63, understanding abstractuser involved `models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `class CustomUser(AbstractUser):` declares a Python class, grouping related data or behaviour together. `role = models.CharField(max_length=10)` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 63. For Step 63, the proposed way to check understanding abstractuser was to revisit `models.py` and run the corresponding command or feature to see its result. Development continued in Step 64 before a complete result could be claimed.
+
+#### Next
+
+[Step 62: Understand CustomUser inheritance](#step-62) · [Step 64: Inspect Django’s built-in User model](#step-64)
