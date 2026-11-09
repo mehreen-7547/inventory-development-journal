@@ -21,6 +21,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 - [Step 75: Login Page](#step-75)
 - [Step 76: Login URL](#step-76)
 - [Step 77: Connect Login URL](#step-77)
+- [Step 78: Login Redirect](#step-78)
 
 ---
 
@@ -325,3 +326,40 @@ Not tested yet at Step 77. For Step 77, the proposed way to check connect login 
 #### Next
 
 [Step 76: Login URL](#step-76) · [Step 78: Login Redirect](#step-78)
+
+
+---
+
+<a id="step-78"></a>
+
+### Step 78: Login Redirect
+
+#### Before this step
+
+After a successful login, we sent the user to the home address /. We needed to know where that address leads. Immediately before this, Step 77 dealt with connect login url; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django matches / against the project URL rules and hands the request to the homepage view. The login function does not have to create the homepage itself; it simply sends the browser there.
+
+#### Code and commands
+
+**Step 78, block 1.** This code sample or terminal command was used while working on login redirect. The content below remains in its original sequence for Step 78, block 1.
+
+```python
+return redirect('/')
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 78, login redirect involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return redirect('/')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 78. For Step 78, the proposed way to check login redirect was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Development continued in Step 79 before a complete result could be claimed.
+
+#### Next
+
+[Step 77: Connect Login URL](#step-77) · [Step 79: Understand a Django project versus an app](#step-79)
