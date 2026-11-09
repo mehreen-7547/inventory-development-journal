@@ -23,6 +23,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 181: Update Change Password Page](#step-181)
 - [Step 182: Update Forgot Password Page](#step-182)
 - [Step 183: Update Reset Confirmation](#step-183)
+- [Step 184: Update Set New Password Page](#step-184)
 
 ---
 
@@ -642,3 +643,98 @@ Not tested yet at Step 183. For Step 183, the proposed way to check update reset
 #### Next
 
 [Step 182: Update Forgot Password Page](#step-182) · [Step 184: Update Set New Password Page](#step-184)
+
+
+---
+
+<a id="step-184"></a>
+
+### Step 184: Update Set New Password Page
+
+#### Before this step
+
+The password-reset link opens a page outside the normal app navigation, so the recipient should immediately understand what to do. Immediately before this, Step 183 dealt with update reset confirmation; the work here continued the same part of the application.
+
+#### What we did and why
+
+The reset-confirm template uses the same layout and clearly shows the new-password form or an invalid-link message. Django still decides whether the token can be used; HTML styling does not make the link valid.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Set New Password - Inventory System{% endblock %}`; Replace lines around `{% block content %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-7 col-lg-5">`; Replace lines around `{% if validlink %}`; Replace lines around `<h2 class="mb-4">Set New Password</h2>`. For Step 184, this comparison used the code block from Step 126, which might not represent the whole file.
+
+**Step 184, block 1.** This code sample or terminal command was used while working on update set new password page. The content below remains in its original sequence for Step 184, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Set New Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+
+        {% if validlink %}
+
+            <h2 class="mb-4">Set New Password</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Reset Password
+                </button>
+            </form>
+
+        {% else %}
+
+            <h2 class="mb-4">Invalid Reset Link</h2>
+
+            <div class="alert alert-warning">
+                This password reset link is invalid or has
+                expired. Please request a new one.
+            </div>
+
+            <a href="{% url 'password_reset' %}"
+               class="btn btn-outline-primary">
+                Request New Link
+            </a>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 45 lines).** In Step 184, update set new password page involved `password_reset_confirm.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Set New Password - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-7 col-lg-5">` creates or closes part of the page structure seen by the browser. `{% if validlink %}` decides which HTML is included based on the value Django provided. The HTML element `<h2 class="mb-4">Set New Password</h2>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page.
+
+**Lines 15–21:** The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<div class="mb-3">` creates or closes part of the page structure seen by the browser. `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-4">Invalid Reset Link</h2>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** The HTML element `<div class="alert alert-warning">` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'password_reset' %}"` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 36–42:** `class="btn btn-outline-primary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+**Lines 43–45:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 184. For Step 184, the proposed way to check update set new password page was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_confirm.html`. Development continued in Step 185 before a complete result could be claimed.
+
+#### Next
+
+[Step 183: Update Reset Confirmation](#step-183) · [Step 185: Update Reset Complete Page](#step-185)

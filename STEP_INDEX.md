@@ -185,3 +185,4 @@
 | 181 | Module 1, Chapter 18 | [ Update Change Password Page ](Module-1/18-shared-base-template-and-page-styling.md#step-181) |
 | 182 | Module 1, Chapter 18 | [ Update Forgot Password Page ](Module-1/18-shared-base-template-and-page-styling.md#step-182) |
 | 183 | Module 1, Chapter 18 | [ Update Reset Confirmation ](Module-1/18-shared-base-template-and-page-styling.md#step-183) |
+| 184 | Module 1, Chapter 18 | [ Update Set New Password Page ](Module-1/18-shared-base-template-and-page-styling.md#step-184) |
