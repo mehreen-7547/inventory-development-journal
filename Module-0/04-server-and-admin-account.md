@@ -20,6 +20,7 @@ If someone opens the home address, Django needs to decide which view will answer
 - [Step 30: Trace the homepage request](#step-30)
 - [Step 31: Documenting Superuser Setup](#step-31)
 - [Step 32: Staging Development Journal Update](#step-32)
+- [Step 33: Understand git -C and git add](#step-33)
 
 ---
 
@@ -313,3 +314,40 @@ Not tested yet at Step 32. For Step 32, the proposed way to check staging develo
 #### Next
 
 [Step 31: Documenting Superuser Setup](#step-31) · [Step 33: Understand git -C and git add](#step-33)
+
+
+---
+
+<a id="step-33"></a>
+
+### Step 33: Understand git -C and git add
+
+#### Before this step
+
+The command included git -C, which looked unfamiliar, so we explained it before using it. Immediately before this, Step 32 dealt with staging development journal update; the work here continued the same part of the application.
+
+#### What we did and why
+
+-C tells Git to work inside a named folder without making us manually change folders first. The add part still means “put this file in the list for the next commit.”.
+
+#### Code and commands
+
+**Step 33, block 1.** This code sample or terminal command was used while working on understand git -c and git add. The content below remains in its original sequence for Step 33, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inventory-development-journal.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 33, understand git -c and git add involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal add inven` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 33. For Step 33, the proposed way to check understand git -c and git add was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 34 before a complete result could be claimed.
+
+#### Next
+
+[Step 32: Staging Development Journal Update](#step-32) · [Step 34: Staging Development Journal Update](#step-34)
