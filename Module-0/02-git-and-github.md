@@ -17,6 +17,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 ### Find a step
 
 - [Step 7: Initialize the Git repository](#step-7)
+- [Step 8: Stage the project files](#step-8)
 
 ---
 
@@ -73,3 +74,70 @@ For Step 7 (Initialize the Git repository), we compared the visible terminal out
 #### Next
 
 [Step 6: Create .env](../Module-0/01-environment-setup.md#step-6) · [Step 8: Stage the project files](#step-8)
+
+
+---
+
+<a id="step-8"></a>
+
+### Step 8: Stage the project files
+
+#### Before this step
+
+Git had been switched on, but it had not been told which changed files to save in the next snapshot. Immediately before this, Step 7 dealt with initialize the git repository; the work here continued the same part of the application.
+
+#### What we did and why
+
+git add puts chosen files into a temporary list for the next save. This list is called the staging area. Nothing has been saved as a commit or sent to GitHub yet.
+
+#### Code and commands
+
+**Step 8, block 1.** This code sample or terminal command was used while working on stage the project files. The content below remains in its original sequence for Step 8, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add .
+```
+
+**Step 8, block 2.** This code sample or terminal command was used while working on stage the project files. The content below remains in its original sequence for Step 8, block 2.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic diff --cached --name-only
+```
+
+**Step 8, block 3.** This code sample or terminal command was used while working on stage the project files. The content below remains in its original sequence for Step 8, block 3.
+
+```powershell
+.\.venv\Scripts\python.exe .\techmindz_inventory_module0_sqlite_atomic\manage.py check
+```
+
+**Step 8, block 4.** This output was used while working on stage the project files. The content below remains in its original sequence for Step 8, block 4.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 8, stage the project files involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic add .` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 8, stage the project files involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic diff --cached --name-only` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (powershell, 1 lines).** In Step 8, stage the project files involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `.\.venv\Scripts\python.exe .\techmindz_inventory_module0_sqlite_atomic\manage.py chec` supply the values or page content for this part of VS Code terminal / project setup. These lines are kept together because their order and indentation matter.
+
+**Block 4 (text, 1 lines).** In Step 8, stage the project files involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 8, output block 4 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for stage the project files.
+
+#### How we checked it
+
+Not tested yet at Step 8. For Step 8, the proposed way to check stage the project files was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 9 before a complete result could be claimed.
+
+#### Next
+
+[Step 7: Initialize the Git repository](#step-7) · [Step 9: Create our first Git commit](#step-9)
