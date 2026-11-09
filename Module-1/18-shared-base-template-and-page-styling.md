@@ -21,6 +21,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 179: Dashboard Template Inheritance](#step-179)
 - [Step 180: Update Login Page](#step-180)
 - [Step 181: Update Change Password Page](#step-181)
+- [Step 182: Update Forgot Password Page](#step-182)
 
 ---
 
@@ -481,3 +482,87 @@ Not tested yet at Step 181. For Step 181, the proposed way to check update chang
 #### Next
 
 [Step 180: Update Login Page](#step-180) · [Step 182: Update Forgot Password Page](#step-182)
+
+
+---
+
+<a id="step-182"></a>
+
+### Step 182: Update Forgot Password Page
+
+#### Before this step
+
+The forgot-password screen was another page that needed the shared header and consistent spacing. Immediately before this, Step 181 dealt with update change password page; the work here continued the same part of the application.
+
+#### What we did and why
+
+We changed its HTML to reuse the common layout. The purpose of the page remains the same: ask for the email address associated with an account so Django can prepare a reset link.
+
+#### Code and commands
+
+**Step 182, block 1.** This code sample or terminal command was used while working on update forgot password page. The content below remains in its original sequence for Step 182, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Forgot Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+        <h2 class="mb-3">Forgot Password</h2>
+
+        <p>
+            Enter your registered email address
+            to reset your password.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Send Reset Link
+            </button>
+        </form>
+
+        <p class="mt-3">
+            <a href="{% url 'login' %}">
+                Back to Login
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 38 lines).** In Step 182, update forgot password page involved `base.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Forgot Password - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-6 col-lg-5">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-3">Forgot Password</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `</p>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<div class="mb-3">` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-primary">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** The HTML element `<p class="mt-3">` creates or closes part of the page structure seen by the browser. `<a href="{% url 'login' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–38:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 182. For Step 182, the proposed way to check update forgot password page was to open the related page in the browser and check that the route reached the intended view or template in `base.html`. Development continued in Step 183 before a complete result could be claimed.
+
+#### Next
+
+[Step 181: Update Change Password Page](#step-181) · [Step 183: Update Reset Confirmation](#step-183)

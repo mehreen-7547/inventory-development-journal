@@ -183,3 +183,4 @@
 | 179 | Module 1, Chapter 18 | [ Dashboard Template Inheritance ](Module-1/18-shared-base-template-and-page-styling.md#step-179) |
 | 180 | Module 1, Chapter 18 | [ Update Login Page ](Module-1/18-shared-base-template-and-page-styling.md#step-180) |
 | 181 | Module 1, Chapter 18 | [ Update Change Password Page ](Module-1/18-shared-base-template-and-page-styling.md#step-181) |
+| 182 | Module 1, Chapter 18 | [ Update Forgot Password Page ](Module-1/18-shared-base-template-and-page-styling.md#step-182) |
