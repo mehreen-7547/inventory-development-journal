@@ -171,3 +171,4 @@
 | 167 | Module 1, Chapter 16 | [ Message Styling ](Module-1/16-message-styling.md#step-167) |
 | 168 | Module 1, Chapter 16 | [ Display employee-list messages ](Module-1/16-message-styling.md#step-168) |
 | 169 | Module 1, Chapter 16 | [ Message Styling CSS ](Module-1/16-message-styling.md#step-169) |
+| 170 | Module 1, Chapter 17 | [ Real Email Configuration ](Module-1/17-real-email-delivery-smtp.md#step-170) |
