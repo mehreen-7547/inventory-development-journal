@@ -19,6 +19,7 @@ Imagine the difference between writing a letter on your own desk and posting it 
 - [Step 170: Real Email Configuration](#step-170)
 - [Step 171: Configure SMTP Credentials](#step-171)
 - [Step 172: Install python-dotenv](#step-172)
+- [Step 173: Fix Email Backend](#step-173)
 
 ---
 
@@ -241,3 +242,136 @@ Not tested yet at Step 172. For Step 172, the proposed way to check install pyth
 #### Next
 
 [Step 171: Configure SMTP Credentials](#step-171) · [Step 173: Fix Email Backend](#step-173)
+
+
+---
+
+<a id="step-173"></a>
+
+### Step 173: Fix Email Backend
+
+#### Before this step
+
+We tried sending an email, but the message still appeared in the terminal. That told us Django was behaving as if testing mode were still selected. Immediately before this, Step 172 dealt with install python-dotenv; the work here continued the same part of the application.
+
+#### What we did and why
+
+We checked what email mode Django was actually using, instead of assuming the new settings worked. The investigation pointed to when .env was loaded. If the settings are read before that file is loaded, Django cannot see the Gmail details and may use the default terminal mode.
+
+#### Code and commands
+
+**Step 173, block 1.** This output was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 1.
+
+```text
+From: no-reply@example.com
+```
+
+**Step 173, block 2.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 2.
+
+```python
+import os
+from dotenv import load_dotenv
+```
+
+**Step 173, block 3.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 3.
+
+```python
+load_dotenv(BASE_DIR / '.env')
+```
+
+**Step 173, block 4.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 4.
+
+```python
+EMAIL_MODE = os.getenv('EMAIL_MODE', 'console')
+
+if EMAIL_MODE == 'smtp':
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+```
+
+**Step 173, block 5.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 5.
+
+```python
+exit()
+```
+
+**Step 173, block 6.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 6.
+
+```powershell
+python manage.py shell
+```
+
+**Step 173, block 7.** This code sample or terminal command was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 7.
+
+```python
+from django.conf import settings
+
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+**Step 173, block 8.** This output was used while working on fix email backend. The content below remains in its original sequence for Step 173, block 8.
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+YOUR_GMAIL_ADDRESS
+```
+
+#### How the code works
+
+**Block 1 (text, 1 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 173, output block 1 showed the result rather than another command. Its visible value was `From: no-reply@example.com`, which mattered for fix email backend.
+
+**Block 2 (python, 2 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `import os` makes a Python function, class or module available to the code that follows. `from dotenv import load_dotenv` makes a Python function, class or module available to the code that follows.
+
+**Block 3 (python, 1 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `load_dotenv(BASE_DIR / '.env')` loads settings from the local `.env` file before the application reads them.
+
+**Block 4 (python, 16 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `EMAIL_MODE = os.getenv('EMAIL_MODE', 'console')` reads a configuration value from the running environment instead of putting the private value directly into Python source. `if EMAIL_MODE == 'smtp':` is a condition: the code inside this branch only runs when its condition is satisfied. `EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'` selects whether email is printed for development or handed to an actual mail server. `EMAIL_HOST = 'smtp.gmail.com'` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')` reads a configuration value from the running environment instead of putting the private value directly into Python source. `EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')` reads a configuration value from the running environment instead of putting the private value directly into Python source. `DEFAULT_FROM_EMAIL = EMAIL_HOST_USER` sets the named value used by the next operation in this file. The `else` branch handles the alternative case when the preceding condition was not satisfied.
+
+**Lines 15–16:** `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'` selects whether email is printed for development or handed to an actual mail server. `DEFAULT_FROM_EMAIL = 'no-reply@example.com'` sets the named value used by the next operation in this file.
+
+**Block 5 (python, 1 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `exit()` supply the values or page content for this part of config/settings.py. These lines are kept together because their order and indentation matter.
+
+**Block 6 (powershell, 1 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py shell` starts Python or one of its tools from the development terminal.
+
+**Block 7 (python, 5 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `from django.conf import settings` makes a Python function, class or module available to the code that follows. `print(settings.EMAIL_MODE)` reads one of the Django configuration values used by this feature. `print(settings.EMAIL_BACKEND)` selects whether email is printed for development or handed to an actual mail server. `print(settings.DEFAULT_FROM_EMAIL)` reads one of the Django configuration values used by this feature.
+
+**Block 8 (text, 3 lines).** In Step 173, fix email backend involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 173, output block 8 showed the result rather than another command. Its visible value was `smtp`, which mattered for fix email backend.
+
+#### How we checked it
+
+For Step 173 (Fix Email Backend), we compared the visible Django response or result with the requested action. The visible result for Step 173 was described as “your output confirms”; this only addressed the fix email backend check in `config/settings.py`.
+
+#### Next
+
+[Step 172: Install python-dotenv](#step-172) · [Step 174: Remove the conflicting email backend override](#step-174)
