@@ -128,3 +128,4 @@
 | 124 | Module 1, Chapter 10 | [ Password Reset Complete URL ](Module-1/10-forgot-and-reset-password.md#step-124) |
 | 125 | Module 1, Chapter 10 | [ Fix the password reset URL error ](Module-1/10-forgot-and-reset-password.md#step-125) |
 | 126 | Module 1, Chapter 10 | [ Consolidate the accounts URL patterns ](Module-1/10-forgot-and-reset-password.md#step-126) |
+| 127 | Module 1, Chapter 10 | [ Email Testing ](Module-1/10-forgot-and-reset-password.md#step-127) |

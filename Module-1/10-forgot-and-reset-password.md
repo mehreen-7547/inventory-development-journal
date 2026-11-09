@@ -30,6 +30,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 124: Password Reset Complete URL](#step-124)
 - [Step 125: Fix the password reset URL error](#step-125)
 - [Step 126: Consolidate the accounts URL patterns](#step-126)
+- [Step 127: Email Testing](#step-127)
 
 ---
 
@@ -871,3 +872,45 @@ Not tested yet at Step 126. For Step 126, the proposed way to check consolidate 
 #### Next
 
 [Step 125: Fix the password reset URL error](#step-125) · [Step 127: Email Testing](#step-127)
+
+
+---
+
+<a id="step-127"></a>
+
+### Step 127: Email Testing
+
+#### Before this step
+
+We wanted to know whether the reset flow actually generated an email for a registered account. Immediately before this, Step 126 dealt with consolidate the accounts url patterns; the work here continued the same part of the application.
+
+#### What we did and why
+
+In console mode the email appears in the terminal rather than someone's inbox. The useful checks were that the form accepted the request, the message appeared and the link led to the expected reset screen.
+
+#### Code and commands
+
+**Step 127, block 1.** This code sample or terminal command was used while working on email testing. The content below remains in its original sequence for Step 127, block 1.
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 127, email testing involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'` selects whether email is printed for development or handed to an actual mail server.
+
+#### How we checked it
+
+Not tested yet at Step 127. For Step 127, the proposed way to check email testing was to start Django Shell, inspect the email settings and run a safe test send. Step 127 did not establish a successful outcome for email testing.
+
+#### Next
+
+[Step 126: Consolidate the accounts URL patterns](#step-126) · [Step 128: Employee Creation Form](../Module-1/11-employee-welcome-email-and-password-setup-link.md#step-128)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **forgot and reset password** was needed at this point, and describe what the application did differently after the final step of this chapter.
