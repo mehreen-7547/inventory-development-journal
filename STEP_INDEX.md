@@ -140,3 +140,4 @@
 | 136 | Module 1, Chapter 12 | [ Employee Management ](Module-1/12-employee-list.md#step-136) |
 | 137 | Module 1, Chapter 12 | [ Employee List Template ](Module-1/12-employee-list.md#step-137) |
 | 138 | Module 1, Chapter 12 | [ Employee List URL ](Module-1/12-employee-list.md#step-138) |
+| 139 | Module 1, Chapter 13 | [ Create Employee View ](Module-1/13-create-employee.md#step-139) |
