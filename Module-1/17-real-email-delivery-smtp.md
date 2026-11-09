@@ -20,6 +20,7 @@ Imagine the difference between writing a letter on your own desk and posting it 
 - [Step 171: Configure SMTP Credentials](#step-171)
 - [Step 172: Install python-dotenv](#step-172)
 - [Step 173: Fix Email Backend](#step-173)
+- [Step 174: Remove the conflicting email backend override](#step-174)
 
 ---
 
@@ -375,3 +376,111 @@ For Step 173 (Fix Email Backend), we compared the visible Django response or res
 #### Next
 
 [Step 172: Install python-dotenv](#step-172) · [Step 174: Remove the conflicting email backend override](#step-174)
+
+
+---
+
+<a id="step-174"></a>
+
+### Step 174: Remove the conflicting email backend override
+
+#### Before this step
+
+Even after dealing with the private settings file, the email still used the wrong mode. We found another cause in settings.py. Immediately before this, Step 173 dealt with fix email backend; the work here continued the same part of the application.
+
+#### What we did and why
+
+The file was setting the email option twice: first in the new “Gmail or terminal” choice, then later again to “terminal.” Python keeps the last value it sees, so the later line cancelled our Gmail setting. Removing that extra line allowed the original choice to work.
+
+#### Code and commands
+
+**Step 174, block 1.** This code sample or terminal command was used while working on remove the conflicting email backend override. The content below remains in its original sequence for Step 174, block 1.
+
+```python
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+**Step 174, block 2.** This code sample or terminal command was used while working on remove the conflicting email backend override. The content below remains in its original sequence for Step 174, block 2.
+
+```python
+# Email configuration
+EMAIL_MODE = os.getenv("EMAIL_MODE", "console").strip().lower()
+
+if EMAIL_MODE == "smtp":
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
+
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "no-reply@example.com"
+
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+**Step 174, block 3.** This code sample or terminal command was used while working on remove the conflicting email backend override. The content below remains in its original sequence for Step 174, block 3.
+
+```dotenv
+EMAIL_MODE=smtp
+EMAIL_HOST_USER=YOUR_GMAIL_ADDRESS
+EMAIL_HOST_PASSWORD=YOUR_GMAIL_APP_PASSWORD
+```
+
+**Step 174, block 4.** This code sample or terminal command was used while working on remove the conflicting email backend override. The content below remains in its original sequence for Step 174, block 4.
+
+```python
+from django.conf import settings
+
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+**Step 174, block 5.** This output was used while working on remove the conflicting email backend override. The content below remains in its original sequence for Step 174, block 5.
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+YOUR_GMAIL_ADDRESS
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 174, remove the conflicting email backend override involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"` selects whether email is printed for development or handed to an actual mail server. `DEFAULT_FROM_EMAIL = 'no-reply@example.com'` sets the named value used by the next operation in this file. `PASSWORD_RESET_TIMEOUT = 60 * 60 * 24` sets the named value used by the next operation in this file.
+
+**Block 2 (python, 18 lines).** In Step 174, remove the conflicting email backend override involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `# Email configuration` explains the intention of the following section; it does not execute as application logic. `EMAIL_MODE = os.getenv("EMAIL_MODE", "console").strip().lower()` reads a configuration value from the running environment instead of putting the private value directly into Python source. `if EMAIL_MODE == "smtp":` is a condition: the code inside this branch only runs when its condition is satisfied. `EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"` selects whether email is printed for development or handed to an actual mail server.
+
+**Lines 8–14:** `EMAIL_USE_TLS = True` sets the named value used by the next operation in this file. `EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")` reads a configuration value from the running environment instead of putting the private value directly into Python source. `EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")` reads a configuration value from the running environment instead of putting the private value directly into Python source. `DEFAULT_FROM_EMAIL = EMAIL_HOST_USER` sets the named value used by the next operation in this file.
+
+**Lines 15–18:** `EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"` selects whether email is printed for development or handed to an actual mail server. `DEFAULT_FROM_EMAIL = "no-reply@example.com"` sets the named value used by the next operation in this file. `PASSWORD_RESET_TIMEOUT = 60 * 60 * 24` sets the named value used by the next operation in this file.
+
+**Block 3 (dotenv, 3 lines).** In Step 174, remove the conflicting email backend override involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `EMAIL_MODE=smtp` sets the named value used by the next operation in this file. `EMAIL_HOST_USER=YOUR_GMAIL_ADDRESS` sets the named value used by the next operation in this file. `EMAIL_HOST_PASSWORD=YOUR_GMAIL_APP_PASSWORD` sets the named value used by the next operation in this file.
+
+**Block 4 (python, 5 lines).** In Step 174, remove the conflicting email backend override involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `from django.conf import settings` makes a Python function, class or module available to the code that follows. `print(settings.EMAIL_MODE)` reads one of the Django configuration values used by this feature. `print(settings.EMAIL_BACKEND)` selects whether email is printed for development or handed to an actual mail server. `print(settings.DEFAULT_FROM_EMAIL)` reads one of the Django configuration values used by this feature.
+
+**Block 5 (text, 3 lines).** In Step 174, remove the conflicting email backend override involved `settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 174, output block 5 showed the result rather than another command. Its visible value was `smtp`, which mattered for remove the conflicting email backend override.
+
+#### How we checked it
+
+Not tested yet at Step 174. For Step 174, the proposed way to check remove the conflicting email backend override was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 175 before a complete result could be claimed.
+
+#### Next
+
+[Step 173: Fix Email Backend](#step-173) · [Step 175: Restart Django Shell after configuration changes](#step-175)
