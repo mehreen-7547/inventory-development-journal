@@ -22,6 +22,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 10: Connect your local project to GitHub](#step-10)
 - [Step 11: Connect your local project to GitHub](#step-11)
 - [Step 12: Push your first commit to GitHub](#step-12)
+- [Step 13: Create a separate local journal folder](#step-13)
 
 ---
 
@@ -324,3 +325,56 @@ Not tested yet at Step 12. For Step 12, the proposed way to check push your firs
 #### Next
 
 [Step 11: Connect your local project to GitHub](#step-11) · [Step 13: Create a separate local journal folder](#step-13)
+
+
+---
+
+<a id="step-13"></a>
+
+### Step 13: Create a separate local journal folder
+
+#### Before this step
+
+We wanted to keep detailed study notes without mixing long explanations into the Django application's code folders. Immediately before this, Step 12 dealt with push your first commit to github; the work here continued the same part of the application.
+
+#### What we did and why
+
+We created a separate folder for the learning journal. Think of it as a notebook beside the project, not part of the running website. Its history and GitHub destination can be managed independently.
+
+#### Code and commands
+
+**Step 13, block 1.** This code sample or terminal command was used while working on create a separate local journal folder. The content below remains in its original sequence for Step 13, block 1.
+
+```powershell
+New-Item -ItemType Directory -Path C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal
+```
+
+**Step 13, block 2.** This output was used while working on create a separate local journal folder. The content below remains in its original sequence for Step 13, block 2.
+
+```text
+projects2026/
+├── Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│   └── techmindz_inventory_module0_sqlite_atomic/
+│       └── Django project (public Git repository)
+│
+└── inventory-development-journal/
+    └── Learning journal (private Git repository)
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 13, create a separate local journal folder involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `New-Item -ItemType Directory -Path C:\Users\YOUR_WINDOWS_USERNAME\projects2026\invent` supply the values or page content for this part of VS Code terminal / project setup. These lines are kept together because their order and indentation matter.
+
+**Block 2 (text, 7 lines).** In Step 13, create a separate local journal folder involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 13, output block 2 showed the result rather than another command. Its visible value was `projects2026/`, which mattered for create a separate local journal folder.
+
+#### How we checked it
+
+Not tested yet at Step 13. For Step 13, the proposed way to check create a separate local journal folder was to revisit `VS Code terminal / project setup` and run the corresponding command or feature to see its result. Development continued in Step 14 before a complete result could be claimed.
+
+#### Next
+
+[Step 12: Push your first commit to GitHub](#step-12) · [Step 14: Initialize Git for the private journal](#step-14)
