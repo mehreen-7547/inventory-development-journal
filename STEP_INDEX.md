@@ -57,3 +57,4 @@
 | 53 | Module 0, Chapter 7 | [ Final Documentation Commit ](Module-0/07-module-0-completion.md#step-53) |
 | 54 | Module 0, Chapter 7 | [ Create Completion Tag ](Module-0/07-module-0-completion.md#step-54) |
 | 55 | Module 0, Chapter 7 | [ Publish Completion Tag ](Module-0/07-module-0-completion.md#step-55) |
+| 56 | Module 1, Chapter 1 | [ Begin the Accounts module ](Module-1/01-accounts-app-and-custom-user-model.md#step-56) |
