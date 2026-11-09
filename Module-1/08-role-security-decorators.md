@@ -19,6 +19,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 - [Step 100: Role Security](#step-100)
 - [Step 101: Understand nested decorator functions](#step-101)
 - [Step 102: Trace the decorator execution order](#step-102)
+- [Step 103: Apply Role Security](#step-103)
 
 ---
 
@@ -307,3 +308,66 @@ Not tested yet at Step 102. For Step 102, the proposed way to check trace the de
 #### Next
 
 [Step 101: Understand nested decorator functions](#step-101) · [Step 103: Apply Role Security](#step-103)
+
+
+---
+
+<a id="step-103"></a>
+
+### Step 103: Apply Role Security
+
+#### Before this step
+
+The role-checking function was written. Now a page actually had to use it. Immediately before this, Step 102 dealt with trace the decorator execution order; the work here continued the same part of the application.
+
+#### What we did and why
+
+Placing @role_required(...) above a view attaches that check to requests for this page. Without applying it, writing the decorator file alone would not protect anything.
+
+#### Code and commands
+
+**Step 103, block 1.** This code sample or terminal command was used while working on apply role security. The content below remains in its original sequence for Step 103, block 1.
+
+```python
+from django.shortcuts import render
+from accounts.decorators import role_required
+
+
+@role_required('admin', 'manager', 'sales')
+def home(request):
+    return render(request, 'core/home.html')
+```
+
+**Step 103, block 2.** This code sample or terminal command was used while working on apply role security. The content below remains in its original sequence for Step 103, block 2.
+
+```python
+@login_required(login_url='/login/')
+```
+
+**Step 103, block 3.** This code sample or terminal command was used while working on apply role security. The content below remains in its original sequence for Step 103, block 3.
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 103, apply role security involved `accounts/decorators.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.shortcuts import render` makes a Python function, class or module available to the code that follows. `from accounts.decorators import role_required` makes a Python function, class or module available to the code that follows. `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself. `def home(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 2 (python, 1 lines).** In Step 103, apply role security involved `accounts/decorators.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@login_required(login_url='/login/')` adds a check or behaviour around the view before Django runs the view itself.
+
+**Block 3 (python, 1 lines).** In Step 103, apply role security involved `accounts/decorators.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself.
+
+#### How we checked it
+
+Not tested yet at Step 103. For Step 103, the proposed way to check apply role security was to revisit `accounts/decorators.py` and run the corresponding command or feature to see its result. Development continued in Step 104 before a complete result could be claimed.
+
+#### Next
+
+[Step 102: Trace the decorator execution order](#step-102) · [Step 104: Test Role Restrictions](#step-104)
