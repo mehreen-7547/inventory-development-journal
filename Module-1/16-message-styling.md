@@ -17,6 +17,7 @@ When a view saves a change and redirects back to a list, Django can carry a shor
 ### Find a step
 
 - [Step 165: Employee Management Messages](#step-165)
+- [Step 166: Display edit-page feedback messages](#step-166)
 
 ---
 
@@ -73,3 +74,55 @@ Not tested yet at Step 165. For Step 165, the proposed way to check employee man
 #### Next
 
 [Step 164: Home Template Review](../Module-1/15-activate-deactivate-and-resend-setup-email.md#step-164) · [Step 166: Display edit-page feedback messages](#step-166)
+
+
+---
+
+<a id="step-166"></a>
+
+### Step 166: Display edit-page feedback messages
+
+#### Before this step
+
+An employee edit page could also need to show feedback, such as why saving failed. Immediately before this, Step 165 dealt with employee management messages; the work here continued the same part of the application.
+
+#### What we did and why
+
+We made sure the edit template had a place to show messages or field errors. This helps the person know whether they need to correct something.
+
+#### Code and commands
+
+**Step 166, block 1.** This code sample or terminal command was used while working on display edit-page feedback messages. The content below remains in its original sequence for Step 166, block 1.
+
+```html
+{% if employee.is_active and not employee.has_usable_password %}
+
+    <form method="POST"
+          action="{% url 'resend_setup_email' employee.id %}">
+
+        {% csrf_token %}
+
+        <button type="submit">
+            Resend Setup Email
+        </button>
+
+    </form>
+
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 14 lines).** In Step 166, display edit-page feedback messages involved `edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if employee.is_active and not employee.has_usable_password %}` decides which HTML is included based on the value Django provided. The form sends submitted fields to the server as a POST request, rather than just opening a page. `action="{% url 'resend_setup_email' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 8–14:** The HTML element `<button type="submit">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 166. For Step 166, the proposed way to check display edit-page feedback messages was to open the related page in the browser and check that the route reached the intended view or template in `edit_employee.html`. Development continued in Step 167 before a complete result could be claimed.
+
+#### Next
+
+[Step 165: Employee Management Messages](#step-165) · [Step 167: Message Styling](#step-167)
