@@ -23,6 +23,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 149: Employee Edit Link](#step-149)
 - [Step 150: Employee Edit Mode](#step-150)
 - [Step 151: Edit Mode Button](#step-151)
+- [Step 152: Select Employee](#step-152)
 
 ---
 
@@ -461,3 +462,110 @@ Not tested yet at Step 151. For Step 151, the proposed way to check edit mode bu
 #### Next
 
 [Step 150: Employee Edit Mode](#step-150) · [Step 152: Select Employee](#step-152)
+
+
+---
+
+<a id="step-152"></a>
+
+### Step 152: Select Employee
+
+#### Before this step
+
+Once in edit mode, the administrator needed a way to choose which employee to edit. Immediately before this, Step 151 dealt with edit mode button; the work here continued the same part of the application.
+
+#### What we did and why
+
+Selection controls on the list identify the desired row. The selected employee's ID is what ultimately tells the edit route which record to load.
+
+#### Code and commands
+
+**Step 152, block 1.** This code sample or terminal command was used while working on select employee. The content below remains in its original sequence for Step 152, block 1.
+
+```html
+<style>
+    .selectable {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .selectable:hover {
+        background-color: #eeeeee;
+    }
+
+    .row-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+</style>
+```
+
+**Step 152, block 2.** This code sample or terminal command was used while working on select employee. The content below remains in its original sequence for Step 152, block 2.
+
+```html
+{% for employee in employees %}
+```
+
+**Step 152, block 3.** This code sample or terminal command was used while working on select employee. The content below remains in its original sequence for Step 152, block 3.
+
+```html
+<tr {% if edit_mode %}class="selectable"{% endif %}>
+```
+
+**Step 152, block 4.** This code sample or terminal command was used while working on select employee. The content below remains in its original sequence for Step 152, block 4.
+
+```html
+<td>{{ employee.username }}</td>
+```
+
+**Step 152, block 5.** This code sample or terminal command was used while working on select employee. The content below remains in its original sequence for Step 152, block 5.
+
+```html
+<td>
+    {% if edit_mode %}
+        <a class="row-link"
+           href="{% url 'edit_employee' employee.id %}">
+            {{ employee.username }}
+        </a>
+    {% else %}
+        {{ employee.username }}
+    {% endif %}
+</td>
+```
+
+#### How the code works
+
+**Block 1 (html, 16 lines).** In Step 152, select employee involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<style>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The lines starting with `background-color: #eeeeee;` supply the values or page content for this part of templates/accounts/employee_list.html. These lines are kept together because their order and indentation matter.
+
+**Lines 15–16:** The HTML element `</style>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 1 lines).** In Step 152, select employee involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `{% for employee in employees %}` repeats the following operation once for each matching item.
+
+**Block 3 (html, 1 lines).** In Step 152, select employee involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `<tr {% if edit_mode %}class="selectable"{% endif %}>` decides which HTML is included based on the value Django provided.
+
+**Block 4 (html, 1 lines).** In Step 152, select employee involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<td>{{ employee.username }}</td>` creates or closes part of the page structure seen by the browser.
+
+**Block 5 (html, 10 lines).** In Step 152, select employee involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided. The HTML element `<a class="row-link"` creates or closes part of the page structure seen by the browser. `href="{% url 'edit_employee' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 8–10:** The HTML element `</td>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 152. For Step 152, the proposed way to check select employee was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 153 before a complete result could be claimed.
+
+#### Next
+
+[Step 151: Edit Mode Button](#step-151) · [Step 153: Combine the list and selection controls](#step-153)
