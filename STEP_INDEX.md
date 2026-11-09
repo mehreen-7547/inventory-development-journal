@@ -16,3 +16,4 @@
 | 12 | Module 0, Chapter 2 | [ Push your first commit to GitHub ](Module-0/02-git-and-github.md#step-12) |
 | 13 | Module 0, Chapter 2 | [ Create a separate local journal folder ](Module-0/02-git-and-github.md#step-13) |
 | 14 | Module 0, Chapter 2 | [ Initialize Git for the private journal ](Module-0/02-git-and-github.md#step-14) |
+| 15 | Module 0, Chapter 2 | [ Connect it to GitHub ](Module-0/02-git-and-github.md#step-15) |

@@ -24,6 +24,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 12: Push your first commit to GitHub](#step-12)
 - [Step 13: Create a separate local journal folder](#step-13)
 - [Step 14: Initialize Git for the private journal](#step-14)
+- [Step 15: Connect it to GitHub](#step-15)
 
 ---
 
@@ -416,3 +417,81 @@ Not tested yet at Step 14. For Step 14, the proposed way to check initialize git
 #### Next
 
 [Step 13: Create a separate local journal folder](#step-13) · [Step 15: Connect it to GitHub](#step-15)
+
+
+---
+
+<a id="step-15"></a>
+
+### Step 15: Connect it to GitHub
+
+#### Before this step
+
+The private journal was ready locally. We needed to connect it to the right private GitHub repository. Immediately before this, Step 14 dealt with initialize git for the private journal; the work here continued the same part of the application.
+
+#### What we did and why
+
+This command tells the journal folder where its online copy lives. A private repository is intended to restrict who can see the written explanation, unlike a publicly visible project repository.
+
+#### Code and commands
+
+**Step 15, block 1.** This code sample or terminal command was used while working on connect it to github. The content below remains in its original sequence for Step 15, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote add origin https://github.com/mehreen-7547/inventory-development-journal.git
+```
+
+**Step 15, block 2.** This code sample or terminal command was used while working on connect it to github. The content below remains in its original sequence for Step 15, block 2.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote -v
+```
+
+**Step 15, block 3.** This output was used while working on connect it to github. The content below remains in its original sequence for Step 15, block 3.
+
+```text
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
+```
+
+**Step 15, block 4.** This code sample or terminal command was used while working on connect it to github. The content below remains in its original sequence for Step 15, block 4.
+
+```powershell
+Get-ChildItem C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal -Name
+```
+
+**Step 15, block 5.** This output was used while working on connect it to github. The content below remains in its original sequence for Step 15, block 5.
+
+```text
+inventory-development-journal.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 15, connect it to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote ad` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 15, connect it to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote -v` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (text, 2 lines).** In Step 15, connect it to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 15, output block 3 showed the result rather than another command. Its visible value was `origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)`, which mattered for connect it to github.
+
+**Block 4 (powershell, 1 lines).** In Step 15, connect it to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Get-ChildItem C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journ` supply the values or page content for this part of VS Code terminal / project setup. These lines are kept together because their order and indentation matter.
+
+**Block 5 (text, 1 lines).** In Step 15, connect it to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 15, output block 5 showed the result rather than another command. Its visible value was `inventory-development-journal.md`, which mattered for connect it to github.
+
+#### How we checked it
+
+Not tested yet at Step 15. For Step 15, the proposed way to check connect it to github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 16 before a complete result could be claimed.
+
+#### Next
+
+[Step 14: Initialize Git for the private journal](#step-14) · [Step 16: Stage the journal for Git](#step-16)
