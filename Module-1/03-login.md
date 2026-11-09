@@ -20,6 +20,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 - [Step 74: Understand models.py versus admin.py](#step-74)
 - [Step 75: Login Page](#step-75)
 - [Step 76: Login URL](#step-76)
+- [Step 77: Connect Login URL](#step-77)
 
 ---
 
@@ -244,3 +245,83 @@ Not tested yet at Step 76. For Step 76, the proposed way to check login url was 
 #### Next
 
 [Step 75: Login Page](#step-75) · [Step 77: Connect Login URL](#step-77)
+
+
+---
+
+<a id="step-77"></a>
+
+### Step 77: Connect Login URL
+
+#### Before this step
+
+Django's project-level URL file is the first place it looks when a browser requests a page. Immediately before this, Step 76 dealt with login url; the work here continued the same part of the application.
+
+#### What we did and why
+
+Including the accounts URL file means /accounts/... addresses can reach the views inside our accounts app. Without that connection, even a correct login view may return “page not found.”.
+
+#### Code and commands
+
+**Step 77, block 1.** This code sample or terminal command was used while working on connect login url. The content below remains in its original sequence for Step 77, block 1.
+
+```python
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("accounts.urls")),
+    path("", include("core.urls")),
+]
+```
+
+**Step 77, block 2.** This code sample or terminal command was used while working on connect login url. The content below remains in its original sequence for Step 77, block 2.
+
+```python
+path("", include("accounts.urls")),
+```
+
+**Step 77, block 3.** This code sample or terminal command was used while working on connect login url. The content below remains in its original sequence for Step 77, block 3.
+
+```powershell
+Test-Path .\templates\accounts\login.html
+```
+
+**Step 77, block 4.** This output was used while working on connect login url. The content below remains in its original sequence for Step 77, block 4.
+
+```text
+techmindz_inventory_module0_sqlite_atomic/
+├── manage.py
+└── templates/
+    └── accounts/
+        └── login.html
+```
+
+#### How the code works
+
+**Block 1 (python, 8 lines).** In Step 77, connect login url involved `config/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.contrib import admin` makes a Python function, class or module available to the code that follows. `from django.urls import include, path` makes a Python function, class or module available to the code that follows. `urlpatterns = [` sets the named value used by the next operation in this file. `path("admin/", admin.site.urls),` begins a URL rule connecting a browser address with the function that answers it.
+
+**Lines 8–8:** The lines starting with `]` supply the values or page content for this part of config/urls.py. These lines are kept together because their order and indentation matter.
+
+**Block 2 (python, 1 lines).** In Step 77, connect login url involved `config/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `path("", include("accounts.urls")),` begins a URL rule connecting a browser address with the function that answers it.
+
+**Block 3 (powershell, 1 lines).** In Step 77, connect login url involved `config/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Test-Path .\templates\accounts\login.html` supply the values or page content for this part of config/urls.py. These lines are kept together because their order and indentation matter.
+
+**Block 4 (text, 5 lines).** In Step 77, connect login url involved `config/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 77, output block 4 showed the result rather than another command. Its visible value was `techmindz_inventory_module0_sqlite_atomic/`, which mattered for connect login url.
+
+#### How we checked it
+
+Not tested yet at Step 77. For Step 77, the proposed way to check connect login url was to open the related page in the browser and check that the route reached the intended view or template in `config/urls.py`. Development continued in Step 78 before a complete result could be claimed.
+
+#### Next
+
+[Step 76: Login URL](#step-76) · [Step 78: Login Redirect](#step-78)

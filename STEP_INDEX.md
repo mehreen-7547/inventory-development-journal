@@ -78,3 +78,4 @@
 | 74 | Module 1, Chapter 3 | [ Understand models.py versus admin.py ](Module-1/03-login.md#step-74) |
 | 75 | Module 1, Chapter 3 | [ Login Page ](Module-1/03-login.md#step-75) |
 | 76 | Module 1, Chapter 3 | [ Login URL ](Module-1/03-login.md#step-76) |
+| 77 | Module 1, Chapter 3 | [ Connect Login URL ](Module-1/03-login.md#step-77) |
