@@ -26,6 +26,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 184: Update Set New Password Page](#step-184)
 - [Step 185: Update Reset Complete Page](#step-185)
 - [Step 186: Update Employee List](#step-186)
+- [Step 187: Update Create Employee](#step-187)
 
 ---
 
@@ -995,3 +996,90 @@ Not tested yet at Step 186. For Step 186, the proposed way to check update emplo
 #### Next
 
 [Step 185: Update Reset Complete Page](#step-185) · [Step 187: Update Create Employee](#step-187)
+
+
+---
+
+<a id="step-187"></a>
+
+### Step 187: Update Create Employee
+
+#### Before this step
+
+The form for creating a new employee needed to look consistent with the newly styled employee list. Immediately before this, Step 186 dealt with update employee list; the work here continued the same part of the application.
+
+#### What we did and why
+
+We moved it into the common page layout and kept a clear form and save action. The server still validates the information before creating a user.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Create Employee - Inventory System{% endblock %}`; Replace lines around `{% block content %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-8 col-lg-6">`; Replace lines around `<h2 class="mb-3">Create Employee</h2>`; Replace lines around `<p class="text-muted mb-4"> / Enter the employee details below.`. For Step 187, this comparison used the code block from Step 141, which might not represent the whole file.
+
+**Step 187, block 1.** This code sample or terminal command was used while working on update create employee. The content below remains in its original sequence for Step 187, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Create Employee - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <h2 class="mb-3">Create Employee</h2>
+
+        <p class="text-muted mb-4">
+            Enter the employee details below.
+            A password setup link will be sent to their email.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Create Employee
+                </button>
+
+                <a href="{% url 'employee_list' %}"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 39 lines).** In Step 187, update create employee involved `create_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Create Employee - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-8 col-lg-6">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-3">Create Employee</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p class="text-muted mb-4">` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `</p>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<div class="mb-4">` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<div class="d-flex gap-2">` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-primary">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** `<a href="{% url 'employee_list' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-secondary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–39:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 187. For Step 187, the proposed way to check update create employee was to revisit `create_employee.html` and run the corresponding command or feature to see its result. Development continued in Step 188 before a complete result could be claimed.
+
+#### Next
+
+[Step 186: Update Employee List](#step-186) · [Step 188: Fix Form Styling](#step-188)
