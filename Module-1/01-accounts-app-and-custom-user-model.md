@@ -19,6 +19,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 56: Begin the Accounts module](#step-56)
 - [Step 57: Custom User Model](#step-57)
 - [Step 58: Clarify account creation workflow](#step-58)
+- [Step 59: App Creation](#step-59)
 
 ---
 
@@ -171,3 +172,41 @@ Not tested yet at Step 58. For Step 58, the proposed way to check clarify accoun
 #### Next
 
 [Step 57: Custom User Model](#step-57) · [Step 59: App Creation](#step-59)
+
+
+---
+
+<a id="step-59"></a>
+
+### Step 59: App Creation
+
+#### Before this step
+
+We needed a place inside Django to keep the files related to employees and login. Immediately before this, Step 58 dealt with clarify account creation workflow; the work here continued the same part of the application.
+
+#### What we did and why
+
+A Django app is a folder of related features. Creating the accounts app gave us a home for user models, forms, views, and URL rules. It did not automatically make login work.
+
+#### Code and commands
+
+**Step 59, block 1.** This code sample or terminal command was used while working on app creation. The content below remains in its original sequence for Step 59, block 1.
+
+```powershell
+cd "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+python manage.py startapp accounts
+```
+
+#### How the code works
+
+**Block 1 (powershell, 2 lines).** In Step 59, app creation involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The command `python manage.py startapp accounts` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 59. For Step 59, the proposed way to check app creation was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 60 before a complete result could be claimed.
+
+#### Next
+
+[Step 58: Clarify account creation workflow](#step-58) · [Step 60: Configure Settings](#step-60)

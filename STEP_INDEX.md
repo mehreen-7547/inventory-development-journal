@@ -60,3 +60,4 @@
 | 56 | Module 1, Chapter 1 | [ Begin the Accounts module ](Module-1/01-accounts-app-and-custom-user-model.md#step-56) |
 | 57 | Module 1, Chapter 1 | [ Custom User Model ](Module-1/01-accounts-app-and-custom-user-model.md#step-57) |
 | 58 | Module 1, Chapter 1 | [ Clarify account creation workflow ](Module-1/01-accounts-app-and-custom-user-model.md#step-58) |
+| 59 | Module 1, Chapter 1 | [ App Creation ](Module-1/01-accounts-app-and-custom-user-model.md#step-59) |
