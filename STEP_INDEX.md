@@ -41,3 +41,4 @@
 | 37 | Module 0, Chapter 5 | [ Staging Security Verification Notes ](Module-0/05-security-checks.md#step-37) |
 | 38 | Module 0, Chapter 5 | [ Committing Security Verification Notes ](Module-0/05-security-checks.md#step-38) |
 | 39 | Module 0, Chapter 5 | [ Pushing Security Verification Notes ](Module-0/05-security-checks.md#step-39) |
+| 40 | Module 0, Chapter 5 | [ Understand feasibility models ](Module-0/05-security-checks.md#step-40) |

@@ -19,6 +19,7 @@ Imagine keeping a notebook of checks performed before accepting more changes. We
 - [Step 37: Staging Security Verification Notes](#step-37)
 - [Step 38: Committing Security Verification Notes](#step-38)
 - [Step 39: Pushing Security Verification Notes](#step-39)
+- [Step 40: Understand feasibility models](#step-40)
 
 ---
 
@@ -139,3 +140,51 @@ Not tested yet at Step 39. For Step 39, the proposed way to check pushing securi
 #### Next
 
 [Step 38: Committing Security Verification Notes](#step-38) · [Step 40: Understand feasibility models](#step-40)
+
+
+---
+
+<a id="step-40"></a>
+
+### Step 40: Understand feasibility models
+
+#### Before this step
+
+The inventory project would eventually predict future demand. Before attempting that feature, we needed to see whether the laptop could run the model tools. Immediately before this, Step 39 dealt with pushing security verification notes; the work here continued the same part of the application.
+
+#### What we did and why
+
+The test models mentioned here were experiments, not the final prediction feature. Their purpose was to learn what software and computer resources were available before building a forecasting screen or making accuracy claims.
+
+#### Code and commands
+
+**Step 40, block 1.** This code sample or terminal command was used while working on understand feasibility models. The content below remains in its original sequence for Step 40, block 1.
+
+```python
+class ExampleProduct(models.Model):
+    on_hand = models.PositiveIntegerField(default=0)
+```
+
+**Step 40, block 2.** This code sample or terminal command was used while working on understand feasibility models. The content below remains in its original sequence for Step 40, block 2.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
+```
+
+#### How the code works
+
+**Block 1 (python, 2 lines).** In Step 40, understand feasibility models involved `core/tests.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `class ExampleProduct(models.Model):` declares a Python class, grouping related data or behaviour together. `on_hand = models.PositiveIntegerField(default=0)` sets the named value used by the next operation in this file.
+
+**Block 2 (powershell, 1 lines).** In Step 40, understand feasibility models involved `core/tests.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+For Step 40 (Understand feasibility models), we compared the visible terminal output with the requested action. The visible result for Step 40 was described as “your output confirms”; this only addressed the understand feasibility models check in `core/tests.py`.
+
+#### Next
+
+[Step 39: Pushing Security Verification Notes](#step-39) · [Step 41: Record and Push Test Results](#step-41)
