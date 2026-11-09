@@ -17,6 +17,7 @@ This is an early-development correction. On a live system, deleting the database
 ### Find a step
 
 - [Step 68: Database Reset](#step-68)
+- [Step 69: Database File Locked](#step-69)
 
 ---
 
@@ -53,3 +54,40 @@ Not tested yet at Step 68. For Step 68, the proposed way to check database reset
 #### Next
 
 [Step 67: Migration Preparation](../Module-1/01-accounts-app-and-custom-user-model.md#step-67) · [Step 69: Database File Locked](#step-69)
+
+
+---
+
+<a id="step-69"></a>
+
+### Step 69: Database File Locked
+
+#### Before this step
+
+Windows refused to delete the test database because another running program was still using the file. Immediately before this, Step 68 dealt with database reset; the work here continued the same part of the application.
+
+#### What we did and why
+
+A running Django server or database connection can keep SQLite open. We needed to stop the process holding the file before touching it. The lock error was a file-use problem, not a mistake in the CustomUser class.
+
+#### Code and commands
+
+**Step 69, block 1.** This code sample or terminal command was used while working on database file locked. The content below remains in its original sequence for Step 69, block 1.
+
+```powershell
+Remove-Item .\db.sqlite3
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 69, database file locked involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Remove-Item .\db.sqlite3` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 69. For Step 69, the proposed way to check database file locked was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 70 before a complete result could be claimed.
+
+#### Next
+
+[Step 68: Database Reset](#step-68) · [Step 70: Create Database Tables](#step-70)
