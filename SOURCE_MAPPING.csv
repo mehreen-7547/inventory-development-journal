@@ -230,3 +230,19 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 229,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Prevent recovery emails for inactive accounts
 230,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Validate the account-setup token and welcome-email content
 231,,361–365,1,Testing Password Changes, Password Recovery and Account Setup Emails,Run the full 45-test suite and verify the GitHub commit
+232,,,1,Testing Complete Password Reset and First-Time Employee Password Setup,Confirm the repository is clean before changing tests
+233,,,1,Testing Complete Password Reset and First-Time Employee Password Setup,Test a complete password-reset confirmation
+234,,,1,Testing Complete Password Reset and First-Time Employee Password Setup,Test first-time password setup for a new employee
+235,,,1,Testing Complete Password Reset and First-Time Employee Password Setup,Run the suite publish the code and mark Module 1 complete
+236,,,2,Supplier setup and list,Create the catalog Django app
+237,,,2,Supplier setup and list,Register catalog in Django settings
+238,,,2,Supplier setup and list,Define the first Supplier model
+239,,,2,Supplier setup and list,Preview the Supplier migration
+240,,,2,Supplier setup and list,Review the supplier fields against v3
+241,,,2,Supplier setup and list,Finalize the five-field Supplier model
+242,,,2,Supplier setup and list,Generate and apply the Supplier migration
+243,,,2,Supplier setup and list,Create the Supplier ModelForm
+244,,,2,Supplier setup and list,Build a Manager-only Supplier List view
+245,,,2,Supplier setup and list,Create the Supplier List template
+246,,,2,Supplier setup and list,Connect the Supplier URL
+247,,,2,Supplier setup and list,Diagnose the missing SQLite table and verify the page
