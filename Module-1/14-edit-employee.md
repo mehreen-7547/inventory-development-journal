@@ -19,6 +19,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 145: Edit Employee Form](#step-145)
 - [Step 146: Edit Employee View](#step-146)
 - [Step 147: Edit Employee Template](#step-147)
+- [Step 148: Edit Employee URL](#step-148)
 
 ---
 
@@ -242,3 +243,44 @@ Not tested yet at Step 147. For Step 147, the proposed way to check edit employe
 #### Next
 
 [Step 146: Edit Employee View](#step-146) · [Step 148: Edit Employee URL](#step-148)
+
+
+---
+
+<a id="step-148"></a>
+
+### Step 148: Edit Employee URL
+
+#### Before this step
+
+The browser needed a unique address for editing each employee. Immediately before this, Step 147 dealt with edit employee template; the work here continued the same part of the application.
+
+#### What we did and why
+
+The edit URL contains an employee ID. It tells the same edit view which record to load, so we do not need a different Python function for every person.
+
+#### Code and commands
+
+**Step 148, block 1.** This code sample or terminal command was used while working on edit employee url. The content below remains in its original sequence for Step 148, block 1.
+
+```python
+path(
+    'employees/edit/<int:employee_id>/',
+    views.edit_employee,
+    name='edit_employee'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 148, edit employee url involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `path(` begins a URL rule connecting a browser address with the function that answers it. `name='edit_employee'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 148. For Step 148, the proposed way to check edit employee url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 149 before a complete result could be claimed.
+
+#### Next
+
+[Step 147: Edit Employee Template](#step-147) · [Step 149: Employee Edit Link](#step-149)
