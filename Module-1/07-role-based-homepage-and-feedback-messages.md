@@ -21,6 +21,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 93: Why hiding a link does not secure Django Admin](#step-93)
 - [Step 94: Verify manager access is restricted](#step-94)
 - [Step 95: Login Error Messages](#step-95)
+- [Step 96: Password Change Confirmation](#step-96)
 
 ---
 
@@ -243,3 +244,57 @@ Not tested yet at Step 95. For Step 95, the proposed way to check login error me
 #### Next
 
 [Step 94: Verify manager access is restricted](#step-94) · [Step 96: Password Change Confirmation](#step-96)
+
+
+---
+
+<a id="step-96"></a>
+
+### Step 96: Password Change Confirmation
+
+#### Before this step
+
+After a successful password change, the user needed an indication that the update worked. Immediately before this, Step 95 dealt with login error messages; the work here continued the same part of the application.
+
+#### What we did and why
+
+The view sets a success message so the next page can show confirmation. That message is separate from saving the new password: the database change and the visual feedback have different jobs.
+
+#### Code and commands
+
+**Step 96, block 1.** This code sample or terminal command was used while working on password change confirmation. The content below remains in its original sequence for Step 96, block 1.
+
+```python
+if form.is_valid():
+    user = form.save()
+    update_session_auth_hash(request, user)
+    return redirect('home')
+```
+
+**Step 96, block 2.** This code sample or terminal command was used while working on password change confirmation. The content below remains in its original sequence for Step 96, block 2.
+
+```python
+if form.is_valid():
+    user = form.save()
+    update_session_auth_hash(request, user)
+    messages.success(request, 'Password changed successfully.')
+    return redirect('home')
+```
+
+#### How the code works
+
+**Block 1 (python, 4 lines).** In Step 96, password change confirmation involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** `if form.is_valid():` is a condition: the code inside this branch only runs when its condition is satisfied. `form.save()` writes the validated form values into the corresponding database record. `return redirect('home')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 2 (python, 5 lines).** In Step 96, password change confirmation involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `if form.is_valid():` is a condition: the code inside this branch only runs when its condition is satisfied. `form.save()` writes the validated form values into the corresponding database record. `messages.success(request, 'Password changed successfully.')` prepares feedback that can appear when the user reaches the next page. `return redirect('home')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 96. For Step 96, the proposed way to check password change confirmation was to open the password-related page and try the expected form flow with a test account. Development continued in Step 97 before a complete result could be claimed.
+
+#### Next
+
+[Step 95: Login Error Messages](#step-95) · [Step 97: Success Message](#step-97)
