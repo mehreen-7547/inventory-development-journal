@@ -21,6 +21,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 115: Password Reset Confirmation](#step-115)
 - [Step 116: Understand the password reset templates](#step-116)
 - [Step 117: Confirmation Page URL](#step-117)
+- [Step 118: Password Reset Email](#step-118)
 
 ---
 
@@ -282,3 +283,62 @@ Not tested yet at Step 117. For Step 117, the proposed way to check confirmation
 #### Next
 
 [Step 116: Understand the password reset templates](#step-116) · [Step 118: Password Reset Email](#step-118)
+
+
+---
+
+<a id="step-118"></a>
+
+### Step 118: Password Reset Email
+
+#### Before this step
+
+The email had to tell the user where to set a new password. Immediately before this, Step 117 dealt with confirmation page url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The email template builds a link containing information Django can later check. It does not contain the person's password and it does not change the password just by being opened.
+
+#### Code and commands
+
+**Step 118, block 1.** This code sample or terminal command was used while working on password reset email. The content below remains in its original sequence for Step 118, block 1.
+
+```django
+Hello,
+
+We received a request to reset your Inventory System password.
+
+Click the link below to set a new password:
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+If you did not request this password reset, you can ignore this email.
+
+Inventory System
+```
+
+**Step 118, block 2.** This code sample or terminal command was used while working on password reset email. The content below remains in its original sequence for Step 118, block 2.
+
+```django
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+```
+
+#### How the code works
+
+**Block 1 (django, 11 lines).** In Step 118, password reset email involved `templates/accounts/password_reset_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 8–11:** The lines starting with `If you did not request this password reset, you can ignore this email.` supply the values or page content for this part of templates/accounts/password_reset_email.txt. These lines are kept together because their order and indentation matter.
+
+**Block 2 (django, 1 lines).** In Step 118, password reset email involved `templates/accounts/password_reset_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+#### How we checked it
+
+Not tested yet at Step 118. For Step 118, the proposed way to check password reset email was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 119 before a complete result could be claimed.
+
+#### Next
+
+[Step 117: Confirmation Page URL](#step-117) · [Step 119: Connect Email Template](#step-119)
