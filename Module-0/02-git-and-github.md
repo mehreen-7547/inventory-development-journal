@@ -19,6 +19,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 7: Initialize the Git repository](#step-7)
 - [Step 8: Stage the project files](#step-8)
 - [Step 9: Create our first Git commit](#step-9)
+- [Step 10: Connect your local project to GitHub](#step-10)
 
 ---
 
@@ -189,3 +190,40 @@ Not tested yet at Step 9. For Step 9, the proposed way to check create our first
 #### Next
 
 [Step 8: Stage the project files](#step-8) · [Step 10: Connect your local project to GitHub](#step-10)
+
+
+---
+
+<a id="step-10"></a>
+
+### Step 10: Connect your local project to GitHub
+
+#### Before this step
+
+We had a saved project on the laptop, but no connection to the GitHub repository that would hold its online copy. Immediately before this, Step 9 dealt with create our first git commit; the work here continued the same part of the application.
+
+#### What we did and why
+
+A remote is simply a GitHub destination. Giving it the nickname origin lets later commands send our commits there. Connecting a remote does not upload files by itself.
+
+#### Code and commands
+
+**Step 10, block 1.** This code sample or terminal command was used while working on connect your local project to github. The content below remains in its original sequence for Step 10, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/mehreen-7547/ai-assisted-inventory-manager.git
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 10, connect your local project to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic remote add origin https://github.com/me` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 10. For Step 10, the proposed way to check connect your local project to github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 11 before a complete result could be claimed.
+
+#### Next
+
+[Step 9: Create our first Git commit](#step-9) · [Step 11: Connect your local project to GitHub](#step-11)
