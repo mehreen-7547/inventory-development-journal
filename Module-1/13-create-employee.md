@@ -21,6 +21,7 @@ When an admin first opens the page, Django shows empty fields. After the admin s
 - [Step 141: Create Employee Template](#step-141)
 - [Step 142: Create Employee URL](#step-142)
 - [Step 143: Add Employee Link](#step-143)
+- [Step 144: Refine the Create Employee link](#step-144)
 
 ---
 
@@ -308,3 +309,59 @@ Not tested yet at Step 143. For Step 143, the proposed way to check add employee
 #### Next
 
 [Step 142: Create Employee URL](#step-142) · [Step 144: Refine the Create Employee link](#step-144)
+
+
+---
+
+<a id="step-144"></a>
+
+### Step 144: Refine the Create Employee link
+
+#### Before this step
+
+We adjusted where the create action appears so it would be easier to spot on the employee list. Immediately before this, Step 143 dealt with add employee link; the work here continued the same part of the application.
+
+#### What we did and why
+
+The link still leads to the same creation page. The change was about making the workflow clear, not adding a second way to save employees.
+
+#### Code and commands
+
+**Step 144, block 1.** This code sample or terminal command was used while working on refine the create employee link. The content below remains in its original sequence for Step 144, block 1.
+
+```html
+<h2>Manage Employees</h2>
+```
+
+**Step 144, block 2.** This code sample or terminal command was used while working on refine the create employee link. The content below remains in its original sequence for Step 144, block 2.
+
+```html
+<p>
+    <a href="{% url 'create_employee' %}">
+        Add New Employee
+    </a>
+</p>
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 144, refine the create employee link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<h2>Manage Employees</h2>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 5 lines).** In Step 144, refine the create employee link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'create_employee' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 144. For Step 144, the proposed way to check refine the create employee link was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Step 144 did not establish a successful outcome for refine the create employee link.
+
+#### Next
+
+[Step 143: Add Employee Link](#step-143) · [Step 145: Edit Employee Form](../Module-1/14-edit-employee.md#step-145)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **create employee** was needed at this point, and describe what the application did differently after the final step of this chapter.
