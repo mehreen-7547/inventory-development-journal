@@ -83,3 +83,4 @@
 | 79 | Module 1, Chapter 3 | [ Understand a Django project versus an app ](Module-1/03-login.md#step-79) |
 | 80 | Module 1, Chapter 4 | [ Logout Function ](Module-1/04-logout.md#step-80) |
 | 81 | Module 1, Chapter 4 | [ Logout URL ](Module-1/04-logout.md#step-81) |
+| 82 | Module 1, Chapter 4 | [ Logout Button ](Module-1/04-logout.md#step-82) |

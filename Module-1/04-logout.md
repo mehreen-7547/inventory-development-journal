@@ -18,6 +18,7 @@ Signing in creates a session so Django remembers who you are. Logging out ends t
 
 - [Step 80: Logout Function](#step-80)
 - [Step 81: Logout URL](#step-81)
+- [Step 82: Logout Button](#step-82)
 
 ---
 
@@ -117,3 +118,48 @@ Not tested yet at Step 81. For Step 81, the proposed way to check logout url was
 #### Next
 
 [Step 80: Logout Function](#step-80) · [Step 82: Logout Button](#step-82)
+
+
+---
+
+<a id="step-82"></a>
+
+### Step 82: Logout Button
+
+#### Before this step
+
+A user should not have to type a logout URL manually. Immediately before this, Step 81 dealt with logout url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The homepage gained a form or button that sends a POST request to the logout view. POST is a browser request used for an action that changes state, such as ending a session, rather than simply reading a page.
+
+#### Code and commands
+
+**Step 82, block 1.** This code sample or terminal command was used while working on logout button. The content below remains in its original sequence for Step 82, block 1.
+
+```html
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+```
+
+#### How the code works
+
+**Block 1 (html, 4 lines).** In Step 82, logout button involved `home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** `<form method="POST" action="{% url 'logout' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<button type="submit">Logout</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 82. For Step 82, the proposed way to check logout button was to revisit `home.html` and run the corresponding command or feature to see its result. Step 82 did not establish a successful outcome for logout button.
+
+#### Next
+
+[Step 81: Logout URL](#step-81) · [Step 83: Protect Homepage](../Module-1/05-homepage-protection-and-navigation.md#step-83)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **logout** was needed at this point, and describe what the application did differently after the final step of this chapter.
