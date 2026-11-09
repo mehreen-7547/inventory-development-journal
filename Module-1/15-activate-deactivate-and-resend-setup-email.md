@@ -18,6 +18,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 
 - [Step 157: Employee Deactivation](#step-157)
 - [Step 158: Employee Status URL](#step-158)
+- [Step 159: Deactivate/Reactivate Button](#step-159)
 
 ---
 
@@ -135,3 +136,73 @@ Not tested yet at Step 158. For Step 158, the proposed way to check employee sta
 #### Next
 
 [Step 157: Employee Deactivation](#step-157) · [Step 159: Deactivate/Reactivate Button](#step-159)
+
+
+---
+
+<a id="step-159"></a>
+
+### Step 159: Deactivate/Reactivate Button
+
+#### Before this step
+
+The administrator needed a visible way to change an employee's account state. Immediately before this, Step 158 dealt with employee status url; the work here continued the same part of the application.
+
+#### What we did and why
+
+A button shows the appropriate action, such as Deactivate or Reactivate, based on the current status. The request is sent as an action, not a harmless page-opening link.
+
+#### Code and commands
+
+**Step 159, block 1.** This code sample or terminal command was used while working on deactivate/reactivate button. The content below remains in its original sequence for Step 159, block 1.
+
+```html
+</form>
+```
+
+**Step 159, block 2.** This code sample or terminal command was used while working on deactivate/reactivate button. The content below remains in its original sequence for Step 159, block 2.
+
+```html
+<form method="POST"
+      action="{% url 'toggle_employee_status' employee.id %}">
+
+    {% csrf_token %}
+
+    {% if employee.is_active %}
+
+        <button type="submit">
+            Deactivate Employee
+        </button>
+
+    {% else %}
+
+        <button type="submit">
+            Reactivate Employee
+        </button>
+
+    {% endif %}
+
+</form>
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 159, deactivate/reactivate button involved `templates/accounts/edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 20 lines).** In Step 159, deactivate/reactivate button involved `templates/accounts/edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The form sends submitted fields to the server as a POST request, rather than just opening a page. `action="{% url 'toggle_employee_status' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. `{% if employee.is_active %}` decides which HTML is included based on the value Django provided.
+
+**Lines 8–14:** The HTML element `<button type="submit">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–20:** The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 159. For Step 159, the proposed way to check deactivate/reactivate button was to revisit `templates/accounts/edit_employee.html` and run the corresponding command or feature to see its result. Development continued in Step 160 before a complete result could be claimed.
+
+#### Next
+
+[Step 158: Employee Status URL](#step-158) · [Step 160: Resend Setup Email](#step-160)
