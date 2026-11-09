@@ -26,6 +26,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 152: Select Employee](#step-152)
 - [Step 153: Combine the list and selection controls](#step-153)
 - [Step 154: External CSS](#step-154)
+- [Step 155: Fix Row Selection](#step-155)
 
 ---
 
@@ -832,3 +833,71 @@ Not tested yet at Step 154. For Step 154, the proposed way to check external css
 #### Next
 
 [Step 153: Combine the list and selection controls](#step-153) · [Step 155: Fix Row Selection](#step-155)
+
+
+---
+
+<a id="step-155"></a>
+
+### Step 155: Fix Row Selection
+
+#### Before this step
+
+The first version of row selection did not behave correctly when the user clicked on an employee. Immediately before this, Step 154 dealt with external css; the work here continued the same part of the application.
+
+#### What we did and why
+
+We checked the connection between the clickable row, the selection control and the edit action. Fixing the page interaction did not change the employee database model.
+
+#### Code and commands
+
+**Step 155, block 1.** This code sample or terminal command was used while working on fix row selection. The content below remains in its original sequence for Step 155, block 1.
+
+```html
+{% for employee in employees %}
+```
+
+**Step 155, block 2.** This code sample or terminal command was used while working on fix row selection. The content below remains in its original sequence for Step 155, block 2.
+
+```html
+<tr {% if edit_mode %}class="selectable"{% endif %}>
+```
+
+**Step 155, block 3.** This code sample or terminal command was used while working on fix row selection. The content below remains in its original sequence for Step 155, block 3.
+
+```html
+<td>
+    {% if edit_mode %}
+        <a class="row-link"
+           href="{% url 'edit_employee' employee.id %}">
+            {{ employee.username }}
+        </a>
+    {% else %}
+        {{ employee.username }}
+    {% endif %}
+</td>
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 155, fix row selection involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `{% for employee in employees %}` repeats the following operation once for each matching item.
+
+**Block 2 (html, 1 lines).** In Step 155, fix row selection involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `<tr {% if edit_mode %}class="selectable"{% endif %}>` decides which HTML is included based on the value Django provided.
+
+**Block 3 (html, 10 lines).** In Step 155, fix row selection involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided. The HTML element `<a class="row-link"` creates or closes part of the page structure seen by the browser. `href="{% url 'edit_employee' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 8–10:** The HTML element `</td>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 155. For Step 155, the proposed way to check fix row selection was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 156 before a complete result could be claimed.
+
+#### Next
+
+[Step 154: External CSS](#step-154) · [Step 156: Correct employee row selection](#step-156)
