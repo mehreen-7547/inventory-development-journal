@@ -22,6 +22,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 148: Edit Employee URL](#step-148)
 - [Step 149: Employee Edit Link](#step-149)
 - [Step 150: Employee Edit Mode](#step-150)
+- [Step 151: Edit Mode Button](#step-151)
 
 ---
 
@@ -403,3 +404,60 @@ Not tested yet at Step 150. For Step 150, the proposed way to check employee edi
 #### Next
 
 [Step 149: Employee Edit Link](#step-149) · [Step 151: Edit Mode Button](#step-151)
+
+
+---
+
+<a id="step-151"></a>
+
+### Step 151: Edit Mode Button
+
+#### Before this step
+
+We wanted a clear button that says when the administrator is entering edit mode. Immediately before this, Step 150 dealt with employee edit mode; the work here continued the same part of the application.
+
+#### What we did and why
+
+The page can change what controls are shown when Edit is selected. This helps avoid accidental clicks while someone is only trying to read employee details.
+
+#### Code and commands
+
+**Step 151, block 1.** This code sample or terminal command was used while working on edit mode button. The content below remains in its original sequence for Step 151, block 1.
+
+```html
+{% if edit_mode %}
+
+    <p>Select an employee to edit.</p>
+
+    <a href="{% url 'employee_list' %}">
+        Cancel Edit
+    </a>
+
+{% else %}
+
+    <p>
+        <a href="{% url 'employee_list' %}?mode=edit">
+            Edit Employee
+        </a>
+    </p>
+
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 17 lines).** In Step 151, edit mode button involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if edit_mode %}` decides which HTML is included based on the value Django provided. The HTML element `<p>Select an employee to edit.</p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}?mode=edit">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–17:** The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 151. For Step 151, the proposed way to check edit mode button was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 152 before a complete result could be claimed.
+
+#### Next
+
+[Step 150: Employee Edit Mode](#step-150) · [Step 152: Select Employee](#step-152)
