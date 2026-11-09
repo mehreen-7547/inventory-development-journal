@@ -29,6 +29,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 187: Update Create Employee](#step-187)
 - [Step 188: Fix Form Styling](#step-188)
 - [Step 189: Add CSS classes to creation form widgets](#step-189)
+- [Step 190: Correct Form Styling](#step-190)
 
 ---
 
@@ -1178,3 +1179,54 @@ Not tested yet at Step 189. For Step 189, the proposed way to check add css clas
 #### Next
 
 [Step 188: Fix Form Styling](#step-188) · [Step 190: Correct Form Styling](#step-190)
+
+
+---
+
+<a id="step-190"></a>
+
+### Step 190: Correct Form Styling
+
+#### Before this step
+
+We noticed the styling instructions were added to the wrong form in an earlier edit. Immediately before this, Step 189 dealt with add css classes to creation form widgets; the work here continued the same part of the application.
+
+#### What we did and why
+
+The project had a creation form and an edit form, and they are different Python classes. We corrected which class received the styling method, so the intended creation page would actually use it.
+
+#### Code and commands
+
+**Step 190, block 1.** This code sample or terminal command was used while working on correct form styling. The content below remains in its original sequence for Step 190, block 1.
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+#### How the code works
+
+**Block 1 (python, 13 lines).** In Step 190, correct form styling involved `accounts/forms.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `def __init__(self, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `self.fields['role'].choices = [` sets the named value used by the next operation in this file.
+
+**Lines 8–13:** `for name, field in self.fields.items():` repeats the following operation once for each matching item. `if name == 'role':` is a condition: the code inside this branch only runs when its condition is satisfied. `field.widget.attrs['class'] = 'form-select'` sets the named value used by the next operation in this file. The `else` branch handles the alternative case when the preceding condition was not satisfied.
+
+#### How we checked it
+
+Not tested yet at Step 190. For Step 190, the proposed way to check correct form styling was to revisit `accounts/forms.py` and run the corresponding command or feature to see its result. Development continued in Step 191 before a complete result could be claimed.
+
+#### Next
+
+[Step 189: Add CSS classes to creation form widgets](#step-189) · [Step 191: Consolidate both employee forms](#step-191)
