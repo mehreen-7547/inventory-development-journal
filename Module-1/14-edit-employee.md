@@ -20,6 +20,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 146: Edit Employee View](#step-146)
 - [Step 147: Edit Employee Template](#step-147)
 - [Step 148: Edit Employee URL](#step-148)
+- [Step 149: Employee Edit Link](#step-149)
 
 ---
 
@@ -284,3 +285,74 @@ Not tested yet at Step 148. For Step 148, the proposed way to check edit employe
 #### Next
 
 [Step 147: Edit Employee Template](#step-147) · [Step 149: Employee Edit Link](#step-149)
+
+
+---
+
+<a id="step-149"></a>
+
+### Step 149: Employee Edit Link
+
+#### Before this step
+
+The list showed employees but did not yet let an administrator open one person's edit page. Immediately before this, Step 148 dealt with edit employee url; the work here continued the same part of the application.
+
+#### What we did and why
+
+We added edit links using each row's employee ID. Clicking a link opens the edit form for that particular record.
+
+#### Code and commands
+
+**Step 149, block 1.** This code sample or terminal command was used while working on employee edit link. The content below remains in its original sequence for Step 149, block 1.
+
+```html
+<th>Actions</th>
+```
+
+**Step 149, block 2.** This code sample or terminal command was used while working on employee edit link. The content below remains in its original sequence for Step 149, block 2.
+
+```html
+<th>Status</th>
+```
+
+**Step 149, block 3.** This code sample or terminal command was used while working on employee edit link. The content below remains in its original sequence for Step 149, block 3.
+
+```html
+<td>
+    <a href="{% url 'edit_employee' employee.id %}">
+        Edit
+    </a>
+</td>
+```
+
+**Step 149, block 4.** This code sample or terminal command was used while working on employee edit link. The content below remains in its original sequence for Step 149, block 4.
+
+```html
+<td colspan="5">No employees found.</td>
+```
+
+#### How the code works
+
+**Block 1 (html, 1 lines).** In Step 149, employee edit link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<th>Actions</th>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 1 lines).** In Step 149, employee edit link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<th>Status</th>` creates or closes part of the page structure seen by the browser.
+
+**Block 3 (html, 5 lines).** In Step 149, employee edit link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** The HTML element `<td>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'edit_employee' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</td>` creates or closes part of the page structure seen by the browser.
+
+**Block 4 (html, 1 lines).** In Step 149, employee edit link involved `templates/accounts/employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The HTML element `<td colspan="5">No employees found.</td>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 149. For Step 149, the proposed way to check employee edit link was to revisit `templates/accounts/employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 150 before a complete result could be claimed.
+
+#### Next
+
+[Step 148: Edit Employee URL](#step-148) · [Step 150: Employee Edit Mode](#step-150)
