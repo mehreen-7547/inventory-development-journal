@@ -27,3 +27,4 @@
 | 23 | Module 0, Chapter 2 | [ Update your private development journal ](Module-0/02-git-and-github.md#step-23) |
 | 24 | Module 0, Chapter 2 | [ Stage the updated journal ](Module-0/02-git-and-github.md#step-24) |
 | 25 | Module 0, Chapter 3 | [ Committing Development Journal Update ](Module-0/03-database-and-migrations.md#step-25) |
+| 26 | Module 0, Chapter 3 | [ Clarify the journal commit ](Module-0/03-database-and-migrations.md#step-26) |
