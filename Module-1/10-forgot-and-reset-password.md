@@ -29,6 +29,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 123: Password Reset Success Page](#step-123)
 - [Step 124: Password Reset Complete URL](#step-124)
 - [Step 125: Fix the password reset URL error](#step-125)
+- [Step 126: Consolidate the accounts URL patterns](#step-126)
 
 ---
 
@@ -777,3 +778,96 @@ Not tested yet at Step 125. For Step 125, the proposed way to check fix the pass
 #### Next
 
 [Step 124: Password Reset Complete URL](#step-124) · [Step 126: Consolidate the accounts URL patterns](#step-126)
+
+
+---
+
+<a id="step-126"></a>
+
+### Step 126: Consolidate the accounts URL patterns
+
+#### Before this step
+
+After several edits, the accounts URL file contained pieces of the reset flow that were hard to follow. Immediately before this, Step 125 dealt with fix the password reset url error; the work here continued the same part of the application.
+
+#### What we did and why
+
+We brought the URL rules together in one orderly file. That makes it easier to see each address and the view that handles it and reduces the chance of conflicting routes.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `from django.urls import path / from . import views`; Replace lines around `path( / 'password-reset/done/',`; Replace lines around `path(`. For Step 126, this comparison used the code block from Step 125, which might not represent the whole file.
+
+**Step 126, block 1.** This code sample or terminal command was used while working on consolidate the accounts url patterns. The content below remains in its original sequence for Step 126, block 1.
+
+```python
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('login/', views.loginpage, name='login'),
+    path('logout/', views.logoutpage, name='logout'),
+    path('change-password/', views.changepassword, name='change_password'),
+
+    path(
+        'password-reset/',
+        auth_views.PasswordResetView.as_view(
+            template_name='accounts/password_reset.html',
+            email_template_name='accounts/password_reset_email.txt',
+            subject_template_name='accounts/password_reset_subject.txt'
+        ),
+        name='password_reset'
+    ),
+
+    path(
+        'password-reset/done/',
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='accounts/password_reset_done.html'
+        ),
+        name='password_reset_done'
+    ),
+
+    path(
+        'password-reset/confirm/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='accounts/password_reset_confirm.html'
+        ),
+        name='password_reset_confirm'
+    ),
+
+    path(
+        'password-reset/complete/',
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='accounts/password_reset_complete.html'
+        ),
+        name='password_reset_complete'
+    ),
+]
+```
+
+#### How the code works
+
+**Block 1 (python, 43 lines).** In Step 126, consolidate the accounts url patterns involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.urls import path` makes a Python function, class or module available to the code that follows. `from . import views` makes a Python function, class or module available to the code that follows. `from django.contrib.auth import views as auth_views` makes a Python function, class or module available to the code that follows. `urlpatterns = [` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `path('change-password/', views.changepassword, name='change_password'),` begins a URL rule connecting a browser address with the function that answers it. `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset.html',` sets the named value used by the next operation in this file. `email_template_name='accounts/password_reset_email.txt',` sets the named value used by the next operation in this file.
+
+**Lines 15–21:** `subject_template_name='accounts/password_reset_subject.txt'` sets the named value used by the next operation in this file. `name='password_reset'` sets the named value used by the next operation in this file. `path(` begins a URL rule connecting a browser address with the function that answers it.
+
+**Lines 22–28:** `template_name='accounts/password_reset_done.html'` sets the named value used by the next operation in this file. `name='password_reset_done'` sets the named value used by the next operation in this file. `path(` begins a URL rule connecting a browser address with the function that answers it.
+
+**Lines 29–35:** `template_name='accounts/password_reset_confirm.html'` sets the named value used by the next operation in this file. `name='password_reset_confirm'` sets the named value used by the next operation in this file.
+
+**Lines 36–42:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset_complete.html'` sets the named value used by the next operation in this file. `name='password_reset_complete'` sets the named value used by the next operation in this file.
+
+**Lines 43–43:** The lines starting with `]` supply the values or page content for this part of accounts/urls.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 126. For Step 126, the proposed way to check consolidate the accounts url patterns was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 127 before a complete result could be claimed.
+
+#### Next
+
+[Step 125: Fix the password reset URL error](#step-125) · [Step 127: Email Testing](#step-127)
