@@ -31,6 +31,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 189: Add CSS classes to creation form widgets](#step-189)
 - [Step 190: Correct Form Styling](#step-190)
 - [Step 191: Consolidate both employee forms](#step-191)
+- [Step 192: Update Edit Employee](#step-192)
 
 ---
 
@@ -1343,3 +1344,163 @@ Not tested yet at Step 191. For Step 191, the proposed way to check consolidate 
 #### Next
 
 [Step 190: Correct Form Styling](#step-190) · [Step 192: Update Edit Employee](#step-192)
+
+
+---
+
+<a id="step-192"></a>
+
+### Step 192: Update Edit Employee
+
+#### Before this step
+
+The edit-employee page was one of the remaining screens using its older layout. Immediately before this, Step 191 dealt with consolidate both employee forms; the work here continued the same part of the application.
+
+#### What we did and why
+
+We updated its HTML to reuse the common page frame, while keeping the employee's current values, save button and any status or resend actions. The actual update still happens in the view.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Edit Employee - Inventory System{% endblock %}`; Replace lines around `{% block content %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-8 col-lg-6">`; Replace lines around `<h2 class="mb-3">Edit Employee</h2>`; Replace lines around `<p class="text-muted"> / Username: <strong>{{ employee.username }}</strong>`. For Step 192, this comparison used the code block from Step 166, which might not represent the whole file.
+
+**Step 192, block 1.** This code sample or terminal command was used while working on update edit employee. The content below remains in its original sequence for Step 192, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Edit Employee - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+        <h2 class="mb-3">Edit Employee</h2>
+
+        <p class="text-muted">
+            Username: <strong>{{ employee.username }}</strong>
+        </p>
+
+        <!-- EDIT EMPLOYEE DETAILS -->
+        <form method="POST" class="mb-4">
+            {% csrf_token %}
+
+            <div class="mb-4">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Changes
+            </button>
+        </form>
+
+        <hr>
+
+        <!-- EMPLOYEE STATUS -->
+        <h5 class="mt-4">Account Status</h5>
+
+        <p>
+            Current status:
+            {% if employee.is_active %}
+                <span class="badge bg-success">Active</span>
+            {% else %}
+                <span class="badge bg-secondary">Inactive</span>
+            {% endif %}
+        </p>
+
+        <form method="POST"
+              action="{% url 'toggle_employee_status' employee.id %}"
+              class="mb-4">
+
+            {% csrf_token %}
+
+            {% if employee.is_active %}
+                <button type="submit" class="btn btn-outline-danger">
+                    Deactivate Employee
+                </button>
+            {% else %}
+                <button type="submit" class="btn btn-outline-success">
+                    Reactivate Employee
+                </button>
+            {% endif %}
+
+        </form>
+
+        <!-- PASSWORD SETUP -->
+        {% if employee.is_active and not employee.has_usable_password %}
+
+            <hr>
+
+            <h5 class="mt-4">Password Setup</h5>
+
+            <p class="text-muted">
+                This employee has not set a password yet.
+            </p>
+
+            <form method="POST"
+                  action="{% url 'resend_setup_email' employee.id %}"
+                  class="mb-4">
+
+                {% csrf_token %}
+
+                <button type="submit" class="btn btn-outline-primary">
+                    Resend Setup Email
+                </button>
+
+            </form>
+
+        {% endif %}
+
+        <hr>
+
+        <a href="{% url 'employee_list' %}"
+           class="btn btn-outline-secondary mt-2">
+            Back to Manage Employees
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 96 lines).** In Step 192, update edit employee involved `edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Edit Employee - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-8 col-lg-6">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-3">Edit Employee</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p class="text-muted">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The comment `<!-- EDIT EMPLOYEE DETAILS -->` explains the intention of the following section; it does not execute as application logic. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. The HTML element `<div class="mb-4">` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-primary">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** The HTML element `<hr>` creates or closes part of the page structure seen by the browser. The comment `<!-- EMPLOYEE STATUS -->` explains the intention of the following section; it does not execute as application logic. The HTML element `<h5 class="mt-4">Account Status</h5>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–42:** `{% if employee.is_active %}` decides which HTML is included based on the value Django provided. The HTML element `<span class="badge bg-success">Active</span>` creates or closes part of the page structure seen by the browser. The HTML element `<span class="badge bg-secondary">Inactive</span>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 43–49:** The form sends submitted fields to the server as a POST request, rather than just opening a page. `action="{% url 'toggle_employee_status' employee.id %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="mb-4">` sets the named value used by the next operation in this file. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 50–56:** The HTML element `<button type="submit" class="btn btn-outline-danger">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-outline-success">` creates or closes part of the page structure seen by the browser.
+
+**Lines 57–63:** The HTML element `</form>` creates or closes part of the page structure seen by the browser. The comment `<!-- PASSWORD SETUP -->` explains the intention of the following section; it does not execute as application logic. `{% if employee.is_active and not employee.has_usable_password %}` decides which HTML is included based on the value Django provided.
+
+**Lines 64–70:** The HTML element `<hr>` creates or closes part of the page structure seen by the browser. The HTML element `<h5 class="mt-4">Password Setup</h5>` creates or closes part of the page structure seen by the browser. The HTML element `<p class="text-muted">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 71–77:** The form sends submitted fields to the server as a POST request, rather than just opening a page. `action="{% url 'resend_setup_email' employee.id %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="mb-4">` sets the named value used by the next operation in this file. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 78–84:** The HTML element `<button type="submit" class="btn btn-outline-primary">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 85–91:** The HTML element `<hr>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-secondary mt-2">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 92–96:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 192. For Step 192, the proposed way to check update edit employee was to revisit `edit_employee.html` and run the corresponding command or feature to see its result. Development continued in Step 193 before a complete result could be claimed.
+
+#### Next
+
+[Step 191: Consolidate both employee forms](#step-191) · [Step 193: Email Error Handling](#step-193)

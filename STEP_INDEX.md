@@ -193,3 +193,4 @@
 | 189 | Module 1, Chapter 18 | [ Add CSS classes to creation form widgets ](Module-1/18-shared-base-template-and-page-styling.md#step-189) |
 | 190 | Module 1, Chapter 18 | [ Correct Form Styling ](Module-1/18-shared-base-template-and-page-styling.md#step-190) |
 | 191 | Module 1, Chapter 18 | [ Consolidate both employee forms ](Module-1/18-shared-base-template-and-page-styling.md#step-191) |
+| 192 | Module 1, Chapter 18 | [ Update Edit Employee ](Module-1/18-shared-base-template-and-page-styling.md#step-192) |
