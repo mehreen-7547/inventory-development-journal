@@ -38,3 +38,4 @@
 | 34 | Module 0, Chapter 4 | [ Staging Development Journal Update ](Module-0/04-server-and-admin-account.md#step-34) |
 | 35 | Module 0, Chapter 4 | [ Committing Development Journal Update ](Module-0/04-server-and-admin-account.md#step-35) |
 | 36 | Module 0, Chapter 4 | [ Pushing Development Journal to GitHub ](Module-0/04-server-and-admin-account.md#step-36) |
+| 37 | Module 0, Chapter 5 | [ Staging Security Verification Notes ](Module-0/05-security-checks.md#step-37) |
