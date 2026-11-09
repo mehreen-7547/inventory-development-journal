@@ -22,3 +22,4 @@
 | 18 | Module 0, Chapter 2 | [ Stage the private journal ](Module-0/02-git-and-github.md#step-18) |
 | 19 | Module 0, Chapter 2 | [ Commit the private development journal ](Module-0/02-git-and-github.md#step-19) |
 | 20 | Module 0, Chapter 2 | [ Push your journal to private GitHub ](Module-0/02-git-and-github.md#step-20) |
+| 21 | Module 0, Chapter 2 | [ Understand local and remote main branches ](Module-0/02-git-and-github.md#step-21) |

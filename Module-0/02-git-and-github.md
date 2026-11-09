@@ -30,6 +30,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 18: Stage the private journal](#step-18)
 - [Step 19: Commit the private development journal](#step-19)
 - [Step 20: Push your journal to private GitHub](#step-20)
+- [Step 21: Understand local and remote main branches](#step-21)
 
 ---
 
@@ -736,3 +737,60 @@ Not tested yet at Step 20. For Step 20, the proposed way to check push your jour
 #### Next
 
 [Step 19: Commit the private development journal](#step-19) · [Step 21: Understand local and remote main branches](#step-21)
+
+
+---
+
+<a id="step-21"></a>
+
+### Step 21: Understand local and remote main branches
+
+#### Before this step
+
+Both the application and journal used a branch named main, which could make it seem as though they were connected. Immediately before this, Step 20 dealt with push your journal to private github; the work here continued the same part of the application.
+
+#### What we did and why
+
+A branch is one line of history inside one repository. Two different repositories can each have a main branch without sharing files. A local main is your working version; origin/main describes the version known on GitHub.
+
+#### Code and commands
+
+**Step 21, block 1.** This code sample or terminal command was used while working on understand local and remote main branches. The content below remains in its original sequence for Step 21, block 1.
+
+```powershell
+git push -u origin main
+```
+
+**Step 21, block 2.** This code sample or terminal command was used while working on understand local and remote main branches. The content below remains in its original sequence for Step 21, block 2.
+
+```powershell
+git push
+```
+
+**Step 21, block 3.** This code sample or terminal command was used while working on understand local and remote main branches. The content below remains in its original sequence for Step 21, block 3.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 21, understand local and remote main branches involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git push -u origin main` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 21, understand local and remote main branches involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git push` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (powershell, 1 lines).** In Step 21, understand local and remote main branches involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py showmigrations` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 21. For Step 21, the proposed way to check understand local and remote main branches was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 22 before a complete result could be claimed.
+
+#### Next
+
+[Step 20: Push your journal to private GitHub](#step-20) · [Step 22: Apply database migrations](#step-22)
