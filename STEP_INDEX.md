@@ -112,3 +112,4 @@
 | 108 | Module 1, Chapter 9 | [ Understand REQUIRED_FIELDS ](Module-1/09-email-validation-and-email-setup.md#step-108) |
 | 109 | Module 1, Chapter 9 | [ Enforce Email Validation ](Module-1/09-email-validation-and-email-setup.md#step-109) |
 | 110 | Module 1, Chapter 9 | [ Create Migration ](Module-1/09-email-validation-and-email-setup.md#step-110) |
+| 111 | Module 1, Chapter 9 | [ Apply Migration ](Module-1/09-email-validation-and-email-setup.md#step-111) |

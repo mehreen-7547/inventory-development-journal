@@ -19,6 +19,7 @@ When we say “console email,” we mean Django prints the message where we ran 
 - [Step 108: Understand REQUIRED_FIELDS](#step-108)
 - [Step 109: Enforce Email Validation](#step-109)
 - [Step 110: Create Migration](#step-110)
+- [Step 111: Apply Migration](#step-111)
 
 ---
 
@@ -206,3 +207,50 @@ Not tested yet at Step 110. For Step 110, the proposed way to check create migra
 #### Next
 
 [Step 109: Enforce Email Validation](#step-109) · [Step 111: Apply Migration](#step-111)
+
+
+---
+
+<a id="step-111"></a>
+
+### Step 111: Apply Migration
+
+#### Before this step
+
+The migration instruction existed. Now the actual database needed to follow it. Immediately before this, Step 110 dealt with create migration; the work here continued the same part of the application.
+
+#### What we did and why
+
+migrate applies the new rule so SQLite can reject duplicate email addresses. Until this command runs successfully, editing models.py alone is not enough.
+
+#### Code and commands
+
+**Step 111, block 1.** This code sample or terminal command was used while working on apply migration. The content below remains in its original sequence for Step 111, block 1.
+
+```bash
+python manage.py migrate
+```
+
+**Step 111, block 2.** This output was used while working on apply migration. The content below remains in its original sequence for Step 111, block 2.
+
+```text
+Applying accounts.0002_alter_customuser_email... OK
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 111, apply migration involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py migrate` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 1 lines).** In Step 111, apply migration involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 111, output block 2 showed the result rather than another command. Its visible value was `Applying accounts.0002_alter_customuser_email... OK`, which mattered for apply migration.
+
+#### How we checked it
+
+Not tested yet at Step 111. For Step 111, the proposed way to check apply migration was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 112 before a complete result could be claimed.
+
+#### Next
+
+[Step 110: Create Migration](#step-110) · [Step 112: Email Configuration](#step-112)
