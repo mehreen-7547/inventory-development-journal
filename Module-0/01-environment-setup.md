@@ -20,6 +20,7 @@ Think of this as setting up the desk and tools before starting a piece of work. 
 - [Step 2: Create the virtual environment](#step-2)
 - [Step 3: Install Django and required packages](#step-3)
 - [Step 4: Create the configuration file](#step-4)
+- [Step 5: Understand the Django project folders](#step-5)
 
 ---
 
@@ -237,3 +238,60 @@ Not tested yet at Step 4. For Step 4, the proposed way to check create the confi
 #### Next
 
 [Step 3: Install Django and required packages](#step-3) · [Step 5: Understand the Django project folders](#step-5)
+
+
+---
+
+<a id="step-5"></a>
+
+### Step 5: Understand the Django project folders
+
+#### Before this step
+
+The downloaded starter project had several folders, so it was easy to open the wrong one or run a command in the wrong place. Immediately before this, Step 4 dealt with create the configuration file; the work here continued the same part of the application.
+
+#### What we did and why
+
+manage.py is the file Django uses to start its commands. By locating it first, we know where to run commands such as starting the server or creating database tables. This step mainly clarified the project layout, rather than adding a new feature.
+
+#### Code and commands
+
+**Step 5, block 1.** This output was used while working on understand the django project folders. The content below remains in its original sequence for Step 5, block 1.
+
+```text
+Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│
+├── .venv/                 ← Python environment
+│
+└── techmindz_inventory_module0_sqlite_atomic/
+    ├── config/            ← Django configuration
+    ├── core/              ← Initial Django app
+    ├── scripts/           ← AI testing scripts
+    ├── manage.py          ← Django command entry point
+    ├── requirements.txt   ← Python dependencies
+    └── .env.example       ← Configuration template
+```
+
+**Step 5, block 2.** This code sample or terminal command was used while working on understand the django project folders. The content below remains in its original sequence for Step 5, block 2.
+
+```powershell
+Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+#### How the code works
+
+**Block 1 (text, 11 lines).** In Step 5, understand the django project folders involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 5, output block 1 showed the result rather than another command. Its visible value was `Techmindz_Inventory_Module0_SQLite_Atomic_Update/`, which mattered for understand the django project folders.
+
+**Block 2 (powershell, 1 lines).** In Step 5, understand the django project folders involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_invent` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 5. For Step 5, the proposed way to check understand the django project folders was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 6 before a complete result could be claimed.
+
+#### Next
+
+[Step 4: Create the configuration file](#step-4) · [Step 6: Create .env](#step-6)
