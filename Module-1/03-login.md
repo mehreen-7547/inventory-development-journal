@@ -18,6 +18,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 
 - [Step 73: Login View](#step-73)
 - [Step 74: Understand models.py versus admin.py](#step-74)
+- [Step 75: Login Page](#step-75)
 
 ---
 
@@ -133,3 +134,70 @@ Not tested yet at Step 74. For Step 74, the proposed way to check understand mod
 #### Next
 
 [Step 73: Login View](#step-73) · [Step 75: Login Page](#step-75)
+
+
+---
+
+<a id="step-75"></a>
+
+### Step 75: Login Page
+
+#### Before this step
+
+The login view was written, but an employee still needed a page where they could type a username and password. Immediately before this, Step 74 dealt with understand models.py versus admin.py; the work here continued the same part of the application.
+
+#### What we did and why
+
+The HTML template creates the form shown in the browser. It sends the typed information to the login view. The password field hides characters on screen, while Django handles checking the actual credentials on the server.
+
+#### Code and commands
+
+**Step 75, block 1.** This code sample or terminal command was used while working on login page. The content below remains in its original sequence for Step 75, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="username"
+               placeholder="Username" required>
+
+        <input type="password" name="password"
+               placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 25 lines).** In Step 75, login page involved `templates/accounts/login.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Login</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p>{{ message }}</p>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 15–21:** The HTML element `<input type="text" name="username"` creates or closes part of the page structure seen by the browser. `placeholder="Username" required>` sets the named value used by the next operation in this file. The HTML element `<input type="password" name="password"` creates or closes part of the page structure seen by the browser. `placeholder="Password" required>` sets the named value used by the next operation in this file.
+
+**Lines 22–25:** The HTML element `<button type="submit">Login</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser. The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 75. For Step 75, the proposed way to check login page was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/login.html`. Development continued in Step 76 before a complete result could be claimed.
+
+#### Next
+
+[Step 74: Understand models.py versus admin.py](#step-74) · [Step 76: Login URL](#step-76)

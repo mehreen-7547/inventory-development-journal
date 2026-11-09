@@ -76,3 +76,4 @@
 | 72 | Module 1, Chapter 2 | [ Register CustomUser ](Module-1/02-database-setup-and-admin-site.md#step-72) |
 | 73 | Module 1, Chapter 3 | [ Login View ](Module-1/03-login.md#step-73) |
 | 74 | Module 1, Chapter 3 | [ Understand models.py versus admin.py ](Module-1/03-login.md#step-74) |
+| 75 | Module 1, Chapter 3 | [ Login Page ](Module-1/03-login.md#step-75) |
