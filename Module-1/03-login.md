@@ -1,10 +1,40 @@
-# Module 1, Chapter 3: Login
+# MODULE 1 — Employee accounts
 
-## Step 73: Login View
+## Chapter 3: Login (Steps 73–79)
 
-#### Next: Create the login function
+### Before we begin
 
-Open `accounts/views.py` and replace its contents with:
+The administrator could use Django's built-in site, but ordinary employees needed their own login screen inside the inventory website.
+
+### What we worked on
+
+We built a login function, an HTML form and the URL rules that connect them. We also traced what happens when login sends the browser to the homepage.
+
+### Picture it this way
+
+A typical visit goes: browser opens login page, employee types credentials, Django checks them, then the browser is sent to the home address. The next chapter adds a way to log out.
+
+### Find a step
+
+- [Step 73: Login View](#step-73)
+
+---
+
+<a id="step-73"></a>
+
+### Step 73: Login View
+
+#### Before this step
+
+Until now, the only built-in account screen was Django Admin. Employees needed a normal login page inside the inventory application. The preceding step, Step 72, covered register customuser, so this was the next part of the development sequence.
+
+#### What we did and why
+
+A view receives the browser's request, reads the submitted username and password, and asks Django to check them. If they are correct, Django signs the person in and redirects; if not, the form can explain that login failed.
+
+#### Code and commands
+
+**Step 73, block 1.** This code sample or terminal command was used while working on login view. The content below remains in its original sequence for Step 73, block 1.
 
 ```python
 from django.shortcuts import render, redirect
@@ -32,236 +62,22 @@ def loginpage(request):
     return render(request, 'accounts/login.html')
 ```
 
-**What it does:** Checks the username and password, logs in the user if valid, and redirects to the homepage.
+#### How the code works
 
-This follows the login-function approach taught in class.
+**Block 1 (python, 23 lines).** In Step 73, login view involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-**Expected result:** The file saves without errors. We'll create the login page next.
+**Lines 1–7:** `from django.shortcuts import render, redirect` makes a Python function, class or module available to the code that follows. `from django.contrib.auth import authenticate, login` makes a Python function, class or module available to the code that follows. `from django.contrib import messages` makes a Python function, class or module available to the code that follows. `def loginpage(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
 
-*Previous: Step 72 (Register CustomUser)  |  Next: Step 74 (models.py vs admin.py)*
+**Lines 8–14:** `username = request.POST.get('username')` sets the named value used by the next operation in this file. `password = request.POST.get('password')` sets the named value used by the next operation in this file. `user = authenticate(` sets the named value used by the next operation in this file. `username=username,` sets the named value used by the next operation in this file.
 
----
+**Lines 15–21:** `if user is not None:` is a condition: the code inside this branch only runs when its condition is satisfied. `return redirect('/')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser. `messages.error(request, 'Invalid username or password.')` prepares feedback that can appear when the user reaches the next page.
 
-## Step 74: models.py vs admin.py
-
-Because the two files have **different purposes**.
-
-- **`models.py`** defines what information is stored in the database.
-- **`admin.py`** defines how that information is displayed and managed in Django Admin.
-
-In our project:
-
-```python
-# models.py
-class CustomUser(AbstractUser):
-    role = models.CharField(...)
-```
-
-This creates the `role` database field.
-
-```python
-# admin.py
-class CustomUserAdmin(UserAdmin):
-    ...
-```
-
-This makes the `role` field available in Django Admin's user forms.
-
-**Simply put:** `models.py` defines the data; `admin.py` controls its administration interface.
-
-*Previous: Step 73 (Login View)  |  Next: Step 75 (Login Page)*
-
----
-
-## Step 75: Login Page
-
-#### Next: Create the login page
-
-Create a file at **`templates/accounts/login.html`**.
-
-Add:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-
-    <form method="POST">
-        {% csrf_token %}
-
-        <input type="text" name="username"
-               placeholder="Username" required>
-
-        <input type="password" name="password"
-               placeholder="Password" required>
-
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
-```
-
-**What this does:** Creates a form where users enter their username and password. The form sends these values to the `loginpage()` function we created earlier.
-
-**Expected result:** The file saves successfully. We will connect the page to a URL next.
-
-*Previous: Step 74 (models.py vs admin.py)  |  Next: Step 76 (Login URL)*
-
----
-
-## Step 76: Login URL
-
-#### Next: Create `accounts/urls.py`
-
-Inside the existing `accounts` folder, create a file named `urls.py`.
-
-Paste:
-
-```python
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('login/', views.loginpage, name='login'),
-]
-```
-
-**What this does:** Connects the URL `/login/` to our `loginpage()` function in `accounts/views.py`.
-
-**Expected result:** File saves successfully. Next, we'll connect these URLs to the main project.
-
-*Previous: Step 75 (Login Page)  |  Next: Step 77 (Connect Login URL)*
-
----
-
-## Step 77: Connect Login URL
-
-#### Next: Update `config/urls.py`
-
-Replace its contents with:
-
-```python
-from django.contrib import admin
-from django.urls import include, path
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("accounts.urls")),
-    path("", include("core.urls")),
-]
-```
-
-**What changed?**
-
-We added:
-
-```python
-path("", include("accounts.urls")),
-```
-
-This tells Django to look inside `accounts/urls.py` for account-related URLs.
-
-**Expected result:** With the development server running, opening `http://127.0.0.1:8000/login/` displays your login form.
+**Lines 22–23:** `return render(request, 'accounts/login.html')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
 
 #### How we checked it
 
-Django found your login function, but **cannot locate `login.html`**.
+Not tested yet at Step 73. For Step 73, the proposed way to check login view was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Development continued in Step 74 before a complete result could be claimed.
 
-#### Next: Check the file location
+#### Next
 
-In the VS Code terminal, run:
-
-```powershell
-Test-Path .\templates\accounts\login.html
-```
-
-**Expected output:** `True`
-
-If it says `False`, ensure your file is located here:
-
-```text
-techmindz_inventory_module0_sqlite_atomic/
-├── manage.py
-└── templates/
-    └── accounts/
-        └── login.html
-```
-
-The `templates` folder must be in the **same folder as `manage.py`**.
-
-Once corrected, refresh `/login/`.
-
-If the error persists even when the command returns `True`, share that result.
-
-*Previous: Step 76 (Login URL)  |  Next: Step 78 (Login Redirect)*
-
----
-
-## Step 78: Login Redirect
-
-Because of this line in **`accounts/views.py`**:
-
-```python
-return redirect('/')
-```
-
-Here's what happens:
-
-1. User logs in successfully.
-2. `redirect('/')` sends them to the root URL.
-3. In `core/urls.py`, `path('', views.home, name='home')` matches that URL.
-4. `core.views.home` displays `home.html`.
-
-**So `login.html` doesn't automatically lead to `home.html`. We explicitly instructed Django to redirect there.**
-
-Later, we can redirect users to different dashboards based on their roles.
-
-*Previous: Step 77 (Connect Login URL)  |  Next: Step 79 (Project vs App)*
-
----
-
-## Step 79: Project vs App
-
-**Yes, exactly.** That's the structure Django creates by default.
-
-For example, when you run:
-
-```bash
-django-admin startproject myproject
-```
-
-Django creates:
-
-```text
-myproject/
-├── manage.py
-└── myproject/
-    ├── settings.py
-    └── urls.py
-```
-
-The inner `myproject` folder has the **same name as the project**.
-
-Your instructor called it the *main app*, but technically it's the **project configuration package**, not a Django app.
-
-In our project, we named that folder `config` instead.
-
-So:
-
-- `config/urls.py` — connects URLs from other apps.
-- `core/urls.py` — defines homepage URLs.
-- `accounts/urls.py` — defines account-related URLs.
-
-**The structure is the same as what you learned. Only the name of the main configuration folder is different.**
-
-*Previous: Step 78 (Login Redirect)  |  Next: Step 80 (Logout Function)*
-
----
+[Step 72: Register CustomUser](../Module-1/02-database-setup-and-admin-site.md#step-72) · [Step 74: Understand models.py versus admin.py](#step-74)
