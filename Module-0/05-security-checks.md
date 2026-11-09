@@ -18,6 +18,7 @@ Imagine keeping a notebook of checks performed before accepting more changes. We
 
 - [Step 37: Staging Security Verification Notes](#step-37)
 - [Step 38: Committing Security Verification Notes](#step-38)
+- [Step 39: Pushing Security Verification Notes](#step-39)
 
 ---
 
@@ -91,3 +92,50 @@ Not tested yet at Step 38. For Step 38, the proposed way to check committing sec
 #### Next
 
 [Step 37: Staging Security Verification Notes](#step-37) · [Step 39: Pushing Security Verification Notes](#step-39)
+
+
+---
+
+<a id="step-39"></a>
+
+### Step 39: Pushing Security Verification Notes
+
+#### Before this step
+
+The latest security notes still needed to be copied to GitHub. Immediately before this, Step 38 dealt with committing security verification notes; the work here continued the same part of the application.
+
+#### What we did and why
+
+A push uploaded this journal update. The database and secret files were meant to stay local.
+
+#### Code and commands
+
+**Step 39, block 1.** This code sample or terminal command was used while working on pushing security verification notes. The content below remains in its original sequence for Step 39, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push
+```
+
+**Step 39, block 2.** This code sample or terminal command was used while working on pushing security verification notes. The content below remains in its original sequence for Step 39, block 2.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 39, pushing security verification notes involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 39, pushing security verification notes involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py test core` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 39. For Step 39, the proposed way to check pushing security verification notes was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 40 before a complete result could be claimed.
+
+#### Next
+
+[Step 38: Committing Security Verification Notes](#step-38) · [Step 40: Understand feasibility models](#step-40)

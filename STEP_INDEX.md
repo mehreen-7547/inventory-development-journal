@@ -40,3 +40,4 @@
 | 36 | Module 0, Chapter 4 | [ Pushing Development Journal to GitHub ](Module-0/04-server-and-admin-account.md#step-36) |
 | 37 | Module 0, Chapter 5 | [ Staging Security Verification Notes ](Module-0/05-security-checks.md#step-37) |
 | 38 | Module 0, Chapter 5 | [ Committing Security Verification Notes ](Module-0/05-security-checks.md#step-38) |
+| 39 | Module 0, Chapter 5 | [ Pushing Security Verification Notes ](Module-0/05-security-checks.md#step-39) |
