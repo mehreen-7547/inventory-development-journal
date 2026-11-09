@@ -154,3 +154,4 @@
 | 150 | Module 1, Chapter 14 | [ Employee Edit Mode ](Module-1/14-edit-employee.md#step-150) |
 | 151 | Module 1, Chapter 14 | [ Edit Mode Button ](Module-1/14-edit-employee.md#step-151) |
 | 152 | Module 1, Chapter 14 | [ Select Employee ](Module-1/14-edit-employee.md#step-152) |
+| 153 | Module 1, Chapter 14 | [ Combine the list and selection controls ](Module-1/14-edit-employee.md#step-153) |
