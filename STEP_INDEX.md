@@ -71,3 +71,4 @@
 | 67 | Module 1, Chapter 1 | [ Migration Preparation ](Module-1/01-accounts-app-and-custom-user-model.md#step-67) |
 | 68 | Module 1, Chapter 2 | [ Database Reset ](Module-1/02-database-setup-and-admin-site.md#step-68) |
 | 69 | Module 1, Chapter 2 | [ Database File Locked ](Module-1/02-database-setup-and-admin-site.md#step-69) |
+| 70 | Module 1, Chapter 2 | [ Create Database Tables ](Module-1/02-database-setup-and-admin-site.md#step-70) |
