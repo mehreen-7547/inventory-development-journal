@@ -19,6 +19,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 - [Step 157: Employee Deactivation](#step-157)
 - [Step 158: Employee Status URL](#step-158)
 - [Step 159: Deactivate/Reactivate Button](#step-159)
+- [Step 160: Resend Setup Email](#step-160)
 
 ---
 
@@ -206,3 +207,78 @@ Not tested yet at Step 159. For Step 159, the proposed way to check deactivate/r
 #### Next
 
 [Step 158: Employee Status URL](#step-158) · [Step 160: Resend Setup Email](#step-160)
+
+
+---
+
+<a id="step-160"></a>
+
+### Step 160: Resend Setup Email
+
+#### Before this step
+
+Some existing employees might still have no usable password because their first setup email was lost. Immediately before this, Step 159 dealt with deactivate/reactivate button; the work here continued the same part of the application.
+
+#### What we did and why
+
+The resend view checks whether sending another setup link makes sense for that employee. It should not send a first-time setup link to every employee without checking their current account state.
+
+#### Code and commands
+
+**Step 160, block 1.** This code sample or terminal command was used while working on resend setup email. The content below remains in its original sequence for Step 160, block 1.
+
+```python
+@role_required('admin')
+@require_POST
+def resend_setup_email(request, employee_id):
+
+    employee = get_object_or_404(
+        CustomUser,
+        id=employee_id,
+        role__in=['manager', 'sales']
+    )
+
+    if not employee.is_active:
+        messages.error(
+            request,
+            'Cannot send setup email to an inactive employee.'
+        )
+
+    elif employee.has_usable_password():
+        messages.error(
+            request,
+            'Employee has already set a password.'
+        )
+
+    else:
+        send_welcome_email(request, employee)
+
+        messages.success(
+            request,
+            'Password setup email generated successfully.'
+        )
+
+    return redirect('employee_list')
+```
+
+#### How the code works
+
+**Block 1 (python, 31 lines).** In Step 160, resend setup email involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `@role_required('admin')` adds a check or behaviour around the view before Django runs the view itself. `@require_POST` adds a check or behaviour around the view before Django runs the view itself. `def resend_setup_email(request, employee_id):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `employee = get_object_or_404(` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `role__in=['manager', 'sales']` sets the named value used by the next operation in this file. `if not employee.is_active:` is a condition: the code inside this branch only runs when its condition is satisfied. `messages.error(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 15–21:** `elif employee.has_usable_password():` is a condition: the code inside this branch only runs when its condition is satisfied. `messages.error(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 22–28:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `messages.success(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 29–31:** `return redirect('employee_list')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 160. For Step 160, the proposed way to check resend setup email was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 161 before a complete result could be claimed.
+
+#### Next
+
+[Step 159: Deactivate/Reactivate Button](#step-159) · [Step 161: Resend Setup Email URL](#step-161)

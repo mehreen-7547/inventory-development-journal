@@ -161,3 +161,4 @@
 | 157 | Module 1, Chapter 15 | [ Employee Deactivation ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-157) |
 | 158 | Module 1, Chapter 15 | [ Employee Status URL ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-158) |
 | 159 | Module 1, Chapter 15 | [ Deactivate/Reactivate Button ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-159) |
+| 160 | Module 1, Chapter 15 | [ Resend Setup Email ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-160) |
