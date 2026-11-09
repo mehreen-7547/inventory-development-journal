@@ -17,6 +17,7 @@ The report explains the work to a human reader. The tag is a bookmark in Git. Ne
 ### Find a step
 
 - [Step 46: Update Module 0 Report](#step-46)
+- [Step 47: Stage Documentation](#step-47)
 
 ---
 
@@ -135,3 +136,40 @@ Not tested yet at Step 46. For Step 46, the proposed way to check update module 
 #### Next
 
 [Step 45: Documenting Model Results](../Module-0/06-ai-forecasting-feasibility-test.md#step-45) · [Step 47: Stage Documentation](#step-47)
+
+
+---
+
+<a id="step-47"></a>
+
+### Step 47: Stage Documentation
+
+#### Before this step
+
+The Module 0 report had been edited. Git still needed to be told which files to include in the next snapshot. Immediately before this, Step 46 dealt with update module 0 report; the work here continued the same part of the application.
+
+#### What we did and why
+
+The stage command selected the report and related documents. Nothing was uploaded just yet.
+
+#### Code and commands
+
+**Step 47, block 1.** This code sample or terminal command was used while working on stage documentation. The content below remains in its original sequence for Step 47, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 47, stage documentation involved `MODULE0_REPORT.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 47. For Step 47, the proposed way to check stage documentation was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 48 before a complete result could be claimed.
+
+#### Next
+
+[Step 46: Update Module 0 Report](#step-46) · [Step 48: Commit Documentation](#step-48)

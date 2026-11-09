@@ -48,3 +48,4 @@
 | 44 | Module 0, Chapter 6 | [ Installing AI Dependencies ](Module-0/06-ai-forecasting-feasibility-test.md#step-44) |
 | 45 | Module 0, Chapter 6 | [ Documenting Model Results ](Module-0/06-ai-forecasting-feasibility-test.md#step-45) |
 | 46 | Module 0, Chapter 7 | [ Update Module 0 Report ](Module-0/07-module-0-completion.md#step-46) |
+| 47 | Module 0, Chapter 7 | [ Stage Documentation ](Module-0/07-module-0-completion.md#step-47) |
