@@ -18,6 +18,7 @@ Editing is not creating a second employee. The view finds the existing account b
 
 - [Step 145: Edit Employee Form](#step-145)
 - [Step 146: Edit Employee View](#step-146)
+- [Step 147: Edit Employee Template](#step-147)
 
 ---
 
@@ -168,3 +169,76 @@ Not tested yet at Step 146. For Step 146, the proposed way to check edit employe
 #### Next
 
 [Step 145: Edit Employee Form](#step-145) · [Step 147: Edit Employee Template](#step-147)
+
+
+---
+
+<a id="step-147"></a>
+
+### Step 147: Edit Employee Template
+
+#### Before this step
+
+The edit view needed an actual page with fields and a save button. Immediately before this, Step 146 dealt with edit employee view; the work here continued the same part of the application.
+
+#### What we did and why
+
+The edit template shows the existing values and any validation errors. The browser sees the form; the view remains responsible for reading and saving the data.
+
+#### Code and commands
+
+**Step 147, block 1.** This code sample or terminal command was used while working on edit employee template. The content below remains in its original sequence for Step 147, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Employee</title>
+</head>
+<body>
+
+    <h2>Edit Employee</h2>
+
+    <p>Username: {{ employee.username }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Save Changes
+        </button>
+    </form>
+
+    <p>
+        <a href="{% url 'employee_list' %}">
+            Back to Manage Employees
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 29 lines).** In Step 147, edit employee template involved `templates/accounts/edit_employee.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Edit Employee</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<h2>Edit Employee</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>Username: {{ employee.username }}</p>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 15–21:** `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `<button type="submit">` creates or closes part of the page structure seen by the browser. The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–29:** The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 147. For Step 147, the proposed way to check edit employee template was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/edit_employee.html`. Development continued in Step 148 before a complete result could be claimed.
+
+#### Next
+
+[Step 146: Edit Employee View](#step-146) · [Step 148: Edit Employee URL](#step-148)
