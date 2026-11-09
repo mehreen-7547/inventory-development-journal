@@ -23,6 +23,7 @@ If someone opens the home address, Django needs to decide which view will answer
 - [Step 33: Understand git -C and git add](#step-33)
 - [Step 34: Staging Development Journal Update](#step-34)
 - [Step 35: Committing Development Journal Update](#step-35)
+- [Step 36: Pushing Development Journal to GitHub](#step-36)
 
 ---
 
@@ -427,3 +428,105 @@ Not tested yet at Step 35. For Step 35, the proposed way to check committing dev
 #### Next
 
 [Step 34: Staging Development Journal Update](#step-34) · [Step 36: Pushing Development Journal to GitHub](#step-36)
+
+
+---
+
+<a id="step-36"></a>
+
+### Step 36: Pushing Development Journal to GitHub
+
+#### Before this step
+
+The newest journal version was only on the laptop, so we uploaded it. Immediately before this, Step 35 dealt with committing development journal update; the work here continued the same part of the application.
+
+#### What we did and why
+
+This push made the same saved notes available in the private GitHub journal. It did not change the application repository.
+
+#### Code and commands
+
+**Step 36, block 1.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 36, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push
+```
+
+**Step 36, block 2.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 36, block 2.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic check-ignore -v .env db.sqlite3
+```
+
+**Step 36, block 3.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 36, block 3.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic ls-files -- .env db.sqlite3
+```
+
+**Step 36, block 4.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 36, block 4.
+
+```powershell
+Add-Content -Path "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Git Repository Security Verification
+
+### Objective
+Ensure sensitive local files are excluded from the public repository.
+
+### Commands
+1. git check-ignore -v .env db.sqlite3
+2. git ls-files -- .env db.sqlite3
+
+### Results
+- .env is excluded by .gitignore.
+- db.sqlite3 is excluded by .gitignore.
+- Neither file is currently tracked by Git.
+
+### What I learned
+- .gitignore prevents untracked files from being added accidentally.
+- git check-ignore identifies matching ignore rules.
+- git ls-files checks which files Git currently tracks.
+- Ignoring a file does not automatically untrack it.
+
+### Errors
+None.
+'@
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 36, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 36, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic check-ignore -v .env db.sqlite3` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (powershell, 1 lines).** In Step 36, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic ls-files -- .env db.sqlite3` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 4 (powershell, 25 lines).** In Step 36, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `## Git Repository Security Verification` explains the intention of the following section; it does not execute as application logic. The comment `### Objective` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 8–14:** The comment `### Commands` explains the intention of the following section; it does not execute as application logic. The command `1. git check-ignore -v .env db.sqlite3` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour. The command `2. git ls-files -- .env db.sqlite3` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour. The comment `### Results` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 15–21:** The comment `### What I learned` explains the intention of the following section; it does not execute as application logic. The command `- git check-ignore identifies matching ignore rules.` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour. The command `- git ls-files checks which files Git currently tracks.` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Lines 22–25:** The comment `### Errors` explains the intention of the following section; it does not execute as application logic.
+
+#### How we checked it
+
+For Step 36 (Pushing Development Journal to GitHub), we compared the visible terminal output with the requested action. The visible result for Step 36 was described as “your output confirms”; this only addressed the pushing development journal to github check in `VS Code terminal / project setup`.
+
+#### Next
+
+[Step 35: Committing Development Journal Update](#step-35) · [Step 37: Staging Security Verification Notes](../Module-0/05-security-checks.md#step-37)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **server and admin account** was needed at this point, and describe what the application did differently after the final step of this chapter.
