@@ -213,3 +213,10 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 207 | M1 · Ch 20 | [Require POST for logout and clear the session](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-207) |
 | 208 | M1 · Ch 20 | [Run all eleven Django tests together](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-208) |
 | 209 | M1 · Ch 20 | [Commit and push the authentication tests](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md#step-209) |
+| 210 | M1 · Ch 21 | [Prepare administrator, manager and sales accounts](Module-1/21-testing-employee-management-and-admin-permissions.md#step-210) |
+| 211 | M1 · Ch 21 | [Verify employee listing and reject non-admin access](Module-1/21-testing-employee-management-and-admin-permissions.md#step-211) |
+| 212 | M1 · Ch 21 | [Create an employee and handle welcome-email failure](Module-1/21-testing-employee-management-and-admin-permissions.md#step-212) |
+| 213 | M1 · Ch 21 | [Edit and deactivate staff without modifying administrators](Module-1/21-testing-employee-management-and-admin-permissions.md#step-213) |
+| 214 | M1 · Ch 21 | [Resend password-setup emails safely](Module-1/21-testing-employee-management-and-admin-permissions.md#step-214) |
+| 215 | M1 · Ch 21 | [Run the full Django suite and review coverage limits](Module-1/21-testing-employee-management-and-admin-permissions.md#step-215) |
+| 216 | M1 · Ch 21 | [Publish the tested employee-management code](Module-1/21-testing-employee-management-and-admin-permissions.md#step-216) |

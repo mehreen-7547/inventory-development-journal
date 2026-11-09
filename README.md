@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **209 development steps in 27 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **216 development steps in 28 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -46,3 +46,4 @@ These are **209 development steps in 27 chapters**, rewritten so you can underst
 
 - [Chapter 19: Publishing the Completed Django Accounts Module to GitHub and Fixing the Home Page Login Redirect Test](Module-1/19-publishing-accounts-and-fixing-homepage-login-redirect-test.md) — Steps 195–203
 - [Chapter 20: Testing Django Login, Logout, Inactive Accounts and Authentication Sessions](Module-1/20-testing-login-logout-inactive-accounts-and-sessions.md) — Steps 204–209
+- [Chapter 21: Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails](Module-1/21-testing-employee-management-and-admin-permissions.md) — Steps 210–216

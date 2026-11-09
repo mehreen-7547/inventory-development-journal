@@ -208,3 +208,10 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 207,,351,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Require POST for logout and clear the session
 208,,351–352,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Run all eleven Django tests together
 209,,352–354,1,Testing Django Login, Logout, Inactive Accounts and Authentication Sessions,Commit and push the authentication tests
+210,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Prepare administrator, manager and sales accounts
+211,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Verify employee listing and reject non-admin access
+212,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Create an employee and handle welcome-email failure
+213,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Edit and deactivate staff without modifying administrators
+214,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Resend password-setup emails safely
+215,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Run the full Django suite and review coverage limits
+216,,355–357,1,Testing Employee Creation, Editing, Deactivation, Administrator Permissions and Setup Emails,Publish the tested employee-management code
