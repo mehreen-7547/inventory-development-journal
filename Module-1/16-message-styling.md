@@ -19,6 +19,7 @@ When a view saves a change and redirects back to a list, Django can carry a shor
 - [Step 165: Employee Management Messages](#step-165)
 - [Step 166: Display edit-page feedback messages](#step-166)
 - [Step 167: Message Styling](#step-167)
+- [Step 168: Display employee-list messages](#step-168)
 
 ---
 
@@ -211,3 +212,76 @@ Not tested yet at Step 167. For Step 167, the proposed way to check message styl
 #### Next
 
 [Step 166: Display edit-page feedback messages](#step-166) · [Step 168: Display employee-list messages](#step-168)
+
+
+---
+
+<a id="step-168"></a>
+
+### Step 168: Display employee-list messages
+
+#### Before this step
+
+The employee list is where many actions return after saving. It needed a reliable place to show the result. Immediately before this, Step 167 dealt with message styling; the work here continued the same part of the application.
+
+#### What we did and why
+
+The updated list template displays Django's messages near the employee information. A “saved” notice now has somewhere to appear after the redirect.
+
+#### Code and commands
+
+**Step 168, block 1.** This code sample or terminal command was used while working on display employee-list messages. The content below remains in its original sequence for Step 168, block 1.
+
+```html
+{% if messages %}
+    {% for message in messages %}
+        <p class="message {{ message.tags }}">
+            {{ message }}
+        </p>
+    {% endfor %}
+{% endif %}
+```
+
+**Step 168, block 2.** This code sample or terminal command was used while working on display employee-list messages. The content below remains in its original sequence for Step 168, block 2.
+
+```html
+<body>
+
+    <h2>Manage Employees</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p class="message {{ message.tags }}">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <p>
+        <a href="{% url 'create_employee' %}">
+            Add New Employee
+        </a>
+    </p>
+```
+
+#### How the code works
+
+**Block 1 (html, 7 lines).** In Step 168, display employee-list messages involved `employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% if messages %}` decides which HTML is included based on the value Django provided. `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p class="message {{ message.tags }}">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (html, 17 lines).** In Step 168, display employee-list messages involved `employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<body>` creates or closes part of the page structure seen by the browser. The HTML element `<h2>Manage Employees</h2>` creates or closes part of the page structure seen by the browser. `{% if messages %}` decides which HTML is included based on the value Django provided. `{% for message in messages %}` repeats the following operation once for each matching item.
+
+**Lines 8–14:** The HTML element `</p>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'create_employee' %}">` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 15–17:** The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 168. For Step 168, the proposed way to check display employee-list messages was to revisit `employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 169 before a complete result could be claimed.
+
+#### Next
+
+[Step 167: Message Styling](#step-167) · [Step 169: Message Styling CSS](#step-169)
