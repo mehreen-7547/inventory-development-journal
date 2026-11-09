@@ -50,3 +50,4 @@
 | 46 | Module 0, Chapter 7 | [ Update Module 0 Report ](Module-0/07-module-0-completion.md#step-46) |
 | 47 | Module 0, Chapter 7 | [ Stage Documentation ](Module-0/07-module-0-completion.md#step-47) |
 | 48 | Module 0, Chapter 7 | [ Commit Documentation ](Module-0/07-module-0-completion.md#step-48) |
+| 49 | Module 0, Chapter 7 | [ Push Documentation ](Module-0/07-module-0-completion.md#step-49) |
