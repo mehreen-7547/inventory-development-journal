@@ -151,3 +151,4 @@
 | 147 | Module 1, Chapter 14 | [ Edit Employee Template ](Module-1/14-edit-employee.md#step-147) |
 | 148 | Module 1, Chapter 14 | [ Edit Employee URL ](Module-1/14-edit-employee.md#step-148) |
 | 149 | Module 1, Chapter 14 | [ Employee Edit Link ](Module-1/14-edit-employee.md#step-149) |
+| 150 | Module 1, Chapter 14 | [ Employee Edit Mode ](Module-1/14-edit-employee.md#step-150) |

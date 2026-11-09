@@ -21,6 +21,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 147: Edit Employee Template](#step-147)
 - [Step 148: Edit Employee URL](#step-148)
 - [Step 149: Employee Edit Link](#step-149)
+- [Step 150: Employee Edit Mode](#step-150)
 
 ---
 
@@ -356,3 +357,49 @@ Not tested yet at Step 149. For Step 149, the proposed way to check employee edi
 #### Next
 
 [Step 148: Edit Employee URL](#step-148) · [Step 150: Employee Edit Mode](#step-150)
+
+
+---
+
+<a id="step-150"></a>
+
+### Step 150: Employee Edit Mode
+
+#### Before this step
+
+A clickable employee row could make editing feel accidental. We wanted the action to be deliberate. Immediately before this, Step 149 dealt with employee edit link; the work here continued the same part of the application.
+
+#### What we did and why
+
+We started introducing an edit mode instead of treating ordinary list browsing as an edit action. This is a user-interface improvement; the server-side permission checks still matter.
+
+#### Code and commands
+
+**Step 150, block 1.** This code sample or terminal command was used while working on employee edit mode. The content below remains in its original sequence for Step 150, block 1.
+
+```python
+    return render(
+        request,
+        'accounts/employee_list.html',
+        {
+            'employees': employees,
+            'edit_mode': request.GET.get('mode') == 'edit'
+        }
+    )
+```
+
+#### How the code works
+
+**Block 1 (python, 8 lines).** In Step 150, employee edit mode involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `return render(` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser. `'edit_mode': request.GET.get('mode') == 'edit'` sets the named value used by the next operation in this file.
+
+**Lines 8–8:** The lines starting with `)` supply the values or page content for this part of accounts/views.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 150. For Step 150, the proposed way to check employee edit mode was to revisit `accounts/views.py` and run the corresponding command or feature to see its result. Development continued in Step 151 before a complete result could be claimed.
+
+#### Next
+
+[Step 149: Employee Edit Link](#step-149) · [Step 151: Edit Mode Button](#step-151)
