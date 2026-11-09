@@ -22,6 +22,7 @@ A typical visit goes: browser opens login page, employee types credentials, Djan
 - [Step 76: Login URL](#step-76)
 - [Step 77: Connect Login URL](#step-77)
 - [Step 78: Login Redirect](#step-78)
+- [Step 79: Understand a Django project versus an app](#step-79)
 
 ---
 
@@ -363,3 +364,59 @@ Not tested yet at Step 78. For Step 78, the proposed way to check login redirect
 #### Next
 
 [Step 77: Connect Login URL](#step-77) · [Step 79: Understand a Django project versus an app](#step-79)
+
+
+---
+
+<a id="step-79"></a>
+
+### Step 79: Understand a Django project versus an app
+
+#### Before this step
+
+The config folder and the accounts folder both contained Python files such as urls.py, which could be confusing. Immediately before this, Step 78 dealt with login redirect; the work here continued the same part of the application.
+
+#### What we did and why
+
+config holds settings and the main map of website addresses. accounts holds one collection of related features. The project connects several apps rather than putting everything in one file.
+
+#### Code and commands
+
+**Step 79, block 1.** This code sample or terminal command was used while working on understand a django project versus an app. The content below remains in its original sequence for Step 79, block 1.
+
+```bash
+django-admin startproject myproject
+```
+
+**Step 79, block 2.** This output was used while working on understand a django project versus an app. The content below remains in its original sequence for Step 79, block 2.
+
+```text
+myproject/
+├── manage.py
+└── myproject/
+    ├── settings.py
+    └── urls.py
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 79, understand a django project versus an app involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `django-admin startproject myproject` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+**Block 2 (text, 5 lines).** In Step 79, understand a django project versus an app involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 79, output block 2 showed the result rather than another command. Its visible value was `myproject/`, which mattered for understand a django project versus an app.
+
+#### How we checked it
+
+Not tested yet at Step 79. For Step 79, the proposed way to check understand a django project versus an app was to revisit `manage.py` and run the corresponding command or feature to see its result. Step 79 did not establish a successful outcome for understand a django project versus an app.
+
+#### Next
+
+[Step 78: Login Redirect](#step-78) · [Step 80: Logout Function](../Module-1/04-logout.md#step-80)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **login** was needed at this point, and describe what the application did differently after the final step of this chapter.

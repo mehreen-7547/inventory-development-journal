@@ -80,3 +80,4 @@
 | 76 | Module 1, Chapter 3 | [ Login URL ](Module-1/03-login.md#step-76) |
 | 77 | Module 1, Chapter 3 | [ Connect Login URL ](Module-1/03-login.md#step-77) |
 | 78 | Module 1, Chapter 3 | [ Login Redirect ](Module-1/03-login.md#step-78) |
+| 79 | Module 1, Chapter 3 | [ Understand a Django project versus an app ](Module-1/03-login.md#step-79) |
