@@ -17,6 +17,7 @@ A small experiment is not the same as a finished forecasting feature. These note
 ### Find a step
 
 - [Step 42: Installing PyTorch](#step-42)
+- [Step 43: Understanding python -m](#step-43)
 
 ---
 
@@ -53,3 +54,50 @@ For Step 42 (Installing PyTorch), we compared the visible terminal output with t
 #### Next
 
 [Step 41: Record and Push Test Results](../Module-0/05-security-checks.md#step-41) · [Step 43: Understanding python -m](#step-43)
+
+
+---
+
+<a id="step-43"></a>
+
+### Step 43: Understanding python -m
+
+#### Before this step
+
+We used commands such as python -m pip, and wanted to know why the word python was included. Immediately before this, Step 42 dealt with installing pytorch; the work here continued the same part of the application.
+
+#### What we did and why
+
+pip installs Python packages. The command python -m pip explicitly asks the current Python installation to run its own installer, reducing the chance that packages go into the wrong Python environment.
+
+#### Code and commands
+
+**Step 43, block 1.** This code sample or terminal command was used while working on understanding python -m. The content below remains in its original sequence for Step 43, block 1.
+
+```powershell
+pip install torch
+```
+
+**Step 43, block 2.** This code sample or terminal command was used while working on understanding python -m. The content below remains in its original sequence for Step 43, block 2.
+
+```powershell
+python -m pip install torch
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 43, understanding python -m involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `pip install torch` starts Python or one of its tools from the development terminal.
+
+**Block 2 (powershell, 1 lines).** In Step 43, understanding python -m involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python -m pip install torch` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 43. For Step 43, the proposed way to check understanding python -m was to revisit `VS Code terminal / project setup` and run the corresponding command or feature to see its result. Development continued in Step 44 before a complete result could be claimed.
+
+#### Next
+
+[Step 42: Installing PyTorch](#step-42) · [Step 44: Installing AI Dependencies](#step-44)
