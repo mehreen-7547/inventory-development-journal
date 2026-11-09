@@ -24,6 +24,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 61: Custom User Model](#step-61)
 - [Step 62: Understand CustomUser inheritance](#step-62)
 - [Step 63: Understanding AbstractUser](#step-63)
+- [Step 64: Inspect Django’s built-in User model](#step-64)
 
 ---
 
@@ -453,3 +454,60 @@ Not tested yet at Step 63. For Step 63, the proposed way to check understanding 
 #### Next
 
 [Step 62: Understand CustomUser inheritance](#step-62) · [Step 64: Inspect Django’s built-in User model](#step-64)
+
+
+---
+
+<a id="step-64"></a>
+
+### Step 64: Inspect Django’s built-in User model
+
+#### Before this step
+
+We examined Django's standard user fields so the new model would feel less mysterious. Immediately before this, Step 63 dealt with understanding abstractuser; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django's existing user class defines things such as usernames, names, email and password behaviour. Our model does not need to declare all of these again; it receives them through inheritance.
+
+#### Code and commands
+
+**Step 64, block 1.** This output was used while working on inspect django’s built-in user model. The content below remains in its original sequence for Step 64, block 1.
+
+```text
+.venv/Lib/site-packages/django/contrib/auth/models.py
+```
+
+**Step 64, block 2.** This code sample or terminal command was used while working on inspect django’s built-in user model. The content below remains in its original sequence for Step 64, block 2.
+
+```python
+class User(AbstractUser):
+```
+
+**Step 64, block 3.** This output was used while working on inspect django’s built-in user model. The content below remains in its original sequence for Step 64, block 3.
+
+```text
+techmindz_inventory_module0_sqlite_atomic/db.sqlite3
+```
+
+#### How the code works
+
+**Block 1 (text, 1 lines).** In Step 64, inspect django’s built-in user model involved `.venv/Lib/site-packages/django/contrib/auth/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 64, output block 1 showed the result rather than another command. Its visible value was `.venv/Lib/site-packages/django/contrib/auth/models.py`, which mattered for inspect django’s built-in user model.
+
+**Block 2 (python, 1 lines).** In Step 64, inspect django’s built-in user model involved `.venv/Lib/site-packages/django/contrib/auth/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `class User(AbstractUser):` declares a Python class, grouping related data or behaviour together.
+
+**Block 3 (text, 1 lines).** In Step 64, inspect django’s built-in user model involved `.venv/Lib/site-packages/django/contrib/auth/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 64, output block 3 showed the result rather than another command. Its visible value was `techmindz_inventory_module0_sqlite_atomic/db.sqlite3`, which mattered for inspect django’s built-in user model.
+
+#### How we checked it
+
+Not tested yet at Step 64. For Step 64, the proposed way to check inspect django’s built-in user model was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 65 before a complete result could be claimed.
+
+#### Next
+
+[Step 63: Understanding AbstractUser](#step-63) · [Step 65: AUTH_USER_MODEL](#step-65)

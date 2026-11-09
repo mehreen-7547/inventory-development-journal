@@ -65,3 +65,4 @@
 | 61 | Module 1, Chapter 1 | [ Custom User Model ](Module-1/01-accounts-app-and-custom-user-model.md#step-61) |
 | 62 | Module 1, Chapter 1 | [ Understand CustomUser inheritance ](Module-1/01-accounts-app-and-custom-user-model.md#step-62) |
 | 63 | Module 1, Chapter 1 | [ Understanding AbstractUser ](Module-1/01-accounts-app-and-custom-user-model.md#step-63) |
+| 64 | Module 1, Chapter 1 | [ Inspect Django’s built-in User model ](Module-1/01-accounts-app-and-custom-user-model.md#step-64) |
