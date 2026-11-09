@@ -220,3 +220,10 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 214 | M1 · Ch 21 | [Resend password-setup emails safely](Module-1/21-testing-employee-management-and-admin-permissions.md#step-214) |
 | 215 | M1 · Ch 21 | [Run the full Django suite and review coverage limits](Module-1/21-testing-employee-management-and-admin-permissions.md#step-215) |
 | 216 | M1 · Ch 21 | [Publish the tested employee-management code](Module-1/21-testing-employee-management-and-admin-permissions.md#step-216) |
+| 217 | M1 · Ch 22 | [Prepare three roles and reusable employee form data](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-217) |
+| 218 | M1 · Ch 22 | [Prevent non-admin POST requests from changing employees](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-218) |
+| 219 | M1 · Ch 22 | [Reactivate staff while protecting administrator accounts](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-219) |
+| 220 | M1 · Ch 22 | [Reject duplicate emails, missing usernames and admin roles](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-220) |
+| 221 | M1 · Ch 22 | [Preserve existing emails and enforce setup-email rules](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-221) |
+| 222 | M1 · Ch 22 | [Run all 35 tests in an isolated Django database](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-222) |
+| 223 | M1 · Ch 22 | [Commit the passing tests and verify the GitHub branch](Module-1/22-testing-unauthorized-employee-changes-form-validation-and-reactivation.md#step-223) |
