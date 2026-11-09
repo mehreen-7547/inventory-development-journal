@@ -20,6 +20,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 178: Create the shared base.html template](#step-178)
 - [Step 179: Dashboard Template Inheritance](#step-179)
 - [Step 180: Update Login Page](#step-180)
+- [Step 181: Update Change Password Page](#step-181)
 
 ---
 
@@ -402,3 +403,81 @@ Not tested yet at Step 180. For Step 180, the proposed way to check update login
 #### Next
 
 [Step 179: Dashboard Template Inheritance](#step-179) · [Step 181: Update Change Password Page](#step-181)
+
+
+---
+
+<a id="step-181"></a>
+
+### Step 181: Update Change Password Page
+
+#### Before this step
+
+We wanted the change-password page to look and behave like part of the same application. Immediately before this, Step 180 dealt with update login page; the work here continued the same part of the application.
+
+#### What we did and why
+
+The template now uses the shared layout, while its form still asks for old and new passwords. Moving HTML into the common design does not remove the password checks in the view.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Change Password - Inventory System{% endblock %}`; Replace lines around `{% block content %}`. For Step 181, this comparison used the code block from Step 89, which might not represent the whole file.
+
+**Step 181, block 1.** This code sample or terminal command was used while working on update change password page. The content below remains in its original sequence for Step 181, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Change Password - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+        <h2 class="mb-4">Change Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Change Password
+            </button>
+
+            <a href="{% url 'home' %}"
+               class="btn btn-outline-secondary">
+                Cancel
+            </a>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 32 lines).** In Step 181, update change password page involved `change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Change Password - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-6 col-lg-5">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-4">Change Password</h2>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 15–21:** The HTML element `<div class="mb-3">` creates or closes part of the page structure seen by the browser. `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-primary">` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** `<a href="{% url 'home' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-secondary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–32:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 181. For Step 181, the proposed way to check update change password page was to open the related page in the browser and check that the route reached the intended view or template in `change_password.html`. Development continued in Step 182 before a complete result could be claimed.
+
+#### Next
+
+[Step 180: Update Login Page](#step-180) · [Step 182: Update Forgot Password Page](#step-182)
