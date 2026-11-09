@@ -28,6 +28,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 16: Stage the journal for Git](#step-16)
 - [Step 17: Understand staging versus committing](#step-17)
 - [Step 18: Stage the private journal](#step-18)
+- [Step 19: Commit the private development journal](#step-19)
 
 ---
 
@@ -639,3 +640,61 @@ Not tested yet at Step 18. For Step 18, the proposed way to check stage the priv
 #### Next
 
 [Step 17: Understand staging versus committing](#step-17) · [Step 19: Commit the private development journal](#step-19)
+
+
+---
+
+<a id="step-19"></a>
+
+### Step 19: Commit the private development journal
+
+#### Before this step
+
+The journal file was selected. We could now save its first version in the journal's own history. Immediately before this, Step 18 dealt with stage the private journal; the work here continued the same part of the application.
+
+#### What we did and why
+
+The commit records what the journal said at that moment. If the written explanation change later, we will still be able to see this earlier version.
+
+#### Code and commands
+
+**Step 19, block 1.** This code sample or terminal command was used while working on commit the private development journal. The content below remains in its original sequence for Step 19, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal commit -m "docs: add initial development and setup journal"
+```
+
+**Step 19, block 2.** This code sample or terminal command was used while working on commit the private development journal. The content below remains in its original sequence for Step 19, block 2.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote -v
+```
+
+**Step 19, block 3.** This output was used while working on commit the private development journal. The content below remains in its original sequence for Step 19, block 3.
+
+```text
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)
+origin  https://github.com/mehreen-7547/inventory-development-journal.git (push)
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 19, commit the private development journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal commit -m` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 19, commit the private development journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal remote -v` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 3 (text, 2 lines).** In Step 19, commit the private development journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 19, output block 3 showed the result rather than another command. Its visible value was `origin  https://github.com/mehreen-7547/inventory-development-journal.git (fetch)`, which mattered for commit the private development journal.
+
+#### How we checked it
+
+Not tested yet at Step 19. For Step 19, the proposed way to check commit the private development journal was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 20 before a complete result could be claimed.
+
+#### Next
+
+[Step 18: Stage the private journal](#step-18) · [Step 20: Push your journal to private GitHub](#step-20)
