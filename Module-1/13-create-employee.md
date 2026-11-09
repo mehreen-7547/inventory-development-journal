@@ -17,6 +17,7 @@ When an admin first opens the page, Django shows empty fields. After the admin s
 ### Find a step
 
 - [Step 139: Create Employee View](#step-139)
+- [Step 140: Restrict Employee Roles](#step-140)
 
 ---
 
@@ -95,3 +96,46 @@ Not tested yet at Step 139. For Step 139, the proposed way to check create emplo
 #### Next
 
 [Step 138: Employee List URL](../Module-1/12-employee-list.md#step-138) · [Step 140: Restrict Employee Roles](#step-140)
+
+
+---
+
+<a id="step-140"></a>
+
+### Step 140: Restrict Employee Roles
+
+#### Before this step
+
+The creation form showed Admin as a possible role, but this staff form was only meant for Manager and Sales Staff. Immediately before this, Step 139 dealt with create employee view; the work here continued the same part of the application.
+
+#### What we did and why
+
+We changed the form so its role choices contain only those two jobs. Django checks the selected value when the form is submitted, so hiding Admin in the dropdown is not the only protection.
+
+#### Code and commands
+
+**Step 140, block 1.** This code sample or terminal command was used while working on restrict employee roles. The content below remains in its original sequence for Step 140, block 1.
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 140, restrict employee roles involved `accounts/forms.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `def __init__(self, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `self.fields['role'].choices = [` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 140. For Step 140, the proposed way to check restrict employee roles was to revisit `accounts/forms.py` and run the corresponding command or feature to see its result. Development continued in Step 141 before a complete result could be claimed.
+
+#### Next
+
+[Step 139: Create Employee View](#step-139) · [Step 141: Create Employee Template](#step-141)
