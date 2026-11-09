@@ -25,6 +25,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 62: Understand CustomUser inheritance](#step-62)
 - [Step 63: Understanding AbstractUser](#step-63)
 - [Step 64: Inspect Django’s built-in User model](#step-64)
+- [Step 65: AUTH_USER_MODEL](#step-65)
 
 ---
 
@@ -511,3 +512,40 @@ Not tested yet at Step 64. For Step 64, the proposed way to check inspect django
 #### Next
 
 [Step 63: Understanding AbstractUser](#step-63) · [Step 65: AUTH_USER_MODEL](#step-65)
+
+
+---
+
+<a id="step-65"></a>
+
+### Step 65: AUTH_USER_MODEL
+
+#### Before this step
+
+There can be only one main user model for the project's login system. Django needed to know which one we chose. Immediately before this, Step 64 dealt with inspect django’s built-in user model; the work here continued the same part of the application.
+
+#### What we did and why
+
+AUTH_USER_MODEL tells Django to use accounts.CustomUser whenever it needs the project user type. Without that setting, Django may keep expecting its default user model instead.
+
+#### Code and commands
+
+**Step 65, block 1.** This code sample or terminal command was used while working on auth_user_model. The content below remains in its original sequence for Step 65, block 1.
+
+```python
+AUTH_USER_MODEL = "accounts.CustomUser"
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 65, auth_user_model involved `accounts/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `AUTH_USER_MODEL = "accounts.CustomUser"` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 65. For Step 65, the proposed way to check auth_user_model was to run the appropriate Django migration or model check and inspect its result in the terminal. Development continued in Step 66 before a complete result could be claimed.
+
+#### Next
+
+[Step 64: Inspect Django’s built-in User model](#step-64) · [Step 66: Django Authentication](#step-66)
