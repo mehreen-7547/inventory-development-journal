@@ -239,3 +239,15 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 233 | M1 · Ch 24 | [Test a complete password-reset confirmation](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-233) |
 | 234 | M1 · Ch 24 | [Test first-time password setup for a new employee](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-234) |
 | 235 | M1 · Ch 24 | [Run the suite, publish the code and mark Module 1 complete](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-235) |
+| 236 | M2 · Ch 1 | [Create the catalog Django app](Module-2/01-supplier-setup-and-list.md#step-236) |
+| 237 | M2 · Ch 1 | [Register catalog in Django settings](Module-2/01-supplier-setup-and-list.md#step-237) |
+| 238 | M2 · Ch 1 | [Define the first Supplier model](Module-2/01-supplier-setup-and-list.md#step-238) |
+| 239 | M2 · Ch 1 | [Preview the Supplier migration](Module-2/01-supplier-setup-and-list.md#step-239) |
+| 240 | M2 · Ch 1 | [Review the supplier fields against v3](Module-2/01-supplier-setup-and-list.md#step-240) |
+| 241 | M2 · Ch 1 | [Finalize the five-field Supplier model](Module-2/01-supplier-setup-and-list.md#step-241) |
+| 242 | M2 · Ch 1 | [Generate and apply the Supplier migration](Module-2/01-supplier-setup-and-list.md#step-242) |
+| 243 | M2 · Ch 1 | [Create the Supplier ModelForm](Module-2/01-supplier-setup-and-list.md#step-243) |
+| 244 | M2 · Ch 1 | [Build a Manager-only Supplier List view](Module-2/01-supplier-setup-and-list.md#step-244) |
+| 245 | M2 · Ch 1 | [Create the Supplier List template](Module-2/01-supplier-setup-and-list.md#step-245) |
+| 246 | M2 · Ch 1 | [Connect the Supplier URL](Module-2/01-supplier-setup-and-list.md#step-246) |
+| 247 | M2 · Ch 1 | [Diagnose the missing SQLite table and verify the page](Module-2/01-supplier-setup-and-list.md#step-247) |
