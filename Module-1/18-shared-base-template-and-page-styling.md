@@ -33,6 +33,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 191: Consolidate both employee forms](#step-191)
 - [Step 192: Update Edit Employee](#step-192)
 - [Step 193: Email Error Handling](#step-193)
+- [Step 194: Resend Email Error Handling](#step-194)
 
 ---
 
@@ -1597,3 +1598,116 @@ Not tested yet at Step 193. For Step 193, the proposed way to check email error 
 #### Next
 
 [Step 192: Update Edit Employee](#step-192) · [Step 194: Resend Email Error Handling](#step-194)
+
+
+---
+
+<a id="step-194"></a>
+
+### Step 194: Resend Email Error Handling
+
+#### Before this step
+
+The “resend setup email” button could face the same Gmail failure, even though the employee account already existed. Immediately before this, Step 193 dealt with email error handling; the work here continued the same part of the application.
+
+#### What we did and why
+
+We added similar error handling to the resend view. If Gmail is unavailable, the administrator sees a useful message and can try again later; the account record remains intact.
+
+#### Code and commands
+
+**Step 194, block 1.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 1.
+
+```python
+    else:
+        send_welcome_email(request, employee)
+        messages.success(request, 'Password setup email generated successfully.')
+```
+
+**Step 194, block 2.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 2.
+
+```python
+    else:
+        try:
+            send_welcome_email(request, employee)
+
+        except (SMTPException, OSError):
+            messages.error(
+                request,
+                'Setup email could not be sent. Please try again.'
+            )
+
+        else:
+            messages.success(
+                request,
+                'Password setup email generated successfully.'
+            )
+```
+
+**Step 194, block 3.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 3.
+
+```powershell
+python manage.py check
+```
+
+**Step 194, block 4.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 4.
+
+```powershell
+git status --short
+```
+
+**Step 194, block 5.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 5.
+
+```powershell
+git status --short
+```
+
+**Step 194, block 6.** This code sample or terminal command was used while working on resend email error handling. The content below remains in its original sequence for Step 194, block 6.
+
+```powershell
+git log --oneline --decorate --max-count=20
+git status --short
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `messages.success(request, 'Password setup email generated successfully.')` prepares feedback that can appear when the user reaches the next page.
+
+**Block 2 (python, 15 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `messages.error(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 8–14:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `messages.success(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 15–15:** The lines starting with `)` supply the values or page content for this part of accounts/views.py. These lines are kept together because their order and indentation matter.
+
+**Block 3 (powershell, 1 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py check` starts Python or one of its tools from the development terminal.
+
+**Block 4 (powershell, 1 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git status --short` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 5 (powershell, 1 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git status --short` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 6 (powershell, 2 lines).** In Step 194, resend email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The command `git log --oneline --decorate --max-count=20` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour. The command `git status --short` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 194. For Step 194, the proposed way to check resend email error handling was to start Django Shell, inspect the email settings and run a safe test send. Step 194 did not establish a successful outcome for resend email error handling.
+
+#### Next
+
+[Step 193: Email Error Handling](#step-193)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **shared base template and page styling** was needed at this point, and describe what the application did differently after the final step of this chapter.
