@@ -25,6 +25,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 119: Connect Email Template](#step-119)
 - [Step 120: Connect Email Subject](#step-120)
 - [Step 121: Set New Password Page](#step-121)
+- [Step 122: Reset Link URL](#step-122)
 
 ---
 
@@ -540,3 +541,46 @@ Not tested yet at Step 121. For Step 121, the proposed way to check set new pass
 #### Next
 
 [Step 120: Connect Email Subject](#step-120) · [Step 122: Reset Link URL](#step-122)
+
+
+---
+
+<a id="step-122"></a>
+
+### Step 122: Reset Link URL
+
+#### Before this step
+
+The reset URL looks unusual because it carries a user identifier and a temporary token. Immediately before this, Step 121 dealt with set new password page; the work here continued the same part of the application.
+
+#### What we did and why
+
+The identifier tells Django which account the link is for. The token is a check that Django generates and validates. If the link is wrong or too old, it should not let someone set a password.
+
+#### Code and commands
+
+**Step 122, block 1.** This code sample or terminal command was used while working on reset link url. The content below remains in its original sequence for Step 122, block 1.
+
+```python
+path(
+    'password-reset/confirm/<uidb64>/<token>/',
+    auth_views.PasswordResetConfirmView.as_view(
+        template_name='accounts/password_reset_confirm.html'
+    ),
+    name='password_reset_confirm'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 122, reset link url involved `password_reset_confirm.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset_confirm.html'` sets the named value used by the next operation in this file. `name='password_reset_confirm'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 122. For Step 122, the proposed way to check reset link url was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_confirm.html`. Development continued in Step 123 before a complete result could be claimed.
+
+#### Next
+
+[Step 121: Set New Password Page](#step-121) · [Step 123: Password Reset Success Page](#step-123)
