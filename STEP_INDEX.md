@@ -235,3 +235,7 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 229 | M1 · Ch 23 | [Prevent recovery emails for inactive accounts](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-229) |
 | 230 | M1 · Ch 23 | [Validate the account-setup token and welcome-email content](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-230) |
 | 231 | M1 · Ch 23 | [Run the full 45-test suite and verify the GitHub commit](Module-1/23-testing-password-changes-recovery-and-account-setup-emails.md#step-231) |
+| 232 | M1 · Ch 24 | [Confirm the repository is clean before changing tests](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-232) |
+| 233 | M1 · Ch 24 | [Test a complete password-reset confirmation](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-233) |
+| 234 | M1 · Ch 24 | [Test first-time password setup for a new employee](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-234) |
+| 235 | M1 · Ch 24 | [Run the suite, publish the code and mark Module 1 complete](Module-1/24-testing-complete-password-reset-and-first-time-employee-setup.md#step-235) |
