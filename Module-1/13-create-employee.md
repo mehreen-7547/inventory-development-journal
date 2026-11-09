@@ -19,6 +19,7 @@ When an admin first opens the page, Django shows empty fields. After the admin s
 - [Step 139: Create Employee View](#step-139)
 - [Step 140: Restrict Employee Roles](#step-140)
 - [Step 141: Create Employee Template](#step-141)
+- [Step 142: Create Employee URL](#step-142)
 
 ---
 
@@ -214,3 +215,44 @@ Not tested yet at Step 141. For Step 141, the proposed way to check create emplo
 #### Next
 
 [Step 140: Restrict Employee Roles](#step-140) · [Step 142: Create Employee URL](#step-142)
+
+
+---
+
+<a id="step-142"></a>
+
+### Step 142: Create Employee URL
+
+#### Before this step
+
+The creation page had a view and template but no address in the accounts URL file. Immediately before this, Step 141 dealt with create employee template; the work here continued the same part of the application.
+
+#### What we did and why
+
+The new route links the browser's address to the create view. Together, view, template and URL form a usable page.
+
+#### Code and commands
+
+**Step 142, block 1.** This code sample or terminal command was used while working on create employee url. The content below remains in its original sequence for Step 142, block 1.
+
+```python
+path(
+    'employees/create/',
+    views.create_employee,
+    name='create_employee'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 142, create employee url involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `path(` begins a URL rule connecting a browser address with the function that answers it. `name='create_employee'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 142. For Step 142, the proposed way to check create employee url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 143 before a complete result could be claimed.
+
+#### Next
+
+[Step 141: Create Employee Template](#step-141) · [Step 143: Add Employee Link](#step-143)
