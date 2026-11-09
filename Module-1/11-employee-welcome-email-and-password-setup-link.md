@@ -17,6 +17,7 @@ Creating an employee and letting the employee choose a password are separate mom
 ### Find a step
 
 - [Step 128: Employee Creation Form](#step-128)
+- [Step 129: Connect Employee Form](#step-129)
 
 ---
 
@@ -74,3 +75,73 @@ Not tested yet at Step 128. For Step 128, the proposed way to check employee cre
 #### Next
 
 [Step 127: Email Testing](../Module-1/10-forgot-and-reset-password.md#step-127) · [Step 129: Connect Employee Form](#step-129)
+
+
+---
+
+<a id="step-129"></a>
+
+### Step 129: Connect Employee Form
+
+#### Before this step
+
+The employee form was written, but it had to be connected to the account-creation screen used at this stage. Immediately before this, Step 128 dealt with employee creation form; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django Admin can use a custom add form when an administrator creates a user. This is an early onboarding route; later we build our own employee-creation page inside the application.
+
+#### Code and commands
+
+**Step 129, block 1.** This code sample or terminal command was used while working on connect employee form. The content below remains in its original sequence for Step 129, block 1.
+
+```python
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+from .forms import EmployeeCreationForm
+
+
+class CustomUserAdmin(UserAdmin):
+
+    add_form = EmployeeCreationForm
+
+    fieldsets = UserAdmin.fieldsets + (
+        ('Inventory Role', {'fields': ('role',)}),
+    )
+
+    add_fieldsets = (
+        (None, {
+            'fields': (
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+                'role'
+            )
+        }),
+    )
+
+
+admin.site.register(CustomUser, CustomUserAdmin)
+```
+
+#### How the code works
+
+**Block 1 (python, 28 lines).** In Step 129, connect employee form involved `accounts/admin.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.contrib import admin` makes a Python function, class or module available to the code that follows. `from django.contrib.auth.admin import UserAdmin` makes a Python function, class or module available to the code that follows. `from .models import CustomUser` makes a Python function, class or module available to the code that follows. `from .forms import EmployeeCreationForm` makes a Python function, class or module available to the code that follows.
+
+**Lines 8–14:** `add_form = EmployeeCreationForm` sets the named value used by the next operation in this file. `fieldsets = UserAdmin.fieldsets + (` sets the named value used by the next operation in this file.
+
+**Lines 15–21:** `add_fieldsets = (` sets the named value used by the next operation in this file.
+
+**Lines 22–28:** The lines starting with `'role'` supply the values or page content for this part of accounts/admin.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 129. For Step 129, the proposed way to check connect employee form was to revisit `accounts/admin.py` and run the corresponding command or feature to see its result. Development continued in Step 130 before a complete result could be claimed.
+
+#### Next
+
+[Step 128: Employee Creation Form](#step-128) · [Step 130: Welcome Email Template](#step-130)
