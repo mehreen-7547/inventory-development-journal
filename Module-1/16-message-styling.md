@@ -20,6 +20,7 @@ When a view saves a change and redirects back to a list, Django can carry a shor
 - [Step 166: Display edit-page feedback messages](#step-166)
 - [Step 167: Message Styling](#step-167)
 - [Step 168: Display employee-list messages](#step-168)
+- [Step 169: Message Styling CSS](#step-169)
 
 ---
 
@@ -285,3 +286,74 @@ Not tested yet at Step 168. For Step 168, the proposed way to check display empl
 #### Next
 
 [Step 167: Message Styling](#step-167) · [Step 169: Message Styling CSS](#step-169)
+
+
+---
+
+<a id="step-169"></a>
+
+### Step 169: Message Styling CSS
+
+#### Before this step
+
+The message text was showing, but we wanted it to be easier to read and recognise. Immediately before this, Step 168 dealt with display employee-list messages; the work here continued the same part of the application.
+
+#### What we did and why
+
+The CSS file gives notices consistent spacing and appearance. This makes feedback clearer without changing the rules for creating or editing employees.
+
+#### Code and commands
+
+**Step 169, block 1.** This code sample or terminal command was used while working on message styling css. The content below remains in its original sequence for Step 169, block 1.
+
+```css
+.message {
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.message.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.message.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.message.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+```
+
+#### How the code works
+
+**Block 1 (css, 24 lines).** In Step 169, message styling css involved `employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The lines starting with `.message {` supply the values or page content for this part of employee_list.html. These lines are kept together because their order and indentation matter.
+
+**Lines 8–14:** The lines starting with `.message.success {` supply the values or page content for this part of employee_list.html. These lines are kept together because their order and indentation matter.
+
+**Lines 15–21:** The lines starting with `color: #721c24;` supply the values or page content for this part of employee_list.html. These lines are kept together because their order and indentation matter.
+
+**Lines 22–24:** The lines starting with `background-color: #fff3cd;` supply the values or page content for this part of employee_list.html. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 169. For Step 169, the proposed way to check message styling css was to revisit `employee_list.html` and run the corresponding command or feature to see its result. Step 169 did not establish a successful outcome for message styling css.
+
+#### Next
+
+[Step 168: Display employee-list messages](#step-168) · [Step 170: Real Email Configuration](../Module-1/17-real-email-delivery-smtp.md#step-170)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **message styling** was needed at this point, and describe what the application did differently after the final step of this chapter.
