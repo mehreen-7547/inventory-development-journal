@@ -17,6 +17,7 @@ If someone opens the home address, Django needs to decide which view will answer
 ### Find a step
 
 - [Step 29: Confirming Terminal Environment](#step-29)
+- [Step 30: Trace the homepage request](#step-30)
 
 ---
 
@@ -83,3 +84,123 @@ For Step 29 (Confirming Terminal Environment), we compared the visible terminal 
 #### Next
 
 [Step 28: Understanding the Migration Workflow](../Module-0/03-database-and-migrations.md#step-28) · [Step 30: Trace the homepage request](#step-30)
+
+
+---
+
+<a id="step-30"></a>
+
+### Step 30: Trace the homepage request
+
+#### Before this step
+
+With Django starting, we wanted to understand what happens when a person types the website's home address in a browser. Immediately before this, Step 29 dealt with confirming terminal environment; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django first looks at its URL rules to decide which function should handle that address. That function is called a view. The view can then return an HTML page, called a template, for the browser to show.
+
+#### Code and commands
+
+**Step 30, block 1.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 1.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+**Step 30, block 2.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 2.
+
+```python
+    path("", include("core.urls"))
+    
+```
+
+**Step 30, block 3.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 3.
+
+```python
+    def home(request):
+        return render(request, "core/home.html")
+    
+```
+
+**Step 30, block 4.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 4.
+
+```html
+    <h1>Inventory &amp; Demand Intelligence</h1>
+    <p>Module 0 setup is running.</p>
+    <p><a href="/admin/">Open Django admin</a></p>
+    
+```
+
+**Step 30, block 5.** This output was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 5.
+
+```text
+Techmindz_Inventory_Module0_SQLite_Atomic_Update/
+│
+├── .venv/
+│
+└── techmindz_inventory_module0_sqlite_atomic/
+    │
+    ├── manage.py           ← HERE
+    │
+    ├── config/
+    │   ├── settings.py
+    │   ├── urls.py
+    │   ├── asgi.py
+    │   └── wsgi.py
+    │
+    └── core/
+        ├── views.py
+        ├── urls.py
+        └── models.py
+```
+
+**Step 30, block 6.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 6.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+**Step 30, block 7.** This code sample or terminal command was used while working on trace the homepage request. The content below remains in its original sequence for Step 30, block 7.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
+
+**Block 2 (python, 2 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `path("", include("core.urls"))` begins a URL rule connecting a browser address with the function that answers it.
+
+**Block 3 (python, 3 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `def home(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `return render(request, "core/home.html")` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 4 (html, 4 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** The HTML element `<h1>Inventory &amp; Demand Intelligence</h1>` creates or closes part of the page structure seen by the browser. The HTML element `<p>Module 0 setup is running.</p>` creates or closes part of the page structure seen by the browser. The link `<p><a href="/admin/">Open Django admin</a></p>` lets the user navigate to the named screen from this page.
+
+**Block 5 (text, 18 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 30, output block 5 showed the result rather than another command. Its visible value was `Techmindz_Inventory_Module0_SQLite_Atomic_Update/`, which mattered for trace the homepage request.
+
+**Block 6 (powershell, 1 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
+
+**Block 7 (powershell, 1 lines).** In Step 30, trace the homepage request involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 30. For Step 30, the proposed way to check trace the homepage request was to open the related page in the browser and check that the route reached the intended view or template in `manage.py`. Development continued in Step 31 before a complete result could be claimed.
+
+#### Next
+
+[Step 29: Confirming Terminal Environment](#step-29) · [Step 31: Documenting Superuser Setup](#step-31)
