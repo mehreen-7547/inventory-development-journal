@@ -20,6 +20,7 @@ When we say “console email,” we mean Django prints the message where we ran 
 - [Step 109: Enforce Email Validation](#step-109)
 - [Step 110: Create Migration](#step-110)
 - [Step 111: Apply Migration](#step-111)
+- [Step 112: Email Configuration](#step-112)
 
 ---
 
@@ -254,3 +255,87 @@ Not tested yet at Step 111. For Step 111, the proposed way to check apply migrat
 #### Next
 
 [Step 110: Create Migration](#step-110) · [Step 112: Email Configuration](#step-112)
+
+
+---
+
+<a id="step-112"></a>
+
+### Step 112: Email Configuration
+
+#### Before this step
+
+We wanted to develop password-reset emails without sending real messages or exposing a Gmail password. Immediately before this, Step 111 dealt with apply migration; the work here continued the same part of the application.
+
+#### What we did and why
+
+The console email setting tells Django to print the email text and link in the VS Code terminal. This lets us test the message safely. We would switch to real sending only later.
+
+#### Code and commands
+
+**Step 112, block 1.** This code sample or terminal command was used while working on email configuration. The content below remains in its original sequence for Step 112, block 1.
+
+```python
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+```
+
+**Step 112, block 2.** This code sample or terminal command was used while working on email configuration. The content below remains in its original sequence for Step 112, block 2.
+
+```bash
+python manage.py shell
+```
+
+**Step 112, block 3.** This code sample or terminal command was used while working on email configuration. The content below remains in its original sequence for Step 112, block 3.
+
+```powershell
+cd techmindz_inventory_module0_sqlite_atomic
+```
+
+**Step 112, block 4.** This output was used while working on email configuration. The content below remains in its original sequence for Step 112, block 4.
+
+```text
+(.venv) PS C:\Users\YOUR_WINDOWS_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic>
+```
+
+**Step 112, block 5.** This code sample or terminal command was used while working on email configuration. The content below remains in its original sequence for Step 112, block 5.
+
+```powershell
+python manage.py shell
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 112, email configuration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'` selects whether email is printed for development or handed to an actual mail server. `DEFAULT_FROM_EMAIL = 'no-reply@example.com'` sets the named value used by the next operation in this file.
+
+**Block 2 (bash, 1 lines).** In Step 112, email configuration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py shell` starts Python or one of its tools from the development terminal.
+
+**Block 3 (powershell, 1 lines).** In Step 112, email configuration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `cd techmindz_inventory_module0_sqlite_atomic` supply the values or page content for this part of config/settings.py. These lines are kept together because their order and indentation matter.
+
+**Block 4 (text, 1 lines).** In Step 112, email configuration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 112, output block 4 showed the result rather than another command. Its visible value was `(.venv) PS C:\Users\YOUR_WINDOWS_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomi`, which mattered for email configuration.
+
+**Block 5 (powershell, 1 lines).** In Step 112, email configuration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py shell` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 112. For Step 112, the proposed way to check email configuration was to start Django Shell, inspect the email settings and run a safe test send. Step 112 did not establish a successful outcome for email configuration.
+
+#### Next
+
+[Step 111: Apply Migration](#step-111) · [Step 113: Forgot Password](../Module-1/10-forgot-and-reset-password.md#step-113)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **email validation and email setup** was needed at this point, and describe what the application did differently after the final step of this chapter.
