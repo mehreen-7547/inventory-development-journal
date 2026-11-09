@@ -8,3 +8,4 @@
 | 4 | Module 0, Chapter 1 | [ Create the configuration file ](Module-0/01-environment-setup.md#step-4) |
 | 5 | Module 0, Chapter 1 | [ Understand the Django project folders ](Module-0/01-environment-setup.md#step-5) |
 | 6 | Module 0, Chapter 1 | [ Create .env ](Module-0/01-environment-setup.md#step-6) |
+| 7 | Module 0, Chapter 2 | [ Initialize the Git repository ](Module-0/02-git-and-github.md#step-7) |
