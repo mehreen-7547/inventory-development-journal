@@ -103,3 +103,4 @@
 | 99 | Module 1, Chapter 7 | [ Commit Changes ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-99) |
 | 100 | Module 1, Chapter 8 | [ Role Security ](Module-1/08-role-security-decorators.md#step-100) |
 | 101 | Module 1, Chapter 8 | [ Understand nested decorator functions ](Module-1/08-role-security-decorators.md#step-101) |
+| 102 | Module 1, Chapter 8 | [ Trace the decorator execution order ](Module-1/08-role-security-decorators.md#step-102) |

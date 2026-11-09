@@ -18,6 +18,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 
 - [Step 100: Role Security](#step-100)
 - [Step 101: Understand nested decorator functions](#step-101)
+- [Step 102: Trace the decorator execution order](#step-102)
 
 ---
 
@@ -225,3 +226,84 @@ Not tested yet at Step 101. For Step 101, the proposed way to check understand n
 #### Next
 
 [Step 100: Role Security](#step-100) · [Step 102: Trace the decorator execution order](#step-102)
+
+
+---
+
+<a id="step-102"></a>
+
+### Step 102: Trace the decorator execution order
+
+#### Before this step
+
+We followed one protected request through the full decorator to understand each return. Immediately before this, Step 101 dealt with understand nested decorator functions; the work here continued the same part of the application.
+
+#### What we did and why
+
+The browser asks for a page, the decorator checks login and allowed roles, and only then calls the original view. If the user is not allowed, Django returns a refusal instead of showing the protected information.
+
+#### Code and commands
+
+**Step 102, block 1.** This code sample or terminal command was used while working on trace the decorator execution order. The content below remains in its original sequence for Step 102, block 1.
+
+```python
+@role_required('admin', 'manager')
+def inventory_report(request):
+    return render(request, 'inventory/report.html')
+```
+
+**Step 102, block 2.** This code sample or terminal command was used while working on trace the decorator execution order. The content below remains in its original sequence for Step 102, block 2.
+
+```python
+original_view = inventory_report
+
+step1 = role_required('admin', 'manager')
+
+step2 = step1(original_view)
+
+inventory_report = step2
+```
+
+**Step 102, block 3.** This code sample or terminal command was used while working on trace the decorator execution order. The content below remains in its original sequence for Step 102, block 3.
+
+```python
+decorator(original_view)
+```
+
+**Step 102, block 4.** This code sample or terminal command was used while working on trace the decorator execution order. The content below remains in its original sequence for Step 102, block 4.
+
+```python
+@login_required(login_url='/login/')
+@wraps(view_func)
+def wrapper(request, *args, **kwargs):
+    if request.user.role not in roles:
+        raise PermissionDenied
+
+    return view_func(request, *args, **kwargs)
+```
+
+#### How the code works
+
+**Block 1 (python, 3 lines).** In Step 102, trace the decorator execution order involved `inventory/report.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `@role_required('admin', 'manager')` adds a check or behaviour around the view before Django runs the view itself. `def inventory_report(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `return render(request, 'inventory/report.html')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 2 (python, 7 lines).** In Step 102, trace the decorator execution order involved `inventory/report.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `original_view = inventory_report` sets the named value used by the next operation in this file. `step1 = role_required('admin', 'manager')` sets the named value used by the next operation in this file. `step2 = step1(original_view)` sets the named value used by the next operation in this file. `inventory_report = step2` sets the named value used by the next operation in this file.
+
+**Block 3 (python, 1 lines).** In Step 102, trace the decorator execution order involved `inventory/report.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `decorator(original_view)` supply the values or page content for this part of inventory/report.html. These lines are kept together because their order and indentation matter.
+
+**Block 4 (python, 7 lines).** In Step 102, trace the decorator execution order involved `inventory/report.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `@login_required(login_url='/login/')` adds a check or behaviour around the view before Django runs the view itself. `@wraps(view_func)` adds a check or behaviour around the view before Django runs the view itself. `def wrapper(request, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `if request.user.role not in roles:` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+#### How we checked it
+
+Not tested yet at Step 102. For Step 102, the proposed way to check trace the decorator execution order was to revisit `inventory/report.html` and run the corresponding command or feature to see its result. Development continued in Step 103 before a complete result could be claimed.
+
+#### Next
+
+[Step 101: Understand nested decorator functions](#step-101) · [Step 103: Apply Role Security](#step-103)
