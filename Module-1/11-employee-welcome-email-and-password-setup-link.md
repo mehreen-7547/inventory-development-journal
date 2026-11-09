@@ -23,6 +23,7 @@ Creating an employee and letting the employee choose a password are separate mom
 - [Step 132: Send Welcome Email](#step-132)
 - [Step 133: Automatic Welcome Email](#step-133)
 - [Step 134: Link Expiration](#step-134)
+- [Step 135: Resend Setup Link](#step-135)
 
 ---
 
@@ -421,3 +422,63 @@ Not tested yet at Step 134. For Step 134, the proposed way to check link expirat
 #### Next
 
 [Step 133: Automatic Welcome Email](#step-133) · [Step 135: Resend Setup Link](#step-135)
+
+
+---
+
+<a id="step-135"></a>
+
+### Step 135: Resend Setup Link
+
+#### Before this step
+
+A person might lose their first email or let its link expire, but we should not create another account for them. Immediately before this, Step 134 dealt with link expiration; the work here continued the same part of the application.
+
+#### What we did and why
+
+The resend action prepares a fresh setup link for an eligible existing employee. It reuses the same user record rather than duplicating people in the database.
+
+#### Code and commands
+
+**Step 135, block 1.** This code sample or terminal command was used while working on resend setup link. The content below remains in its original sequence for Step 135, block 1.
+
+```python
+    actions = ['resend_setup_email']
+
+    @admin.action(description='Resend password setup email')
+    def resend_setup_email(self, request, queryset):
+        count = 0
+
+        for user in queryset:
+            if user.is_active and not user.has_usable_password() and user.email:
+                send_welcome_email(request, user)
+                count += 1
+
+        self.message_user(
+            request,
+            f'Setup email generated for {count} employee(s).'
+        )
+```
+
+#### How the code works
+
+**Block 1 (python, 15 lines).** In Step 135, resend setup link involved `accounts/admin.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `actions = ['resend_setup_email']` sets the named value used by the next operation in this file. `@admin.action(description='Resend password setup email')` adds a check or behaviour around the view before Django runs the view itself. `def resend_setup_email(self, request, queryset):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `count = 0` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `if user.is_active and not user.has_usable_password() and user.email:` is a condition: the code inside this branch only runs when its condition is satisfied. `count += 1` sets the named value used by the next operation in this file.
+
+**Lines 15–15:** The lines starting with `)` supply the values or page content for this part of accounts/admin.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 135. For Step 135, the proposed way to check resend setup link was to revisit `accounts/admin.py` and run the corresponding command or feature to see its result. Step 135 did not establish a successful outcome for resend setup link.
+
+#### Next
+
+[Step 134: Link Expiration](#step-134) · [Step 136: Employee Management](../Module-1/12-employee-list.md#step-136)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **employee welcome email and password-setup link** was needed at this point, and describe what the application did differently after the final step of this chapter.
