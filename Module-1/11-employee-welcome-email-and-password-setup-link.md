@@ -22,6 +22,7 @@ Creating an employee and letting the employee choose a password are separate mom
 - [Step 131: Secure Password-Setup Link](#step-131)
 - [Step 132: Send Welcome Email](#step-132)
 - [Step 133: Automatic Welcome Email](#step-133)
+- [Step 134: Link Expiration](#step-134)
 
 ---
 
@@ -383,3 +384,40 @@ Not tested yet at Step 133. For Step 133, the proposed way to check automatic we
 #### Next
 
 [Step 132: Send Welcome Email](#step-132) · [Step 134: Link Expiration](#step-134)
+
+
+---
+
+<a id="step-134"></a>
+
+### Step 134: Link Expiration
+
+#### Before this step
+
+A password-setup link should not work forever if somebody finds an old email. Immediately before this, Step 133 dealt with automatic welcome email; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django lets us set how long reset tokens remain useful. We reused that mechanism for first-time password setup so old links stop working after the configured period.
+
+#### Code and commands
+
+**Step 134, block 1.** This code sample or terminal command was used while working on link expiration. The content below remains in its original sequence for Step 134, block 1.
+
+```python
+PASSWORD_RESET_TIMEOUT = 60 * 60 * 24
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 134, link expiration involved `config/settings.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `PASSWORD_RESET_TIMEOUT = 60 * 60 * 24` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 134. For Step 134, the proposed way to check link expiration was to revisit `config/settings.py` and run the corresponding command or feature to see its result. Development continued in Step 135 before a complete result could be claimed.
+
+#### Next
+
+[Step 133: Automatic Welcome Email](#step-133) · [Step 135: Resend Setup Link](#step-135)
