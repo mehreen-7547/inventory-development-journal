@@ -105,3 +105,4 @@
 | 101 | Module 1, Chapter 8 | [ Understand nested decorator functions ](Module-1/08-role-security-decorators.md#step-101) |
 | 102 | Module 1, Chapter 8 | [ Trace the decorator execution order ](Module-1/08-role-security-decorators.md#step-102) |
 | 103 | Module 1, Chapter 8 | [ Apply Role Security ](Module-1/08-role-security-decorators.md#step-103) |
+| 104 | Module 1, Chapter 8 | [ Test Role Restrictions ](Module-1/08-role-security-decorators.md#step-104) |

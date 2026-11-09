@@ -20,6 +20,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 - [Step 101: Understand nested decorator functions](#step-101)
 - [Step 102: Trace the decorator execution order](#step-102)
 - [Step 103: Apply Role Security](#step-103)
+- [Step 104: Test Role Restrictions](#step-104)
 
 ---
 
@@ -371,3 +372,60 @@ Not tested yet at Step 103. For Step 103, the proposed way to check apply role s
 #### Next
 
 [Step 102: Trace the decorator execution order](#step-102) · [Step 104: Test Role Restrictions](#step-104)
+
+
+---
+
+<a id="step-104"></a>
+
+### Step 104: Test Role Restrictions
+
+#### Before this step
+
+Security needs to be tested with a person who should be refused, not only someone who should succeed. Immediately before this, Step 103 dealt with apply role security; the work here continued the same part of the application.
+
+#### What we did and why
+
+We tried or planned the denied-role case. A signed-in person with the wrong role should be stopped even though their username and password are valid.
+
+#### Code and commands
+
+**Step 104, block 1.** This code sample or terminal command was used while working on test role restrictions. The content below remains in its original sequence for Step 104, block 1.
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+**Step 104, block 2.** This code sample or terminal command was used while working on test role restrictions. The content below remains in its original sequence for Step 104, block 2.
+
+```python
+@role_required('admin', 'manager')
+```
+
+**Step 104, block 3.** This code sample or terminal command was used while working on test role restrictions. The content below remains in its original sequence for Step 104, block 3.
+
+```python
+@role_required('admin', 'manager', 'sales')
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 104, test role restrictions involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself.
+
+**Block 2 (python, 1 lines).** In Step 104, test role restrictions involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager')` adds a check or behaviour around the view before Django runs the view itself.
+
+**Block 3 (python, 1 lines).** In Step 104, test role restrictions involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself.
+
+#### How we checked it
+
+Not tested yet at Step 104. For Step 104, the proposed way to check test role restrictions was to revisit `core/views.py` and run the corresponding command or feature to see its result. Development continued in Step 105 before a complete result could be claimed.
+
+#### Next
+
+[Step 103: Apply Role Security](#step-103) · [Step 105: Review the role decorator](#step-105)
