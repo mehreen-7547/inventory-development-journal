@@ -19,6 +19,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 177: Plan the shared layout](#step-177)
 - [Step 178: Create the shared base.html template](#step-178)
 - [Step 179: Dashboard Template Inheritance](#step-179)
+- [Step 180: Update Login Page](#step-180)
 
 ---
 
@@ -294,3 +295,110 @@ Not tested yet at Step 179. For Step 179, the proposed way to check dashboard te
 #### Next
 
 [Step 178: Create the shared base.html template](#step-178) · [Step 180: Update Login Page](#step-180)
+
+
+---
+
+<a id="step-180"></a>
+
+### Step 180: Update Login Page
+
+#### Before this step
+
+The login page still had its old standalone layout and looked different from the rest of the website. Immediately before this, Step 179 dealt with dashboard template inheritance; the work here continued the same part of the application.
+
+#### What we did and why
+
+We connected it to the shared base.html layout. The username/password form and login check remain the same; only the surrounding page structure and appearance changed.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% block title %}Login - Inventory System{% endblock %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-6 col-lg-4">`; Replace lines around `<h2 class="mb-4">Login</h2>`; Replace lines around `<form method="POST"> / {% csrf_token %}`; Replace lines around `<div class="mb-3"> / <label for="username" class="form-label">`; Replace lines around `<div class="mb-3"> / <label for="password" class="form-label">`. For Step 180, this comparison used the code block from Step 179, which might not represent the whole file.
+
+**Step 180, block 1.** This code sample or terminal command was used while working on update login page. The content below remains in its original sequence for Step 180, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Login - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+
+        <h2 class="mb-4">Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="username" class="form-label">
+                    Username
+                </label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       class="form-control"
+                       placeholder="Enter username"
+                       autocomplete="username"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    Password
+                </label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control"
+                       placeholder="Enter password"
+                       autocomplete="current-password"
+                       required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+        </form>
+
+        <p class="mt-3 text-center">
+            <a href="{% url 'password_reset' %}">
+                Forgot Password?
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 55 lines).** In Step 180, update login page involved `base.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Login - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-6 col-lg-4">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-4">Login</h2>` creates or closes part of the page structure seen by the browser. The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted.
+
+**Lines 15–21:** The HTML element `<div class="mb-3">` creates or closes part of the page structure seen by the browser. The HTML element `<label for="username" class="form-label">` creates or closes part of the page structure seen by the browser. The HTML element `</label>` creates or closes part of the page structure seen by the browser. The HTML element `<input type="text"` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** `class="form-control"` sets the named value used by the next operation in this file. `placeholder="Enter username"` sets the named value used by the next operation in this file. `autocomplete="username"` sets the named value used by the next operation in this file. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** The HTML element `<label for="password" class="form-label">` creates or closes part of the page structure seen by the browser. The HTML element `</label>` creates or closes part of the page structure seen by the browser. The HTML element `<input type="password"` creates or closes part of the page structure seen by the browser. `id="password"` sets the named value used by the next operation in this file.
+
+**Lines 36–42:** `placeholder="Enter password"` sets the named value used by the next operation in this file. `autocomplete="current-password"` sets the named value used by the next operation in this file. The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<button type="submit" class="btn btn-primary w-100">` creates or closes part of the page structure seen by the browser.
+
+**Lines 43–49:** The HTML element `</button>` creates or closes part of the page structure seen by the browser. The HTML element `</form>` creates or closes part of the page structure seen by the browser. The HTML element `<p class="mt-3 text-center">` creates or closes part of the page structure seen by the browser. `<a href="{% url 'password_reset' %}">` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 50–55:** The HTML element `</p>` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 180. For Step 180, the proposed way to check update login page was to open the related page in the browser and check that the route reached the intended view or template in `base.html`. Development continued in Step 181 before a complete result could be claimed.
+
+#### Next
+
+[Step 179: Dashboard Template Inheritance](#step-179) · [Step 181: Update Change Password Page](#step-181)
