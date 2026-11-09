@@ -19,6 +19,7 @@ This is an early-development correction. On a live system, deleting the database
 - [Step 68: Database Reset](#step-68)
 - [Step 69: Database File Locked](#step-69)
 - [Step 70: Create Database Tables](#step-70)
+- [Step 71: Create Administrator](#step-71)
 
 ---
 
@@ -139,3 +140,60 @@ Not tested yet at Step 70. For Step 70, the proposed way to check create databas
 #### Next
 
 [Step 69: Database File Locked](#step-69) · [Step 71: Create Administrator](#step-71)
+
+
+---
+
+<a id="step-71"></a>
+
+### Step 71: Create Administrator
+
+#### Before this step
+
+The database could now store users, but nobody yet had an administrator login. Immediately before this, Step 70 dealt with create database tables; the work here continued the same part of the application.
+
+#### What we did and why
+
+createsuperuser asks for account details and creates a powerful account intended for setup and administration. This is different from the limited staff accounts we will add later.
+
+#### Code and commands
+
+**Step 71, block 1.** This code sample or terminal command was used while working on create administrator. The content below remains in its original sequence for Step 71, block 1.
+
+```powershell
+python manage.py createsuperuser
+```
+
+**Step 71, block 2.** This output was used while working on create administrator. The content below remains in its original sequence for Step 71, block 2.
+
+```text
+Superuser created successfully.
+```
+
+**Step 71, block 3.** This code sample or terminal command was used while working on create administrator. The content below remains in its original sequence for Step 71, block 3.
+
+```powershell
+python manage.py runserver
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 71, create administrator involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py createsuperuser` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 1 lines).** In Step 71, create administrator involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 71, output block 2 showed the result rather than another command. Its visible value was `Superuser created successfully.`, which mattered for create administrator.
+
+**Block 3 (powershell, 1 lines).** In Step 71, create administrator involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py runserver` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 71. For Step 71, the proposed way to check create administrator was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 72 before a complete result could be claimed.
+
+#### Next
+
+[Step 70: Create Database Tables](#step-70) · [Step 72: Register CustomUser](#step-72)
