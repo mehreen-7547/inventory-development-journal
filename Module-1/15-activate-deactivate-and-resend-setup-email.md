@@ -20,6 +20,7 @@ Deactivation leaves the account record in the database but prevents normal sign-
 - [Step 158: Employee Status URL](#step-158)
 - [Step 159: Deactivate/Reactivate Button](#step-159)
 - [Step 160: Resend Setup Email](#step-160)
+- [Step 161: Resend Setup Email URL](#step-161)
 
 ---
 
@@ -282,3 +283,44 @@ Not tested yet at Step 160. For Step 160, the proposed way to check resend setup
 #### Next
 
 [Step 159: Deactivate/Reactivate Button](#step-159) · [Step 161: Resend Setup Email URL](#step-161)
+
+
+---
+
+<a id="step-161"></a>
+
+### Step 161: Resend Setup Email URL
+
+#### Before this step
+
+The resend code existed, but each employee's button needed an address that reached it. Immediately before this, Step 160 dealt with resend setup email; the work here continued the same part of the application.
+
+#### What we did and why
+
+The URL includes that employee's ID and points to the resend view. The same helper can then build a fresh link for the correct person.
+
+#### Code and commands
+
+**Step 161, block 1.** This code sample or terminal command was used while working on resend setup email url. The content below remains in its original sequence for Step 161, block 1.
+
+```python
+path(
+    'employees/resend-setup/<int:employee_id>/',
+    views.resend_setup_email,
+    name='resend_setup_email'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 161, resend setup email url involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `path(` begins a URL rule connecting a browser address with the function that answers it. `name='resend_setup_email'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 161. For Step 161, the proposed way to check resend setup email url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Development continued in Step 162 before a complete result could be claimed.
+
+#### Next
+
+[Step 160: Resend Setup Email](#step-160) · [Step 162: Resend Setup Email Button](#step-162)
