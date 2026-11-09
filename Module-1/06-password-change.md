@@ -17,6 +17,7 @@ The page first asks for the old password and the new one. Django checks the form
 ### Find a step
 
 - [Step 86: Change Password](#step-86)
+- [Step 87: Walk through password change](#step-87)
 
 ---
 
@@ -79,3 +80,142 @@ Not tested yet at Step 86. For Step 86, the proposed way to check change passwor
 #### Next
 
 [Step 85: Login Page Check](../Module-1/05-homepage-protection-and-navigation.md#step-85) · [Step 87: Walk through password change](#step-87)
+
+
+---
+
+<a id="step-87"></a>
+
+### Step 87: Walk through password change
+
+#### Before this step
+
+That view contained several steps in one function, so we slowed down and followed one browser request at a time. Immediately before this, Step 86 dealt with change password; the work here continued the same part of the application.
+
+#### What we did and why
+
+Opening the page normally is a GET request, so the view shows a blank form. Submitting it is POST, so the view checks the entered values. If the change succeeds, Django updates the login session so the user can stay signed in.
+
+#### Code and commands
+
+**Step 87, block 1.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 1.
+
+```python
+@login_required(login_url='/login/')
+def changepassword(request):
+```
+
+**Step 87, block 2.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 2.
+
+```python
+if request.method == 'POST':
+```
+
+**Step 87, block 3.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 3.
+
+```python
+else:
+    form = PasswordChangeForm(request.user)
+```
+
+**Step 87, block 4.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 4.
+
+```python
+return render(request, 'accounts/change_password.html', {'form': form})
+```
+
+**Step 87, block 5.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 5.
+
+```python
+if request.method == 'POST':
+```
+
+**Step 87, block 6.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 6.
+
+```python
+form = PasswordChangeForm(request.user, request.POST)
+```
+
+**Step 87, block 7.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 7.
+
+```python
+if form.is_valid():
+```
+
+**Step 87, block 8.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 8.
+
+```python
+user = form.save()
+```
+
+**Step 87, block 9.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 9.
+
+```python
+update_session_auth_hash(request, user)
+```
+
+**Step 87, block 10.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 10.
+
+```python
+return redirect('home')
+```
+
+**Step 87, block 11.** This code sample or terminal command was used while working on walk through password change. The content below remains in its original sequence for Step 87, block 11.
+
+```python
+return render(request, 'accounts/change_password.html', {'form': form})
+```
+
+#### How the code works
+
+**Block 1 (python, 2 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** `@login_required(login_url='/login/')` adds a check or behaviour around the view before Django runs the view itself. `def changepassword(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+**Block 2 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `if request.method == 'POST':` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+**Block 3 (python, 2 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `form = PasswordChangeForm(request.user)` sets the named value used by the next operation in this file.
+
+**Block 4 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return render(request, 'accounts/change_password.html', {'form': form})` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 5 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `if request.method == 'POST':` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+**Block 6 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `form = PasswordChangeForm(request.user, request.POST)` sets the named value used by the next operation in this file.
+
+**Block 7 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `if form.is_valid():` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+**Block 8 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `form.save()` writes the validated form values into the corresponding database record.
+
+**Block 9 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `update_session_auth_hash(request, user)` supply the values or page content for this part of accounts/change_password.html. These lines are kept together because their order and indentation matter.
+
+**Block 10 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return redirect('home')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 11 (python, 1 lines).** In Step 87, walk through password change involved `accounts/change_password.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `return render(request, 'accounts/change_password.html', {'form': form})` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+#### How we checked it
+
+Not tested yet at Step 87. For Step 87, the proposed way to check walk through password change was to open the password-related page and try the expected form flow with a test account. Development continued in Step 88 before a complete result could be claimed.
+
+#### Next
+
+[Step 86: Change Password](#step-86) · [Step 88: Password Change URL](#step-88)
