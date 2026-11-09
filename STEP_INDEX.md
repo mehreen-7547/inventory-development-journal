@@ -189,3 +189,4 @@
 | 185 | Module 1, Chapter 18 | [ Update Reset Complete Page ](Module-1/18-shared-base-template-and-page-styling.md#step-185) |
 | 186 | Module 1, Chapter 18 | [ Update Employee List ](Module-1/18-shared-base-template-and-page-styling.md#step-186) |
 | 187 | Module 1, Chapter 18 | [ Update Create Employee ](Module-1/18-shared-base-template-and-page-styling.md#step-187) |
+| 188 | Module 1, Chapter 18 | [ Fix Form Styling ](Module-1/18-shared-base-template-and-page-styling.md#step-188) |
