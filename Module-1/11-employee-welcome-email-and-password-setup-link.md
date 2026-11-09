@@ -21,6 +21,7 @@ Creating an employee and letting the employee choose a password are separate mom
 - [Step 130: Welcome Email Template](#step-130)
 - [Step 131: Secure Password-Setup Link](#step-131)
 - [Step 132: Send Welcome Email](#step-132)
+- [Step 133: Automatic Welcome Email](#step-133)
 
 ---
 
@@ -331,3 +332,54 @@ Not tested yet at Step 132. For Step 132, the proposed way to check send welcome
 #### Next
 
 [Step 131: Secure Password-Setup Link](#step-131) · [Step 133: Automatic Welcome Email](#step-133)
+
+
+---
+
+<a id="step-133"></a>
+
+### Step 133: Automatic Welcome Email
+
+#### Before this step
+
+An administrator should not have to send the welcome email manually after creating each employee. Immediately before this, Step 132 dealt with send welcome email; the work here continued the same part of the application.
+
+#### What we did and why
+
+The account-creation workflow calls the email helper after saving the account. Saving and sending are two different actions; a later step adds clearer handling if sending fails.
+
+#### Code and commands
+
+**Step 133, block 1.** This code sample or terminal command was used while working on automatic welcome email. The content below remains in its original sequence for Step 133, block 1.
+
+```python
+from .utils import send_welcome_email
+```
+
+**Step 133, block 2.** This code sample or terminal command was used while working on automatic welcome email. The content below remains in its original sequence for Step 133, block 2.
+
+```python
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
+        if not change:
+            send_welcome_email(request, obj)
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 133, automatic welcome email involved `accounts/admin.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `from .utils import send_welcome_email` makes a Python function, class or module available to the code that follows.
+
+**Block 2 (python, 5 lines).** In Step 133, automatic welcome email involved `accounts/admin.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `def save_model(self, request, obj, form, change):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `if not change:` is a condition: the code inside this branch only runs when its condition is satisfied.
+
+#### How we checked it
+
+Not tested yet at Step 133. For Step 133, the proposed way to check automatic welcome email was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 134 before a complete result could be claimed.
+
+#### Next
+
+[Step 132: Send Welcome Email](#step-132) · [Step 134: Link Expiration](#step-134)
