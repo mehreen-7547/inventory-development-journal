@@ -18,6 +18,7 @@ Every person signs in through the same Django login system, but their role helps
 
 - [Step 56: Begin the Accounts module](#step-56)
 - [Step 57: Custom User Model](#step-57)
+- [Step 58: Clarify account creation workflow](#step-58)
 
 ---
 
@@ -113,3 +114,60 @@ Not tested yet at Step 57. For Step 57, the proposed way to check custom user mo
 #### Next
 
 [Step 56: Begin the Accounts module](#step-56) · [Step 58: Clarify account creation workflow](#step-58)
+
+
+---
+
+<a id="step-58"></a>
+
+### Step 58: Clarify account creation workflow
+
+#### Before this step
+
+Before creating database tables, we corrected how employee accounts were supposed to be added and used. Immediately before this, Step 57 dealt with custom user model; the work here continued the same part of the application.
+
+#### What we did and why
+
+This was a decision-checking step. We wanted the account rules clear first so we did not build a login process that contradicted our agreed workflow. It was not a second user model.
+
+#### Code and commands
+
+**Step 58, block 1.** This code sample or terminal command was used while working on clarify account creation workflow. The content below remains in its original sequence for Step 58, block 1.
+
+```powershell
+Set-Location "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic"
+
+python manage.py startapp accounts
+```
+
+**Step 58, block 2.** This output was used while working on clarify account creation workflow. The content below remains in its original sequence for Step 58, block 2.
+
+```text
+accounts/
+    __init__.py
+    admin.py
+    apps.py
+    models.py
+    tests.py
+    views.py
+    migrations/
+        __init__.py
+```
+
+#### How the code works
+
+**Block 1 (powershell, 3 lines).** In Step 58, clarify account creation workflow involved `accounts/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** The command `python manage.py startapp accounts` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 9 lines).** In Step 58, clarify account creation workflow involved `accounts/models.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 58, output block 2 showed the result rather than another command. Its visible value was `accounts/`, which mattered for clarify account creation workflow.
+
+#### How we checked it
+
+Not tested yet at Step 58. For Step 58, the proposed way to check clarify account creation workflow was to revisit `accounts/models.py` and run the corresponding command or feature to see its result. Development continued in Step 59 before a complete result could be claimed.
+
+#### Next
+
+[Step 57: Custom User Model](#step-57) · [Step 59: App Creation](#step-59)
