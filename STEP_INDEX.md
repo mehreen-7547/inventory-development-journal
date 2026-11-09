@@ -126,3 +126,4 @@
 | 122 | Module 1, Chapter 10 | [ Reset Link URL ](Module-1/10-forgot-and-reset-password.md#step-122) |
 | 123 | Module 1, Chapter 10 | [ Password Reset Success Page ](Module-1/10-forgot-and-reset-password.md#step-123) |
 | 124 | Module 1, Chapter 10 | [ Password Reset Complete URL ](Module-1/10-forgot-and-reset-password.md#step-124) |
+| 125 | Module 1, Chapter 10 | [ Fix the password reset URL error ](Module-1/10-forgot-and-reset-password.md#step-125) |

@@ -28,6 +28,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 122: Reset Link URL](#step-122)
 - [Step 123: Password Reset Success Page](#step-123)
 - [Step 124: Password Reset Complete URL](#step-124)
+- [Step 125: Fix the password reset URL error](#step-125)
 
 ---
 
@@ -687,3 +688,92 @@ Not tested yet at Step 124. For Step 124, the proposed way to check password res
 #### Next
 
 [Step 123: Password Reset Success Page](#step-123) · [Step 125: Fix the password reset URL error](#step-125)
+
+
+---
+
+<a id="step-125"></a>
+
+### Step 125: Fix the password reset URL error
+
+#### Before this step
+
+A Django error showed that an option had been given to the wrong part of the reset process. Immediately before this, Step 124 dealt with password reset complete url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The view that sends emails needs email-template settings. The view that merely displays “check your inbox” does not. We moved the option to the part that actually uses it, instead of changing the whole workflow.
+
+#### Code and commands
+
+**Step 125, block 1.** This output was used while working on fix the password reset url error. The content below remains in its original sequence for Step 125, block 1.
+
+```text
+TypeError: PasswordResetDoneView() received an invalid
+keyword 'email_template_name'.
+```
+
+**Step 125, block 2.** This code sample or terminal command was used while working on fix the password reset url error. The content below remains in its original sequence for Step 125, block 2.
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt',
+        subject_template_name='accounts/password_reset_subject.txt'
+    ),
+    name='password_reset'
+),
+
+path(
+    'password-reset/done/',
+    auth_views.PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'
+    ),
+    name='password_reset_done'
+),
+```
+
+**Step 125, block 3.** This code sample or terminal command was used while working on fix the password reset url error. The content below remains in its original sequence for Step 125, block 3.
+
+```powershell
+python manage.py runserver
+```
+
+**Step 125, block 4.** This output was used while working on fix the password reset url error. The content below remains in its original sequence for Step 125, block 4.
+
+```text
+System check identified no issues (0 silenced).
+Starting development server at http://127.0.0.1:8000/
+```
+
+#### How the code works
+
+**Block 1 (text, 2 lines).** In Step 125, fix the password reset url error involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 125, output block 1 showed the result rather than another command. Its visible value was `TypeError: PasswordResetDoneView() received an invalid`, which mattered for fix the password reset url error.
+
+**Block 2 (python, 17 lines).** In Step 125, fix the password reset url error involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset.html',` sets the named value used by the next operation in this file. `email_template_name='accounts/password_reset_email.txt',` sets the named value used by the next operation in this file. `subject_template_name='accounts/password_reset_subject.txt'` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** `name='password_reset'` sets the named value used by the next operation in this file. `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset_done.html'` sets the named value used by the next operation in this file.
+
+**Lines 15–17:** `name='password_reset_done'` sets the named value used by the next operation in this file.
+
+**Block 3 (powershell, 1 lines).** In Step 125, fix the password reset url error involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py runserver` starts Python or one of its tools from the development terminal.
+
+**Block 4 (text, 2 lines).** In Step 125, fix the password reset url error involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 125, output block 4 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for fix the password reset url error.
+
+#### How we checked it
+
+Not tested yet at Step 125. For Step 125, the proposed way to check fix the password reset url error was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Development continued in Step 126 before a complete result could be claimed.
+
+#### Next
+
+[Step 124: Password Reset Complete URL](#step-124) · [Step 126: Consolidate the accounts URL patterns](#step-126)
