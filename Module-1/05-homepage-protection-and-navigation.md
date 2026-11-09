@@ -1,12 +1,40 @@
-# Module 1, Chapter 5: Homepage protection and navigation
+# MODULE 1 — Employee accounts
 
-## Step 83: Protect Homepage
+## Chapter 5: Homepage protection and navigation (Steps 83–85)
 
-#### Next: Allow only logged-in users to access the homepage
+### Before we begin
 
-Currently, someone could open `/` without logging in.
+After login was working, we noticed the homepage still needed proper protection and clearer information about the current user.
 
-Open **`core/views.py`** and update it:
+### What we worked on
+
+We required login for the homepage, showed who was signed in and reviewed what happens when someone already logged in opens the login page.
+
+### Picture it this way
+
+The main lesson is that protecting a page happens in its Django view. Hiding a menu item does not stop someone typing the page's address directly.
+
+### Find a step
+
+- [Step 83: Protect Homepage](#step-83)
+
+---
+
+<a id="step-83"></a>
+
+### Step 83: Protect Homepage
+
+#### Before this step
+
+The login page worked, but someone could still type the homepage address directly without signing in. The preceding step, Step 82, covered logout button, so this was the next part of the development sequence.
+
+#### What we did and why
+
+login_required checks for a signed-in user before allowing the homepage view to run. It closes the shortcut around the login screen: hiding a link would not be enough.
+
+#### Code and commands
+
+**Step 83, block 1.** This code sample or terminal command was used while working on protect homepage. The content below remains in its original sequence for Step 83, block 1.
 
 ```python
 from django.shortcuts import render
@@ -17,88 +45,16 @@ def home(request):
     return render(request, 'core/home.html')
 ```
 
-**What does `@login_required` do?**
+#### How the code works
 
-Before executing `home()`, Django checks whether the visitor is logged in.
+**Block 1 (python, 6 lines).** In Step 83, protect homepage involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-- **Logged in:** Display the homepage.
-- **Not logged in:** Redirect to `/login/`.
+**Lines 1–6:** `from django.shortcuts import render` makes a Python function, class or module available to the code that follows. `from django.contrib.auth.decorators import login_required` makes a Python function, class or module available to the code that follows. `@login_required(login_url='/login/')` adds a check or behaviour around the view before Django runs the view itself. `def home(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
 
-This is called a **decorator**, just like `@require_POST`. It adds a condition to a function.
+#### How we checked it
 
-**Test:** Log out, then manually open `http://127.0.0.1:8000/`. You should be redirected to the login page.
+Not tested yet at Step 83. For Step 83, the proposed way to check protect homepage was to open the related page in the browser and check that the route reached the intended view or template in `core/views.py`. Development continued in Step 84 before a complete result could be claimed.
 
-*Previous: Step 82 (Logout Button)  |  Next: Step 84 (Display User Details)*
+#### Next
 
----
-
-## Step 84: Display User Details
-
-#### Next: Show who is logged in
-
-Open **`core/home.html`**.
-
-Above the Logout button, add:
-
-```html
-<h2>Welcome, {{ request.user.username }}</h2>
-<p>Role: {{ request.user.get_role_display }}</p>
-```
-
-**What this means:**
-
-- `request.user` — the currently logged-in user.
-- `.username` — their username.
-- `.get_role_display` — the readable name of their role, such as *Inventory Manager* instead of `manager`.
-
-**Expected result:** Log in using `manager1`. The homepage should display:
-
-  Welcome, manager1
-  Role: Inventory Manager
-
-This confirms that Django can access the logged-in user's details.
-
-*Previous: Step 83 (Protect Homepage)  |  Next: Step 85 (Login Page Check)*
-
----
-
-## Step 85: Login Page Check
-
-#### Next: Prevent logged-in users from seeing the login page again
-
-Currently, even after logging in, you can manually visit `/login/` and see the login form.
-
-Open **`accounts/views.py`**.
-
-Add these two lines at the beginning of `loginpage()`, before the existing POST check:
-
-```python
-def loginpage(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-```
-
-Keep the remaining code in the function unchanged.
-
-**Explanation:**
-
-- `request.user` — the current visitor.
-- `is_authenticated` — checks whether they're logged in.
-- `redirect('home')` — sends them to the homepage.
-
-  NEW vs CLASS
-  **Where:** `accounts/views.py`
-
-  **Class reference:** `backend/secondproject/library/views.py` uses `@login_required` to protect pages.
-
-  **Difference:** We use `request.user.is_authenticated` to check login status inside a function.
-
-  **Why:** Logged-in users don't need to see the login form again.
-
-  **Alternative:** Leave the login page accessible, as it was previously.
-
-**Test:** While logged in, visit `/login/`. You should automatically return to the homepage.
-
-*Previous: Step 84 (Display User Details)  |  Next: Step 86 (Change Password)*
-
----
+[Step 82: Logout Button](../Module-1/04-logout.md#step-82) · [Step 84: Display User Details](#step-84)

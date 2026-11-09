@@ -84,3 +84,4 @@
 | 80 | Module 1, Chapter 4 | [ Logout Function ](Module-1/04-logout.md#step-80) |
 | 81 | Module 1, Chapter 4 | [ Logout URL ](Module-1/04-logout.md#step-81) |
 | 82 | Module 1, Chapter 4 | [ Logout Button ](Module-1/04-logout.md#step-82) |
+| 83 | Module 1, Chapter 5 | [ Protect Homepage ](Module-1/05-homepage-protection-and-navigation.md#step-83) |
