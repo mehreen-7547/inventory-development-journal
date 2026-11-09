@@ -22,6 +22,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 180: Update Login Page](#step-180)
 - [Step 181: Update Change Password Page](#step-181)
 - [Step 182: Update Forgot Password Page](#step-182)
+- [Step 183: Update Reset Confirmation](#step-183)
 
 ---
 
@@ -566,3 +567,78 @@ Not tested yet at Step 182. For Step 182, the proposed way to check update forgo
 #### Next
 
 [Step 181: Update Change Password Page](#step-181) · [Step 183: Update Reset Confirmation](#step-183)
+
+
+---
+
+<a id="step-183"></a>
+
+### Step 183: Update Reset Confirmation
+
+#### Before this step
+
+The “check your email” screen appeared after a password-reset request, and it also needed the new layout. Immediately before this, Step 182 dealt with update forgot password page; the work here continued the same part of the application.
+
+#### What we did and why
+
+We kept the neutral confirmation message but placed it inside the shared page frame. The page is meant to reassure the requester without revealing whether that email address exists.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Password Reset Requested - Inventory System{% endbloc`; Replace lines around `{% block content %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-7 col-lg-6">`; Replace lines around `<h2 class="mb-4">Check Your Email</h2>`; Replace lines around `<div class="alert alert-info"> / If an active account exists with that email address,`. For Step 183, this comparison used the code block from Step 126, which might not represent the whole file.
+
+**Step 183, block 1.** This code sample or terminal command was used while working on update reset confirmation. The content below remains in its original sequence for Step 183, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Password Reset Requested - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+
+        <h2 class="mb-4">Check Your Email</h2>
+
+        <div class="alert alert-info">
+            If an active account exists with that email address,
+            password reset instructions will be sent.
+        </div>
+
+        <p>
+            Please check your email for the reset link.
+        </p>
+
+        <a href="{% url 'login' %}"
+           class="btn btn-outline-primary mt-2">
+            Back to Login
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 29 lines).** In Step 183, update reset confirmation involved `password_reset_done.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Password Reset Requested - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-7 col-lg-6">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-4">Check Your Email</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<div class="alert alert-info">` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'login' %}"` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 22–28:** `class="btn btn-outline-primary mt-2">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–29:** The lines starting with `{% endblock %}` supply the values or page content for this part of password_reset_done.html. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 183. For Step 183, the proposed way to check update reset confirmation was to revisit `password_reset_done.html` and run the corresponding command or feature to see its result. Development continued in Step 184 before a complete result could be claimed.
+
+#### Next
+
+[Step 182: Update Forgot Password Page](#step-182) · [Step 184: Update Set New Password Page](#step-184)
