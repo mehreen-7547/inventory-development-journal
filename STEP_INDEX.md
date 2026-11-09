@@ -36,3 +36,4 @@
 | 32 | Module 0, Chapter 4 | [ Staging Development Journal Update ](Module-0/04-server-and-admin-account.md#step-32) |
 | 33 | Module 0, Chapter 4 | [ Understand git -C and git add ](Module-0/04-server-and-admin-account.md#step-33) |
 | 34 | Module 0, Chapter 4 | [ Staging Development Journal Update ](Module-0/04-server-and-admin-account.md#step-34) |
+| 35 | Module 0, Chapter 4 | [ Committing Development Journal Update ](Module-0/04-server-and-admin-account.md#step-35) |
