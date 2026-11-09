@@ -28,6 +28,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 186: Update Employee List](#step-186)
 - [Step 187: Update Create Employee](#step-187)
 - [Step 188: Fix Form Styling](#step-188)
+- [Step 189: Add CSS classes to creation form widgets](#step-189)
 
 ---
 
@@ -1125,3 +1126,55 @@ Not tested yet at Step 188. For Step 188, the proposed way to check fix form sty
 #### Next
 
 [Step 187: Update Create Employee](#step-187) · [Step 189: Add CSS classes to creation form widgets](#step-189)
+
+
+---
+
+<a id="step-189"></a>
+
+### Step 189: Add CSS classes to creation form widgets
+
+#### Before this step
+
+The employee creation form had text fields and a role dropdown. We wanted both to use the correct styles without changing what they mean. Immediately before this, Step 188 dealt with fix form styling; the work here continued the same part of the application.
+
+#### What we did and why
+
+When Django builds the form, a small method adds a CSS class to each field. Text inputs get one class and the role dropdown another. This changes appearance, not which roles are allowed or how values are saved.
+
+#### Code and commands
+
+**Step 189, block 1.** This code sample or terminal command was used while working on add css classes to creation form widgets. The content below remains in its original sequence for Step 189, block 1.
+
+```python
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        # Bootstrap styling
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+#### How the code works
+
+**Block 1 (python, 14 lines).** In Step 189, add css classes to creation form widgets involved `accounts/forms.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `def __init__(self, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `self.fields['role'].choices = [` sets the named value used by the next operation in this file.
+
+**Lines 8–14:** The comment `# Bootstrap styling` explains the intention of the following section; it does not execute as application logic. `for name, field in self.fields.items():` repeats the following operation once for each matching item. `if name == 'role':` is a condition: the code inside this branch only runs when its condition is satisfied. `field.widget.attrs['class'] = 'form-select'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 189. For Step 189, the proposed way to check add css classes to creation form widgets was to revisit `accounts/forms.py` and run the corresponding command or feature to see its result. Development continued in Step 190 before a complete result could be claimed.
+
+#### Next
+
+[Step 188: Fix Form Styling](#step-188) · [Step 190: Correct Form Styling](#step-190)
