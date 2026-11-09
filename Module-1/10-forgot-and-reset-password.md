@@ -22,6 +22,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 116: Understand the password reset templates](#step-116)
 - [Step 117: Confirmation Page URL](#step-117)
 - [Step 118: Password Reset Email](#step-118)
+- [Step 119: Connect Email Template](#step-119)
 
 ---
 
@@ -342,3 +343,59 @@ Not tested yet at Step 118. For Step 118, the proposed way to check password res
 #### Next
 
 [Step 117: Confirmation Page URL](#step-117) · [Step 119: Connect Email Template](#step-119)
+
+
+---
+
+<a id="step-119"></a>
+
+### Step 119: Connect Email Template
+
+#### Before this step
+
+We created the email text, but Django would not use it unless we explicitly pointed the reset view to it. Immediately before this, Step 118 dealt with password reset email; the work here continued the same part of the application.
+
+#### What we did and why
+
+The URL configuration names the email template. When Django prepares a reset message, it fills that template with the appropriate reset link.
+
+#### Code and commands
+
+**Step 119, block 1.** This code sample or terminal command was used while working on connect email template. The content below remains in its original sequence for Step 119, block 1.
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt'
+    ),
+    name='password_reset'
+),
+```
+
+**Step 119, block 2.** This code sample or terminal command was used while working on connect email template. The content below remains in its original sequence for Step 119, block 2.
+
+```python
+email_template_name='accounts/password_reset_email.txt'
+```
+
+#### How the code works
+
+**Block 1 (python, 8 lines).** In Step 119, connect email template involved `password_reset_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset.html',` sets the named value used by the next operation in this file. `email_template_name='accounts/password_reset_email.txt'` sets the named value used by the next operation in this file. `name='password_reset'` sets the named value used by the next operation in this file.
+
+**Lines 8–8:** The lines starting with `),` supply the values or page content for this part of password_reset_email.txt. These lines are kept together because their order and indentation matter.
+
+**Block 2 (python, 1 lines).** In Step 119, connect email template involved `password_reset_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `email_template_name='accounts/password_reset_email.txt'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 119. For Step 119, the proposed way to check connect email template was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_email.txt`. Development continued in Step 120 before a complete result could be claimed.
+
+#### Next
+
+[Step 118: Password Reset Email](#step-118) · [Step 120: Connect Email Subject](#step-120)
