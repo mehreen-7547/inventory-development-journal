@@ -25,6 +25,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 183: Update Reset Confirmation](#step-183)
 - [Step 184: Update Set New Password Page](#step-184)
 - [Step 185: Update Reset Complete Page](#step-185)
+- [Step 186: Update Employee List](#step-186)
 
 ---
 
@@ -808,3 +809,189 @@ Not tested yet at Step 185. For Step 185, the proposed way to check update reset
 #### Next
 
 [Step 184: Update Set New Password Page](#step-184) · [Step 186: Update Employee List](#step-186)
+
+
+---
+
+<a id="step-186"></a>
+
+### Step 186: Update Employee List
+
+#### Before this step
+
+The employee list had become the administrator's main account-management screen, so its table and buttons needed a clearer layout. Immediately before this, Step 185 dealt with update reset complete page; the work here continued the same part of the application.
+
+#### What we did and why
+
+We reused the shared template while keeping the employee rows and management actions together. The goal was to make it easy to find a person and understand which action each button performs.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %} / {% load static %}`; Replace lines around `{% block title %}Manage Employees - Inventory System{% endblock %}`; Replace lines around `{% block extra_css %} / <link rel="stylesheet" href="{% static 'accounts/style.css' %}">`; Replace lines around `{% block content %}`. For Step 186, this comparison used the code block from Step 169, which might not represent the whole file.
+
+**Step 186, block 1.** This code sample or terminal command was used while working on update employee list. The content below remains in its original sequence for Step 186, block 1.
+
+```html
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manage Employees - Inventory System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Manage Employees</h2>
+
+<div class="d-flex gap-2 mb-4">
+
+    <a href="{% url 'create_employee' %}"
+       class="btn btn-primary">
+        Add New Employee
+    </a>
+
+    {% if edit_mode %}
+
+        <a href="{% url 'employee_list' %}"
+           class="btn btn-outline-secondary">
+            Cancel Edit
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'employee_list' %}?mode=edit"
+           class="btn btn-outline-primary">
+            Edit Employee
+        </a>
+
+    {% endif %}
+
+</div>
+
+{% if edit_mode %}
+    <p class="text-muted">
+        Select an employee to edit.
+    </p>
+{% endif %}
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-hover align-middle">
+
+        <thead class="table-light">
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for employee in employees %}
+
+            <tr {% if edit_mode %}class="selectable"{% endif %}>
+
+                <td>
+                    {% if edit_mode %}
+                        <a class="row-link"
+                           href="{% url 'edit_employee' employee.id %}">
+                            {{ employee.username }}
+                        </a>
+                    {% else %}
+                        {{ employee.username }}
+                    {% endif %}
+                </td>
+
+                <td>
+                    {{ employee.first_name }}
+                    {{ employee.last_name }}
+                </td>
+
+                <td>{{ employee.email }}</td>
+
+                <td>{{ employee.get_role_display }}</td>
+
+                <td>
+                    {% if employee.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" class="text-center">
+                    No employees found.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<a href="{% url 'home' %}"
+   class="btn btn-outline-secondary mt-3">
+    Back to Home
+</a>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 116 lines).** In Step 186, update employee list involved `employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Manage Employees - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block extra_css %}` marks the part of the page where a child template supplies its own content. The link `<link rel="stylesheet" href="{% static 'accounts/style.css' %}">` lets the user navigate to the named screen from this page.
+
+**Lines 8–14:** `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<h2 class="mb-4">Manage Employees</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<div class="d-flex gap-2 mb-4">` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** `<a href="{% url 'create_employee' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-primary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided.
+
+**Lines 22–28:** `<a href="{% url 'employee_list' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-secondary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** `<a href="{% url 'employee_list' %}?mode=edit"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-primary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–42:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided. The HTML element `<p class="text-muted">` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 43–49:** The HTML element `<div class="table-responsive">` creates or closes part of the page structure seen by the browser. The HTML element `<table class="table table-bordered table-hover align-middle">` creates or closes part of the page structure seen by the browser. The HTML element `<thead class="table-light">` creates or closes part of the page structure seen by the browser.
+
+**Lines 50–56:** The HTML element `<tr>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Username</th>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Name</th>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Email</th>` creates or closes part of the page structure seen by the browser.
+
+**Lines 57–63:** The HTML element `</thead>` creates or closes part of the page structure seen by the browser. The HTML element `<tbody>` creates or closes part of the page structure seen by the browser. `{% for employee in employees %}` repeats the following operation once for each matching item. `<tr {% if edit_mode %}class="selectable"{% endif %}>` decides which HTML is included based on the value Django provided.
+
+**Lines 64–70:** The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided. The HTML element `<a class="row-link"` creates or closes part of the page structure seen by the browser. `href="{% url 'edit_employee' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes.
+
+**Lines 71–77:** The HTML element `</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>` creates or closes part of the page structure seen by the browser.
+
+**Lines 78–84:** The HTML element `</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>{{ employee.email }}</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>{{ employee.get_role_display }}</td>` creates or closes part of the page structure seen by the browser.
+
+**Lines 85–91:** The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if employee.is_active %}` decides which HTML is included based on the value Django provided. The HTML element `<span class="badge bg-success">Active</span>` creates or closes part of the page structure seen by the browser. The HTML element `<span class="badge bg-secondary">Inactive</span>` creates or closes part of the page structure seen by the browser.
+
+**Lines 92–98:** The HTML element `</tr>` creates or closes part of the page structure seen by the browser. The HTML element `<tr>` creates or closes part of the page structure seen by the browser. The HTML element `<td colspan="5" class="text-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 99–105:** The HTML element `</td>` creates or closes part of the page structure seen by the browser. The HTML element `</tr>` creates or closes part of the page structure seen by the browser. The HTML element `</tbody>` creates or closes part of the page structure seen by the browser.
+
+**Lines 106–112:** The HTML element `</table>` creates or closes part of the page structure seen by the browser. The HTML element `</div>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'home' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-outline-secondary mt-3">` sets the named value used by the next operation in this file.
+
+**Lines 113–116:** The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 186. For Step 186, the proposed way to check update employee list was to revisit `employee_list.html` and run the corresponding command or feature to see its result. Development continued in Step 187 before a complete result could be claimed.
+
+#### Next
+
+[Step 185: Update Reset Complete Page](#step-185) · [Step 187: Update Create Employee](#step-187)
