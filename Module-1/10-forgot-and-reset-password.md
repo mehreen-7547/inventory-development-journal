@@ -19,6 +19,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 113: Forgot Password](#step-113)
 - [Step 114: Password Reset URL](#step-114)
 - [Step 115: Password Reset Confirmation](#step-115)
+- [Step 116: Understand the password reset templates](#step-116)
 
 ---
 
@@ -200,3 +201,40 @@ Not tested yet at Step 115. For Step 115, the proposed way to check password res
 #### Next
 
 [Step 114: Password Reset URL](#step-114) · [Step 116: Understand the password reset templates](#step-116)
+
+
+---
+
+<a id="step-116"></a>
+
+### Step 116: Understand the password reset templates
+
+#### Before this step
+
+The password-reset journey uses more than one screen, and their filenames were getting confusing. Immediately before this, Step 115 dealt with password reset confirmation; the work here continued the same part of the application.
+
+#### What we did and why
+
+We mapped the journey in order: enter email, see confirmation, open the link, set a new password, then see completion. Each template has one place in that journey.
+
+#### Code and commands
+
+**Step 116, block 1.** This code sample or terminal command was used while working on understand the password reset templates. The content below remains in its original sequence for Step 116, block 1.
+
+```python
+template_name='accounts/password_reset.html'
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 116, understand the password reset templates involved `login.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `template_name='accounts/password_reset.html'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 116. For Step 116, the proposed way to check understand the password reset templates was to open the related page in the browser and check that the route reached the intended view or template in `login.html`. Development continued in Step 117 before a complete result could be claimed.
+
+#### Next
+
+[Step 115: Password Reset Confirmation](#step-115) · [Step 117: Confirmation Page URL](#step-117)

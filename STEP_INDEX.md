@@ -117,3 +117,4 @@
 | 113 | Module 1, Chapter 10 | [ Forgot Password ](Module-1/10-forgot-and-reset-password.md#step-113) |
 | 114 | Module 1, Chapter 10 | [ Password Reset URL ](Module-1/10-forgot-and-reset-password.md#step-114) |
 | 115 | Module 1, Chapter 10 | [ Password Reset Confirmation ](Module-1/10-forgot-and-reset-password.md#step-115) |
+| 116 | Module 1, Chapter 10 | [ Understand the password reset templates ](Module-1/10-forgot-and-reset-password.md#step-116) |
