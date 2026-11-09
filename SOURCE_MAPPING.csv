@@ -246,3 +246,7 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 245,,,2,Supplier setup and list,Create the Supplier List template
 246,,,2,Supplier setup and list,Connect the Supplier URL
 247,,,2,Supplier setup and list,Diagnose the missing SQLite table and verify the page
+248,,387,2,Create Supplier,Create the Manager-only Supplier Create view
+249,,388,2,Create Supplier,Create the Add Supplier HTML form
+250,,389,2,Create Supplier,Register the Add Supplier URL and test saving
+251,,390,2,Create Supplier,Add the Add Supplier link to the list page
