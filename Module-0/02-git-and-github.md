@@ -32,6 +32,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 20: Push your journal to private GitHub](#step-20)
 - [Step 21: Understand local and remote main branches](#step-21)
 - [Step 22: Apply database migrations](#step-22)
+- [Step 23: Update your private development journal](#step-23)
 
 ---
 
@@ -842,3 +843,87 @@ For Step 22 (Apply database migrations), we compared the visible terminal output
 #### Next
 
 [Step 21: Understand local and remote main branches](#step-21) · [Step 23: Update your private development journal](#step-23)
+
+
+---
+
+<a id="step-23"></a>
+
+### Step 23: Update your private development journal
+
+#### Before this step
+
+We had created the starting database tables. We wanted the learning notes to record that important point. Immediately before this, Step 22 dealt with apply database migrations; the work here continued the same part of the application.
+
+#### What we did and why
+
+This did not change Django code. It updated the journal so that a future reader could see when the database was initialized and how the result was checked.
+
+#### Code and commands
+
+**Step 23, block 1.** This code sample or terminal command was used while working on update your private development journal. The content below remains in its original sequence for Step 23, block 1.
+
+```powershell
+Add-Content -Path "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Value @'
+
+## Django Database Initialization — Initial Migrations
+
+### Objective
+Initialize Django's built-in database tables using SQLite.
+
+### Commands executed
+1. python manage.py showmigrations
+2. python manage.py migrate
+3. python manage.py showmigrations
+
+### Results
+- Initially, all 18 migrations were unapplied [ ].
+- The migrate command completed successfully.
+- Verification confirmed all 18 migrations applied [X].
+- Applications: admin, auth, contenttypes, sessions.
+
+### What I learned
+- A migration defines a database structure change.
+- migrate applies pending migrations to the database.
+- showmigrations displays which migrations have been applied.
+- [X] means applied; [ ] means pending.
+
+### Errors
+None.
+
+### Revision question
+What is the difference between makemigrations and migrate?
+'@
+```
+
+**Step 23, block 2.** This code sample or terminal command was used while working on update your private development journal. The content below remains in its original sequence for Step 23, block 2.
+
+```powershell
+Get-Content "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal\inventory-development-journal.md" -Tail 25
+```
+
+#### How the code works
+
+**Block 1 (powershell, 30 lines).** In Step 23, update your private development journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The comment `## Django Database Initialization — Initial Migrations` explains the intention of the following section; it does not execute as application logic. The comment `### Objective` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 8–14:** The comment `### Commands executed` explains the intention of the following section; it does not execute as application logic. The command `1. python manage.py showmigrations` starts Python or one of its tools from the development terminal. The command `2. python manage.py migrate` starts Python or one of its tools from the development terminal. The command `3. python manage.py showmigrations` starts Python or one of its tools from the development terminal.
+
+**Lines 15–21:** The comment `### What I learned` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 22–28:** The comment `### Errors` explains the intention of the following section; it does not execute as application logic. The comment `### Revision question` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 29–30:** The lines starting with `What is the difference between makemigrations and migrate?` supply the values or page content for this part of inventory-development-journal.md. These lines are kept together because their order and indentation matter.
+
+**Block 2 (powershell, 1 lines).** In Step 23, update your private development journal involved `inventory-development-journal.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Get-Content "C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journa` supply the values or page content for this part of inventory-development-journal.md. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 23. For Step 23, the proposed way to check update your private development journal was to revisit `inventory-development-journal.md` and run the corresponding command or feature to see its result. Development continued in Step 24 before a complete result could be claimed.
+
+#### Next
+
+[Step 22: Apply database migrations](#step-22) · [Step 24: Stage the updated journal](#step-24)
