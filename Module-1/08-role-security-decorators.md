@@ -22,6 +22,7 @@ A decorator is a guard placed in front of a Django view. It checks who is asking
 - [Step 103: Apply Role Security](#step-103)
 - [Step 104: Test Role Restrictions](#step-104)
 - [Step 105: Review the role decorator](#step-105)
+- [Step 106: Apply Role Security](#step-106)
 
 ---
 
@@ -500,3 +501,48 @@ Not tested yet at Step 105. For Step 105, the proposed way to check review the r
 #### Next
 
 [Step 104: Test Role Restrictions](#step-104) · [Step 106: Apply Role Security](#step-106)
+
+
+---
+
+<a id="step-106"></a>
+
+### Step 106: Apply Role Security
+
+#### Before this step
+
+One working homepage version still checked only whether a person was signed in. That was too broad for the latest rules. Immediately before this, Step 105 dealt with review the role decorator; the work here continued the same part of the application.
+
+#### What we did and why
+
+We replaced the login-only check with the role-aware decorator where required. Being signed in answers who you are; role permission answers whether you may use this page.
+
+#### Code and commands
+
+**Earlier version for Step 106:** No complete preceding version of `core/views.py` was available for line-by-line comparison. The changes shown here therefore need manual comparison with the working file.
+
+**Step 106, block 1.** This code sample or terminal command was used while working on apply role security. The content below remains in its original sequence for Step 106, block 1.
+
+```python
+from django.shortcuts import render
+from accounts.decorators import role_required
+
+
+@role_required('admin', 'manager', 'sales')
+def home(request):
+    return render(request, 'core/home.html')
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 106, apply role security involved `core/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django.shortcuts import render` makes a Python function, class or module available to the code that follows. `from accounts.decorators import role_required` makes a Python function, class or module available to the code that follows. `@role_required('admin', 'manager', 'sales')` adds a check or behaviour around the view before Django runs the view itself. `def home(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called.
+
+#### How we checked it
+
+Not tested yet at Step 106. For Step 106, the proposed way to check apply role security was to revisit `core/views.py` and run the corresponding command or feature to see its result. Development continued in Step 107 before a complete result could be claimed.
+
+#### Next
+
+[Step 105: Review the role decorator](#step-105) · [Step 107: Test Role Security](#step-107)

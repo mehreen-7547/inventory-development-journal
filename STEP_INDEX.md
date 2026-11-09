@@ -107,3 +107,4 @@
 | 103 | Module 1, Chapter 8 | [ Apply Role Security ](Module-1/08-role-security-decorators.md#step-103) |
 | 104 | Module 1, Chapter 8 | [ Test Role Restrictions ](Module-1/08-role-security-decorators.md#step-104) |
 | 105 | Module 1, Chapter 8 | [ Review the role decorator ](Module-1/08-role-security-decorators.md#step-105) |
+| 106 | Module 1, Chapter 8 | [ Apply Role Security ](Module-1/08-role-security-decorators.md#step-106) |
