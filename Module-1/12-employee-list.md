@@ -18,6 +18,7 @@ Think of the employee list as the starting screen for account management. At thi
 
 - [Step 136: Employee Management](#step-136)
 - [Step 137: Employee List Template](#step-137)
+- [Step 138: Employee List URL](#step-138)
 
 ---
 
@@ -169,3 +170,49 @@ Not tested yet at Step 137. For Step 137, the proposed way to check employee lis
 #### Next
 
 [Step 136: Employee Management](#step-136) · [Step 138: Employee List URL](#step-138)
+
+
+---
+
+<a id="step-138"></a>
+
+### Step 138: Employee List URL
+
+#### Before this step
+
+The list view and page existed, but an administrator needed a URL to open them. Immediately before this, Step 137 dealt with employee list template; the work here continued the same part of the application.
+
+#### What we did and why
+
+Adding the named employee-list route makes the page available and gives other pages a stable link back to it.
+
+#### Code and commands
+
+**Step 138, block 1.** This code sample or terminal command was used while working on employee list url. The content below remains in its original sequence for Step 138, block 1.
+
+```python
+path(
+    'employees/',
+    views.employee_list,
+    name='employee_list'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 5 lines).** In Step 138, employee list url involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** `path(` begins a URL rule connecting a browser address with the function that answers it. `name='employee_list'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 138. For Step 138, the proposed way to check employee list url was to open the related page in the browser and check that the route reached the intended view or template in `accounts/urls.py`. Step 138 did not establish a successful outcome for employee list url.
+
+#### Next
+
+[Step 137: Employee List Template](#step-137) · [Step 139: Create Employee View](../Module-1/13-create-employee.md#step-139)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **employee list** was needed at this point, and describe what the application did differently after the final step of this chapter.

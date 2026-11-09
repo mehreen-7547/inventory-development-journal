@@ -139,3 +139,4 @@
 | 135 | Module 1, Chapter 11 | [ Resend Setup Link ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-135) |
 | 136 | Module 1, Chapter 12 | [ Employee Management ](Module-1/12-employee-list.md#step-136) |
 | 137 | Module 1, Chapter 12 | [ Employee List Template ](Module-1/12-employee-list.md#step-137) |
+| 138 | Module 1, Chapter 12 | [ Employee List URL ](Module-1/12-employee-list.md#step-138) |
