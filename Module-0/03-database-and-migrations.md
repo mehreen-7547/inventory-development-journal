@@ -18,6 +18,7 @@ The key difference is between a database change and a journal update. Writing no
 
 - [Step 25: Committing Development Journal Update](#step-25)
 - [Step 26: Clarify the journal commit](#step-26)
+- [Step 27: Pushing Development Journal to GitHub](#step-27)
 
 ---
 
@@ -91,3 +92,60 @@ Not tested yet at Step 26. For Step 26, the proposed way to check clarify the jo
 #### Next
 
 [Step 25: Committing Development Journal Update](#step-25) · [Step 27: Pushing Development Journal to GitHub](#step-27)
+
+
+---
+
+<a id="step-27"></a>
+
+### Step 27: Pushing Development Journal to GitHub
+
+#### Before this step
+
+The latest journal commit still existed only locally. Immediately before this, Step 26 dealt with clarify the journal commit; the work here continued the same part of the application.
+
+#### What we did and why
+
+This push uploaded that saved milestone to the private repository. The application and database were not moved by this command; only the Git history of the journal was sent.
+
+#### Code and commands
+
+**Step 27, block 1.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 27, block 1.
+
+```powershell
+git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push
+```
+
+**Step 27, block 2.** This code sample or terminal command was used while working on pushing development journal to github. The content below remains in its original sequence for Step 27, block 2.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+**Step 27, block 3.** This output was used while working on pushing development journal to github. The content below remains in its original sequence for Step 27, block 3.
+
+```text
+Starting development server at http://127.0.0.1:8000/
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 27, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C C:\Users\YOUR_WINDOWS_USERNAME\projects2026\inventory-development-journal push` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (powershell, 1 lines).** In Step 27, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
+
+**Block 3 (text, 1 lines).** In Step 27, pushing development journal to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 27, output block 3 showed the result rather than another command. Its visible value was `Starting development server at http://127.0.0.1:8000/`, which mattered for pushing development journal to github.
+
+#### How we checked it
+
+Not tested yet at Step 27. For Step 27, the proposed way to check pushing development journal to github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 28 before a complete result could be claimed.
+
+#### Next
+
+[Step 26: Clarify the journal commit](#step-26) · [Step 28: Understanding the Migration Workflow](#step-28)
