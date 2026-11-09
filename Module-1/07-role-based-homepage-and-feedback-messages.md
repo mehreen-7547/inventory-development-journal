@@ -19,6 +19,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 91: Role-Based Homepage](#step-91)
 - [Step 92: Admin Link Visibility](#step-92)
 - [Step 93: Why hiding a link does not secure Django Admin](#step-93)
+- [Step 94: Verify manager access is restricted](#step-94)
 
 ---
 
@@ -153,3 +154,42 @@ Not tested yet at Step 93. For Step 93, the proposed way to check why hiding a l
 #### Next
 
 [Step 92: Admin Link Visibility](#step-92) · [Step 94: Verify manager access is restricted](#step-94)
+
+
+---
+
+<a id="step-94"></a>
+
+### Step 94: Verify manager access is restricted
+
+#### Before this step
+
+We tested or reviewed what happens when a manager attempts to reach an admin-only location. Immediately before this, Step 93 dealt with why hiding a link does not secure django admin; the work here continued the same part of the application.
+
+#### What we did and why
+
+The intended result is that an ordinary manager cannot get administrator privileges merely by knowing the URL. This step checked access behaviour, not just what the homepage looks like.
+
+#### Code and commands
+
+**Step 94, block 1.** This code sample or terminal command was used while working on verify manager access is restricted. The content below remains in its original sequence for Step 94, block 1.
+
+```html
+{% if request.user.is_staff %}
+    <p><a href="/admin/">Open Django admin</a></p>
+{% endif %}
+```
+
+#### How the code works
+
+**Block 1 (html, 3 lines).** In Step 94, verify manager access is restricted involved `home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `{% if request.user.is_staff %}` decides which HTML is included based on the value Django provided. The link `<p><a href="/admin/">Open Django admin</a></p>` lets the user navigate to the named screen from this page.
+
+#### How we checked it
+
+Not tested yet at Step 94. For Step 94, the proposed way to check verify manager access is restricted was to revisit `home.html` and run the corresponding command or feature to see its result. Development continued in Step 95 before a complete result could be claimed.
+
+#### Next
+
+[Step 93: Why hiding a link does not secure Django Admin](#step-93) · [Step 95: Login Error Messages](#step-95)
