@@ -17,6 +17,7 @@ There are several small pages because each has a different job. Django's built-i
 ### Find a step
 
 - [Step 113: Forgot Password](#step-113)
+- [Step 114: Password Reset URL](#step-114)
 
 ---
 
@@ -81,3 +82,56 @@ Not tested yet at Step 113. For Step 113, the proposed way to check forgot passw
 #### Next
 
 [Step 112: Email Configuration](../Module-1/09-email-validation-and-email-setup.md#step-112) · [Step 114: Password Reset URL](#step-114)
+
+
+---
+
+<a id="step-114"></a>
+
+### Step 114: Password Reset URL
+
+#### Before this step
+
+The forgot-password form needed a web address and a Django view to handle its submission. Immediately before this, Step 113 dealt with forgot password; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django provides a ready-made password-reset view. We connected it to our template, so the form can ask Django to prepare a reset email when submitted.
+
+#### Code and commands
+
+**Step 114, block 1.** This code sample or terminal command was used while working on password reset url. The content below remains in its original sequence for Step 114, block 1.
+
+```python
+from django.contrib.auth import views as auth_views
+```
+
+**Step 114, block 2.** This code sample or terminal command was used while working on password reset url. The content below remains in its original sequence for Step 114, block 2.
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html'
+    ),
+    name='password_reset'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 114, password reset url involved `password_reset.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `from django.contrib.auth import views as auth_views` makes a Python function, class or module available to the code that follows.
+
+**Block 2 (python, 7 lines).** In Step 114, password reset url involved `password_reset.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset.html'` sets the named value used by the next operation in this file. `name='password_reset'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 114. For Step 114, the proposed way to check password reset url was to open the related page in the browser and check that the route reached the intended view or template in `password_reset.html`. Development continued in Step 115 before a complete result could be claimed.
+
+#### Next
+
+[Step 113: Forgot Password](#step-113) · [Step 115: Password Reset Confirmation](#step-115)

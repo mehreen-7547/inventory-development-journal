@@ -115,3 +115,4 @@
 | 111 | Module 1, Chapter 9 | [ Apply Migration ](Module-1/09-email-validation-and-email-setup.md#step-111) |
 | 112 | Module 1, Chapter 9 | [ Email Configuration ](Module-1/09-email-validation-and-email-setup.md#step-112) |
 | 113 | Module 1, Chapter 10 | [ Forgot Password ](Module-1/10-forgot-and-reset-password.md#step-113) |
+| 114 | Module 1, Chapter 10 | [ Password Reset URL ](Module-1/10-forgot-and-reset-password.md#step-114) |
