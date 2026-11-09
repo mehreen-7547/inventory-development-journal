@@ -21,6 +21,7 @@ A Git commit is a saved version on the laptop. A Git push sends that saved versi
 - [Step 9: Create our first Git commit](#step-9)
 - [Step 10: Connect your local project to GitHub](#step-10)
 - [Step 11: Connect your local project to GitHub](#step-11)
+- [Step 12: Push your first commit to GitHub](#step-12)
 
 ---
 
@@ -286,3 +287,40 @@ Not tested yet at Step 11. For Step 11, the proposed way to check connect your l
 #### Next
 
 [Step 10: Connect your local project to GitHub](#step-10) · [Step 12: Push your first commit to GitHub](#step-12)
+
+
+---
+
+<a id="step-12"></a>
+
+### Step 12: Push your first commit to GitHub
+
+#### Before this step
+
+Our first project commit existed only on the laptop. We wanted a copy on GitHub as well. Immediately before this, Step 11 dealt with connect your local project to github; the work here continued the same part of the application.
+
+#### What we did and why
+
+git push sends local commits to the connected GitHub repository. This is different from committing: commit saves a version locally; push uploads it.
+
+#### Code and commands
+
+**Step 12, block 1.** This code sample or terminal command was used while working on push your first commit to github. The content below remains in its original sequence for Step 12, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic push -u origin main
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 12, push your first commit to github involved `VS Code terminal / project setup`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic push -u origin main` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 12. For Step 12, the proposed way to check push your first commit to github was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 13 before a complete result could be claimed.
+
+#### Next
+
+[Step 11: Connect your local project to GitHub](#step-11) · [Step 13: Create a separate local journal folder](#step-13)

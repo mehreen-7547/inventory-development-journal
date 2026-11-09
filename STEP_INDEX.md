@@ -13,3 +13,4 @@
 | 9 | Module 0, Chapter 2 | [ Create our first Git commit ](Module-0/02-git-and-github.md#step-9) |
 | 10 | Module 0, Chapter 2 | [ Connect your local project to GitHub ](Module-0/02-git-and-github.md#step-10) |
 | 11 | Module 0, Chapter 2 | [ Connect your local project to GitHub ](Module-0/02-git-and-github.md#step-11) |
+| 12 | Module 0, Chapter 2 | [ Push your first commit to GitHub ](Module-0/02-git-and-github.md#step-12) |
