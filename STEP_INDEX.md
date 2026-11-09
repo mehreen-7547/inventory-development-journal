@@ -45,3 +45,4 @@
 | 41 | Module 0, Chapter 5 | [ Record and Push Test Results ](Module-0/05-security-checks.md#step-41) |
 | 42 | Module 0, Chapter 6 | [ Installing PyTorch ](Module-0/06-ai-forecasting-feasibility-test.md#step-42) |
 | 43 | Module 0, Chapter 6 | [ Understanding python -m ](Module-0/06-ai-forecasting-feasibility-test.md#step-43) |
+| 44 | Module 0, Chapter 6 | [ Installing AI Dependencies ](Module-0/06-ai-forecasting-feasibility-test.md#step-44) |
