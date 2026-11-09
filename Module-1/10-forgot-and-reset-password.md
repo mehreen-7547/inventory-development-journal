@@ -20,6 +20,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 114: Password Reset URL](#step-114)
 - [Step 115: Password Reset Confirmation](#step-115)
 - [Step 116: Understand the password reset templates](#step-116)
+- [Step 117: Confirmation Page URL](#step-117)
 
 ---
 
@@ -238,3 +239,46 @@ Not tested yet at Step 116. For Step 116, the proposed way to check understand t
 #### Next
 
 [Step 115: Password Reset Confirmation](#step-115) · [Step 117: Confirmation Page URL](#step-117)
+
+
+---
+
+<a id="step-117"></a>
+
+### Step 117: Confirmation Page URL
+
+#### Before this step
+
+The password-reset view needed to know which page to show after the email request. Immediately before this, Step 116 dealt with understand the password reset templates; the work here continued the same part of the application.
+
+#### What we did and why
+
+We connected the confirmation URL as the next destination. Otherwise users could submit the form but end up on the wrong page or encounter a missing link.
+
+#### Code and commands
+
+**Step 117, block 1.** This code sample or terminal command was used while working on confirmation page url. The content below remains in its original sequence for Step 117, block 1.
+
+```python
+path(
+    'password-reset/done/',
+    auth_views.PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'
+    ),
+    name='password_reset_done'
+),
+```
+
+#### How the code works
+
+**Block 1 (python, 7 lines).** In Step 117, confirmation page url involved `password_reset_done.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset_done.html'` sets the named value used by the next operation in this file. `name='password_reset_done'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 117. For Step 117, the proposed way to check confirmation page url was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_done.html`. Development continued in Step 118 before a complete result could be claimed.
+
+#### Next
+
+[Step 116: Understand the password reset templates](#step-116) · [Step 118: Password Reset Email](#step-118)
