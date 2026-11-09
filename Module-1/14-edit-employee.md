@@ -25,6 +25,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 151: Edit Mode Button](#step-151)
 - [Step 152: Select Employee](#step-152)
 - [Step 153: Combine the list and selection controls](#step-153)
+- [Step 154: External CSS](#step-154)
 
 ---
 
@@ -755,3 +756,79 @@ Not tested yet at Step 153. For Step 153, the proposed way to check combine the 
 #### Next
 
 [Step 152: Select Employee](#step-152) · [Step 154: External CSS](#step-154)
+
+
+---
+
+<a id="step-154"></a>
+
+### Step 154: External CSS
+
+#### Before this step
+
+The HTML was becoming cluttered with styling instructions mixed into the page structure. Immediately before this, Step 153 dealt with combine the list and selection controls; the work here continued the same part of the application.
+
+#### What we did and why
+
+We moved the appearance rules into a CSS file. CSS decides how a page looks; the HTML still describes its content and controls.
+
+#### Code and commands
+
+**Step 154, block 1.** This code sample or terminal command was used while working on external css. The content below remains in its original sequence for Step 154, block 1.
+
+```css
+.selectable {
+    position: relative;
+    cursor: pointer;
+}
+
+.selectable:hover {
+    background-color: #eeeeee;
+}
+
+.row-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+```
+
+**Step 154, block 2.** This code sample or terminal command was used while working on external css. The content below remains in its original sequence for Step 154, block 2.
+
+```django
+{% load static %}
+```
+
+**Step 154, block 3.** This code sample or terminal command was used while working on external css. The content below remains in its original sequence for Step 154, block 3.
+
+```html
+<head>
+    <title>Manage Employees</title>
+    <link rel="stylesheet"
+          href="{% static 'accounts/style.css' %}">
+</head>
+```
+
+#### How the code works
+
+**Block 1 (css, 14 lines).** In Step 154, external css involved `style.css`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The lines starting with `.selectable {` supply the values or page content for this part of style.css. These lines are kept together because their order and indentation matter.
+
+**Lines 8–14:** The lines starting with `}` supply the values or page content for this part of style.css. These lines are kept together because their order and indentation matter.
+
+**Block 2 (django, 1 lines).** In Step 154, external css involved `style.css`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `{% load static %}` supply the values or page content for this part of style.css. These lines are kept together because their order and indentation matter.
+
+**Block 3 (html, 5 lines).** In Step 154, external css involved `style.css`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–5:** The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Manage Employees</title>` creates or closes part of the page structure seen by the browser. The HTML element `<link rel="stylesheet"` creates or closes part of the page structure seen by the browser. The link `href="{% static 'accounts/style.css' %}">` lets the user navigate to the named screen from this page.
+
+#### How we checked it
+
+Not tested yet at Step 154. For Step 154, the proposed way to check external css was to revisit `style.css` and run the corresponding command or feature to see its result. Development continued in Step 155 before a complete result could be claimed.
+
+#### Next
+
+[Step 153: Combine the list and selection controls](#step-153) · [Step 155: Fix Row Selection](#step-155)
