@@ -52,3 +52,4 @@
 | 48 | Module 0, Chapter 7 | [ Commit Documentation ](Module-0/07-module-0-completion.md#step-48) |
 | 49 | Module 0, Chapter 7 | [ Push Documentation ](Module-0/07-module-0-completion.md#step-49) |
 | 50 | Module 0, Chapter 7 | [ Finalize Report ](Module-0/07-module-0-completion.md#step-50) |
+| 51 | Module 0, Chapter 7 | [ Finalize README ](Module-0/07-module-0-completion.md#step-51) |
