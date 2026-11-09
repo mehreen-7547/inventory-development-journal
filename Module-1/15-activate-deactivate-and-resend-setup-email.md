@@ -1,26 +1,46 @@
-# Module 1, Chapter 15: Activate, deactivate and resend setup email
+# MODULE 1 — Employee accounts
 
-## Step 157: Employee Deactivation
+## Chapter 15: Activate, deactivate and resend setup email (Steps 157–164)
 
-#### Next: Create the Deactivate/Reactivate Employee view
+### Before we begin
 
-Employee selection and editing are working.
+Sometimes an employee leaves or needs another password-setup email. Deleting the employee is not a good answer because it removes useful history.
 
-Now we'll allow administrators to **deactivate employees who leave the company**, without deleting their accounts or historical records.
+### What we worked on
 
-We'll eventually add a Deactivate/Reactivate button to the existing Edit Employee page.
+We added an active/inactive switch, a button to request another setup email and links to reach these actions.
 
-#### Step 1: Add the view
+### Picture it this way
 
-Open **`accounts/views.py`**.
+Deactivation leaves the account record in the database but prevents normal sign-in. Resending an email reuses the existing employee, after checking whether another setup message is appropriate.
 
-Add this import:
+### Find a step
+
+- [Step 157: Employee Deactivation](#step-157)
+
+---
+
+<a id="step-157"></a>
+
+### Step 157: Employee Deactivation
+
+#### Before this step
+
+We needed to stop a former employee from signing in without deleting their account and losing their past activity history. The preceding step, Step 156, covered correct employee row selection, so this was the next part of the development sequence.
+
+#### What we did and why
+
+The is_active field is a yes/no value on the user record. Changing it to false disables normal login while leaving the employee row in the database. Changing it back can reactivate the same account.
+
+#### Code and commands
+
+**Step 157, block 1.** This code sample or terminal command was used while working on employee deactivation. The content below remains in its original sequence for Step 157, block 1.
 
 ```python
 from django.views.decorators.http import require_POST
 ```
 
-Then add this function at the bottom:
+**Step 157, block 2.** This code sample or terminal command was used while working on employee deactivation. The content below remains in its original sequence for Step 157, block 2.
 
 ```python
 @role_required('admin')
@@ -50,406 +70,26 @@ def toggle_employee_status(request, employee_id):
     return redirect('employee_list')
 ```
 
-#### What happens?
+#### How the code works
 
-| Action | Result |
-|---|---|
-| Deactivate | Employee cannot log in |
-| Reactivate | Employee can log in again using their existing password |
-| Either action | Employee record remains in the database |
+**Block 1 (python, 1 lines).** In Step 157, employee deactivation involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  **NEW vs CLASS — `@require_POST`**
+**Lines 1–1:** `from django.views.decorators.http import require_POST` makes a Python function, class or module available to the code that follows.
 
-  This decorator ensures the view accepts only POST requests.
+**Block 2 (python, 25 lines).** In Step 157, employee deactivation involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  Changing an employee's account status is a database operation, so it should not happen simply by opening a URL.
+**Lines 1–7:** `@role_required('admin')` adds a check or behaviour around the view before Django runs the view itself. `@require_POST` adds a check or behaviour around the view before Django runs the view itself. `def toggle_employee_status(request, employee_id):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `employee = get_object_or_404(` sets the named value used by the next operation in this file.
 
-**Save `views.py`.** No browser testing yet.
+**Lines 8–14:** `role__in=['manager', 'sales']` sets the named value used by the next operation in this file. `employee.is_active = not employee.is_active` sets the named value used by the next operation in this file. `employee.save(update_fields=['is_active'])` sets the named value used by the next operation in this file. `if employee.is_active:` is a condition: the code inside this branch only runs when its condition is satisfied.
 
-Next, we'll add the URL for this view.
+**Lines 15–21:** `messages.success(` prepares feedback that can appear when the user reaches the next page. The `else` branch handles the alternative case when the preceding condition was not satisfied.
 
-*Previous: Step 156 (Change employee_list.html)  |  Next: Step 158 (Employee Status URL)*
+**Lines 22–25:** `return redirect('employee_list')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
 
----
+#### How we checked it
 
-## Step 158: Employee Status URL
+Not tested yet at Step 157. For Step 157, the proposed way to check employee deactivation was to revisit `accounts/views.py` and run the corresponding command or feature to see its result. Development continued in Step 158 before a complete result could be claimed.
 
-#### Next: Connect the Deactivate/Reactivate view
+#### Next
 
-We've created `toggle_employee_status()` in `accounts/views.py`.
-
-Now we'll add a URL that connects to it.
-
-Open **`accounts/urls.py`**.
-
-Add this inside the existing `urlpatterns` list:
-
-```python
-path(
-    'employees/status/<int:employee_id>/',
-    views.toggle_employee_status,
-    name='toggle_employee_status'
-),
-```
-
-#### How does this work?
-
-For example:
-
-`/employees/status/3/`
-
-Django passes employee ID `3` to `toggle_employee_status()`.
-
-The view then changes the employee's status:
-
-      **Active**
-      Can log in
-
-      **Inactive**
-      Cannot log in
-
-**Important:** This URL accepts only POST requests because we used `@require_POST`. Opening it directly in the browser will return HTTP 405 (Method Not Allowed). That is expected.
-
-Save `accounts/urls.py`.
-
-Next, we'll add the **Deactivate/Reactivate** button to `edit_employee.html`.
-
-*Previous: Step 157 (Employee Deactivation)  |  Next: Step 159 (Deactivate/Reactivate Button)*
-
----
-
-## Step 159: Deactivate/Reactivate Button
-
-#### Next: Add the Deactivate/Reactivate button
-
-We've created the view and URL. Now we'll connect them to the Edit Employee page.
-
-Open **`templates/accounts/edit_employee.html`**.
-
-Find the existing **Save Changes** form's closing tag:
-
-```html
-</form>
-```
-
-Immediately **below it**, add:
-
-```html
-<form method="POST"
-      action="{% url 'toggle_employee_status' employee.id %}">
-
-    {% csrf_token %}
-
-    {% if employee.is_active %}
-
-        <button type="submit">
-            Deactivate Employee
-        </button>
-
-    {% else %}
-
-        <button type="submit">
-            Reactivate Employee
-        </button>
-
-    {% endif %}
-
-</form>
-```
-
-#### Expected result
-
-  {@body const [active,setActive] = DIL.useState(true)}
-  Edit Employee
-  Username: sales1
-
-  Save Changes
-  setActive(!active)}>{active?"Deactivate Employee":"Reactivate Employee"}
-  Interactive illustration only. Click to preview both states.
-
-  **NEW vs CLASS — `action` attribute**
-
-  The HTML form's `action` specifies which URL receives the submitted data.
-
-  Here, the button sends a POST request to our `toggle_employee_status()` view.
-
-**Important:** Keep this as a separate form, outside the existing Save Changes form.
-
-Save the file. Next, we'll test deactivation, login restrictions and reactivation.
-
-*Previous: Step 158 (Employee Status URL)  |  Next: Step 160 (Resend Setup Email)*
-
----
-
-## Step 160: Resend Setup Email
-
-#### Next: Create the Resend Password Setup Email view
-
-Employee deactivation and reactivation tests passed.
-
-Now we'll allow administrators to resend the welcome email when a new employee hasn't completed their password setup.
-
-#### Step 1: Add the view
-
-Open **`accounts/views.py`**.
-
-Add this function at the bottom:
-
-```python
-@role_required('admin')
-@require_POST
-def resend_setup_email(request, employee_id):
-
-    employee = get_object_or_404(
-        CustomUser,
-        id=employee_id,
-        role__in=['manager', 'sales']
-    )
-
-    if not employee.is_active:
-        messages.error(
-            request,
-            'Cannot send setup email to an inactive employee.'
-        )
-
-    elif employee.has_usable_password():
-        messages.error(
-            request,
-            'Employee has already set a password.'
-        )
-
-    else:
-        send_welcome_email(request, employee)
-
-        messages.success(
-            request,
-            'Password setup email generated successfully.'
-        )
-
-    return redirect('employee_list')
-```
-
-#### How does it work?
-
-| Employee condition | Result |
-|---|---|
-| Active, password not set | Resend setup email |
-| Active, password already set | Reject; use password reset instead |
-| Inactive | Reject |
-
-We're reusing the existing `send_welcome_email()` function. Since our email backend is currently configured for console output, the email will appear in the VS Code terminal.
-
-**Save `views.py`.** No browser testing yet.
-
-Next, we'll connect the URL and then add a Resend Setup Email button to the employee interface.
-
-*Previous: Step 159 (Deactivate/Reactivate Button)  |  Next: Step 161 (Resend Setup Email URL)*
-
----
-
-## Step 161: Resend Setup Email URL
-
-#### Next: Connect the Resend Setup Email view
-
-We've created `resend_setup_email()` in `accounts/views.py`.
-
-Now we'll connect it to a URL.
-
-Open **`accounts/urls.py`**.
-
-Add this inside the existing `urlpatterns` list:
-
-```python
-path(
-    'employees/resend-setup/<int:employee_id>/',
-    views.resend_setup_email,
-    name='resend_setup_email'
-),
-```
-
-#### How does it work?
-
-For example:
-
-`/employees/resend-setup/3/`
-
-This URL identifies employee ID `3` and connects to our `resend_setup_email()` view.
-
-Like the Deactivate/Reactivate operation, it accepts **POST requests only**.
-
-Opening the URL directly in a browser should return HTTP 405. This is expected.
-
-**Save `accounts/urls.py`.**
-
-Next, we'll add the **Resend Setup Email** button to the Edit Employee page. It will appear only for active employees who haven't set a password.
-
-*Previous: Step 160 (Resend Setup Email)  |  Next: Step 162 (Resend Setup Email Button)*
-
----
-
-## Step 162: Resend Setup Email Button
-
-#### Next: Add the Resend Setup Email button
-
-We've created the view and URL. Now we'll add the button to the employee editing page.
-
-Open **`templates/accounts/edit_employee.html`**.
-
-Find the existing **Deactivate/Reactivate** form.
-
-Immediately **below its closing `</form>` tag**, add:
-
-```html
-{% if employee.is_active and not employee.has_usable_password %}
-
-    <form method="POST"
-          action="{% url 'resend_setup_email' employee.id %}">
-
-        {% csrf_token %}
-
-        <button type="submit">
-            Resend Setup Email
-        </button>
-
-    </form>
-
-{% endif %}
-```
-
-#### When will the button appear?
-
-| Employee status | Password set? | Button |
-|---|---|---|
-| Active | No | Visible |
-| Active | Yes | Hidden |
-| Inactive | No | Hidden |
-| Inactive | Yes | Hidden |
-
-This prevents administrators from accidentally sending a setup email to employees who already have passwords.
-
-**Important:** Keep this as a separate form, outside the Save Changes and Deactivate/Reactivate forms.
-
-No internal CSS is needed. We'll continue using external stylesheets.
-
-#### Test
-
-1. Open an active employee who hasn't set a password.
-2. Verify that **Resend Setup Email** appears.
-3. Open an employee who has already set a password.
-4. Verify that the button is hidden.
-
-Next, we'll test sending the email and verify its password setup link.
-
-*Previous: Step 161 (Resend Setup Email URL)  |  Next: Step 163 (Home Page Navigation)*
-
----
-
-## Step 163: Home Page Navigation
-
-We haven't added the **Manage Employees** link to the Home page yet. The employee management system exists, but currently you can access it only through its URL.
-
-#### Add Manage Employees to the Home page
-
-Open **`core/templates/core/home.html`**.
-
-Find:
-
-```html
-<p>Administrator Dashboard</p>
-```
-
-Immediately below it, add:
-
-```html
-{% if user.role == 'admin' %}
-
-    <p>
-        <a href="{% url 'employee_list' %}">
-            Manage Employees
-        </a>
-    </p>
-
-{% endif %}
-```
-
-#### Expected result
-
-Your Admin home page will now contain:
-
-  Inventory & Demand Intelligence
-  **Welcome, admin**
-
-  Role: Admin
-
-  Administrator Dashboard
-
-    Manage Employees
-
-  Change Password
-
-Only users with the Admin role will see this link. The employee management views are also protected by our `@role_required('admin')` decorator.
-
-**Test:** Save the file, refresh `http://127.0.0.1:8000/`, and click **Manage Employees**.
-
-*Previous: Step 162 (Resend Setup Email Button)  |  Next: Step 164 (Home Template Review)*
-
----
-
-## Step 164: Home Template Review
-
-Yes, almost correct. The **Manage Employees** link will work, but two small corrections are needed.
-
-#### 1. Remove the duplicate Admin condition
-
-Replace your entire Dashboard section with:
-
-```html
-<!-- DASHBOARD -->
-{% if request.user.role == 'admin' %}
-
-    <p>Administrator Dashboard</p>
-
-    <p>
-        <a href="{% url 'employee_list' %}">
-            Manage Employees
-        </a>
-    </p>
-
-{% elif request.user.role == 'manager' %}
-
-    <p>Inventory Manager Dashboard</p>
-
-{% elif request.user.role == 'sales' %}
-
-    <p>Sales Staff Dashboard</p>
-
-{% endif %}
-```
-
-You don't need a second `{% if user.role == 'admin' %}` inside the first one.
-
-#### 2. Move the messages inside `<body>`
-
-At the bottom of your file, replace everything from `<!-- LOGOUT -->` onwards with:
-
-```html
-<!-- LOGOUT -->
-<form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
-
-<!-- MESSAGES -->
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
-
-</body>
-</html>
-```
-
-**Everything else is correct.** Save and refresh the Home page. You should now see **Manage Employees** below Administrator Dashboard.
-
-*Previous: Step 163 (Home Page Navigation)  |  Next: Step 165 (Employee Management Messages)*
-
----
+[Step 156: Correct employee row selection](../Module-1/14-edit-employee.md#step-156) · [Step 158: Employee Status URL](#step-158)

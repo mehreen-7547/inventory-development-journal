@@ -158,3 +158,4 @@
 | 154 | Module 1, Chapter 14 | [ External CSS ](Module-1/14-edit-employee.md#step-154) |
 | 155 | Module 1, Chapter 14 | [ Fix Row Selection ](Module-1/14-edit-employee.md#step-155) |
 | 156 | Module 1, Chapter 14 | [ Correct employee row selection ](Module-1/14-edit-employee.md#step-156) |
+| 157 | Module 1, Chapter 15 | [ Employee Deactivation ](Module-1/15-activate-deactivate-and-resend-setup-email.md#step-157) |
