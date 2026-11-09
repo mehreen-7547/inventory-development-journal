@@ -18,6 +18,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 
 - [Step 177: Plan the shared layout](#step-177)
 - [Step 178: Create the shared base.html template](#step-178)
+- [Step 179: Dashboard Template Inheritance](#step-179)
 
 ---
 
@@ -203,3 +204,93 @@ Not tested yet at Step 178. For Step 178, the proposed way to check create the s
 #### Next
 
 [Step 177: Plan the shared layout](#step-177) · [Step 179: Dashboard Template Inheritance](#step-179)
+
+
+---
+
+<a id="step-179"></a>
+
+### Step 179: Dashboard Template Inheritance
+
+#### Before this step
+
+Now that the common layout existed, the homepage needed to use it instead of repeating all its own HTML. Immediately before this, Step 178 dealt with create the shared base.html template; the work here continued the same part of the application.
+
+#### What we did and why
+
+The homepage template extends base.html and supplies its own heading and content inside named sections. Django combines both files into the final page shown in the browser.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Dashboard - Inventory System{% endblock %}`; Insert lines around `{% endblock %}`. For Step 179, this comparison used the code block from Step 163, which might not represent the whole file.
+
+**Step 179, block 1.** This code sample or terminal command was used while working on dashboard template inheritance. The content below remains in its original sequence for Step 179, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Inventory System{% endblock %}
+
+{% block content %}
+
+<h1>Inventory &amp; Demand Intelligence</h1>
+
+<!-- WELCOME -->
+<h2>Welcome, {{ request.user.username }}</h2>
+<p>Role: {{ request.user.get_role_display }}</p>
+
+<!-- DASHBOARD -->
+{% if request.user.role == 'admin' %}
+
+    <h3>Administrator Dashboard</h3>
+
+    {% if request.user.is_staff %}
+        <p>
+            <a href="/admin/">Open Django admin</a>
+        </p>
+    {% endif %}
+
+{% elif request.user.role == 'manager' %}
+
+    <h3>Inventory Manager Dashboard</h3>
+
+{% elif request.user.role == 'sales' %}
+
+    <h3>Sales Staff Dashboard</h3>
+
+{% endif %}
+
+{% endblock %}
+```
+
+**Step 179, block 2.** This code sample or terminal command was used while working on dashboard template inheritance. The content below remains in its original sequence for Step 179, block 2.
+
+```powershell
+python manage.py runserver
+```
+
+#### How the code works
+
+**Block 1 (html, 34 lines).** In Step 179, dashboard template inheritance involved `home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Dashboard - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<h1>Inventory &amp; Demand Intelligence</h1>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The comment `<!-- WELCOME -->` explains the intention of the following section; it does not execute as application logic. The HTML element `<h2>Welcome, {{ request.user.username }}</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<p>Role: {{ request.user.get_role_display }}</p>` creates or closes part of the page structure seen by the browser. The comment `<!-- DASHBOARD -->` explains the intention of the following section; it does not execute as application logic.
+
+**Lines 15–21:** The HTML element `<h3>Administrator Dashboard</h3>` creates or closes part of the page structure seen by the browser. `{% if request.user.is_staff %}` decides which HTML is included based on the value Django provided. The HTML element `<p>` creates or closes part of the page structure seen by the browser. The link `<a href="/admin/">Open Django admin</a>` lets the user navigate to the named screen from this page.
+
+**Lines 22–28:** `{% elif request.user.role == 'manager' %}` decides which HTML is included based on the value Django provided. The HTML element `<h3>Inventory Manager Dashboard</h3>` creates or closes part of the page structure seen by the browser. `{% elif request.user.role == 'sales' %}` decides which HTML is included based on the value Django provided.
+
+**Lines 29–34:** The HTML element `<h3>Sales Staff Dashboard</h3>` creates or closes part of the page structure seen by the browser.
+
+**Block 2 (powershell, 1 lines).** In Step 179, dashboard template inheritance involved `home.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py runserver` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 179. For Step 179, the proposed way to check dashboard template inheritance was to open the related page in the browser and check that the route reached the intended view or template in `home.html`. Development continued in Step 180 before a complete result could be claimed.
+
+#### Next
+
+[Step 178: Create the shared base.html template](#step-178) · [Step 180: Update Login Page](#step-180)
