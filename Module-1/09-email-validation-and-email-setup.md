@@ -1,16 +1,46 @@
-# Module 1, Chapter 9: Email validation and email setup
+# MODULE 1 — Employee accounts
 
-## Step 108: REQUIRED_FIELDS
+## Chapter 9: Email validation and email setup (Steps 108–112)
 
-`REQUIRED_FIELDS = ['email', 'role']` tells Django **which additional information to ask for when creating a superuser through the terminal**.
+### Before we begin
 
-For example, when you run:
+Employee accounts were going to receive important links by email, so we needed better email addresses and a safe way to try sending messages.
+
+### What we worked on
+
+We required each account to have its own email, updated the database, and made Django print test emails in the terminal.
+
+### Picture it this way
+
+When we say “console email,” we mean Django prints the message where we ran the server. It does not send anything to an inbox yet. That temporary method is useful while building password recovery.
+
+### Find a step
+
+- [Step 108: Understand REQUIRED_FIELDS](#step-108)
+
+---
+
+<a id="step-108"></a>
+
+### Step 108: Understand REQUIRED_FIELDS
+
+#### Before this step
+
+Django's administrator-creation command was asking for fields such as email and role. We wanted to know why. The preceding step, Step 107, covered test role security, so this was the next part of the development sequence.
+
+#### What we did and why
+
+REQUIRED_FIELDS tells Django which extra fields to prompt for when creating a superuser from the terminal. It does not by itself decide all validation rules for every web form.
+
+#### Code and commands
+
+**Step 108, block 1.** This code sample or terminal command was used while working on understand required_fields. The content below remains in its original sequence for Step 108, block 1.
 
 ```bash
 python manage.py createsuperuser
 ```
 
-Django prompts you for:
+**Step 108, block 2.** This output was used while working on understand required_fields. The content below remains in its original sequence for Step 108, block 2.
 
 ```text
 Username: admin
@@ -20,229 +50,30 @@ Password:
 Password (again):
 ```
 
-This happens because of `REQUIRED_FIELDS`.
-
-#### Why didn't it work for `manager1` and `sales1`?
-
-Because `REQUIRED_FIELDS` is **not a database validation rule**.
-
-| Situation | Does `REQUIRED_FIELDS` enforce email? |
-|---|---|
-| Creating a superuser through `createsuperuser` | Yes, prompts for it |
-| Creating a user through Django Admin | No |
-| Creating a user through Python code | No |
-| Saving a user to the database | No |
-
-#### What we actually need
+**Step 108, block 3.** This code sample or terminal command was used while working on understand required_fields. The content below remains in its original sequence for Step 108, block 3.
 
 ```python
 email = models.EmailField(unique=True, blank=False)
 ```
 
-- `EmailField` — validates email format through Django's forms and model validation.
-- `unique=True` — prevents two users from having the same email.
-- `blank=False` — requires an email in Django forms.
+#### How the code works
 
-**In short:** `REQUIRED_FIELDS` controls the `createsuperuser` prompts. The email field definition controls validation and database uniqueness.
+**Block 1 (bash, 1 lines).** In Step 108, understand required_fields involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-We'll keep `REQUIRED_FIELDS` and add the email field after correcting the existing accounts.
+**Lines 1–1:** The command `python manage.py createsuperuser` starts Python or one of its tools from the development terminal.
 
-*Previous: Step 107 (Test Role Security)  |  Next: Step 109 (Enforce Email Validation)*
+**Block 2 (text, 5 lines).** In Step 108, understand required_fields involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
----
+In Step 108, output block 2 showed the result rather than another command. Its visible value was `Username: admin`, which mattered for understand required_fields.
 
-## Step 109: Enforce Email Validation
+**Block 3 (python, 1 lines).** In Step 108, understand required_fields involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-#### Next: Update the CustomUser model
-
-Assuming you've assigned different email addresses to `manager1` and `sales1`, we can now enforce email validation.
-
-Open **`accounts/models.py`** and update it to:
-
-```python
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-
-
-class CustomUser(AbstractUser):
-    ROLE_CHOICES = (
-        ('admin', 'Admin'),
-        ('manager', 'Inventory Manager'),
-        ('sales', 'Sales Staff'),
-    )
-
-    email = models.EmailField(
-        unique=True,
-        blank=False
-    )
-
-    role = models.CharField(
-        max_length=10,
-        choices=ROLE_CHOICES,
-        default='sales'
-    )
-
-    REQUIRED_FIELDS = ['email', 'role']
-```
-
-#### What did we add?
-
-```python
-email = models.EmailField(
-    unique=True,
-    blank=False
-)
-```
-
-- **`EmailField`** — provides email-format validation in Django forms.
-- **`unique=True`** — prevents duplicate email values in the database.
-- **`blank=False`** — makes the email mandatory in Django forms, including Django Admin.
-
-We retain `REQUIRED_FIELDS` because it serves a separate purpose during superuser creation.
-
-**For now:** Save the file. Don't run migrations yet; we'll do that in the next step.
-
-*Previous: Step 108 (REQUIRED_FIELDS)  |  Next: Step 110 (Create Migration)*
-
----
-
-## Step 110: Create Migration
-
-#### Next: Create the database migration
-
-We've updated `CustomUser` to require unique email addresses. Now Django needs to prepare the corresponding database change.
-
-Open your VS Code terminal and run:
-
-```bash
-python manage.py makemigrations accounts
-```
-
-**What happens?**
-
-Django compares your updated `models.py` with the previous migration and creates a new migration file.
-
-**Expected output (approximately):**
-
-```text
-Migrations for 'accounts':
-  accounts/migrations/0002_alter_customuser_email.py
-    ~ Alter field email on customuser
-```
-
-The migration filename may differ.
-
-**Important:** This command creates the migration instructions. It does not apply them to the database yet.
-
-Don't run `migrate` yet. We'll do that next.
-
-*Previous: Step 109 (Enforce Email Validation)  |  Next: Step 111 (Apply Migration)*
-
----
-
-## Step 111: Apply Migration
-
-#### Next: Apply the email-field migration
-
-We've created the migration file. Now we need to apply its changes to the actual database.
-
-Before proceeding, ensure `admin`, `manager1`, and `sales1` have different, non-empty email addresses.
-
-Run:
-
-```bash
-python manage.py migrate
-```
-
-**What does this do?**
-
-Django executes any pending migrations, including our new email-field migration.
-
-**Expected output (approximately):**
-
-```text
-Applying accounts.0002_alter_customuser_email... OK
-```
-
-After this, the database will enforce unique email addresses.
-
-**Important:** If you receive an error, don't modify or delete anything. Send me the terminal output so we can identify the cause.
-
-*Previous: Step 110 (Create Migration)  |  Next: Step 112 (Email Configuration)*
-
----
-
-## Step 112: Email Configuration
-
-**Email uniqueness test passed.**
-
-Django correctly rejected `manager1@example.com` because another account already uses it.
-
-You can leave the form without saving. The invalid email was not stored.
-
-#### Next: Configure local email testing
-
-Open **`config/settings.py`** and add these lines at the bottom:
-
-```python
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-DEFAULT_FROM_EMAIL = 'no-reply@example.com'
-```
-
-**What do these settings mean?**
-
-- `EMAIL_BACKEND` tells Django how to handle outgoing emails.
-- `console.EmailBackend` prints emails in the terminal instead of actually sending them.
-- `DEFAULT_FROM_EMAIL` specifies the sender address.
-
-  NEW vs CLASS — Email backend
-  This introduces Django's built-in email configuration. It uses the same `VARIABLE = value` syntax as other settings in `settings.py`.
-
-**For now:** Save the file. We'll test sending an email in the next step.
+**Lines 1–1:** `email = models.EmailField(unique=True, blank=False)` sets the named value used by the next operation in this file.
 
 #### How we checked it
 
-**No, you don't need to stop the server.**
+Not tested yet at Step 108. For Step 108, the proposed way to check understand required_fields was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 109 before a complete result could be claimed.
 
-Keep Django running in its current terminal.
+#### Next
 
-1. Open a **new terminal** in VS Code using the `+` button in the Terminal panel.
-2. Make sure your virtual environment `(.venv)` is active.
-3. Run:
-
-```bash
-python manage.py shell
-```
-
-You can now test email sending while the Django server continues running in the first terminal.
-
-#### How we checked it
-
-You're currently **one folder above** the Django project directory.
-
-First, run:
-
-```powershell
-cd techmindz_inventory_module0_sqlite_atomic
-```
-
-Your terminal should then show:
-
-```text
-(.venv) PS C:\Users\mehre\projects2026\Techmindz_Inventory_Module0_SQLite_Atomic_Update\techmindz_inventory_module0_sqlite_atomic>
-```
-
-Now run:
-
-```powershell
-python manage.py shell
-```
-
-This opens Django's Python shell so you can test email sending.
-
-**Keep your Django server running in the other terminal.**
-
-*Previous: Step 111 (Apply Migration)  |  Next: Step 113 (Forgot Password)*
-
----
+[Step 107: Test Role Security](../Module-1/08-role-security-decorators.md#step-107) · [Step 109: Enforce Email Validation](#step-109)

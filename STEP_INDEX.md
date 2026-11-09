@@ -109,3 +109,4 @@
 | 105 | Module 1, Chapter 8 | [ Review the role decorator ](Module-1/08-role-security-decorators.md#step-105) |
 | 106 | Module 1, Chapter 8 | [ Apply Role Security ](Module-1/08-role-security-decorators.md#step-106) |
 | 107 | Module 1, Chapter 8 | [ Test Role Security ](Module-1/08-role-security-decorators.md#step-107) |
+| 108 | Module 1, Chapter 9 | [ Understand REQUIRED_FIELDS ](Module-1/09-email-validation-and-email-setup.md#step-108) |
