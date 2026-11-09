@@ -18,6 +18,7 @@ Imagine the difference between writing a letter on your own desk and posting it 
 
 - [Step 170: Real Email Configuration](#step-170)
 - [Step 171: Configure SMTP Credentials](#step-171)
+- [Step 172: Install python-dotenv](#step-172)
 
 ---
 
@@ -151,3 +152,92 @@ Not tested yet at Step 171. For Step 171, the proposed way to check configure sm
 #### Next
 
 [Step 170: Real Email Configuration](#step-170) · [Step 172: Install python-dotenv](#step-172)
+
+
+---
+
+<a id="step-172"></a>
+
+### Step 172: Install python-dotenv
+
+#### Before this step
+
+Typing the Gmail details again every time was inconvenient. We needed somewhere on this computer to keep them without uploading them to GitHub. Immediately before this, Step 171 dealt with configure smtp credentials; the work here continued the same part of the application.
+
+#### What we did and why
+
+We used a file named .env, which is just a small private settings file containing lines like EMAIL_MODE=smtp. The python-dotenv package reads that file when Django starts. This only works if Django loads the file before it asks what email mode to use.
+
+#### Code and commands
+
+**Step 172, block 1.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 1.
+
+```powershell
+python -m pip install python-dotenv
+```
+
+**Step 172, block 2.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 2.
+
+```dotenv
+EMAIL_MODE=smtp
+EMAIL_HOST_USER=YOUR_GMAIL_ADDRESS
+EMAIL_HOST_PASSWORD=YOUR_16_CHARACTER_APP_PASSWORD
+```
+
+**Step 172, block 3.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 3.
+
+```python
+from dotenv import load_dotenv
+```
+
+**Step 172, block 4.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 4.
+
+```python
+BASE_DIR = Path(__file__).resolve().parent.parent
+```
+
+**Step 172, block 5.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 5.
+
+```python
+load_dotenv(BASE_DIR / '.env')
+```
+
+**Step 172, block 6.** This code sample or terminal command was used while working on install python-dotenv. The content below remains in its original sequence for Step 172, block 6.
+
+```gitignore
+.env
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python -m pip install python-dotenv` starts Python or one of its tools from the development terminal.
+
+**Block 2 (dotenv, 3 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `EMAIL_MODE=smtp` sets the named value used by the next operation in this file. `EMAIL_HOST_USER=YOUR_GMAIL_ADDRESS` sets the named value used by the next operation in this file. `EMAIL_HOST_PASSWORD=YOUR_16_CHARACTER_APP_PASSWORD` sets the named value used by the next operation in this file.
+
+**Block 3 (python, 1 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `from dotenv import load_dotenv` makes a Python function, class or module available to the code that follows.
+
+**Block 4 (python, 1 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `BASE_DIR = Path(__file__).resolve().parent.parent` sets the named value used by the next operation in this file.
+
+**Block 5 (python, 1 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `load_dotenv(BASE_DIR / '.env')` loads settings from the local `.env` file before the application reads them.
+
+**Block 6 (gitignore, 1 lines).** In Step 172, install python-dotenv involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `.env` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 172. For Step 172, the proposed way to check install python-dotenv was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 173 before a complete result could be claimed.
+
+#### Next
+
+[Step 171: Configure SMTP Credentials](#step-171) · [Step 173: Fix Email Backend](#step-173)
