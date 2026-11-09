@@ -21,6 +21,7 @@ Imagine the difference between writing a letter on your own desk and posting it 
 - [Step 172: Install python-dotenv](#step-172)
 - [Step 173: Fix Email Backend](#step-173)
 - [Step 174: Remove the conflicting email backend override](#step-174)
+- [Step 175: Restart Django Shell after configuration changes](#step-175)
 
 ---
 
@@ -484,3 +485,85 @@ Not tested yet at Step 174. For Step 174, the proposed way to check remove the c
 #### Next
 
 [Step 173: Fix Email Backend](#step-173) · [Step 175: Restart Django Shell after configuration changes](#step-175)
+
+
+---
+
+<a id="step-175"></a>
+
+### Step 175: Restart Django Shell after configuration changes
+
+#### Before this step
+
+We had changed Django's settings file, but our already-open Django shell might still have been using values it loaded earlier. Immediately before this, Step 174 dealt with remove the conflicting email backend override; the work here continued the same part of the application.
+
+#### What we did and why
+
+A Django shell is an interactive Python window connected to the project. Restarting it makes it read the updated settings afresh. Without restarting, another email test might still use the old terminal-only option and confuse us.
+
+#### Code and commands
+
+**Step 175, block 1.** This code sample or terminal command was used while working on restart django shell after configuration changes. The content below remains in its original sequence for Step 175, block 1.
+
+```python
+exit()
+```
+
+**Step 175, block 2.** This output was used while working on restart django shell after configuration changes. The content below remains in its original sequence for Step 175, block 2.
+
+```text
+(.venv) PS C:\Users\YOUR_WINDOWS_USERNAME\...>
+```
+
+**Step 175, block 3.** This code sample or terminal command was used while working on restart django shell after configuration changes. The content below remains in its original sequence for Step 175, block 3.
+
+```powershell
+python manage.py shell
+```
+
+**Step 175, block 4.** This code sample or terminal command was used while working on restart django shell after configuration changes. The content below remains in its original sequence for Step 175, block 4.
+
+```python
+from django.conf import settings
+print(settings.EMAIL_MODE)
+print(settings.EMAIL_BACKEND)
+print(settings.DEFAULT_FROM_EMAIL)
+```
+
+**Step 175, block 5.** This output was used while working on restart django shell after configuration changes. The content below remains in its original sequence for Step 175, block 5.
+
+```text
+smtp
+django.core.mail.backends.smtp.EmailBackend
+YOUR_GMAIL_ADDRESS
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 175, restart django shell after configuration changes involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `exit()` supply the values or page content for this part of manage.py. These lines are kept together because their order and indentation matter.
+
+**Block 2 (text, 1 lines).** In Step 175, restart django shell after configuration changes involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 175, output block 2 showed the result rather than another command. Its visible value was `(.venv) PS C:\Users\YOUR_WINDOWS_USERNAME\...>`, which mattered for restart django shell after configuration changes.
+
+**Block 3 (powershell, 1 lines).** In Step 175, restart django shell after configuration changes involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py shell` starts Python or one of its tools from the development terminal.
+
+**Block 4 (python, 4 lines).** In Step 175, restart django shell after configuration changes involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** `from django.conf import settings` makes a Python function, class or module available to the code that follows. `print(settings.EMAIL_MODE)` reads one of the Django configuration values used by this feature. `print(settings.EMAIL_BACKEND)` selects whether email is printed for development or handed to an actual mail server. `print(settings.DEFAULT_FROM_EMAIL)` reads one of the Django configuration values used by this feature.
+
+**Block 5 (text, 3 lines).** In Step 175, restart django shell after configuration changes involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 175, output block 5 showed the result rather than another command. Its visible value was `smtp`, which mattered for restart django shell after configuration changes.
+
+#### How we checked it
+
+Not tested yet at Step 175. For Step 175, the proposed way to check restart django shell after configuration changes was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 176 before a complete result could be claimed.
+
+#### Next
+
+[Step 174: Remove the conflicting email backend override](#step-174) · [Step 176: Send a real email through Gmail](#step-176)

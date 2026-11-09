@@ -176,3 +176,4 @@
 | 172 | Module 1, Chapter 17 | [ Install python-dotenv ](Module-1/17-real-email-delivery-smtp.md#step-172) |
 | 173 | Module 1, Chapter 17 | [ Fix Email Backend ](Module-1/17-real-email-delivery-smtp.md#step-173) |
 | 174 | Module 1, Chapter 17 | [ Remove the conflicting email backend override ](Module-1/17-real-email-delivery-smtp.md#step-174) |
+| 175 | Module 1, Chapter 17 | [ Restart Django Shell after configuration changes ](Module-1/17-real-email-delivery-smtp.md#step-175) |
