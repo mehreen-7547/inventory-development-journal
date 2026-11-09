@@ -23,6 +23,7 @@ There are several small pages because each has a different job. Django's built-i
 - [Step 117: Confirmation Page URL](#step-117)
 - [Step 118: Password Reset Email](#step-118)
 - [Step 119: Connect Email Template](#step-119)
+- [Step 120: Connect Email Subject](#step-120)
 
 ---
 
@@ -399,3 +400,60 @@ Not tested yet at Step 119. For Step 119, the proposed way to check connect emai
 #### Next
 
 [Step 118: Password Reset Email](#step-118) · [Step 120: Connect Email Subject](#step-120)
+
+
+---
+
+<a id="step-120"></a>
+
+### Step 120: Connect Email Subject
+
+#### Before this step
+
+The reset message also needed a clear subject line so a recipient could recognise it. Immediately before this, Step 119 dealt with connect email template; the work here continued the same part of the application.
+
+#### What we did and why
+
+The subject is a small text template used as the email's title. This change helps people understand why they received the message; it does not change reset-link security.
+
+#### Code and commands
+
+**Step 120, block 1.** This code sample or terminal command was used while working on connect email subject. The content below remains in its original sequence for Step 120, block 1.
+
+```python
+path(
+    'password-reset/',
+    auth_views.PasswordResetView.as_view(
+        template_name='accounts/password_reset.html',
+        email_template_name='accounts/password_reset_email.txt',
+        subject_template_name='accounts/password_reset_subject.txt'
+    ),
+    name='password_reset'
+),
+```
+
+**Step 120, block 2.** This code sample or terminal command was used while working on connect email subject. The content below remains in its original sequence for Step 120, block 2.
+
+```python
+subject_template_name='accounts/password_reset_subject.txt'
+```
+
+#### How the code works
+
+**Block 1 (python, 9 lines).** In Step 120, connect email subject involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `path(` begins a URL rule connecting a browser address with the function that answers it. `template_name='accounts/password_reset.html',` sets the named value used by the next operation in this file. `email_template_name='accounts/password_reset_email.txt',` sets the named value used by the next operation in this file. `subject_template_name='accounts/password_reset_subject.txt'` sets the named value used by the next operation in this file.
+
+**Lines 8–9:** `name='password_reset'` sets the named value used by the next operation in this file.
+
+**Block 2 (python, 1 lines).** In Step 120, connect email subject involved `accounts/urls.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `subject_template_name='accounts/password_reset_subject.txt'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 120. For Step 120, the proposed way to check connect email subject was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 121 before a complete result could be claimed.
+
+#### Next
+
+[Step 119: Connect Email Template](#step-119) · [Step 121: Set New Password Page](#step-121)
