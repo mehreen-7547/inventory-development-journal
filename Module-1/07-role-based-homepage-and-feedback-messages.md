@@ -24,6 +24,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 96: Password Change Confirmation](#step-96)
 - [Step 97: Success Message](#step-97)
 - [Step 98: Stage Files](#step-98)
+- [Step 99: Commit Changes](#step-99)
 
 ---
 
@@ -429,3 +430,56 @@ Not tested yet at Step 98. For Step 98, the proposed way to check stage files wa
 #### Next
 
 [Step 97: Success Message](#step-97) · [Step 99: Commit Changes](#step-99)
+
+
+---
+
+<a id="step-99"></a>
+
+### Step 99: Commit Changes
+
+#### Before this step
+
+After staging the changes, we saved them in the project's Git history. Immediately before this, Step 98 dealt with stage files; the work here continued the same part of the application.
+
+#### What we did and why
+
+The commit makes this version easy to find later. It is a local record of the code at that point, not a guarantee that every page has been tested.
+
+#### Code and commands
+
+**Step 99, block 1.** This code sample or terminal command was used while working on commit changes. The content below remains in its original sequence for Step 99, block 1.
+
+```bash
+git commit -m "Complete Module 1 accounts and authentication"
+```
+
+**Step 99, block 2.** This output was used while working on commit changes. The content below remains in its original sequence for Step 99, block 2.
+
+```text
+[main abc1234] Complete Module 1 accounts and authentication
+12 files changed, ...
+```
+
+#### How the code works
+
+**Block 1 (bash, 1 lines).** In Step 99, commit changes involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git commit -m "Complete Module 1 accounts and authentication"` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 2 (text, 2 lines).** In Step 99, commit changes involved `the Django project files`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 99, output block 2 showed the result rather than another command. Its visible value was `[main abc1234] Complete Module 1 accounts and authentication`, which mattered for commit changes.
+
+#### How we checked it
+
+Not tested yet at Step 99. For Step 99, the proposed way to check commit changes was to run `git status` and inspect the local or remote history for the expected change. Step 99 did not establish a successful outcome for commit changes.
+
+#### Next
+
+[Step 98: Stage Files](#step-98) · [Step 100: Role Security](../Module-1/08-role-security-decorators.md#step-100)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **role-based homepage and feedback messages** was needed at this point, and describe what the application did differently after the final step of this chapter.
