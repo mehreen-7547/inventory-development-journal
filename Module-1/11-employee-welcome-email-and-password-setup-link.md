@@ -18,6 +18,7 @@ Creating an employee and letting the employee choose a password are separate mom
 
 - [Step 128: Employee Creation Form](#step-128)
 - [Step 129: Connect Employee Form](#step-129)
+- [Step 130: Welcome Email Template](#step-130)
 
 ---
 
@@ -145,3 +146,60 @@ Not tested yet at Step 129. For Step 129, the proposed way to check connect empl
 #### Next
 
 [Step 128: Employee Creation Form](#step-128) · [Step 130: Welcome Email Template](#step-130)
+
+
+---
+
+<a id="step-130"></a>
+
+### Step 130: Welcome Email Template
+
+#### Before this step
+
+A newly created employee needs to know why they received an email and what to do next. Immediately before this, Step 129 dealt with connect employee form; the work here continued the same part of the application.
+
+#### What we did and why
+
+The welcome-email template is the message body. It introduces the account and includes a link for setting the password rather than sending a password in plain text.
+
+#### Code and commands
+
+**Step 130, block 1.** This code sample or terminal command was used while working on welcome email template. The content below remains in its original sequence for Step 130, block 1.
+
+```django
+Hello {{ first_name }},
+
+Welcome to the Inventory System.
+
+Your employee account has been created.
+
+Username: {{ username }}
+
+To activate your account, set your password using the link below:
+
+{{ setup_link }}
+
+This link is temporary and can only be used once to set your password.
+
+If you were not expecting this email, please contact your administrator.
+
+Inventory System
+```
+
+#### How the code works
+
+**Block 1 (django, 17 lines).** In Step 130, welcome email template involved `templates/accounts/welcome_email.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The lines starting with `Hello {{ first_name }},` supply the values or page content for this part of templates/accounts/welcome_email.txt. These lines are kept together because their order and indentation matter.
+
+**Lines 8–14:** The lines starting with `To activate your account, set your password using the link below:` supply the values or page content for this part of templates/accounts/welcome_email.txt. These lines are kept together because their order and indentation matter.
+
+**Lines 15–17:** The lines starting with `If you were not expecting this email, please contact your administrator.` supply the values or page content for this part of templates/accounts/welcome_email.txt. These lines are kept together because their order and indentation matter.
+
+#### How we checked it
+
+Not tested yet at Step 130. For Step 130, the proposed way to check welcome email template was to open the related page in the browser and check that the route reached the intended view or template in `templates/accounts/welcome_email.txt`. Development continued in Step 131 before a complete result could be claimed.
+
+#### Next
+
+[Step 129: Connect Employee Form](#step-129) · [Step 131: Secure Password-Setup Link](#step-131)

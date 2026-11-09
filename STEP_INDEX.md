@@ -131,3 +131,4 @@
 | 127 | Module 1, Chapter 10 | [ Email Testing ](Module-1/10-forgot-and-reset-password.md#step-127) |
 | 128 | Module 1, Chapter 11 | [ Employee Creation Form ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-128) |
 | 129 | Module 1, Chapter 11 | [ Connect Employee Form ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-129) |
+| 130 | Module 1, Chapter 11 | [ Welcome Email Template ](Module-1/11-employee-welcome-email-and-password-setup-link.md#step-130) |
