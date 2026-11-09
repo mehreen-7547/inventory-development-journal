@@ -21,6 +21,7 @@ Think of this as setting up the desk and tools before starting a piece of work. 
 - [Step 3: Install Django and required packages](#step-3)
 - [Step 4: Create the configuration file](#step-4)
 - [Step 5: Understand the Django project folders](#step-5)
+- [Step 6: Create .env](#step-6)
 
 ---
 
@@ -295,3 +296,249 @@ Not tested yet at Step 5. For Step 5, the proposed way to check understand the d
 #### Next
 
 [Step 4: Create the configuration file](#step-4) · [Step 6: Create .env](#step-6)
+
+
+---
+
+<a id="step-6"></a>
+
+### Step 6: Create .env
+
+#### Before this step
+
+Django now had its packages, but it still needed local settings so it could start safely on this computer. Immediately before this, Step 5 dealt with understand the django project folders; the work here continued the same part of the application.
+
+#### What we did and why
+
+A secret key is a private value Django uses for security-related features. We put local values in .env instead of inside publicly shared code. The setup checks here were meant to show that these settings were available; they did not mean the full inventory system was finished.
+
+#### Code and commands
+
+**Step 6, block 1.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 1.
+
+```powershell
+    py --list
+    
+```
+
+**Step 6, block 2.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 2.
+
+```powershell
+    py -V:Astral/CPython3.12.12 -m venv .venv
+    
+```
+
+**Step 6, block 3.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 3.
+
+```powershell
+    .\.venv\Scripts\python.exe --version
+    
+```
+
+**Step 6, block 4.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 4.
+
+```powershell
+    .\.venv\Scripts\python.exe -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\requirements.txt
+    
+```
+
+**Step 6, block 5.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 5.
+
+```powershell
+Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+**Step 6, block 6.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 6.
+
+```powershell
+.\.venv\Scripts\python.exe -m django --version
+```
+
+**Step 6, block 7.** This output was used while working on create .env. The content below remains in its original sequence for Step 6, block 7.
+
+```text
+6.0.9
+```
+
+**Step 6, block 8.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 8.
+
+```powershell
+Test-Path .\techmindz_inventory_module0_sqlite_atomic\.env
+```
+
+**Step 6, block 9.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 9.
+
+```powershell
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+**Step 6, block 10.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 10.
+
+```env
+DJANGO_SECRET_KEY=replace-with-random-secret
+```
+
+**Step 6, block 11.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 11.
+
+```powershell
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+**Step 6, block 12.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 12.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py check
+```
+
+**Step 6, block 13.** This output was used while working on create .env. The content below remains in its original sequence for Step 6, block 13.
+
+```text
+System check identified no issues (0 silenced).
+```
+
+**Step 6, block 14.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 14.
+
+```powershell
+git --version
+```
+
+**Step 6, block 15.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 15.
+
+```powershell
+.\.venv\Scripts\python.exe -m django --version
+```
+
+**Step 6, block 16.** This output was used while working on create .env. The content below remains in its original sequence for Step 6, block 16.
+
+```text
+6.0.9
+```
+
+**Step 6, block 17.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 17.
+
+```powershell
+git --version
+```
+
+**Step 6, block 18.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 18.
+
+```powershell
+Test-Path .\techmindz_inventory_module0_sqlite_atomic\.gitignore
+```
+
+**Step 6, block 19.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 19.
+
+```powershell
+Get-Content .\techmindz_inventory_module0_sqlite_atomic\.gitignore
+```
+
+**Step 6, block 20.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 20.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic status
+```
+
+**Step 6, block 21.** This code sample or terminal command was used while working on create .env. The content below remains in its original sequence for Step 6, block 21.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic status
+```
+
+#### How the code works
+
+**Block 1 (powershell, 2 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The command `py --list` starts Python or one of its tools from the development terminal.
+
+**Block 2 (powershell, 2 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The command `py -V:Astral/CPython3.12.12 -m venv .venv` starts Python or one of its tools from the development terminal.
+
+**Block 3 (powershell, 2 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The lines starting with `.\.venv\Scripts\python.exe --version` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 4 (powershell, 2 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–2:** The command `.\.venv\Scripts\python.exe -m pip install -r .\techmindz_inventory_module0_sqlite_atomic\r` starts Python or one of its tools from the development terminal.
+
+**Block 5 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Copy-Item .\techmindz_inventory_module0_sqlite_atomic\.env.example .\techmindz_invent` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 6 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `.\.venv\Scripts\python.exe -m django --version` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 7 (text, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 6, output block 7 showed the result rather than another command. Its visible value was `6.0.9`, which mattered for create .env.
+
+**Block 8 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Test-Path .\techmindz_inventory_module0_sqlite_atomic\.env` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 9 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python -c "from django.core.management.utils import get_random_secret_key; print(get_rando` starts Python or one of its tools from the development terminal.
+
+**Block 10 (env, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `DJANGO_SECRET_KEY=replace-with-random-secret` sets the named value used by the next operation in this file.
+
+**Block 11 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python -c "from django.core.management.utils import get_random_secret_key; print(get_rando` starts Python or one of its tools from the development terminal.
+
+**Block 12 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py check` starts Python or one of its tools from the development terminal.
+
+**Block 13 (text, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 6, output block 13 showed the result rather than another command. Its visible value was `System check identified no issues (0 silenced).`, which mattered for create .env.
+
+**Block 14 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git --version` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 15 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `.\.venv\Scripts\python.exe -m django --version` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 16 (text, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 6, output block 16 showed the result rather than another command. Its visible value was `6.0.9`, which mattered for create .env.
+
+**Block 17 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git --version` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 18 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Test-Path .\techmindz_inventory_module0_sqlite_atomic\.gitignore` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 19 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The lines starting with `Get-Content .\techmindz_inventory_module0_sqlite_atomic\.gitignore` supply the values or page content for this part of requirements.txt. These lines are kept together because their order and indentation matter.
+
+**Block 20 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic status` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+**Block 21 (powershell, 1 lines).** In Step 6, create .env involved `requirements.txt`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic status` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+For Step 6 (Create .env), we compared the visible terminal output with the requested action. The visible result for Step 6 was described as “was successful”; this only addressed the create .env check in `requirements.txt`.
+
+#### Next
+
+[Step 5: Understand the Django project folders](#step-5) · [Step 7: Initialize the Git repository](../Module-0/02-git-and-github.md#step-7)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **environment setup** was needed at this point, and describe what the application did differently after the final step of this chapter.
