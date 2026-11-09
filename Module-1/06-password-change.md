@@ -19,6 +19,7 @@ The page first asks for the old password and the new one. Django checks the form
 - [Step 86: Change Password](#step-86)
 - [Step 87: Walk through password change](#step-87)
 - [Step 88: Password Change URL](#step-88)
+- [Step 89: Password Change Form](#step-89)
 
 ---
 
@@ -261,3 +262,59 @@ Not tested yet at Step 88. For Step 88, the proposed way to check password chang
 #### Next
 
 [Step 87: Walk through password change](#step-87) · [Step 89: Password Change Form](#step-89)
+
+
+---
+
+<a id="step-89"></a>
+
+### Step 89: Password Change Form
+
+#### Before this step
+
+The user needed to see the old-password and new-password fields in the browser. Immediately before this, Step 88 dealt with password change url; the work here continued the same part of the application.
+
+#### What we did and why
+
+The HTML template displays the Django form, any field errors and a submit button. The view performs the checks; the template's job is to show the form clearly.
+
+#### Code and commands
+
+**Step 89, block 1.** This code sample or terminal command was used while working on password change form. The content below remains in its original sequence for Step 89, block 1.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Password</title>
+</head>
+<body>
+    <h2>Change Password</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Change Password</button>
+    </form>
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 16 lines).** In Step 89, password change form involved `login.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Change Password</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The form sends submitted fields to the server as a POST request, rather than just opening a page. The `{% csrf_token %}` tag places Django’s request-verification value inside this specific form before it is submitted. `{{ form.as_p }}` displays the fields of this form as simple paragraph elements. The HTML element `<button type="submit">Change Password</button>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–16:** The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 89. For Step 89, the proposed way to check password change form was to open the password-related page and try the expected form flow with a test account. Development continued in Step 90 before a complete result could be claimed.
+
+#### Next
+
+[Step 88: Password Change URL](#step-88) · [Step 90: Change Password Link](#step-90)

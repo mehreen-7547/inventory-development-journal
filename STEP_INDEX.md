@@ -90,3 +90,4 @@
 | 86 | Module 1, Chapter 6 | [ Change Password ](Module-1/06-password-change.md#step-86) |
 | 87 | Module 1, Chapter 6 | [ Walk through password change ](Module-1/06-password-change.md#step-87) |
 | 88 | Module 1, Chapter 6 | [ Password Change URL ](Module-1/06-password-change.md#step-88) |
+| 89 | Module 1, Chapter 6 | [ Password Change Form ](Module-1/06-password-change.md#step-89) |
