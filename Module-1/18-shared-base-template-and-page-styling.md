@@ -24,6 +24,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 182: Update Forgot Password Page](#step-182)
 - [Step 183: Update Reset Confirmation](#step-183)
 - [Step 184: Update Set New Password Page](#step-184)
+- [Step 185: Update Reset Complete Page](#step-185)
 
 ---
 
@@ -738,3 +739,72 @@ Not tested yet at Step 184. For Step 184, the proposed way to check update set n
 #### Next
 
 [Step 183: Update Reset Confirmation](#step-183) · [Step 185: Update Reset Complete Page](#step-185)
+
+
+---
+
+<a id="step-185"></a>
+
+### Step 185: Update Reset Complete Page
+
+#### Before this step
+
+After someone has successfully reset a password, the last screen should make the next action obvious. Immediately before this, Step 184 dealt with update set new password page; the work here continued the same part of the application.
+
+#### What we did and why
+
+We updated the completion page to match the rest of the site and guide the person back to login. No password details need to appear there.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% extends 'base.html' %}`; Replace lines around `{% block title %}Password Reset Complete - Inventory System{% endblock`; Replace lines around `{% block content %}`; Replace lines around `<div class="row justify-content-center"> / <div class="col-md-7 col-lg-5">`; Replace lines around `<h2 class="mb-4">Password Reset Successful</h2>`; Replace lines around `<div class="alert alert-success"> / Your password has been reset successfully.`. For Step 185, this comparison used the code block from Step 126, which might not represent the whole file.
+
+**Step 185, block 1.** This code sample or terminal command was used while working on update reset complete page. The content below remains in its original sequence for Step 185, block 1.
+
+```html
+{% extends 'base.html' %}
+
+{% block title %}Password Reset Complete - Inventory System{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-5">
+
+        <h2 class="mb-4">Password Reset Successful</h2>
+
+        <div class="alert alert-success">
+            Your password has been reset successfully.
+            You can now log in using your new password.
+        </div>
+
+        <a href="{% url 'login' %}"
+           class="btn btn-primary">
+            Go to Login
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}
+```
+
+#### How the code works
+
+**Block 1 (html, 25 lines).** In Step 185, update reset complete page involved `password_reset_complete.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `{% extends 'base.html' %}` tells this page to reuse a shared layout rather than repeating the entire page structure. `{% block title %}Password Reset Complete - Inventory System{% endblock %}` marks the part of the page where a child template supplies its own content. `{% block content %}` marks the part of the page where a child template supplies its own content. The HTML element `<div class="row justify-content-center">` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The HTML element `<div class="col-md-7 col-lg-5">` creates or closes part of the page structure seen by the browser. The HTML element `<h2 class="mb-4">Password Reset Successful</h2>` creates or closes part of the page structure seen by the browser. The HTML element `<div class="alert alert-success">` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `</div>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'login' %}"` builds the address from a Django route name, so the link follows the route if its address later changes. `class="btn btn-primary">` sets the named value used by the next operation in this file. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–25:** The HTML element `</div>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 185. For Step 185, the proposed way to check update reset complete page was to open the related page in the browser and check that the route reached the intended view or template in `password_reset_complete.html`. Development continued in Step 186 before a complete result could be claimed.
+
+#### Next
+
+[Step 184: Update Set New Password Page](#step-184) · [Step 186: Update Employee List](#step-186)
