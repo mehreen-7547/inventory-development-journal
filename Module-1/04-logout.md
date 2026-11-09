@@ -1,24 +1,52 @@
-# Module 1, Chapter 4: Logout
+# MODULE 1 — Employee accounts
 
-## Step 80: Logout Function
+## Chapter 4: Logout (Steps 80–82)
 
-#### Next: Add logout functionality
+### Before we begin
 
-Open `accounts/views.py`.
+Users could log in, but there was no way to end the signed-in session from the website.
 
-**1.** Change the existing authentication import to:
+### What we worked on
+
+We added the logout function, connected a URL to it and placed a logout control on the homepage.
+
+### Picture it this way
+
+Signing in creates a session so Django remembers who you are. Logging out ends that session. A link or button by itself does not end it; the request must reach the logout view.
+
+### Find a step
+
+- [Step 80: Logout Function](#step-80)
+
+---
+
+<a id="step-80"></a>
+
+### Step 80: Logout Function
+
+#### Before this step
+
+We could sign in, but we also needed a safe way to sign out. The preceding step, Step 79, covered understand a django project versus an app, so this was the next part of the development sequence.
+
+#### What we did and why
+
+Logout tells Django to end the current login session. The session is what lets the website remember the signed-in person across multiple pages. Ending it means the next protected request needs a login again.
+
+#### Code and commands
+
+**Step 80, block 1.** This code sample or terminal command was used while working on logout function. The content below remains in its original sequence for Step 80, block 1.
 
 ```python
 from django.contrib.auth import authenticate, login, logout
 ```
 
-**2.** Add this import:
+**Step 80, block 2.** This code sample or terminal command was used while working on logout function. The content below remains in its original sequence for Step 80, block 2.
 
 ```python
 from django.views.decorators.http import require_POST
 ```
 
-**3.** Add this function below `loginpage()`:
+**Step 80, block 3.** This code sample or terminal command was used while working on logout function. The content below remains in its original sequence for Step 80, block 3.
 
 ```python
 @require_POST
@@ -27,80 +55,24 @@ def logoutpage(request):
     return redirect('login')
 ```
 
-**What it does:** Logs out the current user and redirects them to the login page.
+#### How the code works
 
-  NEW vs CLASS
-  **Where:** `accounts/views.py`
+**Block 1 (python, 1 lines).** In Step 80, logout function involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  **Class example:** `backend/secondproject/library/views.py` uses `logout(request)`.
+**Lines 1–1:** `from django.contrib.auth import authenticate, login, logout` makes a Python function, class or module available to the code that follows.
 
-  **Difference:** We added `@require_POST`.
+**Block 2 (python, 1 lines).** In Step 80, logout function involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-  **Why:** Prevents logout through an ordinary link or GET request.
+**Lines 1–1:** `from django.views.decorators.http import require_POST` makes a Python function, class or module available to the code that follows.
 
-  **Alternative:** The class version without this restriction.
+**Block 3 (python, 4 lines).** In Step 80, logout function involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
 
-**Expected result:** File saves successfully. We'll connect the logout URL next.
+**Lines 1–4:** `@require_POST` adds a check or behaviour around the view before Django runs the view itself. `def logoutpage(request):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `return redirect('login')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
 
-*Previous: Step 79 (Project vs App)  |  Next: Step 81 (Logout URL)*
+#### How we checked it
 
----
+Not tested yet at Step 80. For Step 80, the proposed way to check logout function was to revisit `accounts/views.py` and run the corresponding command or feature to see its result. Development continued in Step 81 before a complete result could be claimed.
 
-## Step 81: Logout URL
+#### Next
 
-#### Connect the logout function to a URL
-
-Open **`accounts/urls.py`**.
-
-Add the logout path below the login path:
-
-```python
-urlpatterns = [
-    path('login/', views.loginpage, name='login'),
-    path('logout/', views.logoutpage, name='logout'),
-]
-```
-
-**What this means:**
-
-- `/login/` → executes `loginpage()`
-- `/logout/` → connects to `logoutpage()`
-
-Because we used `@require_POST`, simply typing `/logout/` in the browser won't log you out.
-
-**Expected result:** Save the file. Django should show no errors.
-
-Next, we'll create the actual Logout button.
-
-*Previous: Step 80 (Logout Function)  |  Next: Step 82 (Logout Button)*
-
----
-
-## Step 82: Logout Button
-
-#### Add a Logout button to the homepage
-
-Open your homepage template (`home.html`, the file rendered by `core/views.py`).
-
-Inside the `<body>`, add:
-
-```html
-<form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
-```
-
-**What each part means:**
-
-- `<form>` — creates a form.
-- `method="POST"` — sends a POST request when submitted.
-- `{% url 'logout' %}` — finds the URL named `logout` in `accounts/urls.py`.
-- `{% csrf_token %}` — adds a security token that Django checks.
-- `<button>` — submits the form when clicked.
-
-**Expected result:** After logging in, you should see a Logout button on the homepage. Clicking it should return you to the login page.
-
-*Previous: Step 81 (Logout URL)  |  Next: Step 83 (Protect Homepage)*
-
----
+[Step 79: Understand a Django project versus an app](../Module-1/03-login.md#step-79) · [Step 81: Logout URL](#step-81)
