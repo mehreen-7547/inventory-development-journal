@@ -22,6 +22,7 @@ The report explains the work to a human reader. The tag is a bookmark in Git. Ne
 - [Step 49: Push Documentation](#step-49)
 - [Step 50: Finalize Report](#step-50)
 - [Step 51: Finalize README](#step-51)
+- [Step 52: Stage Final Updates](#step-52)
 
 ---
 
@@ -345,3 +346,40 @@ Not tested yet at Step 51. For Step 51, the proposed way to check finalize readm
 #### Next
 
 [Step 50: Finalize Report](#step-50) · [Step 52: Stage Final Updates](#step-52)
+
+
+---
+
+<a id="step-52"></a>
+
+### Step 52: Stage Final Updates
+
+#### Before this step
+
+The final report and README edits were both ready to save. Immediately before this, Step 51 dealt with finalize readme; the work here continued the same part of the application.
+
+#### What we did and why
+
+Staging them together meant the next commit would hold the matching versions of both documents.
+
+#### Code and commands
+
+**Step 52, block 1.** This code sample or terminal command was used while working on stage final updates. The content below remains in its original sequence for Step 52, block 1.
+
+```powershell
+git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 52, stage final updates involved `MODULE0_REPORT.md`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `git -C .\techmindz_inventory_module0_sqlite_atomic add MODULE0_REPORT.md README_M0.md` works with Git history or a GitHub connection; it does not itself change the website’s Django behaviour.
+
+#### How we checked it
+
+Not tested yet at Step 52. For Step 52, the proposed way to check stage final updates was to run `git status` and inspect the local or remote history for the expected change. Development continued in Step 53 before a complete result could be claimed.
+
+#### Next
+
+[Step 51: Finalize README](#step-51) · [Step 53: Final Documentation Commit](#step-53)
