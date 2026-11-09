@@ -32,6 +32,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 190: Correct Form Styling](#step-190)
 - [Step 191: Consolidate both employee forms](#step-191)
 - [Step 192: Update Edit Employee](#step-192)
+- [Step 193: Email Error Handling](#step-193)
 
 ---
 
@@ -1504,3 +1505,95 @@ Not tested yet at Step 192. For Step 192, the proposed way to check update edit 
 #### Next
 
 [Step 191: Consolidate both employee forms](#step-191) · [Step 193: Email Error Handling](#step-193)
+
+
+---
+
+<a id="step-193"></a>
+
+### Step 193: Email Error Handling
+
+#### Before this step
+
+A tricky problem remained: an administrator could save a new employee successfully, but Gmail might fail a moment later. The page could then show an error, making it look as though the account was never created. Immediately before this, Step 192 dealt with update edit employee; the work here continued the same part of the application.
+
+#### What we did and why
+
+We separated those two outcomes. First, the employee is saved. Then the code tries to send the welcome email. If sending fails, the page shows a warning about the email rather than pretending the whole employee creation failed.
+
+#### Code and commands
+
+**Step 193, block 1.** This code sample or terminal command was used while working on email error handling. The content below remains in its original sequence for Step 193, block 1.
+
+```python
+from smtplib import SMTPException
+```
+
+**Step 193, block 2.** This code sample or terminal command was used while working on email error handling. The content below remains in its original sequence for Step 193, block 2.
+
+```python
+employee = form.save()
+send_welcome_email(request, employee)
+messages.success(request, 'Employee created successfully.')
+return redirect('employee_list')
+```
+
+**Step 193, block 3.** This code sample or terminal command was used while working on email error handling. The content below remains in its original sequence for Step 193, block 3.
+
+```python
+            employee = form.save()
+
+            try:
+                send_welcome_email(request, employee)
+
+            except (SMTPException, OSError):
+                messages.error(
+                    request,
+                    'Employee created, but the setup email could not '
+                    'be sent. Use Resend Setup Email to try again.'
+                )
+
+            else:
+                messages.success(
+                    request,
+                    'Employee created successfully.'
+                )
+
+            return redirect('employee_list')
+```
+
+**Step 193, block 4.** This code sample or terminal command was used while working on email error handling. The content below remains in its original sequence for Step 193, block 4.
+
+```powershell
+python manage.py check
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 193, email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `from smtplib import SMTPException` makes a Python function, class or module available to the code that follows.
+
+**Block 2 (python, 4 lines).** In Step 193, email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–4:** `form.save()` writes the validated form values into the corresponding database record. `messages.success(request, 'Employee created successfully.')` prepares feedback that can appear when the user reaches the next page. `return redirect('employee_list')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 3 (python, 19 lines).** In Step 193, email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `form.save()` writes the validated form values into the corresponding database record. `messages.error(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 8–14:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `messages.success(` prepares feedback that can appear when the user reaches the next page.
+
+**Lines 15–19:** `return redirect('employee_list')` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser.
+
+**Block 4 (powershell, 1 lines).** In Step 193, email error handling involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py check` starts Python or one of its tools from the development terminal.
+
+#### How we checked it
+
+Not tested yet at Step 193. For Step 193, the proposed way to check email error handling was to start Django Shell, inspect the email settings and run a safe test send. Development continued in Step 194 before a complete result could be claimed.
+
+#### Next
+
+[Step 192: Update Edit Employee](#step-192) · [Step 194: Resend Email Error Handling](#step-194)
