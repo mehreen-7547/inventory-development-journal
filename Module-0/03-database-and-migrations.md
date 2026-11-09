@@ -19,6 +19,7 @@ The key difference is between a database change and a journal update. Writing no
 - [Step 25: Committing Development Journal Update](#step-25)
 - [Step 26: Clarify the journal commit](#step-26)
 - [Step 27: Pushing Development Journal to GitHub](#step-27)
+- [Step 28: Understanding the Migration Workflow](#step-28)
 
 ---
 
@@ -149,3 +150,99 @@ Not tested yet at Step 27. For Step 27, the proposed way to check pushing develo
 #### Next
 
 [Step 26: Clarify the journal commit](#step-26) · [Step 28: Understanding the Migration Workflow](#step-28)
+
+
+---
+
+<a id="step-28"></a>
+
+### Step 28: Understanding the Migration Workflow
+
+#### Before this step
+
+We had run the migration command, but it was not enough to memorize the word migrate. We wanted to know what it actually did. Immediately before this, Step 27 dealt with pushing development journal to github; the work here continued the same part of the application.
+
+#### What we did and why
+
+Django looks at the migration instructions stored in project files, applies any outstanding changes to the database, and remembers which instructions it has already applied. Changing model code by itself is not enough to update an existing database.
+
+#### Code and commands
+
+**Step 28, block 1.** This code sample or terminal command was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 1.
+
+```powershell
+python manage.py showmigrations
+```
+
+**Step 28, block 2.** This output was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 2.
+
+```text
+auth
+ [ ] 0001_initial
+ [ ] 0002_alter_permission_name_max_length
+```
+
+**Step 28, block 3.** This code sample or terminal command was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 3.
+
+```powershell
+python manage.py migrate
+```
+
+**Step 28, block 4.** This output was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 4.
+
+```text
+auth
+ [X] 0001_initial
+ [X] 0002_alter_permission_name_max_length
+```
+
+**Step 28, block 5.** This code sample or terminal command was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 5.
+
+```powershell
+python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver
+```
+
+**Step 28, block 6.** This output was used while working on understanding the migration workflow. The content below remains in its original sequence for Step 28, block 6.
+
+```text
+Starting development server at http://127.0.0.1:8000/
+```
+
+#### How the code works
+
+**Block 1 (powershell, 1 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py showmigrations` starts Python or one of its tools from the development terminal.
+
+**Block 2 (text, 3 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 28, output block 2 showed the result rather than another command. Its visible value was `auth`, which mattered for understanding the migration workflow.
+
+**Block 3 (powershell, 1 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python manage.py migrate` starts Python or one of its tools from the development terminal.
+
+**Block 4 (text, 3 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 28, output block 4 showed the result rather than another command. Its visible value was `auth`, which mattered for understanding the migration workflow.
+
+**Block 5 (powershell, 1 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** The command `python .\techmindz_inventory_module0_sqlite_atomic\manage.py runserver` starts Python or one of its tools from the development terminal.
+
+**Block 6 (text, 1 lines).** In Step 28, understanding the migration workflow involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+In Step 28, output block 6 showed the result rather than another command. Its visible value was `Starting development server at http://127.0.0.1:8000/`, which mattered for understanding the migration workflow.
+
+#### How we checked it
+
+Not tested yet at Step 28. For Step 28, the proposed way to check understanding the migration workflow was to run the appropriate Django migration or model check and inspect its result in the terminal. Step 28 did not establish a successful outcome for understanding the migration workflow.
+
+#### Next
+
+[Step 27: Pushing Development Journal to GitHub](#step-27) · [Step 29: Confirming Terminal Environment](../Module-0/04-server-and-admin-account.md#step-29)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **database and migrations** was needed at this point, and describe what the application did differently after the final step of this chapter.
