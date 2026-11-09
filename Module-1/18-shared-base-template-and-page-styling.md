@@ -30,6 +30,7 @@ The shared base.html template is a page frame reused everywhere. Each child page
 - [Step 188: Fix Form Styling](#step-188)
 - [Step 189: Add CSS classes to creation form widgets](#step-189)
 - [Step 190: Correct Form Styling](#step-190)
+- [Step 191: Consolidate both employee forms](#step-191)
 
 ---
 
@@ -1230,3 +1231,115 @@ Not tested yet at Step 190. For Step 190, the proposed way to check correct form
 #### Next
 
 [Step 189: Add CSS classes to creation form widgets](#step-189) · [Step 191: Consolidate both employee forms](#step-191)
+
+
+---
+
+<a id="step-191"></a>
+
+### Step 191: Consolidate both employee forms
+
+#### Before this step
+
+After several small corrections, the complete form file was easier to understand than a patchwork of partial edits. Immediately before this, Step 190 dealt with correct form styling; the work here continued the same part of the application.
+
+#### What we did and why
+
+We brought the creation and edit form definitions together in one final version. This makes it clearer which fields create a new account, which fields edit an existing one, and where the styling is applied.
+
+#### Code and commands
+
+**Compared with the earlier version:** Insert lines around `from django import forms / from .models import CustomUser`; Insert lines around `def save(self, commit=True):`. For Step 191, this comparison used the code block from Step 190, which might not represent the whole file.
+
+**Step 191, block 1.** This code sample or terminal command was used while working on consolidate both employee forms. The content below remains in its original sequence for Step 191, block 1.
+
+```python
+from django import forms
+from .models import CustomUser
+
+
+class EmployeeCreationForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'first_name', 'last_name', 'email', 'role']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_unusable_password()
+
+        if commit:
+            user.save()
+
+        return user
+
+
+class EmployeeEditForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'role'
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['role'].choices = [
+            ('manager', 'Inventory Manager'),
+            ('sales', 'Sales Staff')
+        ]
+
+        for name, field in self.fields.items():
+            if name == 'role':
+                field.widget.attrs['class'] = 'form-select'
+            else:
+                field.widget.attrs['class'] = 'form-control'
+```
+
+#### How the code works
+
+**Block 1 (python, 58 lines).** In Step 191, consolidate both employee forms involved `accounts/forms.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** `from django import forms` makes a Python function, class or module available to the code that follows. `from .models import CustomUser` makes a Python function, class or module available to the code that follows. `class EmployeeCreationForm(forms.ModelForm):` declares a Python class, grouping related data or behaviour together. `class Meta:` declares a Python class, grouping related data or behaviour together.
+
+**Lines 8–14:** `model = CustomUser` sets the named value used by the next operation in this file. `fields = ['username', 'first_name', 'last_name', 'email', 'role']` sets the named value used by the next operation in this file. `def __init__(self, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `self.fields['role'].choices = [` sets the named value used by the next operation in this file.
+
+**Lines 15–21:** `for name, field in self.fields.items():` repeats the following operation once for each matching item. `if name == 'role':` is a condition: the code inside this branch only runs when its condition is satisfied. `field.widget.attrs['class'] = 'form-select'` sets the named value used by the next operation in this file.
+
+**Lines 22–28:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `field.widget.attrs['class'] = 'form-control'` sets the named value used by the next operation in this file. `def save(self, commit=True):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `user = super().save(commit=False)` sets the named value used by the next operation in this file.
+
+**Lines 29–35:** `if commit:` is a condition: the code inside this branch only runs when its condition is satisfied. `return user` sends the result back to the caller; for a Django view, this usually determines the response shown in the browser. `class EmployeeEditForm(forms.ModelForm):` declares a Python class, grouping related data or behaviour together.
+
+**Lines 36–42:** `class Meta:` declares a Python class, grouping related data or behaviour together. `model = CustomUser` sets the named value used by the next operation in this file. `fields = [` sets the named value used by the next operation in this file.
+
+**Lines 43–49:** `def __init__(self, *args, **kwargs):` begins the function responsible for the operation described in this step; the indented lines beneath it run when that function is called. `self.fields['role'].choices = [` sets the named value used by the next operation in this file.
+
+**Lines 50–56:** `for name, field in self.fields.items():` repeats the following operation once for each matching item. `if name == 'role':` is a condition: the code inside this branch only runs when its condition is satisfied. `field.widget.attrs['class'] = 'form-select'` sets the named value used by the next operation in this file.
+
+**Lines 57–58:** The `else` branch handles the alternative case when the preceding condition was not satisfied. `field.widget.attrs['class'] = 'form-control'` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 191. For Step 191, the proposed way to check consolidate both employee forms was to revisit `accounts/forms.py` and run the corresponding command or feature to see its result. Development continued in Step 192 before a complete result could be claimed.
+
+#### Next
+
+[Step 190: Correct Form Styling](#step-190) · [Step 192: Update Edit Employee](#step-192)
