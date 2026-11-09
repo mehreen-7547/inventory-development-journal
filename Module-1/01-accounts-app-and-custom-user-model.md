@@ -22,6 +22,7 @@ Every person signs in through the same Django login system, but their role helps
 - [Step 59: App Creation](#step-59)
 - [Step 60: Configure Settings](#step-60)
 - [Step 61: Custom User Model](#step-61)
+- [Step 62: Understand CustomUser inheritance](#step-62)
 
 ---
 
@@ -319,3 +320,60 @@ Not tested yet at Step 61. For Step 61, the proposed way to check custom user mo
 #### Next
 
 [Step 60: Configure Settings](#step-60) · [Step 62: Understand CustomUser inheritance](#step-62)
+
+
+---
+
+<a id="step-62"></a>
+
+### Step 62: Understand CustomUser inheritance
+
+#### Before this step
+
+The CustomUser class was short, but it seemed to gain many fields without writing them out. We needed to understand why. Immediately before this, Step 61 dealt with custom user model; the work here continued the same part of the application.
+
+#### What we did and why
+
+AbstractUser is Django's ready-made user blueprint. By inheriting from it, our class gets username, password and other account behaviour. We add only the business-specific difference: the role. Later migrations turn this model into database tables.
+
+#### Code and commands
+
+**Step 62, block 1.** This code sample or terminal command was used while working on understand customuser inheritance. The content below remains in its original sequence for Step 62, block 1.
+
+```python
+role = models.CharField(...)
+```
+
+**Step 62, block 2.** This code sample or terminal command was used while working on understand customuser inheritance. The content below remains in its original sequence for Step 62, block 2.
+
+```python
+class CustomUser(AbstractUser):
+```
+
+**Step 62, block 3.** This code sample or terminal command was used while working on understand customuser inheritance. The content below remains in its original sequence for Step 62, block 3.
+
+```python
+REQUIRED_FIELDS = ['email', 'role']
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 62, understand customuser inheritance involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `role = models.CharField(...)` sets the named value used by the next operation in this file.
+
+**Block 2 (python, 1 lines).** In Step 62, understand customuser inheritance involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `class CustomUser(AbstractUser):` declares a Python class, grouping related data or behaviour together.
+
+**Block 3 (python, 1 lines).** In Step 62, understand customuser inheritance involved `manage.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `REQUIRED_FIELDS = ['email', 'role']` sets the named value used by the next operation in this file.
+
+#### How we checked it
+
+Not tested yet at Step 62. For Step 62, the proposed way to check understand customuser inheritance was to revisit `manage.py` and run the corresponding command or feature to see its result. Development continued in Step 63 before a complete result could be claimed.
+
+#### Next
+
+[Step 61: Custom User Model](#step-61) · [Step 63: Understanding AbstractUser](#step-63)

@@ -63,3 +63,4 @@
 | 59 | Module 1, Chapter 1 | [ App Creation ](Module-1/01-accounts-app-and-custom-user-model.md#step-59) |
 | 60 | Module 1, Chapter 1 | [ Configure Settings ](Module-1/01-accounts-app-and-custom-user-model.md#step-60) |
 | 61 | Module 1, Chapter 1 | [ Custom User Model ](Module-1/01-accounts-app-and-custom-user-model.md#step-61) |
+| 62 | Module 1, Chapter 1 | [ Understand CustomUser inheritance ](Module-1/01-accounts-app-and-custom-user-model.md#step-62) |
