@@ -27,6 +27,7 @@ Editing is not creating a second employee. The view finds the existing account b
 - [Step 153: Combine the list and selection controls](#step-153)
 - [Step 154: External CSS](#step-154)
 - [Step 155: Fix Row Selection](#step-155)
+- [Step 156: Correct employee row selection](#step-156)
 
 ---
 
@@ -901,3 +902,176 @@ Not tested yet at Step 155. For Step 155, the proposed way to check fix row sele
 #### Next
 
 [Step 154: External CSS](#step-154) · [Step 156: Correct employee row selection](#step-156)
+
+
+---
+
+<a id="step-156"></a>
+
+### Step 156: Correct employee row selection
+
+#### Before this step
+
+After finding the row-selection problem, we replaced the affected template code with a corrected version. Immediately before this, Step 155 dealt with fix row selection; the work here continued the same part of the application.
+
+#### What we did and why
+
+The updated employee list keeps the same records and edit routes but changes how the selection interface works. This is a correction to an earlier step, not a separate employee-management feature.
+
+#### Code and commands
+
+**Compared with the earlier version:** Replace lines around `{% load static %}`; Replace lines around `<p>Select an employee to edit.</p>`; Replace lines around `<p>`; Replace lines around `<br>`. For Step 156, this comparison used the code block from Step 155, which might not represent the whole file.
+
+**Step 156, block 1.** This code sample or terminal command was used while working on correct employee row selection. The content below remains in its original sequence for Step 156, block 1.
+
+```html
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Employees</title>
+    <link rel="stylesheet"
+          href="{% static 'accounts/style.css' %}">
+</head>
+
+<body>
+
+    <h2>Manage Employees</h2>
+
+    <p>
+        <a href="{% url 'create_employee' %}">
+            Add New Employee
+        </a>
+    </p>
+
+    {% if edit_mode %}
+
+        <p>Select an employee to edit.</p>
+
+        <a href="{% url 'employee_list' %}">
+            Cancel Edit
+        </a>
+
+    {% else %}
+
+        <p>
+            <a href="{% url 'employee_list' %}?mode=edit">
+                Edit Employee
+            </a>
+        </p>
+
+    {% endif %}
+
+    <br>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+
+        {% for employee in employees %}
+
+        <tr {% if edit_mode %}class="selectable"{% endif %}>
+
+            <td>
+                {% if edit_mode %}
+                    <a class="row-link"
+                       href="{% url 'edit_employee' employee.id %}">
+                        {{ employee.username }}
+                    </a>
+                {% else %}
+                    {{ employee.username }}
+                {% endif %}
+            </td>
+
+            <td>
+                {{ employee.first_name }}
+                {{ employee.last_name }}
+            </td>
+
+            <td>{{ employee.email }}</td>
+
+            <td>{{ employee.get_role_display }}</td>
+
+            <td>
+                {% if employee.is_active %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="{% url 'home' %}">
+            Back to Home
+        </a>
+    </p>
+
+</body>
+</html>
+```
+
+#### How the code works
+
+**Block 1 (html, 102 lines).** In Step 156, correct employee row selection involved `employee_list.html`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–7:** The HTML element `<!DOCTYPE html>` creates or closes part of the page structure seen by the browser. The HTML element `<html>` creates or closes part of the page structure seen by the browser. The HTML element `<head>` creates or closes part of the page structure seen by the browser. The HTML element `<title>Manage Employees</title>` creates or closes part of the page structure seen by the browser.
+
+**Lines 8–14:** The link `href="{% static 'accounts/style.css' %}">` lets the user navigate to the named screen from this page. The HTML element `</head>` creates or closes part of the page structure seen by the browser. The HTML element `<body>` creates or closes part of the page structure seen by the browser. The HTML element `<h2>Manage Employees</h2>` creates or closes part of the page structure seen by the browser.
+
+**Lines 15–21:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'create_employee' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 22–28:** The HTML element `<p>Select an employee to edit.</p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 29–35:** The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'employee_list' %}?mode=edit">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser. The HTML element `</p>` creates or closes part of the page structure seen by the browser.
+
+**Lines 36–42:** The HTML element `<br>` creates or closes part of the page structure seen by the browser. The HTML element `<table border="1" cellpadding="10">` creates or closes part of the page structure seen by the browser.
+
+**Lines 43–49:** The HTML element `<tr>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Username</th>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Name</th>` creates or closes part of the page structure seen by the browser. The HTML element `<th>Email</th>` creates or closes part of the page structure seen by the browser.
+
+**Lines 50–56:** `{% for employee in employees %}` repeats the following operation once for each matching item. `<tr {% if edit_mode %}class="selectable"{% endif %}>` decides which HTML is included based on the value Django provided. The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if edit_mode %}` decides which HTML is included based on the value Django provided.
+
+**Lines 57–63:** The HTML element `<a class="row-link"` creates or closes part of the page structure seen by the browser. `href="{% url 'edit_employee' employee.id %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 64–70:** The HTML element `</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>` creates or closes part of the page structure seen by the browser.
+
+**Lines 71–77:** The HTML element `<td>{{ employee.email }}</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>{{ employee.get_role_display }}</td>` creates or closes part of the page structure seen by the browser. The HTML element `<td>` creates or closes part of the page structure seen by the browser. `{% if employee.is_active %}` decides which HTML is included based on the value Django provided.
+
+**Lines 78–84:** The HTML element `</td>` creates or closes part of the page structure seen by the browser. The HTML element `</tr>` creates or closes part of the page structure seen by the browser.
+
+**Lines 85–91:** The HTML element `<tr>` creates or closes part of the page structure seen by the browser. The HTML element `<td colspan="5">No employees found.</td>` creates or closes part of the page structure seen by the browser. The HTML element `</tr>` creates or closes part of the page structure seen by the browser.
+
+**Lines 92–98:** The HTML element `</table>` creates or closes part of the page structure seen by the browser. The HTML element `<p>` creates or closes part of the page structure seen by the browser. `<a href="{% url 'home' %}">` builds the address from a Django route name, so the link follows the route if its address later changes. The HTML element `</a>` creates or closes part of the page structure seen by the browser.
+
+**Lines 99–102:** The HTML element `</p>` creates or closes part of the page structure seen by the browser. The HTML element `</body>` creates or closes part of the page structure seen by the browser. The HTML element `</html>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 156. For Step 156, the proposed way to check correct employee row selection was to revisit `employee_list.html` and run the corresponding command or feature to see its result. Step 156 did not establish a successful outcome for correct employee row selection.
+
+#### Next
+
+[Step 155: Fix Row Selection](#step-155) · [Step 157: Employee Deactivation](../Module-1/15-activate-deactivate-and-resend-setup-email.md#step-157)
+
+
+### Check your understanding
+
+Without looking at the code, explain why **edit employee** was needed at this point, and describe what the application did differently after the final step of this chapter.

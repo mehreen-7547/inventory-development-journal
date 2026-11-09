@@ -157,3 +157,4 @@
 | 153 | Module 1, Chapter 14 | [ Combine the list and selection controls ](Module-1/14-edit-employee.md#step-153) |
 | 154 | Module 1, Chapter 14 | [ External CSS ](Module-1/14-edit-employee.md#step-154) |
 | 155 | Module 1, Chapter 14 | [ Fix Row Selection ](Module-1/14-edit-employee.md#step-155) |
+| 156 | Module 1, Chapter 14 | [ Correct employee row selection ](Module-1/14-edit-employee.md#step-156) |
