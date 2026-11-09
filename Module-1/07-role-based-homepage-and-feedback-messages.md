@@ -20,6 +20,7 @@ This chapter is about what the user sees. Proper server-side protection for rest
 - [Step 92: Admin Link Visibility](#step-92)
 - [Step 93: Why hiding a link does not secure Django Admin](#step-93)
 - [Step 94: Verify manager access is restricted](#step-94)
+- [Step 95: Login Error Messages](#step-95)
 
 ---
 
@@ -193,3 +194,52 @@ Not tested yet at Step 94. For Step 94, the proposed way to check verify manager
 #### Next
 
 [Step 93: Why hiding a link does not secure Django Admin](#step-93) · [Step 95: Login Error Messages](#step-95)
+
+
+---
+
+<a id="step-95"></a>
+
+### Step 95: Login Error Messages
+
+#### Before this step
+
+A wrong username or password needs an understandable message, otherwise users do not know what happened. Immediately before this, Step 94 dealt with verify manager access is restricted; the work here continued the same part of the application.
+
+#### What we did and why
+
+The login template displays the error or feedback set by the view. It does not reveal the correct password or tell a user how to bypass authentication.
+
+#### Code and commands
+
+**Step 95, block 1.** This code sample or terminal command was used while working on login error messages. The content below remains in its original sequence for Step 95, block 1.
+
+```python
+messages.error(request, 'Invalid username or password.')
+```
+
+**Step 95, block 2.** This code sample or terminal command was used while working on login error messages. The content below remains in its original sequence for Step 95, block 2.
+
+```html
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+```
+
+#### How the code works
+
+**Block 1 (python, 1 lines).** In Step 95, login error messages involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–1:** `messages.error(request, 'Invalid username or password.')` prepares feedback that can appear when the user reaches the next page.
+
+**Block 2 (html, 3 lines).** In Step 95, login error messages involved `accounts/views.py`. We followed the statements in the order shown, so the setup appears before the operation that uses it.
+
+**Lines 1–3:** `{% for message in messages %}` repeats the following operation once for each matching item. The HTML element `<p>{{ message }}</p>` creates or closes part of the page structure seen by the browser.
+
+#### How we checked it
+
+Not tested yet at Step 95. For Step 95, the proposed way to check login error messages was to open the related page in the browser and check that the route reached the intended view or template in `accounts/views.py`. Development continued in Step 96 before a complete result could be claimed.
+
+#### Next
+
+[Step 94: Verify manager access is restricted](#step-94) · [Step 96: Password Change Confirmation](#step-96)

@@ -96,3 +96,4 @@
 | 92 | Module 1, Chapter 7 | [ Admin Link Visibility ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-92) |
 | 93 | Module 1, Chapter 7 | [ Why hiding a link does not secure Django Admin ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-93) |
 | 94 | Module 1, Chapter 7 | [ Verify manager access is restricted ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-94) |
+| 95 | Module 1, Chapter 7 | [ Login Error Messages ](Module-1/07-role-based-homepage-and-feedback-messages.md#step-95) |
