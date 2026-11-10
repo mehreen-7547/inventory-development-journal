@@ -93,3 +93,19 @@ Every term below is written for someone revising Django from the beginning.
 **TestCase / setUp():** Django's automated test class and per-test preparation method for repeatable tests.
 
 **assertRedirects():** Django test assertion checking a redirect goes to the expected page.
+
+**SKU:** A unique code identifying a product, such as `TEST-001`.
+
+**ForeignKey:** A model field linking one database record to another, such as a product to its supplier.
+
+**PROTECT:** A Django deletion rule that prevents deleting a supplier while products still refer to it.
+
+**DecimalField:** A database field for fixed-precision numbers, useful for prices.
+
+**select_related():** Loads linked supplier data with products in one database query.
+
+**editable=False:** Prevents a model field such as `on_hand` from appearing in ordinary ModelForms; it is not a complete security control by itself.
+
+**instance=product:** Tells ModelForm to edit an existing Product rather than create another.
+
+**distinct():** Removes duplicate database results, used when combining supplier choices.
