@@ -295,3 +295,10 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 283 | M2 · Ch 9 | [Verify and publish Chapter 9](Module-2/09-opening-stock-registration.md#step-283) |
 
 | 284 | M2 · Ch 10 | [Correct the Opening Stock edit-form test and close Module 2](Module-2/10-module-2-closing-test-correction.md#step-284) |
+
+| 285 | M3 · Ch 1 | [Extend the stock service (interactive Steps 418–419)](Module-3/01-stock-adjustments-and-product-modes.md#step-285) |
+| 286 | M3 · Ch 1 | [Build the adjustment form, view, route and page](Module-3/01-stock-adjustments-and-product-modes.md#step-286) |
+| 287 | M3 · Ch 1 | [Verify stock corrections in tests and browser](Module-3/01-stock-adjustments-and-product-modes.md#step-287) |
+| 288 | M3 · Ch 1 | [Add Edit, History and Adjust selection modes](Module-3/01-stock-adjustments-and-product-modes.md#step-288) |
+| 289 | M3 · Ch 1 | [Remove stock actions from Edit Product](Module-3/01-stock-adjustments-and-product-modes.md#step-289) |
+| 290 | M3 · Ch 1 | [Verify and publish Chapter 1](Module-3/01-stock-adjustments-and-product-modes.md#step-290) |
