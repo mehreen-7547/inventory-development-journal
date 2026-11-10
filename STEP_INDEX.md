@@ -255,3 +255,13 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 249 | M2 · Ch 2 | [Create the Add Supplier HTML form](Module-2/02-create-supplier.md#step-249) |
 | 250 | M2 · Ch 2 | [Register the Add Supplier URL and test saving](Module-2/02-create-supplier.md#step-250) |
 | 251 | M2 · Ch 2 | [Add the Add Supplier link to the list page](Module-2/02-create-supplier.md#step-251) |
+
+| 252 | M2 · Ch 3 | [Create the Manager-only Supplier Edit view](Module-2/03-edit-supplier.md#step-252) |
+| 253 | M2 · Ch 3 | [Register and verify the supplier-specific edit URL](Module-2/03-edit-supplier.md#step-253) |
+| 254 | M2 · Ch 3 | [Reuse the Supplier form for create and edit](Module-2/03-edit-supplier.md#step-254) |
+| 255 | M2 · Ch 3 | [Recover the Supplier List after a template mix-up](Module-2/03-edit-supplier.md#step-255) |
+| 256 | M2 · Ch 3 | [Adopt the single Edit Supplier button and selection mode](Module-2/03-edit-supplier.md#step-256) |
+| 257 | M2 · Ch 3 | [Make Supplier rows selectable only in edit mode](Module-2/03-edit-supplier.md#step-257) |
+| 258 | M2 · Ch 3 | [Create an external Catalog stylesheet](Module-2/03-edit-supplier.md#step-258) |
+| 259 | M2 · Ch 3 | [Connect the CSS and diagnose the initial 404](Module-2/03-edit-supplier.md#step-259) |
+| 260 | M2 · Ch 3 | [Verify Chapter 3 and publish the code repository](Module-2/03-edit-supplier.md#step-260) |
