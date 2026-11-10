@@ -126,13 +126,13 @@ Every term below is written for someone revising Django from the beginning.
 
 **StringIO:** A Python object used to capture text output in automated tests.
 
-**Sale:** One completed or voided transaction record. Its model stores totals and transaction metadata; checkout logic is still pending.
+**Sale:** One completed or voided transaction record. Its model stores totals and transaction metadata; recording is implemented in `sales/services.py`; user-facing checkout pages are pending.
 
 **SaleLine:** One product row belonging to a sale, with quantity, historical product name and selling price.
 
 **Snapshot:** A copy of a product name or price saved at transaction time so old sales are not rewritten when catalog data changes.
 
-**Submission key:** A unique value intended to help prevent saving the same sale twice; its enforcement is not implemented yet.
+**Submission key:** A unique value intended to help prevent saving the same sale twice; the service checks it and the database enforces uniqueness.
 
 **Idempotency:** A rule that repeating the same request does not create a second transaction.
 
@@ -141,3 +141,15 @@ Every term below is written for someone revising Django from the beginning.
 **Choices:** The allowed labels for a model field, such as `completed` or `voided`.
 
 **Migration history:** Django's record of database migrations already applied. Resetting it is dangerous when real records exist.
+
+**record_sale():** The Sales service that validates a purchase, saves its lines and deducts stock in one database transaction.
+
+**transaction.atomic():** A Django database block that either saves all its changes or rolls them back together after an error.
+
+**IntegrityError:** A database exception, such as trying to insert a duplicate value into a unique field.
+
+**Savepoint:** A smaller rollback boundary inside a transaction, used when handling an expected database error.
+
+**Rollback:** Undoing all changes in a failed transaction so stock and sales remain consistent.
+
+**patch():** A testing helper that temporarily replaces a function to simulate a failure.
