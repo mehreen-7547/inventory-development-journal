@@ -11,6 +11,6 @@ This map links journal explanations to source files and GitHub commits. It is no
 
 | Module 4 Chapter 1 | [`18022db`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/18022db), [`7af5b5e`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/7af5b5e) | `config/settings.py`, `config/urls.py`, `sales/apps.py`, `sales/models.py`, `sales/admin.py`, `sales/migrations/0001_initial.py`, `sales/tests.py`, `sales/urls.py` — Sales schema and URL setup | [Sales Setup](Module-4/01-sales-setup.md) |
 
-**Latest source checkpoint:** `b2ae5c6` on `main`; user reported 27 Sales tests and 138 total tests passed, with no pending migrations. Earlier chapters and their exact source mappings are described in their individual journal files; this is a focused map for the current inventory work, not a claim to have remapped every historic source file.
-
 | Module 4 Chapter 2 | [`b2ae5c6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b2ae5c6355e98e3ad9c0a5206aec2ba3be9a6418) | `sales/services.py` — atomic `record_sale()`, stock movements, discounts and duplicate-submission checks; `sales/tests.py` — transaction, permission, validation and rollback tests | [Recording Sales](Module-4/02-recording-sales.md) |
+
+**Latest source checkpoint:** `b2ae5c6` on `main`; user reported 27 Sales tests and 138 total tests passed, with no pending migrations. Earlier chapters and their exact source mappings are described in their individual journal files; this is a focused map for the current inventory work, not a claim to have remapped every historic source file.
