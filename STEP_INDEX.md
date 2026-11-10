@@ -293,3 +293,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 281 | M2 · Ch 9 | [Save the product and first stock movement together](Module-2/09-opening-stock-registration.md#step-281) |
 | 282 | M2 · Ch 9 | [Test opening stock and correct a misleading test](Module-2/09-opening-stock-registration.md#step-282) |
 | 283 | M2 · Ch 9 | [Verify and publish Chapter 9](Module-2/09-opening-stock-registration.md#step-283) |
+
+| 284 | M2 · Ch 10 | [Correct the Opening Stock edit-form test and close Module 2](Module-2/10-module-2-closing-test-correction.md#step-284) |
