@@ -1,46 +1,35 @@
-# Development handoff — verified through Module 4 Chapter 1
+# Development handoff — verified through Module 4 Chapter 2
 
 ## Repositories
 - Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Never modify `main` or `study-3` in journal repository.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Never modify journal `main` or `study-3`.
 
-## Verified checkpoint
-- Last interactive development step: **444**.
-- Last journal step: **306**; **44 chapters**.
-- Source commits: `18022db` (Sales Setup), `7af5b5e` (missing URL integration).
-- User terminal: **114 Django tests passed** after both commits; final source branch `main` at `7af5b5e`; clean status output.
-- Journal: [Module 4 Chapter 1](Module-4/01-sales-setup.md), journal Steps 295–306, interactive Steps 428–444.
+## Latest checkpoint
+- Interactive development Step **457**; journal Step **316**; **45 chapters**.
+- Source commit: [`b2ae5c6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b2ae5c6355e98e3ad9c0a5206aec2ba3be9a6418), confirmed on GitHub.
+- User terminal: **27 Sales tests and 138 total tests passed**; no pending migrations. User subsequently confirmed successful commit/push.
+- Journal: [Module 4 Chapter 2](Module-4/02-recording-sales.md).
 
-## Implemented in Sales
-- `sales` app registered in `config/settings.py`.
-- `Sale` and `SaleLine` schema, with protected FKs, discounts and totals fields, submission key, historical snapshots and void metadata.
-- Initial migration `sales/migrations/0001_initial.py`.
-- Both models registered in Django Admin.
-- Three Sales model-structure tests in `sales/tests.py`.
-- `config/urls.py` includes `sales.urls`; `sales/urls.py` has an empty `urlpatterns` list.
+## Implemented in Chapter 2
+- `sales/services.py`: `record_sale(items, user, submission_key, discount_type='none', discount_value=0)`.
+- Sales/manager role and active-user validation; active products, positive quantities and duplicate-item validation.
+- Fixed and percentage discounts; sale totals and historical SaleLine name/price snapshots.
+- `transaction.atomic()` saves Sale, SaleLine and stock movements together; a late failure rolls everything back.
+- Existing matching submission key returns the original sale; mismatched request/user is rejected. Database uniqueness and nested savepoint handle insert integrity errors.
+- `sales/tests.py`: 27 Sales tests in total, including 3 earlier model tests; 138 full-project tests.
 
 ## Not implemented yet
-- No sale creation service, stock deduction, discount calculations, idempotency enforcement, void service, user-facing Sales forms/pages, or sales dashboards. Model fields alone are not working features.
-- The approved next area is Sales transaction logic and its tests; follow the frozen v3 plan.
+- Sales forms, views, checkout templates, customer-facing sales routes and dashboards.
+- `void_sale()` and stock reversal; void metadata fields in the model do not mean voiding works.
+- No concurrent multi-process stress test or guarantee that a racing retry returns the existing sale: the loser can receive a controlled error.
 
-## Migration repair
-- An early temporary `Sale`/`SaleItem` migration was applied, then the models were corrected to `Sale`/`SaleLine`. Adding non-null `created_by` triggered a Django default prompt. In the empty development Sales database only, the user dropped Sales tables, cleared Sales migration history, deleted the old initial migration and regenerated a correct `0001_initial.py`. Do **not** repeat that reset against real transaction data.
-
-## Source publication detail
-- First commit `18022db` omitted `config/urls.py` and `sales/urls.py` from staging. Second commit `7af5b5e` added both, and 114 tests passed again.
+## Next work
+- Module 4 Chapter 3: implement the user-facing Sales recording workflow in small, tested steps. Reuse `record_sale()` rather than changing stock directly in a view. Verify the frozen plan before deciding exact page design or voiding order.
 
 ## Workflow requirements
-- The user prefers grouped related code changes and terminal commands, concise explanations, exact filenames and NEW vs CLASS markers.
-- At each chapter close, run guarded tests, stage, commit and push source; then write and verify the journal chapter and README, STEP_INDEX, GLOSSARY, SOURCE_MAPPING and HANDOFF on `study-2` before advancing.
-- Never claim features exist merely because their model fields have been created.
+- Exact filenames and NEW vs CLASS markers; concise explanations; group related code edits.
+- At chapter close: run tests, stage/commit/push source; then publish and verify chapter plus README, STEP_INDEX, SOURCE_MAPPING, GLOSSARY and HANDOFF on journal `study-2` before advancing.
 
-## Navigation
-- [README](README.md) · [Step index](STEP_INDEX.md) · [Source mapping](SOURCE_MAPPING.md) · [Glossary](GLOSSARY.md)
-
-## Prior handoff
-## Implemented behavior
-- Product and supplier management; opening stock and StockMovement history.
-- Manager-only stock adjustment using `adjust_stock()`, with expected-balance checks and a product-list action mode.
-- Read-only `python manage.py check_ledger` command. It checks movement continuity, arithmetic and final balance against `Product.on_hand`. It reports errors and raises `CommandError` without changing data.
-- Four command tests plus two separate movement-integrity tests are present in `inventory/tests.py`.
-
+## Previous checkpoint
+- Module 4 Chapter 1: Sales models, migrations, admin and empty URL skeleton; commits `18022db` and `7af5b5e`, 114 tests.
+- Module 3 Chapter 2: stock ledger integrity command; commit `5d662eb`.
