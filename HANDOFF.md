@@ -1,32 +1,42 @@
-# Development handoff — verified through Module 2 Chapter 4
+# Development handoff — verified through Module 3 Chapter 2
 
 ## Repositories
 - Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`; do not modify its `main` or `study-3`.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Do not change `main` or `study-3`.
 
-## Checkpoint
-- Chapter: Module 2 Chapter 4 — Activate/Deactivate Supplier.
-- Last interactive development step: **403**. Last response number: **003** (separate numbering).
-- Journal: **269 continuous steps**, **35 chapters**. Chapter 4 = steps **261–269**.
-- Source commit: [`1c3f0ecb2474f3285c0b529fcf00fb67c9e6ab0f`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/1c3f0ecb2474f3285c0b529fcf00fb67c9e6ab0f).
-- Verified source files: `catalog/views.py`, `catalog/urls.py`, `catalog/templates/catalog/supplier_form.html`, `catalog/templates/catalog/supplier_list.html`, `catalog/tests.py`, `core/templates/core/home.html`.
+## Current verified checkpoint
+- Last interactive development step: **427**.
+- Last journal step: **294**; **43 chapters**.
+- Source commit: [`5d662eb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5d662eb).
+- User's final terminal output: **111 Django tests passed**; source pushed to `main`; clean `git status --short`.
+- Latest journal chapter: [Module 3 Chapter 2](Module-3/02-stock-ledger-integrity.md), journal Steps 291–294.
+- Previous journal chapter: [Module 3 Chapter 1](Module-3/01-stock-adjustments-and-product-modes.md), journal Steps 285–290, source commit `983d4b0`.
 
-## Completed behavior
-- Manager-only Supplier list, create, edit, deactivate and reactivate.
-- Status view accepts POST only, toggles existing `is_active` and preserves the record.
-- Status controls appear on the Edit Supplier page only, in a separate CSRF-protected form.
-- Supplier List has five columns and no row-level Action buttons.
-- Manager dashboard links to Manage Suppliers.
-- Six catalog tests cover both transitions, GET rejection, Sales Staff restriction, anonymous restriction, and record persistence.
-- User reported `python manage.py check`, all six catalog tests and browser workflow passed; source files were independently verified on GitHub, but tests were not rerun by the assistant.
+## Implemented behavior
+- Product and supplier management; opening stock and StockMovement history.
+- Manager-only stock adjustment using `adjust_stock()`, with expected-balance checks and a product-list action mode.
+- Read-only `python manage.py check_ledger` command. It checks movement continuity, arithmetic and final balance against `Product.on_hand`. It reports errors and raises `CommandError` without changing data.
+- Four command tests plus two separate movement-integrity tests are present in `inventory/tests.py`.
 
-## Notes
-- Git staged diff check warned about trailing whitespace in `core/templates/core/home.html`; line-ending warning also appeared. Commit/push succeeded.
-- No Supplier model migration was needed. Supplier reassignment and later product-dependency rules are not implemented here.
+## Latest changed source files
+- `inventory/management/__init__.py` — NEW, empty package file.
+- `inventory/management/commands/__init__.py` — NEW, empty package file.
+- `inventory/management/commands/check_ledger.py` — NEW, read-only management command.
+- `inventory/tests.py` — CLASS, extended tests.
 
-## Future workflow
-- Begin interactive Step **404** only after verifying all journal files remotely.
-- One end-to-end functional development step per response, including related view, URL, template, tests and checks as applicable.
-- Number responses independently: next is **RESPONSE 004**. Do not mix response, interactive development or journal step numbering.
-- Give exact filenames and NEW vs CLASS markers, concise explanations and a Next control.
-- At chapter completion: consolidate one source commit/push, verify GitHub source, update detailed `study-2` chapter and index/glossary/handoff, and verify journal remotely before next chapter.
+## Important notes
+- The first chapter-closing script failed because the empty package file was missing; this was corrected.
+- Extra blank lines at EOF were removed before the final commit. The full test suite passed afterward.
+- The user prefers **simple language**, one small action per turn, exact filenames and NEW vs CLASS markers, and a Next control.
+- Do not ask for the frozen v3 plan again. Follow the approved roadmap and project instructions.
+- Source verification and full journal/index/handoff updates must happen before starting the next chapter.
+- The next planned development module is **Module 4: Sales**; do not add an unapproved Module 3 Chapter 3.
+
+## Journal navigation
+- [README](README.md)
+- [Step index](STEP_INDEX.md)
+- [Source mapping](SOURCE_MAPPING.md)
+- [Glossary](GLOSSARY.md)
+
+## Historical handoff
+The previous handoff was outdated at Module 2 Chapter 4. This file supersedes that checkpoint; earlier chapter details remain in the journal.
