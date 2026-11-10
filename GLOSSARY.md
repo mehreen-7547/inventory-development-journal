@@ -71,3 +71,13 @@ Every term below is written for someone revising Django from the beginning.
 **Branch:** A separate line of changes in one Git repository, so we can work without changing `main`.
 
 **Virtual environment:** A private Python-and-packages folder for one project, usually named `.venv`.
+
+**Primary key (PK):** A database identifier for a specific record. Django's `form.instance.pk` tells us whether the form is editing a saved supplier.
+
+**ModelForm instance:** The model object attached to a form. Supplying `instance=supplier` means saving updates that supplier rather than inserting a new row.
+
+**Query string:** Extra URL data after `?`, such as `?mode=edit`. We use it for list selection mode, not access control.
+
+**Static file:** A CSS, image or JavaScript asset served separately from the HTML template. Catalog's stylesheet lives at `catalog/static/catalog/style.css`.
+
+**findstatic:** A Django management command that shows whether Django can discover a named static asset and where it looked.
