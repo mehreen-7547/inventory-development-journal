@@ -335,3 +335,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 319 | M4 · Ch 3 | [Add protected create and detail views](Module-4/03-sales-recording-interface.md#step-319) |
 | 320 | M4 · Ch 3 | [Add routes, templates and dashboard links](Module-4/03-sales-recording-interface.md#step-320) |
 | 321 | M4 · Ch 3 | [Test, clean whitespace and publish](Module-4/03-sales-recording-interface.md#step-321) |
+| 322 | M4 · Ch 4 | [Create the protected history view](Module-4/04-sales-history.md#step-322) |
+| 323 | M4 · Ch 4 | [Search, filter and paginate sales](Module-4/04-sales-history.md#step-323) |
+| 324 | M4 · Ch 4 | [Register the URL and build the history template](Module-4/04-sales-history.md#step-324) |
+| 325 | M4 · Ch 4 | [Connect dashboards and sale details](Module-4/04-sales-history.md#step-325) |
+| 326 | M4 · Ch 4 | [Test, fix fixtures and publish](Module-4/04-sales-history.md#step-326) |
