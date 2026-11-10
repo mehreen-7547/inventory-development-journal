@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **283 development steps in 40 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **284 development steps in 41 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapters 1–9 (suppliers, products, stock ledger, movement history and opening stock), Steps 1–283. Module 2 is in progress; later inventory or forecasting features are not claimed as implemented.
+**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapters 1–10 (suppliers, products, stock ledger, movement history, opening stock and final test correction), Steps 1–284. Module 2 is complete; Module 3 stock adjustments and later forecasting features are not yet claimed as implemented.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -69,3 +69,5 @@ These are **283 development steps in 40 chapters**, rewritten so you can underst
 - [Chapter 8: Stock Movement and Stock Service](Module-2/08-stock-movement-ledger-and-history.md) — Steps 275–279 (source commit `110c30f`; 80 tests passed)
 
 - [Chapter 9: Opening Stock Registration](Module-2/09-opening-stock-registration.md) — Steps 280–283 (source commit `75fce94`; 87 tests passed)
+
+- [Chapter 10: Module 2 Closing Test Correction](Module-2/10-module-2-closing-test-correction.md) — Step 284 (source commit `61c812b`; 87 tests passed)
