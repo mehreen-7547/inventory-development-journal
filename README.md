@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **274 development steps in 38 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **279 development steps in 39 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapters 1–7 (supplier management, product registration, editing and status control), Steps 1–274. Module 2 is in progress; later inventory or forecasting features are not claimed as implemented.
+**Scope:** These notes cover Module 0 (setup), Module 1 (employee accounts) and Module 2 Chapters 1–8 (suppliers, products, stock ledger and movement history), Steps 1–279. Module 2 is in progress; later inventory or forecasting features are not claimed as implemented.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -65,3 +65,5 @@ These are **274 development steps in 38 chapters**, rewritten so you can underst
 - [Chapter 6: Edit Product](Module-2/06-edit-product.md) — Step 273 (source commit `796ccb5`)
 
 - [Chapter 7: Activate and Deactivate Product](Module-2/07-activate-deactivate-product.md) — Step 274 (source commit `ff55d4f`)
+
+- [Chapter 8: Stock Movement and Stock Service](Module-2/08-stock-movement-ledger-and-history.md) — Steps 275–279 (source commit `110c30f`; 80 tests passed)
