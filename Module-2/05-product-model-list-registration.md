@@ -8,6 +8,7 @@ Chapters 1–4 established supplier management. There was no Product database ta
 ### What we built
 A Product table, database migration, read-only catalogue for Manager and Sales Staff, and Manager-only product registration. **Interactive Steps 404–406 correspond to journal Steps 270–272.** This chapter was published together with Chapter 6 in source commit [`796ccb5`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/796ccb5). The user reported successful Django checks and tests; 15 catalogue tests passed after Chapter 6.
 
+<a id="step-270"></a>
 ### Step 270: Define the Product model and create its database table
 **Before this step:** Suppliers existed but products had nowhere to be stored.
 
