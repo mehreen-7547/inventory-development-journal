@@ -280,3 +280,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 271 | M2 · Ch 5 | [Show the product list](Module-2/05-product-model-list-registration.md#step-271) |
 | 272 | M2 · Ch 5 | [Register products](Module-2/05-product-model-list-registration.md#step-272) |
 | 273 | M2 · Ch 6 | [Edit saved products](Module-2/06-edit-product.md#step-273) |
+
+| 274 | M2 · Ch 7 | [Activate and deactivate a product](Module-2/07-activate-deactivate-product.md#step-274) |
