@@ -1,42 +1,46 @@
-# Development handoff — verified through Module 3 Chapter 2
+# Development handoff — verified through Module 4 Chapter 1
 
 ## Repositories
 - Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Do not change `main` or `study-3`.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Never modify `main` or `study-3` in journal repository.
 
-## Current verified checkpoint
-- Last interactive development step: **427**.
-- Last journal step: **294**; **43 chapters**.
-- Source commit: [`5d662eb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5d662eb).
-- User's final terminal output: **111 Django tests passed**; source pushed to `main`; clean `git status --short`.
-- Latest journal chapter: [Module 3 Chapter 2](Module-3/02-stock-ledger-integrity.md), journal Steps 291–294.
-- Previous journal chapter: [Module 3 Chapter 1](Module-3/01-stock-adjustments-and-product-modes.md), journal Steps 285–290, source commit `983d4b0`.
+## Verified checkpoint
+- Last interactive development step: **444**.
+- Last journal step: **306**; **44 chapters**.
+- Source commits: `18022db` (Sales Setup), `7af5b5e` (missing URL integration).
+- User terminal: **114 Django tests passed** after both commits; final source branch `main` at `7af5b5e`; clean status output.
+- Journal: [Module 4 Chapter 1](Module-4/01-sales-setup.md), journal Steps 295–306, interactive Steps 428–444.
 
+## Implemented in Sales
+- `sales` app registered in `config/settings.py`.
+- `Sale` and `SaleLine` schema, with protected FKs, discounts and totals fields, submission key, historical snapshots and void metadata.
+- Initial migration `sales/migrations/0001_initial.py`.
+- Both models registered in Django Admin.
+- Three Sales model-structure tests in `sales/tests.py`.
+- `config/urls.py` includes `sales.urls`; `sales/urls.py` has an empty `urlpatterns` list.
+
+## Not implemented yet
+- No sale creation service, stock deduction, discount calculations, idempotency enforcement, void service, user-facing Sales forms/pages, or sales dashboards. Model fields alone are not working features.
+- The approved next area is Sales transaction logic and its tests; follow the frozen v3 plan.
+
+## Migration repair
+- An early temporary `Sale`/`SaleItem` migration was applied, then the models were corrected to `Sale`/`SaleLine`. Adding non-null `created_by` triggered a Django default prompt. In the empty development Sales database only, the user dropped Sales tables, cleared Sales migration history, deleted the old initial migration and regenerated a correct `0001_initial.py`. Do **not** repeat that reset against real transaction data.
+
+## Source publication detail
+- First commit `18022db` omitted `config/urls.py` and `sales/urls.py` from staging. Second commit `7af5b5e` added both, and 114 tests passed again.
+
+## Workflow requirements
+- The user prefers grouped related code changes and terminal commands, concise explanations, exact filenames and NEW vs CLASS markers.
+- At each chapter close, run guarded tests, stage, commit and push source; then write and verify the journal chapter and README, STEP_INDEX, GLOSSARY, SOURCE_MAPPING and HANDOFF on `study-2` before advancing.
+- Never claim features exist merely because their model fields have been created.
+
+## Navigation
+- [README](README.md) · [Step index](STEP_INDEX.md) · [Source mapping](SOURCE_MAPPING.md) · [Glossary](GLOSSARY.md)
+
+## Prior handoff
 ## Implemented behavior
 - Product and supplier management; opening stock and StockMovement history.
 - Manager-only stock adjustment using `adjust_stock()`, with expected-balance checks and a product-list action mode.
 - Read-only `python manage.py check_ledger` command. It checks movement continuity, arithmetic and final balance against `Product.on_hand`. It reports errors and raises `CommandError` without changing data.
 - Four command tests plus two separate movement-integrity tests are present in `inventory/tests.py`.
 
-## Latest changed source files
-- `inventory/management/__init__.py` — NEW, empty package file.
-- `inventory/management/commands/__init__.py` — NEW, empty package file.
-- `inventory/management/commands/check_ledger.py` — NEW, read-only management command.
-- `inventory/tests.py` — CLASS, extended tests.
-
-## Important notes
-- The first chapter-closing script failed because the empty package file was missing; this was corrected.
-- Extra blank lines at EOF were removed before the final commit. The full test suite passed afterward.
-- The user prefers **simple language**, one small action per turn, exact filenames and NEW vs CLASS markers, and a Next control.
-- Do not ask for the frozen v3 plan again. Follow the approved roadmap and project instructions.
-- Source verification and full journal/index/handoff updates must happen before starting the next chapter.
-- The next planned development module is **Module 4: Sales**; do not add an unapproved Module 3 Chapter 3.
-
-## Journal navigation
-- [README](README.md)
-- [Step index](STEP_INDEX.md)
-- [Source mapping](SOURCE_MAPPING.md)
-- [Glossary](GLOSSARY.md)
-
-## Historical handoff
-The previous handoff was outdated at Module 2 Chapter 4. This file supersedes that checkpoint; earlier chapter details remain in the journal.
