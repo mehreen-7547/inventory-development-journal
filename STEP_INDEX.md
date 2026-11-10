@@ -265,3 +265,13 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 258 | M2 · Ch 3 | [Create an external Catalog stylesheet](Module-2/03-edit-supplier.md#step-258) |
 | 259 | M2 · Ch 3 | [Connect the CSS and diagnose the initial 404](Module-2/03-edit-supplier.md#step-259) |
 | 260 | M2 · Ch 3 | [Verify Chapter 3 and publish the code repository](Module-2/03-edit-supplier.md#step-260) |
+
+| 261 | M2 · Ch 4 | [Add the Manager-only POST status view](Module-2/04-activate-deactivate-supplier.md#step-261) |
+| 262 | M2 · Ch 4 | [Register the status URL](Module-2/04-activate-deactivate-supplier.md#step-262) |
+| 263 | M2 · Ch 4 | [Correct the UI placement to match Employee Management](Module-2/04-activate-deactivate-supplier.md#step-263) |
+| 264 | M2 · Ch 4 | [Put a separate status form on Edit Supplier](Module-2/04-activate-deactivate-supplier.md#step-264) |
+| 265 | M2 · Ch 4 | [Expose Manage Suppliers on the Manager dashboard](Module-2/04-activate-deactivate-supplier.md#step-265) |
+| 266 | M2 · Ch 4 | [Create a repeatable supplier-status test fixture](Module-2/04-activate-deactivate-supplier.md#step-266) |
+| 267 | M2 · Ch 4 | [Test both status transitions and database persistence](Module-2/04-activate-deactivate-supplier.md#step-267) |
+| 268 | M2 · Ch 4 | [Test denied requests and POST-only protection](Module-2/04-activate-deactivate-supplier.md#step-268) |
+| 269 | M2 · Ch 4 | [Verify and publish Chapter 4](Module-2/04-activate-deactivate-supplier.md#step-269) |
