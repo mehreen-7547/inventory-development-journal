@@ -8,7 +8,7 @@ Chapter 6 allowed Managers to edit product details. The Product model already ha
 ### What we built
 A separate status form on the **Edit Product** page, using the same interaction as Supplier Management. A Manager can deactivate and reactivate a product without deleting its record or altering its stock. **Interactive Step 408 corresponds to journal Step 274.**
 
-**Verification evidence:** The user reported 21 passing catalogue tests and seven passing browser checks. These results were run locally by the user, not independently executed here. Source commit for Chapter 7 is pending the user's Git push; the preceding source baseline is [`796ccb5`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/796ccb5).
+**Verification evidence:** The user reported 21 passing catalogue tests and seven passing browser checks. These results were run locally by the user, not independently executed here. Source commit: [`ff55d4f`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/ff55d4f), pushed to `main` by the user. The preceding source baseline was `796ccb5`.
 
 <a id="step-274"></a>
 ### Step 274: Add product activation and deactivation
@@ -100,6 +100,6 @@ def test_manager_can_deactivate_product(self):
     self.assertRedirects(response, reverse('product_list'))
 ```
 
-**How we checked it:** The user confirmed `python manage.py check`, all **21 catalogue tests** and **seven browser checks** passed. The browser checks covered the Manager edit/status workflow, both transitions, unchanged product details/stock and Sales Staff visibility without modification permission. Git commit/push verification is separate and still pending at the time this journal entry was written.
+**How we checked it:** The user confirmed `python manage.py check`, all **21 catalogue tests** and **seven browser checks** passed. The browser checks covered the Manager edit/status workflow, both transitions, unchanged product details/stock and Sales Staff visibility without modification permission. The user subsequently confirmed source commit `ff55d4f` was pushed successfully to `origin/main`. The working tree still contained five unrelated untracked files from a terminal paste issue, requiring separate inspection.
 
 **Next:** Chapter 8 should begin only after the Chapter 7 source commit and this journal update have both been verified.
