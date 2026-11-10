@@ -109,3 +109,19 @@ Every term below is written for someone revising Django from the beginning.
 **instance=product:** Tells ModelForm to edit an existing Product rather than create another.
 
 **distinct():** Removes duplicate database results, used when combining supplier choices.
+
+**Stock ledger:** A history of every change to a product's stock quantity.
+
+**Stock movement:** One recorded addition or reduction, including quantity before and after.
+
+**Quantity delta:** The signed stock change, such as +5 for a delivery or -2 for damaged items.
+
+**Management command:** A Django task run in the terminal using `python manage.py <command_name>`.
+
+**BaseCommand:** Django class used as the starting point for a management command.
+
+**CommandError:** A Django error that marks a management command as failed.
+
+**Ledger integrity:** Checking that consecutive movement balances and the product's final stock quantity agree.
+
+**StringIO:** A Python object used to capture text output in automated tests.
