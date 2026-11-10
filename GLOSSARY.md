@@ -125,3 +125,19 @@ Every term below is written for someone revising Django from the beginning.
 **Ledger integrity:** Checking that consecutive movement balances and the product's final stock quantity agree.
 
 **StringIO:** A Python object used to capture text output in automated tests.
+
+**Sale:** One completed or voided transaction record. Its model stores totals and transaction metadata; checkout logic is still pending.
+
+**SaleLine:** One product row belonging to a sale, with quantity, historical product name and selling price.
+
+**Snapshot:** A copy of a product name or price saved at transaction time so old sales are not rewritten when catalog data changes.
+
+**Submission key:** A unique value intended to help prevent saving the same sale twice; its enforcement is not implemented yet.
+
+**Idempotency:** A rule that repeating the same request does not create a second transaction.
+
+**Void:** Marking a sale as cancelled while preserving its record; reversal behavior is planned, not yet implemented.
+
+**Choices:** The allowed labels for a model field, such as `completed` or `voided`.
+
+**Migration history:** Django's record of database migrations already applied. Resetting it is dangerous when real records exist.
