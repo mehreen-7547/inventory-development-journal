@@ -307,3 +307,16 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 292 | M3 · Ch 2 | [Add the check_ledger management command](Module-3/02-stock-ledger-integrity.md#step-292) |
 | 293 | M3 · Ch 2 | [Test valid and inconsistent ledgers](Module-3/02-stock-ledger-integrity.md#step-293) |
 | 294 | M3 · Ch 2 | [Verify and publish Chapter 2](Module-3/02-stock-ledger-integrity.md#step-294) |
+
+| 295 | M4 · Ch 1 | [Create the Sales app](Module-4/01-sales-setup.md#step-295) |
+| 296 | M4 · Ch 1 | [Register Sales in INSTALLED_APPS](Module-4/01-sales-setup.md#step-296) |
+| 297 | M4 · Ch 1 | [Prepare and connect Sales URL configuration](Module-4/01-sales-setup.md#step-297) |
+| 298 | M4 · Ch 1 | [Draft the first Sale and SaleItem models](Module-4/01-sales-setup.md#step-298) |
+| 299 | M4 · Ch 1 | [Replace draft models with the approved schema](Module-4/01-sales-setup.md#step-299) |
+| 300 | M4 · Ch 1 | [Understand discounts, totals and void metadata](Module-4/01-sales-setup.md#step-300) |
+| 301 | M4 · Ch 1 | [Define SaleLine and snapshots](Module-4/01-sales-setup.md#step-301) |
+| 302 | M4 · Ch 1 | [Repair and apply the initial Sales migration](Module-4/01-sales-setup.md#step-302) |
+| 303 | M4 · Ch 1 | [Register both Sales models in Django Admin](Module-4/01-sales-setup.md#step-303) |
+| 304 | M4 · Ch 1 | [Test Sales model fields and protected relationships](Module-4/01-sales-setup.md#step-304) |
+| 305 | M4 · Ch 1 | [Test and push Sales Setup](Module-4/01-sales-setup.md#step-305) |
+| 306 | M4 · Ch 1 | [Correct omitted URLs and close the source checkpoint](Module-4/01-sales-setup.md#step-306) |
