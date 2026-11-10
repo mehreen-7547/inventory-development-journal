@@ -163,3 +163,15 @@ Every term below is written for someone revising Django from the beginning.
 **Post/Redirect/Get:** Redirecting after a successful POST so refreshing the confirmation page does not repeat the submission.
 
 **Sale detail page:** A protected view of a saved transaction and its line items.
+
+**Paginator:** Django helper that divides a queryset into pages, here ten sales per page.
+
+**Q object:** Django query helper for combining filters with OR or AND, such as searching a sale number or employee username.
+
+**select_related():** Fetches a related database record in the same query, avoiding extra queries for each sale's creator.
+
+**icontains:** A case-insensitive substring lookup used in sale-history search.
+
+**GET filter:** Form inputs placed in the URL query string, so a history search can be bookmarked or shared (subject to access control).
+
+**Role-scoped queryset:** A database query restricted to the records a user's role is permitted to see, before applying optional search filters.
