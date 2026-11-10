@@ -81,3 +81,15 @@ Every term below is written for someone revising Django from the beginning.
 **Static file:** A CSS, image or JavaScript asset served separately from the HTML template. Catalog's stylesheet lives at `catalog/static/catalog/style.css`.
 
 **findstatic:** A Django management command that shows whether Django can discover a named static asset and where it looked.
+
+**Soft deactivation:** Marking a record inactive instead of deleting it. A supplier remains in the database and can be reactivated.
+
+**require_POST:** Django decorator that accepts only POST requests for a view and rejects GET with HTTP 405.
+
+**HTTP 405:** “Method Not Allowed.” A GET request cannot trigger this supplier status change.
+
+**refresh_from_db():** Django model method that reloads saved values from the database, useful after a test request.
+
+**TestCase / setUp():** Django's automated test class and per-test preparation method for repeatable tests.
+
+**assertRedirects():** Django test assertion checking a redirect goes to the expected page.
