@@ -288,3 +288,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 277 | M2 · Ch 8 | [Correct the rollback test](Module-2/08-stock-movement-ledger-and-history.md#step-277) |
 | 278 | M2 · Ch 8 | [Build Manager-only product stock history](Module-2/08-stock-movement-ledger-and-history.md#step-278) |
 | 279 | M2 · Ch 8 | [Remove temporary tests and publish](Module-2/08-stock-movement-ledger-and-history.md#step-279) |
+
+| 280 | M2 · Ch 9 | [Ask for opening stock on the Add Product form](Module-2/09-opening-stock-registration.md#step-280) |
+| 281 | M2 · Ch 9 | [Save the product and first stock movement together](Module-2/09-opening-stock-registration.md#step-281) |
+| 282 | M2 · Ch 9 | [Test opening stock and correct a misleading test](Module-2/09-opening-stock-registration.md#step-282) |
+| 283 | M2 · Ch 9 | [Verify and publish Chapter 9](Module-2/09-opening-stock-registration.md#step-283) |
