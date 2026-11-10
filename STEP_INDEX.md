@@ -275,3 +275,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 267 | M2 · Ch 4 | [Test both status transitions and database persistence](Module-2/04-activate-deactivate-supplier.md#step-267) |
 | 268 | M2 · Ch 4 | [Test denied requests and POST-only protection](Module-2/04-activate-deactivate-supplier.md#step-268) |
 | 269 | M2 · Ch 4 | [Verify and publish Chapter 4](Module-2/04-activate-deactivate-supplier.md#step-269) |
+
+| 270 | M2 · Ch 5 | [Define the Product model and migration](Module-2/05-product-model-list-registration.md#step-270) |
+| 271 | M2 · Ch 5 | [Show the product list](Module-2/05-product-model-list-registration.md#step-271) |
+| 272 | M2 · Ch 5 | [Register products](Module-2/05-product-model-list-registration.md#step-272) |
+| 273 | M2 · Ch 6 | [Edit saved products](Module-2/06-edit-product.md#step-273) |
