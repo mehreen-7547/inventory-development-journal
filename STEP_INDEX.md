@@ -320,3 +320,13 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 304 | M4 · Ch 1 | [Test Sales model fields and protected relationships](Module-4/01-sales-setup.md#step-304) |
 | 305 | M4 · Ch 1 | [Test and push Sales Setup](Module-4/01-sales-setup.md#step-305) |
 | 306 | M4 · Ch 1 | [Correct omitted URLs and close the source checkpoint](Module-4/01-sales-setup.md#step-306) |
+| 307 | M4 · Ch 2 | [Create the record_sale service (445–447)](Module-4/02-recording-sales.md#step-307) |
+| 308 | M4 · Ch 2 | [Validate user, key and discount (447–449)](Module-4/02-recording-sales.md#step-308) |
+| 309 | M4 · Ch 2 | [Return an existing matching sale (450)](Module-4/02-recording-sales.md#step-309) |
+| 310 | M4 · Ch 2 | [Validate products and calculate totals (447–452)](Module-4/02-recording-sales.md#step-310) |
+| 311 | M4 · Ch 2 | [Save Sale, SaleLine and stock movement atomically (447–452)](Module-4/02-recording-sales.md#step-311) |
+| 312 | M4 · Ch 2 | [Test multiple products and rollback (451–452)](Module-4/02-recording-sales.md#step-312) |
+| 313 | M4 · Ch 2 | [Handle database uniqueness errors (453)](Module-4/02-recording-sales.md#step-313) |
+| 314 | M4 · Ch 2 | [Test database duplicate-key protection (454)](Module-4/02-recording-sales.md#step-314) |
+| 315 | M4 · Ch 2 | [Test rollback after the first deduction (455)](Module-4/02-recording-sales.md#step-315) |
+| 316 | M4 · Ch 2 | [Verify, repair whitespace and publish (456–457)](Module-4/02-recording-sales.md#step-316) |
