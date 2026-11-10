@@ -153,3 +153,13 @@ Every term below is written for someone revising Django from the beginning.
 **Rollback:** Undoing all changes in a failed transaction so stock and sales remain consistent.
 
 **patch():** A testing helper that temporarily replaces a function to simulate a failure.
+
+**Form.clean():** A Django form method for checking relationships between fields, such as duplicate product selections.
+
+**ModelChoiceField:** A form field that accepts only model records from a specified queryset.
+
+**CSRF token:** A hidden form security value Django checks to protect POST submissions.
+
+**Post/Redirect/Get:** Redirecting after a successful POST so refreshing the confirmation page does not repeat the submission.
+
+**Sale detail page:** A protected view of a saved transaction and its line items.
