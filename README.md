@@ -64,4 +64,4 @@ These are **274 development steps in 38 chapters**, rewritten so you can underst
 - [Chapter 5: Product Model, List and Registration](Module-2/05-product-model-list-registration.md) — Steps 270–272 (source commit `796ccb5`)
 - [Chapter 6: Edit Product](Module-2/06-edit-product.md) — Step 273 (source commit `796ccb5`)
 
-- [Chapter 7: Activate and Deactivate Product](Module-2/07-activate-deactivate-product.md) — Step 274 (source push pending)
+- [Chapter 7: Activate and Deactivate Product](Module-2/07-activate-deactivate-product.md) — Step 274 (source commit `ff55d4f`)
