@@ -1,31 +1,32 @@
-# Development handoff — verified through Module 2 Chapter 3
+# Development handoff — verified through Module 2 Chapter 4
 
-## Repository boundaries
-- Application source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Beginner study journal: `mehreen-7547/inventory-development-journal`, branch `study-2`. Do not overwrite `main` or `study-3`.
+## Repositories
+- Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2`; do not modify its `main` or `study-3`.
 
-## Latest source checkpoint
-- Chapter: Module 2, Chapter 3 — Edit Supplier.
-- Last interactive development step: 398 (source commit/push).
-- Continuous journal steps: 1–260, 34 chapters; Chapter 3 = 252–260.
-- Source commit: [`2b580fbd82ed4285f972c07cb8daf35782ea932c`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/2b580fbd82ed4285f972c07cb8daf35782ea932c).
-- Verified files: `catalog/views.py`, `catalog/urls.py`, `catalog/templates/catalog/supplier_list.html`, `catalog/templates/catalog/supplier_form.html`, `catalog/static/catalog/style.css`.
+## Checkpoint
+- Chapter: Module 2 Chapter 4 — Activate/Deactivate Supplier.
+- Last interactive development step: **403**. Last response number: **003** (separate numbering).
+- Journal: **269 continuous steps**, **35 chapters**. Chapter 4 = steps **261–269**.
+- Source commit: [`1c3f0ecb2474f3285c0b529fcf00fb67c9e6ab0f`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/1c3f0ecb2474f3285c0b529fcf00fb67c9e6ab0f).
+- Verified source files: `catalog/views.py`, `catalog/urls.py`, `catalog/templates/catalog/supplier_form.html`, `catalog/templates/catalog/supplier_list.html`, `catalog/tests.py`, `core/templates/core/home.html`.
 
-## Completed Chapter 3 behavior
-- Manager-only Supplier list/create/edit.
-- Single Edit Supplier button switches list to selection mode with `?mode=edit`.
-- Clicking supplier name opens prefilled edit form.
-- Shared create/edit form uses `form.instance.pk` to switch heading/button and show edit Cancel.
-- External Catalog CSS styles the table and selectable rows.
-- User reported successful browser checks and `python manage.py check` with no issues.
+## Completed behavior
+- Manager-only Supplier list, create, edit, deactivate and reactivate.
+- Status view accepts POST only, toggles existing `is_active` and preserves the record.
+- Status controls appear on the Edit Supplier page only, in a separate CSRF-protected form.
+- Supplier List has five columns and no row-level Action buttons.
+- Manager dashboard links to Manage Suppliers.
+- Six catalog tests cover both transitions, GET rejection, Sales Staff restriction, anonymous restriction, and record persistence.
+- User reported `python manage.py check`, all six catalog tests and browser workflow passed; source files were independently verified on GitHub, but tests were not rerun by the assistant.
 
-## Important lessons from troubleshooting
-- Do not overwrite `supplier_list.html` with the form template.
-- CSS was initially 404; `python manage.py findstatic catalog/style.css --verbosity 2` located it, and after server restart the styled table appeared. Do not assert a proven root cause.
-- No Supplier deactivate feature or automated edit test suite was implemented in Chapter 3.
+## Notes
+- Git staged diff check warned about trailing whitespace in `core/templates/core/home.html`; line-ending warning also appeared. Commit/push succeeded.
+- No Supplier model migration was needed. Supplier reassignment and later product-dependency rules are not implemented here.
 
-## Next-session rules
-- Do not begin Chapter 4 until the study-2 journal is verified remotely.
-- Teach exactly one development step at a time, with precise filename, NEW vs CLASS marker, explanation, verification and Next control.
-- At chapter completion: consolidate source Git stage/commit/push; verify published source; update study-2 chapter, README, STEP_INDEX, glossary and handoff; verify remote.
-- Keep code style aligned with the instructor's Django examples; do not add scope without approval.
+## Future workflow
+- Begin interactive Step **404** only after verifying all journal files remotely.
+- One end-to-end functional development step per response, including related view, URL, template, tests and checks as applicable.
+- Number responses independently: next is **RESPONSE 004**. Do not mix response, interactive development or journal step numbering.
+- Give exact filenames and NEW vs CLASS markers, concise explanations and a Next control.
+- At chapter completion: consolidate one source commit/push, verify GitHub source, update detailed `study-2` chapter and index/glossary/handoff, and verify journal remotely before next chapter.
