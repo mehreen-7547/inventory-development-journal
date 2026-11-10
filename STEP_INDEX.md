@@ -330,3 +330,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 314 | M4 · Ch 2 | [Test database duplicate-key protection (454)](Module-4/02-recording-sales.md#step-314) |
 | 315 | M4 · Ch 2 | [Test rollback after the first deduction (455)](Module-4/02-recording-sales.md#step-315) |
 | 316 | M4 · Ch 2 | [Verify, repair whitespace and publish (456–457)](Module-4/02-recording-sales.md#step-316) |
+| 317 | M4 · Ch 3 | [Build the five-row SaleForm](Module-4/03-sales-recording-interface.md#step-317) |
+| 318 | M4 · Ch 3 | [Validate items and discounts in the form](Module-4/03-sales-recording-interface.md#step-318) |
+| 319 | M4 · Ch 3 | [Add protected create and detail views](Module-4/03-sales-recording-interface.md#step-319) |
+| 320 | M4 · Ch 3 | [Add routes, templates and dashboard links](Module-4/03-sales-recording-interface.md#step-320) |
+| 321 | M4 · Ch 3 | [Test, clean whitespace and publish](Module-4/03-sales-recording-interface.md#step-321) |
