@@ -302,3 +302,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 288 | M3 · Ch 1 | [Add Edit, History and Adjust selection modes](Module-3/01-stock-adjustments-and-product-modes.md#step-288) |
 | 289 | M3 · Ch 1 | [Remove stock actions from Edit Product](Module-3/01-stock-adjustments-and-product-modes.md#step-289) |
 | 290 | M3 · Ch 1 | [Verify and publish Chapter 1](Module-3/01-stock-adjustments-and-product-modes.md#step-290) |
+
+| 291 | M3 · Ch 2 | [Review the existing stock ledger](Module-3/02-stock-ledger-integrity.md#step-291) |
+| 292 | M3 · Ch 2 | [Add the check_ledger management command](Module-3/02-stock-ledger-integrity.md#step-292) |
+| 293 | M3 · Ch 2 | [Test valid and inconsistent ledgers](Module-3/02-stock-ledger-integrity.md#step-293) |
+| 294 | M3 · Ch 2 | [Verify and publish Chapter 2](Module-3/02-stock-ledger-integrity.md#step-294) |
