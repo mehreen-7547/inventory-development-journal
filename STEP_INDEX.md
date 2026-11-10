@@ -282,3 +282,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 273 | M2 · Ch 6 | [Edit saved products](Module-2/06-edit-product.md#step-273) |
 
 | 274 | M2 · Ch 7 | [Activate and deactivate a product](Module-2/07-activate-deactivate-product.md#step-274) |
+
+| 275 | M2 · Ch 8 | [Create and register the inventory app](Module-2/08-stock-movement-ledger-and-history.md#step-275) |
+| 276 | M2 · Ch 8 | [Implement StockMovement and change_stock](Module-2/08-stock-movement-ledger-and-history.md#step-276) |
+| 277 | M2 · Ch 8 | [Correct the rollback test](Module-2/08-stock-movement-ledger-and-history.md#step-277) |
+| 278 | M2 · Ch 8 | [Build Manager-only product stock history](Module-2/08-stock-movement-ledger-and-history.md#step-278) |
+| 279 | M2 · Ch 8 | [Remove temporary tests and publish](Module-2/08-stock-movement-ledger-and-history.md#step-279) |
