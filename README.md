@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **290 development steps in 42 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **294 development steps in 43 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0, Module 1, Module 2 Chapters 1–10 and Module 3 Chapter 1 (stock adjustments and product action modes), journal Steps 1–290. Module 3 Chapter 1 is source-verified at commit `983d4b0`. Later forecasting features are not yet claimed as implemented. The interactive conversation used Steps 418–423 for this chapter; the journal keeps its own consecutive Steps 285–290.
+**Scope:** These notes cover Module 0, Module 1, Module 2 Chapters 1–10 and Module 3 Chapters 1–2 (stock adjustments, product action modes and ledger integrity), journal Steps 1–294. Module 3 Chapter 1 is source-verified at commit `983d4b0`. Module 3 Chapter 2 is source-verified at commit `5d662eb` (111 tests passed). Later forecasting features are not yet claimed as implemented. The interactive conversation used Steps 418–423 for this chapter; the journal keeps its own consecutive Steps 285–290.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -75,3 +75,5 @@ These are **290 development steps in 42 chapters**, rewritten so you can underst
 ## Module 3 — Stock adjustments
 
 - [Chapter 1: Stock Adjustments and Product Action Modes](Module-3/01-stock-adjustments-and-product-modes.md) — Journal Steps 285–290 (interactive Steps 418–423; source commit `983d4b0`)
+
+- [Chapter 2: Stock Ledger Integrity](Module-3/02-stock-ledger-integrity.md) — Journal Steps 291–294 (interactive Steps 424–427; source commit `5d662eb`)
