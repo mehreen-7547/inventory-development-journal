@@ -183,3 +183,13 @@ Every term below is written for someone revising Django from the beginning.
 **Void reason:** Required explanation entered by a manager before reversing a sale; stored with the transaction.
 
 **Void audit metadata:** The user, timestamp and reason saved when a sale is voided.
+
+**Purchase order (PO):** A record of goods the business intends to buy from a supplier; creating it does not increase physical stock.
+
+**Purchase order line:** A product, quantity ordered and agreed unit cost within a purchase order.
+
+**Draft purchase order:** An order being prepared, not yet issued to the supplier.
+
+**Goods receipt:** A future workflow recording delivered goods; it is separate from creating a purchase order.
+
+**TabularInline:** A Django Admin configuration for editing related records in rows on the parent record's admin page.
