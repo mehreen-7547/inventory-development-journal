@@ -29,3 +29,5 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Journal: [Steps 327–331](Module-4/05-sale-voiding-and-stock-reversal.md).
 - Changed files: `sales/services.py`, `sales/forms.py`, `sales/views.py`, `sales/urls.py`, `sales/tests.py`, `sales/templates/sales/sale_void.html`, `sales/templates/sales/sale_detail.html`.
 - Manager-only voiding, positive stock restoration, audit metadata, confirmation form, status display and 14 new tests are in source. User terminal confirmed successful push and clean tree; test output not supplied.
+
+**Final Module 4 verification:** User terminal confirmed 196 tests passed (198.781s), 0 Django system-check issues and no pending migrations after source commit `f202c39`.
