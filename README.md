@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **331 development steps in 48 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **343 development steps in 51 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -11,6 +11,8 @@ These are **331 development steps in 48 chapters**, rewritten so you can underst
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
+
+**Latest checkpoint:** Sales UI maintenance after Module 5 Chapter 2, [journal Step 343](Module-5/03-sales-ui-maintenance-before-purchase-interface.md). The next interactive development step is **480**, Module 5 Chapter 3.
 
 ## Module 0 — Foundations
 
@@ -97,3 +99,5 @@ These are **331 development steps in 48 chapters**, rewritten so you can underst
 - [Chapter 1: Purchase Order Setup](Module-5/01-purchase-order-setup.md) — Journal Steps 332–336 (interactive Steps 469–473; source commit `45bd7a2`; user reported purchasing checks passed)
 
 - [Chapter 2: Purchase Order Creation Service](Module-5/02-purchase-order-creation-service.md) — Journal Steps 337–342 (interactive Steps 474–479; source commit `5160b69`; 221 full-project tests passed)
+
+- [Maintenance after Module 5 Chapter 2: Sales UI cleanup](Module-5/03-sales-ui-maintenance-before-purchase-interface.md) — Step 343
