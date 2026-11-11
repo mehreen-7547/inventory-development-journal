@@ -352,3 +352,10 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 334 | M5 · Ch 1 | [Define PurchaseOrder and PurchaseOrderLine](Module-5/01-purchase-order-setup.md#step-334) |
 | 335 | M5 · Ch 1 | [Register Admin, add tests and migrate](Module-5/01-purchase-order-setup.md#step-335) |
 | 336 | M5 · Ch 1 | [Verify and publish Chapter 1](Module-5/01-purchase-order-setup.md#step-336) |
+
+| 337 | M5 · Ch 2 | [Create the purchase order service](Module-5/02-purchase-order-creation-service.md#step-337) |
+| 338 | M5 · Ch 2 | [Strengthen validation](Module-5/02-purchase-order-creation-service.md#step-338) |
+| 339 | M5 · Ch 2 | [Test creation, permissions and rollback](Module-5/02-purchase-order-creation-service.md#step-339) |
+| 340 | M5 · Ch 2 | [Handle database uniqueness errors](Module-5/02-purchase-order-creation-service.md#step-340) |
+| 341 | M5 · Ch 2 | [Run full project checks](Module-5/02-purchase-order-creation-service.md#step-341) |
+| 342 | M5 · Ch 2 | [Clean whitespace and publish source](Module-5/02-purchase-order-creation-service.md#step-342) |
