@@ -250,3 +250,14 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 249,,388,2,Create Supplier,Create the Add Supplier HTML form
 250,,389,2,Create Supplier,Register the Add Supplier URL and test saving
 251,,390,2,Create Supplier,Add the Add Supplier link to the list page
+361,,,5,Goods Receipt and Close Short,"Store goods receipts and generate the migration"
+362,,,5,Goods Receipt and Close Short,"Implement receive_goods as one transaction"
+363,,,5,Goods Receipt and Close Short,"Test receipt quantities and idempotency"
+364,,,5,Goods Receipt and Close Short,"Build a dynamic GoodsReceiptForm"
+365,,,5,Goods Receipt and Close Short,"Connect the Manager-only receipt view"
+366,,,5,Goods Receipt and Close Short,"Register the receipt route and form page"
+367,,,5,Goods Receipt and Close Short,"Show received totals and receipt actions"
+368,,,5,Goods Receipt and Close Short,"Allow partially received orders to close short"
+369,,,5,Goods Receipt and Close Short,"Expose the Close Short action in the template"
+370,,,5,Goods Receipt and Close Short,"Test Close Short and repair two brittle assertions"
+371,,,5,Goods Receipt and Close Short,"Run regression tests and publish the source"

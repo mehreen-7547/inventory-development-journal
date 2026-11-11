@@ -2,17 +2,17 @@
 
 ## A plain-language journal of how I built the project
 
-These are **352 development steps in 52 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **371 development steps**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** These notes cover Module 0, Module 1, Module 2 Chapters 1–10 and Module 3 Chapters 1–2 (stock adjustments, product action modes and ledger integrity), journal Steps 1–331. Module 3 Chapter 1 is source-verified at commit `983d4b0`. Module 3 Chapter 2 is source-verified at commit `5d662eb` (111 tests passed). Module 4 Chapter 1 is source-verified at commits `18022db` and `7af5b5e` (114 tests passed); sales transaction service is implemented but sales pages are not yet implemented. Later forecasting features are not yet claimed as implemented. The interactive conversation used Steps 418–423 for this chapter; the journal keeps its own consecutive Steps 285–290.
+**Scope:** This journal covers Modules 0–5 through Module 5 Chapter 5 (Steps 1–371). Chapter 5 is source-verified at commit `788a158`; 87 purchasing tests passed. Forecasting remains future work.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Module 5 Chapter 3 Purchase Order Creation Interface, [journal Steps 345–352](Module-5/04-purchase-order-creation-interface.md), source commit `f3063b6` (39 purchasing tests passed). Next interactive development step is **488**, Module 5 Chapter 4.
+**Latest checkpoint:** Module 5 Chapter 5 — [Goods Receipt and Close Short](Module-5/06-goods-receipt-and-close-short.md), Steps 361–371, verified source commit `788a158`.
 
 ## Module 0 — Foundations
 
@@ -106,4 +106,4 @@ These are **352 development steps in 52 chapters**, rewritten so you can underst
 
 - [Chapter 4: Purchase Order Management Interface](Module-5/05-purchase-order-management-interface.md) — Journal Steps 353–360 (source commits `06694bb`, `634c41e`; final 56-test rerun not supplied)
 
-- [Chapter 5: Goods Receipt and Close Short](Module-5/06-goods-receipt-and-close-short.md) — Journal Steps 361–371 (87 purchasing tests passed; source push pending)
+- [Chapter 5: Goods Receipt and Close Short](Module-5/06-goods-receipt-and-close-short.md) — Steps 361–371 (source `788a158`; 87 purchasing tests passed)

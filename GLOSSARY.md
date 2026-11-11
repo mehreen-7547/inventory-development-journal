@@ -190,7 +190,7 @@ Every term below is written for someone revising Django from the beginning.
 
 **Draft purchase order:** An order being prepared, not yet issued to the supplier.
 
-**Goods receipt:** A future workflow recording delivered goods; it is separate from creating a purchase order.
+**Goods receipt:** A saved supplier delivery, with usable and damaged quantities, linked to a purchase order.
 
 **TabularInline:** A Django Admin configuration for editing related records in rows on the parent record's admin page.
 
@@ -199,3 +199,12 @@ Every term below is written for someone revising Django from the beginning.
 **PO number uniqueness:** A unique database constraint prevents two purchase orders from sharing the same identifier, even if an earlier application-level lookup misses a duplicate.
 
 **Trailing whitespace:** Spaces or tabs at the ends of lines; staged Git checks may reject these and extra blank lines at the end of a file.
+
+
+**Submission key / idempotency key:** A unique value used to prevent one delivery from being processed twice.
+
+**Partial receipt:** A delivery that leaves some ordered quantity still outstanding.
+
+**Close Short:** A final status for a partly delivered order when the remaining goods will not arrive; it does not increase stock.
+
+**Atomic transaction:** Related database changes that all succeed together or all roll back if one fails.

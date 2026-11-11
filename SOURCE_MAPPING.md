@@ -43,3 +43,9 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Journal: [Steps 337–342](Module-5/02-purchase-order-creation-service.md).
 - Changed files: `purchasing/services.py` (new), `purchasing/tests.py` (expanded).
 - User terminal: 17 focused service tests reported passed; 221 full-project tests passed (209.321s), zero system-check issues, no pending migrations, successful push and clean working tree.
+
+## Module 5 — Chapter 5: Goods Receipt and Close Short
+- Verified source commit: [`788a158`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/788a1580c1d7a8a9c6fb264eec605e50a2efcd6a).
+- Journal: [Steps 361–371](Module-5/06-goods-receipt-and-close-short.md).
+- Files: `purchasing/forms.py`, `purchasing/migrations/0002_purchaseorderline_quantity_received_and_more.py`, `purchasing/models.py`, `purchasing/services.py`, `purchasing/templates/purchasing/goods_receipt_form.html`, `purchasing/templates/purchasing/purchase_order_detail.html`, `purchasing/test_close_short.py`, `purchasing/test_goods_receipt.py`, `purchasing/test_goods_receipt_views.py`, `purchasing/urls.py`, `purchasing/views.py`.
+- Verification: 87 purchasing tests passed; full-project terminal output not supplied.
