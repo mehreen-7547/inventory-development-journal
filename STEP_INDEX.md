@@ -340,3 +340,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 324 | M4 · Ch 4 | [Register the URL and build the history template](Module-4/04-sales-history.md#step-324) |
 | 325 | M4 · Ch 4 | [Connect dashboards and sale details](Module-4/04-sales-history.md#step-325) |
 | 326 | M4 · Ch 4 | [Test, fix fixtures and publish](Module-4/04-sales-history.md#step-326) |
+
+| 327 | M4 · Ch 5 | [Implement manager-only voiding service](Module-4/05-sale-voiding-and-stock-reversal.md#step-327) |
+| 328 | M4 · Ch 5 | [Add confirmation form and view](Module-4/05-sale-voiding-and-stock-reversal.md#step-328) |
+| 329 | M4 · Ch 5 | [Connect void URL and templates](Module-4/05-sale-voiding-and-stock-reversal.md#step-329) |
+| 330 | M4 · Ch 5 | [Test stock reversal, permissions and rollback](Module-4/05-sale-voiding-and-stock-reversal.md#step-330) |
+| 331 | M4 · Ch 5 | [Clean whitespace and publish source](Module-4/05-sale-voiding-and-stock-reversal.md#step-331) |
