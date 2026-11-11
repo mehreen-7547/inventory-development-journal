@@ -126,7 +126,7 @@ Every term below is written for someone revising Django from the beginning.
 
 **StringIO:** A Python object used to capture text output in automated tests.
 
-**Sale:** One completed or voided transaction record. Its model stores totals and transaction metadata; recording is implemented in `sales/services.py`; user-facing checkout pages are pending.
+**Sale:** One completed or voided transaction record. Its model stores totals and transaction metadata; recording is implemented in `sales/services.py`; checkout pages and voiding interface are implemented.
 
 **SaleLine:** One product row belonging to a sale, with quantity, historical product name and selling price.
 
@@ -136,7 +136,7 @@ Every term below is written for someone revising Django from the beginning.
 
 **Idempotency:** A rule that repeating the same request does not create a second transaction.
 
-**Void:** Marking a sale as cancelled while preserving its record; reversal behavior is planned, not yet implemented.
+**Void:** Marking a sale as cancelled while preserving its record; reversal is implemented by the manager-only void_sale() service.
 
 **Choices:** The allowed labels for a model field, such as `completed` or `voided`.
 
@@ -175,3 +175,11 @@ Every term below is written for someone revising Django from the beginning.
 **GET filter:** Form inputs placed in the URL query string, so a history search can be bookmarked or shared (subject to access control).
 
 **Role-scoped queryset:** A database query restricted to the records a user's role is permitted to see, before applying optional search filters.
+
+**void_sale():** Manager-only Sales service that restores quantities from a completed sale, records void movements and saves audit metadata atomically.
+
+**select_for_update():** Requests a database row lock until the transaction ends on databases supporting row-level locking; SQLite does not provide equivalent row-level locking.
+
+**Void reason:** Required explanation entered by a manager before reversing a sale; stored with the transaction.
+
+**Void audit metadata:** The user, timestamp and reason saved when a sale is voided.
