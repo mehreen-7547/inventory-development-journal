@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **344 development steps in 51 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **352 development steps in 52 chapters**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -12,7 +12,7 @@ These are **344 development steps in 51 chapters**, rewritten so you can underst
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Sales UI maintenance after Module 5 Chapter 2, [journal Steps 343–344](Module-5/03-sales-ui-maintenance-before-purchase-interface.md). The next interactive development step is **480**, Module 5 Chapter 3.
+**Latest checkpoint:** Module 5 Chapter 3 Purchase Order Creation Interface, [journal Steps 345–352](Module-5/04-purchase-order-creation-interface.md), source commit `f3063b6` (39 purchasing tests passed). Next interactive development step is **488**, Module 5 Chapter 4.
 
 ## Module 0 — Foundations
 
@@ -101,3 +101,5 @@ These are **344 development steps in 51 chapters**, rewritten so you can underst
 - [Chapter 2: Purchase Order Creation Service](Module-5/02-purchase-order-creation-service.md) — Journal Steps 337–342 (interactive Steps 474–479; source commit `5160b69`; 221 full-project tests passed)
 
 - [Maintenance after Module 5 Chapter 2: Sales UI cleanup](Module-5/03-sales-ui-maintenance-before-purchase-interface.md) — Steps 343–344 (latest source `6cd17f6`; 99 Sales tests passed)
+
+- [Chapter 3: Purchase Order Creation Interface](Module-5/04-purchase-order-creation-interface.md) — Journal Steps 345–352 (interactive Steps 480–487; source commit `f3063b6`; 39 purchasing tests passed)
