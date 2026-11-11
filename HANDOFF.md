@@ -1,27 +1,25 @@
-# Development handoff — Purchasing Chapter 3 complete; next Chapter 4
+# Development handoff — Purchasing Chapter 4 source published; next Chapter 5
 
 ## Repositories
 - Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
 - Journal: `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY.
 
 ## Checkpoint
-- Interactive Steps **480–487** completed; next interactive Step **488**, Module 5 Chapter 4 of 5.
-- Journal documents **352 steps**; Chapter 3 maps interactive Steps 480–487 to journal Steps 345–352.
-- Source commit: [`f3063b6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/f3063b6), pushed to `main`.
-- User ran `python manage.py test purchasing`: **39/39 passed**, zero system-check issues.
-- User ran `python manage.py check`: zero issues; `git diff --check`: no whitespace errors.
-- Chapter journal: [Purchase Order Creation Interface](Module-5/04-purchase-order-creation-interface.md).
+- Interactive Chapter 4 began at Step **488**; next interactive step number must be confirmed from the development plan before continuing.
+- Journal now documents **360 steps**; Chapter 4 is journal Steps **353–360**.
+- Source commits: [`06694bb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/06694bb) (management interface) and [`634c41e`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/634c41e) (Manager dashboard link).
+- Last supplied test output: **56 discovered, 55 passed, 1 failed** because dashboard link was absent. The link is now present on source `main`, but final rerun output was not supplied.
+- `python manage.py check`: zero issues; earlier `git diff --check`: no errors.
 
 ## Implemented
-- Manager-only purchase-order creation with dynamic Add Item/Remove rows, up to 100.
-- One supplier per order; products filtered client-side and validated server-side.
-- Multiple products saved atomically through `create_purchase_order`.
-- Creating a purchase order **does not change stock**.
-- Purchasing route, dashboard link, template and form/view tests.
-- Sales JavaScript editor correction included in source commit.
+- Manager-only list, detail and status actions; clickable full rows.
+- Automatic hidden PO numbering on save; product stock, safety stock and lead time context.
+- Dynamic supplier filtering and exclusion of products selected in other rows; live totals.
+- Draft → Ordered, Draft/Ordered → Cancelled; no stock changes from creation/status actions.
+- 17 new management tests in `purchasing/test_purchase_management.py`.
+- No goods receipt implemented in this chapter.
 
 ## Next
-- Start **interactive Step 488**, Module 5 Chapter 4, after reviewing the approved chapter plan and current source.
-- Preserve instructor-style Django conventions and full ready-to-copy source files in chat; journal shows only step-relevant code snippets with exact filenames.
-- Goods receipt and status transitions are not claimed implemented.
-- Update journal only on `study-2` after verified source pushes.
+- Confirm `python manage.py test purchasing` reports **56/56 passing** after the dashboard-link fix.
+- Then begin Module 5 Chapter 5 after reviewing the approved goods-receipt plan and actual source.
+- Preserve instructor-style Django conventions; chat code is full ready-to-copy files, journal uses step-relevant snippets with exact filenames.
