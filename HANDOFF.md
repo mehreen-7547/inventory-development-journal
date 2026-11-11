@@ -1,35 +1,27 @@
-# Development handoff — verified through Module 4 Chapter 5
+# Development handoff — verified through Module 5 Chapter 1
 
 ## Repositories
-- Source `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY; do not modify `main` or `study-3`.
+- Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY; do not modify `main` or `study-3`.
 
 ## Checkpoint
-- Interactive Step **467**, journal Step **331**, **48 chapters**.
-- Source commit [`f202c39`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/f202c39) pushed to `main`.
-- User terminal confirmed seven source files changed, successful push and clean working tree. LF/CRLF warnings were informational. Subsequent terminal verification confirmed all 196 tests passed in 198.781s, no pending migrations, and zero system-check issues.
-- Journal: [Module 4 Chapter 5](Module-4/05-sale-voiding-and-stock-reversal.md).
+- Interactive Step **473**; journal Step **336**; **49 chapters** documented.
+- Source commit [`45bd7a2`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/45bd7a265a4b0eb8a3eac846582dede8d027b42f) verified on `main`.
+- User reported Chapter 1 Django checks, migration checks and Purchasing tests passing; detailed terminal output not provided.
+- Module 4 final verification: 196 total tests passed in 198.781 seconds; no pending migrations or Django system-check issues.
+- Journal chapter: [Module 5 Chapter 1](Module-5/01-purchase-order-setup.md).
 
-## Implemented in Chapter 5
-- `sales/services.py`: manager-only `void_sale()`, reason validation, atomic stock restoration through `change_stock()`, void audit metadata and duplicate-void rejection.
-- `sales/forms.py`: `VoidSaleForm` with required reason and 500-character limit.
-- `sales/views.py`, `sales/urls.py`: manager-only GET confirmation / POST void workflow and named route.
-- `sales/templates/sales/sale_void.html`: confirmation form and already-voided state.
-- `sales/templates/sales/sale_detail.html`: conditional manager action and void details.
-- `sales/tests.py`: 14 tests for service, permissions, stock, audit, form and rollback.
-
-## Technical cautions
-- `select_for_update()` does not provide equivalent row-level locking on SQLite. Do not claim the implementation is fully concurrency-safe across simultaneous voids on SQLite.
-- The source currently includes an unused `require_POST` import in `sales/views.py`; this is harmless but can be removed in a later cleanup.
-- Previous five-row sale form and potential invalid-field `clean()` edge case remain unchanged.
-- Demand forecasting and intelligence features are not yet implemented.
-
-## Final Module 4 verification
-- `python manage.py check`: 0 issues.
-- `python manage.py makemigrations --check --dry-run`: No changes detected.
-- `python manage.py test`: 196 tests, all OK (198.781s).
+## Module 5 Chapter 1 source
+- `config/settings.py`: Purchasing app registered.
+- `purchasing/models.py`: `PurchaseOrder` (PO number, supplier, status, expected delivery date, creator, timestamp) and `PurchaseOrderLine` (product, quantity ordered, unit cost).
+- `purchasing/admin.py`: Purchase order admin with inline lines.
+- `purchasing/tests.py`: eight model tests, including unchanged on-hand stock.
+- `purchasing/migrations/0001_initial.py`: initial schema.
+- No goods receipt, role-restricted purchase UI, status transition service, or incoming-stock posting implemented yet.
 
 ## Next
-- Confirm the next approved chapter scope before implementing it.
-- Future source commits: automatically clean trailing whitespace, verify staged diff, and stop on failed commit or push.
-- Journal changes must remain on `study-2` after source push.
+- Module 5 Chapter 2 — Purchase Order Creation Workflow.
+- Validate manager role, supplier active status, each product's supplier and active status, quantities and costs; create order and lines atomically.
+- Avoid changing stock on purchase-order creation.
+- Future source commits: strip trailing whitespace automatically; run staged diff checks; stop on commit/push failures.
+- Update journal `study-2` after source push, then verify journal links and mappings.
