@@ -359,3 +359,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 340 | M5 · Ch 2 | [Handle database uniqueness errors](Module-5/02-purchase-order-creation-service.md#step-340) |
 | 341 | M5 · Ch 2 | [Run full project checks](Module-5/02-purchase-order-creation-service.md#step-341) |
 | 342 | M5 · Ch 2 | [Clean whitespace and publish source](Module-5/02-purchase-order-creation-service.md#step-342) |
+
+| 343 | Maintenance · after M5 Ch 2 | [Improve Sales UI and dynamic rows](Module-5/03-sales-ui-maintenance-before-purchase-interface.md#step-343) |
