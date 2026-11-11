@@ -1,30 +1,23 @@
-# Development handoff — verified through Module 5 Chapter 2
+# Development handoff — Sales UI cleanup verified; next Step 480
 
 ## Repositories
 - Source `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY; never edit journal `main` or `study-3`.
+- Journal `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY.
 
 ## Checkpoint
-- Interactive Step **479**, journal Step **342**, **50 chapters** documented.
-- Source commit [`5160b69`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5160b691a8dafbc509f4b478c765fb003a2874a7) verified on `main`, files `purchasing/services.py` and `purchasing/tests.py`.
-- User terminal confirmed 221 tests passed (209.321s), 0 system-check issues, no pending migrations, successful push and clean working tree.
-- Journal chapter: [Module 5 Chapter 2](Module-5/02-purchase-order-creation-service.md).
+- Interactive Step **479** completed; next interactive Step **480**, Module 5 Chapter 3 of 5.
+- Journal now documents **343 steps**. Step 343 is a cross-module Sales UI maintenance checkpoint, not the first purchasing-interface step.
+- Source Purchasing Chapter 2 commit: `5160b69`. Source Sales UI cleanup commit: [`3615b91`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/3615b91242b3fef477a97b984cdaf1115e781fe8).
+- User confirmed `python manage.py check` passed and **221/221 tests** passed; browser UI was approved.
+- Latest journal chapter: [Sales UI maintenance](Module-5/03-sales-ui-maintenance-before-purchase-interface.md).
 
-## Implemented
-- `purchasing/services.py`: manager-only `create_purchase_order()` validates active user, PO number, supplier, items, product-supplier relationships, positive integer quantity, finite cost with two decimal places, and duplicate product IDs.
-- Uses `transaction.atomic()` and inner savepoint around order and line writes; translates `IntegrityError` into `ValueError` for duplicate PO number (broadly, for any integrity error).
-- Creating an order does not change stock.
-- `purchasing/tests.py`: 17 service tests added to 8 existing Chapter 1 tests; 221 tests across project.
-
-## Technical cautions
-- Broad `IntegrityError` catch may mislabel unrelated integrity failures as duplicate PO numbers.
-- SQLite does not provide equivalent row-level locking to PostgreSQL/MySQL.
-- No Purchasing form, protected view, dedicated URL or template yet.
-- Goods receipt and incoming stock posting are not yet implemented.
-- Purchase order status transitions are not yet implemented.
+## Purchasing constraints
+- Manager-only creation service exists in `purchasing/services.py`.
+- Creating a purchase order does **not** update on-hand stock.
+- Purchase order form, view, URL and template are next; goods receipt and status transitions remain later.
+- Preserve instructor-style Django conventions and do not invent implemented features.
 
 ## Next
-- **Module 5 Chapter 3 of 5** — Purchase Order Creation Interface, beginning at interactive Step **480**.
-- Follow existing sales form/view/template patterns; inspect source before editing. Keep manager-only access and avoid stock changes on PO creation.
-- Source Git blocks MUST remove trailing spaces/tabs AND extra EOF blank lines, run `git diff --cached --check`, stop on failure, then commit/push.
-- Update journal `study-2` only after successful source push.
+- Resume **interactive Step 480**: Purchase Order Creation Interface.
+- Inspect current source before editing; keep one step at a time.
+- After verified source push, update only the `study-2` journal.
