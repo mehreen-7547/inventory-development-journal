@@ -103,3 +103,5 @@ These are **352 development steps in 52 chapters**, rewritten so you can underst
 - [Maintenance after Module 5 Chapter 2: Sales UI cleanup](Module-5/03-sales-ui-maintenance-before-purchase-interface.md) — Steps 343–344 (latest source `6cd17f6`; 99 Sales tests passed)
 
 - [Chapter 3: Purchase Order Creation Interface](Module-5/04-purchase-order-creation-interface.md) — Journal Steps 345–352 (interactive Steps 480–487; source commit `f3063b6`; 39 purchasing tests passed)
+
+- [Chapter 4: Purchase Order Management Interface](Module-5/05-purchase-order-management-interface.md) — Journal Steps 353–360 (source commits `06694bb`, `634c41e`; final 56-test rerun not supplied)
