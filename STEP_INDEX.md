@@ -346,3 +346,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 329 | M4 · Ch 5 | [Connect void URL and templates](Module-4/05-sale-voiding-and-stock-reversal.md#step-329) |
 | 330 | M4 · Ch 5 | [Test stock reversal, permissions and rollback](Module-4/05-sale-voiding-and-stock-reversal.md#step-330) |
 | 331 | M4 · Ch 5 | [Clean whitespace and publish source](Module-4/05-sale-voiding-and-stock-reversal.md#step-331) |
+
+| 332 | M5 · Ch 1 | [Create the Purchasing app](Module-5/01-purchase-order-setup.md#step-332) |
+| 333 | M5 · Ch 1 | [Register Purchasing in settings](Module-5/01-purchase-order-setup.md#step-333) |
+| 334 | M5 · Ch 1 | [Define PurchaseOrder and PurchaseOrderLine](Module-5/01-purchase-order-setup.md#step-334) |
+| 335 | M5 · Ch 1 | [Register Admin, add tests and migrate](Module-5/01-purchase-order-setup.md#step-335) |
+| 336 | M5 · Ch 1 | [Verify and publish Chapter 1](Module-5/01-purchase-order-setup.md#step-336) |
