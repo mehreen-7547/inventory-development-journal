@@ -362,3 +362,12 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 
 | 343 | Maintenance · after M5 Ch 2 | [Improve Sales UI and dynamic rows](Module-5/03-sales-ui-maintenance-before-purchase-interface.md#step-343) |
 | 344 | Maintenance · after M5 Ch 2 | [Explain product availability and test it](Module-5/03-sales-ui-maintenance-before-purchase-interface.md#step-344) |
+
+| 345 | M5 · Ch 3 | [Create the purchase-order form](Module-5/04-purchase-order-creation-interface.md#step-345) |
+| 346 | M5 · Ch 3 | [Connect the Manager-only creation view](Module-5/04-purchase-order-creation-interface.md#step-346) |
+| 347 | M5 · Ch 3 | [Create the purchase-order route and form page](Module-5/04-purchase-order-creation-interface.md#step-347) |
+| 348 | M5 · Ch 3 | [Register purchasing URLs and add dashboard navigation](Module-5/04-purchase-order-creation-interface.md#step-348) |
+| 349 | M5 · Ch 3 | [Filter products to the chosen supplier](Module-5/04-purchase-order-creation-interface.md#step-349) |
+| 350 | M5 · Ch 3 | [Add dynamic Add Item and Remove controls](Module-5/04-purchase-order-creation-interface.md#step-350) |
+| 351 | M5 · Ch 3 | [Test multi-product creation and validation](Module-5/04-purchase-order-creation-interface.md#step-351) |
+| 352 | M5 · Ch 3 | [Verify, inspect Sales correction and publish Chapter 3](Module-5/04-purchase-order-creation-interface.md#step-352) |
