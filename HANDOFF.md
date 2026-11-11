@@ -8,7 +8,7 @@
 - Interactive Chapter 4 began at Step **488**; next interactive step number must be confirmed from the development plan before continuing.
 - Journal now documents **360 steps**; Chapter 4 is journal Steps **353–360**.
 - Source commits: [`06694bb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/06694bb) (management interface) and [`634c41e`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/634c41e) (Manager dashboard link).
-- Last supplied test output: **56 discovered, 55 passed, 1 failed** because dashboard link was absent. The link is now present on source `main`, but final rerun output was not supplied.
+- Final purchasing test run: **56/56 passed**, zero system-check issues (user-provided terminal output, 2026-11-11).
 - `python manage.py check`: zero issues; earlier `git diff --check`: no errors.
 
 ## Implemented
@@ -20,6 +20,5 @@
 - No goods receipt implemented in this chapter.
 
 ## Next
-- Confirm `python manage.py test purchasing` reports **56/56 passing** after the dashboard-link fix.
 - Then begin Module 5 Chapter 5 after reviewing the approved goods-receipt plan and actual source.
 - Preserve instructor-style Django conventions; chat code is full ready-to-copy files, journal uses step-relevant snippets with exact filenames.
