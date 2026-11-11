@@ -371,3 +371,12 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 350 | M5 · Ch 3 | [Add dynamic Add Item and Remove controls](Module-5/04-purchase-order-creation-interface.md#step-350) |
 | 351 | M5 · Ch 3 | [Test multi-product creation and validation](Module-5/04-purchase-order-creation-interface.md#step-351) |
 | 352 | M5 · Ch 3 | [Verify, inspect Sales correction and publish Chapter 3](Module-5/04-purchase-order-creation-interface.md#step-352) |
+
+| 353 | M5 · Ch 4 | [Add purchase-order list and detail routes](Module-5/05-purchase-order-management-interface.md#step-353) |
+| 354 | M5 · Ch 4 | [Display orders and their line totals](Module-5/05-purchase-order-management-interface.md#step-354) |
+| 355 | M5 · Ch 4 | [Make purchase-order rows open their details](Module-5/05-purchase-order-management-interface.md#step-355) |
+| 356 | M5 · Ch 4 | [Change eligible order statuses without changing stock](Module-5/05-purchase-order-management-interface.md#step-356) |
+| 357 | M5 · Ch 4 | [Generate PO numbers and show product stock context](Module-5/05-purchase-order-management-interface.md#step-357) |
+| 358 | M5 · Ch 4 | [Prevent duplicate product selections and calculate totals](Module-5/05-purchase-order-management-interface.md#step-358) |
+| 359 | M5 · Ch 4 | [Test purchase-order management and repair test discovery](Module-5/05-purchase-order-management-interface.md#step-359) |
+| 360 | M5 · Ch 4 | [Add the dashboard link and publish Chapter 4](Module-5/05-purchase-order-management-interface.md#step-360) |
