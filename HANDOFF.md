@@ -6,9 +6,10 @@
 
 ## Checkpoint
 - Interactive Step **479** completed; next interactive Step **480**, Module 5 Chapter 3 of 5.
-- Journal now documents **343 steps**. Step 343 is a cross-module Sales UI maintenance checkpoint, not the first purchasing-interface step.
+- Journal now documents **344 steps**. Steps 343–344 are cross-module Sales UI maintenance checkpoint, not the first purchasing-interface step.
 - Source Purchasing Chapter 2 commit: `5160b69`. Source Sales UI cleanup commit: [`3615b91`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/3615b91242b3fef477a97b984cdaf1115e781fe8).
 - User confirmed `python manage.py check` passed and **221/221 tests** passed; browser UI was approved.
+- Latest source commit: `6cd17f6`.
 - Latest journal chapter: [Sales UI maintenance](Module-5/03-sales-ui-maintenance-before-purchase-interface.md).
 
 ## Purchasing constraints
