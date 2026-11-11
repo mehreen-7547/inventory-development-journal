@@ -31,3 +31,9 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Manager-only voiding, positive stock restoration, audit metadata, confirmation form, status display and 14 new tests are in source. User terminal confirmed successful push and clean tree; test output not supplied.
 
 **Final Module 4 verification:** User terminal confirmed 196 tests passed (198.781s), 0 Django system-check issues and no pending migrations after source commit `f202c39`.
+
+## Module 5 — Chapter 1: Purchase Order Setup
+- Source commit: [`45bd7a2`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/45bd7a265a4b0eb8a3eac846582dede8d027b42f), branch `main`.
+- Journal: [Steps 332–336](Module-5/01-purchase-order-setup.md).
+- Changed files: `config/settings.py`, `purchasing/__init__.py`, `purchasing/admin.py`, `purchasing/apps.py`, `purchasing/migrations/0001_initial.py`, `purchasing/migrations/__init__.py`, `purchasing/models.py`, `purchasing/tests.py`, `purchasing/views.py`.
+- User reported all Chapter 1 checks passing; remote source commit verified. Detailed test terminal output not provided.
