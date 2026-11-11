@@ -37,3 +37,9 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Journal: [Steps 332–336](Module-5/01-purchase-order-setup.md).
 - Changed files: `config/settings.py`, `purchasing/__init__.py`, `purchasing/admin.py`, `purchasing/apps.py`, `purchasing/migrations/0001_initial.py`, `purchasing/migrations/__init__.py`, `purchasing/models.py`, `purchasing/tests.py`, `purchasing/views.py`.
 - User reported all Chapter 1 checks passing; remote source commit verified. Detailed test terminal output not provided.
+
+## Module 5 — Chapter 2: Purchase Order Creation Service
+- Source commit: [`5160b69`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5160b691a8dafbc509f4b478c765fb003a2874a7), branch `main`.
+- Journal: [Steps 337–342](Module-5/02-purchase-order-creation-service.md).
+- Changed files: `purchasing/services.py` (new), `purchasing/tests.py` (expanded).
+- User terminal: 17 focused service tests reported passed; 221 full-project tests passed (209.321s), zero system-check issues, no pending migrations, successful push and clean working tree.
