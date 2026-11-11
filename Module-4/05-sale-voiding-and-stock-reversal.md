@@ -262,3 +262,6 @@ User terminal confirmed source commit `f202c39`, push `664cf33..f202c39`, seven 
 
 ### Next
 Continue with the next approved development chapter after verifying its scope; keep future journal changes on `study-2` only.
+
+## Final module verification (after source push)
+The user ran `python manage.py check`, `python manage.py makemigrations --check --dry-run`, and `python manage.py test`. Terminal output confirmed **0 system-check issues**, **no model changes**, and **196/196 tests passed** (`Ran 196 tests in 198.781s — OK`). This confirms the previously unverified Chapter 5 test results and closes Module 4 without an additional source commit.
