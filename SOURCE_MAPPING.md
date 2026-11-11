@@ -23,3 +23,9 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Changed files: `sales/views.py`, `sales/urls.py`, `sales/tests.py`, `sales/templates/sales/sale_list.html`, `sales/templates/sales/sale_detail.html`, `core/templates/core/home.html`.
 - Verified user terminal: 12 history tests, 71 Sales tests, 182 full-project tests passed; whitespace checks passed; source pushed.
 - History browsing, search, status filter, pagination and role restrictions implemented. No voiding service or reversal yet.
+
+## Module 4 — Chapter 5: Sale Voiding and Stock Reversal
+- Source commit: [`f202c39`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/f202c39), branch `main`.
+- Journal: [Steps 327–331](Module-4/05-sale-voiding-and-stock-reversal.md).
+- Changed files: `sales/services.py`, `sales/forms.py`, `sales/views.py`, `sales/urls.py`, `sales/tests.py`, `sales/templates/sales/sale_void.html`, `sales/templates/sales/sale_detail.html`.
+- Manager-only voiding, positive stock restoration, audit metadata, confirmation form, status display and 14 new tests are in source. User terminal confirmed successful push and clean tree; test output not supplied.
