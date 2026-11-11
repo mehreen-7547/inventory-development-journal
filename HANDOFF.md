@@ -1,24 +1,23 @@
-# Development handoff — Purchasing Chapter 4 source published; next Chapter 5
+# Development handoff — Module 5 Chapter 5 journal updated; source commit pending
 
 ## Repositories
 - Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
 - Journal: `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY.
 
 ## Checkpoint
-- Interactive Chapter 4 began at Step **488**; next interactive step number must be confirmed from the development plan before continuing.
-- Journal now documents **360 steps**; Chapter 4 is journal Steps **353–360**.
-- Source commits: [`06694bb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/06694bb) (management interface) and [`634c41e`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/634c41e) (Manager dashboard link).
-- Final purchasing test run: **56/56 passed**, zero system-check issues (user-provided terminal output, 2026-11-11).
-- `python manage.py check`: zero issues; earlier `git diff --check`: no errors.
+- Journal documents **371 steps**, with Chapter 5 at journal Steps **361–371**.
+- Chapter 5 journal: [Goods Receipt and Close Short](Module-5/06-goods-receipt-and-close-short.md).
+- Source code reviewed from the user's local `purchasing.zip`; the Chapter 5 source has **not yet been pushed**.
+- User ran `python manage.py test purchasing`: **87/87 passed**, zero system-check issues (2026-11-11).
+- `git status --short` showed six modified and five new Chapter 5 files.
 
-## Implemented
-- Manager-only list, detail and status actions; clickable full rows.
-- Automatic hidden PO numbering on save; product stock, safety stock and lead time context.
-- Dynamic supplier filtering and exclusion of products selected in other rows; live totals.
-- Draft → Ordered, Draft/Ordered → Cancelled; no stock changes from creation/status actions.
-- 17 new management tests in `purchasing/test_purchase_management.py`.
-- No goods receipt implemented in this chapter.
+## Implemented locally
+- GoodsReceipt and GoodsReceiptLine records; PO line cumulative received quantity; migration 0002.
+- Manager-only goods receipt service, form, view, URL and template.
+- Partial/full/damaged receipt handling; no over-receipt; submission-key duplicate protection; usable stock movement only.
+- Close Short transition and confirmation action for partially received orders.
+- New tests: `test_goods_receipt.py`, `test_goods_receipt_views.py`, `test_close_short.py`.
 
 ## Next
-- Then begin Module 5 Chapter 5 after reviewing the approved goods-receipt plan and actual source.
-- Preserve instructor-style Django conventions; chat code is full ready-to-copy files, journal uses step-relevant snippets with exact filenames.
+- Stage, commit and push the 11 Chapter 5 source files to source `main` in one combined Git block.
+- Verify remote source commit and then update this handoff with its SHA; do not change earlier chapters.
