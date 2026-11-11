@@ -380,3 +380,15 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 358 | M5 · Ch 4 | [Prevent duplicate product selections and calculate totals](Module-5/05-purchase-order-management-interface.md#step-358) |
 | 359 | M5 · Ch 4 | [Test purchase-order management and repair test discovery](Module-5/05-purchase-order-management-interface.md#step-359) |
 | 360 | M5 · Ch 4 | [Add the dashboard link and publish Chapter 4](Module-5/05-purchase-order-management-interface.md#step-360) |
+
+| 361 | M5 · Ch 5 | [Extend the purchase order models](Module-5/06-goods-receipt-and-close-short.md#step-361) |
+| 362 | M5 · Ch 5 | [Implement atomic receipt processing](Module-5/06-goods-receipt-and-close-short.md#step-362) |
+| 363 | M5 · Ch 5 | [Test partial, damaged, full and repeated receipts](Module-5/06-goods-receipt-and-close-short.md#step-363) |
+| 364 | M5 · Ch 5 | [Build the receipt entry form](Module-5/06-goods-receipt-and-close-short.md#step-364) |
+| 365 | M5 · Ch 5 | [Connect the Manager-only receipt view](Module-5/06-goods-receipt-and-close-short.md#step-365) |
+| 366 | M5 · Ch 5 | [Add receipt URL and pages](Module-5/06-goods-receipt-and-close-short.md#step-366) |
+| 367 | M5 · Ch 5 | [Test receipt routes and browser behavior](Module-5/06-goods-receipt-and-close-short.md#step-367) |
+| 368 | M5 · Ch 5 | [Allow a partially received order to close short](Module-5/06-goods-receipt-and-close-short.md#step-368) |
+| 369 | M5 · Ch 5 | [Expose Close Short on the purchase order detail page](Module-5/06-goods-receipt-and-close-short.md#step-369) |
+| 370 | M5 · Ch 5 | [Correct Close Short test assertions](Module-5/06-goods-receipt-and-close-short.md#step-370) |
+| 371 | M5 · Ch 5 | [Run full purchasing regression tests and inspect changed files](Module-5/06-goods-receipt-and-close-short.md#step-371) |
