@@ -193,3 +193,9 @@ Every term below is written for someone revising Django from the beginning.
 **Goods receipt:** A future workflow recording delivered goods; it is separate from creating a purchase order.
 
 **TabularInline:** A Django Admin configuration for editing related records in rows on the parent record's admin page.
+
+**create_purchase_order():** Manager-only Purchasing service that validates the supplier, products, quantities, costs and PO number, then saves the order and lines atomically without increasing stock.
+
+**PO number uniqueness:** A unique database constraint prevents two purchase orders from sharing the same identifier, even if an earlier application-level lookup misses a duplicate.
+
+**Trailing whitespace:** Spaces or tabs at the ends of lines; staged Git checks may reject these and extra blank lines at the end of a file.
