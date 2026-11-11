@@ -29,3 +29,19 @@ The focused `sales.tests.SalePageTests.test_post_records_sale` test passed. `pyt
 
 ### Next
 Return to **Module 5 Chapter 3, interactive Step 480**: build the purchase-order creation interface. Purchase-order creation must remain manager-only and must not increase on-hand stock; goods receipt belongs to later work.
+
+## Step 344 — Explain available-stock filtering and add regression tests
+
+### Before this step
+An active pen had zero on-hand stock and was absent from Record Sale. The form intentionally lists only active products with positive stock, but did not explain this.
+
+### What we did
+**CLASS — `sales/templates/sales/sale_form.html`**: added “Only active products with available stock are shown.” beneath the dropdown in both existing and dynamically added rows.
+
+**NEW — `sales/test_product_availability.py`**: added 14 tests for availability, restocking, inactive products, dynamic rows, duplicate detection, 100-row limit, explanatory text and multi-product sales. Existing `sales/tests.py` remains intact.
+
+### How we checked it
+Focused availability tests: **14/14 passed**. Complete Sales suite: **99/99 passed**, including a second run. `python manage.py check` and `git diff --cached --check` passed. Source commit [`6cd17f6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/6cd17f6) was pushed to `main`, and `git status --short` was empty. Full-project tests were not rerun after this maintenance.
+
+### Next
+Resume interactive Step **480**, Module 5 Chapter 3, purchase-order creation interface.
