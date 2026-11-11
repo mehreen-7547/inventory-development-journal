@@ -89,3 +89,5 @@ These are **331 development steps in 48 chapters**, rewritten so you can underst
 - [Chapter 4: Sales History](Module-4/04-sales-history.md) — Journal Steps 322–326 (interactive Steps 461–462; source commit `664cf33`; 182 tests passed)
 
 - [Chapter 5: Sale Voiding and Stock Reversal](Module-4/05-sale-voiding-and-stock-reversal.md) — Journal Steps 327–331 (interactive Steps 463–467; source commit `f202c39`; test outputs not supplied)
+
+**Module 4 final verification:** All 196 Django tests passed, 0 system-check issues and no pending migrations after Chapter 5 source commit `f202c39`.
