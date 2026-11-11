@@ -361,3 +361,4 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 342 | M5 · Ch 2 | [Clean whitespace and publish source](Module-5/02-purchase-order-creation-service.md#step-342) |
 
 | 343 | Maintenance · after M5 Ch 2 | [Improve Sales UI and dynamic rows](Module-5/03-sales-ui-maintenance-before-purchase-interface.md#step-343) |
+| 344 | Maintenance · after M5 Ch 2 | [Explain product availability and test it](Module-5/03-sales-ui-maintenance-before-purchase-interface.md#step-344) |
