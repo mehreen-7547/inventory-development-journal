@@ -1,27 +1,30 @@
-# Development handoff — verified through Module 4 Chapter 4
+# Development handoff — verified through Module 4 Chapter 5
 
 ## Repositories
 - Source `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
 - Journal `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY; do not modify `main` or `study-3`.
 
-## Verified checkpoint
-- Interactive Step **462**, journal Step **326**, **47 chapters**.
-- Source commit [`664cf33`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/664cf33) pushed to `main`.
-- User terminal: **12 history, 71 Sales and 182 total tests passed**. Whitespace checks passed and working tree clean.
-- Journal: [Module 4 Chapter 4](Module-4/04-sales-history.md).
+## Checkpoint
+- Interactive Step **467**, journal Step **331**, **48 chapters**.
+- Source commit [`f202c39`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/f202c39) pushed to `main`.
+- User terminal confirmed seven source files changed, successful push and clean working tree. LF/CRLF warnings were informational. Test outputs were not included in the final terminal log; do not claim verified counts.
+- Journal: [Module 4 Chapter 5](Module-4/05-sale-voiding-and-stock-reversal.md).
 
-## Implemented in Chapter 4
-- `sales/views.py`: `sale_list` with login and sales/manager permissions, manager-wide versus employee-owned results, newest-first order, sale number/username search, completed/voided status filter and 10-per-page pagination.
-- `sales/urls.py`: named `sale_list` route at `/sales/`.
-- `sales/templates/sales/sale_list.html`: GET filters, sale table, empty state, detail links and pagination.
-- `sales/templates/sales/sale_detail.html`: link back to history.
-- `core/templates/core/home.html`: Sales History links for manager and sales dashboards.
-- `sales/tests.py`: 12 new history tests, unique-email fixtures and a regression test for search access control.
+## Implemented in Chapter 5
+- `sales/services.py`: manager-only `void_sale()`, reason validation, atomic stock restoration through `change_stock()`, void audit metadata and duplicate-void rejection.
+- `sales/forms.py`: `VoidSaleForm` with required reason and 500-character limit.
+- `sales/views.py`, `sales/urls.py`: manager-only GET confirmation / POST void workflow and named route.
+- `sales/templates/sales/sale_void.html`: confirmation form and already-voided state.
+- `sales/templates/sales/sale_detail.html`: conditional manager action and void details.
+- `sales/tests.py`: 14 tests for service, permissions, stock, audit, form and rollback.
 
-## Still pending
-- Sale voiding and inventory reversal service/UI. Status filter displays voided records but does not void sales.
-- Forecasting and demand-intelligence features remain outside this completed chapter.
-- The earlier sale form still supports five fixed rows; a potential invalid-field `clean()` edge case was noted in Chapter 3 handoff.
+## Technical cautions
+- `select_for_update()` does not provide equivalent row-level locking on SQLite. Do not claim the implementation is fully concurrency-safe across simultaneous voids on SQLite.
+- The source currently includes an unused `require_POST` import in `sales/views.py`; this is harmless but can be removed in a later cleanup.
+- Previous five-row sale form and potential invalid-field `clean()` edge case remain unchanged.
+- Demand forecasting and intelligence features are not yet implemented.
 
 ## Next
-- Module 4 Chapter 5: verify the approved voiding workflow before implementation; keep source code and journal updates separate, publishing journal only after source tests and push.
+- Confirm the next approved chapter scope before implementing it.
+- Future source commits: automatically clean trailing whitespace, verify staged diff, and stop on failed commit or push.
+- Journal changes must remain on `study-2` after source push.
