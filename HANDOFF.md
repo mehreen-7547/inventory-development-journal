@@ -1,24 +1,27 @@
-# Development handoff — Sales UI cleanup verified; next Step 480
+# Development handoff — Purchasing Chapter 3 complete; next Chapter 4
 
 ## Repositories
-- Source `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
-- Journal `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY.
+- Source: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`.
+- Journal: `mehreen-7547/inventory-development-journal`, branch `study-2` ONLY.
 
 ## Checkpoint
-- Interactive Step **479** completed; next interactive Step **480**, Module 5 Chapter 3 of 5.
-- Journal now documents **344 steps**. Steps 343–344 are cross-module Sales UI maintenance checkpoint, not the first purchasing-interface step.
-- Source Purchasing Chapter 2 commit: `5160b69`. Source Sales UI cleanup commit: [`3615b91`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/3615b91242b3fef477a97b984cdaf1115e781fe8).
-- User confirmed `python manage.py check` passed and **221/221 tests** passed; browser UI was approved.
-- Latest source commit: `6cd17f6`.
-- Latest journal chapter: [Sales UI maintenance](Module-5/03-sales-ui-maintenance-before-purchase-interface.md).
+- Interactive Steps **480–487** completed; next interactive Step **488**, Module 5 Chapter 4 of 5.
+- Journal documents **352 steps**; Chapter 3 maps interactive Steps 480–487 to journal Steps 345–352.
+- Source commit: [`f3063b6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/f3063b6), pushed to `main`.
+- User ran `python manage.py test purchasing`: **39/39 passed**, zero system-check issues.
+- User ran `python manage.py check`: zero issues; `git diff --check`: no whitespace errors.
+- Chapter journal: [Purchase Order Creation Interface](Module-5/04-purchase-order-creation-interface.md).
 
-## Purchasing constraints
-- Manager-only creation service exists in `purchasing/services.py`.
-- Creating a purchase order does **not** update on-hand stock.
-- Purchase order form, view, URL and template are next; goods receipt and status transitions remain later.
-- Preserve instructor-style Django conventions and do not invent implemented features.
+## Implemented
+- Manager-only purchase-order creation with dynamic Add Item/Remove rows, up to 100.
+- One supplier per order; products filtered client-side and validated server-side.
+- Multiple products saved atomically through `create_purchase_order`.
+- Creating a purchase order **does not change stock**.
+- Purchasing route, dashboard link, template and form/view tests.
+- Sales JavaScript editor correction included in source commit.
 
 ## Next
-- Resume **interactive Step 480**: Purchase Order Creation Interface.
-- Inspect current source before editing; keep one step at a time.
-- After verified source push, update only the `study-2` journal.
+- Start **interactive Step 488**, Module 5 Chapter 4, after reviewing the approved chapter plan and current source.
+- Preserve instructor-style Django conventions and full ready-to-copy source files in chat; journal shows only step-relevant code snippets with exact filenames.
+- Goods receipt and status transitions are not claimed implemented.
+- Update journal only on `study-2` after verified source pushes.
