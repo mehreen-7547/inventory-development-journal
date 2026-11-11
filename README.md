@@ -95,3 +95,5 @@ These are **331 development steps in 48 chapters**, rewritten so you can underst
 ## Module 5 — Purchasing
 
 - [Chapter 1: Purchase Order Setup](Module-5/01-purchase-order-setup.md) — Journal Steps 332–336 (interactive Steps 469–473; source commit `45bd7a2`; user reported purchasing checks passed)
+
+- [Chapter 2: Purchase Order Creation Service](Module-5/02-purchase-order-creation-service.md) — Journal Steps 337–342 (interactive Steps 474–479; source commit `5160b69`; 221 full-project tests passed)
