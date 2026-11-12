@@ -129,3 +129,7 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 9: Seed Data Verification and Full Regression Tests](Module-6/09-seed-verification-and-full-regression.md) — Step 380 (source `42a5f74`; all 374 tests passed)
 
 - [Chapter 10: Final Authorization and Module Completion](Module-6/10-final-authorization-and-module-closure.md) — Step 381 (source `5ce9647`; annotated tag `m6-complete`; module closed)
+
+## Post-Core maintenance — Data realism
+
+- [Realistic Branded Demo Dataset](Post-Core/01-realistic-branded-dataset.md) — Step 382 (source `5c62595`; 8 new tests, all 398 regression tests passed; active SQLite replacement pending)
