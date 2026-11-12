@@ -410,3 +410,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 379 | M6 · Ch 8 | [Synthetic historical data seed command](Module-6/08-synthetic-historical-data-seed.md#step-379) |
 
 | 380 | M6 · Ch 9 | [Seed integration and complete regression suite](Module-6/09-seed-verification-and-full-regression.md#step-380) |
+
+| 381 | M6 · Ch 10 | [Final authorization and Module 6 completion](Module-6/10-final-authorization-and-module-closure.md#step-381) |
