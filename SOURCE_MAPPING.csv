@@ -271,3 +271,4 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 379,,,6,Synthetic Historical Data Seed Command,"Add atomic local 365-day sales/stock/PO/receipt generator plus six safety tests; 30 stock/seed tests passed"
 380,,,6,Seed Data Verification and Full Regression Tests,"Seven full-year seed integration tests; 374 discoverable/passed; independent local stock ledger passed; source 42a5f74"
 381,,,6,Final Authorization and Module 6 Completion,"16 cross-role authorization tests, LOGIN_URL correction, final checks and m6-complete tag; source 5ce9647"
+382,,,Post-Core,Realistic Branded Demo Dataset,"48 branded products, five fictional suppliers, seasonal/variable demand, transactions, 8 new tests, 398 total tests passed; source 5c62595"
