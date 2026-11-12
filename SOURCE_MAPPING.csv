@@ -262,3 +262,4 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 370,,,5,Goods Receipt and Close Short,"Test Close Short and repair two brittle assertions"
 371,,,5,Goods Receipt and Close Short,"Run regression tests and publish the source"
 372,,,6,Manager Dashboard Summary Cards,"Calculate six Manager dashboard figures, render cards and verify 302 tests"
+373,,,6,Low-stock and Out-of-stock Products Panel,"Query and render up to ten active low/out-of-stock products, verify 308 tests"
