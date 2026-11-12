@@ -400,3 +400,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 374 | M6 · Ch 3 | [Purchase orders needing attention](Module-6/03-purchase-order-attention-panel.md#step-374) |
 
 | 375 | M6 · Ch 4 | [Recent stock movements and sales](Module-6/04-recent-stock-movements-and-sales.md#step-375) |
+
+| 376 | M6 · Ch 5 | [Top-selling products and seven-day sales](Module-6/05-top-sellers-and-daily-sales.md#step-376) |
