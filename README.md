@@ -123,3 +123,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 6: Sales Staff Dashboard](Module-6/06-sales-staff-dashboard.md) — Step 377 (commits `9bc0d92`, `a800ee7`; 51 dashboard tests passed)
 
 - [Chapter 7: Administrator Dashboard](Module-6/07-administrator-dashboard.md) — Step 378 (source `ccc99f3`; 13 new tests, push verified)
+
+- [Chapter 8: Synthetic Historical Data Seed Command](Module-6/08-synthetic-historical-data-seed.md) — Step 379 (source `ab5d7ce`; 30 stock/seed tests passed)
