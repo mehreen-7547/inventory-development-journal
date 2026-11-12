@@ -406,3 +406,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 377 | M6 · Ch 6 | [Sales Staff Dashboard](Module-6/06-sales-staff-dashboard.md#step-377) |
 
 | 378 | M6 · Ch 7 | [Administrator Dashboard](Module-6/07-administrator-dashboard.md#step-378) |
+
+| 379 | M6 · Ch 8 | [Synthetic historical data seed command](Module-6/08-synthetic-historical-data-seed.md#step-379) |
