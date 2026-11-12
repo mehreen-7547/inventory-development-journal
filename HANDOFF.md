@@ -1,37 +1,31 @@
-# Development handoff — Module 5 Chapter 5 completed
+# Development handoff — Module 6 Chapter 1 completed
 
-## Repositories and checkpoint
-- Code: https://github.com/mehreen-7547/ai-assisted-inventory-manager — branch `main`.
-- Journal: https://github.com/mehreen-7547/inventory-development-journal — **branch `study-2` ONLY**; never edit journal main or force-push.
-- Current: Module 5 Chapter 5 — Goods Receipt and Close Short; journal Steps **361–371**.
-- Verified code commit: [`788a1580c1d7a8a9c6fb264eec605e50a2efcd6a`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/788a1580c1d7a8a9c6fb264eec605e50a2efcd6a); six modified and five new purchasing files, no .env or db.sqlite3 in commit.
-- Tests: **87 purchasing tests passed** in 213.331 s; zero Django system-check issues. Full-project tests were included in the push block but their output was not provided.
+## Current checkpoint
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit `02bdb49`.
+- Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
+- Module 6 Chapter 1 completed: Step 372, six Manager summary cards.
+- Full suite: **302 passed** (203.720 s), zero Django system-check issues, no pending migrations.
+- Four source files: `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_manager_dashboard.py`.
+- Local untracked `purchasing.zip` is unrelated and must not be staged.
 
-## Chapter 5 implementation
-- `PurchaseOrderLine.quantity_received`, `GoodsReceipt`, `GoodsReceiptLine`, `closed_short`, migration 0002.
-- Manager-only `receive_goods`, atomic stock movements for usable quantities, partial/full/damaged receipt handling, validation and submission-key protection.
-- Dynamic form, receipt view, URL, template, detail actions, delivered quantity column.
-- Close Short on partially received orders with outstanding quantity; receipt history and stock preserved.
-- Three new test modules: `test_goods_receipt.py`, `test_goods_receipt_views.py`, `test_close_short.py`.
+## Frozen Module 6 scope
+- No new apps, database tables, model fields, libraries, chart libraries or dashboard editing. Function-based views, queries in plain functions in `core/dashboard.py`; computed values are not stored.
+- Today = `timezone.localdate()`; last 7 days includes today and six previous days; last 30 days includes today and 29 previous days. Completed sales count in totals; voided sales appear only in recent lists. Only active products and suppliers count. Open orders are ordered or partially received; overdue orders are open with expected date before today. Every empty panel needs a one-line message.
+- Manager dashboard chapters: Ch1 summary cards DONE; Ch2 low/out-of-stock panel; Ch3 purchase-order attention panel; Ch4 recent stock activity and recent sales; Ch5 top sellers and seven-day daily sales table using Bootstrap progress bars.
+- Sales dashboard Ch6: own sales only, three cards, recent own sales, low/out-of-stock read-only list; no other staff revenue, suppliers, purchasing or movements.
+- Admin dashboard Ch7: accounts only, four cards, pending setup and recently added accounts; no business metrics.
+- Ch8 local reproducible synthetic seed command: fixed random seed, 365 daily sales days ending yesterday, three suppliers, about 25 products and five category strings, opening stock, restocking through existing services, open/overdue orders and ~6 printed anomaly days. Do not create users; require existing Manager; refuse when any Sale exists; use `change_stock`, `record_sale`, `receive_goods`; run `check_ledger`.
+- Ch9 seed tests, ledger verification and full tests; Ch10 URL authorization sweep, full tests and `m6-complete` tag. About 92 steps in the frozen plan, but journal numbering follows actual completed steps.
+- Known deviation: `select_for_update()` remains in the receipt service; SQLite ignores it. Leave unchanged.
 
-## Approved architecture
-- Django 6, Python 3.12, SQLite initially; MySQL only later if needed; settings from .env.
-- Apps: accounts, catalog, inventory, sales, purchasing, core; intelligence stretch phase later.
-- One supplier per product; category is a CharField, no Category model.
-- Admin manages accounts; Manager manages products, suppliers, stock, purchasing, reporting; Sales records sales and views stock.
-- `Product.on_hand` is the stored balance; all stock changes use `change_stock()` and `StockMovement`.
-- Function-based views, service-layer business rules, `transaction.atomic()`; no DRF, Celery, separate frontend, paid services or heavy training.
-- Forecast plan: Chronos-Bolt Tiny CPU, formal evaluation in Module 8; seed data planned in Module 6.
-- **Known deviation:** the committed receipt service uses `select_for_update()`, contrary to the approved SQLite guidance. SQLite ignores this lock clause. Do not silently change the verified source; assess during a future maintenance step.
-
-## Chapter and journal rules
-- One small development action at a time; test features within their chapters; step numbering continuous across the journal.
-- Chapter closes only after tests pass, user confirms, code is pushed and journal is published.
-- User confirmed no additional Chapter 5 changes outside the chat.
-- User pushes source using one guarded PowerShell block: full tests once, secret check, explicit staging, whitespace check, commit, push and log.
-- Assistant verifies source commit and publishes journal through connector to `study-2` in one commit.
-- Each journal chapter: Before we begin / What we worked on / Picture it this way / step jump-list; every step has Before this step, What we did and why, exact filename before each code block, at least 60-word code walkthrough, How we checked it, previous/next links; chapter summary and one specific recall question.
-- Never invent results, expose secrets or rewrite older journal chapters without approval.
+## Chapter-end procedure
+- One small step at a time unless user requests rapid mode; each chapter is fully tested and pushed before the next.
+- User pushes source with explicit staging and guarded PowerShell block. Assistant verifies and publishes the journal to `study-2` (never `main`).
+- Journal includes chapter introduction, precise filenames before each code block, code from the actual source, explanation, tests, previous/next links, glossary when needed, and recall question.
+- If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-- Module 6: Seed Data. Confirm the chapter plan before implementing; use local/free synthetic data and preserve approved architecture.
+Module 6 Chapter 2: Manager low-stock and out-of-stock products panel. Preserve all existing Chapter 1 cards and quick actions.
+
+## Deferred ideas
+None proposed.
