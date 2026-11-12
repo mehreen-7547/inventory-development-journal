@@ -76,3 +76,9 @@ None proposed.
 - User ran eight tests successfully (19.329s), then the **entire 398-test suite passed in 1084.055s**; local `check_ledger` passed, system checks and migration checks passed, pushed source `5c62595`. Exact files fetched and verified in GitHub.
 - **Local DB not yet switched** as of user-reported full-suite results. It contains OLD demo data. Next run existing backup-and-reset script from manage.py directory after verifying account count=8, confirm backup saved, then `python manage.py seed_realistic_data --manager manager1` and `python manage.py check_ledger`. A failed seed must not lead to an unbacked reset or user deletion.
 - Journal: `Post-Core/01-realistic-branded-dataset.md` Step 382; preserve earlier Module 6 Chapter 10 as historical source.
+
+## Realistic local dataset activated — 2026-11-12
+- User ran `python manage.py seed_realistic_data --manager manager1`; command completed successfully and printed: 3,291 sales (32 voided), 365-day range 2025-11-13 to 2026-11-12, 48 branded products, 5 fictional suppliers, 132 POs, 158 receipts, 10 stock counts, 9 synthetic campaign days.
+- `check_ledger` passed inside command and separately immediately after. This is **now the ACTIVE local business dataset**; previous notes that the old seed is active are superseded.
+- Do NOT reset or rerun either seed. User did not paste reset backup or current account count this time; don't claim either freshly verified. Previously eight accounts existed and seed command does not alter users.
+- Next: open Manager/Sales dashboard and judge realism; only then advance to Stretch historical-data/AI forecasting. Core tag `m6-complete` remains frozen, recent source commit `5c62595`.
