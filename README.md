@@ -117,3 +117,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 3: Purchase Orders Needing Attention](Module-6/03-purchase-order-attention-panel.md) — Step 374 (source `698c81c`; 315 tests passed)
 
 - [Chapter 4: Recent Stock Movements and Sales](Module-6/04-recent-stock-movements-and-sales.md) — Step 375 (source `4d331d8`; 325 tests passed)
+
+- [Chapter 5: Top-selling Products and Seven-day Sales](Module-6/05-top-sellers-and-daily-sales.md) — Step 376 (source `1e64eb7`; 336 tests passed)
