@@ -408,3 +408,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 378 | M6 · Ch 7 | [Administrator Dashboard](Module-6/07-administrator-dashboard.md#step-378) |
 
 | 379 | M6 · Ch 8 | [Synthetic historical data seed command](Module-6/08-synthetic-historical-data-seed.md#step-379) |
+
+| 380 | M6 · Ch 9 | [Seed integration and complete regression suite](Module-6/09-seed-verification-and-full-regression.md#step-380) |
