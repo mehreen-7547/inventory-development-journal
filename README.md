@@ -121,3 +121,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 5: Top-selling Products and Seven-day Sales](Module-6/05-top-sellers-and-daily-sales.md) — Step 376 (source `1e64eb7`; 336 tests passed)
 
 - [Chapter 6: Sales Staff Dashboard](Module-6/06-sales-staff-dashboard.md) — Step 377 (commits `9bc0d92`, `a800ee7`; 51 dashboard tests passed)
+
+- [Chapter 7: Administrator Dashboard](Module-6/07-administrator-dashboard.md) — Step 378 (source `ccc99f3`; 13 new tests, push verified)
