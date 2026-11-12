@@ -1,10 +1,10 @@
-# Development handoff — Module 6 Chapter 7 completed
+# Development handoff — Module 6 Chapter 8 completed
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `ccc99f3` (Module 6 Chapter 7 Administrator dashboard).
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `ab5d7ce` (Module 6 Chapter 8 seed command).
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
-- Module 6 Chapter 7 completed: Step 378. All three role dashboards have planned functional sections (Manager, Sales Staff, Administrator).
-- Last observed complete suite: **336 tests passed** after Chapter 5. Chapter 6: **51 related dashboard tests passed**, 12 new tests. Chapter 7: **13 new tests included in committed source**; user's successful guarded push recorded but individual test output not supplied. Expected total suite count **361**, unverified until the next full run.
+- Module 6 Chapter 8 completed: Step 379. Three role dashboards intact; local atomic synthetic historical seed command added.
+- Last observed full suite: **336 passed** at Chapter 5. Chapter 6 added 12 tests (51 dashboard tests passed), Ch7 added 13 tests (committed), Ch8 added 6 tests (30 related tests passed in 19.268s). Expected total **367**; full-suite run due Chapter 9.
 - Chapter 6 changed `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_sales_staff_dashboard.py` and corrected `core/test_recent_activity_dashboard.py`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 Chapter 8: Build the local, reproducible synthetic historical-data seed command. Requires existing Manager; refuse if any Sale exists; generate 365 past days (ending yesterday), three suppliers, ~25 products across five categories, real stock movements via existing services, receipts and some open/overdue POs; run ledger check.
+Module 6 Chapter 9: Add full-year seed integration and ledger tests, run `manage.py test` full suite, verify data before seeding the user's active SQLite database. The user has intentionally cleared their old dummy business records while preserving eight user accounts. The Chapter 8 seed command has not been run against active database.
 
 ## Deferred ideas
 None proposed.
@@ -48,3 +48,9 @@ None proposed.
 - User pushed `ccc99f3` on `main`. Verified the exact four source files and 13 test methods in GitHub.
 - Admin dashboard remains read-only; pending user email action reuses the POST/CSRF-protected `resend_setup_email` view.
 - Run the next full regression milestone by/with seed-command verification; compare observed tests to expected 361 before new seed tests.
+
+## Chapter 8 checkpoint / user's local data state
+- User ran `reset_business_data_once.py` on active local SQLite database and confirmed all business models emptied. **Eight existing users/accounts/roles/passwords preserved**, and a SQLite backup was saved.
+- Source seed code in `ab5d7ce`: three suppliers, 25 products/five categories, opening stock, year of historical sales ending yesterday, six anomaly days, buying/receipts with services, and `check_ledger` inside transaction.
+- Six new seed-safety tests; 30 seed+inventory tests passed (19.268 seconds), zero system-check issues, no migrations. No live seed yet. Pending Chapter 9 full integration and full suite.
+- Important: avoid requesting creation of users or a separate database; user specifically wants to populate the cleaned existing SQLite database and preserve eight accounts.
