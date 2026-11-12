@@ -1,10 +1,10 @@
-# Development handoff — Module 6 Chapter 6 completed
+# Development handoff — Module 6 Chapter 7 completed
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `a800ee7` (Chapter 6 feature commit `9bc0d92`, follow-up test correction `a800ee7`).
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `ccc99f3` (Module 6 Chapter 7 Administrator dashboard).
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
-- Module 6 Chapter 6 completed: Step 377. All five Manager chapters preserved; Sales Staff dashboard added with own sales totals, recent sales and stock alerts.
-- Last complete suite: **336 passed** (616.410 s) after Chapter 5. Chapter 6: **12 new tests**, **51 dashboard tests passed** (58.205 s), full suite not rerun; expected full count 348.
+- Module 6 Chapter 7 completed: Step 378. All three role dashboards have planned functional sections (Manager, Sales Staff, Administrator).
+- Last observed complete suite: **336 tests passed** after Chapter 5. Chapter 6: **51 related dashboard tests passed**, 12 new tests. Chapter 7: **13 new tests included in committed source**; user's successful guarded push recorded but individual test output not supplied. Expected total suite count **361**, unverified until the next full run.
 - Chapter 6 changed `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_sales_staff_dashboard.py` and corrected `core/test_recent_activity_dashboard.py`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
@@ -13,7 +13,7 @@
 - Today = `timezone.localdate()`; last 7 days includes today and six previous days; last 30 days includes today and 29 previous days. Completed sales count in totals; voided sales appear only in recent lists. Only active products and suppliers count. Open orders are ordered or partially received; overdue orders are open with expected date before today. Every empty panel needs a one-line message.
 - Manager dashboard chapters Ch1–Ch5: DONE (summary cards, stock/PO alerts, recent movements/sales, top sellers and seven-day trend).
 - Sales dashboard Ch6: DONE (own today/last-seven-day completed sales, overall out-of-stock count, own eight recent sales, eight stock alerts, no purchasing/supplier/team figures).
-- Admin dashboard Ch7: accounts only, four cards, pending setup and recently added accounts; no business metrics.
+- Admin dashboard Ch7 DONE: active total, active counts per role, deactivated total, pending unusable passwords (active Manager/Sales), resend setup POST action, last five accounts. No business metrics.
 - Ch8 local reproducible synthetic seed command: fixed random seed, 365 daily sales days ending yesterday, three suppliers, about 25 products and five category strings, opening stock, restocking through existing services, open/overdue orders and ~6 printed anomaly days. Do not create users; require existing Manager; refuse when any Sale exists; use `change_stock`, `record_sale`, `receive_goods`; run `check_ledger`.
 - Ch9 seed tests, ledger verification and full tests; Ch10 URL authorization sweep, full tests and `m6-complete` tag. About 92 steps in the frozen plan, but journal numbering follows actual completed steps.
 - Known deviation: `select_for_update()` remains in the receipt service; SQLite ignores it. Leave unchanged.
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 Chapter 7: Administrator Dashboard (account figures, role counts, pending password setup, recent accounts and existing resend setup email link). No business figures.
+Module 6 Chapter 8: Build the local, reproducible synthetic historical-data seed command. Requires existing Manager; refuse if any Sale exists; generate 365 past days (ending yesterday), three suppliers, ~25 products across five categories, real stock movements via existing services, receipts and some open/overdue POs; run ledger check.
 
 ## Deferred ideas
 None proposed.
@@ -43,3 +43,8 @@ None proposed.
 - First source commit `9bc0d92` passed 48 discovered dashboard tests, but incorrect indentation had hidden three tests. Source commit `a800ee7` restored them; 51 dashboard tests passed.
 - After new tests or edits to test classes, compare discovered-test counts, not only `OK`.
 - Full suite milestone was 336 tests after Chapter 5; expected count after adding 12 Chapter 6 tests is 348. The full suite has not yet been rerun.
+
+## Chapter 7 checkpoint
+- User pushed `ccc99f3` on `main`. Verified the exact four source files and 13 test methods in GitHub.
+- Admin dashboard remains read-only; pending user email action reuses the POST/CSRF-protected `resend_setup_email` view.
+- Run the next full regression milestone by/with seed-command verification; compare observed tests to expected 361 before new seed tests.
