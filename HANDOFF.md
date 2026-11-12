@@ -1,11 +1,11 @@
 # Development handoff — Module 6 Chapter 1 completed
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit `698c81c`.
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit `4d331d8`.
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
-- Module 6 Chapter 3 completed: Step 374, Manager summary cards, low/out-of-stock panel and purchase-order attention panel.
-- Full suite: **315 passed** (379.849 s), zero Django system-check issues, no pending migrations.
-- Chapter 3 changed four source files: `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_purchase_order_dashboard.py`.
+- Module 6 Chapter 4 completed: Step 375, Manager summary cards, stock/PO panels and recent stock movements and sales.
+- Full suite: **325 passed** (414.175 s), zero Django system-check issues, no pending migrations.
+- Chapter 4 changed four source files: `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_recent_activity_dashboard.py`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
 ## Frozen Module 6 scope
@@ -25,7 +25,12 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 Chapter 4: Manager recent stock movements and recent sales panels. Preserve all existing dashboard cards, stock and PO panels, and quick actions.
+Module 6 Chapter 5: Manager top-selling products and seven-day daily sales activity. Preserve all existing dashboard panels and quick actions.
 
 ## Deferred ideas
 None proposed.
+
+## Deferred UI and receipt review (user feedback after Chapter 4)
+- The goods receipt form at `/purchase-orders/3/receive/` has cramped, misaligned table columns and quantity inputs; fix with responsive Bootstrap layout during UI refinement.
+- Add a professional, responsive, role-specific navigation sidebar/drawer and visual consistency pass after Module 6 functionality is finished.
+- Review existing goods receipt access; add read-only goods receipt history and details linked from the relevant purchase order if not already available. Treat this as a separate functional gap outside frozen Module 6 scope, not as a new model/table requirement.
