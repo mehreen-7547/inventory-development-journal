@@ -800,3 +800,15 @@ Post-Core Step 382 introduced and verified a second, more believable data genera
 **Recall question:** Why must the realistic seed command refuse to run while business records exist, rather than automatically deleting the old sales and purchase orders?
 
 **Source commit:** [`5c62595`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5c62595).
+
+## Local dataset replacement verified — 12 November 2026
+
+After the Step 382 code was committed and the 398-test suite passed, the user ran `python manage.py seed_realistic_data --manager manager1` on the active local SQLite database. Its output confirmed:
+
+- `Stock ledger check passed` from inside the command.
+- **3,291 sales**, including **32 voided**, spanning **2025-11-13 through 2026-11-12** (365 inclusive calendar days).
+- **48 branded products**, **5 fictional suppliers**, **132 purchase orders**, **158 goods receipts**.
+- **10 stock-count adjustments**, **9 synthetic campaign days**.
+- A subsequent standalone `python manage.py check_ledger` also printed **`Stock ledger check passed`**.
+
+The explicit reset/backup log and fresh user-account count were not included in this message, so do not claim those have been reverified here. The seed command itself refuses any existing business records and finished successfully, indicating the old business tables had been cleared first. **Do not reseed or reset again.** Next the user should visually inspect the Manager dashboard and confirm the branded product mix and varied history look suitable before advancing into Stretch AI features.
