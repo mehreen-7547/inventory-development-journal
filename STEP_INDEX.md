@@ -412,3 +412,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 380 | M6 · Ch 9 | [Seed integration and complete regression suite](Module-6/09-seed-verification-and-full-regression.md#step-380) |
 
 | 381 | M6 · Ch 10 | [Final authorization and Module 6 completion](Module-6/10-final-authorization-and-module-closure.md#step-381) |
+
+| 382 | Post-Core · Data | [Branded synthetic dataset and verification](Post-Core/01-realistic-branded-dataset.md#step-382) |
