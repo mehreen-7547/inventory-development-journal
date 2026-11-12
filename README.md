@@ -115,3 +115,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 2: Low-stock and Out-of-stock Products Panel](Module-6/02-low-stock-products-panel.md) — Step 373 (source `81cde18`; 308 tests passed)
 
 - [Chapter 3: Purchase Orders Needing Attention](Module-6/03-purchase-order-attention-panel.md) — Step 374 (source `698c81c`; 315 tests passed)
+
+- [Chapter 4: Recent Stock Movements and Sales](Module-6/04-recent-stock-movements-and-sales.md) — Step 375 (source `4d331d8`; 325 tests passed)
