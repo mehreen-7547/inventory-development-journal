@@ -268,3 +268,4 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 376,,,6,Top-selling Products and Seven-day Sales,"30-day top five gross line revenue and units, seven-day net daily revenue with bars; 336 tests"
 377,,,6,Sales Staff Dashboard,"Personal sales metrics, recent own sales and stock alerts; restore regression tests; 51 dashboard tests passed"
 378,,,6,Administrator Dashboard,"Show active/inactive user counts and active roles, pending setup email actions, last five accounts; new 13 tests"
+379,,,6,Synthetic Historical Data Seed Command,"Add atomic local 365-day sales/stock/PO/receipt generator plus six safety tests; 30 stock/seed tests passed"
