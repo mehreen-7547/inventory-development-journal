@@ -404,3 +404,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 376 | M6 · Ch 5 | [Top-selling products and seven-day sales](Module-6/05-top-sellers-and-daily-sales.md#step-376) |
 
 | 377 | M6 · Ch 6 | [Sales Staff Dashboard](Module-6/06-sales-staff-dashboard.md#step-377) |
+
+| 378 | M6 · Ch 7 | [Administrator Dashboard](Module-6/07-administrator-dashboard.md#step-378) |
