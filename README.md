@@ -113,3 +113,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 1: Manager Dashboard Summary Cards](Module-6/01-manager-dashboard-summary-cards.md) — Step 372 (source `02bdb49`; 302 tests passed)
 
 - [Chapter 2: Low-stock and Out-of-stock Products Panel](Module-6/02-low-stock-products-panel.md) — Step 373 (source `81cde18`; 308 tests passed)
+
+- [Chapter 3: Purchase Orders Needing Attention](Module-6/03-purchase-order-attention-panel.md) — Step 374 (source `698c81c`; 315 tests passed)
