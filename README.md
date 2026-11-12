@@ -127,3 +127,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 8: Synthetic Historical Data Seed Command](Module-6/08-synthetic-historical-data-seed.md) — Step 379 (source `ab5d7ce`; 30 stock/seed tests passed)
 
 - [Chapter 9: Seed Data Verification and Full Regression Tests](Module-6/09-seed-verification-and-full-regression.md) — Step 380 (source `42a5f74`; all 374 tests passed)
+
+- [Chapter 10: Final Authorization and Module Completion](Module-6/10-final-authorization-and-module-closure.md) — Step 381 (source `5ce9647`; annotated tag `m6-complete`; module closed)
