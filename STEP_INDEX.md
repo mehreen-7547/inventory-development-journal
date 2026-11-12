@@ -398,3 +398,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 373 | M6 · Ch 2 | [Low-stock and out-of-stock products panel](Module-6/02-low-stock-products-panel.md#step-373) |
 
 | 374 | M6 · Ch 3 | [Purchase orders needing attention](Module-6/03-purchase-order-attention-panel.md#step-374) |
+
+| 375 | M6 · Ch 4 | [Recent stock movements and sales](Module-6/04-recent-stock-movements-and-sales.md#step-375) |
