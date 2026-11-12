@@ -366,39 +366,24 @@ We added a Received column, adjusted the total row alignment and placed a Receiv
 Open `purchasing/templates/purchasing/purchase_order_detail.html` and find these lines in the change made for this step:
 
 ```django
+<th class="text-end">Received</th>
+<td class="text-end">
+    {{ item.line.quantity_received }}
+</td>
+<th colspan="5" class="text-end">
+    Order Total
+</th>
+
+            {% if order.status == 'ordered' or order.status == 'partially_received' %}
+            <a href="{% url 'goods_receipt_create' order.pk %}"
                class="btn btn-success">
-                {% if order.status == 'partially_received' %}
-                    Receive Remaining Goods
-                {% else %}
-                    Receive Goods
-                {% endif %}
-            </a>
-            {% endif %}
-
-            {% if order.status == 'partially_received' %}
-            <form method="post"
-                  action="{% url 'purchase_order_status' order.pk %}"
-                  onsubmit="return confirm('Close this purchase order without receiving the remaining goods? This action cannot be undone.');">
-                {% csrf_token %}
-                <input type="hidden" name="status" value="closed_short">
-
-                <button type="submit" class="btn btn-outline-warning">
-                    Close Short
-                </button>
-            </form>
-            {% endif %}
-
-            {% if order.status == 'draft' or order.status == 'ordered' %}
-            {% endif %}
-            Marking a purchase order as ordered does not increase stock.
-            Stock increases only when usable goods are received.
 ```
 
 ### Code walkthrough
 The new table cell reads `item.line.quantity_received`, the cumulative amount across all deliveries for that product. It is not the quantity from only the most recent receipt. The table footer spans one extra column so the order total remains aligned. The receipt link appears only for `ordered` and `partially_received` states, matching the service's eligibility rule. The text changes after a partial receipt so the next action is clear. This visibility check helps the user but is not the security check; the view and service independently reject an ineligible request.
 
 ### How we checked it
-The view tests confirmed that the order detail contains the receipt action, and the full purchasing tests passed.
+The receipt-view tests checked the order detail and receipt workflow. The purchasing suite previously passed 87 tests; the full-project test count was not captured in the pasted terminal output.
 
 ### Where to go next
 Previous: [Step 366](#step-366). Next: [Step 368](#step-368).
@@ -415,8 +400,29 @@ We extended `change_purchase_order_status` with `closed_short`, restricted to or
 Open `purchasing/services.py` and find these lines in the change made for this step:
 
 ```python
-)
     if new_status not in ('ordered', 'cancelled', 'closed_short'):
+        raise ValueError('Invalid purchase order status.')
+
+    with transaction.atomic():
+        try:
+            order = PurchaseOrder.objects.select_for_update().get(
+                pk=order_id
+            )
+        except PurchaseOrder.DoesNotExist:
+            raise ValueError('Purchase order not found.')
+
+        if new_status == 'ordered':
+            if order.status != 'draft':
+                raise ValueError(
+                    'Only draft purchase orders can be marked as ordered.'
+                )
+
+        elif new_status == 'cancelled':
+            if order.status not in ('draft', 'ordered'):
+                raise ValueError(
+                    'This purchase order cannot be cancelled.'
+                )
+
         elif new_status == 'closed_short':
             if order.status != 'partially_received':
                 raise ValueError(
@@ -435,16 +441,10 @@ Open `purchasing/services.py` and find these lines in the change made for this s
                     'This purchase order has no outstanding quantity.'
                 )
 
+        order.status = new_status
+        order.save(update_fields=['status'])
 
-
-def receive_goods(order_id, items, submission_key, user):
-    if (
-        not user
-        or not user.is_authenticated
-        or not user.is_active
-        or user.role != 'manager'
-    ):
-        raise ValueError('Only active managers can receive goods.')
+        return order
 ```
 
 ### Code walkthrough
@@ -468,6 +468,17 @@ We added a POST form with a hidden `closed_short` value and a confirmation promp
 Open `purchasing/templates/purchasing/purchase_order_detail.html` and find these lines in the change made for this step:
 
 ```django
+            {% if order.status == 'partially_received' %}
+                    Receive Remaining Goods
+                {% else %}
+                    Receive Goods
+                {% endif %}
+            </a>
+            {% endif %}
+
+            {% if order.status == 'partially_received' %}
+            <form method="post"
+                  action="{% url 'purchase_order_status' order.pk %}"
                   onsubmit="return confirm('Close this purchase order without receiving the remaining goods? This action cannot be undone.');">
                 {% csrf_token %}
                 <input type="hidden" name="status" value="closed_short">
@@ -477,13 +488,6 @@ Open `purchasing/templates/purchasing/purchase_order_detail.html` and find these
                 </button>
             </form>
             {% endif %}
-
-            {% if order.status == 'draft' or order.status == 'ordered' %}
-            {% endif %}
-            Marking a purchase order as ordered does not increase stock.
-            Stock increases only when usable goods are received.
-            Closing short preserves previously received quantities
-            and prevents further deliveries against this order.
 ```
 
 ### Code walkthrough
