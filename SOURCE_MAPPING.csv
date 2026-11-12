@@ -270,3 +270,4 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 378,,,6,Administrator Dashboard,"Show active/inactive user counts and active roles, pending setup email actions, last five accounts; new 13 tests"
 379,,,6,Synthetic Historical Data Seed Command,"Add atomic local 365-day sales/stock/PO/receipt generator plus six safety tests; 30 stock/seed tests passed"
 380,,,6,Seed Data Verification and Full Regression Tests,"Seven full-year seed integration tests; 374 discoverable/passed; independent local stock ledger passed; source 42a5f74"
+381,,,6,Final Authorization and Module 6 Completion,"16 cross-role authorization tests, LOGIN_URL correction, final checks and m6-complete tag; source 5ce9647"
