@@ -111,3 +111,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 ## Module 6 — Role dashboards and seed data
 
 - [Chapter 1: Manager Dashboard Summary Cards](Module-6/01-manager-dashboard-summary-cards.md) — Step 372 (source `02bdb49`; 302 tests passed)
+
+- [Chapter 2: Low-stock and Out-of-stock Products Panel](Module-6/02-low-stock-products-panel.md) — Step 373 (source `81cde18`; 308 tests passed)
