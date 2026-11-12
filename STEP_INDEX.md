@@ -392,3 +392,5 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 369 | M5 · Ch 5 | [Expose Close Short on the purchase order detail page](Module-5/06-goods-receipt-and-close-short.md#step-369) |
 | 370 | M5 · Ch 5 | [Correct Close Short test assertions](Module-5/06-goods-receipt-and-close-short.md#step-370) |
 | 371 | M5 · Ch 5 | [Run full purchasing regression tests and inspect changed files](Module-5/06-goods-receipt-and-close-short.md#step-371) |
+
+| 372 | M6 · Ch 1 | [Manager dashboard summary cards](Module-6/01-manager-dashboard-summary-cards.md#step-372) |
