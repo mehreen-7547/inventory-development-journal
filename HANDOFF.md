@@ -1,10 +1,10 @@
-# Development handoff — Module 6 completed and tagged
+# Development handoff — Post-Core dataset realism, Step 382 complete
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `5ce9647`, annotated tag `m6-complete` (pushed to origin).
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `5c62595`; frozen Core checkpoint tag `m6-complete` remains at `5ce9647`.
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
 - **Module 6 Chapter 10 completed: Step 381.** All ten Module 6 chapters complete. Manager, Sales Staff, Administrator dashboards and 365-day synthetic history are verified; final authorization sweep added.
-- **Full suite:** Last directly pasted `OK` log at Chapter 9: **374/374 passed in 827.910s** at `42a5f74`. Chapter 10 added 16 authorization tests, expected **390**. The user's guarded final script completed through Git commit and tag, implying the 390-test suite passed, but the early test output and duration were not separately pasted. Independent local stock ledger passed; no Django check issues, no migrations.
+- **Latest verified full suite:** 398/398 passed in **1,084.055 seconds**, after Step 382 addition. Eight focused realistic seed tests also passed (19.329 seconds). Local stock ledger passed, Django checks found zero issues, and no migration changes were detected.
 - **Final Chapter 10 files:** `config/settings.py` (added `LOGIN_URL = "/login/"`), `core/test_module6_authorization.py` (16 methods); source commit `5ce9647`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 is closed at source tag `m6-complete`. Before final academic demonstration, review the deferred goods receipt history/detail, goods receipt form layout and role-specific responsive navigation/consistent UI. These are follow-on review items, not unfinished Module 6 chapters. **Do not reset or reseed the local SQLite database.**
+**Back up and replace the old synthetic business data in the user's local SQLite database**, keeping eight existing user accounts. The proven `reset_business_data_once.py` is already in the local project; it backs up SQLite and deletes only business model records after explicit confirmation. Only after a successful reset, run `python manage.py seed_realistic_data --manager manager1`, then `python manage.py check_ledger` and inspect the new dashboard. Do not run the old `seed_demo_data` again. Follow this with Stretch AI work and deferred UI review.
 
 ## Deferred ideas
 None proposed.
@@ -66,5 +66,13 @@ None proposed.
 - Verified final source includes 16 authorization tests in `core/test_module6_authorization.py` plus `LOGIN_URL = "/login/"` in `config/settings.py`.
 - Chapter 10's guarded PowerShell verification completed through push and tag. The pasted terminal tail explicitly confirms `Stock ledger check passed`, no Django issues, and no pending migrations. Since the earlier test logs were not included in this paste, only infer the 390 test run completed from guard success; preserve last directly observed 374/374 pass in Chapter 9.
 - **All ten Module 6 chapters are finished.** The academic project as a whole may still require later AI demand intelligence and the deferred UI/receipt review; do not call the entire project finished.
-- Preserve the 8 existing users and local demo data (1,085 sales over 365 days, 25 products, 3 suppliers, 32 POs, 30 receipts). Do not rerun the seed or reset command.
+- At the Module 6 checkpoint the eight users and first demo set (1,085 sales, 25 products, 3 suppliers, 32 POs, 30 receipts) remained intact. User has **now explicitly requested replacing these synthetic business records** after backing up. Keep all eight user accounts; never reset users. Only run replacement once.
 - Deferred follow-ons: responsive role-based navigation/sidebar, cleaned goods receipt form layout, and read-only receipt history/detail; keep these separate from closed Module 6.
+
+## Post-Core Step 382 — realistic brand catalog generator committed
+- The old dashboard dataset looked too fake (generic catalog and predictable trading patterns). User authorized a more plausible *synthetic* branded retail data fixture.
+- Source commit `5c62595` on `main` adds `inventory/management/commands/seed_realistic_data.py` and `inventory/test_realistic_seed.py` (8 test methods). Existing Core tag `m6-complete` is unchanged.
+- Generator has **48 branded catalog products**, five fictional suppliers mapped one per category, varying monthly and weekly patterns, discounts, voids, stock adjustments, replenishment with delayed and split receipts and open-order examples. Prices/brand labels are illustrative, not verified real sales.
+- User ran eight tests successfully (19.329s), then the **entire 398-test suite passed in 1084.055s**; local `check_ledger` passed, system checks and migration checks passed, pushed source `5c62595`. Exact files fetched and verified in GitHub.
+- **Local DB not yet switched** as of user-reported full-suite results. It contains OLD demo data. Next run existing backup-and-reset script from manage.py directory after verifying account count=8, confirm backup saved, then `python manage.py seed_realistic_data --manager manager1` and `python manage.py check_ledger`. A failed seed must not lead to an unbacked reset or user deletion.
+- Journal: `Post-Core/01-realistic-branded-dataset.md` Step 382; preserve earlier Module 6 Chapter 10 as historical source.
