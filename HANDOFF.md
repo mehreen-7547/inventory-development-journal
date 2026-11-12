@@ -1,10 +1,10 @@
-# Development handoff — Module 6 Chapter 8 completed
+# Development handoff — Module 6 Chapter 9 completed
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `ab5d7ce` (Module 6 Chapter 8 seed command).
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `42a5f74` (Module 6 Chapter 9 full integration verification).
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
-- Module 6 Chapter 8 completed: Step 379. Three role dashboards intact; local atomic synthetic historical seed command added.
-- Last observed full suite: **336 passed** at Chapter 5. Chapter 6 added 12 tests (51 dashboard tests passed), Ch7 added 13 tests (committed), Ch8 added 6 tests (30 related tests passed in 19.268s). Expected total **367**; full-suite run due Chapter 9.
+- Module 6 Chapter 9 completed: Step 380. All dashboards and 365-day synthetic seed validated. Full suite 374/374 passed.
+- **Latest full suite: 374/374 passed in 827.910s** at `42a5f74`; new integration tests 7/7 in 8.661s, zero system-check issues and no migrations. Independent local `check_ledger` passed. Test discovery explicitly counted 374.
 - Chapter 6 changed `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_sales_staff_dashboard.py` and corrected `core/test_recent_activity_dashboard.py`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 Chapter 9: Add full-year seed integration and ledger tests, run `manage.py test` full suite, verify data before seeding the user's active SQLite database. The user has intentionally cleared their old dummy business records while preserving eight user accounts. The Chapter 8 seed command has not been run against active database.
+Module 6 Chapter 10: URL/role authorization sweep, module-end full test run and the `m6-complete` tag. Preserve the eight users and the current seeded dataset in local SQLite. Do NOT reset or reseed.
 
 ## Deferred ideas
 None proposed.
@@ -54,3 +54,9 @@ None proposed.
 - Source seed code in `ab5d7ce`: three suppliers, 25 products/five categories, opening stock, year of historical sales ending yesterday, six anomaly days, buying/receipts with services, and `check_ledger` inside transaction.
 - Six new seed-safety tests; 30 seed+inventory tests passed (19.268 seconds), zero system-check issues, no migrations. No live seed yet. Pending Chapter 9 full integration and full suite.
 - Important: avoid requesting creation of users or a separate database; user specifically wants to populate the cleaned existing SQLite database and preserve eight accounts.
+
+## Chapter 9 checkpoint / local seed verified
+- User ran `python manage.py seed_demo_data --manager manager1` against the cleared SQLite. Result: 1,085 sales from 2025-11-12 to 2026-11-11, 3 suppliers, 25 products, 32 POs, 30 goods receipts, six anomaly days. The seed command's internal `check_ledger` and separate `python manage.py check_ledger` both passed.
+- User then added Chapter 9 test module and confirmed 7 integration tests passed (8.661s), 374 tests discovered, and all 374 application tests passed (827.910s). Django check passed; no migrations; push `42a5f74` to `main` succeeded.
+- The live seed was performed *before* Chapter 9; no need to run seed again. Maintain current data and all eight accounts.
+- Final Module 6 Chapter 10 still pending authorization sweep and tag. Full-suite test at Chapter 9 is authoritative baseline.
