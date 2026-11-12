@@ -119,3 +119,5 @@ These are **372 development steps**, rewritten so you can understand and explain
 - [Chapter 4: Recent Stock Movements and Sales](Module-6/04-recent-stock-movements-and-sales.md) — Step 375 (source `4d331d8`; 325 tests passed)
 
 - [Chapter 5: Top-selling Products and Seven-day Sales](Module-6/05-top-sellers-and-daily-sales.md) — Step 376 (source `1e64eb7`; 336 tests passed)
+
+- [Chapter 6: Sales Staff Dashboard](Module-6/06-sales-staff-dashboard.md) — Step 377 (commits `9bc0d92`, `a800ee7`; 51 dashboard tests passed)
