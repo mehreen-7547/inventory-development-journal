@@ -264,3 +264,4 @@ journal_step,original_chat_message_index,original_chat_badge,original_module,ori
 372,,,6,Manager Dashboard Summary Cards,"Calculate six Manager dashboard figures, render cards and verify 302 tests"
 373,,,6,Low-stock and Out-of-stock Products Panel,"Query and render up to ten active low/out-of-stock products, verify 308 tests"
 374,,,6,Purchase Orders Needing Attention,"Query five earliest open POs, calculate days overdue, render detail links, verify 315 tests"
+375,,,6,Recent Stock Movements and Sales,"Show eight recent stock movements and five sales including voided; verify 325 tests"
