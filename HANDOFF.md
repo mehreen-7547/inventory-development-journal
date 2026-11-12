@@ -1,11 +1,11 @@
 # Development handoff — Module 6 Chapter 1 completed
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit `4d331d8`.
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit `1e64eb7`.
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
-- Module 6 Chapter 4 completed: Step 375, Manager summary cards, stock/PO panels and recent stock movements and sales.
-- Full suite: **325 passed** (414.175 s), zero Django system-check issues, no pending migrations.
-- Chapter 4 changed four source files: `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_recent_activity_dashboard.py`.
+- Module 6 Chapter 5 completed: Step 376, Manager summary cards, stock/PO/recent activity panels, 30-day top sellers and daily seven-day sales.
+- Full suite: **336 passed** (616.410 s), zero Django system-check issues, no pending migrations.
+- Chapter 5 changed four source files: `core/dashboard.py`, `core/views.py`, `core/templates/core/home.html`, `core/test_sales_trends_dashboard.py`.
 - Local untracked `purchasing.zip` is unrelated and must not be staged.
 
 ## Frozen Module 6 scope
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-Module 6 Chapter 5: Manager top-selling products and seven-day daily sales activity. Preserve all existing dashboard panels and quick actions.
+Module 6 Chapter 6: Sales Staff dashboard, own today/last-seven-day completed sales count and total, out-of-stock count, own last eight sales, up to eight low/out products. Preserve all existing Manager dashboard features and role isolation.
 
 ## Deferred ideas
 None proposed.
@@ -34,3 +34,7 @@ None proposed.
 - The goods receipt form at `/purchase-orders/3/receive/` has cramped, misaligned table columns and quantity inputs; fix with responsive Bootstrap layout during UI refinement.
 - Add a professional, responsive, role-specific navigation sidebar/drawer and visual consistency pass after Module 6 functionality is finished.
 - Review existing goods receipt access; add read-only goods receipt history and details linked from the relevant purchase order if not already available. Treat this as a separate functional gap outside frozen Module 6 scope, not as a new model/table requirement.
+
+## Testing cadence agreement after Chapter 5
+- Current suite: 336 tests; last full run 616.410 seconds; completed and pushed at `1e64eb7`.
+- For next chapters, run new chapter tests plus relevant existing tests each change; run the full regression suite after every 2–3 chapters, after high-risk auth/stock/transaction changes, and at module completion. Communicate clearly when a commit has **not** had a full-suite run since the last milestone.
