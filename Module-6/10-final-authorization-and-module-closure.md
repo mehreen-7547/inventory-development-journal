@@ -696,7 +696,7 @@ The CRLF/LF warning about `config/settings.py` was an informational line-ending 
 - **Administrator dashboard:** Account counts, role breakdown, inactive users, pending password setup and recent accounts; existing resend email action reused.
 - **Synthetic historical data:** A local 365-day generator through existing sale, stock and purchasing services; 25 products/three suppliers, six high-sales days, and a verified ledger.
 - **Authorization:** Role-specific route visibility, sales privacy and method restrictions covered by the closing test module.
-- **Git checkpoint:** [Source commit `5ce9647`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5ce9647), tagged [`m6-complete`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/releases/tag/m6-complete) (Git tag link resolves to the tag; no GitHub Release is required).
+- **Git checkpoint:** [Source commit `5ce9647`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/5ce9647), tagged [`m6-complete`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/tree/m6-complete) (annotated Git tag, not a GitHub Release).
 - **Local data:** Existing eight user accounts and already populated historical demo records remain intact; **do not reset or rerun** `seed_demo_data`.
 
 ### What comes next
