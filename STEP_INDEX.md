@@ -441,3 +441,17 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 405 | M7 · Ch 2 | [Commit and push source](Module-7/02-historical-csv-import.md#step-405--commit-and-push-source) |
 | 402A | M7 · Ch 2 | [Isolate the failing test](Module-7/02-historical-csv-import.md#step-402a--isolate-the-failing-test) |
 | 402B | M7 · Ch 2 | [Repair the date-sensitive test](Module-7/02-historical-csv-import.md#step-402b--repair-the-date-sensitive-test) |
+
+| 407 | M7 · Ch 3 | [Approve recorded-sales priority](Module-7/03-historical-data-reconciliation.md#step-407--approve-recordedsales-priority) |
+| 408 | M7 · Ch 3 | [Approve source ownership design](Module-7/03-historical-data-reconciliation.md#step-408--approve-source-ownership-design) |
+| 409 | M7 · Ch 3 | [Add DailySales source field](Module-7/03-historical-data-reconciliation.md#step-409--add-dailysales-source-field) |
+| 410 | M7 · Ch 3 | [Generate migration](Module-7/03-historical-data-reconciliation.md#step-410--generate-migration) |
+| 411 | M7 · Ch 3 | [Inspect migration](Module-7/03-historical-data-reconciliation.md#step-411--inspect-migration) |
+| 412 | M7 · Ch 3 | [Apply migration](Module-7/03-historical-data-reconciliation.md#step-412--apply-migration) |
+| 413 | M7 · Ch 3 | [Implement source-aware services](Module-7/03-historical-data-reconciliation.md#step-413--implement-sourceaware-services) |
+| 414 | M7 · Ch 3 | [Add reconciliation tests](Module-7/03-historical-data-reconciliation.md#step-414--add-reconciliation-tests) |
+| 415 | M7 · Ch 3 | [Run focused tests](Module-7/03-historical-data-reconciliation.md#step-415--run-focused-tests) |
+| 416 | M7 · Ch 3 | [Audit existing DailySales](Module-7/03-historical-data-reconciliation.md#step-416--audit-existing-dailysales) |
+| 417 | M7 · Ch 3 | [Run full regression](Module-7/03-historical-data-reconciliation.md#step-417--run-full-regression) |
+| 418 | M7 · Ch 3 | [Clean whitespace and push source](Module-7/03-historical-data-reconciliation.md#step-418--clean-whitespace-and-push-source) |
+| 419 | M7 · Ch 3 | [Publish Chapter 3 journal](Module-7/03-historical-data-reconciliation.md#step-419--publish-chapter-3-journal) |
