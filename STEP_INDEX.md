@@ -424,3 +424,20 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 389 | M7 · Ch 1 | [Synchronize all products](Module-7/01-daily-sales-history-foundation.md#step-389) |
 | 390 | M7 · Ch 1 | [Verify full historical coverage](Module-7/01-daily-sales-history-foundation.md#step-390) |
 | 391 | M7 · Ch 1 | [Run checks, fix whitespace and push source](Module-7/01-daily-sales-history-foundation.md#step-391) |
+
+| 392 | M7 · Ch 2 | [Validate CSV structure and row values](Module-7/02-historical-csv-import.md#step-392--validate-csv-structure-and-row-values) |
+| 393 | M7 · Ch 2 | [Test CSV validation](Module-7/02-historical-csv-import.md#step-393--test-csv-validation) |
+| 394 | M7 · Ch 2 | [Verify SKUs against products](Module-7/02-historical-csv-import.md#step-394--verify-skus-against-products) |
+| 395 | M7 · Ch 2 | [Test SKU validation](Module-7/02-historical-csv-import.md#step-395--test-sku-validation) |
+| 396 | M7 · Ch 2 | [Implement atomic import service](Module-7/02-historical-csv-import.md#step-396--implement-atomic-import-service) |
+| 397 | M7 · Ch 2 | [Test import behavior](Module-7/02-historical-csv-import.md#step-397--test-import-behavior) |
+| 398 | M7 · Ch 2 | [Prove rollback on database failure](Module-7/02-historical-csv-import.md#step-398--prove-rollback-on-database-failure) |
+| 399 | M7 · Ch 2 | [Reject header-only CSV](Module-7/02-historical-csv-import.md#step-399--reject-headeronly-csv) |
+| 400 | M7 · Ch 2 | [Import more than one product](Module-7/02-historical-csv-import.md#step-400--import-more-than-one-product) |
+| 401 | M7 · Ch 2 | [Rerun focused CSV tests](Module-7/02-historical-csv-import.md#step-401--rerun-focused-csv-tests) |
+| 402 | M7 · Ch 2 | [Run full suite and investigate regression](Module-7/02-historical-csv-import.md#step-402--run-full-suite-and-investigate-regression) |
+| 403 | M7 · Ch 2 | [Rerun full regression suite](Module-7/02-historical-csv-import.md#step-403--rerun-full-regression-suite) |
+| 404 | M7 · Ch 2 | [Review changed files](Module-7/02-historical-csv-import.md#step-404--review-changed-files) |
+| 405 | M7 · Ch 2 | [Commit and push source](Module-7/02-historical-csv-import.md#step-405--commit-and-push-source) |
+| 402A | M7 · Ch 2 | [Isolate the failing test](Module-7/02-historical-csv-import.md#step-402a--isolate-the-failing-test) |
+| 402B | M7 · Ch 2 | [Repair the date-sensitive test](Module-7/02-historical-csv-import.md#step-402b--repair-the-date-sensitive-test) |
