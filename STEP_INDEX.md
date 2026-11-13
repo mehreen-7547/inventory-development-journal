@@ -467,3 +467,10 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 427 | M7 · Ch 5 | [Verify real Chronos-Bolt Tiny inference](Module-7/05-chronos-bolt-tiny-integration.md#step-427--verify-real-chronos-bolt-tiny-inference) |
 | 428 | M7 · Ch 5 | [Run regression and push source](Module-7/05-chronos-bolt-tiny-integration.md#step-428--run-regression-and-push-the-source) |
 | 429 | M7 · Ch 5 | [Publish development journal](Module-7/05-chronos-bolt-tiny-integration.md#step-429--publish-the-development-journal) |
+
+| 430 | M7 · Ch 6 | [Implement MAE calculation](Module-7/06-forecast-accuracy-evaluation.md#step-430--implement-mae-calculation) |
+| 431 | M7 · Ch 6 | [Add chronological holdout and moving-average baseline](Module-7/06-forecast-accuracy-evaluation.md#step-431--add-chronological-holdout-and-moving-average-baseline) |
+| 432 | M7 · Ch 6 | [Test evaluation logic](Module-7/06-forecast-accuracy-evaluation.md#step-432--test-the-evaluation-logic) |
+| 433 | M7 · Ch 6 | [Run real historical evaluation](Module-7/06-forecast-accuracy-evaluation.md#step-433--run-real-historical-evaluation-for-five-products) |
+| 434 | M7 · Ch 6 | [Verify and commit source](Module-7/06-forecast-accuracy-evaluation.md#step-434--verify-and-commit-the-source) |
+| 435 | M7 · Ch 6 | [Publish Chapter 6 journal](Module-7/06-forecast-accuracy-evaluation.md#step-435--publish-chapter-6-journal) |
