@@ -133,3 +133,7 @@ These are **372 development steps**, rewritten so you can understand and explain
 ## Post-Core maintenance — Data realism
 
 - [Realistic Branded Demo Dataset](Post-Core/01-realistic-branded-dataset.md) — Step 382 (source `5c62595`; 8 new tests, all 398 regression tests passed; active SQLite replacement pending)
+
+## Module 7 — Stretch historical data
+
+- [Chapter 1: Daily Sales History Foundation](Module-7/01-daily-sales-history-foundation.md) — Steps 383–391 (source `21d51cf`; 5 daily sales tests passed; 403 tests discovered; 17,568 DailySales rows verified)
