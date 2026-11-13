@@ -74,3 +74,10 @@ This map links journal explanations to source files and GitHub commits. It is no
 - NEW: `intelligence/forecasting_data.py` (read-only, gap-checked 60-day units sequence) and `intelligence/test_forecasting_data.py` (six tests).
 - Verification: Django check 0 issues; no migrations; 35/35 focused tests passed (4.593s); user reported full regression OK (full count not shown); push confirmed.
 - Limit: no AI inference, forecasts, MAE or UI yet; unrelated untracked files excluded.
+
+## Module 7 — Chapter 5: Chronos-Bolt Tiny Demand Forecasting
+- Source: [`2c93e25`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/2c93e25), verified against `65ca45f`: one commit, two NEW files, 204 additions (85 + 119), zero deletions.
+- Journal: [Steps 425–429](Module-7/05-chronos-bolt-tiny-integration.md), branch `study-2`.
+- NEW: `intelligence/forecasting.py` (cached pretrained CPU model; 60-day history → 30 dated P10/P50/P90 estimates, validation and nonnegative clipping); `intelligence/test_forecasting.py` (five mocked inference-service tests).
+- Verification: 11/11 focused tests passed, Django check zero issues, no migrations; real `scripts/ai_probe.py --model bolt` on synthetic 90-day history: WORKED YES, 34.99 seconds total, 339.6 MB peak memory, 0.01 seconds forecast computation; full regression ended OK (count not supplied); source push confirmed.
+- Limitations: probe is synthetic and separate from the new service; no end-to-end real product inference or forecast accuracy/MAE verified; no UI, stock writes or automatic ordering. Local `ai_probe_results.json` not staged; unrelated untracked files untouched.
