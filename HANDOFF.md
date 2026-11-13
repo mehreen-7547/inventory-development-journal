@@ -1,7 +1,7 @@
-# Development handoff — Post-Core dataset realism, Step 382 complete
+# Development handoff — Module 7 Chapter 1 complete (Step 391)
 
 ## Current checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest commit `5c62595`; frozen Core checkpoint tag `m6-complete` remains at `5ce9647`.
+- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, latest verified commit `21d51cf`; frozen Core tag `m6-complete` remains at `5ce9647`.
 - Journal: https://github.com/mehreen-7547/inventory-development-journal, branch `study-2` ONLY.
 - **Module 6 Chapter 10 completed: Step 381.** All ten Module 6 chapters complete. Manager, Sales Staff, Administrator dashboards and 365-day synthetic history are verified; final authorization sweep added.
 - **Latest verified full suite:** 398/398 passed in **1,084.055 seconds**, after Step 382 addition. Eight focused realistic seed tests also passed (19.329 seconds). Local stock ledger passed, Django checks found zero issues, and no migration changes were detected.
@@ -25,7 +25,7 @@
 - If a useful feature is outside frozen scope, list it under Deferred ideas and do not implement.
 
 ## Next
-**Back up and replace the old synthetic business data in the user's local SQLite database**, keeping eight existing user accounts. The proven `reset_business_data_once.py` is already in the local project; it backs up SQLite and deletes only business model records after explicit confirmation. Only after a successful reset, run `python manage.py seed_realistic_data --manager manager1`, then `python manage.py check_ledger` and inspect the new dashboard. Do not run the old `seed_demo_data` again. Follow this with Stretch AI work and deferred UI review.
+**Module 7 Chapter 2 / Step 392:** Design and validate a CSV format for historical sales input, one small verified step at a time. Carefully distinguish imported historical demand from transaction/stock ledgers; avoid duplicating the already-generated synthetic sales. Do not modify active local demo data without tests. Publish each completed chapter to journal `study-2` after a confirmed source commit.
 
 ## Deferred ideas
 None proposed.
@@ -82,3 +82,10 @@ None proposed.
 - `check_ledger` passed inside command and separately immediately after. This is **now the ACTIVE local business dataset**; previous notes that the old seed is active are superseded.
 - Do NOT reset or rerun either seed. User did not paste reset backup or current account count this time; don't claim either freshly verified. Previously eight accounts existed and seed command does not alter users.
 - Next: open Manager/Sales dashboard and judge realism; only then advance to Stretch historical-data/AI forecasting. Core tag `m6-complete` remains frozen, recent source commit `5c62595`.
+
+## Module 7 Chapter 1 checkpoint (Steps 383–391)
+- Source `21d51cf` on `main`: registered new `intelligence` Django app, `DailySales` product-date unique model, applied migration `0001_initial`, and added `intelligence/services.py` for aggregation/sync plus `intelligence/test_daily_sales.py` with **five** test methods.
+- User ran 5 focused tests successfully (1.751s), found **403** full suite tests but DID NOT execute the entire suite this chapter. Prior most recent completed full suite = 398/398 after realistic seed update.
+- User's live SQLite already holds 48 branded products, 3,291 original synthetic sales, and **17,568 DailySales rows** (366 dates each from 2025-11-13 to 2026-11-13). Local ledger check passed. No user accounts or original sales/stock records were erased.
+- Initial whitespace errors in `intelligence/test_daily_sales.py` resolved and source pushed as `21d51cf`. Chapter journal path: `Module-7/01-daily-sales-history-foundation.md`.
+- Continue modules 7–9 AI/data workflows first, then final professional UI rearrangement; do not confuse Core Module 6 completion with completed entire project.
