@@ -81,3 +81,11 @@ This map links journal explanations to source files and GitHub commits. It is no
 - NEW: `intelligence/forecasting.py` (cached pretrained CPU model; 60-day history → 30 dated P10/P50/P90 estimates, validation and nonnegative clipping); `intelligence/test_forecasting.py` (five mocked inference-service tests).
 - Verification: 11/11 focused tests passed, Django check zero issues, no migrations; real `scripts/ai_probe.py --model bolt` on synthetic 90-day history: WORKED YES, 34.99 seconds total, 339.6 MB peak memory, 0.01 seconds forecast computation; full regression ended OK (count not supplied); source push confirmed.
 - Limitations: probe is synthetic and separate from the new service; no end-to-end real product inference or forecast accuracy/MAE verified; no UI, stock writes or automatic ordering. Local `ai_probe_results.json` not staged; unrelated untracked files untouched.
+
+## Module 7 — Chapter 6: Historical Forecast Accuracy Evaluation
+- Source: [`b3b1051`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b3b1051), verified against `2c93e25`: one commit, two NEW files, 226 additions (96 + 130), zero deletions.
+- Journal: [Steps 430–435](Module-7/06-forecast-accuracy-evaluation.md), branch `study-2`.
+- NEW `intelligence/forecast_evaluation.py`: `calculate_mae` validates and scores predictions; `evaluate_product_forecast` separates 90 days into 60 context / 30 held-out actuals, requests Chronos P50 forecasts at cutoff, compares to a fixed seven-day moving-average baseline and returns both MAEs and lower-error method. Read-only.
+- NEW `intelligence/test_forecast_evaluation.py`: eight mocked/deterministic tests for arithmetic, invalid inputs, Chronos win, baseline win, tie, wrong length, wrong dates, and missing history.
+- User verification: 19 focused tests passed, zero Django issues, no migrations; full regression `OK` (count not supplied), successful push. Local evaluation ending 2026-11-13 succeeded on five eligible products (IDs 30–34); Chronos lower MAE on four, moving average on one. Exact per-product values are recorded in Chapter 6.
+- Limits: single 30-day holdout per product, local historical/demo dataset, no statistical superiority claim, no UI/stock writes, no evaluation result persisted. Untracked `purchasing.zip` and `reset_business_data_once.py` untouched.
