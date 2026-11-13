@@ -208,3 +208,27 @@ Every term below is written for someone revising Django from the beginning.
 **Close Short:** A final status for a partly delivered order when the remaining goods will not arrive; it does not increase stock.
 
 **Atomic transaction:** Related database changes that all succeed together or all roll back if one fails.
+
+## Historical CSV import terms (Module 7 Chapter 2)
+
+**CSV:** Comma-separated values; a text format with one row per record and a header naming columns.
+
+**SKU validation:** Checking that every product code in the CSV exists in the catalog before importing.
+
+**Decimal:** Python's precise base-10 number type, useful for money rather than binary floating-point arithmetic.
+
+**Atomic transaction:** A database operation that commits all its writes together or rolls them all back if one fails.
+
+**update_or_create:** Django ORM method that updates an existing matching record or creates it if absent.
+
+**Rollback:** Undoing database writes made in a transaction when an error occurs.
+
+**SimpleTestCase:** Django test class useful for code that does not query the database.
+
+**TestCase:** Django test class with isolated database support for model-dependent tests.
+
+**Mock / patch.object:** Temporarily replacing a method in a test to simulate behavior such as a database failure.
+
+**Idempotent import:** Importing the same product/date data again without creating duplicate DailySales rows.
+
+**Date-dependent test:** A test whose expected output changes with the calendar; avoid hardcoded totals when weekdays influence generated data.
