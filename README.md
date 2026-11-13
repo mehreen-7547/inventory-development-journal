@@ -2,17 +2,17 @@
 
 ## A plain-language journal of how I built the project
 
-These are **372 development steps**, rewritten so you can understand and explain them even if you did not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **391 documented development steps so far**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** This journal covers Modules 0–6 through Module 6 Chapter 1 (Steps 1–372). Chapter 5 is source-verified at commit `788a158`; 87 purchasing tests passed. Forecasting remains future work.
+**Scope:** Modules 0–6 (Core completed and tagged `m6-complete`), post-Core branded-data maintenance, and Module 7 Chapter 1 (Steps 383–391). The latest chapter prepares daily sales summaries; demand forecasting and other AI predictions remain future work.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Module 6 Chapter 1 — [Manager Dashboard Summary Cards](Module-6/01-manager-dashboard-summary-cards.md), Step 372, source commit `02bdb49`; 302 full-project tests passed.
+**Latest checkpoint:** Module 7 Chapter 1 — [Daily Sales History Foundation](Module-7/01-daily-sales-history-foundation.md), Steps 383–391, source commit `21d51cf`; five focused tests passed, 403 tests discovered (full 403-test suite not yet run).
 
 ## Module 0 — Foundations
 
