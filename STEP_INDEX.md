@@ -414,3 +414,13 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 381 | M6 · Ch 10 | [Final authorization and Module 6 completion](Module-6/10-final-authorization-and-module-closure.md#step-381) |
 
 | 382 | Post-Core · Data | [Branded synthetic dataset and verification](Post-Core/01-realistic-branded-dataset.md#step-382) |
+
+| 383 | M7 · Ch 1 | [Register the intelligence app](Module-7/01-daily-sales-history-foundation.md#step-383) |
+| 384 | M7 · Ch 1 | [Define DailySales](Module-7/01-daily-sales-history-foundation.md#step-384) |
+| 385 | M7 · Ch 1 | [Create/apply the DailySales migration](Module-7/01-daily-sales-history-foundation.md#step-385) |
+| 386 | M7 · Ch 1 | [Aggregate completed sales into daily totals](Module-7/01-daily-sales-history-foundation.md#step-386) |
+| 387 | M7 · Ch 1 | [Save daily product summaries](Module-7/01-daily-sales-history-foundation.md#step-387) |
+| 388 | M7 · Ch 1 | [Test daily aggregation and resynchronization](Module-7/01-daily-sales-history-foundation.md#step-388) |
+| 389 | M7 · Ch 1 | [Synchronize all products](Module-7/01-daily-sales-history-foundation.md#step-389) |
+| 390 | M7 · Ch 1 | [Verify full historical coverage](Module-7/01-daily-sales-history-foundation.md#step-390) |
+| 391 | M7 · Ch 1 | [Run checks, fix whitespace and push source](Module-7/01-daily-sales-history-foundation.md#step-391) |
