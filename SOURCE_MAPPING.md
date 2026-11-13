@@ -58,3 +58,12 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Behavior: strict CSV parsing and SKU checks; atomic upsert into DailySales; no physical stock change; date-dependent seed test fixed.
 - User terminal: 18 focused CSV tests passed, isolated seed correction 1/1 passed, full regression 421/421 passed (729.967s). Source pushed successfully. Whitespace warnings remained in committed source.
 - Unrelated untracked local files `purchasing.zip` and `reset_business_data_once.py` excluded.
+
+## Module 7 — Chapter 3: Historical Data Reconciliation
+- Source: [`ff0c68d`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/ff0c68d) on `main` (compared with `adb1355`, one commit ahead).
+- Journal: [Steps 407–419](Module-7/03-historical-data-reconciliation.md).
+- New: `intelligence/migrations/0002_dailysales_source.py`.
+- Modified: `intelligence/models.py`, `intelligence/services.py`, `intelligence/test_csv_validation.py`, `intelligence/test_daily_sales.py`.
+- Behavior: DailySales source recorded/imported; synchronization takes priority in its date range, including zero-sales days; CSV skips recorded rows and updates imported rows.
+- Verified GitHub diff: five files, 172 insertions and 7 deletions. User terminal: 427/427 full tests passed (617.512s); 29/29 focused tests passed after whitespace cleanup (4.473s); Django check clean. Source push confirmed.
+- Limitations: existing rows default recorded; no independently verified historical provenance or coverage calendar. Import count includes skipped rows. Concurrency race not separately tested.
