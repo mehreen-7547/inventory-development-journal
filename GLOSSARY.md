@@ -246,3 +246,21 @@ Every term below is written for someone revising Django from the beginning.
 **Migration default:** A value assigned to existing rows when a new model field is added; `recorded` is assumed for old DailySales rows and does not reconstruct their origin.
 
 **Whitespace cleanup:** Removing trailing spaces and extra final blank lines before `git diff --cached --check`, then rerunning focused tests and committing only intended files.
+
+## Forecasting data preparation (Module 7 Chapter 4)
+
+**Demand history:** The number of product units sold on each past day, used as input for future forecasting.
+
+**Lookback window:** The period of past days supplied to the forecasting model; this project currently requires at least 60 consecutive days.
+
+**Forecast horizon:** How far ahead predictions extend; the planned AI horizon is 30 days, not implemented in Chapter 4.
+
+**Missing day versus zero sales:** A missing database record is unknown history; a saved record with zero units is a valid zero-demand observation.
+
+**Read-only service:** A function that retrieves and transforms data without changing stored records.
+
+**Pretrained time-series foundation model:** An AI model trained previously on time-series data; the planned Chronos-Bolt Tiny integration uses inference without local training.
+
+**MAE (mean absolute error):** The average absolute difference between predicted and actual sales; planned for future model evaluation.
+
+**Moving-average baseline:** A simple prediction based on recent sales averages, used to compare whether the AI forecast improves accuracy.
