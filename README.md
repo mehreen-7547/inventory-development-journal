@@ -2,17 +2,17 @@
 
 ## A plain-language journal of how I built the project
 
-These are **405 documented development steps so far**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **424 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** Modules 0–6 (Core completed and tagged `m6-complete`), post-Core branded-data maintenance, and Module 7 Chapters 1–2 (Steps 383–405). The latest chapter adds validated atomic CSV import into DailySales; forecasting and other AI predictions remain future work.
+**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, and Module 7 Chapters 1–4 (through Step 424). Chapter 4 prepares 60-day forecasting inputs; pretrained AI inference remains future work.
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Module 7 Chapter 2 — [Historical CSV Import](Module-7/02-historical-csv-import.md), Steps 392–405, source commit `adb1355`; 18 focused CSV tests and 421 full-project tests passed.
+**Latest checkpoint:** Module 7 Chapter 4 — [Forecasting Data Preparation](Module-7/04-forecasting-data-preparation.md), Steps 420–424, source commit `65ca45f`; 35 focused tests passed and full regression reported OK.
 
 ## Module 0 — Foundations
 
@@ -141,3 +141,5 @@ These are **405 documented development steps so far**, written so you can unders
 - [Chapter 2: Historical CSV Import](Module-7/02-historical-csv-import.md) — Steps 392–405 (source commit `adb1355`; 421 tests passed)
 
 - [Chapter 3: Historical Data Reconciliation](Module-7/03-historical-data-reconciliation.md) — Steps 407–419 (source commit `ff0c68d`; 427 full-project tests passed; 29 focused tests passed after cleanup)
+
+- [Chapter 4: Forecasting Data Preparation](Module-7/04-forecasting-data-preparation.md) — Steps 420–424 (source commit `65ca45f`; 35 focused tests passed)
