@@ -455,3 +455,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 417 | M7 · Ch 3 | [Run full regression](Module-7/03-historical-data-reconciliation.md#step-417--run-full-regression) |
 | 418 | M7 · Ch 3 | [Clean whitespace and push source](Module-7/03-historical-data-reconciliation.md#step-418--clean-whitespace-and-push-source) |
 | 419 | M7 · Ch 3 | [Publish Chapter 3 journal](Module-7/03-historical-data-reconciliation.md#step-419--publish-chapter-3-journal) |
+
+| 420 | M7 · Ch 4 | [Create 60-day forecasting data reader](Module-7/04-forecasting-data-preparation.md#step-420--create-60day-forecasting-data-reader) |
+| 421 | M7 · Ch 4 | [Add six forecasting input tests](Module-7/04-forecasting-data-preparation.md#step-421--add-six-forecasting-input-tests) |
+| 422 | M7 · Ch 4 | [Run focused verification](Module-7/04-forecasting-data-preparation.md#step-422--run-focused-verification) |
+| 423 | M7 · Ch 4 | [Run full regression and push source](Module-7/04-forecasting-data-preparation.md#step-423--run-full-regression-and-push-source) |
+| 424 | M7 · Ch 4 | [Publish Chapter 4 journal](Module-7/04-forecasting-data-preparation.md#step-424--publish-chapter-4-journal) |
