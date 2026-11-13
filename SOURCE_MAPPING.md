@@ -67,3 +67,10 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Behavior: DailySales source recorded/imported; synchronization takes priority in its date range, including zero-sales days; CSV skips recorded rows and updates imported rows.
 - Verified GitHub diff: five files, 172 insertions and 7 deletions. User terminal: 427/427 full tests passed (617.512s); 29/29 focused tests passed after whitespace cleanup (4.473s); Django check clean. Source push confirmed.
 - Limitations: existing rows default recorded; no independently verified historical provenance or coverage calendar. Import count includes skipped rows. Concurrency race not separately tested.
+
+## Module 7 — Chapter 4: Forecasting Data Preparation
+- Source: [`65ca45f`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/65ca45f), verified against `ff0c68d`: one commit, two added files, 130 additions, zero deletions.
+- Journal: [Steps 420–424](Module-7/04-forecasting-data-preparation.md).
+- NEW: `intelligence/forecasting_data.py` (read-only, gap-checked 60-day units sequence) and `intelligence/test_forecasting_data.py` (six tests).
+- Verification: Django check 0 issues; no migrations; 35/35 focused tests passed (4.593s); user reported full regression OK (full count not shown); push confirmed.
+- Limit: no AI inference, forecasts, MAE or UI yet; unrelated untracked files excluded.
