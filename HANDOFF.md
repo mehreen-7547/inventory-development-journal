@@ -1,19 +1,25 @@
-# Development handoff — Module 7 Chapter 5 complete (Step 429)
+# Development handoff — Module 7 Chapter 6 complete (Step 435)
 
 ## Verified checkpoint
-- Source: https://github.com/mehreen-7547/ai-assisted-inventory-manager, branch `main`, commit [`2c93e25`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/2c93e25), compared with `65ca45f`: exactly one commit, two new files, 204 additions, zero deletions.
-- Journal: branch `study-2`, [Module 7 Chapter 5](Module-7/05-chronos-bolt-tiny-integration.md), Steps 425–429.
-- User output: 11/11 focused tests passed; Django check 0 issues, no migrations; full regression `OK` (count and duration not visible in supplied excerpt); source push confirmed.
-- Real pretrained-model probe `python scripts/ai_probe.py --model bolt`: WORKED YES, 34.99s total, 339.6 MB peak memory, 0.01s forecast computation, first-day P10/P50/P90 [7.37, 8.42, 9.39]. Probe uses 90 days synthetic data, **not** live Django product history.
-- Unrelated local untracked `purchasing.zip` and `reset_business_data_once.py` remain untouched. Local `ai_probe_results.json` was not staged.
+- Source repository `mehreen-7547/ai-assisted-inventory-manager`, branch `main`, commit [`b3b1051`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b3b1051), compared with `2c93e25`: one commit, two NEW files, 226 added lines, zero deletions.
+- Journal repository `mehreen-7547/inventory-development-journal`, branch `study-2`, [Chapter 6](Module-7/06-forecast-accuracy-evaluation.md), Steps 430–435; chapter/index/source mapping/glossary/handoff updated.
+- User terminal: Django check 0 issues; no migrations; 19/19 focused tests passed in 0.054 seconds; full regression ended `OK` (test count/duration not visible); source push confirmed.
+- Unrelated local untracked `purchasing.zip` and `reset_business_data_once.py` untouched. Do not stage them.
 
 ## Implementation
-- NEW `intelligence/forecasting.py` (85 lines): `load_forecasting_model()` caches pretrained `amazon/chronos-bolt-tiny` CPU pipeline; `forecast_product_demand(product_id, end_date)` obtains gap-checked 60-day history via `get_forecasting_data`, makes float32 tensor of shape (1,60), requests 30-day P10/P50/P90 predictions, validates output shape/finiteness, clips negative values, sorts quantiles and returns dated forecasts. No writes or training.
-- NEW `intelligence/test_forecasting.py` (119 lines): five `SimpleTestCase` tests using mocks for shape/quantile contract and dates, negative clipping, bad shape, NaN rejection, and missing history. Six earlier history-reader tests give 11 focused tests total.
-- Existing `requirements-ai.txt` has `torch==2.10.0`, `chronos-forecasting==2.3.2`, `psutil==7.0.0`; existing `scripts/ai_probe.py` remains unchanged. First model download may require internet; subsequent cached weights can work offline.
+- NEW `intelligence/forecast_evaluation.py` (96 lines): `calculate_mae(actual,predicted)` validates lengths/nonnegative finite values and returns rounded MAE; `evaluate_product_forecast(product_id,end_date)` reads 90 contiguous daily sales values, uses first 60 as inference context, final 30 as held-out actuals, runs `forecast_product_demand` with a 30-day earlier cutoff, checks 30 dates and P50 forecasts, compares with fixed 7-day average calculated at cutoff, returns two MAEs and lower-error method. No writes/migrations.
+- NEW `intelligence/test_forecast_evaluation.py` (130 lines): 8 mocked tests for MAE, invalid input, Chronos win, baseline win, tie, wrong forecast length/date, and missing history. Existing 5 forecast and 6 history tests give 19 focused tests total.
+- Actual historical evaluation on 2026-11-13, 90-day window 2026-08-16 to 2026-11-13, products 30–34:
+  - 30 Classmate Pulse Notebook A4 180 Pages: Chronos 1.1593; baseline 2.0143.
+  - 31 Classmate Long Notebook 172 Pages: Chronos 0.9977; baseline 1.2381.
+  - 32 Navneet Youva Notebook A5 160 Pages: Chronos 0.8833; baseline 1.0190.
+  - 33 Cello Butterflow Blue Ball Pen Pack of 10: Chronos 0.7823; baseline 0.7000.
+  - 34 Reynolds 045 Fine Carbure Pen Pack of 5: Chronos 0.5187; baseline 0.8000.
+- Chronos lower MAE for 4/5 on this one local historical holdout. These numbers came from the user's terminal; no committed evaluation-results file. Dataset is local/demo, provenance and generalization not independently established. Do not claim general model superiority.
+- An initial history check failed due to wrong `inventory.models.Product` import and interactive Python indentation; corrected to `catalog.models.Product` and standalone `django.setup()` script. Initial reported zero eligible products was invalid.
 
-## Next — Module 7 Chapter 6: forecast evaluation
-- Design and implement a **chronological holdout**: prevent leakage of future sales into model inputs; compare actual held-out daily sales to 30-day P50 forecasts and a simple moving-average baseline using MAE. Define minimum history and holdout rules carefully. Ensure evaluation is read-only and has deterministic tests that do not repeatedly load pretrained weights.
-- Distinguish mock unit tests, real synthetic probe, real product inference, and accuracy comparison. No measured accuracy exists yet.
-- Later: stock-shortage prediction, reorder recommendations requiring manager approval, unusual-sales detection, and dashboard. Avoid expanding academic scope without justification.
-- Keep source `main` and journal `study-2` distinct. User runs/tests/pushes source; assistant verifies source and publishes journal. Use exact filenames, NEW/CLASS markers, Rapid Development Mode, explicit staging, whitespace/EOF cleanup, and thorough explanations with **only relevant code snippets**. Do not touch frozen `m6-complete` tag or unrelated local files.
+## Next — Module 7 Chapter 7: stock-shortage prediction
+- Before coding, inspect actual inventory stock, supplier lead-time, purchase-order and incoming-quantity models/services in `main`. Keep academic scope constrained; do not assume fields exist.
+- Design shortage risk using on-hand stock, pending incoming stock and forecast demand across a grounded horizon; clarify treatment of incoming goods and lead time. Forecasts are estimates and do not automatically alter stock or place orders.
+- Then implement read-only service and deterministic tests, verify real scenarios, run full regression, explicit staging, source push, and journal publication.
+- Preserve instructor-aligned Django style, Rapid Development Mode, exact filenames, NEW vs CLASS markers, relevant snippets with detailed line-level explanation, chapter intros and links, indexes/glossary/source mapping/handoff. User runs/pushes source; assistant verifies source then writes journal to `study-2`. Do not change frozen `m6-complete` tag.
