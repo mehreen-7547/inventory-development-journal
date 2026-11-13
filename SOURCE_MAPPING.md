@@ -49,3 +49,12 @@ This map links journal explanations to source files and GitHub commits. It is no
 - Journal: [Steps 361–371](Module-5/06-goods-receipt-and-close-short.md).
 - Files: `purchasing/forms.py`, `purchasing/migrations/0002_purchaseorderline_quantity_received_and_more.py`, `purchasing/models.py`, `purchasing/services.py`, `purchasing/templates/purchasing/goods_receipt_form.html`, `purchasing/templates/purchasing/purchase_order_detail.html`, `purchasing/test_close_short.py`, `purchasing/test_goods_receipt.py`, `purchasing/test_goods_receipt_views.py`, `purchasing/urls.py`, `purchasing/views.py`.
 - Verification: 87 purchasing tests passed; full-project terminal output not supplied.
+
+## Module 7 — Chapter 2: Historical CSV Import
+- Source: [`adb1355`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/adb1355) on `main` (compared to `21d51cf`).
+- Journal: [Steps 392–405](Module-7/02-historical-csv-import.md).
+- New: `intelligence/csv_validation.py`, `intelligence/test_csv_validation.py`.
+- Modified: `intelligence/services.py`, `inventory/test_seed_integration.py`.
+- Behavior: strict CSV parsing and SKU checks; atomic upsert into DailySales; no physical stock change; date-dependent seed test fixed.
+- User terminal: 18 focused CSV tests passed, isolated seed correction 1/1 passed, full regression 421/421 passed (729.967s). Source pushed successfully. Whitespace warnings remained in committed source.
+- Unrelated untracked local files `purchasing.zip` and `reset_business_data_once.py` excluded.
