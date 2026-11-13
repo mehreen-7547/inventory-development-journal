@@ -264,3 +264,23 @@ Every term below is written for someone revising Django from the beginning.
 **MAE (mean absolute error):** The average absolute difference between predicted and actual sales; planned for future model evaluation.
 
 **Moving-average baseline:** A simple prediction based on recent sales averages, used to compare whether the AI forecast improves accuracy.
+
+## Chronos-Bolt forecasting (Module 7 Chapter 5)
+
+**Chronos-Bolt Tiny:** A pretrained transformer-based time-series foundation model used locally to forecast numerical sequences without model training.
+
+**Inference:** Running an already trained model to obtain predictions, without updating its weights.
+
+**Tensor:** PyTorch's numerical array type; the input shape `(1, 60)` means one sequence containing 60 daily values.
+
+**Batch dimension:** The leading dimension added with `unsqueeze(0)` so the model receives one sequence as a batch.
+
+**P10 / P50 / P90:** Model-predicted 10th, 50th and 90th quantiles for future demand; estimates rather than guarantees.
+
+**Model cache (`lru_cache`):** Reuses the loaded model in the current Python process; does not store predictions in the database.
+
+**`torch.inference_mode()`:** PyTorch context for prediction without gradient tracking.
+
+**Mocked model test:** Replaces real model calls with controlled outputs to test service behavior quickly and deterministically.
+
+**Feasibility probe:** Checks whether pretrained inference runs on local hardware; unlike an accuracy evaluation, it does not establish whether forecasts match future sales.
