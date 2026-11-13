@@ -143,3 +143,5 @@ These are **424 numbered development steps through the latest chapter**, written
 - [Chapter 3: Historical Data Reconciliation](Module-7/03-historical-data-reconciliation.md) — Steps 407–419 (source commit `ff0c68d`; 427 full-project tests passed; 29 focused tests passed after cleanup)
 
 - [Chapter 4: Forecasting Data Preparation](Module-7/04-forecasting-data-preparation.md) — Steps 420–424 (source commit `65ca45f`; 35 focused tests passed)
+
+- [Chapter 5: Chronos-Bolt Tiny Demand Forecasting](Module-7/05-chronos-bolt-tiny-integration.md) — Steps 425–429 (source commit `2c93e25`; 11 focused tests passed; real CPU model probe passed; full regression OK, count not supplied)
