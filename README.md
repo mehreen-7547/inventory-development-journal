@@ -139,3 +139,5 @@ These are **405 documented development steps so far**, written so you can unders
 - [Chapter 1: Daily Sales History Foundation](Module-7/01-daily-sales-history-foundation.md) — Steps 383–391 (source `21d51cf`; 5 daily sales tests passed; 403 tests discovered; 17,568 DailySales rows verified)
 
 - [Chapter 2: Historical CSV Import](Module-7/02-historical-csv-import.md) — Steps 392–405 (source commit `adb1355`; 421 tests passed)
+
+- [Chapter 3: Historical Data Reconciliation](Module-7/03-historical-data-reconciliation.md) — Steps 407–419 (source commit `ff0c68d`; 427 full-project tests passed; 29 focused tests passed after cleanup)
