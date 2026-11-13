@@ -232,3 +232,17 @@ Every term below is written for someone revising Django from the beginning.
 **Idempotent import:** Importing the same product/date data again without creating duplicate DailySales rows.
 
 **Date-dependent test:** A test whose expected output changes with the calendar; avoid hardcoded totals when weekdays influence generated data.
+
+## Historical data reconciliation (Module 7 Chapter 3)
+
+**Source ownership:** The `DailySales.source` label describing whether a daily summary is `recorded` (from transactions) or `imported` (from CSV).
+
+**Recorded-sales priority:** A recorded summary cannot be replaced by a later CSV import; synchronizing recorded history can replace an imported summary in the specified date range.
+
+**Recorded zero-sales day:** A date inside a synchronized range where completed transactions for a product total zero; still marked `recorded` and protected from CSV replacement.
+
+**Synchronization coverage assumption:** The project treats the explicitly synchronized date range as authoritative even when a product has zero sales; it does not independently prove that every historical transaction is present.
+
+**Migration default:** A value assigned to existing rows when a new model field is added; `recorded` is assumed for old DailySales rows and does not reconstruct their origin.
+
+**Whitespace cleanup:** Removing trailing spaces and extra final blank lines before `git diff --cached --check`, then rerunning focused tests and committing only intended files.
