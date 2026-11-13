@@ -461,3 +461,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 422 | M7 · Ch 4 | [Run focused verification](Module-7/04-forecasting-data-preparation.md#step-422--run-focused-verification) |
 | 423 | M7 · Ch 4 | [Run full regression and push source](Module-7/04-forecasting-data-preparation.md#step-423--run-full-regression-and-push-source) |
 | 424 | M7 · Ch 4 | [Publish Chapter 4 journal](Module-7/04-forecasting-data-preparation.md#step-424--publish-chapter-4-journal) |
+
+| 425 | M7 · Ch 5 | [Implement pretrained forecasting service](Module-7/05-chronos-bolt-tiny-integration.md#step-425--implement-the-pretrained-forecasting-service) |
+| 426 | M7 · Ch 5 | [Add deterministic forecasting tests](Module-7/05-chronos-bolt-tiny-integration.md#step-426--add-deterministic-forecasting-tests) |
+| 427 | M7 · Ch 5 | [Verify real Chronos-Bolt Tiny inference](Module-7/05-chronos-bolt-tiny-integration.md#step-427--verify-real-chronos-bolt-tiny-inference) |
+| 428 | M7 · Ch 5 | [Run regression and push source](Module-7/05-chronos-bolt-tiny-integration.md#step-428--run-regression-and-push-the-source) |
+| 429 | M7 · Ch 5 | [Publish development journal](Module-7/05-chronos-bolt-tiny-integration.md#step-429--publish-the-development-journal) |
