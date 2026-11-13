@@ -284,3 +284,23 @@ Every term below is written for someone revising Django from the beginning.
 **Mocked model test:** Replaces real model calls with controlled outputs to test service behavior quickly and deterministically.
 
 **Feasibility probe:** Checks whether pretrained inference runs on local hardware; unlike an accuracy evaluation, it does not establish whether forecasts match future sales.
+
+## Forecast evaluation (Module 7 Chapter 6)
+
+**Chronological holdout:** Evaluating on later observations that were not supplied to the forecasting model at its cutoff date.
+
+**Inference context:** Historical values passed to an already pretrained model; not local model training.
+
+**Evaluation cutoff:** The final date the model is permitted to use as history before predicting held-out days.
+
+**MAE (mean absolute error):** Average of absolute daily differences between actual and predicted units; lower means better on that evaluation period.
+
+**P50 point forecast:** The model's central/median quantile, used here to calculate MAE.
+
+**Moving-average baseline:** Simple comparison method; here, the last seven pre-cutoff days are averaged once and that same value predicts all 30 future days.
+
+**Data leakage:** Accidentally allowing information from the test period into model inputs or baseline calculations, making accuracy look unrealistically good.
+
+**Single-window backtest:** Testing on one historical forecast origin and future period; results may vary for other dates and products.
+
+**Model comparison:** Scoring two forecasting methods against the same actual observations; a lower score in one test does not prove general superiority.
