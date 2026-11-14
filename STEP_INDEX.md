@@ -490,3 +490,29 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 448 | M7 · Ch 7 | [Final regression verification](Module-7/07-stock-shortage-prediction.md#step-448--final-regression-verification) |
 | 449 | M7 · Ch 7 | [Commit and push verified Chapter 7 source](Module-7/07-stock-shortage-prediction.md#step-449--commit-and-push-verified-chapter-7-source) |
 | 450 | M7 · Ch 7 | [Publish and verify the Chapter 7 journal](Module-7/07-stock-shortage-prediction.md#step-450--publish-and-verify-the-chapter-7-journal) |
+
+| 451 | M7 · Ch 8 | [Choose forecast-based reorder calculation](Module-7/08-reorder-quantity-recommendations.md#step-451--choose-forecast-based-reorder-calculation) |
+| 452 | M7 · Ch 8 | [Limit recommendations to the 30-day horizon](Module-7/08-reorder-quantity-recommendations.md#step-452--limit-recommendations-to-the-30-day-horizon) |
+| 453 | M7 · Ch 8 | [Round up only the final reorder quantity](Module-7/08-reorder-quantity-recommendations.md#step-453--round-up-only-the-final-reorder-quantity) |
+| 454 | M7 · Ch 8 | [Count only incoming within lead time](Module-7/08-reorder-quantity-recommendations.md#step-454--count-only-incoming-within-lead-time) |
+| 455 | M7 · Ch 8 | [Exclude overdue and undated orders](Module-7/08-reorder-quantity-recommendations.md#step-455--exclude-overdue-and-undated-orders) |
+| 456 | M7 · Ch 8 | [Keep the trigger tied to lead-time demand](Module-7/08-reorder-quantity-recommendations.md#step-456--keep-the-trigger-tied-to-lead-time-demand) |
+| 457 | M7 · Ch 8 | [Provide a non-AI fallback for limited history](Module-7/08-reorder-quantity-recommendations.md#step-457--provide-a-non-ai-fallback-for-limited-history) |
+| 458 | M7 · Ch 8 | [Require at least seven fallback days](Module-7/08-reorder-quantity-recommendations.md#step-458--require-at-least-seven-fallback-days) |
+| 459 | M7 · Ch 8 | [Include recorded zero-sales days](Module-7/08-reorder-quantity-recommendations.md#step-459--include-recorded-zero-sales-days) |
+| 460 | M7 · Ch 8 | [Stop at missing dates](Module-7/08-reorder-quantity-recommendations.md#step-460--stop-at-missing-dates) |
+| 461 | M7 · Ch 8 | [Average all available consecutive days](Module-7/08-reorder-quantity-recommendations.md#step-461--average-all-available-consecutive-days) |
+| 462 | M7 · Ch 8 | [Fallback when Chronos fails](Module-7/08-reorder-quantity-recommendations.md#step-462--fallback-when-chronos-fails) |
+| 463 | M7 · Ch 8 | [Return unavailable if both methods fail](Module-7/08-reorder-quantity-recommendations.md#step-463--return-unavailable-if-both-methods-fail) |
+| 464 | M7 · Ch 8 | [Create the consecutive-sales helper](Module-7/08-reorder-quantity-recommendations.md#step-464--create-the-consecutive-sales-helper) |
+| 465 | M7 · Ch 8 | [Calculate average-based lead-time demand](Module-7/08-reorder-quantity-recommendations.md#step-465--calculate-average-based-lead-time-demand) |
+| 466 | M7 · Ch 8 | [Validate the fallback lead-time range](Module-7/08-reorder-quantity-recommendations.md#step-466--validate-the-fallback-lead-time-range) |
+| 467 | M7 · Ch 8 | [Validate and sum Chronos P50 demand](Module-7/08-reorder-quantity-recommendations.md#step-467--validate-and-sum-chronos-p50-demand) |
+| 468 | M7 · Ch 8 | [Separate scheduled, overdue, undated and later receipts](Module-7/08-reorder-quantity-recommendations.md#step-468--separate-scheduled-overdue-undated-and-later-receipts) |
+| 469 | M7 · Ch 8 | [Initialize a safe result and validate the request](Module-7/08-reorder-quantity-recommendations.md#step-469--initialize-a-safe-result-and-validate-the-request) |
+| 470 | M7 · Ch 8 | [Select AI or fallback and calculate the quantity](Module-7/08-reorder-quantity-recommendations.md#step-470--select-ai-or-fallback-and-calculate-the-quantity) |
+| 471 | M7 · Ch 8 | [Create deterministic reorder service tests](Module-7/08-reorder-quantity-recommendations.md#step-471--create-deterministic-reorder-service-tests) |
+| 472 | M7 · Ch 8 | [Test fallback continuity and zero-sales days](Module-7/08-reorder-quantity-recommendations.md#step-472--test-fallback-continuity-and-zero-sales-days) |
+| 473 | M7 · Ch 8 | [Run focused tests and Django checks](Module-7/08-reorder-quantity-recommendations.md#step-473--run-focused-tests-and-django-checks) |
+| 474 | M7 · Ch 8 | [Run full regression and inspect Git changes](Module-7/08-reorder-quantity-recommendations.md#step-474--run-full-regression-and-inspect-git-changes) |
+| 475 | M7 · Ch 8 | [Commit and publish Chapter 8 source](Module-7/08-reorder-quantity-recommendations.md#step-475--commit-and-publish-chapter-8-source) |
