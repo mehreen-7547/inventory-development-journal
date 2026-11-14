@@ -352,3 +352,23 @@ Every term below is written for someone revising Django from the beginning.
 **Unavailable recommendation:** `status='unavailable'` and `reorder_quantity=None`; distinct from an available recommendation of zero units.
 
 **AI error:** A recorded explanation of why Chronos failed before the service tried the non-AI fallback; not proof that fallback estimates are AI-generated.
+
+## Unusual sales pattern detection (Module 7 Chapter 9)
+
+**Sales anomaly:** A recorded sales day whose unit count differs substantially from recent history; not necessarily a mistake or fraud.
+
+**Rolling 14-day baseline:** Average of the 14 recorded days immediately before each evaluated day. The baseline moves forward as the target day changes.
+
+**Absolute difference:** Actual units minus baseline average; the default alert requires a magnitude of at least five units.
+
+**Percentage deviation:** `(actual - baseline) / baseline × 100`; the default requires at least 50% in magnitude when baseline is nonzero.
+
+**Zero baseline:** When the previous 14 days average zero, percentage change is undefined (`None`); the minimum-unit difference is used alone.
+
+**Missing history:** A calendar date with no DailySales row. Unlike a saved zero-sales row, it makes that target's 14-day baseline incomplete and causes a skip.
+
+**Statistical detection:** A transparent arithmetic rule, not a separately trained AI model. The returned method is `statistical_rolling_average`.
+
+**Skipped day:** A target date excluded because its sales row or a required baseline record is missing; returned with a reason, not silently treated as normal.
+
+**False positive:** A day flagged as unusual despite a legitimate cause such as a promotion or holiday; thresholds require calibration against business data.
