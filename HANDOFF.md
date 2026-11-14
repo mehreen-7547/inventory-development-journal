@@ -1,18 +1,17 @@
-# Development handoff — Module 7 Chapter 8 complete (Step 475)
+# Development handoff — Module 7 Chapter 9 complete (Step 487)
 
 ## Verified checkpoint
-- Source `mehreen-7547/ai-assisted-inventory-manager`, `main`, commit [`2178fb6`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/2178fb6), parent `c226ceb`, two new files, 470 insertions.
-- Journal `mehreen-7547/inventory-development-journal`, branch `study-2`, [Chapter 8](Module-7/08-reorder-quantity-recommendations.md), Steps 451–475.
-- User terminal: 472/472 tests passed (346.249s); Django check zero issues; clean Git whitespace check; successful source push.
-- Unrelated local untracked `purchasing.zip` and `reset_business_data_once.py` untouched. Frozen `m6-complete` tag unchanged.
+- Source repository `mehreen-7547/ai-assisted-inventory-manager`, branch `main`, commit [`c5a8d43`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/c5a8d43), parent `2178fb6`: two NEW files, 363 insertions.
+- Journal `mehreen-7547/inventory-development-journal`, branch `study-2`, [Chapter 9](Module-7/09-unusual-sales-pattern-detection.md), Steps 476–487.
+- User terminal: 17/17 focused anomaly tests passed (0.007s), 489/489 full tests passed (316.196s), Django check 0 issues; source pushed successfully.
+- Local untracked `purchasing.zip` and `reset_business_data_once.py` remain untouched; frozen `m6-complete` tag unchanged.
 
-## Source
-- NEW `intelligence/reorder_recommendation.py`: `get_fallback_sales`, `calculate_fallback_demand`, `get_ai_lead_time_demand`, `get_incoming_stock`, `recommend_reorder_quantity`. Validated Chronos P50 30-day forecast, lead-time 1–30 days, non-AI average fallback 7–59 consecutive days including zero-sales days, scheduled incoming only within lead-time, overdue/undated/later quantities reported separately, one final ceiling, unavailable result if no reliable estimate. No writes.
-- NEW `intelligence/test_reorder_recommendation.py`: 15 mocked SimpleTestCase tests in `ReorderRecommendationTests` and `ReorderFallbackTests`.
+## Implementation
+- NEW `intelligence/anomaly_detection.py` (172 lines): `detect_sales_anomalies(product_id, end_date, days=30, threshold_percent=50, minimum_difference=5)`. Read-only 14-day rolling average, skips incomplete history or missing target, flags high/low differences meeting relative and absolute thresholds, special zero baseline handling, detailed result.
+- NEW `intelligence/test_anomaly_detection.py` (191 lines): CLASS `SalesAnomalyDetectionTests(SimpleTestCase)`, 17 mocked tests for high/low/normal sales, zero history, missing days, rolling update, custom thresholds and invalid arguments.
 
-## Important boundaries
-- No UI, automatic purchasing, inventory changes, schema migrations, new model training, or paid services. The source uses current on-hand with supplied cutoff, so do not present historical-date results as historical stock backtests.
-- AI exceptions are broadly caught and fallback attempted; only `ValueError` and `TypeError` are caught from fallback. The 15 tests are mocked; real-product reorder service probe was not supplied.
+## Boundaries
+- No new AI model, training, migrations, views, UI, persisted alerts, stock changes or purchase orders. Thresholds are initial heuristics, not calibrated. No real-product anomaly detection probe reported.
 
 ## Next
-- Module 7 Chapter 9: Unusual Sales Pattern Detection. Preserve existing chapter scope and source/journal workflow. Use rapid development: group related implementation and tests, user verifies and pushes source, then update journal on `study-2` with exact file names and code-grounded step explanations.
+- Confirm remaining approved Module 7 scope before implementing further features. Continue source-first workflow: user edits/runs/commits/pushes; assistant inspects committed source and updates `study-2` journal. Preserve exact filenames, code walkthroughs, chapter structure and indices.
