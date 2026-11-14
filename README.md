@@ -2,17 +2,17 @@
 
 ## A plain-language journal of how I built the project
 
-These are **424 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **475 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, and Module 7 Chapters 1–4 (through Step 424). Chapter 4 prepares 60-day forecasting inputs; pretrained AI inference remains future work.
+**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, and Module 7 Chapters 1–8 (through Step 475).
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Module 7 Chapter 4 — [Forecasting Data Preparation](Module-7/04-forecasting-data-preparation.md), Steps 420–424, source commit `65ca45f`; 35 focused tests passed and full regression reported OK.
+**Latest checkpoint:** Module 7 Chapter 8 — [Reorder Quantity Recommendations](Module-7/08-reorder-quantity-recommendations.md), Steps 451–475, source commit `2178fb6`; 472/472 full tests passed.
 
 ## Module 0 — Foundations
 
@@ -149,3 +149,5 @@ These are **424 numbered development steps through the latest chapter**, written
 - [Chapter 6: Historical Forecast Accuracy Evaluation](Module-7/06-forecast-accuracy-evaluation.md) — Steps 430–435 (source commit `b3b1051`; 19 focused tests passed, full regression OK; real historical comparison on five products, Chronos lower MAE for four)
 
 - [Chapter 7: Stock-Shortage Prediction](Module-7/07-stock-shortage-prediction.md) — Steps 436–450 (source commit `c226ceb`; 11/11 focused and 457/457 full tests passed; read-only 30-day P50 stock projection; seed-date integration test stabilized)
+
+- [Chapter 8: Reorder Quantity Recommendations](Module-7/08-reorder-quantity-recommendations.md) — Steps 451–475 (source commit `2178fb6`; 15 new tests, 472/472 full regression passed; AI with non-AI fallback, read-only)
