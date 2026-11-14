@@ -126,3 +126,11 @@ Source [9417c09](https://github.com/mehreen-7547/ai-assisted-inventory-manager/c
 - Step 494: MODIFIED `core/templates/core/home.html`, manager navigation.
 - Step 495: NEW `intelligence/test_dashboard.py`, seven tests and unique-email fixture correction.
 - Step 496: source commit and push; 496/496 tests passed; unrelated untracked files excluded.
+
+## Module 7 Chapter 10 — Step 497 dashboard cutoff correction
+- Source [`b1c6063`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b1c6063), parent `9417c09`; journal [Step 497](Module-7/10-intelligence-dashboard-integration.md#step-497--use-the-latest-recorded-sales-date-as-the-dashboard-cutoff).
+- MODIFIED `intelligence/views.py`: product-specific latest DailySales date not later than today; fallback to today when no rows; shared cutoff across four services and template context.
+- MODIFIED `intelligence/templates/intelligence/dashboard.html`: show sales-history cutoff below stock details.
+- MODIFIED `intelligence/test_dashboard.py`: CLASS `IntelligenceDashboardTests`, new `test_dashboard_uses_latest_sales_date`, four service mocks; eight focused tests total.
+- Verified: BRD-045 local history 366 rows through 2026-11-13; real Chronos forecast from that cutoff returned 30 days; 8/8 focused and 497/497 full tests passed; Django check and whitespace check passed.
+- No migration, synthetic sale, stock change, or automatic order; unrelated untracked files untouched. Real dashboard recheck remains pending.
