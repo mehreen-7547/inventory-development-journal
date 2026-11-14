@@ -1,25 +1,27 @@
-# Development handoff — Module 7 Chapter 6 complete (Step 435)
+# Development handoff — Module 7 Chapter 7 complete (Step 450)
 
 ## Verified checkpoint
-- Source repository `mehreen-7547/ai-assisted-inventory-manager`, branch `main`, commit [`b3b1051`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b3b1051), compared with `2c93e25`: one commit, two NEW files, 226 added lines, zero deletions.
-- Journal repository `mehreen-7547/inventory-development-journal`, branch `study-2`, [Chapter 6](Module-7/06-forecast-accuracy-evaluation.md), Steps 430–435; chapter/index/source mapping/glossary/handoff updated.
-- User terminal: Django check 0 issues; no migrations; 19/19 focused tests passed in 0.054 seconds; full regression ended `OK` (test count/duration not visible); source push confirmed.
-- Unrelated local untracked `purchasing.zip` and `reset_business_data_once.py` untouched. Do not stage them.
+- Source repository: `mehreen-7547/ai-assisted-inventory-manager`, branch `main`, commit [`c226ceb`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/c226ceb) (full SHA `c226cebaed3d141afb6c249d601155d96ead49bb`), parent `b3b1051`. GitHub verified exactly three source files, 372 insertions, eight deletions.
+- Journal repository: `mehreen-7547/inventory-development-journal`, branch `study-2`, [Chapter 7](Module-7/07-stock-shortage-prediction.md), Steps 436–450; README, step index, source mapping, glossary and this handoff updated.
+- User terminal: **11/11 shortage tests passed** (0.015s); **457/457 full Django tests passed** (557.941s); `manage.py check` zero issues; Python compilation and Git whitespace checks succeeded. No migrations needed.
+- Unrelated local untracked `purchasing.zip` and `reset_business_data_once.py` remain untouched. Do not stage or delete them.
 
-## Implementation
-- NEW `intelligence/forecast_evaluation.py` (96 lines): `calculate_mae(actual,predicted)` validates lengths/nonnegative finite values and returns rounded MAE; `evaluate_product_forecast(product_id,end_date)` reads 90 contiguous daily sales values, uses first 60 as inference context, final 30 as held-out actuals, runs `forecast_product_demand` with a 30-day earlier cutoff, checks 30 dates and P50 forecasts, compares with fixed 7-day average calculated at cutoff, returns two MAEs and lower-error method. No writes/migrations.
-- NEW `intelligence/test_forecast_evaluation.py` (130 lines): 8 mocked tests for MAE, invalid input, Chronos win, baseline win, tie, wrong forecast length/date, and missing history. Existing 5 forecast and 6 history tests give 19 focused tests total.
-- Actual historical evaluation on 2026-11-13, 90-day window 2026-08-16 to 2026-11-13, products 30–34:
-  - 30 Classmate Pulse Notebook A4 180 Pages: Chronos 1.1593; baseline 2.0143.
-  - 31 Classmate Long Notebook 172 Pages: Chronos 0.9977; baseline 1.2381.
-  - 32 Navneet Youva Notebook A5 160 Pages: Chronos 0.8833; baseline 1.0190.
-  - 33 Cello Butterflow Blue Ball Pen Pack of 10: Chronos 0.7823; baseline 0.7000.
-  - 34 Reynolds 045 Fine Carbure Pen Pack of 5: Chronos 0.5187; baseline 0.8000.
-- Chronos lower MAE for 4/5 on this one local historical holdout. These numbers came from the user's terminal; no committed evaluation-results file. Dataset is local/demo, provenance and generalization not independently established. Do not claim general model superiority.
-- An initial history check failed due to wrong `inventory.models.Product` import and interactive Python indentation; corrected to `catalog.models.Product` and standalone `django.setup()` script. Initial reported zero eligible products was invalid.
+## Implemented source
+- **NEW `intelligence/shortage_prediction.py` (123 lines)** — `predict_stock_shortage(product_id, end_date)`: read `Product`; call existing `forecast_product_demand`; validate exactly 30 consecutive dated finite nonnegative P50 values; query outstanding `ordered` and `partially_received` `PurchaseOrderLine` records with `quantity_ordered > quantity_received`; count only remaining quantities. Aggregate scheduled arrivals by date; separately report `unscheduled_incoming` (no date) and `overdue_incoming` (date <= cutoff); project daily stock by adding due receipts and subtracting P50 demand. Return first date strictly below safety stock, first date strictly below zero, 30 daily records and product context. **Read-only**.
+- **NEW `intelligence/test_shortage_prediction.py` (232 lines)** — CLASS `StockShortagePredictionTests(SimpleTestCase)`, 11 mocked tests: no arrivals, dated arrivals, partial receipts, undated orders, multiple same-day deliveries, zero demand, overdue date, cutoff-date order, invalid forecast length/date/demand.
+- **MODIFIED `inventory/test_seed_integration.py`** — CLASS `SeedDemoDataIntegrationTests(TestCase)`: `setUpTestData` uses fixed 2026-11-13 reference date while seeding; dashboard test patches `core.dashboard.timezone.localdate` to the same date. Original 32 POs/30 receipts/29 received assertions retained; no production seed/dashboard changes.
 
-## Next — Module 7 Chapter 7: stock-shortage prediction
-- Before coding, inspect actual inventory stock, supplier lead-time, purchase-order and incoming-quantity models/services in `main`. Keep academic scope constrained; do not assume fields exist.
-- Design shortage risk using on-hand stock, pending incoming stock and forecast demand across a grounded horizon; clarify treatment of incoming goods and lead time. Forecasts are estimates and do not automatically alter stock or place orders.
-- Then implement read-only service and deterministic tests, verify real scenarios, run full regression, explicit staging, source push, and journal publication.
-- Preserve instructor-aligned Django style, Rapid Development Mode, exact filenames, NEW vs CLASS markers, relevant snippets with detailed line-level explanation, chapter intros and links, indexes/glossary/source mapping/handoff. User runs/pushes source; assistant verifies source then writes journal to `study-2`. Do not change frozen `m6-complete` tag.
+## Investigation and evidence
+- First full suite: 457 tests, one failure (seed expected 32 POs, actual 31 on 2026-11-14). Seed command used `timezone.localdate()` and weekday-sensitive sales, so its purchase-order count changed with calendar alignment despite `random.Random(2026)`.
+- Temporary date diagnostic on 2026-11-13: 32 POs, 30 goods receipts, 29 received. Fixed seed reference alone revealed dashboard still using real 2026-11-14; a test-scoped patch fixed that. Final 7/7 integration tests passed (7.291s), then final 457/457 full suite passed. Temporary diagnostic files removed; unrelated two-blank-line diff in `intelligence/test_daily_sales.py` restored.
+- Real Chronos + database service probe: product IDs 30–34, cutoff 2026-11-13, on-hand 82/119/120/109/46, day-30 projected 75.37/105.69/116.13/108.44/44.12; no safety breach or stockout in those five examples; overdue and unscheduled incoming 0. This is **not** a historical backtest because current stock was used with an earlier forecast cutoff.
+
+## Scope boundaries
+- No new model training, paid APIs, database schema changes, UI, inventory writes, stock adjustments, automatic purchase orders, reorder-quantity recommendations or anomaly detection in Chapter 7.
+- `lead_time_days` is returned for later planning but not yet used to calculate the projection. P50 is a scenario; actual demand and delivery timing can differ. A delivery due on a day is counted before that day's demand; this is an explicit simplifying assumption.
+- Current on-hand plus historical cutoff should not be described as historical stock performance. Future work may need to address this boundary if backtesting is requested.
+
+## Next — Module 7 Chapter 8 (subject to user approval)
+- Confirm the next approved workflow and scope before writing code. Likely **reorder recommendation**, using projected shortage timing, supplier lead time and a simple explainable quantity rule. Do not invent formulas or implement automatic ordering without approval.
+- Continue one step at a time; exact filenames and NEW/CLASS markers; source tests and user-run Git push first; assistant verifies commit then publishes the detailed `study-2` journal. Maintain README, STEP_INDEX, SOURCE_MAPPING, GLOSSARY and HANDOFF, with source-backed snippets and accurate evidence.
+- Do not alter the frozen `m6-complete` tag or unrelated local files.
