@@ -529,3 +529,12 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 485 | M7 · Ch 9 | [Verify focused tests and the full project](Module-7/09-unusual-sales-pattern-detection.md#step-485--verify-focused-tests-and-the-full-project) |
 | 486 | M7 · Ch 9 | [Commit and push only the two new files](Module-7/09-unusual-sales-pattern-detection.md#step-486--commit-and-push-only-the-two-new-files) |
 | 487 | M7 · Ch 9 | [Publish and verify the Chapter 9 journal](Module-7/09-unusual-sales-pattern-detection.md#step-487--publish-and-verify-the-chapter-9-journal) |
+| 488 | M7 · Ch 10 | [Inspect existing dashboard](Module-7/10-intelligence-dashboard-integration.md#step-488) |
+| 489 | M7 · Ch 10 | [Confirm intelligence dependencies](Module-7/10-intelligence-dashboard-integration.md#step-489) |
+| 490 | M7 · Ch 10 | [Implement manager-only view](Module-7/10-intelligence-dashboard-integration.md#step-490) |
+| 491 | M7 · Ch 10 | [Create intelligence URLs](Module-7/10-intelligence-dashboard-integration.md#step-491) |
+| 492 | M7 · Ch 10 | [Register URLs](Module-7/10-intelligence-dashboard-integration.md#step-492) |
+| 493 | M7 · Ch 10 | [Create dashboard template](Module-7/10-intelligence-dashboard-integration.md#step-493) |
+| 494 | M7 · Ch 10 | [Add manager navigation](Module-7/10-intelligence-dashboard-integration.md#step-494) |
+| 495 | M7 · Ch 10 | [Test dashboard and fix email fixtures](Module-7/10-intelligence-dashboard-integration.md#step-495) |
+| 496 | M7 · Ch 10 | [Commit and push source](Module-7/10-intelligence-dashboard-integration.md#step-496) |
