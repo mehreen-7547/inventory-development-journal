@@ -731,3 +731,122 @@ iv>
 **Limits and caution.** The four services are called separately; forecast inference may repeat within one page request (although model weights are cached). Broad exception handling hides the exact failure reason. The current system uses the last 60 consecutive recorded/imported DailySales days as context and forecasts the next 30 days. The model is pretrained, not fine-tuned. Historical CSV data is a daily summary and must not be confused with stock movements or real completed sales.
 
 **Review questions.** Why is the intelligence page manager-only? Why use a GET query string rather than a POST? Why do we require active products? What is the difference between a missing daily row and a row with zero units? What happens if Chronos cannot load? Which tests use mocks, and what would a real end-to-end model probe verify? Why does the CSV import not alter on-hand inventory?
+
+
+---
+
+## Step 497 — Use the latest recorded sales date as the dashboard cutoff
+
+### Before this step
+Chapter 10's dashboard called all four intelligence services with `timezone.localdate()`. A real local runtime check of product `BRD-045` showed 366 DailySales records from 2025-11-13 through 2026-11-13. On 2026-11-14, the required 60-day interval (2026-09-16 through 2026-11-14) had only 59 rows; the sole missing date was 2026-11-14. The forecast and shortage panels displayed unavailable messages, and reorder could not use its expected history. Importing fabricated sales for an unfinished day would be incorrect.
+
+We tested the existing `forecast_product_demand(product.pk, records.last().date)` directly using 2026-11-13 as the cutoff. It loaded `amazon/chronos-bolt-tiny`, returned `forecast_days=30`, and produced its first prediction for 2026-11-14: `p10=0.0`, `p50=0.18`, `p90=1.4`. This is evidence of real inference for one product, not proof that every dashboard panel or product works.
+
+### What we did
+We made the analysis cutoff product-specific: query the latest DailySales date **not later than today**. Pass that same cutoff to all four read-only services. If no DailySales row exists, retain today's date as the fallback so existing missing-history handling remains available. Display the selected cutoff in the template. Add one regression test with yesterday's DailySales row and four mocked services. No database migration, invented sale, stock mutation, or automatic order was introduced.
+
+### Code — `intelligence/views.py` (MODIFIED; function `intelligence_dashboard`)
+
+Added import:
+
+```python
+from .models import DailySales
+```
+
+Added `analysis_date = None` alongside the initial `results` and `errors` dictionaries. Replaced the previous `end_date = timezone.localdate()` with the committed source:
+
+```python
+latest_sales_date = DailySales.objects.filter(
+    product=selected_product,
+    date__lte=timezone.localdate()
+).order_by('-date').values_list('date', flat=True).first()
+
+end_date = latest_sales_date or timezone.localdate()
+analysis_date = end_date
+```
+
+The existing `services` loop continues to call `service(selected_product.pk, end_date)` for `forecast`, `shortage`, `reorder`, and `anomalies`. The `render` context now includes:
+
+```python
+'analysis_date': analysis_date
+```
+
+### Code explanation
+`DailySales.objects.filter(product=selected_product)` limits the query to the product selected by the manager. `date__lte=timezone.localdate()` excludes future-dated rows; `order_by('-date')` sorts newest first. `values_list('date', flat=True).first()` returns one date or `None`, without loading entire sales records. The `or` fallback preserves behavior when a product has no history. Keeping `analysis_date` separate from `end_date` makes the cutoff available to the HTML template without changing the services' call signatures. A latest row alone does not guarantee the required *consecutive* historical coverage; the services still validate their own data requirements.
+
+### Code — `intelligence/templates/intelligence/dashboard.html` (MODIFIED)
+
+Immediately after the existing current-stock and safety-stock paragraph:
+
+```html
+{% if analysis_date %}
+<p class="text-secondary">
+    Sales history cutoff: {{ analysis_date }}
+</p>
+{% endif %}
+```
+
+### Code explanation
+The Django template only shows the cutoff when the view supplies one. This prevents a misleading assumption that forecasts always include today's completed sales. It does not change stock balances or forecast results.
+
+### Code — `intelligence/test_dashboard.py` (MODIFIED; CLASS `IntelligenceDashboardTests`)
+
+Added imports:
+
+```python
+from datetime import timedelta
+from django.utils import timezone
+from intelligence.models import DailySales
+```
+
+Added test method exactly as committed:
+
+```python
+@patch('intelligence.views.detect_sales_anomalies')
+@patch('intelligence.views.recommend_reorder_quantity')
+@patch('intelligence.views.predict_stock_shortage')
+@patch('intelligence.views.forecast_product_demand')
+def test_dashboard_uses_latest_sales_date(
+    self, forecast, shortage, reorder, anomalies
+):
+    yesterday = timezone.localdate() - timedelta(days=1)
+
+    DailySales.objects.create(
+        product=self.product,
+        date=yesterday,
+        units_sold=5
+    )
+
+    self.client.force_login(self.manager)
+
+    response = self.client.get(
+        self.url,
+        {'product': self.product.pk}
+    )
+
+    self.assertEqual(response.status_code, 200)
+    self.assertContains(response, 'Sales history cutoff:')
+
+    for service in (forecast, shortage, reorder, anomalies):
+        service.assert_called_once_with(
+            self.product.pk,
+            yesterday
+        )
+```
+
+### Code explanation
+`timedelta(days=1)` makes the test independent of the calendar date when it runs. The test creates exactly one DailySales row in Django's isolated test database, signs in the manager, and requests the selected product's dashboard. Each `@patch` replaces one expensive intelligence service with a mock, so the test verifies **the date passed by the view** rather than loading Chronos four times. The loop checks that each service receives the same product ID and yesterday cutoff. This test does not prove real-world forecasting accuracy or the behavior of a product with no records.
+
+### How we checked it
+- Before editing: 366 rows for BRD-045, ending 2026-11-13; 59 of 60 required dates existed on 2026-11-14; only 2026-11-14 was missing.
+- Direct real-model probe at 2026-11-13: Chronos-Bolt Tiny loaded and returned 30 forecast days; first prediction 2026-11-14 with P10 0.0, P50 0.18, P90 1.4.
+- `python manage.py test intelligence.test_dashboard`: **8/8 passed** in 5.625 seconds.
+- `python manage.py check`: **0 issues**.
+- `git diff --check`: no reported whitespace errors.
+- `python manage.py test`: **497/497 passed** in 883.771 seconds.
+- Source commit [`b1c6063`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b1c6063) pushed to `main`: exactly three modified files, 53 insertions and 3 deletions. `purchasing.zip` and `reset_business_data_once.py` remained untracked and untouched.
+
+### Next
+Open the running dashboard again with BRD-045 and verify that the cutoff is displayed and the four service panels respond to the corrected date. If a panel still fails, inspect that service's real error rather than inventing records. Keep the academic system read-only and preserve the approved scope.
+
+**Review questions:** Why can a missing DailySales row differ from a recorded zero? Why exclude future dates? Why keep a fallback when no rows exist? Why use mocks in the regression test but a real Chronos probe separately? Does the newest date guarantee 60 consecutive records?
