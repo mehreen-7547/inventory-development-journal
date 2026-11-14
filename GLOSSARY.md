@@ -372,3 +372,17 @@ Every term below is written for someone revising Django from the beginning.
 **Skipped day:** A target date excluded because its sales row or a required baseline record is missing; returned with a reason, not silently treated as normal.
 
 **False positive:** A day flagged as unusual despite a legitimate cause such as a promotion or holiday; thresholds require calibration against business data.
+
+## Intelligence dashboard — Module 7 Chapter 10
+
+**Intelligence dashboard:** Manager-only read-only page showing four analysis results for a selected active product.
+
+**Query parameter:** The `?product=ID` portion of a URL identifying the selected product; the server checks whether it is active.
+
+**Independent service failure:** One analysis can fail without hiding successful results from the others.
+
+**Mocked view test:** A test replacing expensive AI services with controlled responses to check access and HTML without loading the model.
+
+**Unique email constraint:** A database rule disallowing duplicate user emails; the dashboard tests initially omitted distinct emails and were corrected.
+
+**Historical CSV summary:** Imported per-day product sales values, not completed sales transactions or stock movements.
