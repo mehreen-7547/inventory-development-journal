@@ -147,3 +147,5 @@ These are **424 numbered development steps through the latest chapter**, written
 - [Chapter 5: Chronos-Bolt Tiny Demand Forecasting](Module-7/05-chronos-bolt-tiny-integration.md) — Steps 425–429 (source commit `2c93e25`; 11 focused tests passed; real CPU model probe passed; full regression OK, count not supplied)
 
 - [Chapter 6: Historical Forecast Accuracy Evaluation](Module-7/06-forecast-accuracy-evaluation.md) — Steps 430–435 (source commit `b3b1051`; 19 focused tests passed, full regression OK; real historical comparison on five products, Chronos lower MAE for four)
+
+- [Chapter 7: Stock-Shortage Prediction](Module-7/07-stock-shortage-prediction.md) — Steps 436–450 (source commit `c226ceb`; 11/11 focused and 457/457 full tests passed; read-only 30-day P50 stock projection; seed-date integration test stabilized)
