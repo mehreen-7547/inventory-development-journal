@@ -516,3 +516,16 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 473 | M7 · Ch 8 | [Run focused tests and Django checks](Module-7/08-reorder-quantity-recommendations.md#step-473--run-focused-tests-and-django-checks) |
 | 474 | M7 · Ch 8 | [Run full regression and inspect Git changes](Module-7/08-reorder-quantity-recommendations.md#step-474--run-full-regression-and-inspect-git-changes) |
 | 475 | M7 · Ch 8 | [Commit and publish Chapter 8 source](Module-7/08-reorder-quantity-recommendations.md#step-475--commit-and-publish-chapter-8-source) |
+
+| 476 | M7 · Ch 9 | [Select the rolling-average anomaly method](Module-7/09-unusual-sales-pattern-detection.md#step-476--select-the-rolling-average-anomaly-method) |
+| 477 | M7 · Ch 9 | [Create the anomaly detection service](Module-7/09-unusual-sales-pattern-detection.md#step-477--create-the-anomaly-detection-service) |
+| 478 | M7 · Ch 9 | [Validate date, analysis window and thresholds](Module-7/09-unusual-sales-pattern-detection.md#step-478--validate-date-analysis-window-and-thresholds) |
+| 479 | M7 · Ch 9 | [Fetch the target and baseline sales records](Module-7/09-unusual-sales-pattern-detection.md#step-479--fetch-the-target-and-baseline-sales-records) |
+| 480 | M7 · Ch 9 | [Skip missing target days and incomplete baselines](Module-7/09-unusual-sales-pattern-detection.md#step-480--skip-missing-target-days-and-incomplete-baselines) |
+| 481 | M7 · Ch 9 | [Calculate the rolling average and dual thresholds](Module-7/09-unusual-sales-pattern-detection.md#step-481--calculate-the-rolling-average-and-dual-thresholds) |
+| 482 | M7 · Ch 9 | [Handle zero baseline and explain anomaly direction](Module-7/09-unusual-sales-pattern-detection.md#step-482--handle-zero-baseline-and-explain-anomaly-direction) |
+| 483 | M7 · Ch 9 | [Return a structured read-only analysis result](Module-7/09-unusual-sales-pattern-detection.md#step-483--return-a-structured-read-only-analysis-result) |
+| 484 | M7 · Ch 9 | [Create mocked anomaly detection tests](Module-7/09-unusual-sales-pattern-detection.md#step-484--create-mocked-anomaly-detection-tests) |
+| 485 | M7 · Ch 9 | [Verify focused tests and the full project](Module-7/09-unusual-sales-pattern-detection.md#step-485--verify-focused-tests-and-the-full-project) |
+| 486 | M7 · Ch 9 | [Commit and push only the two new files](Module-7/09-unusual-sales-pattern-detection.md#step-486--commit-and-push-only-the-two-new-files) |
+| 487 | M7 · Ch 9 | [Publish and verify the Chapter 9 journal](Module-7/09-unusual-sales-pattern-detection.md#step-487--publish-and-verify-the-chapter-9-journal) |
