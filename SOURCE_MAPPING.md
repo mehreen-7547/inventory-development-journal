@@ -106,3 +106,11 @@ This map links journal explanations to source files and GitHub commits. It is no
 - NEW `intelligence/reorder_recommendation.py`: 30-day Chronos P50 demand; 1–30-day lead time; non-AI fallback using 7–59 consecutive DailySales days; valid zero-sales records included; missing dates stop the run; incoming PO lines grouped as scheduled within lead time, overdue, undated, or later. Reorder quantity is max(0, ceil(lead-time demand + safety stock - on-hand - eligible incoming)). Read-only.
 - NEW `intelligence/test_reorder_recommendation.py`: 15 deterministic mocked tests across two SimpleTestCase classes. User reports 472/472 full tests passed in 346.249 seconds; Django check 0 issues, clean whitespace check, successful push.
 - Limitations: no new real-product end-to-end reorder probe, UI, migrations, model training or automatic purchase order; historical cutoff with current on-hand is not a historical backtest. `purchasing.zip` and `reset_business_data_once.py` remain untracked and untouched.
+
+## Module 7 — Chapter 9: Unusual Sales Pattern Detection
+- Source [`c5a8d43`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/c5a8d43), parent `2178fb6`: exactly two new Python files, 363 insertions.
+- Journal [Steps 476–487](Module-7/09-unusual-sales-pattern-detection.md), branch `study-2`.
+- NEW `intelligence/anomaly_detection.py`: read-only `detect_sales_anomalies`, previous 14 consecutive DailySales days, 1–30 target days, 50% and five-unit defaults, special zero baseline handling, missing-day skip reasons, high/low classifications and explanations.
+- NEW `intelligence/test_anomaly_detection.py`: CLASS `SalesAnomalyDetectionTests(SimpleTestCase)`, 17 deterministic mocked tests.
+- User terminal: 17/17 focused tests passed in 0.007s; 489/489 full tests passed in 316.196s; Django system check 0 issues; successful Git push and staged whitespace check.
+- Limitations: no real-data anomaly probe, UI, persisted alert, automatic order, migrations or new AI training. Thresholds are uncalibrated defaults; seasonality is not modeled. Untracked `purchasing.zip` and `reset_business_data_once.py` untouched.
