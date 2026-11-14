@@ -474,3 +474,19 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 433 | M7 · Ch 6 | [Run real historical evaluation](Module-7/06-forecast-accuracy-evaluation.md#step-433--run-real-historical-evaluation-for-five-products) |
 | 434 | M7 · Ch 6 | [Verify and commit source](Module-7/06-forecast-accuracy-evaluation.md#step-434--verify-and-commit-the-source) |
 | 435 | M7 · Ch 6 | [Publish Chapter 6 journal](Module-7/06-forecast-accuracy-evaluation.md#step-435--publish-chapter-6-journal) |
+
+| 436 | M7 · Ch 7 | [Decide how undated incoming stock is handled](Module-7/07-stock-shortage-prediction.md#step-436--decide-how-undated-incoming-stock-is-handled) |
+| 437 | M7 · Ch 7 | [Implement the read-only shortage service](Module-7/07-stock-shortage-prediction.md#step-437--implement-the-read-only-shortage-service) |
+| 438 | M7 · Ch 7 | [Add the first six shortage tests and correct one expected date](Module-7/07-stock-shortage-prediction.md#step-438--add-the-first-six-shortage-tests-and-correct-one-expected-date) |
+| 439 | M7 · Ch 7 | [Validate forecasts and exclude overdue arrivals](Module-7/07-stock-shortage-prediction.md#step-439--validate-forecasts-and-exclude-overdue-arrivals) |
+| 440 | M7 · Ch 7 | [Run real database and pretrained-model integration](Module-7/07-stock-shortage-prediction.md#step-440--run-real-database-and-pretrained-model-integration) |
+| 441 | M7 · Ch 7 | [Discover the date-dependent seed integration failure](Module-7/07-stock-shortage-prediction.md#step-441--discover-the-date-dependent-seed-integration-failure) |
+| 442 | M7 · Ch 7 | [Inspect the seed generator and correct the working directory](Module-7/07-stock-shortage-prediction.md#step-442--inspect-the-seed-generator-and-correct-the-working-directory) |
+| 443 | M7 · Ch 7 | [Review the unexpected daily-sales test diff](Module-7/07-stock-shortage-prediction.md#step-443--review-the-unexpected-daily-sales-test-diff) |
+| 444 | M7 · Ch 7 | [Clean up unrelated changes](Module-7/07-stock-shortage-prediction.md#step-444--clean-up-unrelated-changes) |
+| 445 | M7 · Ch 7 | [Verify a stable seed reference date](Module-7/07-stock-shortage-prediction.md#step-445--verify-a-stable-seed-reference-date) |
+| 446 | M7 · Ch 7 | [Stabilize the seed integration test](Module-7/07-stock-shortage-prediction.md#step-446--stabilize-the-seed-integration-test) |
+| 447 | M7 · Ch 7 | [Fix the dashboard test's reference date](Module-7/07-stock-shortage-prediction.md#step-447--fix-the-dashboard-tests-reference-date) |
+| 448 | M7 · Ch 7 | [Final regression verification](Module-7/07-stock-shortage-prediction.md#step-448--final-regression-verification) |
+| 449 | M7 · Ch 7 | [Commit and push verified Chapter 7 source](Module-7/07-stock-shortage-prediction.md#step-449--commit-and-push-verified-chapter-7-source) |
+| 450 | M7 · Ch 7 | [Publish and verify the Chapter 7 journal](Module-7/07-stock-shortage-prediction.md#step-450--publish-and-verify-the-chapter-7-journal) |
