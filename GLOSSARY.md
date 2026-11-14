@@ -332,3 +332,23 @@ Every term below is written for someone revising Django from the beginning.
 **Date-stable seed fixture:** An integration-test setup that patches `timezone.localdate` to a fixed date so weekday-dependent demo sales and purchase-order counts remain reproducible across test-run dates.
 
 **Real-model integration probe:** Calling the actual service with Django records and pretrained inference to check that the components work together. It does not establish predictive accuracy or constitute a historical stock backtest.
+
+## Reorder quantity recommendations (Module 7 Chapter 8)
+
+**Reorder quantity:** Suggested number of units to purchase to cover forecast demand during supplier lead time and preserve safety stock, after considering on-hand and eligible incoming stock.
+
+**Lead-time demand:** Total expected sales during the number of days it takes the supplier to deliver; this implementation supports 1–30 days.
+
+**Non-AI fallback:** Average recorded daily sales over 7–59 uninterrupted days, multiplied by lead time; used if Chronos cannot provide a valid forecast.
+
+**Consecutive sales records:** One DailySales row for every calendar day ending on the requested cutoff. Zero units is a valid row; a missing row breaks the run.
+
+**Eligible scheduled incoming:** Outstanding ordered quantity expected after the cutoff but no later than the supplier lead-time end date. Only this category reduces the recommendation.
+
+**Later incoming:** Outstanding stock expected after the lead-time end; shown separately and excluded from the immediate calculation.
+
+**Final ceiling (`ceil`):** Round the final positive shortage up to a whole unit; do not round every day's forecast separately.
+
+**Unavailable recommendation:** `status='unavailable'` and `reorder_quantity=None`; distinct from an available recommendation of zero units.
+
+**AI error:** A recorded explanation of why Chronos failed before the service tried the non-AI fallback; not proof that fallback estimates are AI-generated.
