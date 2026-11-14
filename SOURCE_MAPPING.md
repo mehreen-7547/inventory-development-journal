@@ -114,3 +114,15 @@ This map links journal explanations to source files and GitHub commits. It is no
 - NEW `intelligence/test_anomaly_detection.py`: CLASS `SalesAnomalyDetectionTests(SimpleTestCase)`, 17 deterministic mocked tests.
 - User terminal: 17/17 focused tests passed in 0.007s; 489/489 full tests passed in 316.196s; Django system check 0 issues; successful Git push and staged whitespace check.
 - Limitations: no real-data anomaly probe, UI, persisted alert, automatic order, migrations or new AI training. Thresholds are uncalibrated defaults; seasonality is not modeled. Untracked `purchasing.zip` and `reset_business_data_once.py` untouched.
+
+## Module 7 Chapter 10 — Dashboard (Steps 488–496)
+Source [9417c09](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/9417c09). Journal [Chapter 10](Module-7/10-intelligence-dashboard-integration.md).
+
+- Steps 488–489: inspect existing core, accounts, catalog, inventory and intelligence services.
+- Step 490: MODIFIED `intelligence/views.py`, manager-only selection and four independent analyses.
+- Step 491: NEW `intelligence/urls.py`, named route.
+- Step 492: MODIFIED `config/urls.py`, route registration.
+- Step 493: NEW `intelligence/templates/intelligence/dashboard.html`, four-panel results.
+- Step 494: MODIFIED `core/templates/core/home.html`, manager navigation.
+- Step 495: NEW `intelligence/test_dashboard.py`, seven tests and unique-email fixture correction.
+- Step 496: source commit and push; 496/496 tests passed; unrelated untracked files excluded.
