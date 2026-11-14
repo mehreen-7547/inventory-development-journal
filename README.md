@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **496 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **497 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -155,3 +155,5 @@ These are **496 numbered development steps through the latest chapter**, written
 - [Chapter 9: Unusual Sales Pattern Detection](Module-7/09-unusual-sales-pattern-detection.md) — Steps 476–487 (source commit `c5a8d43`; 17 focused tests, 489 full tests; read-only 14-day rolling-average statistical alerts)
 
 - [Chapter 10: Intelligence Dashboard Integration](Module-7/10-intelligence-dashboard-integration.md) — Steps 488–496 (source `9417c09`; 496 tests passed)
+
+- [Step 497: Dashboard Sales-History Cutoff Correction](Module-7/10-intelligence-dashboard-integration.md#step-497--use-the-latest-recorded-sales-date-as-the-dashboard-cutoff) — source `b1c6063`; 497/497 tests passed; no fabricated daily sales.
