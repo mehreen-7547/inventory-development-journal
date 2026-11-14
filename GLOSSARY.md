@@ -304,3 +304,31 @@ Every term below is written for someone revising Django from the beginning.
 **Single-window backtest:** Testing on one historical forecast origin and future period; results may vary for other dates and products.
 
 **Model comparison:** Scoring two forecasting methods against the same actual observations; a lower score in one test does not prove general superiority.
+
+## Stock-shortage prediction (Module 7 Chapter 7)
+
+**Stock projection:** A day-by-day estimate of future available units, starting from recorded current on-hand stock, adding scheduled outstanding receipts and subtracting forecast demand. This is a scenario, not a guaranteed physical balance.
+
+**Forecast cutoff (`end_date`):** The final historical day for the 30-day forecast; projected dates begin the following day. The shortage service still reads current `Product.on_hand`, so an older cutoff does not create a true historical stock snapshot.
+
+**P50 demand:** The pretrained forecasting model's central/median daily demand estimate used for the stock projection. P50 does not quantify the probability of stockout.
+
+**Safety stock:** The product's configured buffer; a predicted **safety breach** occurs when projected stock is strictly below this value.
+
+**Projected stockout:** The first date projected stock is strictly below zero. Negative projection represents potential unmet demand, not a permitted physical stock balance.
+
+**Outstanding purchase-order quantity:** `quantity_ordered - quantity_received` on a line belonging to an `ordered` or `partially_received` purchase order.
+
+**Scheduled incoming:** Remaining outstanding quantity assigned to a future `expected_delivery_date`; multiple lines on one day are summed.
+
+**Unscheduled incoming:** Outstanding quantity on an order with no expected delivery date; reported separately, not assigned an invented future date.
+
+**Overdue incoming:** Outstanding quantity whose expected delivery date is on or before the forecast cutoff; reported separately rather than assumed received.
+
+**First breach date:** Earliest projected day crossing below a threshold; a later delivery does not erase the earlier warning.
+
+**Deterministic mocked test:** A test that substitutes controlled product, forecast and purchase-order data to verify projection logic without running Chronos or creating database rows.
+
+**Date-stable seed fixture:** An integration-test setup that patches `timezone.localdate` to a fixed date so weekday-dependent demo sales and purchase-order counts remain reproducible across test-run dates.
+
+**Real-model integration probe:** Calling the actual service with Django records and pretrained inference to check that the components work together. It does not establish predictive accuracy or constitute a historical stock backtest.
