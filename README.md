@@ -2,17 +2,17 @@
 
 ## A plain-language journal of how I built the project
 
-These are **475 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **487 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, and Module 7 Chapters 1–8 (through Step 475).
+**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, and Module 7 Chapters 1–9 (through Step 487).
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** Module 7 Chapter 8 — [Reorder Quantity Recommendations](Module-7/08-reorder-quantity-recommendations.md), Steps 451–475, source commit `2178fb6`; 472/472 full tests passed.
+**Latest checkpoint:** Module 7 Chapter 9 — [Unusual Sales Pattern Detection](Module-7/09-unusual-sales-pattern-detection.md), Steps 476–487, source `c5a8d43`; 17/17 focused and 489/489 full tests passed.
 
 ## Module 0 — Foundations
 
@@ -151,3 +151,5 @@ These are **475 numbered development steps through the latest chapter**, written
 - [Chapter 7: Stock-Shortage Prediction](Module-7/07-stock-shortage-prediction.md) — Steps 436–450 (source commit `c226ceb`; 11/11 focused and 457/457 full tests passed; read-only 30-day P50 stock projection; seed-date integration test stabilized)
 
 - [Chapter 8: Reorder Quantity Recommendations](Module-7/08-reorder-quantity-recommendations.md) — Steps 451–475 (source commit `2178fb6`; 15 new tests, 472/472 full regression passed; AI with non-AI fallback, read-only)
+
+- [Chapter 9: Unusual Sales Pattern Detection](Module-7/09-unusual-sales-pattern-detection.md) — Steps 476–487 (source commit `c5a8d43`; 17 focused tests, 489 full tests; read-only 14-day rolling-average statistical alerts)
