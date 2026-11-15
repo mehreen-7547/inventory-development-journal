@@ -539,3 +539,4 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 495 | M7 · Ch 10 | [Test dashboard and fix email fixtures](Module-7/10-intelligence-dashboard-integration.md#step-495--test-authorization-selection-rendering-and-partial-failure) |
 | 496 | M7 · Ch 10 | [Commit and push source](Module-7/10-intelligence-dashboard-integration.md#step-496--commit-and-publish-the-verified-source) |
 | 497 | M7 · Ch 10 | [Use latest recorded sales date for dashboard](Module-7/10-intelligence-dashboard-integration.md#step-497--use-the-latest-recorded-sales-date-as-the-dashboard-cutoff) |
+| 498 | M7 · Ch 10 | [Verify live dashboard and remove temporary diagnostics](Module-7/10-intelligence-dashboard-integration.md#step-498--verify-the-live-dashboard-and-remove-temporary-diagnostics) |
