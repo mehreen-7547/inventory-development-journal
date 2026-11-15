@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **497 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **498 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -157,3 +157,5 @@ These are **497 numbered development steps through the latest chapter**, written
 - [Chapter 10: Intelligence Dashboard Integration](Module-7/10-intelligence-dashboard-integration.md) — Steps 488–496 (source `9417c09`; 496 tests passed)
 
 - [Step 497: Dashboard Sales-History Cutoff Correction](Module-7/10-intelligence-dashboard-integration.md#step-497--use-the-latest-recorded-sales-date-as-the-dashboard-cutoff) — source `b1c6063`; 497/497 tests passed; no fabricated daily sales.
+
+- [Step 498: Live Dashboard Verification and Diagnostic Cleanup](Module-7/10-intelligence-dashboard-integration.md#step-498--verify-the-live-dashboard-and-remove-temporary-diagnostics) — BRD-045 all four panels rendered; no source commit; clean tracked working tree.
