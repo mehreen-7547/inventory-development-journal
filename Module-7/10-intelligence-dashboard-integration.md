@@ -1,4 +1,4 @@
-# Module 7 — Chapter 10: Intelligence Dashboard Integration (Steps 488–496)
+# Module 7 — Chapter 10: Intelligence Dashboard Integration (Steps 488–498)
 
 ## Chapter introduction
 
@@ -850,3 +850,57 @@ def test_dashboard_uses_latest_sales_date(
 Open the running dashboard again with BRD-045 and verify that the cutoff is displayed and the four service panels respond to the corrected date. If a panel still fails, inspect that service's real error rather than inventing records. Keep the academic system read-only and preserve the approved scope.
 
 **Review questions:** Why can a missing DailySales row differ from a recorded zero? Why exclude future dates? Why keep a fallback when no rows exist? Why use mocks in the regression test but a real Chronos probe separately? Does the newest date guarantee 60 consecutive records?
+
+
+---
+
+## Step 498 — Verify the live dashboard and remove temporary diagnostics
+
+### Before this step
+Step 497 fixed the product-specific sales-history cutoff and passed 497 automated tests, but the first live screenshot was mixed: Bru Instant Coffee displayed a 30-day forecast, while Britannia Marie Gold Biscuits (BRD-045) still showed "This analysis is currently unavailable" in the forecast panel. The other Britannia panels showed no projected safety-stock breach or stockout, reorder quantity zero using `ai_chronos`, and no anomalies across 30 analyzed days. A direct shell invocation of `forecast_product_demand(product.pk, end_date)` for BRD-045 succeeded with a 30-day forecast, so a permanent model or data change was not yet justified.
+
+### What we did
+We temporarily instrumented the dashboard exception handler to print the service name, exception type, and message to the development-server terminal while keeping the browser's generic error message. This was **local diagnostic code only** and was never committed. The first attempt to enter the Python print statement directly into PowerShell produced a PowerShell parser error; the code belonged inside the Django view in VS Code.
+
+On the next live run, the manager selected BRD-045 at `/intelligence/?product=74`. The dashboard rendered the Chronos-Bolt Tiny 30-day forecast, a stock-shortage result with no predicted breach/stockout, an `ai_chronos` reorder recommendation of zero units, and zero anomalies across 30 days. The cutoff was displayed as Nov. 13, 2026. The development terminal showed successful HTTP 200 requests, including requests at 20:46:05 and 20:49:43 on Nov. 15, 2026, and **no** `Intelligence dashboard error:` line. The earlier intermittent forecast failure was **not reproduced**; its underlying cause remains unknown.
+
+### Code — `intelligence/views.py` (TEMPORARY diagnostic, REVERTED; not part of committed source)
+
+For the local check only, the existing handler was temporarily replaced with:
+
+```python
+except Exception as error:
+    print(
+        'Intelligence dashboard error:',
+        name,
+        type(error).__name__,
+        str(error)
+    )
+    errors[name] = (
+        'This analysis is currently unavailable.'
+    )
+```
+
+After verifying the page, we restored the committed handler:
+
+```python
+except Exception:
+    errors[name] = (
+        'This analysis is currently unavailable.'
+    )
+```
+
+### Code explanation
+`except Exception as error` captures the error object only for temporary inspection. `type(error).__name__` identifies the exception class, and `str(error)` supplies its message. Printing to the server terminal does not expose details in the browser, but ad-hoc printing is not a production logging solution. The diagnostic was deliberately removed after the run. There is **no new permanent source code**, no migration, and no source commit for Step 498.
+
+### How we checked it
+- Live BRD-045 dashboard: 30-day `amazon/chronos-bolt-tiny` forecast displayed, cutoff Nov. 13, 2026; shortage, reorder, and anomaly panels also rendered.
+- Development-server terminal: HTTP 200 for `GET /intelligence/?product=74`; no diagnostic exception message on the successful requests.
+- After reverting diagnostic code, `python manage.py check` reported **0 issues**; `git diff --check` produced no errors.
+- `git status --short` showed **no tracked modifications**. Only `?? purchasing.zip` and `?? reset_business_data_once.py` remained; both were left untouched.
+- The previous 497/497 regression result belongs to Step 497; a fresh full suite was **not run** for Step 498 because the source was restored to the same committed state.
+
+### Next
+The immediate live dashboard verification is complete. Do not claim the earlier intermittent failure has been explained; investigate again only if it recurs. Review the plausibility of very low forecast quantities against real historical sales before presenting the output as accurate business guidance. Continue with the approved development scope, not an unplanned feature expansion.
+
+**Review questions:** Why can a shell model call succeed while an earlier page request fails? Why should temporary debug output be removed? What does an HTTP 200 prove—and what does it not prove? How do you distinguish forecast availability from forecast accuracy?
