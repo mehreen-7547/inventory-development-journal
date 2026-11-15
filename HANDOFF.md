@@ -1,4 +1,4 @@
-# Development handoff — Module 7 Chapter 10 Step 497 complete
+# Development handoff — Module 7 Chapter 10 Step 498 live verification complete
 
 ## Verified checkpoint
 - Source `mehreen-7547/ai-assisted-inventory-manager` main, [`b1c6063`](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/b1c6063), parent `9417c09`. Three modified files, 53 insertions and 3 deletions; pushed.
@@ -16,7 +16,7 @@
 - Direct Chronos-Bolt Tiny service call with 2026-11-13 succeeded: 30-day forecast, first prediction for 2026-11-14 (P10=0, P50=0.18, P90=1.4).
 - Never fabricate today's sales to satisfy a 60-day requirement. The latest date alone does not guarantee 60 consecutive rows.
 
-## Next
-- User should run the live dashboard again with BRD-045 and report all four panels and displayed cutoff. Live UI verification after Step 497 is **not yet reported**.
+## Step 498 diagnostic cleanup\n- Temporary print-based exception diagnostics in intelligence/views.py were removed; no source commit or permanent changes.\n- User verified Django check 0 issues, whitespace check clean, and only the two known untracked files remain.\n- Journal [Step 498](Module-7/10-intelligence-dashboard-integration.md#step-498--verify-the-live-dashboard-and-remove-temporary-diagnostics).\n\n## Next
+- No immediate rerun is required. The earlier intermittent forecast failure was not reproduced and its root cause remains unknown. Live UI verification **completed** in Step 498: BRD-045 displayed all four panels with sales-history cutoff 2026-11-13; no error printed during the successful requests.
 - If one panel remains unavailable, diagnose its service with real data; do not assume mocked dashboard tests establish all real-service success.
 - User owns source edits/tests/pushes; assistant updates journal only. No paid APIs, model training, automatic orders or unnecessary migrations.
