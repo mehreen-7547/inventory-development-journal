@@ -540,3 +540,13 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 496 | M7 · Ch 10 | [Commit and push source](Module-7/10-intelligence-dashboard-integration.md#step-496--commit-and-publish-the-verified-source) |
 | 497 | M7 · Ch 10 | [Use latest recorded sales date for dashboard](Module-7/10-intelligence-dashboard-integration.md#step-497--use-the-latest-recorded-sales-date-as-the-dashboard-cutoff) |
 | 498 | M7 · Ch 10 | [Verify live dashboard and remove temporary diagnostics](Module-7/10-intelligence-dashboard-integration.md#step-498--verify-the-live-dashboard-and-remove-temporary-diagnostics) |
+
+| 499 | M7 · Ch 11 | [Recognize sparse-sales forecast risk](Module-7/11-demand-intelligence-quality-and-presentation.md#step-499) |
+| 500 | M7 · Ch 11 | [Require complete 28-day sales history](Module-7/11-demand-intelligence-quality-and-presentation.md#step-500) |
+| 501 | M7 · Ch 11 | [Use larger demand for reorder planning](Module-7/11-demand-intelligence-quality-and-presentation.md#step-501) |
+| 502 | M7 · Ch 11 | [Compare 30-day predicted and actual totals](Module-7/11-demand-intelligence-quality-and-presentation.md#step-502) |
+| 503 | M7 · Ch 11 | [Align shortage demand with reorder planning](Module-7/11-demand-intelligence-quality-and-presentation.md#step-503) |
+| 504 | M7 · Ch 11 | [Build verdict-first dashboard summary](Module-7/11-demand-intelligence-quality-and-presentation.md#step-504) |
+| 505 | M7 · Ch 11 | [Show whole items and readable sales rates](Module-7/11-demand-intelligence-quality-and-presentation.md#step-505) |
+| 506 | M7 · Ch 11 | [Keep technical calculations behind details](Module-7/11-demand-intelligence-quality-and-presentation.md#step-506) |
+| 507 | M7 · Ch 11 | [Verify regressions and publish Module 7](Module-7/11-demand-intelligence-quality-and-presentation.md#step-507) |
