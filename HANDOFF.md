@@ -1,16 +1,17 @@
-# Development handoff — Module 7 completed, Module 8 next
+# Development handoff — Module 8 Chapter 1 source complete, approval pending
 
 ## Verified source and journal
-- Source main: [a5ad9ba](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/a5ad9ba6d21d468b21dd9626e02a48c77201dc46), “Complete Module 7 demand intelligence dashboard and quality improvements”.
-- Journal study-2: [Chapter 11 Steps 499–507](Module-7/11-demand-intelligence-quality-and-presentation.md). Earlier Steps 1–498 retained.
-- User terminal: 121/121 intelligence tests passed; Django check no issues; git diff --check no errors; live page approved.
-- Full-project 502-test run occurred earlier, before final Module 7 changes. Do not describe it as a post-change full regression.
-- Source commit excludes untracked intelligence.zip and reset_business_data_once.py.
+- Source main: [54bcb7d](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/54bcb7d), “Add manager needs attention dashboard panel”.
+- Journal study-2: [Module 8 Chapter 1 Steps 508–510](Module-8/01-manager-needs-attention.md); Steps 1–507 retained.
+- User terminal: Django system check passed; 83 tests passed after initial patch; 4/4 focused tests passed after test file addition. A complete post-chapter full-project test run has not been supplied.
+- Source push succeeded. Unrelated local intelligence.zip and reset_business_data_once.py excluded.
 
-## Key behavior
-- Reorder and shortage use the larger of validated AI daily demand and the complete 28-day recent daily average, with different stock/safety/incoming rules as appropriate.
-- Verdict-first page, whole-item labels, weekly slow-selling rates, historical 30-day total error comparison, collapsed details.
-- Read-only advice: no automatic orders or stock writes.
+## Module 8 frozen scope
+- Chapter 1: Manager “Needs attention today” top-10 ranked list from existing shortage/reorder/anomaly functions, one row per active product, links to per-product intelligence, per-product failure isolation. **Source implemented and pushed; await user OK.**
+- Chapter 2: Weekly totals across all products, rolling eight-week evaluation: AI vs seven-day average vs predict zero. Show results table and honest conclusion, including when average is as good or better.
+- Chapter 3: README and five-minute demo script following the dashboard.
+- No new tables, apps or libraries. Wait for user OK after each chapter.
 
 ## Next
-- Start Module 8 from the approved scope and existing source, not guessed features. Preserve journal step numbering; continue from 508.
+- Ask user to review Manager homepage, confirm panel behavior and give explicit OK for Chapter 2.
+- Continue journal numbering from Step 511 only after approval.
