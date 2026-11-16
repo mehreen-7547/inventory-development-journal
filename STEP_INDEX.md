@@ -550,3 +550,7 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 505 | M7 · Ch 11 | [Show whole items and readable sales rates](Module-7/11-demand-intelligence-quality-and-presentation.md#step-505) |
 | 506 | M7 · Ch 11 | [Keep technical calculations behind details](Module-7/11-demand-intelligence-quality-and-presentation.md#step-506) |
 | 507 | M7 · Ch 11 | [Verify regressions and publish Module 7](Module-7/11-demand-intelligence-quality-and-presentation.md#step-507) |
+
+| 508 | M8 · Ch 1 | [Build the ranked Manager attention panel](Module-8/01-manager-needs-attention.md#step-508--calculate-a-combined-attention-list) |
+| 509 | M8 · Ch 1 | [Test attention ranking, links and failure isolation](Module-8/01-manager-needs-attention.md#step-509--add-focused-dashboard-tests) |
+| 510 | M8 · Ch 1 | [Commit and push Chapter 1 source](Module-8/01-manager-needs-attention.md#step-510--commit-and-push-the-completed-chapter-1-source) |
