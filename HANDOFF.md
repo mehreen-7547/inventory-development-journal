@@ -1,17 +1,17 @@
-# Development handoff — Module 8 Chapter 1 source complete, approval pending
+# Development handoff — Module 8 Chapter 2 complete
 
 ## Verified source and journal
-- Source main: [54bcb7d](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/54bcb7d), “Add manager needs attention dashboard panel”.
-- Journal study-2: [Module 8 Chapter 1 Steps 508–510](Module-8/01-manager-needs-attention.md); Steps 1–507 retained.
-- User terminal: Django system check passed; 83 tests passed after initial patch; 4/4 focused tests passed after test file addition. A complete post-chapter full-project test run has not been supplied.
-- Source push succeeded. Unrelated local intelligence.zip and reset_business_data_once.py excluded.
+- Source `main`: [78278d5](https://github.com/mehreen-7547/ai-assisted-inventory-manager/commit/78278d5) — historical AI forecast comparison.
+- Journal `study-2`: [Chapter 1 Steps 508–510](Module-8/01-manager-needs-attention.md), [Chapter 2 Steps 511–532](Module-8/02-weekly-forecast-comparison.md). Earlier steps preserved.
+- User-reported final checks: 528 Django tests passed, system check clean, no pending migrations.
+- Live comparison: 48 products, 336 evaluated product-weeks, 48 skipped. Mean weekly absolute error: AI 3.45; previous-week baseline 3.29; predict-zero 4.30. Baseline performed best.
+- Unrelated local files `intelligence.zip` and `reset_business_data_once.py` were excluded from source commit.
 
-## Module 8 frozen scope
-- Chapter 1: Manager “Needs attention today” top-10 ranked list from existing shortage/reorder/anomaly functions, one row per active product, links to per-product intelligence, per-product failure isolation. **Source implemented and pushed; await user OK.**
-- Chapter 2: Weekly totals across all products, rolling eight-week evaluation: AI vs seven-day average vs predict zero. Show results table and honest conclusion, including when average is as good or better.
-- Chapter 3: README and five-minute demo script following the dashboard.
-- No new tables, apps or libraries. Wait for user OK after each chapter.
+## Frozen remaining scope
+- Module 8 Chapter 3: README and five-minute demo script, not started.
+- Module 9: final submission work.
+- No new tables, apps, paid APIs or libraries required by Chapter 2.
 
 ## Next
-- Ask user to review Manager homepage, confirm panel behavior and give explicit OK for Chapter 2.
-- Continue journal numbering from Step 511 only after approval.
+- Verify the published Chapter 2 journal and navigation.
+- Wait for user approval before beginning Chapter 3.
