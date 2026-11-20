@@ -554,3 +554,26 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 508 | M8 · Ch 1 | [Build the ranked Manager attention panel](Module-8/01-manager-needs-attention.md#step-508--calculate-a-combined-attention-list) |
 | 509 | M8 · Ch 1 | [Test attention ranking, links and failure isolation](Module-8/01-manager-needs-attention.md#step-509--add-focused-dashboard-tests) |
 | 510 | M8 · Ch 1 | [Commit and push Chapter 1 source](Module-8/01-manager-needs-attention.md#step-510--commit-and-push-the-completed-chapter-1-source) |
+
+| 511 | M8 · Ch 2 | [Set the comparison boundaries](Module-8/02-weekly-forecast-comparison.md#step-511--set-the-comparison-boundaries) |
+| 512 | M8 · Ch 2 | [Create the evaluation entry point](Module-8/02-weekly-forecast-comparison.md#step-512--create-the-evaluation-entry-point) |
+| 513 | M8 · Ch 2 | [Iterate through completed weeks](Module-8/02-weekly-forecast-comparison.md#step-513--iterate-through-completed-weeks) |
+| 514 | M8 · Ch 2 | [Separate past sales from actual outcomes](Module-8/02-weekly-forecast-comparison.md#step-514--separate-past-sales-from-actual-outcomes) |
+| 515 | M8 · Ch 2 | [Request the AI forecast at the historical cutoff](Module-8/02-weekly-forecast-comparison.md#step-515--request-the-ai-forecast-at-the-historical-cutoff) |
+| 516 | M8 · Ch 2 | [Validate prediction dates](Module-8/02-weekly-forecast-comparison.md#step-516--validate-prediction-dates) |
+| 517 | M8 · Ch 2 | [Reject invalid forecast quantities](Module-8/02-weekly-forecast-comparison.md#step-517--reject-invalid-forecast-quantities) |
+| 518 | M8 · Ch 2 | [Skip unusable product-weeks](Module-8/02-weekly-forecast-comparison.md#step-518--skip-unusable-product-weeks) |
+| 519 | M8 · Ch 2 | [Calculate the three weekly totals](Module-8/02-weekly-forecast-comparison.md#step-519--calculate-the-three-weekly-totals) |
+| 520 | M8 · Ch 2 | [Record absolute error per method](Module-8/02-weekly-forecast-comparison.md#step-520--record-absolute-error-per-method) |
+| 521 | M8 · Ch 2 | [Keep each product-week inspectable](Module-8/02-weekly-forecast-comparison.md#step-521--keep-each-product-week-inspectable) |
+| 522 | M8 · Ch 2 | [Aggregate errors and choose a winner](Module-8/02-weekly-forecast-comparison.md#step-522--aggregate-errors-and-choose-a-winner) |
+| 523 | M8 · Ch 2 | [Return counts and summary statistics](Module-8/02-weekly-forecast-comparison.md#step-523--return-counts-and-summary-statistics) |
+| 524 | M8 · Ch 2 | [Configure persistent evaluation caching](Module-8/02-weekly-forecast-comparison.md#step-524--configure-persistent-evaluation-caching) |
+| 525 | M8 · Ch 2 | [Create a manager-only evaluation view](Module-8/02-weekly-forecast-comparison.md#step-525--create-a-manager-only-evaluation-view) |
+| 526 | M8 · Ch 2 | [Run on POST and reuse cached results on GET](Module-8/02-weekly-forecast-comparison.md#step-526--run-on-post-and-reuse-cached-results-on-get) |
+| 527 | M8 · Ch 2 | [Render the evaluation page](Module-8/02-weekly-forecast-comparison.md#step-527--render-the-evaluation-page) |
+| 528 | M8 · Ch 2 | [Register the dashboard URL](Module-8/02-weekly-forecast-comparison.md#step-528--register-the-dashboard-url) |
+| 529 | M8 · Ch 2 | [Create the comparison template](Module-8/02-weekly-forecast-comparison.md#step-529--create-the-comparison-template) |
+| 530 | M8 · Ch 2 | [Test the historical evaluation service](Module-8/02-weekly-forecast-comparison.md#step-530--test-the-historical-evaluation-service) |
+| 531 | M8 · Ch 2 | [Test permissions and cache behavior](Module-8/02-weekly-forecast-comparison.md#step-531--test-permissions-and-cache-behavior) |
+| 532 | M8 · Ch 2 | [Verify, stage, commit and push Chapter 2](Module-8/02-weekly-forecast-comparison.md#step-532--verify-stage-commit-and-push-chapter-2) |
