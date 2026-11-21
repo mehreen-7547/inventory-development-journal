@@ -577,3 +577,7 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 530 | M8 · Ch 2 | [Test the historical evaluation service](Module-8/02-weekly-forecast-comparison.md#step-530--test-the-historical-evaluation-service) |
 | 531 | M8 · Ch 2 | [Test permissions and cache behavior](Module-8/02-weekly-forecast-comparison.md#step-531--test-permissions-and-cache-behavior) |
 | 532 | M8 · Ch 2 | [Verify, stage, commit and push Chapter 2](Module-8/02-weekly-forecast-comparison.md#step-532--verify-stage-commit-and-push-chapter-2) |
+
+| 533 | M8 · Ch 3 | [Inspect the implemented project before documenting it](Module-8/03-project-documentation-and-demo.md#step-533--inspect-the-implemented-project-before-documenting-it) |
+| 534 | M8 · Ch 3 | [Create the main project README](Module-8/03-project-documentation-and-demo.md#step-534--create-the-main-project-readme) |
+| 535 | M8 · Ch 3 | [Write and verify the five-minute demonstration script](Module-8/03-project-documentation-and-demo.md#step-535--write-and-verify-the-five-minute-demonstration-script) |
