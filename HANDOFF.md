@@ -26,3 +26,5 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 - [Journal chapter](UI-Refinement/01-shared-compact-styling.md).
 - Browser and regression verification pending; sidebar and individual pages not yet rearranged.
 - The `m8-complete` tag remains the previous verified milestone; `main` now has newer UI commits.
+
+- Step 542: role-specific sidebar, compact header, Manager summary before attention table, collapsed Quick actions. Source commit `4db8a3a`; [journal](UI-Refinement/02-sidebar-and-dashboard.md). **Local verification pending**.
