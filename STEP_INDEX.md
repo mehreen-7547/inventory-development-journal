@@ -581,3 +581,8 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 533 | M8 · Ch 3 | [Inspect the implemented project before documenting it](Module-8/03-project-documentation-and-demo.md#step-533--inspect-the-implemented-project-before-documenting-it) |
 | 534 | M8 · Ch 3 | [Create the main project README](Module-8/03-project-documentation-and-demo.md#step-534--create-the-main-project-readme) |
 | 535 | M8 · Ch 3 | [Write and verify the five-minute demonstration script](Module-8/03-project-documentation-and-demo.md#step-535--write-and-verify-the-five-minute-demonstration-script) |
+| 536 | M8 · Closing | [Check Git state and synchronize documentation](Module-8/04-closing-verification-and-demo.md#step-536--check-git-state-and-synchronize-documentation) |
+| 537 | M8 · Closing | [Run Django system, migration and regression checks](Module-8/04-closing-verification-and-demo.md#step-537--run-django-system-migration-and-regression-checks) |
+| 538 | M8 · Closing | [Tag the verified source commit](Module-8/04-closing-verification-and-demo.md#step-538--tag-the-verified-source-commit) |
+| 539 | M8 · Closing | [Walk through the five-minute demo](Module-8/04-closing-verification-and-demo.md#step-539--walk-through-the-five-minute-demo) |
+| 540 | M8 · Closing | [Close the Module 8 development journal](Module-8/04-closing-verification-and-demo.md#step-540--close-the-module-8-development-journal) |
