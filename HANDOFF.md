@@ -20,3 +20,9 @@
 - Weekly forecast comparison table readability observed during demo.
 
 Do not treat the `m8-complete` milestone as evidence that these later UI changes were implemented. Preserve step numbering and the two-repository separation.
+
+## UI refinement started (after m8-complete)
+- Step 541: shared CSS `core/static/core/ui.css` added; `templates/base.html` loads it, source commit `27046f6`.
+- [Journal chapter](UI-Refinement/01-shared-compact-styling.md).
+- Browser and regression verification pending; sidebar and individual pages not yet rearranged.
+- The `m8-complete` tag remains the previous verified milestone; `main` now has newer UI commits.
