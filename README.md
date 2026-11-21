@@ -171,3 +171,7 @@ These are **540 numbered development steps through the latest chapter**, written
 - [Chapter 3: Project documentation and five-minute demo](Module-8/03-project-documentation-and-demo.md) — Steps 533–535 (source `7b18ee9`, `951e5be`; documentation verified)
 
 - [Closing pass: Git, tests, tag and demonstration](Module-8/04-closing-verification-and-demo.md) — Steps 536–540 (tag `m8-complete`; 528 tests passed; seven demo stages)
+
+## Post-milestone UI refinement
+
+- [Chapter 1: Shared compact styling](UI-Refinement/01-shared-compact-styling.md) — Step 541 (source `27046f6`; browser and test verification pending)
