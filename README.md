@@ -177,3 +177,5 @@ These are **540 numbered development steps through the latest chapter**, written
 - [Chapter 1: Shared compact styling](UI-Refinement/01-shared-compact-styling.md) — Step 541 (source `27046f6`; browser and test verification pending)
 
 - [Chapter 2: Role-specific sidebar and Manager dashboard](UI-Refinement/02-sidebar-and-dashboard.md) — Step 542 (source `4db8a3a`; local verification pending)
+
+- [Chapter 3: Goods receipt layout](UI-Refinement/03-goods-receipt-layout.md) — Step 543 (source `d40f25a`; local verification pending)
