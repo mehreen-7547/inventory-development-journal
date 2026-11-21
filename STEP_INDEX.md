@@ -587,3 +587,4 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 539 | M8 · Closing | [Walk through the five-minute demo](Module-8/04-closing-verification-and-demo.md#step-539--walk-through-the-five-minute-demo) |
 | 540 | M8 · Closing | [Close the Module 8 development journal](Module-8/04-closing-verification-and-demo.md#step-540--close-the-module-8-development-journal) |
 | 541 | UI · Ch 1 | [Introduce a shared UI foundation](UI-Refinement/01-shared-compact-styling.md#step-541--introduce-a-shared-ui-foundation) |
+| 542 | UI · Ch 2 | [Replace scattered navigation with a role-specific sidebar](UI-Refinement/02-sidebar-and-dashboard.md#step-542--replace-scattered-navigation-with-a-role-specific-sidebar) |
