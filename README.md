@@ -2,11 +2,11 @@
 
 ## A plain-language journal of how I built the project
 
-These are **532 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **535 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
-**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, Module 7 Chapters 1–11, and Module 8 Chapters 1–2 (through Step 532).
+**Scope:** Modules 0–6 (Core tagged `m6-complete`), post-Core maintenance, Module 7 Chapters 1–11, and Module 8 Chapters 1–3 (through Step 535).
 
 **History:** The original response-based journal remains on `main`. The earlier rewrite remains on `rewritten-study-journal`. This version is intended for a separate branch named `study-2` (Git branch names cannot contain spaces).
 
@@ -167,3 +167,5 @@ These are **532 numbered development steps through the latest chapter**, written
 - [Chapter 1: Needs attention today](Module-8/01-manager-needs-attention.md) — Steps 508–510 (source `54bcb7d`; 4 focused tests passed)
 
 - [Chapter 2: Historical AI forecast comparison](Module-8/02-weekly-forecast-comparison.md) — Steps 511–532 (source `78278d5`; 528 tests passed; previous-week baseline best on live evaluation)
+
+- [Chapter 3: Project documentation and five-minute demo](Module-8/03-project-documentation-and-demo.md) — Steps 533–535 (source `7b18ee9`, `951e5be`; documentation verified)
