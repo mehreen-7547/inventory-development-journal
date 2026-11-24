@@ -39,3 +39,8 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 - Journal synchronized through Step 549; source `0adf849` on main.
 - System check clean, no migrations; 528/530 full tests passed and both failures passed after the label correction. No single clean post-fix full run recorded.
 - Remaining: browser/mobile verification, 27 interview Q&As, Differences from Class. Receipt history/detail not implemented. Preserve m8-complete.
+
+## Study deliverables published
+- INTERVIEW_QA.md: 27 questions across Modules 0–8.
+- DIFFERENCES_FROM_CLASS.md: classroom evidence and project extensions.
+- Outstanding browser/mobile checks and clean full post-fix regression remain unverified.
