@@ -183,3 +183,11 @@ These are **544 numbered development steps through the latest chapter**, written
 - [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification completed; full regression pending. No numbered development step added.
 
 - [Forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md) — Step 544 (source `695e2dc`; 4 focused tests passed; 384/384 product-weeks evaluated).
+
+- [Refine catalog lists and forms](UI-Refinement/06-products-and-suppliers.md) — Step 545.
+- [Refine transaction pages and role-specific search](UI-Refinement/07-sales-and-purchase-orders.md) — Step 546.
+- [Refine intelligence and forecast comparison](UI-Refinement/08-intelligence-layout.md) — Step 547.
+- [Refine account forms and mobile navigation](UI-Refinement/09-account-pages-and-mobile.md) — Step 548.
+- [Resolve final UI regression failures](UI-Refinement/10-final-regression.md) — Step 549.
+
+Latest source `0adf849`: 528/530 full tests passed, both remaining tests passed after correction; single clean full rerun and outstanding browser/mobile checks pending.
