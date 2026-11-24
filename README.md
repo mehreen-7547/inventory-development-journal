@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **540 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **544 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -12,7 +12,7 @@ These are **540 numbered development steps through the latest chapter**, written
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** [Module 8 closing verification and demo](Module-8/04-closing-verification-and-demo.md) — Steps 536–540 (source tag `m8-complete`; 528 tests passed; seven demo stages verified).
+**Latest checkpoint:** [Step 544 forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md) — 4 focused tests passed; 384/384 product-weeks evaluated.
 
 ## Module 0 — Foundations
 
@@ -176,8 +176,10 @@ These are **540 numbered development steps through the latest chapter**, written
 
 - [Chapter 1: Shared compact styling](UI-Refinement/01-shared-compact-styling.md) — Step 541 (source `27046f6`; browser and test verification pending)
 
-- [Chapter 2: Role-specific sidebar and Manager dashboard](UI-Refinement/02-sidebar-and-dashboard.md) — Step 542 (source `4db8a3a`; local verification pending)
+- [Chapter 2: Role-specific sidebar and Manager dashboard](UI-Refinement/02-sidebar-and-dashboard.md) — Step 542 (source `4db8a3a`; sidebar visually verified)
 
-- [Chapter 3: Goods receipt layout](UI-Refinement/03-goods-receipt-layout.md) — Step 543 (source `d40f25a`; local verification pending)
+- [Chapter 3: Goods receipt layout](UI-Refinement/03-goods-receipt-layout.md) — Step 543 (source `d40f25a`; receipt layout visually verified)
 
-- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification and full regression pending. No numbered development step added.
+- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification completed; full regression pending. No numbered development step added.
+
+- [Forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md) — Step 544 (source `695e2dc`; 4 focused tests passed; 384/384 product-weeks evaluated).
