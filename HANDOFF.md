@@ -27,8 +27,10 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 - Browser and regression verification pending; sidebar and individual pages not yet rearranged.
 - The `m8-complete` tag remains the previous verified milestone; `main` now has newer UI commits.
 
-- Step 542: role-specific sidebar, compact header, Manager summary before attention table, collapsed Quick actions. Source commit `4db8a3a`; [journal](UI-Refinement/02-sidebar-and-dashboard.md). **Local verification pending**.
+- Step 542: role-specific sidebar, compact header, Manager summary before attention table, collapsed Quick actions. Source commit `4db8a3a`; [journal](UI-Refinement/02-sidebar-and-dashboard.md). Sidebar visually verified.
 
-- Step 543: goods receipt form presentation improved in `purchasing/templates/purchasing/goods_receipt_form.html` and shared `core/static/core/ui.css`. Source `d40f25a`. [Journal](UI-Refinement/03-goods-receipt-layout.md). Local visual and regression verification pending; receipt history/details still not implemented.
+- Step 543: goods receipt form presentation improved in `purchasing/templates/purchasing/goods_receipt_form.html` and shared `core/static/core/ui.css`. Source `d40f25a`. [Journal](UI-Refinement/03-goods-receipt-layout.md). Local visual verification passed; full regression pending; receipt history/details still not implemented.
 
-- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification and full regression pending. No numbered development step added.
+- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification completed; full regression pending. No numbered development step added.
+
+- Step 544: [Forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md), source `695e2dc`. Four focused tests passed; live 384/384 product-weeks evaluated, zero skipped, ending 8 November 2026. Next Step 545: Products and Suppliers UI. Full regression pending; preserve m8-complete tag.
