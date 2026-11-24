@@ -589,3 +589,4 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 541 | UI · Ch 1 | [Introduce a shared UI foundation](UI-Refinement/01-shared-compact-styling.md#step-541--introduce-a-shared-ui-foundation) |
 | 542 | UI · Ch 2 | [Replace scattered navigation with a role-specific sidebar](UI-Refinement/02-sidebar-and-dashboard.md#step-542--replace-scattered-navigation-with-a-role-specific-sidebar) |
 | 543 | UI · Ch 3 | [Make the goods receipt form readable](UI-Refinement/03-goods-receipt-layout.md#step-543--make-the-goods-receipt-form-readable) |
+| 544 | Post-milestone correction | [Anchor comparison to available sales history](UI-Refinement/05-forecast-comparison-date-correction.md#step-544--anchor-comparison-to-available-sales-history) |
