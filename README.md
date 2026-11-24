@@ -191,3 +191,7 @@ These are **549 numbered development steps through the latest chapter**, written
 - [Resolve final UI regression failures](UI-Refinement/10-final-regression.md) — Step 549.
 
 Latest source `0adf849`: 528/530 full tests passed, both remaining tests passed after correction; single clean full rerun and outstanding browser/mobile checks pending.
+
+## Interview preparation
+
+- [27 module-wise interview questions and answers](INTERVIEW_QA.md)
