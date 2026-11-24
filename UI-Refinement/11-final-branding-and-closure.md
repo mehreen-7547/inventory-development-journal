@@ -28,3 +28,7 @@ Source commits `3e18247`, `32e6aaa`. User reported completion of the pull and br
 
 ## Closure record
 Development closed at user request. Original m8-complete milestone preserved. All 550 journal steps, 27 interview Q&As and Differences from Class are published. Earlier full run passed 528/530 tests and both remaining tests passed after correction at 0adf849. No clean full run after that correction or final branding change is recorded. Final comprehensive browser/mobile verification was not explicitly confirmed. Receipt history/detail pages remain unimplemented. Do not describe these outstanding checks or features as completed. No Module 9 is planned.
+
+
+### Final regression verification
+User confirmed all 530 Django tests passed in 545.644 seconds, with zero system-check issues, after final branding. This supersedes earlier pending full-regression notes. Comprehensive mobile/browser acceptance remains unconfirmed; final release tag pending confirmation.
