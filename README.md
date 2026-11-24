@@ -195,3 +195,5 @@ Latest source `0adf849`: 528/530 full tests passed, both remaining tests passed 
 ## Interview preparation
 
 - [27 module-wise interview questions and answers](INTERVIEW_QA.md)
+
+- [Differences from Class](DIFFERENCES_FROM_CLASS.md)
