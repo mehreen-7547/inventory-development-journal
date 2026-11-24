@@ -32,3 +32,7 @@ Development closed at user request. Original m8-complete milestone preserved. Al
 
 ### Final regression verification
 User confirmed all 530 Django tests passed in 545.644 seconds, with zero system-check issues, after final branding. This supersedes earlier pending full-regression notes. Comprehensive mobile/browser acceptance remains unconfirmed; final release tag pending confirmation.
+
+
+### Final release — closed
+User confirmed successful creation and push of annotated source tag `v1.0.0`. All 530 tests passed. Development and study documentation are closed. This supersedes earlier pending release-tag notes. Comprehensive mobile/browser acceptance remains unconfirmed.
