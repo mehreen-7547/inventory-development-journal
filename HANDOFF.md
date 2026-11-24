@@ -34,3 +34,8 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 - [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification completed; full regression pending. No numbered development step added.
 
 - Step 544: [Forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md), source `695e2dc`. Four focused tests passed; live 384/384 product-weeks evaluated, zero skipped, ending 8 November 2026. Next Step 545: Products and Suppliers UI. Full regression pending; preserve m8-complete tag.
+
+## Latest checkpoint — Step 549
+- Journal synchronized through Step 549; source `0adf849` on main.
+- System check clean, no migrations; 528/530 full tests passed and both failures passed after the label correction. No single clean post-fix full run recorded.
+- Remaining: browser/mobile verification, 27 interview Q&As, Differences from Class. Receipt history/detail not implemented. Preserve m8-complete.
