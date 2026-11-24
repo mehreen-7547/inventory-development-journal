@@ -179,3 +179,5 @@ These are **540 numbered development steps through the latest chapter**, written
 - [Chapter 2: Role-specific sidebar and Manager dashboard](UI-Refinement/02-sidebar-and-dashboard.md) — Step 542 (source `4db8a3a`; local verification pending)
 
 - [Chapter 3: Goods receipt layout](UI-Refinement/03-goods-receipt-layout.md) — Step 543 (source `d40f25a`; local verification pending)
+
+- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification and full regression pending. No numbered development step added.
