@@ -30,3 +30,5 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 - Step 542: role-specific sidebar, compact header, Manager summary before attention table, collapsed Quick actions. Source commit `4db8a3a`; [journal](UI-Refinement/02-sidebar-and-dashboard.md). **Local verification pending**.
 
 - Step 543: goods receipt form presentation improved in `purchasing/templates/purchasing/goods_receipt_form.html` and shared `core/static/core/ui.css`. Source `d40f25a`. [Journal](UI-Refinement/03-goods-receipt-layout.md). Local visual and regression verification pending; receipt history/details still not implemented.
+
+- [Windows Smart App Control environment recovery](UI-Refinement/04-environment-recovery.md) — 24 November 2026; `.venv_new` created using uv, existing packages copied, Django check passed. Step 543 visual verification and full regression pending. No numbered development step added.
