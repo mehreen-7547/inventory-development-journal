@@ -596,3 +596,4 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 547 | UI refinement | [Refine intelligence and forecast comparison](UI-Refinement/08-intelligence-layout.md#step-547--refine-intelligence-and-forecast-comparison) |
 | 548 | UI refinement | [Refine account forms and mobile navigation](UI-Refinement/09-account-pages-and-mobile.md#step-548--refine-account-forms-and-mobile-navigation) |
 | 549 | UI refinement | [Resolve final UI regression failures](UI-Refinement/10-final-regression.md#step-549--resolve-final-ui-regression-failures) |
+| 550 | UI · Closure | [Add guest branding and close development](UI-Refinement/11-final-branding-and-closure.md#step-550--add-guest-branding-and-close-development) |
