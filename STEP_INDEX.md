@@ -590,3 +590,9 @@ Use your browser's search (`Ctrl+F`) to find a concept, filename, or step number
 | 542 | UI · Ch 2 | [Replace scattered navigation with a role-specific sidebar](UI-Refinement/02-sidebar-and-dashboard.md#step-542--replace-scattered-navigation-with-a-role-specific-sidebar) |
 | 543 | UI · Ch 3 | [Make the goods receipt form readable](UI-Refinement/03-goods-receipt-layout.md#step-543--make-the-goods-receipt-form-readable) |
 | 544 | Post-milestone correction | [Anchor comparison to available sales history](UI-Refinement/05-forecast-comparison-date-correction.md#step-544--anchor-comparison-to-available-sales-history) |
+
+| 545 | UI refinement | [Refine catalog lists and forms](UI-Refinement/06-products-and-suppliers.md#step-545--refine-catalog-lists-and-forms) |
+| 546 | UI refinement | [Refine transaction pages and role-specific search](UI-Refinement/07-sales-and-purchase-orders.md#step-546--refine-transaction-pages-and-role-specific-search) |
+| 547 | UI refinement | [Refine intelligence and forecast comparison](UI-Refinement/08-intelligence-layout.md#step-547--refine-intelligence-and-forecast-comparison) |
+| 548 | UI refinement | [Refine account forms and mobile navigation](UI-Refinement/09-account-pages-and-mobile.md#step-548--refine-account-forms-and-mobile-navigation) |
+| 549 | UI refinement | [Resolve final UI regression failures](UI-Refinement/10-final-regression.md#step-549--resolve-final-ui-regression-failures) |
