@@ -12,7 +12,7 @@ These are **550 numbered development steps through the latest chapter**, written
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** [Step 550 — development closure](UI-Refinement/11-final-branding-and-closure.md). Source `32e6aaa`; final comprehensive regression and mobile checks not recorded.
+**Latest checkpoint:** [Step 550 — development closure](UI-Refinement/11-final-branding-and-closure.md). Source `32e6aaa`; final 530/530 regression passed; mobile checks unconfirmed.
 
 ## Module 0 — Foundations
 
@@ -199,3 +199,7 @@ Latest source `0adf849`: 528/530 full tests passed, both remaining tests passed 
 - [Differences from Class](DIFFERENCES_FROM_CLASS.md)
 
 - [Step 550: Final branding and development closure](UI-Refinement/11-final-branding-and-closure.md)
+
+
+### Final regression verification
+User confirmed all 530 Django tests passed in 545.644 seconds, with zero system-check issues, after final branding. This supersedes earlier pending full-regression notes. Comprehensive mobile/browser acceptance remains unconfirmed; final release tag pending confirmation.
