@@ -47,3 +47,7 @@ Do not treat the `m8-complete` milestone as evidence that these later UI changes
 
 ## Final development closure — Step 550
 User requested closure after guest branding. Source `32e6aaa`; journal complete through 550. Study deliverables published. No new features planned. Preserve m8-complete. Full post-fix/post-branding regression and comprehensive mobile/browser acceptance remain unverified; receipt history/detail not implemented. Local untracked files were not removed.
+
+
+### Final regression verification
+User confirmed all 530 Django tests passed in 545.644 seconds, with zero system-check issues, after final branding. This supersedes earlier pending full-regression notes. Comprehensive mobile/browser acceptance remains unconfirmed; final release tag pending confirmation.
