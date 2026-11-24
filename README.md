@@ -2,7 +2,7 @@
 
 ## A plain-language journal of how I built the project
 
-These are **544 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
+These are **549 numbered development steps through the latest chapter**, written so you can understand and explain them even if you do not remember the original code. The chapters begin with the situation we were in, then each step explains the reason for a change before showing the code.
 
 **Start here:** [How to read and study](HOW_TO_STUDY.md) · [Find a specific step](STEP_INDEX.md) · [Simple word meanings](GLOSSARY.md)
 
@@ -12,7 +12,7 @@ These are **544 numbered development steps through the latest chapter**, written
 
 **Reading code:** An earlier command or code sample may be superseded later. Do not rerun historical database resets, password settings, or Git commands just to study.
 
-**Latest checkpoint:** [Step 544 forecast comparison date correction](UI-Refinement/05-forecast-comparison-date-correction.md) — 4 focused tests passed; 384/384 product-weeks evaluated.
+**Latest checkpoint:** [Step 549 final regression](UI-Refinement/10-final-regression.md) — source `0adf849`; 528/530 full tests passed, both failures corrected and individually verified. Browser/mobile checks pending.
 
 ## Module 0 — Foundations
 
